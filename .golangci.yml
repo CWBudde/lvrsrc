@@ -1,5 +1,4 @@
-run:
-  timeout: 5m
+version: "2"
 
 linters:
   enable:
@@ -7,8 +6,8 @@ linters:
     - staticcheck
     - errcheck
     - ineffassign
-    - gofmt
-    - goimports
 
-issues:
-  exclude-use-default: false
+formatters:
+  enable:
+    - gofumpt
+    - gci

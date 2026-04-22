@@ -32,4 +32,3 @@ jobs:
       - name: fuzz smoke (10s)
         run: |
           go test ./internal/rsrcwire -run='^$' -fuzz=FuzzParseFile -fuzztime=10s
-

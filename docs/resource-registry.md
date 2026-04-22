@@ -9,9 +9,9 @@ This registry tracks known resource types (FourCC), decode status, and safety ti
 
 ## Table (to be expanded)
 
-| FourCC | Description | Decode | Encode | Safety |
-|---|---|---:|---:|---|
-| TBD | To be populated from references and corpus | No | No | Opaque |
+| FourCC | Description                                | Decode | Encode | Safety |
+| ------ | ------------------------------------------ | -----: | -----: | ------ |
+| TBD    | To be populated from references and corpus |     No |     No | Opaque |
 
 ## Method
 

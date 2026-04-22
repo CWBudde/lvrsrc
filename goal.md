@@ -2,10 +2,10 @@
 
 Build a repository where:
 
-* the **main deliverable is a Go library** for parsing, editing, validating, and writing `.vi` files,
-* the **CLI is secondary** and uses **Cobra** for commands and **Viper** for config and environment integration,
-* the implementation is **fully standalone at runtime** and **pure Go**,
-* Python projects are used only as **spec/reference material**, not as dependencies. Cobra is a standard Go CLI framework, and Viper is explicitly designed to pair well with Cobra. ([GitHub][2])
+- the **main deliverable is a Go library** for parsing, editing, validating, and writing `.vi` files,
+- the **CLI is secondary** and uses **Cobra** for commands and **Viper** for config and environment integration,
+- the implementation is **fully standalone at runtime** and **pure Go**,
+- Python projects are used only as **spec/reference material**, not as dependencies. Cobra is a standard Go CLI framework, and Viper is explicitly designed to pair well with Cobra. ([GitHub][2])
 
 ## 2. Scope decision: what “write VI files” should mean
 
@@ -23,12 +23,12 @@ Open a `.vi`, parse the RSRC container, and write it back **bit-for-bit equivale
 
 Allow edits to low-risk, well-understood resources first:
 
-* names
-* descriptions
-* documentation strings
-* selected flags
-* version stamps
-* non-executable metadata
+- names
+- descriptions
+- documentation strings
+- selected flags
+- version stamps
+- non-executable metadata
 
 NI’s docs confirm that VIs contain documentation fields and descriptive metadata users interact with. ([NI][5])
 
@@ -42,14 +42,14 @@ This is the hardest part and should be treated as a **long-term track**, not par
 
 Your MVP should be:
 
-* **Read** `.vi`, `.ctl`, optionally `.vit` and `.llb` later
-* **Parse and expose** RSRC container structure
-* **List and inspect** resources and sections
-* **Validate** structural integrity
-* **Write back** unchanged files
-* **Support selective metadata edits**
-* **Emit JSON** views for inspection/debugging
-* **Provide diff and repair-ish tooling** at the structural level
+- **Read** `.vi`, `.ctl`, optionally `.vit` and `.llb` later
+- **Parse and expose** RSRC container structure
+- **List and inspect** resources and sections
+- **Validate** structural integrity
+- **Write back** unchanged files
+- **Support selective metadata edits**
+- **Emit JSON** views for inspection/debugging
+- **Provide diff and repair-ish tooling** at the structural level
 
 Do **not** promise full semantic editing of arbitrary VI internals in v1.
 
@@ -83,12 +83,12 @@ Low-level container API.
 
 Responsibilities:
 
-* detect file kind
-* parse file header(s)
-* parse resource/block tables
-* parse section descriptors
-* preserve unknown bytes exactly
-* write container back out
+- detect file kind
+- parse file header(s)
+- parse resource/block tables
+- parse section descriptors
+- preserve unknown bytes exactly
+- write container back out
 
 Core types:
 
@@ -128,9 +128,9 @@ VI-oriented higher-level model.
 
 Responsibilities:
 
-* identify known VI resource types
-* decode known resources into typed Go structs
-* expose convenience methods like `Version()`, `SetDescription()`, `ListResources()`
+- identify known VI resource types
+- decode known resources into typed Go structs
+- expose convenience methods like `Version()`, `SetDescription()`, `ListResources()`
 
 #### `pkg/lvmeta`
 
@@ -138,19 +138,19 @@ Focused editing helpers for low-risk changes.
 
 Examples:
 
-* set VI description
-* set icon label text if resource is understood
-* update custom metadata tags
-* rename resource names where supported
+- set VI description
+- set icon label text if resource is understood
+- update custom metadata tags
+- rename resource names where supported
 
 #### `pkg/lvdiff`
 
 Structural diffing between two VIs:
 
-* header differences
-* resource type additions/removals
-* section-level binary diffs
-* decoded known-resource diffs
+- header differences
+- resource type additions/removals
+- section-level binary diffs
+- decoded known-resource diffs
 
 ## 5. Internal implementation layers
 
@@ -176,13 +176,13 @@ Same for a writer with offset patching. The reason is that the format is offset-
 
 Implement exact parsing and reserialization of:
 
-* primary header
-* duplicated header
-* block info list
-* block headers
-* block section info
-* section payloads
-* name tables / trailing Pascal strings
+- primary header
+- duplicated header
+- block info list
+- block headers
+- block section info
+- section payloads
+- name tables / trailing Pascal strings
 
 Start from the RSRC structure descriptions in the `pylabview` wiki and the conceptual file model in `pylavi`. ([GitHub][4])
 
@@ -204,9 +204,9 @@ type Registry struct {
 
 This lets you:
 
-* preserve unknown resources losslessly,
-* decode known resources selectively,
-* evolve coverage incrementally.
+- preserve unknown resources losslessly,
+- decode known resources selectively,
+- evolve coverage incrementally.
 
 ### Layer D — typed resource decoders
 
@@ -218,13 +218,13 @@ This is the only sustainable way to keep the writer safe.
 
 Validator should check:
 
-* duplicate headers consistent
-* offsets inside bounds
-* section sizes sane
-* block counts match tables
-* name offsets valid
-* no overlapping payload regions unless explicitly allowed
-* resource-specific invariants for known types
+- duplicate headers consistent
+- offsets inside bounds
+- section sizes sane
+- block counts match tables
+- name offsets valid
+- no overlapping payload regions unless explicitly allowed
+- resource-specific invariants for known types
 
 Given NI’s published note about incomplete RSRC validation leading to crashes, strong validation is not optional. ([NI][3])
 
@@ -256,11 +256,11 @@ For unchanged and partially changed files.
 
 Rules:
 
-* preserve exact section bytes for unknown resources
-* preserve original ordering
-* preserve original padding/alignment where possible
-* rewrite only tables/offsets impacted by edits
-* regenerate both headers consistently
+- preserve exact section bytes for unknown resources
+- preserve original ordering
+- preserve original padding/alignment where possible
+- rewrite only tables/offsets impacted by edits
+- regenerate both headers consistently
 
 This enables round-trip stability.
 
@@ -270,10 +270,10 @@ For files built or normalized by your library.
 
 Rules:
 
-* canonical ordering of blocks and sections
-* canonical padding/alignment policy
-* recomputed offsets
-* deterministic serialization
+- canonical ordering of blocks and sections
+- canonical padding/alignment policy
+- recomputed offsets
+- deterministic serialization
 
 This is useful for tests, generated fixtures, and future repair tooling.
 
@@ -311,12 +311,12 @@ CLI name example: `lvrsrc`
 
 Print summary:
 
-* file kind
-* version if detected
-* header info
-* blocks/resources
-* section counts
-* warnings
+- file kind
+- version if detected
+- header info
+- blocks/resources
+- section counts
+- warnings
 
 #### `lvrsrc dump file.vi --json`
 
@@ -354,12 +354,12 @@ Later-phase command; only after validation and rewrite are mature.
 
 Support:
 
-* config file path
-* default output format
-* strict validation mode
-* unsafe editing toggle
-* logging level
-* golden fixture directory
+- config file path
+- default output format
+- strict validation mode
+- unsafe editing toggle
+- logging level
+- golden fixture directory
 
 Example:
 
@@ -413,12 +413,12 @@ This project will live or die by its tests.
 
 Collect a wide sample set:
 
-* different LabVIEW versions
-* simple VIs
-* controls
-* templates
-* passworded/corrupt examples if legally/operationally acceptable
-* files with unusual names/resources
+- different LabVIEW versions
+- simple VIs
+- controls
+- templates
+- passworded/corrupt examples if legally/operationally acceptable
+- files with unusual names/resources
 
 Sources should include your own generated sample files plus public examples where licensing allows.
 
@@ -436,9 +436,9 @@ Known files parse without panic and produce expected counts/structures.
 
 Use `pylabview` and `pylavi` out of band during development to compare:
 
-* detected resource types
-* table counts
-* selected decoded fields
+- detected resource types
+- table counts
+- selected decoded fields
 
 Those projects should be used as **development or CI oracle references**, not runtime deps. That still satisfies your “standalone pure Go” requirement.
 
@@ -446,18 +446,18 @@ Those projects should be used as **development or CI oracle references**, not ru
 
 Use Go fuzzing on:
 
-* header parser
-* section table parser
-* name table parser
-* whole-file parser with size guards
+- header parser
+- section table parser
+- name table parser
+- whole-file parser with size guards
 
 NI’s security note is a strong reason to budget for this early. ([NI][3])
 
 #### Property tests
 
-* serialize(parse(x)) is valid
-* parse(serialize(model)) is equivalent
-* unchanged opaque resources survive editing untouched
+- serialize(parse(x)) is valid
+- parse(serialize(model)) is equivalent
+- unchanged opaque resources survive editing untouched
 
 ## 12. Reverse-engineering workflow
 
@@ -477,11 +477,11 @@ That is important because NI does not publish a full VI binary spec publicly, wh
 
 For each unknown resource type:
 
-* identify it across multiple VI samples
-* cluster by version
-* diff before/after a single LabVIEW GUI edit
-* infer field meanings from controlled mutations
-* document as Markdown spec in-repo before implementing codec
+- identify it across multiple VI samples
+- cluster by version
+- diff before/after a single LabVIEW GUI edit
+- infer field meanings from controlled mutations
+- document as Markdown spec in-repo before implementing codec
 
 That keeps the codebase from turning into folklore.
 
@@ -493,17 +493,17 @@ Duration: 1–2 weeks
 
 Deliverables:
 
-* corpus of sample `.vi` files
-* normalized notes from `pylabview` and `pylavi`
-* repo skeleton
-* architecture doc
-* CI setup
+- corpus of sample `.vi` files
+- normalized notes from `pylabview` and `pylavi`
+- repo skeleton
+- architecture doc
+- CI setup
 
 Exit criteria:
 
-* at least 20 diverse sample files
-* list of known resource types observed
-* exact MVP scope approved
+- at least 20 diverse sample files
+- list of known resource types observed
+- exact MVP scope approved
 
 ## Phase 1 — container parser
 
@@ -511,18 +511,18 @@ Duration: 2–4 weeks
 
 Deliverables:
 
-* binary reader
-* header parser
-* block table parser
-* section parser
-* name parser
-* JSON dump command
+- binary reader
+- header parser
+- block table parser
+- section parser
+- name parser
+- JSON dump command
 
 Exit criteria:
 
-* `inspect`, `dump`, `list-resources` work on corpus
-* no panics
-* fuzz baseline in CI
+- `inspect`, `dump`, `list-resources` work on corpus
+- no panics
+- fuzz baseline in CI
 
 ## Phase 2 — preserving writer
 
@@ -530,16 +530,16 @@ Duration: 2–4 weeks
 
 Deliverables:
 
-* serializer
-* offset/padding recomputation
-* rewrite command
-* round-trip tests
+- serializer
+- offset/padding recomputation
+- rewrite command
+- round-trip tests
 
 Exit criteria:
 
-* corpus round-trips successfully
-* unchanged opaque sections preserved
-* rewritten files reopen in parser and pass validation
+- corpus round-trips successfully
+- unchanged opaque sections preserved
+- rewritten files reopen in parser and pass validation
 
 ## Phase 3 — validator and diff
 
@@ -547,15 +547,15 @@ Duration: 1–2 weeks
 
 Deliverables:
 
-* structural validator
-* diff engine
-* CLI commands `validate` and `diff`
+- structural validator
+- diff engine
+- CLI commands `validate` and `diff`
 
 Exit criteria:
 
-* human-readable diagnostics
-* machine-readable JSON diagnostics
-* corpus coverage >90% of common paths
+- human-readable diagnostics
+- machine-readable JSON diagnostics
+- corpus coverage >90% of common paths
 
 ## Phase 4 — safe metadata editing
 
@@ -563,15 +563,15 @@ Duration: 2–4 weeks
 
 Deliverables:
 
-* initial typed codecs for low-risk resources
-* `set-meta` command
-* post-edit validation
+- initial typed codecs for low-risk resources
+- `set-meta` command
+- post-edit validation
 
 Exit criteria:
 
-* targeted metadata edits survive rewrite
-* edited files remain structurally valid
-* verified against sample-open behavior where possible
+- targeted metadata edits survive rewrite
+- edited files remain structurally valid
+- verified against sample-open behavior where possible
 
 ## Phase 5 — typed resource expansion
 
@@ -579,14 +579,14 @@ Duration: ongoing
 
 Deliverables:
 
-* more decoders/encoders
-* better VI semantic model
-* eventually repair/normalize features
+- more decoders/encoders
+- better VI semantic model
+- eventually repair/normalize features
 
 Exit criteria:
 
-* resource coverage dashboard
-* documented support matrix by resource type and LabVIEW version
+- resource coverage dashboard
+- documented support matrix by resource type and LabVIEW version
 
 ## 14. Versioning and compatibility
 
@@ -623,20 +623,20 @@ Then publish a compatibility table like:
 
 Add these docs early:
 
-* `docs/format-overview.md`
-* `docs/wire-layout.md`
-* `docs/resource-registry.md`
-* `docs/safety-model.md`
-* `docs/cli.md`
-* `docs/contributing-reverse-engineering.md`
+- `docs/format-overview.md`
+- `docs/wire-layout.md`
+- `docs/resource-registry.md`
+- `docs/safety-model.md`
+- `docs/cli.md`
+- `docs/contributing-reverse-engineering.md`
 
 For every known resource type:
 
-* binary layout
-* field table
-* examples
-* version caveats
-* whether write support exists
+- binary layout
+- field table
+- examples
+- version caveats
+- whether write support exists
 
 ## 16. Risks
 
@@ -644,45 +644,44 @@ For every known resource type:
 
 Mitigation:
 
-* ship preserving writer first
-* only enable typed writes for proven resources
-* make support matrix explicit
+- ship preserving writer first
+- only enable typed writes for proven resources
+- make support matrix explicit
 
 ### Biggest engineering risk: silent corruption
 
 Mitigation:
 
-* opaque preservation
-* layered validation
-* round-trip and fuzz testing
-* deterministic serializer
+- opaque preservation
+- layered validation
+- round-trip and fuzz testing
+- deterministic serializer
 
 ### Biggest product risk: users expect full VI editing
 
 Mitigation:
 
-* market the project as:
-
-  * structural RSRC toolkit first
-  * safe metadata editor second
-  * semantic VI editor only where implemented
+- market the project as:
+  - structural RSRC toolkit first
+  - safe metadata editor second
+  - semantic VI editor only where implemented
 
 ## 17. Recommended repo roadmap
 
 Initial tags:
 
-* `v0.1.0`: parse + inspect
-* `v0.2.0`: rewrite + validate
-* `v0.3.0`: diff + JSON schema
-* `v0.4.0`: metadata editing
-* `v0.5.x+`: typed resource growth
+- `v0.1.0`: parse + inspect
+- `v0.2.0`: rewrite + validate
+- `v0.3.0`: diff + JSON schema
+- `v0.4.0`: metadata editing
+- `v0.5.x+`: typed resource growth
 
 Do not call `v1.0.0` until:
 
-* round-trip corpus is broad,
-* validator is mature,
-* support matrix is published,
-* unsafe APIs are clearly separated.
+- round-trip corpus is broad,
+- validator is mature,
+- support matrix is published,
+- unsafe APIs are clearly separated.
 
 ## 18. Practical recommendation
 

@@ -18,3 +18,7 @@ references/
 # Local corpus and oracle outputs (user-supplied)
 testdata/corpus/
 testdata/oracle/
+
+# AI agents
+claude/
+.codex
