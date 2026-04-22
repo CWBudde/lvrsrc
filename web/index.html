@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RSRC Viewer - LabVIEW File Inspector</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="RSRC Viewer - LabVIEW File Inspector" />
+    <meta
+      property="og:description"
+      content="Online LabVIEW RSRC/VI file inspector. Parse headers, list resources, and explore block contents in your browser."
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>RSRC Viewer</h1>
+        <p class="subtitle">Inspect LabVIEW RSRC / VI files in your browser</p>
+      </header>
+
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-zone-content">
+          <svg
+            class="drop-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          <p>Drop a <strong>.vi</strong>, <strong>.ctl</strong>, or <strong>.vit</strong> file here</p>
+          <p class="drop-hint">or click to select</p>
+          <input type="file" id="file-input" accept=".vi,.ctl,.vit,.lvlib,.rsrc" hidden />
+        </div>
+      </div>
+
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Parsing file…</p>
+      </div>
+
+      <div id="error" class="error hidden">
+        <p id="error-message"></p>
+      </div>
+
+      <div id="results" class="results hidden">
+        <div class="file-header">
+          <h2 id="file-name"></h2>
+          <span id="file-kind" class="badge"></span>
+          <button id="clear-btn" class="btn-clear">Clear</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="resources">Resources</button>
+        </div>
+
+        <div id="tab-overview" class="tab-content active">
+          <div class="card">
+            <h3>Primary Header</h3>
+            <table class="info-table" id="primary-header"></table>
+          </div>
+          <div class="card">
+            <h3>Secondary Header</h3>
+            <table class="info-table" id="secondary-header"></table>
+          </div>
+        </div>
+
+        <div id="tab-resources" class="tab-content">
+          <div class="card">
+            <h3>Resources</h3>
+            <div id="resources-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          <a href="https://github.com/MeKo-Christian/lvrsrc" target="_blank">MeKo-Christian/lvrsrc</a>
+          &mdash; Open source LabVIEW RSRC parser written in Go
+        </p>
+      </footer>
+    </div>
+
+    <script src="wasm_exec.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

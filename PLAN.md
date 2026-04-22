@@ -77,29 +77,29 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 1.3 Public Container API (`pkg/lvrsrc`)
 
-- [ ] Define `OpenOptions` struct (`Strict bool`)
-- [ ] Implement `Open(path string, opts OpenOptions) (*File, error)`
-- [ ] Implement `Parse(data []byte, opts OpenOptions) (*File, error)`
-- [ ] Implement `(f *File) Resources() []ResourceRef`
-- [ ] Implement `(f *File) Clone() *File`
-- [ ] Write package-level tests
+- [x] Define `OpenOptions` struct (`Strict bool`)
+- [x] Implement `Open(path string, opts OpenOptions) (*File, error)`
+- [x] Implement `Parse(data []byte, opts OpenOptions) (*File, error)`
+- [x] Implement `(f *File) Resources() []ResourceRef`
+- [x] Implement `(f *File) Clone() *File`
+- [x] Write package-level tests
 
 ### 1.4 JSON Dump
 
-- [ ] Define JSON-serializable mirror of `File` struct
-- [ ] Implement `(f *File) MarshalJSON()` or dedicated `DumpJSON` function
-- [ ] Ensure unknown/opaque section bytes are represented as base64
+- [x] Define JSON-serializable mirror of `File` struct
+- [x] Implement `(f *File) MarshalJSON()` or dedicated `DumpJSON` function
+- [x] Ensure unknown/opaque section bytes are represented as base64
 
 ### 1.5 CLI Scaffold (`cmd/lvrsrc`)
 
-- [ ] Initialize Cobra root command with Viper config binding
-- [ ] Add Viper config file support (`--config`), env prefix, defaults
-- [ ] Add persistent flags: `--format`, `--strict`, `--log-level`
-- [ ] Implement `lvrsrc inspect <file>` command (kind, version, header info, block list, warnings)
-- [ ] Implement `lvrsrc dump <file> [--json]` command
-- [ ] Implement `lvrsrc list-resources <file>` command (compact table: type, id, name, size)
-- [ ] Add `--out` flag for output redirection
-- [ ] Write smoke tests for all Phase 1 CLI commands
+- [x] Initialize Cobra root command with Viper config binding
+- [x] Add Viper config file support (`--config`), env prefix, defaults
+- [x] Add persistent flags: `--format`, `--strict`, `--log-level`
+- [x] Implement `lvrsrc inspect <file>` command (kind, version, header info, block list, warnings)
+- [x] Implement `lvrsrc dump <file> [--json]` command
+- [x] Implement `lvrsrc list-resources <file>` command (compact table: type, id, name, size)
+- [x] Add `--out` flag for output redirection
+- [x] Write smoke tests for all Phase 1 CLI commands
 
 ### 1.6 Fuzzing Baseline
 
