@@ -104,15 +104,7 @@ func (f *File) MarshalJSON() ([]byte, error) {
 			if len(block.Sections) > 0 {
 				out.Blocks[i].Sections = make([]jsonSection, len(block.Sections))
 				for j, section := range block.Sections {
-					out.Blocks[i].Sections[j] = jsonSection{
-						Index:      section.Index,
-						NameOffset: section.NameOffset,
-						Unknown3:   section.Unknown3,
-						DataOffset: section.DataOffset,
-						Unknown5:   section.Unknown5,
-						Name:       section.Name,
-						Payload:    section.Payload,
-					}
+					out.Blocks[i].Sections[j] = jsonSection(section)
 				}
 			}
 		}
@@ -121,11 +113,7 @@ func (f *File) MarshalJSON() ([]byte, error) {
 	if len(f.Names) > 0 {
 		out.Names = make([]jsonNameEntry, len(f.Names))
 		for i, name := range f.Names {
-			out.Names[i] = jsonNameEntry{
-				Offset:   name.Offset,
-				Value:    name.Value,
-				Consumed: name.Consumed,
-			}
+			out.Names[i] = jsonNameEntry(name)
 		}
 	}
 

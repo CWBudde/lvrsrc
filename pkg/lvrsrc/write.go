@@ -16,8 +16,10 @@ const (
 	SeverityError   = iv.SeverityError
 )
 
-type IssueLocation = iv.IssueLocation
-type Issue = iv.Issue
+type (
+	IssueLocation = iv.IssueLocation
+	Issue         = iv.Issue
+)
 
 func (f *File) WriteTo(w io.Writer) error {
 	if f == nil {
