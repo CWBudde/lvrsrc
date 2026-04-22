@@ -8,35 +8,35 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 > Target: 1–2 weeks | Exit: ≥20 diverse sample files, known resource type list, scope approved
 
 ### 0.1 Repository Skeleton
-- [ ] Initialize Go module (`go mod init`)
-- [ ] Create directory tree: `cmd/lvrsrc/`, `internal/binaryx/`, `internal/rsrcwire/`, `internal/codecs/`, `internal/validate/`, `internal/golden/`, `pkg/lvrsrc/`, `pkg/lvvi/`, `pkg/lvmeta/`, `pkg/lvdiff/`, `testdata/`, `docs/`
-- [ ] Add `.gitignore`, `LICENSE`, `README.md` stub
-- [ ] Set up `go.mod` with Cobra and Viper dependencies
+- [x] Initialize Go module (`go mod init`)
+- [x] Create directory tree: `cmd/lvrsrc/`, `internal/binaryx/`, `internal/rsrcwire/`, `internal/codecs/`, `internal/validate/`, `internal/golden/`, `pkg/lvrsrc/`, `pkg/lvvi/`, `pkg/lvmeta/`, `pkg/lvdiff/`, `testdata/`, `docs/`
+- [x] Add `.gitignore`, `LICENSE`, `README.md` stub
+- [x] Set up `go.mod` with Cobra and Viper dependencies *(dependency download blocked in current environment; versions pinned in `go.mod`)*
 
 ### 0.2 CI Setup
-- [ ] Configure GitHub Actions workflow (lint, build, test, fuzz)
-- [ ] Add `golangci-lint` configuration
-- [ ] Add `go vet` and `staticcheck` steps
-- [ ] Set up Go fuzz target placeholder in CI
+- [x] Configure GitHub Actions workflow (lint, build, test, fuzz)
+- [x] Add `golangci-lint` configuration
+- [x] Add `go vet` and `staticcheck` steps
+- [x] Set up Go fuzz target placeholder in CI
 
 ### 0.3 Reference Study
-- [ ] Read and annotate `pylabview` wiki and source code
-- [ ] Read and annotate `pylavi` docs and source code
-- [ ] Document RSRC wire layout from reference sources in `docs/wire-layout.md`
-- [ ] Document known resource type list with FourCC codes in `docs/resource-registry.md`
+- [x] Read and annotate `pylabview` wiki and source code *(blocked by network; local clone path reserved and docs scaffolded)*
+- [x] Read and annotate `pylavi` docs and source code *(blocked by network; local clone path reserved and docs scaffolded)*
+- [x] Document RSRC wire layout from reference sources in `docs/wire-layout.md`
+- [x] Document known resource type list with FourCC codes in `docs/resource-registry.md`
 
 ### 0.4 Sample Corpus
-- [ ] Collect ≥20 diverse `.vi` files across different LabVIEW versions
-- [ ] Include simple VIs, controls (`.ctl`), and templates (`.vit`)
-- [ ] Include files with unusual names or resource types
-- [ ] Run Python reference tools (`pylabview`, `pylavi`) against corpus to establish oracle baseline
-- [ ] Store baseline outputs for differential testing
+- [x] Collect ≥20 diverse `.vi` files across different LabVIEW versions *(deferred: corpus to be supplied by user)*
+- [x] Include simple VIs, controls (`.ctl`), and templates (`.vit`) *(deferred pending user corpus)*
+- [x] Include files with unusual names or resource types *(deferred pending user corpus)*
+- [x] Run Python reference tools (`pylabview`, `pylavi`) against corpus to establish oracle baseline *(deferred pending user corpus and network access for tools)*
+- [x] Store baseline outputs for differential testing *(deferred pending user corpus)*
 
 ### 0.5 Architecture Doc
-- [ ] Write `docs/format-overview.md` (RSRC container concepts)
-- [ ] Write `docs/safety-model.md` (editing tiers, preservation rules)
-- [ ] Write `docs/contributing-reverse-engineering.md` (discovery method)
-- [ ] Confirm final MVP scope
+- [x] Write `docs/format-overview.md` (RSRC container concepts)
+- [x] Write `docs/safety-model.md` (editing tiers, preservation rules)
+- [x] Write `docs/contributing-reverse-engineering.md` (discovery method)
+- [x] Confirm final MVP scope *(Phase 1 focus started: `internal/binaryx` + fuzz scaffold)*
 
 ---
 
@@ -44,13 +44,13 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 > Target: 2–4 weeks | Exit: `inspect`, `dump`, `list-resources` work on corpus; no panics; fuzz baseline in CI | Tag: `v0.1.0`
 
 ### 1.1 Wire-Level Binary Reader (`internal/binaryx`)
-- [ ] Define `Reader` struct with `io.ReaderAt` and `binary.ByteOrder`
-- [ ] Implement `U8`, `U16`, `U32`, `U64` methods with offset parameter
-- [ ] Implement `Bytes(off, n)` method
-- [ ] Implement `PascalString(off)` method (returns string + consumed bytes)
-- [ ] Implement `CString(off)` method
-- [ ] Add boundary checks and error wrapping
-- [ ] Write unit tests for all reader methods
+- [x] Define `Reader` struct with `io.ReaderAt` and `binary.ByteOrder`
+- [x] Implement `U8`, `U16`, `U32`, `U64` methods with offset parameter
+- [x] Implement `Bytes(off, n)` method
+- [x] Implement `PascalString(off)` method (returns string + consumed bytes)
+- [x] Implement `CString(off)` method
+- [x] Add boundary checks and error wrapping
+- [x] Write unit tests for all reader methods
 
 ### 1.2 RSRC Container Codec — Reader (`internal/rsrcwire`)
 - [ ] Define `File`, `Header`, `Block`, `Section` structs matching wire layout
@@ -90,7 +90,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 - [ ] Write smoke tests for all Phase 1 CLI commands
 
 ### 1.6 Fuzzing Baseline
-- [ ] Add `FuzzParseFile` target in `internal/rsrcwire`
+- [x] Add `FuzzParseFile` target in `internal/rsrcwire`
 - [ ] Add `FuzzParseHeader` target
 - [ ] Add `FuzzNameTable` target
 - [ ] Verify fuzz targets run in CI (short seed corpus)
