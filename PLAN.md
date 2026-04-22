@@ -142,9 +142,9 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 2.4 CLI `rewrite` Command
 
-- [ ] Implement `lvrsrc rewrite <file> --out <output>` command
-- [ ] Add `--canonical` flag (canonical writer mode, future)
-- [ ] Add round-trip integration test using CLI
+- [x] Implement `lvrsrc rewrite <file> --out <output>` command
+- [x] Add `--canonical` flag (canonical writer mode, future)
+- [x] Add round-trip integration test using CLI
 
 ### 2.5 Round-Trip Test Suite
 
@@ -174,10 +174,10 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 3.2 CLI `validate` Command
 
-- [ ] Implement `lvrsrc validate <file>` command
-- [ ] Human-readable output (colored if TTY)
-- [ ] JSON output with `--json` flag and machine-readable exit codes
-- [ ] Exit 0: valid; Exit 1: warnings; Exit 2: errors
+- [x] Implement `lvrsrc validate <file>` command
+- [x] Human-readable output (colored if TTY)
+- [x] JSON output with `--json` flag and machine-readable exit codes
+- [x] Exit 0: valid; Exit 1: warnings; Exit 2: errors
 
 ### 3.3 Diff Engine (`pkg/lvdiff`)
 

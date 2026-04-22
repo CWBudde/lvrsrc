@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -23,7 +24,7 @@ func main() {
 	cmd := newRootCmd(os.Stdout, os.Stderr)
 	if err := cmd.Execute(); err != nil {
 		_, _ = fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
+		os.Exit(exitCodeForError(err))
 	}
 }
 
@@ -73,6 +74,7 @@ func newRootCmd(stdout, stderr io.Writer) *cobra.Command {
 		app.newInspectCmd(),
 		app.newDumpCmd(),
 		app.newListResourcesCmd(),
+		app.newValidateCmd(),
 		app.newRewriteCmd(),
 	)
 
@@ -176,6 +178,57 @@ func (a *cliApp) newListResourcesCmd() *cobra.Command {
 	}
 }
 
+func (a *cliApp) newValidateCmd() *cobra.Command {
+	var jsonFlag bool
+
+	cmd := &cobra.Command{
+		Use:   "validate <file>",
+		Short: "Validate RSRC container structure",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			file, err := lvrsrc.Open(args[0], lvrsrc.OpenOptions{Strict: a.v.GetBool("strict")})
+			if err != nil {
+				return err
+			}
+
+			issues := file.Validate()
+			warnings, errorsCount := countIssues(issues)
+			exitCode := 0
+			if errorsCount > 0 {
+				exitCode = 2
+			} else if warnings > 0 {
+				exitCode = 1
+			}
+
+			w, closeFn, err := a.outputWriter(cmd)
+			if err != nil {
+				return err
+			}
+			defer closeFn()
+
+			if jsonFlag || strings.EqualFold(a.v.GetString("format"), "json") {
+				if err := a.writeValidateJSON(w, issues, exitCode); err != nil {
+					return err
+				}
+			} else {
+				if err := a.writeValidateText(w, issues, warnings, errorsCount); err != nil {
+					return err
+				}
+			}
+
+			if exitCode == 0 {
+				return nil
+			}
+			return &exitCodeError{
+				code: exitCode,
+				err:  fmt.Errorf("validation reported %d warning(s) and %d error(s)", warnings, errorsCount),
+			}
+		},
+	}
+	cmd.Flags().BoolVar(&jsonFlag, "json", false, "emit JSON output")
+	return cmd
+}
+
 func (a *cliApp) newRewriteCmd() *cobra.Command {
 	var canonical bool
 
@@ -220,6 +273,57 @@ func (a *cliApp) outputWriter(cmd *cobra.Command) (io.Writer, func(), error) {
 		return nil, nil, fmt.Errorf("open output file: %w", err)
 	}
 	return f, func() { _ = f.Close() }, nil
+}
+
+func (a *cliApp) writeValidateText(w io.Writer, issues []lvrsrc.Issue, warnings, errorsCount int) error {
+	status := "VALID"
+	color := colorGreen
+	if errorsCount > 0 {
+		status = "ERROR"
+		color = colorRed
+	} else if warnings > 0 {
+		status = "WARNING"
+		color = colorYellow
+	}
+
+	if _, err := fmt.Fprintf(w, "Status: %s\n", colorize(w, status, color)); err != nil {
+		return err
+	}
+	if _, err := fmt.Fprintf(w, "Warnings: %d\n", warnings); err != nil {
+		return err
+	}
+	if _, err := fmt.Fprintf(w, "Errors: %d\n", errorsCount); err != nil {
+		return err
+	}
+	for _, issue := range issues {
+		if _, err := fmt.Fprintf(w, "- [%s] %s: %s\n", strings.ToUpper(string(issue.Severity)), issue.Code, issue.Message); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (a *cliApp) writeValidateJSON(w io.Writer, issues []lvrsrc.Issue, exitCode int) error {
+	warnings, errorsCount := countIssues(issues)
+
+	payload := struct {
+		Valid    bool            `json:"valid"`
+		ExitCode int             `json:"exitCode"`
+		Summary  validateSummary `json:"summary"`
+		Issues   []lvrsrc.Issue  `json:"issues"`
+	}{
+		Valid:    exitCode == 0,
+		ExitCode: exitCode,
+		Summary: validateSummary{
+			Warnings: warnings,
+			Errors:   errorsCount,
+		},
+		Issues: issues,
+	}
+
+	enc := json.NewEncoder(w)
+	enc.SetIndent("", "  ")
+	return enc.Encode(payload)
 }
 
 func (a *cliApp) writeInspect(w io.Writer, file *lvrsrc.File) error {
@@ -287,4 +391,86 @@ func kindLabel(kind lvrsrc.FileKind) string {
 	default:
 		return "Unknown"
 	}
+}
+
+type validateSummary struct {
+	Warnings int `json:"warnings"`
+	Errors   int `json:"errors"`
+}
+
+const (
+	colorGreen  = "\x1b[32m"
+	colorYellow = "\x1b[33m"
+	colorRed    = "\x1b[31m"
+	colorReset  = "\x1b[0m"
+)
+
+type exitCodeError struct {
+	code int
+	err  error
+}
+
+func (e *exitCodeError) Error() string {
+	if e == nil || e.err == nil {
+		return ""
+	}
+	return e.err.Error()
+}
+
+func (e *exitCodeError) Unwrap() error {
+	if e == nil {
+		return nil
+	}
+	return e.err
+}
+
+func (e *exitCodeError) Code() int {
+	if e == nil || e.code == 0 {
+		return 1
+	}
+	return e.code
+}
+
+func exitCodeForError(err error) int {
+	if err == nil {
+		return 0
+	}
+
+	var codeErr *exitCodeError
+	if errors.As(err, &codeErr) {
+		return codeErr.Code()
+	}
+	return 1
+}
+
+func countIssues(issues []lvrsrc.Issue) (warnings, errorsCount int) {
+	for _, issue := range issues {
+		switch issue.Severity {
+		case lvrsrc.SeverityError:
+			errorsCount++
+		case lvrsrc.SeverityWarning:
+			warnings++
+		}
+	}
+	return warnings, errorsCount
+}
+
+func colorize(w io.Writer, s, color string) string {
+	if !isTerminalWriter(w) {
+		return s
+	}
+	return color + s + colorReset
+}
+
+func isTerminalWriter(w io.Writer) bool {
+	f, ok := w.(*os.File)
+	if !ok {
+		return false
+	}
+
+	info, err := f.Stat()
+	if err != nil {
+		return false
+	}
+	return (info.Mode() & os.ModeCharDevice) != 0
 }
