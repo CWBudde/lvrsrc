@@ -1,0 +1,316 @@
+{
+  "header": {
+    "magic": "RSRC\\x0d\\x0a",
+    "format_version": 3,
+    "type": "LVCC",
+    "creator": "LBVW",
+    "info_offset": 2956,
+    "info_size": 918,
+    "data_offset": 32,
+    "data_size": 2924
+  },
+  "kind": "ctl",
+  "block_count": 24,
+  "blocks": [
+    {
+      "type": "LIBN",
+      "offset": 292,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 16
+        }
+      ]
+    },
+    {
+      "type": "LVSR",
+      "offset": 312,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 0,
+          "payload_len": 160,
+          "name": "Datatypes.ctl"
+        }
+      ]
+    },
+    {
+      "type": "RTSG",
+      "offset": 332,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 16
+        }
+      ]
+    },
+    {
+      "type": "LIvi",
+      "offset": 352,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 51
+        }
+      ]
+    },
+    {
+      "type": "CONP",
+      "offset": 372,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "vers",
+      "offset": 392,
+      "sections": [
+        {
+          "index": 4,
+          "name_offset": 4294967295,
+          "payload_len": 14
+        },
+        {
+          "index": 7,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        },
+        {
+          "index": 8,
+          "name_offset": 4294967295,
+          "payload_len": 14
+        },
+        {
+          "index": 9,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        },
+        {
+          "index": 10,
+          "name_offset": 4294967295,
+          "payload_len": 14
+        }
+      ]
+    },
+    {
+      "type": "ICON",
+      "offset": 492,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 128
+        }
+      ]
+    },
+    {
+      "type": "icl8",
+      "offset": 512,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 1024
+        }
+      ]
+    },
+    {
+      "type": "CPC2",
+      "offset": 532,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "LIfp",
+      "offset": 552,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        }
+      ]
+    },
+    {
+      "type": "FPEx",
+      "offset": 572,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "FPHb",
+      "offset": 592,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 738
+        }
+      ]
+    },
+    {
+      "type": "FPSE",
+      "offset": 612,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VPDP",
+      "offset": 632,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "LIbd",
+      "offset": 652,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        }
+      ]
+    },
+    {
+      "type": "BDEx",
+      "offset": 672,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "BDHb",
+      "offset": 692,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 98
+        }
+      ]
+    },
+    {
+      "type": "BDSE",
+      "offset": 712,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VITS",
+      "offset": 732,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 53
+        }
+      ]
+    },
+    {
+      "type": "DTHP",
+      "offset": 752,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "MUID",
+      "offset": 772,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "HIST",
+      "offset": 792,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 40
+        }
+      ]
+    },
+    {
+      "type": "VCTP",
+      "offset": 812,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 241
+        }
+      ]
+    },
+    {
+      "type": "FTAB",
+      "offset": 832,
+      "sections": [
+        {
+          "index": 128,
+          "name_offset": 4294967295,
+          "payload_len": 101
+        }
+      ]
+    }
+  ],
+  "names": [
+    {
+      "offset": 0,
+      "value": "Datatypes.ctl"
+    }
+  ],
+  "raw_tail_len": 0,
+  "issues": null,
+  "round_trip": {
+    "size_match": true,
+    "in_bytes": 3874,
+    "out_bytes": 3874,
+    "byte_diffs": 1,
+    "first_diff_offset": 3007
+  }
+}

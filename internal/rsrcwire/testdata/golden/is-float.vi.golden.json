@@ -1,0 +1,307 @@
+{
+  "header": {
+    "magic": "RSRC\\x0d\\x0a",
+    "format_version": 3,
+    "type": "LVIN",
+    "creator": "LBVW",
+    "info_offset": 12564,
+    "info_size": 868,
+    "data_offset": 32,
+    "data_size": 12532
+  },
+  "kind": "vi",
+  "block_count": 25,
+  "blocks": [
+    {
+      "type": "LIBN",
+      "offset": 304,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 16
+        }
+      ]
+    },
+    {
+      "type": "LVSR",
+      "offset": 324,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 0,
+          "payload_len": 160,
+          "name": "Is Float.vi"
+        }
+      ]
+    },
+    {
+      "type": "RTSG",
+      "offset": 344,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 16
+        }
+      ]
+    },
+    {
+      "type": "vers",
+      "offset": 364,
+      "sections": [
+        {
+          "index": 4,
+          "name_offset": 4294967295,
+          "payload_len": 14
+        }
+      ]
+    },
+    {
+      "type": "CONP",
+      "offset": 384,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "LIvi",
+      "offset": 404,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 176
+        }
+      ]
+    },
+    {
+      "type": "BDPW",
+      "offset": 424,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 48
+        }
+      ]
+    },
+    {
+      "type": "ICON",
+      "offset": 444,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 128
+        }
+      ]
+    },
+    {
+      "type": "icl8",
+      "offset": 464,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 1024
+        }
+      ]
+    },
+    {
+      "type": "CPC2",
+      "offset": 484,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "LIfp",
+      "offset": 504,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 201
+        }
+      ]
+    },
+    {
+      "type": "FPEx",
+      "offset": 524,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 8
+        }
+      ]
+    },
+    {
+      "type": "FPHb",
+      "offset": 544,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 1334
+        }
+      ]
+    },
+    {
+      "type": "FPSE",
+      "offset": 564,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VPDP",
+      "offset": 584,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "LIbd",
+      "offset": 604,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 201
+        }
+      ]
+    },
+    {
+      "type": "BDEx",
+      "offset": 624,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 8
+        }
+      ]
+    },
+    {
+      "type": "BDHb",
+      "offset": 644,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 1593
+        }
+      ]
+    },
+    {
+      "type": "BDSE",
+      "offset": 664,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VITS",
+      "offset": 684,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 6823
+        }
+      ]
+    },
+    {
+      "type": "DTHP",
+      "offset": 704,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "MUID",
+      "offset": 724,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "HIST",
+      "offset": 744,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 40
+        }
+      ]
+    },
+    {
+      "type": "VCTP",
+      "offset": 764,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 496
+        }
+      ]
+    },
+    {
+      "type": "FTAB",
+      "offset": 784,
+      "sections": [
+        {
+          "index": 128,
+          "name_offset": 4294967295,
+          "payload_len": 101
+        }
+      ]
+    }
+  ],
+  "names": [
+    {
+      "offset": 0,
+      "value": "Is Float.vi"
+    }
+  ],
+  "raw_tail_len": 0,
+  "issues": null,
+  "round_trip": {
+    "size_match": true,
+    "in_bytes": 13432,
+    "out_bytes": 13432,
+    "byte_diffs": 1,
+    "first_diff_offset": 12615
+  }
+}

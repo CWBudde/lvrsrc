@@ -148,10 +148,10 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 2.5 Round-Trip Test Suite
 
-- [ ] Create `internal/golden` harness for golden file tests
-- [ ] Run round-trip on all corpus files; assert byte-for-byte equivalence or structural equivalence
-- [ ] Add regression test against Python oracle for block/section counts
-- [ ] Document any known acceptable differences (regenerated fields)
+- [x] Create `internal/golden` harness for golden file tests
+- [x] Run round-trip on all corpus files; assert byte-for-byte equivalence or structural equivalence (see `TestCorpusGolden`; currently 1 byte/file diff is tracked in goldens — see `docs/writer-differences.md`)
+- [ ] Add regression test against Python oracle for block/section counts _(deferred — pylabview infra not yet wired)_
+- [x] Document any known acceptable differences (regenerated fields) — `docs/writer-differences.md`
 
 ---
 
@@ -181,23 +181,23 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 3.3 Diff Engine (`pkg/lvdiff`)
 
-- [ ] Define `Diff` and `DiffItem` structs
-- [ ] Implement header-level diff (field-by-field)
-- [ ] Implement resource type additions/removals diff
-- [ ] Implement section-level binary diff (size changes, content hash)
-- [ ] Implement decoded-resource diff for known types (stub, expand in Phase 4+)
+- [x] Define `Diff` and `DiffItem` structs
+- [x] Implement header-level diff (field-by-field)
+- [x] Implement resource type additions/removals diff
+- [x] Implement section-level binary diff (size changes, content hash)
+- [x] Implement decoded-resource diff for known types (stub, expand in Phase 4+) _(pluggable `Options.DecodedDiffers` extension point; typed codecs wire in via Phase 4+)_
 
 ### 3.4 CLI `diff` Command
 
-- [ ] Implement `lvrsrc diff <a.vi> <b.vi>` command
-- [ ] Human-readable unified-diff style output
-- [ ] JSON diff output with `--json` flag
+- [x] Implement `lvrsrc diff <a.vi> <b.vi>` command
+- [x] Human-readable unified-diff style output
+- [x] JSON diff output with `--json` flag
 
 ### 3.5 JSON Schema
 
-- [ ] Define JSON schema for `dump` output
-- [ ] Define JSON schema for `validate` output
-- [ ] Publish schemas under `docs/`
+- [x] Define JSON schema for `dump` output — `docs/schemas/dump.schema.json`
+- [x] Define JSON schema for `validate` output — `docs/schemas/validate.schema.json`
+- [x] Publish schemas under `docs/` _(additionally: `Issue`/`IssueLocation` gained `json:` tags so emitted keys are camelCase; CLI schema-conformance tests in `cmd/lvrsrc/schemas_test.go` guard against drift)_
 
 ---
 
@@ -207,29 +207,29 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 4.1 Resource Registry (`internal/codecs`)
 
-- [ ] Define `ResourceCodec` interface (`Decode`, `Encode`, `Validate`, `Capability`)
-- [ ] Define `Registry` struct with `map[FourCC]ResourceCodec`
-- [ ] Define `Context` struct (`FileVersion`, `Kind`)
-- [ ] Define `Capability` struct (`FourCC`, `ReadVersions`, `WriteVersions`, `Safety`)
-- [ ] Implement registry lookup and fallback to opaque codec
-- [ ] Write registry tests
+- [x] Define `ResourceCodec` interface (`Decode`, `Encode`, `Validate`, `Capability`)
+- [x] Define `Registry` struct with `map[FourCC]ResourceCodec`
+- [x] Define `Context` struct (`FileVersion`, `Kind`)
+- [x] Define `Capability` struct (`FourCC`, `ReadVersions`, `WriteVersions`, `Safety`)
+- [x] Implement registry lookup and fallback to opaque codec
+- [x] Write registry tests
 
 ### 4.2 Version Awareness
 
-- [ ] Define `Version` type and `VersionRange`
-- [ ] Define `FileKind` enum
-- [ ] Implement `(f *File) DetectVersion() (Version, bool)` in `pkg/lvvi`
-- [ ] Wire version context into all codec calls
+- [x] Define `Version` type and `VersionRange` _(Version in `pkg/lvvi`; VersionRange in `internal/codecs` from 4.1)_
+- [x] Define `FileKind` enum _(existed from Phase 1.2 in `internal/rsrcwire` / `pkg/lvrsrc`; re-exported in `pkg/lvvi`)_
+- [x] Implement `(f *File) DetectVersion() (Version, bool)` in `pkg/lvvi` _(implemented as package function `lvvi.DetectVersion(*lvrsrc.File)` to avoid `pkg/lvrsrc` ↔ `pkg/lvvi` import cycle)_
+- [ ] Wire version context into all codec calls _(deferred: no codec calls exist yet; will be wired in Phase 4.4/4.5 when `pkg/lvmeta` and `pkg/lvvi` dispatch codecs)_
 
 ### 4.3 Initial Typed Codecs (low-risk resources)
 
-- [ ] Research and document VI description resource layout (Markdown spec in `docs/resources/`)
-- [ ] Implement codec for VI description / documentation string resource
-- [ ] Research and document VI name resource layout
-- [ ] Implement codec for VI name resource
-- [ ] Research and document version stamp resource layout
-- [ ] Implement codec for version stamp resource
-- [ ] Add resource-specific validator checks for each codec
+- [x] Research and document VI description resource layout (Markdown spec in `docs/resources/`) — `docs/resources/strg.md`, grounded in `pylabview`'s `StringListBlock`/`STRG` handling and 4 corpus files with non-empty descriptions
+- [x] Implement codec for VI description / documentation string resource — `internal/codecs/strg` (modern LV≥4.0 single-string layout; legacy layout documented as future work)
+- [x] Research and document VI name resource layout _(N/A — the VI filename is surfaced as `Section.Name` of the `LVSR` block during container parsing; confirmed via `pylabview` `LVSR` class which carries save-record fields but not the name)_
+- [x] Implement codec for VI name resource _(N/A — read path covered by `Section.Name`; write path is a container-level name-table edit handled in Phase 4.4 `pkg/lvmeta`)_
+- [x] Research and document version stamp resource layout — `docs/resources/vers.md`, grounded in 65 corpus samples
+- [x] Implement codec for version stamp resource — `internal/codecs/vers` (Decode + Encode + Validate, byte-for-byte round-trip verified on all corpus `vers` sections)
+- [x] Add resource-specific validator checks for each codec _(implemented for `vers` and `STRG`; see validation rule tables in `docs/resources/*.md`)_
 
 ### 4.4 `pkg/lvmeta` Editing API
 

@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/CWBudde/lvrsrc/internal/corpus"
 	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
@@ -323,7 +324,7 @@ func TestRewriteCommandCanonicalFlagNotImplemented(t *testing.T) {
 
 func fixturePath(t *testing.T, name string) string {
 	t.Helper()
-	return filepath.Join("testdata", name)
+	return corpus.Path(name)
 }
 
 func writeWarningFixture(t *testing.T) string {

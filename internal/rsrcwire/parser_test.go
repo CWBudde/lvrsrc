@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"reflect"
 	"testing"
+
+	"github.com/CWBudde/lvrsrc/internal/corpus"
 )
 
 func TestParseSyntheticFile(t *testing.T) {
@@ -103,7 +105,7 @@ func TestParseCorpusFixtures(t *testing.T) {
 	}{
 		{
 			name:          "ctl",
-			path:          filepath.Join("testdata", "config-data.ctl"),
+			path:          corpus.Path("config-data.ctl"),
 			wantKind:      FileKindControl,
 			wantType:      "LVCC",
 			wantBlocks:    24,
@@ -114,7 +116,7 @@ func TestParseCorpusFixtures(t *testing.T) {
 		},
 		{
 			name:          "vi",
-			path:          filepath.Join("testdata", "get-vi-description.vi"),
+			path:          corpus.Path("get-vi-description.vi"),
 			wantKind:      FileKindVI,
 			wantType:      "LVIN",
 			wantBlocks:    26,
@@ -214,11 +216,11 @@ func TestSerializeCorpusFixturesRoundTrip(t *testing.T) {
 	}{
 		{
 			name: "ctl",
-			path: filepath.Join("testdata", "config-data.ctl"),
+			path: corpus.Path("config-data.ctl"),
 		},
 		{
 			name: "vi",
-			path: filepath.Join("testdata", "get-vi-description.vi"),
+			path: corpus.Path("get-vi-description.vi"),
 		},
 	}
 
@@ -245,6 +247,62 @@ func TestSerializeCorpusFixturesRoundTrip(t *testing.T) {
 			roundTrip, err := Parse(serialized)
 			if err != nil {
 				t.Fatalf("Parse(Serialize(%q)) error = %v", tc.path, err)
+			}
+
+			assertEquivalentFiles(t, roundTrip, parsed)
+		})
+	}
+}
+
+// TestParseCorpusSmoke parses every *.vi and *.ctl fixture under testdata/
+// and confirms a structural round-trip (Parse → Serialize → Parse yields an
+// equivalent file). Byte-exact round-trip on production files is a PLAN.md
+// Phase 2 goal and is NOT asserted here — see TestSerializeSyntheticFilePreservesBytes
+// for the synthetic-only byte-exact invariant.
+// Fixtures are copied from ../labview_mcp; see testdata/README.md.
+func TestParseCorpusSmoke(t *testing.T) {
+	t.Parallel()
+
+	paths, err := filepath.Glob(corpus.Path("*.vi"))
+	if err != nil {
+		t.Fatalf("glob vi: %v", err)
+	}
+	ctlPaths, err := filepath.Glob(corpus.Path("*.ctl"))
+	if err != nil {
+		t.Fatalf("glob ctl: %v", err)
+	}
+	paths = append(paths, ctlPaths...)
+	if len(paths) < 20 {
+		t.Fatalf("corpus has only %d fixtures; expected ≥20", len(paths))
+	}
+
+	for _, p := range paths {
+		p := p
+		t.Run(filepath.Base(p), func(t *testing.T) {
+			t.Parallel()
+
+			data, err := os.ReadFile(p)
+			if err != nil {
+				t.Fatalf("ReadFile(%q) error = %v", p, err)
+			}
+
+			parsed, err := Parse(data)
+			if err != nil {
+				t.Fatalf("Parse(%q) error = %v", p, err)
+			}
+
+			if parsed.Header.Type != "LVIN" && parsed.Header.Type != "LVCC" {
+				t.Fatalf("unexpected header type %q for %q", parsed.Header.Type, p)
+			}
+
+			serialized, err := Serialize(parsed)
+			if err != nil {
+				t.Fatalf("Serialize(%q) error = %v", p, err)
+			}
+
+			roundTrip, err := Parse(serialized)
+			if err != nil {
+				t.Fatalf("Parse(Serialize(%q)) error = %v", p, err)
 			}
 
 			assertEquivalentFiles(t, roundTrip, parsed)

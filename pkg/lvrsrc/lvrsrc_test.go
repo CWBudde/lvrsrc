@@ -2,9 +2,9 @@ package lvrsrc_test
 
 import (
 	"os"
-	"path/filepath"
 	"testing"
 
+	"github.com/CWBudde/lvrsrc/internal/corpus"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -105,7 +105,7 @@ func TestCloneDeepCopy(t *testing.T) {
 
 func fixturePath(t *testing.T, name string) string {
 	t.Helper()
-	return filepath.Join("testdata", name)
+	return corpus.Path(name)
 }
 
 func readFixture(t *testing.T, name string) []byte {

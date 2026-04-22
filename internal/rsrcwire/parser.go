@@ -49,11 +49,11 @@ const (
 )
 
 type IssueLocation struct {
-	Area         string
-	Offset       uint32
-	BlockType    string
-	SectionIndex int32
-	NameOffset   uint32
+	Area         string `json:"area"`
+	Offset       uint32 `json:"offset"`
+	BlockType    string `json:"blockType"`
+	SectionIndex int32  `json:"sectionIndex"`
+	NameOffset   uint32 `json:"nameOffset"`
 }
 
 type ParseIssue struct {

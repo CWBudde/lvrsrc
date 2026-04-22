@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/CWBudde/lvrsrc/docs/schemas/validate.schema.json",
+  "title": "lvrsrc validate output",
+  "description": "JSON produced by `lvrsrc validate <file> --json`. Exit codes: 0 = valid, 1 = warnings only, 2 = at least one error.",
+  "type": "object",
+  "required": ["valid", "exitCode", "summary", "issues"],
+  "additionalProperties": false,
+  "properties": {
+    "valid": {
+      "description": "True iff exitCode == 0 (no warnings and no errors).",
+      "type": "boolean"
+    },
+    "exitCode": {
+      "description": "CLI exit code. 0 = valid, 1 = warnings, 2 = errors.",
+      "type": "integer",
+      "enum": [0, 1, 2]
+    },
+    "summary": {
+      "type": "object",
+      "required": ["warnings", "errors"],
+      "additionalProperties": false,
+      "properties": {
+        "warnings": {
+          "description": "Count of severity=warning issues.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "errors": {
+          "description": "Count of severity=error issues.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "issues": {
+      "description": "Issue list. May be null (or an empty array) when no issues were found.",
+      "type": ["array", "null"],
+      "items": { "$ref": "#/$defs/issue" }
+    }
+  },
+  "$defs": {
+    "issue": {
+      "type": "object",
+      "required": ["severity", "code", "message", "location"],
+      "additionalProperties": false,
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": ["warning", "error"]
+        },
+        "code": {
+          "description": "Stable, dotted identifier for the check that produced the issue (e.g. \"header.mismatch\", \"section.size.zero\", \"name.offset.bounds\").",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable explanation with concrete values interpolated.",
+          "type": "string"
+        },
+        "location": { "$ref": "#/$defs/issueLocation" }
+      }
+    },
+    "issueLocation": {
+      "type": "object",
+      "required": ["area", "offset", "blockType", "sectionIndex", "nameOffset"],
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "description": "High-level region the issue applies to (e.g. \"header\", \"block\", \"section\", \"name\").",
+          "type": "string"
+        },
+        "offset": {
+          "description": "Byte offset within the file, when relevant. Zero otherwise.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "blockType": {
+          "description": "FourCC of the block the issue refers to, or \"\" if not block-scoped.",
+          "type": "string"
+        },
+        "sectionIndex": {
+          "description": "Section index (resource ID) within blockType, or 0 if not section-scoped.",
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "nameOffset": {
+          "description": "Offset into the name table when the issue involves a name, or 0 otherwise.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      }
+    }
+  }
+}

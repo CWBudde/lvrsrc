@@ -1,0 +1,329 @@
+{
+  "header": {
+    "magic": "RSRC\\x0d\\x0a",
+    "format_version": 3,
+    "type": "LVIN",
+    "creator": "LBVW",
+    "info_offset": 11092,
+    "info_size": 948,
+    "data_offset": 32,
+    "data_size": 11060
+  },
+  "kind": "vi",
+  "block_count": 27,
+  "blocks": [
+    {
+      "type": "LIBN",
+      "offset": 328,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 27
+        }
+      ]
+    },
+    {
+      "type": "LVSR",
+      "offset": 348,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 0,
+          "payload_len": 160,
+          "name": "Module Timeout--constant.vi"
+        }
+      ]
+    },
+    {
+      "type": "RTSG",
+      "offset": 368,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 16
+        }
+      ]
+    },
+    {
+      "type": "vers",
+      "offset": 388,
+      "sections": [
+        {
+          "index": 4,
+          "name_offset": 4294967295,
+          "payload_len": 14
+        }
+      ]
+    },
+    {
+      "type": "CONP",
+      "offset": 408,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "LIvi",
+      "offset": 428,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 62
+        }
+      ]
+    },
+    {
+      "type": "BDPW",
+      "offset": 448,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 48
+        }
+      ]
+    },
+    {
+      "type": "STRG",
+      "offset": 468,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 151
+        }
+      ]
+    },
+    {
+      "type": "ICON",
+      "offset": 488,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 128
+        }
+      ]
+    },
+    {
+      "type": "icl4",
+      "offset": 508,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 512
+        }
+      ]
+    },
+    {
+      "type": "icl8",
+      "offset": 528,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 1024
+        }
+      ]
+    },
+    {
+      "type": "CPC2",
+      "offset": 548,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 2
+        }
+      ]
+    },
+    {
+      "type": "LIfp",
+      "offset": 568,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        }
+      ]
+    },
+    {
+      "type": "FPEx",
+      "offset": 588,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "FPHb",
+      "offset": 608,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 917
+        }
+      ]
+    },
+    {
+      "type": "FPSE",
+      "offset": 628,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VPDP",
+      "offset": 648,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "LIbd",
+      "offset": 668,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 12
+        }
+      ]
+    },
+    {
+      "type": "BDEx",
+      "offset": 688,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "BDHb",
+      "offset": 708,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 680
+        }
+      ]
+    },
+    {
+      "type": "BDSE",
+      "offset": 728,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "VITS",
+      "offset": 748,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 6921
+        }
+      ]
+    },
+    {
+      "type": "DTHP",
+      "offset": 768,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "MUID",
+      "offset": 788,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 4
+        }
+      ]
+    },
+    {
+      "type": "HIST",
+      "offset": 808,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 40
+        }
+      ]
+    },
+    {
+      "type": "VCTP",
+      "offset": 828,
+      "sections": [
+        {
+          "index": 0,
+          "name_offset": 4294967295,
+          "payload_len": 76
+        }
+      ]
+    },
+    {
+      "type": "FTAB",
+      "offset": 848,
+      "sections": [
+        {
+          "index": 128,
+          "name_offset": 4294967295,
+          "payload_len": 101
+        }
+      ]
+    }
+  ],
+  "names": [
+    {
+      "offset": 0,
+      "value": "Module Timeout--constant.vi"
+    }
+  ],
+  "raw_tail_len": 0,
+  "issues": null,
+  "round_trip": {
+    "size_match": true,
+    "in_bytes": 12040,
+    "out_bytes": 12040,
+    "byte_diffs": 1,
+    "first_diff_offset": 11143
+  }
+}

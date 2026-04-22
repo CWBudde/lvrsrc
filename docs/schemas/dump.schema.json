@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/CWBudde/lvrsrc/docs/schemas/dump.schema.json",
+  "title": "lvrsrc dump output",
+  "description": "JSON produced by `lvrsrc dump <file> --json`. Mirrors the parsed pkg/lvrsrc.File structure verbatim, with opaque section payloads represented as base64-encoded byte strings.",
+  "type": "object",
+  "required": [
+    "header",
+    "secondaryHeader",
+    "blockInfoList",
+    "blocks",
+    "names",
+    "rawTail",
+    "kind",
+    "compression"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "header": { "$ref": "#/$defs/header" },
+    "secondaryHeader": { "$ref": "#/$defs/header" },
+    "blockInfoList": { "$ref": "#/$defs/blockInfoList" },
+    "blocks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/block" }
+    },
+    "names": {
+      "type": ["array", "null"],
+      "items": { "$ref": "#/$defs/nameEntry" }
+    },
+    "rawTail": {
+      "description": "Trailing bytes after the last resource payload, preserved verbatim. Base64-encoded.",
+      "type": ["string", "null"],
+      "contentEncoding": "base64"
+    },
+    "kind": {
+      "description": "Detected file kind.",
+      "type": "string",
+      "enum": ["unknown", "vi", "ctl", "vit", "llb"]
+    },
+    "compression": {
+      "description": "Detected compression kind. Currently always \"unknown\" until compression support lands.",
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "header": {
+      "type": "object",
+      "required": [
+        "magic",
+        "formatVersion",
+        "type",
+        "creator",
+        "infoOffset",
+        "infoSize",
+        "dataOffset",
+        "dataSize"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "magic": {
+          "description": "RSRC magic string (typically \"RSRC\\r\\n\").",
+          "type": "string"
+        },
+        "formatVersion": {
+          "description": "RSRC container format version.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "type": {
+          "description": "Four-character file type code (e.g. LVIN, LVCC).",
+          "type": "string"
+        },
+        "creator": {
+          "description": "Four-character creator code (e.g. LBVW).",
+          "type": "string"
+        },
+        "infoOffset": { "$ref": "#/$defs/uint32" },
+        "infoSize": { "$ref": "#/$defs/uint32" },
+        "dataOffset": { "$ref": "#/$defs/uint32" },
+        "dataSize": { "$ref": "#/$defs/uint32" }
+      }
+    },
+    "blockInfoList": {
+      "type": "object",
+      "required": [
+        "datasetInt1",
+        "datasetInt2",
+        "datasetInt3",
+        "blockInfoOffset",
+        "blockInfoSize"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "datasetInt1": { "$ref": "#/$defs/uint32" },
+        "datasetInt2": { "$ref": "#/$defs/uint32" },
+        "datasetInt3": { "$ref": "#/$defs/uint32" },
+        "blockInfoOffset": { "$ref": "#/$defs/uint32" },
+        "blockInfoSize": { "$ref": "#/$defs/uint32" }
+      }
+    },
+    "block": {
+      "type": "object",
+      "required": ["type", "sectionCount", "offset", "sections"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "Four-character resource type code (FourCC).",
+          "type": "string"
+        },
+        "sectionCount": {
+          "description": "Number of sections this block contains.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "offset": { "$ref": "#/$defs/uint32" },
+        "sections": {
+          "type": ["array", "null"],
+          "items": { "$ref": "#/$defs/section" }
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "required": [
+        "index",
+        "nameOffset",
+        "unknown3",
+        "dataOffset",
+        "unknown5",
+        "name",
+        "payload"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "description": "Resource ID / section index. Signed because 0xFFFFFFFF is used as a sentinel for absent names elsewhere.",
+          "type": "integer",
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "nameOffset": { "$ref": "#/$defs/uint32" },
+        "unknown3": { "$ref": "#/$defs/uint32" },
+        "dataOffset": { "$ref": "#/$defs/uint32" },
+        "unknown5": { "$ref": "#/$defs/uint32" },
+        "name": {
+          "description": "Resolved section name (empty if no name).",
+          "type": "string"
+        },
+        "payload": {
+          "description": "Raw section payload bytes, base64-encoded. Opaque to lvrsrc today; typed codecs decode these in later phases.",
+          "type": ["string", "null"],
+          "contentEncoding": "base64"
+        }
+      }
+    },
+    "nameEntry": {
+      "type": "object",
+      "required": ["offset", "value", "consumed"],
+      "additionalProperties": false,
+      "properties": {
+        "offset": { "$ref": "#/$defs/uint32" },
+        "value": { "type": "string" },
+        "consumed": { "type": "integer" }
+      }
+    },
+    "uint32": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    }
+  }
+}

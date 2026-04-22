@@ -3,16 +3,29 @@ package rsrcwire
 import (
 	"encoding/binary"
 	"os"
-	"path/filepath"
 	"testing"
 
 	"github.com/CWBudde/lvrsrc/internal/binaryx"
+	"github.com/CWBudde/lvrsrc/internal/corpus"
 )
+
+var corpusSeeds = []string{
+	"config-data.ctl",
+	"get-vi-description.vi",
+	"action.ctl",
+	"request.ctl",
+	"module-data--cluster.ctl",
+	"is-int.vi",
+	"module-timeout--constant.vi",
+	"ndjson-parser.vi",
+	"write-ini.vi",
+}
 
 func FuzzParseFile(f *testing.F) {
 	f.Add([]byte("RSRC"))
-	addFileSeed(f, "config-data.ctl")
-	addFileSeed(f, "get-vi-description.vi")
+	for _, name := range corpusSeeds {
+		addFileSeed(f, name)
+	}
 
 	f.Fuzz(func(t *testing.T, data []byte) {
 		_, _ = Parse(data)
@@ -21,8 +34,9 @@ func FuzzParseFile(f *testing.F) {
 
 func FuzzParseHeader(f *testing.F) {
 	f.Add([]byte("RSRC\r\n\x00\x03LVINLBVW\x00\x00\x00 \x00\x00\x00 \x00\x00\x00 \x00\x00\x00 "))
-	addHeaderSeed(f, "config-data.ctl")
-	addHeaderSeed(f, "get-vi-description.vi")
+	for _, name := range corpusSeeds {
+		addHeaderSeed(f, name)
+	}
 
 	f.Fuzz(func(t *testing.T, data []byte) {
 		_, _ = ParseHeader(data)
@@ -47,7 +61,7 @@ func FuzzNameTable(f *testing.F) {
 func addFileSeed(f *testing.F, name string) {
 	f.Helper()
 
-	data, err := os.ReadFile(filepath.Join("testdata", name))
+	data, err := os.ReadFile(corpus.Path(name))
 	if err == nil {
 		f.Add(data)
 	}
@@ -56,7 +70,7 @@ func addFileSeed(f *testing.F, name string) {
 func addHeaderSeed(f *testing.F, name string) {
 	f.Helper()
 
-	data, err := os.ReadFile(filepath.Join("testdata", name))
+	data, err := os.ReadFile(corpus.Path(name))
 	if err == nil && len(data) >= headerSize {
 		f.Add(append([]byte(nil), data[:headerSize]...))
 	}

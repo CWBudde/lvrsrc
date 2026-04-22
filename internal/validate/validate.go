@@ -17,10 +17,10 @@ const (
 type IssueLocation = rsrcwire.IssueLocation
 
 type Issue struct {
-	Severity Severity
-	Code     string
-	Message  string
-	Location IssueLocation
+	Severity Severity      `json:"severity"`
+	Code     string        `json:"code"`
+	Message  string        `json:"message"`
+	Location IssueLocation `json:"location"`
 }
 
 type Options struct {
