@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 func TestParse(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"testing"
 
-	"github.com/example/lvrsrc/internal/rsrcwire"
+	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
 )
 
 func TestFileValidSyntheticReturnsNoIssues(t *testing.T) {

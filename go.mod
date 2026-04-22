@@ -1,4 +1,4 @@
-module github.com/example/lvrsrc
+module github.com/CWBudde/lvrsrc
 
 go 1.25
 

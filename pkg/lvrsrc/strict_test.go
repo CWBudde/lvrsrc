@@ -3,7 +3,7 @@ package lvrsrc_test
 import (
 	"testing"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 func TestParseLenientByDefaultForRecoverableSecondaryHeaderMismatch(t *testing.T) {

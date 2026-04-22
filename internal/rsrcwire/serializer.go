@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/example/lvrsrc/internal/binaryx"
+	"github.com/CWBudde/lvrsrc/internal/binaryx"
 )
 
 // Serialize encodes f back to RSRC wire format while preserving opaque data.

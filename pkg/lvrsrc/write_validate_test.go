@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 func TestWriteToRoundTrip(t *testing.T) {
@@ -18,7 +18,7 @@ func TestWriteToRoundTrip(t *testing.T) {
 	}
 
 	var buf bytes.Buffer
-	if err := f.WriteTo(&buf); err != nil {
+	if _, err := f.WriteTo(&buf); err != nil {
 		t.Fatalf("WriteTo() error = %v", err)
 	}
 

@@ -5,8 +5,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/example/lvrsrc/internal/rsrcwire"
-	iv "github.com/example/lvrsrc/internal/validate"
+	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
+	iv "github.com/CWBudde/lvrsrc/internal/validate"
 )
 
 type Severity = iv.Severity
@@ -21,18 +21,17 @@ type (
 	Issue         = iv.Issue
 )
 
-func (f *File) WriteTo(w io.Writer) error {
+func (f *File) WriteTo(w io.Writer) (int64, error) {
 	if f == nil {
-		return nil
+		return 0, nil
 	}
 
 	data, err := rsrcwire.Serialize(toWireFile(f))
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	_, err = io.Copy(w, bytes.NewReader(data))
-	return err
+	return io.Copy(w, bytes.NewReader(data))
 }
 
 func (f *File) WriteToFile(path string) error {

@@ -84,9 +84,9 @@ package main
 import (
 	"log"
 
-	"github.com/example/lvrsrc/pkg/lvmeta"
-	"github.com/example/lvrsrc/pkg/lvrsrc"
-	"github.com/example/lvrsrc/pkg/lvvi"
+	"github.com/CWBudde/lvrsrc/pkg/lvmeta"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 )
 
 func main() {

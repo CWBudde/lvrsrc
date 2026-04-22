@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/example/lvrsrc/internal/binaryx"
+	"github.com/CWBudde/lvrsrc/internal/binaryx"
 )
 
 func FuzzParseFile(f *testing.F) {

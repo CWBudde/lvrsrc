@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/example/lvrsrc/internal/binaryx"
+	"github.com/CWBudde/lvrsrc/internal/binaryx"
 )
 
 const (
@@ -20,8 +20,8 @@ const (
 
 	// Sanity caps applied to wire-supplied counts/sizes to prevent
 	// malformed files from driving pathological allocations.
-	maxBlocks           = 1 << 20       // 1,048,576
-	maxSectionsPerBlock = 1 << 20
+	maxBlocks           = 1 << 20   // 1,048,576
+	maxSectionsPerBlock = 1 << 20   // 1,048,576
 	maxPayloadBytes     = 256 << 20 // 256 MiB
 )
 

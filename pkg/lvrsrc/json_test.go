@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 func TestMarshalJSONParsedFile(t *testing.T) {

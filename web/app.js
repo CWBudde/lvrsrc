@@ -68,11 +68,18 @@ async function processFile(file) {
   hideAll();
   loadingEl.classList.remove("hidden");
 
-  if (!wasmReady) {
-    await waitForWasm();
+  if (file.size > MAX_FILE_BYTES) {
+    loadingEl.classList.add("hidden");
+    showError(
+      `File is ${(file.size / (1024 * 1024)).toFixed(1)} MiB; limit is ${MAX_FILE_BYTES / (1024 * 1024)} MiB.`,
+    );
+    return;
   }
 
   try {
+    if (!wasmReady) {
+      await waitForWasm();
+    }
     const buffer = await file.arrayBuffer();
     const bytes = new Uint8Array(buffer);
     const json = parseVI(bytes);
@@ -93,8 +100,18 @@ async function processFile(file) {
 }
 
 function waitForWasm() {
-  return new Promise((resolve) => {
-    const check = () => (wasmReady ? resolve() : setTimeout(check, 50));
+  return new Promise((resolve, reject) => {
+    const check = () => {
+      if (wasmError) {
+        reject(new Error("WASM engine failed to load: " + wasmError.message));
+        return;
+      }
+      if (wasmReady) {
+        resolve();
+        return;
+      }
+      setTimeout(check, 50);
+    };
     check();
   });
 }
@@ -117,13 +134,16 @@ function renderHeader(tableId, h) {
     ["Format version", h.format_version],
     ["Type", h.type],
     ["Creator", h.creator],
-    ["Info offset", "0x" + h.info_offset.toString(16).padStart(8, "0")],
-    ["Info size", h.info_size + " bytes"],
-    ["Data offset", "0x" + h.data_offset.toString(16).padStart(8, "0")],
-    ["Data size", h.data_size + " bytes"],
+    ["Info offset", "0x" + Number(h.info_offset).toString(16).padStart(8, "0")],
+    ["Info size", Number(h.info_size) + " bytes"],
+    ["Data offset", "0x" + Number(h.data_offset).toString(16).padStart(8, "0")],
+    ["Data size", Number(h.data_size) + " bytes"],
   ];
   table.innerHTML = rows
-    .map(([label, val]) => `<tr><td>${label}</td><td>${val}</td></tr>`)
+    .map(
+      ([label, val]) =>
+        `<tr><td>${escHtml(String(label))}</td><td>${escHtml(String(val))}</td></tr>`,
+    )
     .join("");
 }
 
@@ -138,11 +158,11 @@ function renderResources(resources) {
     .map(
       (r) => `
       <tr>
-        <td><span class="type-tag">${escHtml(r.type)}</span></td>
-        <td>${r.id}</td>
-        <td>${escHtml(r.name || "")}</td>
-        <td>${r.size}</td>
-        <td class="hex-preview">${r.payload || ""}</td>
+        <td><span class="type-tag">${escHtml(String(r.type))}</span></td>
+        <td>${Number(r.id)}</td>
+        <td>${escHtml(String(r.name || ""))}</td>
+        <td>${Number(r.size)}</td>
+        <td class="hex-preview">${escHtml(String(r.payload || ""))}</td>
       </tr>`,
     )
     .join("");

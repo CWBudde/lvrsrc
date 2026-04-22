@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"syscall/js"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 // WASMResult is returned as a JSON string to JavaScript.

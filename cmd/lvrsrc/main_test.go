@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/example/lvrsrc/internal/rsrcwire"
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
 func TestInspectCommand(t *testing.T) {

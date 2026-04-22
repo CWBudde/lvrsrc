@@ -9,7 +9,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/example/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -255,7 +255,8 @@ func (a *cliApp) newRewriteCmd() *cobra.Command {
 			}
 			defer closeFn()
 
-			return file.WriteTo(w)
+			_, err = file.WriteTo(w)
+			return err
 		},
 	}
 	cmd.Flags().BoolVar(&canonical, "canonical", false, "rewrite using future canonical writer mode")

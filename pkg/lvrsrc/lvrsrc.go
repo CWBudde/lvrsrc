@@ -3,7 +3,7 @@ package lvrsrc
 import (
 	"os"
 
-	"github.com/example/lvrsrc/internal/rsrcwire"
+	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
 )
 
 type FileKind = rsrcwire.FileKind

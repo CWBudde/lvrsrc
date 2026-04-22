@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/example/lvrsrc/internal/rsrcwire"
+	"github.com/CWBudde/lvrsrc/internal/rsrcwire"
 )
 
 type Severity = rsrcwire.Severity
