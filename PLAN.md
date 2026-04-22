@@ -135,10 +135,10 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 2.3 Public Write API (`pkg/lvrsrc`)
 
-- [ ] Implement `(f *File) WriteTo(w io.Writer) error`
-- [ ] Implement `(f *File) WriteToFile(path string) error`
-- [ ] Implement `(f *File) Validate() []Issue`
-- [ ] Write API-level round-trip tests
+- [x] Implement `(f *File) WriteTo(w io.Writer) error`
+- [x] Implement `(f *File) WriteToFile(path string) error`
+- [x] Implement `(f *File) Validate() []Issue`
+- [x] Write API-level round-trip tests
 
 ### 2.4 CLI `rewrite` Command
 

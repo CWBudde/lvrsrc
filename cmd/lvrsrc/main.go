@@ -73,6 +73,7 @@ func newRootCmd(stdout, stderr io.Writer) *cobra.Command {
 		app.newInspectCmd(),
 		app.newDumpCmd(),
 		app.newListResourcesCmd(),
+		app.newRewriteCmd(),
 	)
 
 	return rootCmd
@@ -173,6 +174,39 @@ func (a *cliApp) newListResourcesCmd() *cobra.Command {
 			return a.writeResources(w, file)
 		},
 	}
+}
+
+func (a *cliApp) newRewriteCmd() *cobra.Command {
+	var canonical bool
+
+	cmd := &cobra.Command{
+		Use:   "rewrite <file>",
+		Short: "Rewrite an RSRC file in preserving mode",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			if canonical {
+				return fmt.Errorf("canonical rewrite mode is not implemented yet")
+			}
+			if a.v.GetString("out") == "" {
+				return fmt.Errorf("rewrite requires --out")
+			}
+
+			file, err := lvrsrc.Open(args[0], lvrsrc.OpenOptions{Strict: a.v.GetBool("strict")})
+			if err != nil {
+				return err
+			}
+
+			w, closeFn, err := a.outputWriter(cmd)
+			if err != nil {
+				return err
+			}
+			defer closeFn()
+
+			return file.WriteTo(w)
+		},
+	}
+	cmd.Flags().BoolVar(&canonical, "canonical", false, "rewrite using future canonical writer mode")
+	return cmd
 }
 
 func (a *cliApp) outputWriter(cmd *cobra.Command) (io.Writer, func(), error) {
