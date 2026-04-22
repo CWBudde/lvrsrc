@@ -104,9 +104,9 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ### 1.6 Fuzzing Baseline
 
 - [x] Add `FuzzParseFile` target in `internal/rsrcwire`
-- [ ] Add `FuzzParseHeader` target
-- [ ] Add `FuzzNameTable` target
-- [ ] Verify fuzz targets run in CI (short seed corpus)
+- [x] Add `FuzzParseHeader` target
+- [x] Add `FuzzNameTable` target
+- [x] Verify fuzz targets run in CI (short seed corpus)
 
 ---
 

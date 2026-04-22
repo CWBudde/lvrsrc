@@ -1,0 +1,31 @@
+name: test-unit
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Run unit tests
+        run: go test ./...
+
+      - name: Fuzz parse file smoke
+        run: go test ./internal/rsrcwire -run='^$' -fuzz=FuzzParseFile -fuzztime=2s
+
+      - name: Fuzz parse header smoke
+        run: go test ./internal/rsrcwire -run='^$' -fuzz=FuzzParseHeader -fuzztime=2s
+
+      - name: Fuzz name table smoke
+        run: go test ./internal/rsrcwire -run='^$' -fuzz=FuzzNameTable -fuzztime=2s
