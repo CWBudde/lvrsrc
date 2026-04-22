@@ -1,6 +1,9 @@
 // RSRC Viewer — WebAssembly frontend
 
 let wasmReady = false;
+let wasmError = null;
+
+const MAX_FILE_BYTES = 50 * 1024 * 1024; // 50 MiB
 
 async function initWasm() {
   const go = new Go();
@@ -13,6 +16,7 @@ async function initWasm() {
 }
 
 initWasm().catch((err) => {
+  wasmError = err;
   showError("Failed to load WASM engine: " + err.message);
 });
 

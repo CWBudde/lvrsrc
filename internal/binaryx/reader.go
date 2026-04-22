@@ -105,6 +105,9 @@ func (r *Reader) PascalString(off int64) (string, int64, error) {
 	return string(b), int64(1 + ln), nil
 }
 
+// MaxCStringLen caps CString scan length to prevent DoS on missing-NUL inputs.
+const MaxCStringLen = 1 << 16 // 64 KiB
+
 // CString reads bytes until a NUL terminator.
 // It returns the decoded string and consumed byte count including terminator.
 func (r *Reader) CString(off int64) (string, int64, error) {
@@ -112,8 +115,13 @@ func (r *Reader) CString(off int64) (string, int64, error) {
 		return "", 0, fmt.Errorf("c-string at offset %d: out of bounds (size=%d)", off, r.size)
 	}
 
+	end := off + MaxCStringLen
+	if end > r.size {
+		end = r.size
+	}
+
 	var buf []byte
-	for i := off; i < r.size; i++ {
+	for i := off; i < end; i++ {
 		b, err := r.readAt(i, 1)
 		if err != nil {
 			return "", 0, err
@@ -124,5 +132,8 @@ func (r *Reader) CString(off int64) (string, int64, error) {
 		buf = append(buf, b[0])
 	}
 
+	if end < r.size {
+		return "", 0, fmt.Errorf("c-string at offset %d: unterminated within %d bytes", off, MaxCStringLen)
+	}
 	return "", 0, fmt.Errorf("c-string at offset %d: missing NUL terminator", off)
 }

@@ -5,6 +5,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"syscall/js"
 
 	"github.com/example/lvrsrc/pkg/lvrsrc"
@@ -51,7 +52,13 @@ func main() {
 	select {}
 }
 
-func parseVI(_ js.Value, args []js.Value) any {
+func parseVI(_ js.Value, args []js.Value) (out any) {
+	defer func() {
+		if rec := recover(); rec != nil {
+			out = errorResult(fmt.Sprintf("parser panicked: %v", rec))
+		}
+	}()
+
 	if len(args) < 1 {
 		return errorResult("no input data provided")
 	}

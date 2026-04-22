@@ -17,6 +17,12 @@ const (
 	sectionStartSize = 20
 
 	noNameOffset = ^uint32(0)
+
+	// Sanity caps applied to wire-supplied counts/sizes to prevent
+	// malformed files from driving pathological allocations.
+	maxBlocks           = 1 << 20       // 1,048,576
+	maxSectionsPerBlock = 1 << 20
+	maxPayloadBytes     = 256 << 20 // 256 MiB
 )
 
 type FileKind string
@@ -157,6 +163,9 @@ func ParseWithOptions(data []byte, opts ParseOptions) (*File, error) {
 	blockCountMinusOne, err := r.U32(int64(blockInfoPos))
 	if err != nil {
 		return nil, fmt.Errorf("parse block count: %w", err)
+	}
+	if blockCountMinusOne >= maxBlocks {
+		return nil, fmt.Errorf("block count %d exceeds sanity cap %d", uint64(blockCountMinusOne)+1, maxBlocks)
 	}
 	blockCount := int(blockCountMinusOne) + 1
 
@@ -336,6 +345,9 @@ func parseBlock(r *binaryx.Reader, header Header, blockInfoPos uint32, headerPos
 		return Block{}, 0, fmt.Errorf("read block offset: %w", err)
 	}
 
+	if countMinusOne >= maxSectionsPerBlock {
+		return Block{}, 0, fmt.Errorf("section count %d exceeds sanity cap %d", uint64(countMinusOne)+1, maxSectionsPerBlock)
+	}
 	sectionCount := int(countMinusOne) + 1
 	sections := make([]Section, 0, sectionCount)
 	startPos := int64(blockInfoPos) + int64(offset)
@@ -383,6 +395,9 @@ func parseSection(r *binaryx.Reader, header Header, off int64) (Section, error) 
 	payloadSize, err := r.U32(payloadSizePos)
 	if err != nil {
 		return Section{}, fmt.Errorf("read section payload size: %w", err)
+	}
+	if payloadSize > maxPayloadBytes {
+		return Section{}, fmt.Errorf("section payload size %d exceeds sanity cap %d", payloadSize, maxPayloadBytes)
 	}
 	payload, err := r.Bytes(payloadSizePos+4, int(payloadSize))
 	if err != nil {
