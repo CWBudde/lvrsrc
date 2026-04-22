@@ -23,7 +23,6 @@ const (
 )
 
 // OpenOptions configures lenient vs. strict parsing behavior.
-// Strict is reserved for future validator-backed behavior.
 type OpenOptions struct {
 	Strict bool
 }
@@ -97,9 +96,7 @@ func Open(path string, opts OpenOptions) (*File, error) {
 }
 
 func Parse(data []byte, opts OpenOptions) (*File, error) {
-	_ = opts
-
-	wireFile, err := rsrcwire.Parse(data)
+	wireFile, err := rsrcwire.ParseWithOptions(data, rsrcwire.ParseOptions{Strict: opts.Strict})
 	if err != nil {
 		return nil, err
 	}

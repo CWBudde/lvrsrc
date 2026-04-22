@@ -2,6 +2,7 @@ package rsrcwire
 
 import (
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"sort"
 
@@ -34,6 +35,32 @@ const (
 	CompressionKindUnknown CompressionKind = "unknown"
 )
 
+type Severity string
+
+const (
+	SeverityWarning Severity = "warning"
+	SeverityError   Severity = "error"
+)
+
+type IssueLocation struct {
+	Area         string
+	Offset       uint32
+	BlockType    string
+	SectionIndex int32
+	NameOffset   uint32
+}
+
+type ParseIssue struct {
+	Severity Severity
+	Code     string
+	Message  string
+	Location IssueLocation
+}
+
+type ParseOptions struct {
+	Strict bool
+}
+
 type File struct {
 	Header          Header
 	SecondaryHeader Header
@@ -43,6 +70,7 @@ type File struct {
 	RawTail         []byte
 	Kind            FileKind
 	Compression     CompressionKind
+	ParseIssues     []ParseIssue
 }
 
 type Header struct {
@@ -88,7 +116,12 @@ type NameEntry struct {
 }
 
 func Parse(data []byte) (*File, error) {
+	return ParseWithOptions(data, ParseOptions{Strict: true})
+}
+
+func ParseWithOptions(data []byte, opts ParseOptions) (*File, error) {
 	r := binaryx.NewReader(data, binary.BigEndian)
+	state := parseState{strict: opts.Strict}
 
 	header, err := parseHeader(r, 0)
 	if err != nil {
@@ -103,7 +136,17 @@ func Parse(data []byte) (*File, error) {
 		return nil, fmt.Errorf("parse secondary header: %w", err)
 	}
 	if header != secondary {
-		return nil, fmt.Errorf("secondary header mismatch")
+		if err := state.addIssue(ParseIssue{
+			Severity: SeverityError,
+			Code:     "header.mismatch",
+			Message:  "secondary header mismatch",
+			Location: IssueLocation{
+				Area:   "header",
+				Offset: header.InfoOffset,
+			},
+		}); err != nil {
+			return nil, err
+		}
 	}
 
 	blockInfoList, blockInfoPos, err := parseBlockInfoList(r, header)
@@ -143,7 +186,7 @@ func Parse(data []byte) (*File, error) {
 		return nil, fmt.Errorf("name table starts beyond info section")
 	}
 
-	names, namesByOffset, rawTailStart, err := parseNames(r, namesStart, infoEnd, nameOffsets)
+	names, namesByOffset, rawTailStart, err := parseNames(r, namesStart, infoEnd, nameOffsets, &state)
 	if err != nil {
 		return nil, err
 	}
@@ -172,6 +215,7 @@ func Parse(data []byte) (*File, error) {
 		RawTail:         rawTail,
 		Kind:            detectFileKind(header.Type),
 		Compression:     detectCompressionKind(blocks),
+		ParseIssues:     append([]ParseIssue(nil), state.issues...),
 	}, nil
 }
 
@@ -355,7 +399,7 @@ func parseSection(r *binaryx.Reader, header Header, off int64) (Section, error) 
 	}, nil
 }
 
-func parseNames(r *binaryx.Reader, namesStart, infoEnd int64, offsets map[uint32]struct{}) ([]NameEntry, map[uint32]string, int64, error) {
+func parseNames(r *binaryx.Reader, namesStart, infoEnd int64, offsets map[uint32]struct{}, state *parseState) ([]NameEntry, map[uint32]string, int64, error) {
 	if len(offsets) == 0 {
 		return nil, map[uint32]string{}, namesStart, nil
 	}
@@ -373,17 +417,53 @@ func parseNames(r *binaryx.Reader, namesStart, infoEnd int64, offsets map[uint32
 	for _, offset := range orderedOffsets {
 		namePos := namesStart + int64(offset)
 		if namePos >= infoEnd {
-			return nil, nil, 0, fmt.Errorf("name offset %d beyond info section", offset)
+			if err := state.addIssue(ParseIssue{
+				Severity: SeverityError,
+				Code:     "section.name_offset.invalid",
+				Message:  fmt.Sprintf("name offset %d beyond info section", offset),
+				Location: IssueLocation{
+					Area:       "name_table",
+					Offset:     uint32(namesStart),
+					NameOffset: offset,
+				},
+			}); err != nil {
+				return nil, nil, 0, err
+			}
+			continue
 		}
 
 		value, consumed, err := r.PascalString(namePos)
 		if err != nil {
-			return nil, nil, 0, fmt.Errorf("parse name at offset %d: %w", offset, err)
+			if issueErr := state.addIssue(ParseIssue{
+				Severity: SeverityError,
+				Code:     "section.name_offset.invalid",
+				Message:  fmt.Sprintf("parse name at offset %d: %v", offset, err),
+				Location: IssueLocation{
+					Area:       "name_table",
+					Offset:     uint32(namePos),
+					NameOffset: offset,
+				},
+			}); issueErr != nil {
+				return nil, nil, 0, issueErr
+			}
+			continue
 		}
 
 		endPos := namePos + consumed
 		if endPos > infoEnd {
-			return nil, nil, 0, fmt.Errorf("name at offset %d exceeds info section", offset)
+			if err := state.addIssue(ParseIssue{
+				Severity: SeverityError,
+				Code:     "section.name_offset.invalid",
+				Message:  fmt.Sprintf("name at offset %d exceeds info section", offset),
+				Location: IssueLocation{
+					Area:       "name_table",
+					Offset:     uint32(namePos),
+					NameOffset: offset,
+				},
+			}); err != nil {
+				return nil, nil, 0, err
+			}
+			continue
 		}
 
 		names = append(names, NameEntry{
@@ -433,4 +513,18 @@ func detectFileKind(headerType string) FileKind {
 
 func detectCompressionKind(_ []Block) CompressionKind {
 	return CompressionKindUnknown
+}
+
+type parseState struct {
+	strict bool
+	issues []ParseIssue
+}
+
+func (s *parseState) addIssue(issue ParseIssue) error {
+	if s.strict {
+		return errors.New(issue.Message)
+	}
+
+	s.issues = append(s.issues, issue)
+	return nil
 }

@@ -5,6 +5,7 @@ import (
 	"encoding/binary"
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 )
 
@@ -186,6 +187,119 @@ func TestParseCorpusFixtures(t *testing.T) {
 	}
 }
 
+func TestSerializeSyntheticFilePreservesBytes(t *testing.T) {
+	data := buildSyntheticRSRC(t)
+
+	f, err := Parse(data)
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	serialized, err := Serialize(f)
+	if err != nil {
+		t.Fatalf("Serialize() error = %v", err)
+	}
+
+	if !bytes.Equal(serialized, data) {
+		t.Fatalf("Serialize() changed bytes:\n got %x\nwant %x", serialized, data)
+	}
+}
+
+func TestSerializeCorpusFixturesRoundTrip(t *testing.T) {
+	t.Parallel()
+
+	tests := []struct {
+		name string
+		path string
+	}{
+		{
+			name: "ctl",
+			path: filepath.Join("testdata", "config-data.ctl"),
+		},
+		{
+			name: "vi",
+			path: filepath.Join("testdata", "get-vi-description.vi"),
+		},
+	}
+
+	for _, tc := range tests {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+
+			data, err := os.ReadFile(tc.path)
+			if err != nil {
+				t.Fatalf("ReadFile(%q) error = %v", tc.path, err)
+			}
+
+			parsed, err := Parse(data)
+			if err != nil {
+				t.Fatalf("Parse(%q) error = %v", tc.path, err)
+			}
+
+			serialized, err := Serialize(parsed)
+			if err != nil {
+				t.Fatalf("Serialize(%q) error = %v", tc.path, err)
+			}
+
+			roundTrip, err := Parse(serialized)
+			if err != nil {
+				t.Fatalf("Parse(Serialize(%q)) error = %v", tc.path, err)
+			}
+
+			assertEquivalentFiles(t, roundTrip, parsed)
+		})
+	}
+}
+
+func TestSerializeRecomputesOffsetsForModifiedPayloads(t *testing.T) {
+	data := buildSyntheticRSRC(t)
+
+	f, err := Parse(data)
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	f.Blocks[0].Sections[0].Payload = []byte("abcdefgh")
+
+	serialized, err := Serialize(f)
+	if err != nil {
+		t.Fatalf("Serialize() error = %v", err)
+	}
+
+	roundTrip, err := Parse(serialized)
+	if err != nil {
+		t.Fatalf("Parse(Serialize()) error = %v", err)
+	}
+
+	first := roundTrip.Blocks[0].Sections[0]
+	second := roundTrip.Blocks[0].Sections[1]
+
+	if got, want := string(first.Payload), "abcdefgh"; got != want {
+		t.Fatalf("section[0].Payload = %q, want %q", got, want)
+	}
+
+	if got, want := string(second.Payload), "wxyz"; got != want {
+		t.Fatalf("section[1].Payload = %q, want %q", got, want)
+	}
+
+	if got, want := first.DataOffset, uint32(0); got != want {
+		t.Fatalf("section[0].DataOffset = %d, want %d", got, want)
+	}
+
+	if got, want := second.DataOffset, uint32(12); got != want {
+		t.Fatalf("section[1].DataOffset = %d, want %d", got, want)
+	}
+
+	if got, want := roundTrip.Header.DataSize, uint32(20); got != want {
+		t.Fatalf("Header.DataSize = %d, want %d", got, want)
+	}
+
+	if got, want := roundTrip.Header.InfoOffset, uint32(52); got != want {
+		t.Fatalf("Header.InfoOffset = %d, want %d", got, want)
+	}
+}
+
 func buildSyntheticRSRC(t *testing.T) []byte {
 	t.Helper()
 
@@ -313,4 +427,76 @@ func buildSyntheticRSRC(t *testing.T) []byte {
 	}
 
 	return full.Bytes()
+}
+
+func assertEquivalentFiles(t *testing.T, got, want *File) {
+	t.Helper()
+
+	if got == nil || want == nil {
+		t.Fatalf("got nil comparison: got=%v want=%v", got, want)
+	}
+
+	if !reflect.DeepEqual(got.Header, want.Header) {
+		t.Fatalf("Header mismatch:\n got %#v\nwant %#v", got.Header, want.Header)
+	}
+
+	if !reflect.DeepEqual(got.SecondaryHeader, want.SecondaryHeader) {
+		t.Fatalf("SecondaryHeader mismatch:\n got %#v\nwant %#v", got.SecondaryHeader, want.SecondaryHeader)
+	}
+
+	if got.Kind != want.Kind {
+		t.Fatalf("Kind = %v, want %v", got.Kind, want.Kind)
+	}
+
+	if got.Compression != want.Compression {
+		t.Fatalf("Compression = %v, want %v", got.Compression, want.Compression)
+	}
+
+	if !reflect.DeepEqual(got.Names, want.Names) {
+		t.Fatalf("Names mismatch:\n got %#v\nwant %#v", got.Names, want.Names)
+	}
+
+	if !bytes.Equal(got.RawTail, want.RawTail) {
+		t.Fatalf("RawTail = %x, want %x", got.RawTail, want.RawTail)
+	}
+
+	if len(got.Blocks) != len(want.Blocks) {
+		t.Fatalf("len(Blocks) = %d, want %d", len(got.Blocks), len(want.Blocks))
+	}
+
+	for bi := range want.Blocks {
+		gotBlock := got.Blocks[bi]
+		wantBlock := want.Blocks[bi]
+
+		if gotBlock.Type != wantBlock.Type {
+			t.Fatalf("block[%d].Type = %q, want %q", bi, gotBlock.Type, wantBlock.Type)
+		}
+		if len(gotBlock.Sections) != len(wantBlock.Sections) {
+			t.Fatalf("len(block[%d].Sections) = %d, want %d", bi, len(gotBlock.Sections), len(wantBlock.Sections))
+		}
+
+		for si := range wantBlock.Sections {
+			gotSection := gotBlock.Sections[si]
+			wantSection := wantBlock.Sections[si]
+
+			if gotSection.Index != wantSection.Index {
+				t.Fatalf("block[%d].section[%d].Index = %d, want %d", bi, si, gotSection.Index, wantSection.Index)
+			}
+			if gotSection.NameOffset != wantSection.NameOffset {
+				t.Fatalf("block[%d].section[%d].NameOffset = %d, want %d", bi, si, gotSection.NameOffset, wantSection.NameOffset)
+			}
+			if gotSection.Unknown3 != wantSection.Unknown3 {
+				t.Fatalf("block[%d].section[%d].Unknown3 = %d, want %d", bi, si, gotSection.Unknown3, wantSection.Unknown3)
+			}
+			if gotSection.Unknown5 != wantSection.Unknown5 {
+				t.Fatalf("block[%d].section[%d].Unknown5 = %d, want %d", bi, si, gotSection.Unknown5, wantSection.Unknown5)
+			}
+			if gotSection.Name != wantSection.Name {
+				t.Fatalf("block[%d].section[%d].Name = %q, want %q", bi, si, gotSection.Name, wantSection.Name)
+			}
+			if !bytes.Equal(gotSection.Payload, wantSection.Payload) {
+				t.Fatalf("block[%d].section[%d].Payload = %x, want %x", bi, si, gotSection.Payload, wantSection.Payload)
+			}
+		}
+	}
 }

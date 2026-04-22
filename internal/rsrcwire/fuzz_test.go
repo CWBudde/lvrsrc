@@ -40,7 +40,7 @@ func FuzzNameTable(f *testing.F) {
 			offsets[uint32(int(off1)%len(data))] = struct{}{}
 			offsets[uint32(int(off2)%len(data))] = struct{}{}
 		}
-		_, _, _, _ = parseNames(r, 0, int64(len(data)), offsets)
+		_, _, _, _ = parseNames(r, 0, int64(len(data)), offsets, &parseState{})
 	})
 }
 

@@ -116,22 +116,22 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 2.1 Wire-Level Binary Writer (`internal/binaryx`)
 
-- [ ] Define `Writer` struct with `io.WriterAt` and byte order
-- [ ] Implement `WriteU16`, `WriteU32`, `WriteU64` at offset
-- [ ] Implement `WriteBytes(off, data)` method
-- [ ] Implement `WritePascalString(off, s)` method
-- [ ] Implement offset-patching helper (write placeholder, patch later)
-- [ ] Write unit tests for all writer methods
+- [x] Define `Writer` struct with `io.WriterAt` and byte order
+- [x] Implement `WriteU16`, `WriteU32`, `WriteU64` at offset
+- [x] Implement `WriteBytes(off, data)` method
+- [x] Implement `WritePascalString(off, s)` method
+- [x] Implement offset-patching helper (write placeholder, patch later)
+- [x] Write unit tests for all writer methods
 
 ### 2.2 RSRC Serializer — Preserving Mode (`internal/rsrcwire`)
 
-- [ ] Implement offset/padding recomputation for section payloads
-- [ ] Implement block table serialization preserving original ordering
-- [ ] Implement name table serialization
-- [ ] Regenerate both headers consistently (primary and duplicate)
-- [ ] Preserve exact bytes for unknown/opaque sections
-- [ ] Preserve original padding/alignment where possible
-- [ ] Write serializer tests (parse → serialize → parse, compare structure)
+- [x] Implement offset/padding recomputation for section payloads
+- [x] Implement block table serialization preserving original ordering
+- [x] Implement name table serialization
+- [x] Regenerate both headers consistently (primary and duplicate)
+- [x] Preserve exact bytes for unknown/opaque sections
+- [x] Preserve original padding/alignment where possible
+- [x] Write serializer tests (parse → serialize → parse, compare structure)
 
 ### 2.3 Public Write API (`pkg/lvrsrc`)
 
@@ -161,16 +161,16 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 3.1 Structural Validator (`internal/validate`)
 
-- [ ] Define `Issue` struct (severity, code, message, location)
-- [ ] Check: duplicate headers are consistent
-- [ ] Check: all offsets are within file bounds
-- [ ] Check: section sizes are non-zero and sane
-- [ ] Check: block counts match block info table
-- [ ] Check: name offsets are valid
-- [ ] Check: no overlapping payload regions
-- [ ] Check: FourCC values are printable ASCII
-- [ ] Implement strict vs. lenient mode
-- [ ] Write validator tests (valid files pass; injected-error files fail with expected codes)
+- [x] Define `Issue` struct (severity, code, message, location)
+- [x] Check: duplicate headers are consistent
+- [x] Check: all offsets are within file bounds
+- [x] Check: section sizes are non-zero and sane
+- [x] Check: block counts match block info table
+- [x] Check: name offsets are valid
+- [x] Check: no overlapping payload regions
+- [x] Check: FourCC values are printable ASCII
+- [x] Implement strict vs. lenient mode
+- [x] Write validator tests (valid files pass; injected-error files fail with expected codes)
 
 ### 3.2 CLI `validate` Command
 

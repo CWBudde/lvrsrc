@@ -8,10 +8,9 @@ import (
 	"strings"
 	"text/tabwriter"
 
+	"github.com/example/lvrsrc/pkg/lvrsrc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
-	"github.com/example/lvrsrc/pkg/lvrsrc"
 )
 
 type cliApp struct {
