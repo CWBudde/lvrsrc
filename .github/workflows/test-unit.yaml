@@ -21,6 +21,9 @@ jobs:
       - name: Run unit tests
         run: go test ./...
 
+      - name: Verify resource coverage dashboard
+        run: go run ./internal/coverage/cmd/resourcecoverage -check
+
       - name: Fuzz parse file smoke
         run: go test ./internal/rsrcwire -run='^$' -fuzz=FuzzParseFile -fuzztime=2s
 

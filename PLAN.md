@@ -233,11 +233,44 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 4.4 `pkg/lvmeta` Editing API
 
-- [ ] Implement `Mutator` struct with `Strict bool`
-- [ ] Implement `SetDescription(f *lvrsrc.File, desc string) error`
-- [ ] Implement `SetName(f *lvrsrc.File, name string) error`
-- [ ] Implement post-edit validation (Tier 2 safety gate)
-- [ ] Write mutation tests (edit → write → re-parse → assert field value)
+#### 4.4.1 Package scaffold and dispatch wiring
+
+- [x] Create `pkg/lvmeta` package with package docs that define Tier 2 mutation guarantees and explicitly distinguish typed edits from Tier 1 preserving rewrites and future Tier 3 raw patching
+- [x] Implement `Mutator` struct with `Strict bool`
+- [x] Add default codec-registry wiring for all shipped Tier 2 codecs (`STRG`, `vers`) so `pkg/lvmeta` does not duplicate FourCC-specific registration logic in callers
+- [x] Add helper to derive `codecs.Context` from `*lvrsrc.File` (`Header.FormatVersion` + `Kind`) so Phase 4.2 version-awareness becomes active on actual codec calls
+- [x] Add deterministic block/section lookup helpers for “zero / one / many” matches so metadata setters can reject ambiguous targets rather than mutating the wrong resource
+
+#### 4.4.2 Generic typed mutation pipeline
+
+- [x] Add internal helper that performs the common Tier 2 edit flow: locate target section, look up codec by FourCC, enforce `Capability.Safety == Tier 2`, enforce `WriteVersions.Contains(ctx.FileVersion)`, decode payload, apply mutation, re-encode payload, run codec `Validate`, and replace the section payload only after the edited value passes checks
+- [x] Make the mutation helper preserve untouched blocks, sections, names, and `RawTail` exactly, with only the edited payload and serializer-regenerated offsets/name-table bytes allowed to change
+- [x] Define strict-mode failure policy: always fail on post-edit validation errors; in `Strict` mode also fail when the edit introduces new warnings for the touched resource
+- [x] Return offset-aware, FourCC-aware errors for all mutator failures (missing target, duplicate target, unsupported version, codec decode/encode failure, post-edit validation failure)
+
+#### 4.4.3 Description editing
+
+- [x] Implement `SetDescription(f *lvrsrc.File, desc string) error`
+- [x] Map description edits to the `STRG` resource using the generic typed mutation pipeline
+- [x] If exactly one `STRG` section exists, update it in place; if no `STRG` section exists, create a new `STRG` block/section with a deterministic section ID and empty name; if multiple `STRG` sections exist, reject in `Strict` mode until corpus evidence justifies an automatic selection rule
+- [x] Preserve the caller-provided description bytes as-is (no newline normalization, trimming, or charset transcoding) and allow empty descriptions to round-trip as a valid zero-length `STRG` payload
+
+#### 4.4.4 Name editing
+
+- [x] Implement `SetName(f *lvrsrc.File, name string) error`
+- [x] Treat VI renaming as a container/name-table mutation rather than a resource-codec edit: update the relevant `LVSR` section `Name`, keep `NameOffset` references valid, and update `File.Names` so serializer and validator stay in sync
+- [x] Reuse an existing name-table entry when another section already carries the requested name; otherwise append/update a `NameEntry` and let serializer compaction rewrite offsets if the old sparse layout no longer fits
+- [x] Reject names that cannot be represented safely in the current container model (for example Pascal-string length overflow) and leave path/extension normalization out of scope for Phase 4.4
+
+#### 4.4.5 Post-edit safety gate and tests
+
+- [x] Add shared post-edit validation helper for `pkg/lvmeta`: run `f.Validate()` after each successful mutation and fail the edit if structural validation reports any error _(implemented as serialize → re-parse → Validate; compares pre-edit vs post-edit error codes so only edit-induced structural breakage fails the gate)_
+- [x] Add focused unit tests for helper behavior: version-context wiring, ambiguous-target detection, missing-resource handling, and strict-vs-lenient warning policy
+- [x] Add corpus-backed mutation tests for description updates on files that already contain `STRG` — `TestSetDescriptionCorpusUpdatesExistingSTRGEndToEnd`
+- [x] Add mutation tests for inserting a new `STRG` section when a file has no description resource
+- [x] Add rename tests that exercise name-table reuse and name-table compaction paths — `TestSetNameReusesExistingEntryWhenAnotherCarriesIt`, `TestSetNameCompactionPath`
+- [x] Add regression tests for unchanged opaque resources surviving metadata edits byte-for-byte — `TestSetDescriptionCorpusUpdatesExistingSTRGEndToEnd`, `TestSetDescriptionCorpusCreatesNewSTRGEndToEnd`, `TestSetNameCorpusOpaquePreservation`
+- [x] Add end-to-end mutation tests (`edit -> write -> re-parse -> assert field value -> Validate()`) for both `SetDescription` and `SetName` — `TestSetDescriptionEndToEndRoundTrips`, `TestSetNameEndToEndRoundTrips`
 
 ### 4.5 `pkg/lvvi` Higher-Level Model
 
@@ -268,9 +301,9 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 5.1 Resource Coverage Dashboard
 
-- [ ] Define machine-readable coverage manifest (YAML/JSON)
-- [ ] Generate coverage report in CI
-- [ ] Add badge to README
+- [x] Define machine-readable coverage manifest (YAML/JSON)
+- [x] Generate coverage report in CI
+- [x] Add badge to README
 
 ### 5.2 Additional Codecs
 

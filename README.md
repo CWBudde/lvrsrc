@@ -1,5 +1,7 @@
 # lvrsrc
 
+[![Resource coverage](docs/generated/resource-coverage-badge.svg)](docs/generated/resource-coverage.md)
+
 `lvrsrc` is a pure-Go toolkit for inspecting, validating, diffing, rewriting, and safely editing LabVIEW RSRC/VI files.
 
 The library is the primary deliverable. The CLI is built on top of it and provides the same container-aware workflows for day-to-day use, automation, and corpus analysis.
@@ -165,6 +167,7 @@ testdata/          fixtures and regression corpus
 
 ## Documentation
 
+- [docs/generated/resource-coverage.md](docs/generated/resource-coverage.md)
 - [docs/format-overview.md](docs/format-overview.md)
 - [docs/wire-layout.md](docs/wire-layout.md)
 - [docs/resource-registry.md](docs/resource-registry.md)

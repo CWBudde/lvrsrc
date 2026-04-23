@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "corpus": {
+    "fixtureCount": 21,
+    "resourceTypeCount": 27
+  },
+  "summary": {
+    "typedCodecCount": 2,
+    "typedResourceTypes": 2,
+    "opaqueResourceTypes": 25,
+    "typedCoveragePct": 7.407407407407407
+  },
+  "resources": [
+    {
+      "fourCC": "BDEx",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "BDHb",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "BDPW",
+      "corpusFixtures": 10,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "BDSE",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "CONP",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "CPC2",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "DTHP",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "FPEx",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "FPHb",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "FPSE",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "FTAB",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "HIST",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "ICON",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "LIBN",
+      "corpusFixtures": 13,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "LIbd",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "LIfp",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "LIvi",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "LVSR",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "MUID",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "RTSG",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "STRG",
+      "corpusFixtures": 4,
+      "typed": {
+        "decode": true,
+        "encode": true,
+        "validate": true
+      },
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/strg",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "VCTP",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "VITS",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "VPDP",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "icl4",
+      "corpusFixtures": 5,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "icl8",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": false,
+        "encode": false,
+        "validate": false
+      },
+      "safetyTier": "Opaque",
+      "package": "internal/codecs (fallback)",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "fourCC": "vers",
+      "corpusFixtures": 21,
+      "typed": {
+        "decode": true,
+        "encode": true,
+        "validate": true
+      },
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/vers",
+      "readVersions": {
+        "min": 0,
+        "max": 0
+      },
+      "writeVersions": {
+        "min": 0,
+        "max": 0
+      }
+    }
+  ],
+  "generated": {
+    "manifest": "docs/generated/resource-coverage.json",
+    "report": "docs/generated/resource-coverage.md",
+    "badge": "docs/generated/resource-coverage-badge.svg"
+  }
+}
