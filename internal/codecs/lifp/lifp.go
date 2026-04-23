@@ -49,10 +49,7 @@ type Entry struct {
 	QualifierCount uint32
 	Qualifiers     []string
 	PrimaryPath    PathRef
-	Field0         uint32
-	Field1         uint32
-	Field2         uint32
-	Field3         uint32
+	Tail           []byte
 	SecondaryPath  *PathRef
 
 	qualifierPad []byte
@@ -137,10 +134,7 @@ func (Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 			return nil, err
 		}
 		out = append(out, pathBytes...)
-		out = appendU32(out, entry.Field0)
-		out = appendU32(out, entry.Field1)
-		out = appendU32(out, entry.Field2)
-		out = appendU32(out, entry.Field3)
+		out = append(out, entry.Tail...)
 		if entry.SecondaryPath != nil {
 			pathBytes, err := encodePathRef(*entry.SecondaryPath, fmt.Sprintf("entry %d secondary path", i))
 			if err != nil {
@@ -305,27 +299,33 @@ func decodeEntry(payload []byte, remaining int, memo map[parseKey]parseResult) (
 	for _, primaryPath := range candidatePathRefs(payload[pathStart:]) {
 		e.SecondaryPath = nil
 		tailStart := pathStart + len(primaryPath.Raw)
-		if len(payload[tailStart:]) < entryTail {
-			continue
-		}
 		e.PrimaryPath = primaryPath
-		e.Field0 = binary.BigEndian.Uint32(payload[tailStart : tailStart+4])
-		e.Field1 = binary.BigEndian.Uint32(payload[tailStart+4 : tailStart+8])
-		e.Field2 = binary.BigEndian.Uint32(payload[tailStart+8 : tailStart+12])
-		e.Field3 = binary.BigEndian.Uint32(payload[tailStart+12 : tailStart+16])
-		afterTail := tailStart + entryTail
+		if remaining == 1 {
+			entryEnd := len(payload) - footerSize
+			if entryEnd < tailStart {
+				continue
+			}
+			tail, secondary, ok := splitTailAndSecondary(payload[tailStart:entryEnd])
+			if !ok {
+				continue
+			}
+			e.Tail = tail
+			e.SecondaryPath = secondary
+			return e, entryEnd, nil
+		}
 
-		if _, _, _, err := decodeEntries(payload[afterTail:], remaining-1, memo); err == nil {
-			return e, afterTail, nil
-		}
-		if len(payload[afterTail:]) < 4 || string(payload[afterTail:afterTail+4]) != "PTH0" {
-			continue
-		}
-		for _, secondaryPath := range candidatePathRefs(payload[afterTail:]) {
-			secondaryEnd := afterTail + len(secondaryPath.Raw)
-			if _, _, _, err := decodeEntries(payload[secondaryEnd:], remaining-1, memo); err == nil {
-				e.SecondaryPath = &secondaryPath
-				return e, secondaryEnd, nil
+		for nextStart := tailStart; nextStart+10 <= len(payload)-footerSize; nextStart++ {
+			if !looksLikeEntryHeader(payload[nextStart:]) {
+				continue
+			}
+			if _, _, _, err := decodeEntries(payload[nextStart:], remaining-1, memo); err == nil {
+				tail, secondary, ok := splitTailAndSecondary(payload[tailStart:nextStart])
+				if !ok {
+					continue
+				}
+				e.Tail = tail
+				e.SecondaryPath = secondary
+				return e, nextStart, nil
 			}
 		}
 	}
@@ -437,4 +437,39 @@ func allZero(b []byte) bool {
 		}
 	}
 	return true
+}
+
+func splitTailAndSecondary(payload []byte) ([]byte, *PathRef, bool) {
+	for i := 0; i+4 <= len(payload); i++ {
+		if string(payload[i:i+4]) != "PTH0" {
+			continue
+		}
+		for _, path := range candidatePathRefs(payload[i:]) {
+			if len(path.Raw) == len(payload)-i {
+				tail := make([]byte, i)
+				copy(tail, payload[:i])
+				pathCopy := path
+				return tail, &pathCopy, true
+			}
+		}
+	}
+	tail := make([]byte, len(payload))
+	copy(tail, payload)
+	return tail, nil, true
+}
+
+func looksLikeEntryHeader(payload []byte) bool {
+	if len(payload) < 10 {
+		return false
+	}
+	if payload[0] != 0 {
+		return false
+	}
+	for _, b := range payload[2:6] {
+		if (b < 'A' || b > 'Z') && (b < 'a' || b > 'z') && (b < '0' || b > '9') {
+			return false
+		}
+	}
+	q := binary.BigEndian.Uint32(payload[6:10])
+	return q <= 8
 }

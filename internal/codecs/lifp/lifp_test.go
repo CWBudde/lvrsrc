@@ -105,11 +105,8 @@ func TestDecodeStructuredSample(t *testing.T) {
 	if e.PrimaryPath.Class != "PTH0" || e.PrimaryPath.DeclaredLen != 0x15 {
 		t.Fatalf("PrimaryPath = %+v, want PTH0 len 0x15", e.PrimaryPath)
 	}
-	if e.Field0 != 0x02000042 {
-		t.Fatalf("Field0 = %#x, want %#x", e.Field0, 0x02000042)
-	}
-	if e.Field1 != 0 || e.Field2 != 1 || e.Field3 != 0x1df {
-		t.Fatalf("fields = [%#x %#x %#x], want [0 1 0x1df]", e.Field1, e.Field2, e.Field3)
+	if len(e.Tail) == 0 {
+		t.Fatalf("Tail is empty, want preserved unknown bytes")
 	}
 	if e.SecondaryPath == nil || e.SecondaryPath.Class != "PTH0" || e.SecondaryPath.DeclaredLen != 0 {
 		t.Fatalf("SecondaryPath = %+v, want zero-length PTH0", e.SecondaryPath)
@@ -174,6 +171,9 @@ func TestDecodeMultiQualifierSample(t *testing.T) {
 	if e.PrimaryPath.DeclaredLen != 0x3d {
 		t.Fatalf("PrimaryPath.DeclaredLen = %#x, want 0x3d", e.PrimaryPath.DeclaredLen)
 	}
+	if len(e.Tail) == 0 {
+		t.Fatalf("Tail is empty, want preserved unknown bytes")
+	}
 	if e.SecondaryPath == nil || e.SecondaryPath.DeclaredLen != 0x31 {
 		t.Fatalf("SecondaryPath = %+v, want len 0x31", e.SecondaryPath)
 	}
@@ -223,7 +223,6 @@ func TestCorpusRoundTrip(t *testing.T) {
 			}
 			for _, section := range block.Sections {
 				total++
-				t.Logf("checking %s LIfp id=%d", e.Name(), section.Index)
 				got, err := Codec{}.Decode(codecs.Context{}, section.Payload)
 				if err != nil {
 					t.Fatalf("%s LIfp id=%d Decode: %v", e.Name(), section.Index, err)

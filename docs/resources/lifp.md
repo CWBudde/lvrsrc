@@ -1,11 +1,21 @@
-# Front-Panel Metadata Candidate: `LIfp`
+# Front-Panel Metadata Codec: `LIfp`
 
-This note captures the current research state for Phase 5.2 front-panel
-metadata work.
+This note captures the current implementation state for the Phase 5.2
+front-panel metadata codec.
+
+## Status
+
+`LIfp` is now the shipped front-panel metadata codec. It remains intentionally
+narrow: it decodes the stable entry envelope observed in the corpus and
+preserves the still-unknown inner bytes exactly on re-encode.
+
+Safety tier: Tier 1.
+
+Implementation package: `internal/codecs/lifp`.
 
 ## Recommendation
 
-The next front-panel metadata codec should target `LIfp`, not `FPHb`.
+`LIfp` was the right first target, not `FPHb`.
 
 `LIfp` is small, repeated, and structurally consistent across the current
 corpus. `FPHb` is the actual front-panel heap, but it is a much larger tagged
@@ -56,9 +66,9 @@ That split matches the local corpus:
 
 This is the main reason `LIfp` is the safer Phase 5.2 target.
 
-## Proposed Scope For The Codec
+## Codec Scope
 
-The first `LIfp` codec should stay narrow:
+The current `LIfp` codec stays narrow:
 
 1. Parse the common header fields that are stable in the corpus.
 2. Detect and expose the `FPHP` marker.
@@ -69,23 +79,29 @@ The first `LIfp` codec should stay narrow:
 The codec should not attempt to decode `FPHb` heap internals or reconstruct
 front-panel object graphs.
 
-## Suggested Decoded Shape
+## Current Decoded Shape
 
-A practical first decoded model would look like:
+The shipped model exposes:
 
-- `EntryCount uint16`
+- `Version uint16`
 - `Marker string` (`"FPHP"`)
+- `EntryCount uint32`
 - `Entries []Entry`
+- `Footer uint16`
 
-Each `Entry` would likely need:
+Each `Entry` exposes:
 
-- optional class/kind marker
-- optional name bytes / decoded text
-- optional `PTH0` path reference
-- opaque remainder bytes for fields not yet understood
+- `Kind uint16`
+- `LinkType string`
+- `QualifierCount uint32`
+- `Qualifiers []string`
+- `PrimaryPath PathRef`
+- `Tail []byte`
+- optional `SecondaryPath *PathRef`
 
-That model is intentionally conservative: structure where the corpus is clear,
-opaque preservation where it is not.
+`Tail` is deliberately opaque. The corpus shows that the bytes between the
+primary and secondary path refs are not yet stable enough to claim semantic
+field meanings across all fixtures, so the codec preserves them byte-for-byte.
 
 ## Blockers / Open Questions
 
@@ -96,11 +112,10 @@ opaque preservation where it is not.
 - Whether `LIfp` and `LIbd` share a single generic link-info codec with
   resource-specific markers
 
-## Implementation Order
+## Remaining Work
 
 Recommended order for the remaining Phase 5.2 work:
 
-1. Implement `LIfp` as the first front-panel metadata codec.
-2. Reuse the same parsing strategy for `LIbd` if the block-diagram payloads
+1. Reuse the same parsing strategy for `LIbd` if the block-diagram payloads
    match the same link-info pattern.
-3. Leave `FPHb` for a later heap/object-graph phase.
+2. Leave `FPHb` for a later heap/object-graph phase.

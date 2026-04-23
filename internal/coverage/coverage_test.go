@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 7 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 7", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 8 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 8", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 7 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 7", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 8 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 8", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 20 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 20", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 19 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 19", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -96,6 +96,20 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	}
 	if cpc2.CorpusFixtures != 21 {
 		t.Fatalf("CPC2 CorpusFixtures = %d, want 21", cpc2.CorpusFixtures)
+	}
+
+	lifp := findResource(t, m, "LIfp")
+	if !lifp.Typed.Decode || !lifp.Typed.Encode || !lifp.Typed.Validate {
+		t.Fatalf("LIfp typed support = %+v, want all true", lifp.Typed)
+	}
+	if lifp.SafetyTier != "Tier 1" {
+		t.Fatalf("LIfp SafetyTier = %q, want %q", lifp.SafetyTier, "Tier 1")
+	}
+	if lifp.Package != "internal/codecs/lifp" {
+		t.Fatalf("LIfp Package = %q, want %q", lifp.Package, "internal/codecs/lifp")
+	}
+	if lifp.CorpusFixtures != 21 {
+		t.Fatalf("LIfp CorpusFixtures = %d, want 21", lifp.CorpusFixtures)
 	}
 
 	vers := findResource(t, m, "vers")
@@ -174,10 +188,11 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 7/27 resource types",
+		"Typed coverage: 8/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",
+		"`LIfp`",
 		"`icl4`",
 		"`icl8`",
 		"`STRG`",

@@ -67,6 +67,7 @@ the coverage badge.
 | `CONP`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
 | `CPC2`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
 | `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
+| `LIfp`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lifp`       |
 | `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `vers`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/vers`       |

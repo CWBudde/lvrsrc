@@ -12,6 +12,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	"github.com/CWBudde/lvrsrc/internal/codecs/icon"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -239,6 +240,7 @@ var shippedCodecs = []codecSpec{
 	{codec: icon.MonoCodec{}, packagePath: "internal/codecs/icon"},
 	{codec: icon.Color4Codec{}, packagePath: "internal/codecs/icon"},
 	{codec: icon.Color8Codec{}, packagePath: "internal/codecs/icon"},
+	{codec: lifp.Codec{}, packagePath: "internal/codecs/lifp"},
 	{codec: strg.Codec{}, packagePath: "internal/codecs/strg"},
 	{codec: vers.Codec{}, packagePath: "internal/codecs/vers"},
 }

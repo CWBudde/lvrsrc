@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 7,
-    "typedResourceTypes": 7,
-    "opaqueResourceTypes": 20,
-    "typedCoveragePct": 25.925925925925927
+    "typedCodecCount": 8,
+    "typedResourceTypes": 8,
+    "opaqueResourceTypes": 19,
+    "typedCoveragePct": 29.62962962962963
   },
   "resources": [
     {
@@ -300,12 +300,12 @@
       "fourCC": "LIfp",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/lifp",
       "readVersions": {
         "min": 0,
         "max": 0
