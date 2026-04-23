@@ -290,8 +290,8 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 4.7 Compatibility Table
 
-- [ ] Define compatibility table format in `docs/resource-registry.md`
-- [ ] Populate entries for all implemented codecs (read/write version ranges, safety tier)
+- [x] Define compatibility table format in `docs/resource-registry.md` — new _Compatibility table format_ section explains every column, maps `all` to `codecs.VersionRange{Min:0, Max:0}`, documents how future closed ranges render as `Min–Max`, and cross-links [generated/resource-coverage.md](docs/generated/resource-coverage.md) as the machine-readable sibling
+- [x] Populate entries for all implemented codecs (read/write version ranges, safety tier) — _Codec status_ table now carries `Read versions` + `Write versions` columns for all seven shipped typed codecs (`CONP`, `CPC2`, `ICON`, `icl4`, `icl8`, `vers`, `STRG`) plus the opaque-fallback row
 
 ---
 
