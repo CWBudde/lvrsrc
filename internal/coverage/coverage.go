@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	"github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
@@ -233,6 +234,8 @@ func ArtifactContents(m Manifest) map[string]string {
 }
 
 var shippedCodecs = []codecSpec{
+	{codec: conpane.PointerCodec{}, packagePath: "internal/codecs/conpane"},
+	{codec: conpane.CountCodec{}, packagePath: "internal/codecs/conpane"},
 	{codec: icon.MonoCodec{}, packagePath: "internal/codecs/icon"},
 	{codec: icon.Color4Codec{}, packagePath: "internal/codecs/icon"},
 	{codec: icon.Color8Codec{}, packagePath: "internal/codecs/icon"},

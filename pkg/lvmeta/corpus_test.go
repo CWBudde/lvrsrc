@@ -335,7 +335,7 @@ func TestRunStructuralCheckFailsOnEditInducedError(t *testing.T) {
 	// Induce a new structural error: empty out a block's section list so
 	// the serializer rejects it — an invariant we can't quietly recover
 	// from on the write path.
-	var victim = -1
+	victim := -1
 	for i, b := range f.Blocks {
 		if len(b.Sections) >= 1 {
 			victim = i

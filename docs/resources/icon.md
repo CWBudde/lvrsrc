@@ -5,11 +5,11 @@ per-resource header.
 
 ## Resource Families
 
-| FourCC | Depth | Payload size | Layout |
-| ------ | ----: | -----------: | ------ |
-| `ICON` | 1 bpp | 128 B        | 1024 packed bits, row-major, MSB-first within each byte |
-| `icl4` | 4 bpp | 512 B        | 1024 packed nibbles, row-major, high nibble then low nibble |
-| `icl8` | 8 bpp | 1024 B       | 1024 raw bytes, row-major |
+| FourCC | Depth | Payload size | Layout                                                      |
+| ------ | ----: | -----------: | ----------------------------------------------------------- |
+| `ICON` | 1 bpp |        128 B | 1024 packed bits, row-major, MSB-first within each byte     |
+| `icl4` | 4 bpp |        512 B | 1024 packed nibbles, row-major, high nibble then low nibble |
+| `icl8` | 8 bpp |       1024 B | 1024 raw bytes, row-major                                   |
 
 All observed samples are exactly `32 * 32 = 1024` pixels. There is no leading
 dimension field, palette table, or trailing checksum in the resource payload
@@ -36,10 +36,10 @@ payload layout.
 
 Current validator behavior is intentionally narrow and corpus-grounded:
 
-| Severity | Code                | Condition |
-| -------- | ------------------- | --------- |
-| error    | `icon.payload.size` | `ICON` payload length is not exactly 128 bytes |
-| error    | `icl4.payload.size` | `icl4` payload length is not exactly 512 bytes |
+| Severity | Code                | Condition                                       |
+| -------- | ------------------- | ----------------------------------------------- |
+| error    | `icon.payload.size` | `ICON` payload length is not exactly 128 bytes  |
+| error    | `icl4.payload.size` | `icl4` payload length is not exactly 512 bytes  |
 | error    | `icl8.payload.size` | `icl8` payload length is not exactly 1024 bytes |
 
 No additional palette or semantic checks are implemented yet. The corpus

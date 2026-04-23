@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 5,
-    "typedResourceTypes": 5,
-    "opaqueResourceTypes": 22,
-    "typedCoveragePct": 18.51851851851852
+    "typedCodecCount": 7,
+    "typedResourceTypes": 7,
+    "opaqueResourceTypes": 20,
+    "typedCoveragePct": 25.925925925925927
   },
   "resources": [
     {
@@ -91,12 +91,12 @@
       "fourCC": "CONP",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/conpane",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -110,12 +110,12 @@
       "fourCC": "CPC2",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/conpane",
       "readVersions": {
         "min": 0,
         "max": 0

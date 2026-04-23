@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 5 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 5", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 7 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 7", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 5 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 5", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 7 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 7", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 22 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 22", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 20 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 20", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -68,6 +68,34 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	}
 	if mono.CorpusFixtures != 21 {
 		t.Fatalf("ICON CorpusFixtures = %d, want 21", mono.CorpusFixtures)
+	}
+
+	conp := findResource(t, m, "CONP")
+	if !conp.Typed.Decode || !conp.Typed.Encode || !conp.Typed.Validate {
+		t.Fatalf("CONP typed support = %+v, want all true", conp.Typed)
+	}
+	if conp.SafetyTier != "Tier 2" {
+		t.Fatalf("CONP SafetyTier = %q, want %q", conp.SafetyTier, "Tier 2")
+	}
+	if conp.Package != "internal/codecs/conpane" {
+		t.Fatalf("CONP Package = %q, want %q", conp.Package, "internal/codecs/conpane")
+	}
+	if conp.CorpusFixtures != 21 {
+		t.Fatalf("CONP CorpusFixtures = %d, want 21", conp.CorpusFixtures)
+	}
+
+	cpc2 := findResource(t, m, "CPC2")
+	if !cpc2.Typed.Decode || !cpc2.Typed.Encode || !cpc2.Typed.Validate {
+		t.Fatalf("CPC2 typed support = %+v, want all true", cpc2.Typed)
+	}
+	if cpc2.SafetyTier != "Tier 2" {
+		t.Fatalf("CPC2 SafetyTier = %q, want %q", cpc2.SafetyTier, "Tier 2")
+	}
+	if cpc2.Package != "internal/codecs/conpane" {
+		t.Fatalf("CPC2 Package = %q, want %q", cpc2.Package, "internal/codecs/conpane")
+	}
+	if cpc2.CorpusFixtures != 21 {
+		t.Fatalf("CPC2 CorpusFixtures = %d, want 21", cpc2.CorpusFixtures)
 	}
 
 	vers := findResource(t, m, "vers")
@@ -146,7 +174,9 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 5/27 resource types",
+		"Typed coverage: 7/27 resource types",
+		"`CONP`",
+		"`CPC2`",
 		"`ICON`",
 		"`icl4`",
 		"`icl8`",

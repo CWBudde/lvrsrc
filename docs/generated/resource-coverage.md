@@ -1,6 +1,6 @@
 # Resource Coverage
 
-Typed coverage: 5/27 resource types (18.5%) across 21 corpus fixtures.
+Typed coverage: 7/27 resource types (25.9%) across 21 corpus fixtures.
 
 | FourCC | Corpus fixtures | Typed decode | Typed encode | Typed validate | Safety | Package | Read versions | Write versions |
 | ------ | --------------: | :----------: | :----------: | :------------: | ------ | ------- | ------------- | -------------- |
@@ -8,8 +8,8 @@ Typed coverage: 5/27 resource types (18.5%) across 21 corpus fixtures.
 | `BDHb` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `BDPW` | 10 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `BDSE` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
-| `CONP` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
-| `CPC2` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
+| `CONP` | 21 | yes | yes | yes | Tier 2 | `internal/codecs/conpane` | all | all |
+| `CPC2` | 21 | yes | yes | yes | Tier 2 | `internal/codecs/conpane` | all | all |
 | `DTHP` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `FPEx` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `FPHb` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |

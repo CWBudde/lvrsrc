@@ -282,11 +282,11 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 4.6 CLI `set-meta` Command
 
-- [ ] Implement `lvrsrc set-meta <file> --description "..." --out <output>` command
-- [ ] Add `--name` flag
-- [ ] Add `--unsafe` flag for Tier 3 raw patching (disabled by default)
-- [ ] Add post-write validation step in command
-- [ ] Write CLI integration tests for metadata editing
+- [x] Implement `lvrsrc set-meta <file> --description "..." --out <output>` command — `cmd/lvrsrc/setmeta.go` routes through `lvmeta.Mutator.SetDescription` and propagates `--strict`
+- [x] Add `--name` flag — maps to `lvmeta.Mutator.SetName`; can be combined with `--description` in a single invocation
+- [x] Add `--unsafe` flag for Tier 3 raw patching (disabled by default) — flag is accepted but currently returns an error citing that Tier 3 is not yet implemented, per the safety model
+- [x] Add post-write validation step in command — `postWriteValidate` re-opens the written file and fails on any severity-error issue from `f.Validate()`
+- [x] Write CLI integration tests for metadata editing — `cmd/lvrsrc/setmeta_test.go` covers description-only, name-only, both-flags, STRG creation when absent, empty-description allowed, missing `--out`, missing edit flags (no output file created), rejected `--unsafe`, propagated `ErrNameTooLong`, and post-write re-validation on corpus
 
 ### 4.7 Compatibility Table
 
@@ -308,7 +308,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ### 5.2 Additional Codecs
 
 - [x] Research and implement icon resource codec
-- [ ] Research and implement connector pane resource codec
+- [x] Research and implement connector pane resource codec
 - [ ] Research and implement front-panel metadata codec
 - [ ] Research and implement block diagram metadata codec
 - [ ] Research and implement type descriptor resource codec

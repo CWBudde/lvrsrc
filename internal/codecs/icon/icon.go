@@ -59,9 +59,11 @@ func (Color8Codec) Capability() codecs.Capability { return color8Spec.capability
 func (MonoCodec) Decode(_ codecs.Context, payload []byte) (any, error) {
 	return decode(monoSpec, payload)
 }
+
 func (Color4Codec) Decode(_ codecs.Context, payload []byte) (any, error) {
 	return decode(color4Spec, payload)
 }
+
 func (Color8Codec) Decode(_ codecs.Context, payload []byte) (any, error) {
 	return decode(color8Spec, payload)
 }
@@ -70,6 +72,7 @@ func (MonoCodec) Encode(_ codecs.Context, value any) ([]byte, error) { return en
 func (Color4Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 	return encode(color4Spec, value)
 }
+
 func (Color8Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 	return encode(color8Spec, value)
 }
@@ -77,9 +80,11 @@ func (Color8Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 func (MonoCodec) Validate(_ codecs.Context, payload []byte) []validate.Issue {
 	return validatePayload(monoSpec, payload)
 }
+
 func (Color4Codec) Validate(_ codecs.Context, payload []byte) []validate.Issue {
 	return validatePayload(color4Spec, payload)
 }
+
 func (Color8Codec) Validate(_ codecs.Context, payload []byte) []validate.Issue {
 	return validatePayload(color8Spec, payload)
 }

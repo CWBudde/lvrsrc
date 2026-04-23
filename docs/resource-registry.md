@@ -24,8 +24,8 @@ These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 | `VCTP`                                     | 1 per file   | variable     | Type descriptor pool.                                                 |
 | `HIST`                                     | 1 per file   | 40 B         | Edit history counters.                                                |
 | `VITS`                                     | 1 per file   | variable     | VI settings / misc.                                                   |
-| `CONP`                                     | 1 per file   | 2 B          | Connector pane pointer.                                               |
-| `CPC2`                                     | 1 per file   | 2 B          | Connector pane counter.                                               |
+| `CONP`                                     | 1 per file   | 2 B          | Connector pane selector/pointer — see [conpane.md](resources/conpane.md). |
+| `CPC2`                                     | 1 per file   | 2 B          | Connector pane count/variant — see [conpane.md](resources/conpane.md). |
 | `RTSG`                                     | 1 per file   | 16 B         | Runtime signature.                                                    |
 | `FTAB`                                     | 1 per file   | ~100 B       | Font table.                                                           |
 | `MUID`                                     | 1 per file   | 4 B          | Module unique ID.                                                     |
@@ -36,6 +36,8 @@ These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 
 | FourCC     | Decode | Encode | Validate | Safety | Package                      |
 | ---------- | :----: | :----: | :------: | ------ | ---------------------------- |
+| `CONP`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/conpane`    |
+| `CPC2`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/conpane`    |
 | `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
 | `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
 | `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
