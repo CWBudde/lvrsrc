@@ -274,11 +274,11 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 4.5 `pkg/lvvi` Higher-Level Model
 
-- [ ] Define `Model` struct with decoded known resources
-- [ ] Implement `DecodeKnownResources(f *lvrsrc.File) (*Model, []Issue)`
-- [ ] Implement `(m *Model) Version() (Version, bool)`
-- [ ] Implement `(m *Model) ListResources() []ResourceSummary`
-- [ ] Write model tests
+- [x] Define `Model` struct with decoded known resources — `pkg/lvvi/model.go` (caches decoded `vers` application version and `STRG` description)
+- [x] Implement `DecodeKnownResources(f *lvrsrc.File) (*Model, []Issue)` — walks sections, dispatches via a local registry mirroring `pkg/lvmeta`'s Tier 2 set, surfaces decode errors + multi-section warnings as `lvvi.Issue` values
+- [x] Implement `(m *Model) Version() (Version, bool)` — `Version` extended with `Major/Minor/Patch/Stage/Build/Text/HasApp` populated from the decoded `vers` resource
+- [x] Implement `(m *Model) ListResources() []ResourceSummary` — one summary per section with `Decoded` flagging sections with a registered non-opaque codec
+- [x] Write model tests — `pkg/lvvi/model_test.go` covers nil-file, app-version surfacing, description round-trip, no-STRG/no-vers fallbacks, ordered `ListResources` with known-codec marking, nil-receiver safety, multi-section warning path, decode-failure issue emission, underlying-pointer access, and payload-immutability guard
 
 ### 4.6 CLI `set-meta` Command
 
@@ -307,7 +307,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 5.2 Additional Codecs
 
-- [ ] Research and implement icon resource codec
+- [x] Research and implement icon resource codec
 - [ ] Research and implement connector pane resource codec
 - [ ] Research and implement front-panel metadata codec
 - [ ] Research and implement block diagram metadata codec

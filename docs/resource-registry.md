@@ -5,7 +5,7 @@ tier, and the Go package that implements the codec.
 
 ## Observed in corpus
 
-These FourCCs appear in the 20-file `testdata/corpus/` set (as of 2026-04-22):
+These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 
 | FourCC                                     | Count        | Typical size | Notes                                                                 |
 | ------------------------------------------ | ------------ | ------------ | --------------------------------------------------------------------- |
@@ -16,9 +16,9 @@ These FourCCs appear in the 20-file `testdata/corpus/` set (as of 2026-04-22):
 | `LIfp`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Front Panel imports.                                    |
 | `LIbd`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Block Diagram imports.                                  |
 | `BDPW`                                     | 1 per file   | 48 B         | Block-diagram password hash (lockout info).                           |
-| `ICON`                                     | 1 per file   | 128 B        | 1-bit VI icon.                                                        |
-| `icl4`                                     | 0–1 per file | 512 B        | 4-bit color icon.                                                     |
-| `icl8`                                     | 1 per file   | 1024 B       | 8-bit color icon.                                                     |
+| `ICON`                                     | 1 per file   | 128 B        | 1-bit VI icon — see [icon.md](resources/icon.md).                     |
+| `icl4`                                     | 0–1 per file | 512 B        | 4-bit color icon — see [icon.md](resources/icon.md).                  |
+| `icl8`                                     | 1 per file   | 1024 B       | 8-bit color icon — see [icon.md](resources/icon.md).                  |
 | `FPHb`                                     | 1 per file   | variable     | Front panel heap.                                                     |
 | `BDHb`                                     | 1 per file   | variable     | Block diagram heap.                                                   |
 | `VCTP`                                     | 1 per file   | variable     | Type descriptor pool.                                                 |
@@ -36,6 +36,9 @@ These FourCCs appear in the 20-file `testdata/corpus/` set (as of 2026-04-22):
 
 | FourCC     | Decode | Encode | Validate | Safety | Package                      |
 | ---------- | :----: | :----: | :------: | ------ | ---------------------------- |
+| `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
+| `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
+| `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/icon`       |
 | `vers`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/vers`       |
 | `STRG`     |   ✅   |   ✅   |    ✅    | Tier 2 | `internal/codecs/strg`       |
 | all others |   —    |   —    |    —     | Opaque | `internal/codecs` (fallback) |

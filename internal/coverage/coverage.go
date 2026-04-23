@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -232,6 +233,9 @@ func ArtifactContents(m Manifest) map[string]string {
 }
 
 var shippedCodecs = []codecSpec{
+	{codec: icon.MonoCodec{}, packagePath: "internal/codecs/icon"},
+	{codec: icon.Color4Codec{}, packagePath: "internal/codecs/icon"},
+	{codec: icon.Color8Codec{}, packagePath: "internal/codecs/icon"},
 	{codec: strg.Codec{}, packagePath: "internal/codecs/strg"},
 	{codec: vers.Codec{}, packagePath: "internal/codecs/vers"},
 }

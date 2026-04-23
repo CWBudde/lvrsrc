@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 2,
-    "typedResourceTypes": 2,
-    "opaqueResourceTypes": 25,
-    "typedCoveragePct": 7.407407407407407
+    "typedCodecCount": 5,
+    "typedResourceTypes": 5,
+    "opaqueResourceTypes": 22,
+    "typedCoveragePct": 18.51851851851852
   },
   "resources": [
     {
@@ -243,12 +243,12 @@
       "fourCC": "ICON",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/icon",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -471,12 +471,12 @@
       "fourCC": "icl4",
       "corpusFixtures": 5,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/icon",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -490,12 +490,12 @@
       "fourCC": "icl8",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 2",
+      "package": "internal/codecs/icon",
       "readVersions": {
         "min": 0,
         "max": 0

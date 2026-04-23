@@ -77,6 +77,7 @@ func newRootCmd(stdout, stderr io.Writer) *cobra.Command {
 		app.newValidateCmd(),
 		app.newRewriteCmd(),
 		app.newDiffCmd(),
+		app.newSetMetaCmd(),
 	)
 
 	return rootCmd

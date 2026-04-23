@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 2 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 2", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 5 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 5", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 2 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 2", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 5 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 5", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 25 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 25", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 22 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 22", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -54,6 +54,20 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	}
 	if strg.CorpusFixtures != 4 {
 		t.Fatalf("STRG CorpusFixtures = %d, want 4", strg.CorpusFixtures)
+	}
+
+	mono := findResource(t, m, "ICON")
+	if !mono.Typed.Decode || !mono.Typed.Encode || !mono.Typed.Validate {
+		t.Fatalf("ICON typed support = %+v, want all true", mono.Typed)
+	}
+	if mono.SafetyTier != "Tier 2" {
+		t.Fatalf("ICON SafetyTier = %q, want %q", mono.SafetyTier, "Tier 2")
+	}
+	if mono.Package != "internal/codecs/icon" {
+		t.Fatalf("ICON Package = %q, want %q", mono.Package, "internal/codecs/icon")
+	}
+	if mono.CorpusFixtures != 21 {
+		t.Fatalf("ICON CorpusFixtures = %d, want 21", mono.CorpusFixtures)
 	}
 
 	vers := findResource(t, m, "vers")
@@ -132,7 +146,10 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 2/27 resource types",
+		"Typed coverage: 5/27 resource types",
+		"`ICON`",
+		"`icl4`",
+		"`icl8`",
 		"`STRG`",
 		"`vers`",
 		"`BDPW`",
