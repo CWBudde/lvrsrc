@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 9,
-    "typedResourceTypes": 9,
-    "opaqueResourceTypes": 18,
-    "typedCoveragePct": 33.333333333333336
+    "typedCodecCount": 10,
+    "typedResourceTypes": 10,
+    "opaqueResourceTypes": 17,
+    "typedCoveragePct": 37.03703703703704
   },
   "resources": [
     {
@@ -414,12 +414,12 @@
       "fourCC": "VCTP",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/vctp",
       "readVersions": {
         "min": 0,
         "max": 0

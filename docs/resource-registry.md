@@ -21,7 +21,7 @@ These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 | `icl8`                                     | 1 per file   | 1024 B       | 8-bit color icon — see [icon.md](resources/icon.md).                  |
 | `FPHb`                                     | 1 per file   | variable     | Front panel heap.                                                     |
 | `BDHb`                                     | 1 per file   | variable     | Block diagram heap.                                                   |
-| `VCTP`                                     | 1 per file   | variable     | Type descriptor pool.                                                 |
+| `VCTP`                                     | 1 per file   | variable     | Type descriptor pool — see [vctp.md](resources/vctp.md).              |
 | `HIST`                                     | 1 per file   | 40 B         | Edit history counters.                                                |
 | `VITS`                                     | 1 per file   | variable     | VI settings / misc.                                                   |
 | `CONP`                                     | 1 per file   | 2 B          | Connector pane selector/pointer — see [conpane.md](resources/conpane.md). |
@@ -69,6 +69,7 @@ the coverage badge.
 | `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `LIbd`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/libd`       |
 | `LIfp`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lifp`       |
+| `VCTP`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/vctp`       |
 | `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `vers`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/vers`       |

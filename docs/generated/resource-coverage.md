@@ -1,6 +1,6 @@
 # Resource Coverage
 
-Typed coverage: 9/27 resource types (33.3%) across 21 corpus fixtures.
+Typed coverage: 10/27 resource types (37.0%) across 21 corpus fixtures.
 
 | FourCC | Corpus fixtures | Typed decode | Typed encode | Typed validate | Safety | Package | Read versions | Write versions |
 | ------ | --------------: | :----------: | :----------: | :------------: | ------ | ------- | ------------- | -------------- |
@@ -25,7 +25,7 @@ Typed coverage: 9/27 resource types (33.3%) across 21 corpus fixtures.
 | `MUID` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `RTSG` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `STRG` | 4 | yes | yes | yes | Tier 2 | `internal/codecs/strg` | all | all |
-| `VCTP` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
+| `VCTP` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/vctp` | all | all |
 | `VITS` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `VPDP` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `icl4` | 5 | yes | yes | yes | Tier 2 | `internal/codecs/icon` | all | all |

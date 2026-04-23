@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 9 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 9", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 10 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 10", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 9 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 9", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 10 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 10", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 18 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 18", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 17 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 17", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -140,6 +140,20 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("vers CorpusFixtures = %d, want 21", vers.CorpusFixtures)
 	}
 
+	vctp := findResource(t, m, "VCTP")
+	if !vctp.Typed.Decode || !vctp.Typed.Encode || !vctp.Typed.Validate {
+		t.Fatalf("VCTP typed support = %+v, want all true", vctp.Typed)
+	}
+	if vctp.SafetyTier != "Tier 1" {
+		t.Fatalf("VCTP SafetyTier = %q, want %q", vctp.SafetyTier, "Tier 1")
+	}
+	if vctp.Package != "internal/codecs/vctp" {
+		t.Fatalf("VCTP Package = %q, want %q", vctp.Package, "internal/codecs/vctp")
+	}
+	if vctp.CorpusFixtures != 21 {
+		t.Fatalf("VCTP CorpusFixtures = %d, want 21", vctp.CorpusFixtures)
+	}
+
 	bdpw := findResource(t, m, "BDPW")
 	if bdpw.Typed.Decode || bdpw.Typed.Encode || bdpw.Typed.Validate {
 		t.Fatalf("BDPW typed support = %+v, want all false", bdpw.Typed)
@@ -202,12 +216,13 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 9/27 resource types",
+		"Typed coverage: 10/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",
 		"`LIbd`",
 		"`LIfp`",
+		"`VCTP`",
 		"`icl4`",
 		"`icl8`",
 		"`STRG`",

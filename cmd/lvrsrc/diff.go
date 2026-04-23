@@ -17,7 +17,7 @@ func (a *cliApp) newDiffCmd() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "diff <a> <b>",
-		Short: "Diff two RSRC files (header, blocks, sections)",
+		Short: "Diff two RSRC files (header, blocks, sections, decoded resources)",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := lvrsrc.OpenOptions{Strict: a.v.GetBool("strict")}

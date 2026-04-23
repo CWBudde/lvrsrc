@@ -10,9 +10,9 @@
 //  3. Section-level payload differences within common blocks: size changes,
 //     content hash changes, additions and removals.
 //
-// A fourth, pluggable layer (KindDecoded) lets callers supply per-codec
-// decoded-resource differs. That layer is a stub today and will be populated
-// by Phase 4+ typed codecs.
+// A fourth layer (KindDecoded) compares decoded resource values using the
+// shipped typed codecs by default. Callers can override or disable that layer
+// via Options.DecodedDiffers.
 package lvdiff
 
 import (
@@ -110,7 +110,8 @@ type Options struct {
 	DecodedDiffers map[string]DecodedDiffer
 }
 
-// Files returns the structural diff between a and b using default options.
+// Files returns the structural diff between a and b using the built-in
+// decoded-resource differs for shipped typed codecs.
 func Files(a, b *lvrsrc.File) *Diff {
 	return FilesWithOptions(a, b, Options{})
 }
@@ -118,6 +119,10 @@ func Files(a, b *lvrsrc.File) *Diff {
 // FilesWithOptions returns the structural diff between a and b using the
 // supplied options.
 func FilesWithOptions(a, b *lvrsrc.File, opts Options) *Diff {
+	if opts.DecodedDiffers == nil {
+		opts.DecodedDiffers = defaultDecodedDiffers()
+	}
+
 	d := &Diff{}
 
 	switch {

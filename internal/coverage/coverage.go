@@ -15,6 +15,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
@@ -245,6 +246,7 @@ var shippedCodecs = []codecSpec{
 	{codec: lifp.Codec{}, packagePath: "internal/codecs/lifp"},
 	{codec: strg.Codec{}, packagePath: "internal/codecs/strg"},
 	{codec: vers.Codec{}, packagePath: "internal/codecs/vers"},
+	{codec: vctp.Codec{}, packagePath: "internal/codecs/vctp"},
 }
 
 func scanCorpus(dir string) (int, map[string]int, error) {

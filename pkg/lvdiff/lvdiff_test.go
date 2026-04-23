@@ -1,6 +1,9 @@
 package lvdiff
 
 import (
+	"bytes"
+	"compress/zlib"
+	"encoding/binary"
 	"testing"
 
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -308,9 +311,6 @@ func TestDiffByCategoryAndFilter(t *testing.T) {
 }
 
 func TestFilesDecodedStubExtensionPoint(t *testing.T) {
-	// The decoded-resource diff is a stub until Phase 4+. Calling Files with
-	// a DecodedDiffer option should invoke the differ for each section pair
-	// whose block type is registered, and include its items in the result.
 	a := baseFile()
 	b := baseFile()
 	b.Blocks[0].Sections[0].Payload = []byte{0x01, 0x02, 0x03, 0x05}
@@ -343,4 +343,114 @@ func TestFilesDecodedStubExtensionPoint(t *testing.T) {
 	if decoded[0].Path != "blocks.LVSR/0.decoded.someField" {
 		t.Fatalf("decoded diff path = %q, want blocks.LVSR/0.decoded.someField", decoded[0].Path)
 	}
+}
+
+func TestFilesIncludesDefaultDecodedDiffForConnectorPane(t *testing.T) {
+	a := baseFile()
+	b := baseFile()
+	a.Blocks = []lvrsrc.Block{{
+		Type: "CONP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: []byte{0x00, 0x01}},
+		},
+	}}
+	b.Blocks = []lvrsrc.Block{{
+		Type: "CONP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: []byte{0x00, 0x02}},
+		},
+	}}
+
+	d := Files(a, b)
+	decoded := d.Filter(KindDecoded)
+	if len(decoded) == 0 {
+		t.Fatalf("expected default decoded diff items, got none; items=%+v", d.Items)
+	}
+
+	var got *DiffItem
+	for i := range decoded {
+		if decoded[i].Path == "blocks.CONP/0.decoded.Value" {
+			got = &decoded[i]
+			break
+		}
+	}
+	if got == nil {
+		t.Fatalf("expected blocks.CONP/0.decoded.Value diff, got %+v", decoded)
+	}
+	if got.Old != uint16(1) || got.New != uint16(2) {
+		t.Fatalf("decoded Value diff Old=%v New=%v, want 1 / 2", got.Old, got.New)
+	}
+}
+
+func TestFilesWithEmptyDecodedDiffersDisablesDefaults(t *testing.T) {
+	a := baseFile()
+	b := baseFile()
+	a.Blocks = []lvrsrc.Block{{
+		Type: "CONP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: []byte{0x00, 0x01}},
+		},
+	}}
+	b.Blocks = []lvrsrc.Block{{
+		Type: "CONP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: []byte{0x00, 0x02}},
+		},
+	}}
+
+	d := FilesWithOptions(a, b, Options{DecodedDiffers: map[string]DecodedDiffer{}})
+	if decoded := d.Filter(KindDecoded); len(decoded) != 0 {
+		t.Fatalf("expected no decoded diffs when defaults are disabled, got %+v", decoded)
+	}
+}
+
+func TestFilesIncludesDefaultDecodedDiffForVCTPInflatedBlob(t *testing.T) {
+	a := baseFile()
+	b := baseFile()
+	a.Blocks = []lvrsrc.Block{{
+		Type: "VCTP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: makeVCTPPayload(t, []byte("old-type-pool"))},
+		},
+	}}
+	b.Blocks = []lvrsrc.Block{{
+		Type: "VCTP",
+		Sections: []lvrsrc.Section{
+			{Index: 0, Payload: makeVCTPPayload(t, []byte("new-type-pool"))},
+		},
+	}}
+
+	d := Files(a, b)
+	decoded := d.Filter(KindDecoded)
+	if len(decoded) == 0 {
+		t.Fatalf("expected default decoded diff items, got none; items=%+v", d.Items)
+	}
+
+	var sawInflated bool
+	for _, it := range decoded {
+		if it.Path == "blocks.VCTP/0.decoded.Inflated" {
+			sawInflated = true
+			break
+		}
+	}
+	if !sawInflated {
+		t.Fatalf("expected VCTP inflated blob diff, got %+v", decoded)
+	}
+}
+
+func makeVCTPPayload(t *testing.T, inflated []byte) []byte {
+	t.Helper()
+	var compressed bytes.Buffer
+	w := zlib.NewWriter(&compressed)
+	if _, err := w.Write(inflated); err != nil {
+		t.Fatalf("zlib write: %v", err)
+	}
+	if err := w.Close(); err != nil {
+		t.Fatalf("zlib close: %v", err)
+	}
+
+	out := make([]byte, 4+compressed.Len())
+	binary.BigEndian.PutUint32(out[:4], uint32(len(inflated)))
+	copy(out[4:], compressed.Bytes())
+	return out
 }
