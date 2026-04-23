@@ -310,7 +310,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 - [x] Research and implement icon resource codec
 - [x] Research and implement connector pane resource codec
 - [x] Research and implement front-panel metadata codec
-- [ ] Research and implement block diagram metadata codec
+- [x] Research and implement block diagram metadata codec
 - [ ] Research and implement type descriptor resource codec
 - [ ] Expand `lvdiff` decoded-resource diff for each new codec
 

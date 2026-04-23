@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 8 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 8", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 9 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 9", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 8 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 8", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 9 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 9", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 19 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 19", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 18 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 18", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -112,6 +112,20 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("LIfp CorpusFixtures = %d, want 21", lifp.CorpusFixtures)
 	}
 
+	libd := findResource(t, m, "LIbd")
+	if !libd.Typed.Decode || !libd.Typed.Encode || !libd.Typed.Validate {
+		t.Fatalf("LIbd typed support = %+v, want all true", libd.Typed)
+	}
+	if libd.SafetyTier != "Tier 1" {
+		t.Fatalf("LIbd SafetyTier = %q, want %q", libd.SafetyTier, "Tier 1")
+	}
+	if libd.Package != "internal/codecs/libd" {
+		t.Fatalf("LIbd Package = %q, want %q", libd.Package, "internal/codecs/libd")
+	}
+	if libd.CorpusFixtures != 21 {
+		t.Fatalf("LIbd CorpusFixtures = %d, want 21", libd.CorpusFixtures)
+	}
+
 	vers := findResource(t, m, "vers")
 	if !vers.Typed.Decode || !vers.Typed.Encode || !vers.Typed.Validate {
 		t.Fatalf("vers typed support = %+v, want all true", vers.Typed)
@@ -188,10 +202,11 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 8/27 resource types",
+		"Typed coverage: 9/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",
+		"`LIbd`",
 		"`LIfp`",
 		"`icl4`",
 		"`icl8`",

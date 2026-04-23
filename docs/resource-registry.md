@@ -14,7 +14,7 @@ These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 | `LIBN`                                     | 1 per file   | 16–27 B      | Library-name list (Pascal-string list of `.lvlib` membership).        |
 | `LIvi`                                     | 1 per file   | 51–176 B     | LabVIEW Info: VI dependencies (library imports, `PTH0` paths).        |
 | `LIfp`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Front Panel imports — see [lifp.md](resources/lifp.md). |
-| `LIbd`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Block Diagram imports.                                  |
+| `LIbd`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Block Diagram imports — see [libd.md](resources/libd.md). |
 | `BDPW`                                     | 1 per file   | 48 B         | Block-diagram password hash (lockout info).                           |
 | `ICON`                                     | 1 per file   | 128 B        | 1-bit VI icon — see [icon.md](resources/icon.md).                     |
 | `icl4`                                     | 0–1 per file | 512 B        | 4-bit color icon — see [icon.md](resources/icon.md).                  |
@@ -67,6 +67,7 @@ the coverage badge.
 | `CONP`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
 | `CPC2`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
 | `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
+| `LIbd`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/libd`       |
 | `LIfp`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lifp`       |
 | `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
 | `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |

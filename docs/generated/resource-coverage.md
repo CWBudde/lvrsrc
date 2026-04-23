@@ -1,6 +1,6 @@
 # Resource Coverage
 
-Typed coverage: 8/27 resource types (29.6%) across 21 corpus fixtures.
+Typed coverage: 9/27 resource types (33.3%) across 21 corpus fixtures.
 
 | FourCC | Corpus fixtures | Typed decode | Typed encode | Typed validate | Safety | Package | Read versions | Write versions |
 | ------ | --------------: | :----------: | :----------: | :------------: | ------ | ------- | ------------- | -------------- |
@@ -18,7 +18,7 @@ Typed coverage: 8/27 resource types (29.6%) across 21 corpus fixtures.
 | `HIST` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `ICON` | 21 | yes | yes | yes | Tier 2 | `internal/codecs/icon` | all | all |
 | `LIBN` | 13 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
-| `LIbd` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
+| `LIbd` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/libd` | all | all |
 | `LIfp` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/lifp` | all | all |
 | `LIvi` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
 | `LVSR` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |

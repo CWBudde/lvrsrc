@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 8,
-    "typedResourceTypes": 8,
-    "opaqueResourceTypes": 19,
-    "typedCoveragePct": 29.62962962962963
+    "typedCodecCount": 9,
+    "typedResourceTypes": 9,
+    "opaqueResourceTypes": 18,
+    "typedCoveragePct": 33.333333333333336
   },
   "resources": [
     {
@@ -281,12 +281,12 @@
       "fourCC": "LIbd",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/libd",
       "readVersions": {
         "min": 0,
         "max": 0
