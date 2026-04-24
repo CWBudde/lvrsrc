@@ -363,11 +363,11 @@ This phase clears the long tail of small, well-understood blocks where `pylabvie
 
 ### 6.2 LVSR flag decoding
 
-- [ ] Research LVSR save-record layout (references/pylavi/pylavi/resource_types.py:96–198 is the concise reference; references/pylabview/pylabview/LVblock.py has the longer one)
-- [ ] Write `docs/resources/lvsr.md` documenting the byte layout and flag bits
-- [ ] Implement `internal/codecs/lvsr` (Tier 1 read) returning `Value{FormatVersion, Flags, ...}` with typed booleans for `Locked`, `PasswordProtected`, `Debuggable`, `RunOnOpen`, `SuspendOnRun`, `SeparateCode`, `AutoErrorHandling`, `Breakpoints`, `ClearIndicators`
-- [ ] Round-trip test on every corpus LVSR
-- [ ] Expose the decoded flags on `pkg/lvvi.Model` (e.g. `(m *Model) Flags() (LVSRFlags, bool)`)
+- [x] Research LVSR save-record layout (references/pylavi/pylavi/resource_types.py:96–198 is the concise reference; references/pylabview/pylabview/LVblock.py has the longer one) — confirmed pylavi's `(word-index, mask)` flag map; cross-checked against pylabview's `VI_EXEC_FLAGS` enum (`LVinstrument.py:137-171`) where word 0 = `execFlags` and the bits align
+- [x] Write `docs/resources/lvsr.md` documenting the byte layout and flag bits — covers version header, variable-length Raw flags, the nine exposed bits with their word/mask coordinates, breakpoint count at word 28, validation rule, reference citations, and open questions
+- [x] Implement `internal/codecs/lvsr` (Tier 1 read) returning `Value{FormatVersion, Flags, ...}` with typed booleans for `Locked`, `PasswordProtected`, `Debuggable`, `RunOnOpen`, `SuspendOnRun`, `SeparateCode`, `AutoErrorHandling`, `Breakpoints`, `ClearIndicators` — shipped as `Value{Version, Raw}` with method accessors for each flag (`PasswordProtected` deferred: it requires combining LVSR's `Locked` bit with BDPW's actual hash state, which is a Phase 6.3 `BDPW` codec prerequisite); `BreakpointCount()` added as a bonus per pylavi's `BREAKPOINT_COUNT_INDEX = 28`
+- [x] Round-trip test on every corpus LVSR — `internal/codecs/lvsr/lvsr_corpus_test.go` exercises 21 LVSR sections (one per corpus fixture), every one decodes and re-encodes byte-for-byte
+- [x] Expose the decoded flags on `pkg/lvvi.Model` (e.g. `(m *Model) Flags() (LVSRFlags, bool)`) — `LVSRFlags` struct published; `Model.Flags()` and `Model.BreakpointCount()` return `(_, ok)`, cached during `DecodeKnownResources`
 
 ### 6.3 Block-family codecs (references: pylabview/pylabview/LVblock.py)
 
@@ -394,7 +394,7 @@ For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests
 
 ### 6.5 Demo integration
 
-- [ ] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB
+- [x] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB — `internal/codecs/icon.PickBest` drives the server-side selection; WASM now sends base64 RGBA + the chosen FourCC; JS paints to a hidden canvas and embeds the PNG via `canvas.toDataURL()` with `image-rendering: pixelated` so the 32×32 source stays crisp at 128 px. A small `icl8` / `icl4` / `ICON` badge sits below the icon
 - [ ] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`)
 - [ ] Structure tab: "decoded" badges light up for every FourCC newly covered
 

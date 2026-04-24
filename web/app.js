@@ -188,45 +188,45 @@ function renderFact(label, value) {
 }
 
 function renderIcon(icon) {
-  if (!icon || !icon.packed) {
+  if (!icon || !icon.rgba) {
     return `<div class="info-icon-placeholder" aria-hidden="true">VI</div>`;
   }
-  const bits = unpackBits(icon.packed, icon.width, icon.height);
-  const cell = 4; // px per icon pixel
-  const w = icon.width * cell;
-  const h = icon.height * cell;
-  let rects = "";
-  for (let y = 0; y < icon.height; y++) {
-    for (let x = 0; x < icon.width; x++) {
-      if (bits[y * icon.width + x]) {
-        rects += `<rect x="${x * cell}" y="${y * cell}" width="${cell}" height="${cell}"/>`;
-      }
-    }
+  const dataURL = iconRGBAToDataURL(icon);
+  if (!dataURL) {
+    return `<div class="info-icon-placeholder" aria-hidden="true">VI</div>`;
   }
+  const badge = icon.fourcc
+    ? `<span class="info-icon-variant">${escHtml(icon.fourcc)}</span>`
+    : "";
   return `
-    <svg class="info-icon-svg"
-         viewBox="0 0 ${w} ${h}"
-         width="${w}" height="${h}"
-         role="img"
-         aria-label="VI icon">
-      <rect x="0" y="0" width="${w}" height="${h}" class="info-icon-bg"/>
-      <g class="info-icon-fg">${rects}</g>
-    </svg>`;
+    <div class="info-icon-stack">
+      <img class="info-icon-img"
+           src="${dataURL}"
+           width="128" height="128"
+           alt="VI icon (${escHtml(icon.fourcc || "icon")})" />
+      ${badge}
+    </div>`;
 }
 
-function unpackBits(base64Packed, width, height) {
-  const packed = atob(base64Packed);
-  const bitsPerRow = width;
-  const rowStride = Math.ceil(bitsPerRow / 8);
-  const out = new Uint8Array(width * height);
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const byte = packed.charCodeAt(y * rowStride + (x >> 3));
-      const bit = (byte >> (7 - (x & 7))) & 1;
-      out[y * width + x] = bit;
-    }
+function iconRGBAToDataURL(icon) {
+  const canvas = document.createElement("canvas");
+  canvas.width = icon.width;
+  canvas.height = icon.height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return null;
   }
-  return out;
+  const raw = atob(icon.rgba);
+  const expected = icon.width * icon.height * 4;
+  if (raw.length !== expected) {
+    return null;
+  }
+  const img = ctx.createImageData(icon.width, icon.height);
+  for (let i = 0; i < expected; i++) {
+    img.data[i] = raw.charCodeAt(i);
+  }
+  ctx.putImageData(img, 0, 0);
+  return canvas.toDataURL("image/png");
 }
 
 function renderDepGroup(label, entries) {

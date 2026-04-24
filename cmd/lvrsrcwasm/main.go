@@ -83,13 +83,14 @@ type WASMInfo struct {
 	Deps        WASMDeps       `json:"deps"`
 }
 
-// WASMIcon carries the packed 1-bit mono icon (32x32, 128 bytes) as base64.
-// Colour icons (icl4, icl8) are deliberately omitted until a palette is in
-// place; the mono icon renders cleanly without one.
+// WASMIcon carries the 32x32 VI icon pre-expanded into row-major RGBA bytes
+// so the browser can paint it directly without palette lookups. The best
+// available variant is selected server-side: icl8 > icl4 > ICON.
 type WASMIcon struct {
+	FourCC string `json:"fourcc"`
 	Width  int    `json:"width"`
 	Height int    `json:"height"`
-	Packed string `json:"packed"` // base64-encoded raw bytes
+	RGBA   string `json:"rgba"` // base64-encoded Width*Height*4 RGBA bytes
 }
 
 // WASMDeps groups decoded link-info entries by source.
@@ -260,13 +261,17 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 		}
 	}
 
-	// Icon (ICON, mono). Send the packed 128-byte payload unchanged; the UI
-	// unpacks and renders it.
-	if payload, ok := firstPayload(file, string(iconcodec.MonoFourCC)); ok && len(payload) == 128 {
+	// Icon — prefer colour (icl8 > icl4 > ICON). The picker falls through
+	// each variant that is missing, mis-sized, or fails to decode. Pixels
+	// are pre-expanded to RGBA so the browser skips the palette lookup.
+	if pick, ok := iconcodec.PickBest(ctx, func(fourCC string) ([]byte, bool) {
+		return firstPayload(file, fourCC)
+	}); ok {
 		info.Icon = &WASMIcon{
-			Width:  iconcodec.Width,
-			Height: iconcodec.Height,
-			Packed: base64.StdEncoding.EncodeToString(payload),
+			FourCC: pick.FourCC,
+			Width:  pick.Value.Width,
+			Height: pick.Value.Height,
+			RGBA:   base64.StdEncoding.EncodeToString(pick.Value.RGBA()),
 		}
 	}
 

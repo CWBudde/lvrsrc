@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -42,16 +43,38 @@ type ResourceSummary struct {
 	Decoded bool
 }
 
+// LVSRFlags is the decoded set of boolean settings from the VI's LVSR
+// block. Fields are populated from the raw flag words via the codec in
+// internal/codecs/lvsr; each field is documented there.
+//
+// All fields default to false; Model.Flags returns ok=false when the
+// wrapped file has no LVSR block.
+type LVSRFlags struct {
+	SuspendOnRun      bool
+	Locked            bool
+	RunOnOpen         bool
+	SavedForPrevious  bool
+	SeparateCode      bool
+	ClearIndicators   bool
+	AutoErrorHandling bool
+	HasBreakpoints    bool
+	Debuggable        bool
+}
+
 // Model is the higher-level, read-oriented view of a LabVIEW file.
 // It wraps a parsed *lvrsrc.File and caches values decoded from known
-// resources (application version, description).
+// resources (application version, description, LVSR flags).
 //
 // Model is read-only. For Tier 2 mutations use pkg/lvmeta.
 type Model struct {
-	file        *lvrsrc.File
-	version     Version
-	description string
-	hasDesc     bool
+	file             *lvrsrc.File
+	version          Version
+	description      string
+	hasDesc          bool
+	lvsr             lvsr.Value
+	hasLvsr          bool
+	breakpointCount  uint32
+	hasBreakpointCnt bool
 }
 
 // File returns the underlying parsed file. It is the same pointer passed
@@ -85,6 +108,37 @@ func (m *Model) Version() (Version, bool) {
 		return Version{}, false
 	}
 	return m.version, true
+}
+
+// Flags returns the decoded LVSR flag set and true when a valid LVSR
+// section was decoded from the wrapped file. It returns a zero LVSRFlags
+// and false when no LVSR section exists or decoding failed (in which case
+// DecodeKnownResources recorded an Issue).
+func (m *Model) Flags() (LVSRFlags, bool) {
+	if m == nil || !m.hasLvsr {
+		return LVSRFlags{}, false
+	}
+	return LVSRFlags{
+		SuspendOnRun:      m.lvsr.SuspendOnRun(),
+		Locked:            m.lvsr.Locked(),
+		RunOnOpen:         m.lvsr.RunOnOpen(),
+		SavedForPrevious:  m.lvsr.SavedForPrevious(),
+		SeparateCode:      m.lvsr.SeparateCode(),
+		ClearIndicators:   m.lvsr.ClearIndicators(),
+		AutoErrorHandling: m.lvsr.AutoErrorHandling(),
+		HasBreakpoints:    m.lvsr.HasBreakpoints(),
+		Debuggable:        m.lvsr.Debuggable(),
+	}, true
+}
+
+// BreakpointCount returns the integer stored at flag-word index 28 of
+// the LVSR block. It returns ok=false when no LVSR section was decoded
+// or the payload is too short to reach that word.
+func (m *Model) BreakpointCount() (uint32, bool) {
+	if m == nil || !m.hasLvsr || !m.hasBreakpointCnt {
+		return 0, false
+	}
+	return m.breakpointCount, true
 }
 
 // ListResources returns one summary per section across all blocks, in
@@ -174,6 +228,24 @@ func DecodeKnownResources(f *lvrsrc.File) (*Model, []Issue) {
 		}
 	}
 
+	// Decode LVSR (first occurrence wins; extras are flagged).
+	if refs := sectionsOf(f, lvsr.FourCC); len(refs) > 0 {
+		issues = appendIfMultiple(issues, lvsr.FourCC, len(refs))
+		payload := refs[0].Payload
+		codec := reg.Lookup(lvsr.FourCC)
+		raw, err := codec.Decode(ctx, payload)
+		if err != nil {
+			issues = append(issues, decodeErrorIssue(lvsr.FourCC, refs[0].Index, err))
+		} else if lv, ok := raw.(lvsr.Value); ok {
+			m.hasLvsr = true
+			m.lvsr = lv
+			if n, ok := lv.BreakpointCount(); ok {
+				m.breakpointCount = n
+				m.hasBreakpointCnt = true
+			}
+		}
+	}
+
 	return m, issues
 }
 
@@ -184,6 +256,7 @@ func newLvviRegistry() *codecs.Registry {
 	r := codecs.New()
 	r.Register(strg.Codec{})
 	r.Register(vers.Codec{})
+	r.Register(lvsr.Codec{})
 	return r
 }
 
