@@ -336,12 +336,205 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 5.6 v1.0 Readiness Checklist
 
+> Gated by Phases 6–10 — the current typed-codec set covers less than half of the observed FourCCs and the two heap resources (`FPHb`, `BDHb`) remain opaque. Tagging `v1.0.0` requires the coverage bar set in Phase 10.
+
 - [ ] Round-trip corpus is broad (version coverage documented)
 - [ ] Validator is mature (all known structural checks pass)
 - [ ] Support matrix published and complete
 - [ ] Unsafe APIs clearly separated and gated
 - [ ] Public API is stable (no breaking changes planned)
 - [ ] Tag `v1.0.0`
+
+---
+
+## Phase 6 — Small-Block Completion & Colour Icons
+
+> Target: 2–3 weeks | Exit: every FourCC observed in the corpus that is straightforwardly shaped has a typed codec; the `icl4` / `icl8` codecs emit RGB; demo's Info tab can render a colour icon and surface VI flags | Tag: `v0.6.0`
+
+This phase clears the long tail of small, well-understood blocks where `pylabview` already has a complete decoder we can port in a few hundred lines each. It also ships the two colour-icon palettes so the demo icon hero can upgrade from 1-bit to 8-bit.
+
+### 6.1 Colour-icon palettes and renderers
+
+- [x] Port `LABVIEW_COLOR_PALETTE_16` and `LABVIEW_COLOR_PALETTE_256` (references/pylabview/pylabview/LVmisc.py:52–95) into an internal Go table — `internal/codecs/icon/palette.go` ships `Palette2`, `Palette16`, `Palette256` as `[N]uint32` packed ARGB with alpha pinned to `0xFF`; includes `Palette2` port from `LVmisc.py:93-95` so mono shares the same pipeline
+- [x] Extend `internal/codecs/icon` `Value` to expose a `Palette []uint32` (packed ARGB) alongside `Pixels` for `icl4` / `icl8` — `Value.Palette` is populated on Decode for every bit depth (Decode wires it via the new `paletteFor(bitsPerPixel)` helper); ignored on Encode since it's derivable from `BitsPerPixel`
+- [x] Add a pure-Go `(Value) RGBA() []uint8` helper that combines indices + palette — returns a fresh `Width*Height*4` slice in RGBA row-major order; out-of-range pixel indices fall back to opaque black (never panics)
+- [x] Unit-test palette indexing against at least one corpus `icl8` section using a handcrafted expected RGBA array — `internal/codecs/icon/palette_corpus_test.go` spot-checks the first and last pixel of `testdata/corpus/format-string.vi`'s `icl8` section against `Palette256[payload[i]]`; test skips cleanly when the fixture is absent
+- [x] Update `docs/resources/icon.md` to record the palette sources — new _Palette sources_ section cites the pylabview line ranges, documents the packed-ARGB layout, and flags the suspicious `LABVIEW_COLOR_PALETTE_256[188] = 0x3003FF` upstream value as an open question
+
+### 6.2 LVSR flag decoding
+
+- [ ] Research LVSR save-record layout (references/pylavi/pylavi/resource_types.py:96–198 is the concise reference; references/pylabview/pylabview/LVblock.py has the longer one)
+- [ ] Write `docs/resources/lvsr.md` documenting the byte layout and flag bits
+- [ ] Implement `internal/codecs/lvsr` (Tier 1 read) returning `Value{FormatVersion, Flags, ...}` with typed booleans for `Locked`, `PasswordProtected`, `Debuggable`, `RunOnOpen`, `SuspendOnRun`, `SeparateCode`, `AutoErrorHandling`, `Breakpoints`, `ClearIndicators`
+- [ ] Round-trip test on every corpus LVSR
+- [ ] Expose the decoded flags on `pkg/lvvi.Model` (e.g. `(m *Model) Flags() (LVSRFlags, bool)`)
+
+### 6.3 Block-family codecs (references: pylabview/pylabview/LVblock.py)
+
+For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests, and per-resource docs in `docs/resources/`:
+
+- [ ] `LIBN` — library-name list (LVblock.py:4683–4756)
+- [ ] `BDPW` — block-diagram password (MD5, hash1, hash2, empty-password sentinel) (LVblock.py:4334–4680; cross-check references/pylavi/pylavi/resource_types.py:54–94)
+- [ ] `FTAB` — font table (LVblock.py:2892–3075)
+- [ ] `DTHP` — data-type-heap pointer (LVblock.py:3177–3276)
+- [ ] `RTSG` — runtime signature GUID (LVblock.py:5383–5434)
+- [ ] `MUID` — module unique ID (LVblock.py:1272–1286)
+- [ ] `FPSE` — front-panel size estimate (LVblock.py:1288–1298)
+- [ ] `BDSE` — block-diagram size estimate (LVblock.py:1383–1393)
+- [ ] `HIST` — edit history counters (LVblock.py:3078–3085; pylabview is a stub — research further before deciding on final shape)
+- [ ] `VITS` — VI settings (LVblock.py:7015–7120; LVVariant name/value pairs with endianness-aware decoding; scope to stable top-level keys first, leave variant-content interpretation opaque)
+- [ ] `FPEx` / `BDEx` — heap-aux blocks (not present in pylabview; corpus-only research — 4-byte zero / 8-byte / 16-byte outliers; start as Tier 1 shape-only and escalate if patterns emerge)
+- [ ] `VPDP` — VI probe-data pointer (LVblock.py:5055–5061; pylabview is a stub)
+
+### 6.4 Safety tier follow-through
+
+- [ ] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2
+- [ ] Update `internal/coverage` manifest and verify the README badge reflects the new count (target: ≥ 20 typed FourCCs)
+- [ ] Extend `pkg/lvdiff` decoded differs for every new codec
+
+### 6.5 Demo integration
+
+- [ ] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB
+- [ ] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`)
+- [ ] Structure tab: "decoded" badges light up for every FourCC newly covered
+
+---
+
+## Phase 7 — Rich Link Graph
+
+> Target: 2–4 weeks | Exit: `LIfp`, `LIbd`, and `LIvi` entries surface fully-typed link targets with resolved paths; dependency card in demo shows per-entry link kind plus a human-readable path | Tag: `v0.7.0`
+
+Today `LIfp` / `LIbd` decode only the entry envelope and opaque tail. `LIvi` is not decoded at all. `pylabview` has ready-to-port decoders for all three plus the PTH0/PTH1 path types and 50-odd `LinkObjRef` subclasses; this phase brings that into Go.
+
+### 7.1 PTH0 / PTH1 path decoder
+
+- [ ] Research `LVPath0` / `LVPath1` layouts (references/pylabview/pylabview/LVclasses.py:94 and :159)
+- [ ] Write `docs/resources/pth0.md` documenting type idents (`"unc "`, `"!pth"`, `"abs "`, `"rel "`), count field, and the length-prefixed component strings
+- [ ] Implement `internal/codecs/pthx` with `Value{Variant, Components []string, IsAbsolute, IsRelative, IsUNC, IsPhony}` covering both the 1-byte-length (PTH0) and 2-byte-length (PTH1) forms and the LabVIEW "zero-fill phony" case
+- [ ] Round-trip test across every PTH0 reference embedded in corpus `LIfp` / `LIbd` payloads
+
+### 7.2 LIvi codec
+
+- [ ] Research `LIvi` shape (references/pylabview/pylabview/LVblock.py:2426; base class `LinkObjRefs` at LVblock.py:2248; ident `LVIN`)
+- [ ] Write `docs/resources/livi.md`
+- [ ] Implement `internal/codecs/livi` with the same envelope shape as `LIfp` / `LIbd` (version, marker, entry count, entries, footer)
+
+### 7.3 Upgrade LIfp / LIbd decoders
+
+- [ ] Replace the per-entry `Tail []byte` with a typed `Target LinkTarget` struct populated from the key `LinkObjRef` subclasses (references/pylabview/pylabview/LVlinkinfo.py:1428–2524)
+- [ ] Cover at least: `VIToOwnerVI`, `VIToLib`, `VIToMSLink`, `VIToFileLink`, `TypeDefToCCLink`, `InstanceVIToOwnerVI`, `HeapToAssembly`, `VIToAssembly` — expose a stable `LinkKind` enum for the rest
+- [ ] Keep unknown subclasses round-trip-safe via an opaque fallback so the codec remains Tier 1
+- [ ] Wire decoded `PrimaryPath` / `SecondaryPath` through `internal/codecs/pthx` instead of preserving raw bytes
+- [ ] Extend round-trip tests to cover corpus files with the 98/100/201/336-byte LIfp variants
+
+### 7.4 Public surface
+
+- [ ] `pkg/lvvi.Model` gains `FrontPanelImports()`, `BlockDiagramImports()`, `VIDependencies()` returning typed entries with resolved paths
+- [ ] `pkg/lvdiff` decoded differ for each link block
+- [ ] Update `docs/resources/lifp.md` and `docs/resources/libd.md` to reflect the richer model; add `docs/resources/livi.md`
+
+### 7.5 Demo integration
+
+- [ ] Dependency card on Info tab: three subsections (Front panel, Block diagram, VI dependencies) with per-entry link-kind chip + rendered path + qualifiers
+- [ ] When path is relative, show origin hint (e.g. `vi.lib/...`, `user.lib/...`) if it can be inferred from the qualifier list
+
+---
+
+## Phase 8 — Type-Descriptor Surface & Connector Pane
+
+> Target: 1–2 weeks | Exit: `VCTP` is navigable through `pkg/lvvi`; `CONP` resolves to a typed Function TypeDesc whose terminals are enumerated; demo shows a Types panel and a connector-pane diagram | Tag: `v0.8.0`
+
+`VCTP` is already decoded at the wire level by Phase 5.2 but the demo doesn't render it and `CONP` / `CPC2` remain unsurfaced. This phase wires the pieces together — no new codecs, just a richer public API and demo UI.
+
+### 8.1 `pkg/lvvi` type-descriptor model
+
+- [ ] Define `TypeDescriptor` as a Go sum type (or interface hierarchy) covering the VCTP enum set (primitive numerics, strings, arrays, clusters, function, user-defined, …)
+- [ ] Implement `(m *Model) Types() []TypeDescriptor` returning top-level types in VCTP order
+- [ ] Implement `(m *Model) TypeAt(id uint32) TypeDescriptor` for lookups from CONP and DTHP
+- [ ] Extensive unit tests using corpus fixtures already covered by `internal/codecs/vctp`
+
+### 8.2 Connector-pane resolution
+
+- [ ] Helper `(m *Model) ConnectorPane() (ConnectorPane, bool)` that reads `CONP` as a TypeID, resolves it through `VCTP`, and returns a struct with `TerminalCount`, `Terminals []Terminal{Name, Direction, TypeID}`, and the observed CPC2 variant
+- [ ] Tests against every corpus file with CPC2 in {1..4}
+
+### 8.3 Demo integration
+
+- [ ] Info tab: collapsed "Types" sub-card listing the top N VCTP entries (expandable for the full tree)
+- [ ] Info tab: "Connector pane" sub-card rendering the pane as a small SVG using the classic LabVIEW 4-2-2-4 layout based on CPC2 (fall back to generic NxM grid for unfamiliar variants)
+
+---
+
+## Phase 9 — Front-Panel Heap Decoder (`FPHb`)
+
+> Target: 6–10 weeks | Exit: `FPHb` is no longer opaque — its tag stream parses into a typed Go tree that round-trips byte-for-byte on the full corpus; `pkg/lvvi` exposes the decoded front-panel object graph | Tag: `v0.9.0`
+
+This is the structurally largest block still opaque. `pylabview`'s `LVheap.py` is the reference; it's ~2 800 lines of tag-stream and typed-node code. The goal is a Tier 1 (read-only) Go port that parses the envelope and the enumerated node types, preserves unknown payload bytes exactly, and gives the rest of the system a walkable tree.
+
+### 9.1 ZLIB wrapping and envelope
+
+- [ ] Research `HeapVerb` wrapper (references/pylabview/pylabview/LVblock.py:5094) — Zlib decompression applied before heap parsing
+- [ ] Implement the wrapper in `internal/codecs/heap` shared between FPHb and BDHb
+- [ ] Add fuzz target for the envelope parser
+
+### 9.2 Tag-enum system
+
+- [ ] Port `SL_SYSTEM_TAGS`, `OBJ_FIELD_TAGS`, `SL_CLASS_TAGS` (references/pylabview/pylabview/LVheap.py)
+- [ ] Port the ~30 specialised tag enums (plot data, tree nodes, tabs, cursors, digital buses, scales, …) — scope to those actually observed in corpus first
+- [ ] Ship as generated Go code with a regenerator script under `scripts/`
+
+### 9.3 Node types
+
+Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap/nodes`:
+
+- [ ] `HeapNode` base type with attributes + children
+- [ ] `HeapNodeStdInt` (U124 / S24 variable-length encoding)
+- [ ] `HeapNodeTypeId`
+- [ ] `HeapNodeRect`
+- [ ] `HeapNodePoint`
+- [ ] `HeapNodeString`
+- [ ] `HeapNodeBool`
+- [ ] `HeapNodeTDDataFill` and `HeapNodeTDDataFillLeaf`
+- [ ] Opaque-bytes fallback for every node type `pylabview` itself leaves partially decoded
+
+### 9.4 FPHb codec
+
+- [ ] `internal/codecs/fphb` wires the envelope + tag-stream decoder + node types
+- [ ] Tier 1; round-trip verified byte-for-byte on every corpus FPHb section
+- [ ] Validate: detect truncation, unrecognised tags (warning in lenient, error in strict), node arity violations
+- [ ] Extensive fuzz coverage
+
+### 9.5 Public surface
+
+- [ ] `pkg/lvvi.Model` gains `FrontPanel()` returning the decoded tree
+- [ ] `pkg/lvdiff` decoded differ for FPHb (structural, tolerates tag ordering noise)
+
+---
+
+## Phase 10 — Block-Diagram Heap (`BDHb`) & Approximate Render
+
+> Target: 4–6 weeks | Exit: `BDHb` round-trips through the same heap framework; demo shows approximate Front-Panel and Block-Diagram previews; coverage dashboard reports typed support for every corpus FourCC; v1.0 gate cleared | Tag: `v1.0.0`
+
+### 10.1 BDHb codec
+
+- [ ] Reuse the Phase 9 heap framework (tag enums are largely shared — cross-reference `BDHb`/`FPHb` in LVblock.py:5350–5362)
+- [ ] Add BDHb-specific tag subsets (block-diagram primitives, wires, structures) from corpus evidence
+- [ ] Tier 1 round-trip verified
+
+### 10.2 Front-panel and block-diagram render (demo-side)
+
+- [ ] Render a best-effort front-panel preview from the decoded tree: controls, indicators, labels, visible groupings (ignore custom skins / images for v1)
+- [ ] Render a block-diagram overview: structures (while/for/case/sequence), primitives, SubVI references — deliberately skip wire routing in v1
+- [ ] Gracefully degrade for object types the decoder can't reach yet; surface them as opaque placeholder boxes with their tag label
+- [ ] Add a "render fidelity" legend explaining what's approximate
+
+### 10.3 v1.0 acceptance gate
+
+- [ ] `internal/coverage` reports typed codec support for every FourCC observed in the corpus
+- [ ] Per-phase `docs/resources/*.md` up to date; `docs/resource-registry.md` shows all observed types as typed
+- [ ] CLI / API surface frozen; any Tier 2 expansions beyond this phase go through a compat policy update
+- [ ] Demo published with the richer Info / Structure views active
+- [ ] Tick the items in Phase 5.6 and tag `v1.0.0`
 
 ---
 
@@ -366,11 +559,15 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### Release Tags
 
-| Tag       | Content                                            |
-| --------- | -------------------------------------------------- |
-| `v0.1.0`  | parse + inspect + dump + list-resources            |
-| `v0.2.0`  | rewrite + round-trip tests                         |
-| `v0.3.0`  | validate + diff + JSON schemas                     |
-| `v0.4.0`  | metadata editing (set-meta)                        |
-| `v0.5.x+` | typed resource growth                              |
-| `v1.0.0`  | stable API, broad corpus, published support matrix |
+| Tag       | Content                                                                                   |
+| --------- | ----------------------------------------------------------------------------------------- |
+| `v0.1.0`  | parse + inspect + dump + list-resources                                                   |
+| `v0.2.0`  | rewrite + round-trip tests                                                                |
+| `v0.3.0`  | validate + diff + JSON schemas                                                            |
+| `v0.4.0`  | metadata editing (set-meta)                                                               |
+| `v0.5.x+` | typed resource growth (`vers`, `STRG`, icons, `CONP`/`CPC2`, link-info envelopes, `VCTP`) |
+| `v0.6.0`  | small-block completion pass + colour icons + LVSR flags                                   |
+| `v0.7.0`  | rich link graph (`LIvi`, PTH0/PTH1 path refs, typed LinkObjRef family)                    |
+| `v0.8.0`  | VCTP navigation + connector-pane resolution/render                                        |
+| `v0.9.0`  | front-panel heap (`FPHb`) decoder                                                         |
+| `v1.0.0`  | block-diagram heap (`BDHb`), approximate FP/BD render, stable API                         |

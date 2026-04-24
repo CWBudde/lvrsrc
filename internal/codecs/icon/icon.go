@@ -27,13 +27,41 @@ const (
 )
 
 // Value is the decoded form of an icon resource. Pixels are normalized to one
-// byte per pixel regardless of the on-disk bit depth.
+// byte per pixel regardless of the on-disk bit depth; each pixel is an index
+// into Palette. Palette entries are packed ARGB (alpha always 0xFF).
+//
+// Palette is populated from Palette2 / Palette16 / Palette256 depending on
+// bit depth. Encoding ignores Palette entirely: it is purely a read-side
+// convenience for rendering and round-trip-preserved because its contents
+// are redundant with BitsPerPixel.
 type Value struct {
 	FourCC       codecs.FourCC
 	Width        int
 	Height       int
 	BitsPerPixel int
 	Pixels       []byte
+	Palette      []uint32
+}
+
+// RGBA expands Value into a row-major RGBA byte run suitable for handing to
+// a browser canvas, Go's image package, or any other renderer that expects
+// 8-bit RGBA. Output length is Width*Height*4. Each pixel is the four
+// big-endian bytes R,G,B,A extracted from Palette[Pixels[i]] — with alpha
+// pinned to 0xFF. If a Pixels entry is out of Palette range, the emitted
+// pixel is opaque black, so callers never see a panic or undefined bytes.
+func (v Value) RGBA() []byte {
+	out := make([]byte, len(v.Pixels)*4)
+	for i, px := range v.Pixels {
+		var argb uint32
+		if int(px) < len(v.Palette) {
+			argb = v.Palette[px]
+		}
+		out[i*4+0] = byte(argb >> 16)
+		out[i*4+1] = byte(argb >> 8)
+		out[i*4+2] = byte(argb)
+		out[i*4+3] = 0xFF
+	}
+	return out
 }
 
 // MonoCodec implements the "ICON" 1-bit icon resource.
@@ -115,6 +143,7 @@ func decode(s spec, payload []byte) (Value, error) {
 		Height:       Height,
 		BitsPerPixel: s.bitsPerPixel,
 		Pixels:       make([]byte, 0, PixelCount),
+		Palette:      paletteFor(s.bitsPerPixel),
 	}
 
 	switch s.bitsPerPixel {
