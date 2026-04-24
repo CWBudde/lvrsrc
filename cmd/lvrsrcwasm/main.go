@@ -160,6 +160,9 @@ func handleValidate(args []js.Value) (any, error) {
 		return nil, err
 	}
 	issues := file.Validate()
+	if issues == nil {
+		issues = []lvrsrc.Issue{}
+	}
 	warnings, errors := countIssues(issues)
 	return WASMValidationData{
 		Summary: WASMValidationSummary{

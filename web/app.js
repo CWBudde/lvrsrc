@@ -459,13 +459,14 @@ function renderValidation() {
     <div class="validation-pill validation-pill-warning">${validation.summary.warning_count} warnings</div>
     <div class="validation-pill">${validation.summary.issue_count} total issues</div>`;
 
-  if (validation.issues.length === 0) {
+  const issues = validation.issues ?? [];
+  if (issues.length === 0) {
     refs.validationList.innerHTML =
       "<p>This file passed structural validation.</p>";
     return;
   }
 
-  refs.validationList.innerHTML = validation.issues
+  refs.validationList.innerHTML = issues
     .map(
       (issue) => `
         <article class="issue-card issue-${escAttr(issue.severity)}">
