@@ -150,7 +150,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 - [x] Create `internal/golden` harness for golden file tests
 - [x] Run round-trip on all corpus files; assert byte-for-byte equivalence or structural equivalence (see `TestCorpusGolden`; currently 1 byte/file diff is tracked in goldens — see `docs/writer-differences.md`)
-- [ ] Add regression test against Python oracle for block/section counts _(deferred — pylabview infra not yet wired)_
+- [x] Add regression test against Python oracle for block/section counts _(wired 2026-04-24: `scripts/gen-oracle.py` walks `testdata/{corpus,llb}` using locally cloned `references/pylabview`, writes per-file JSON baselines under `testdata/oracle/`; `internal/oracle/oracle_test.go` reads those baselines and asserts `lvrsrc.Open` reports the same `(fourcc, section_count)` inventory. All 22 committed oracles pass. CI stays Go-only — Python is only needed to refresh baselines; see `scripts/README.md`.)_
 - [x] Document any known acceptable differences (regenerated fields) — `docs/writer-differences.md`
 
 ---

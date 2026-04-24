@@ -6,6 +6,8 @@
 
 The library is the primary deliverable. The CLI is built on top of it and provides the same container-aware workflows for day-to-day use, automation, and corpus analysis.
 
+Want a fast browser preview instead? [Explore the live RSRC demo](https://cwbudde.github.io/lvrsrc/).
+
 ## Highlights
 
 - Pure Go parser, validator, writer, and editing stack with no Python runtime dependency
