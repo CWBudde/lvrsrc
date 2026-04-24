@@ -56,6 +56,40 @@ func TestWriteToFileRoundTrip(t *testing.T) {
 	assertEquivalentFile(t, roundTrip, f)
 }
 
+func TestWriteToLibraryRoundTrip(t *testing.T) {
+	data := readLLBFixture(t, "empty-libfile.llb")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	var buf bytes.Buffer
+	if _, err := f.WriteTo(&buf); err != nil {
+		t.Fatalf("WriteTo() error = %v", err)
+	}
+
+	roundTrip, err := lvrsrc.Parse(buf.Bytes(), lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(WriteTo()) error = %v", err)
+	}
+
+	assertEquivalentFile(t, roundTrip, f)
+}
+
+func TestValidateReturnsNoIssuesForValidLibraryFixture(t *testing.T) {
+	data := readLLBFixture(t, "empty-libfile.llb")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	if issues := f.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+}
+
 func TestValidateReturnsNoIssuesForValidFixture(t *testing.T) {
 	data := readFixture(t, "config-data.ctl")
 

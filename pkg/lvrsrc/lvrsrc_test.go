@@ -2,6 +2,7 @@ package lvrsrc_test
 
 import (
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/CWBudde/lvrsrc/internal/corpus"
@@ -66,6 +67,55 @@ func TestOpen(t *testing.T) {
 	}
 }
 
+func TestParseLibraryFixture(t *testing.T) {
+	data := readLLBFixture(t, "empty-libfile.llb")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	if got, want := f.Kind, lvrsrc.FileKindLibrary; got != want {
+		t.Fatalf("Kind = %v, want %v", got, want)
+	}
+	if got, want := f.Header.Type, "LVAR"; got != want {
+		t.Fatalf("Header.Type = %q, want %q", got, want)
+	}
+	if got, want := len(f.Blocks), 8; got != want {
+		t.Fatalf("len(Blocks) = %d, want %d", got, want)
+	}
+	if got, want := f.Blocks[0].Type, "ADir"; got != want {
+		t.Fatalf("Blocks[0].Type = %q, want %q", got, want)
+	}
+
+	resources := f.Resources()
+	if got, want := len(resources), 15; got != want {
+		t.Fatalf("len(Resources()) = %d, want %d", got, want)
+	}
+	if got, want := resources[1].Name, "paletteMenu"; got != want {
+		t.Fatalf("resources[1].Name = %q, want %q", got, want)
+	}
+	if got, want := resources[12].Name, "paletteMenu"; got != want {
+		t.Fatalf("resources[12].Name = %q, want %q", got, want)
+	}
+}
+
+func TestOpenLibraryFixture(t *testing.T) {
+	path := llbFixturePath(t, "empty-libfile.llb")
+
+	f, err := lvrsrc.Open(path, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Open() error = %v", err)
+	}
+
+	if got, want := f.Kind, lvrsrc.FileKindLibrary; got != want {
+		t.Fatalf("Kind = %v, want %v", got, want)
+	}
+	if got, want := f.Blocks[len(f.Blocks)-1].Type, "STR "; got != want {
+		t.Fatalf("last block type = %q, want %q", got, want)
+	}
+}
+
 func TestCloneDeepCopy(t *testing.T) {
 	data := readFixture(t, "config-data.ctl")
 
@@ -108,9 +158,23 @@ func fixturePath(t *testing.T, name string) string {
 	return corpus.Path(name)
 }
 
+func llbFixturePath(t *testing.T, name string) string {
+	t.Helper()
+	return filepath.Join(corpus.Dir(), "..", "llb", name)
+}
+
 func readFixture(t *testing.T, name string) []byte {
 	t.Helper()
 	data, err := os.ReadFile(fixturePath(t, name))
+	if err != nil {
+		t.Fatalf("ReadFile(%q) error = %v", name, err)
+	}
+	return data
+}
+
+func readLLBFixture(t *testing.T, name string) []byte {
+	t.Helper()
+	data, err := os.ReadFile(llbFixturePath(t, name))
 	if err != nil {
 		t.Fatalf("ReadFile(%q) error = %v", name, err)
 	}

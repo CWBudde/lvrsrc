@@ -45,6 +45,31 @@ func TestInspectCommand(t *testing.T) {
 	}
 }
 
+func TestInspectCommandLibraryFixture(t *testing.T) {
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{"inspect", llbFixturePath(t, "empty-libfile.llb")})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
+	}
+
+	out := stdout.String()
+	if !strings.Contains(out, "Kind: Library") {
+		t.Fatalf("inspect output missing library kind: %q", out)
+	}
+	if !strings.Contains(out, "Type: LVAR") {
+		t.Fatalf("inspect output missing library type: %q", out)
+	}
+	if !strings.Contains(out, "- ADir sections=1") {
+		t.Fatalf("inspect output missing ADir block: %q", out)
+	}
+	if stderr.Len() != 0 {
+		t.Fatalf("unexpected stderr: %q", stderr.String())
+	}
+}
+
 func TestDumpJSONCommand(t *testing.T) {
 	stdout := new(bytes.Buffer)
 	stderr := new(bytes.Buffer)
@@ -299,6 +324,47 @@ func TestRewriteCommandRoundTrip(t *testing.T) {
 	}
 }
 
+func TestRewriteCommandLibraryRoundTrip(t *testing.T) {
+	tempDir := t.TempDir()
+	outPath := filepath.Join(tempDir, "rewritten.llb")
+
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{
+		"rewrite",
+		llbFixturePath(t, "empty-libfile.llb"),
+		"--out", outPath,
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
+	}
+
+	written, err := os.ReadFile(outPath)
+	if err != nil {
+		t.Fatalf("ReadFile(out) error = %v", err)
+	}
+
+	f, err := lvrsrc.Parse(written, lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(rewritten) error = %v", err)
+	}
+
+	if issues := f.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+	if got, want := f.Kind, lvrsrc.FileKindLibrary; got != want {
+		t.Fatalf("Kind = %v, want %v", got, want)
+	}
+	if got, want := len(f.Resources()), 15; got != want {
+		t.Fatalf("len(Resources()) = %d, want %d", got, want)
+	}
+	if stderr.Len() != 0 {
+		t.Fatalf("unexpected stderr: %q", stderr.String())
+	}
+}
+
 func TestRewriteCommandCanonicalFlagNotImplemented(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "rewritten.ctl")
@@ -325,6 +391,11 @@ func TestRewriteCommandCanonicalFlagNotImplemented(t *testing.T) {
 func fixturePath(t *testing.T, name string) string {
 	t.Helper()
 	return corpus.Path(name)
+}
+
+func llbFixturePath(t *testing.T, name string) string {
+	t.Helper()
+	return filepath.Join(corpus.Dir(), "..", "llb", name)
 }
 
 func writeWarningFixture(t *testing.T) string {

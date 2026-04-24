@@ -316,10 +316,10 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 5.3 `.llb` Library Support
 
-- [ ] Research LLB container format differences
-- [ ] Implement LLB open/parse in `pkg/lvrsrc`
-- [ ] Add `lvrsrc inspect` support for `.llb` files
-- [ ] Add round-trip tests for LLB files
+- [x] Research LLB container format differences
+- [x] Implement LLB open/parse in `pkg/lvrsrc`
+- [x] Add `lvrsrc inspect` support for `.llb` files
+- [x] Add round-trip tests for LLB files
 
 ### 5.4 Canonical Writer
 

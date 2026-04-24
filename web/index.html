@@ -35,15 +35,23 @@
             <polyline points="17 8 12 3 7 8" />
             <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
-          <p>Drop a <strong>.vi</strong>, <strong>.ctl</strong>, or <strong>.vit</strong> file here</p>
+          <p>
+            Drop a <strong>.vi</strong>, <strong>.ctl</strong>, or
+            <strong>.vit</strong> file here
+          </p>
           <p class="drop-hint">or click to select</p>
-          <input type="file" id="file-input" accept=".vi,.ctl,.vit,.lvlib,.rsrc" hidden />
+          <input
+            type="file"
+            id="file-input"
+            accept=".vi,.ctl,.vit,.lvlib,.rsrc"
+            hidden
+          />
         </div>
       </div>
 
       <div id="loading" class="loading hidden">
         <div class="spinner"></div>
-        <p>Parsing file…</p>
+        <p id="loading-message">Parsing file…</p>
       </div>
 
       <div id="error" class="error hidden">
@@ -52,14 +60,38 @@
 
       <div id="results" class="results hidden">
         <div class="file-header">
-          <h2 id="file-name"></h2>
-          <span id="file-kind" class="badge"></span>
-          <button id="clear-btn" class="btn-clear">Clear</button>
+          <div class="file-header-copy">
+            <h2 id="file-name"></h2>
+            <div class="file-meta-row">
+              <span id="file-kind" class="badge"></span>
+              <span id="file-compression" class="badge"></span>
+              <span id="compare-status" class="subtle-text"></span>
+            </div>
+          </div>
+          <div class="file-actions">
+            <button id="compare-btn" class="btn-clear">Compare</button>
+            <button id="compare-clear-btn" class="btn-clear">
+              Clear Compare
+            </button>
+            <button id="export-json-btn" class="btn-clear">Export JSON</button>
+            <button id="clear-btn" class="btn-clear">Clear</button>
+          </div>
+          <input
+            type="file"
+            id="compare-input"
+            accept=".vi,.ctl,.vit,.lvlib,.rsrc"
+            hidden
+          />
         </div>
+
+        <div id="summary-cards" class="summary-grid"></div>
 
         <div class="tabs">
           <button class="tab active" data-tab="overview">Overview</button>
           <button class="tab" data-tab="resources">Resources</button>
+          <button class="tab" data-tab="validate">Validate</button>
+          <button class="tab" data-tab="json">JSON</button>
+          <button class="tab" data-tab="diff">Diff</button>
         </div>
 
         <div id="tab-overview" class="tab-content active">
@@ -76,15 +108,73 @@
         <div id="tab-resources" class="tab-content">
           <div class="card">
             <h3>Resources</h3>
+            <div class="toolbar">
+              <input
+                id="resource-filter"
+                class="text-input"
+                type="search"
+                placeholder="Filter by type, ID, name, or hex preview"
+              />
+            </div>
             <div id="resources-list"></div>
           </div>
+        </div>
+
+        <div id="tab-validate" class="tab-content">
+          <div class="card">
+            <h3>Validation</h3>
+            <div id="validation-summary" class="pill-row"></div>
+            <div id="validation-list" class="stack-list"></div>
+          </div>
+        </div>
+
+        <div id="tab-json" class="tab-content">
+          <div class="card">
+            <h3>JSON Dump</h3>
+            <pre id="json-output" class="code-block"></pre>
+          </div>
+        </div>
+
+        <div id="tab-diff" class="tab-content">
+          <div class="card">
+            <h3>Diff</h3>
+            <p class="subtle-text">
+              Load a second file to compare its structure against the primary
+              file.
+            </p>
+            <div id="diff-summary" class="pill-row"></div>
+            <div id="diff-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="resource-modal" class="modal hidden">
+        <div class="modal-card">
+          <div class="modal-header">
+            <div>
+              <h3 id="resource-modal-title">Resource</h3>
+              <p id="resource-modal-meta" class="subtle-text"></p>
+            </div>
+            <div class="file-actions">
+              <button id="resource-download-btn" class="btn-clear">
+                Download
+              </button>
+              <button class="btn-clear" data-close-modal>Close</button>
+            </div>
+          </div>
+          <pre
+            id="resource-modal-payload"
+            class="code-block code-block-tight"
+          ></pre>
         </div>
       </div>
 
       <footer>
         <p>
-          <a href="https://github.com/MeKo-Christian/lvrsrc" target="_blank">MeKo-Christian/lvrsrc</a>
-          &mdash; Open source LabVIEW RSRC parser written in Go
+          <a href="https://github.com/CWBudde/lvrsrc" target="_blank"
+            >CWBudde/lvrsrc</a
+          >
+          - Open source LabVIEW RSRC parser written in Go
         </p>
       </footer>
     </div>
