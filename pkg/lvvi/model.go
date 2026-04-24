@@ -4,9 +4,17 @@ import (
 	"fmt"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
+	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
+	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
+	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vpdp"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -257,6 +265,14 @@ func newLvviRegistry() *codecs.Registry {
 	r.Register(strg.Codec{})
 	r.Register(vers.Codec{})
 	r.Register(lvsr.Codec{})
+	r.Register(muid.Codec{})
+	r.Register(fpse.Codec{})
+	r.Register(bdse.Codec{})
+	r.Register(vpdp.Codec{})
+	r.Register(dthp.Codec{})
+	r.Register(rtsg.Codec{})
+	r.Register(libn.Codec{})
+	r.Register(hist.Codec{})
 	return r
 }
 

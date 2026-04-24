@@ -168,7 +168,7 @@ func readBytesArg(v js.Value) []byte {
 
 // typedFourCCs lists FourCCs handled by a typed (non-opaque) codec. The web
 // demo uses this only to flag rows in the resource list; the source of truth
-// is internal/codecs/registry.go.
+// is internal/codecs/registry.go and pkg/lvvi.newLvviRegistry.
 var typedFourCCs = map[string]struct{}{
 	"vers": {},
 	"STRG": {},
@@ -180,6 +180,15 @@ var typedFourCCs = map[string]struct{}{
 	"LIfp": {},
 	"LIbd": {},
 	"VCTP": {},
+	"LVSR": {},
+	"MUID": {},
+	"FPSE": {},
+	"BDSE": {},
+	"VPDP": {},
+	"DTHP": {},
+	"RTSG": {},
+	"LIBN": {},
+	"HIST": {},
 }
 
 func buildResources(file *lvrsrc.File) []WASMResource {
