@@ -56,6 +56,34 @@ func TestWriteToFileRoundTrip(t *testing.T) {
 	assertEquivalentFile(t, roundTrip, f)
 }
 
+func TestWriteCanonicalToFileRoundTrip(t *testing.T) {
+	data := readFixture(t, "config-data.ctl")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	outPath := filepath.Join(t.TempDir(), "canonical.ctl")
+	if err := f.WriteCanonicalToFile(outPath); err != nil {
+		t.Fatalf("WriteCanonicalToFile() error = %v", err)
+	}
+
+	written, err := os.ReadFile(outPath)
+	if err != nil {
+		t.Fatalf("ReadFile(%q) error = %v", outPath, err)
+	}
+
+	roundTrip, err := lvrsrc.Parse(written, lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(written) error = %v", err)
+	}
+
+	if issues := roundTrip.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+}
+
 func TestWriteToLibraryRoundTrip(t *testing.T) {
 	data := readLLBFixture(t, "empty-libfile.llb")
 
@@ -114,6 +142,60 @@ func TestValidateReportsRecoverableHeaderMismatch(t *testing.T) {
 	}
 
 	assertHasIssueCode(t, f.Validate(), "header.mismatch")
+}
+
+func TestWriteCanonicalToRoundTrip(t *testing.T) {
+	data := readFixture(t, "config-data.ctl")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	var buf bytes.Buffer
+	if _, err := f.WriteCanonicalTo(&buf); err != nil {
+		t.Fatalf("WriteCanonicalTo() error = %v", err)
+	}
+
+	roundTrip, err := lvrsrc.Parse(buf.Bytes(), lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(WriteCanonicalTo()) error = %v", err)
+	}
+
+	if issues := roundTrip.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+	if got, want := roundTrip.Kind, lvrsrc.FileKindControl; got != want {
+		t.Fatalf("Kind = %v, want %v", got, want)
+	}
+}
+
+func TestWriteCanonicalToIsStableAcrossRepeatedWrites(t *testing.T) {
+	data := readFixture(t, "config-data.ctl")
+
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	var first bytes.Buffer
+	if _, err := f.WriteCanonicalTo(&first); err != nil {
+		t.Fatalf("WriteCanonicalTo(first) error = %v", err)
+	}
+
+	roundTrip, err := lvrsrc.Parse(first.Bytes(), lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(first) error = %v", err)
+	}
+
+	var second bytes.Buffer
+	if _, err := roundTrip.WriteCanonicalTo(&second); err != nil {
+		t.Fatalf("WriteCanonicalTo(second) error = %v", err)
+	}
+
+	if !bytes.Equal(first.Bytes(), second.Bytes()) {
+		t.Fatal("canonical write is not stable across repeated writes")
+	}
 }
 
 func assertHasIssueCode(t *testing.T, issues []lvrsrc.Issue, want string) {

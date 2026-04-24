@@ -324,9 +324,9 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ### 5.4 Canonical Writer
 
 - [ ] Implement canonical ordering of blocks and sections
-- [ ] Implement canonical padding/alignment policy
-- [ ] Implement deterministic serialization
-- [ ] Add `--canonical` flag to `lvrsrc rewrite`
+- [x] Implement canonical padding/alignment policy
+- [x] Implement deterministic serialization
+- [x] Add `--canonical` flag to `lvrsrc rewrite`
 
 ### 5.5 Repair Command
 

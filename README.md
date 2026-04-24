@@ -38,6 +38,7 @@ lvrsrc list-resources example.vi
 lvrsrc extract example.vi --type BDPW --id 12 --out block.bin
 lvrsrc validate example.vi
 lvrsrc rewrite example.vi --out rewritten.vi
+lvrsrc rewrite example.vi --canonical --out canonical.vi
 lvrsrc set-meta example.vi --description "Updated description" --out edited.vi
 lvrsrc diff before.vi after.vi
 lvrsrc repair damaged.vi --out repaired.vi
@@ -50,7 +51,7 @@ lvrsrc repair damaged.vi --out repaired.vi
 - `list-resources`: compact resource listing by type, id, name, and size
 - `extract`: raw resource or section extraction for reverse-engineering and analysis
 - `validate`: structural and typed validation with human-readable or JSON diagnostics
-- `rewrite`: preserving parse/write round-trip through the library
+- `rewrite`: preserving round-trip by default, with optional deterministic canonical layout via `--canonical`
 - `set-meta`: safe metadata edits such as name, description, version stamps, and other supported low-risk fields
 - `diff`: structural and typed diffs between two files
 - `repair`: normalization and repair-oriented rewrite for files that can be recovered safely
@@ -125,7 +126,7 @@ func main() {
 - Tier 2: typed edits on well-understood resources with post-encode validation
 - Tier 3: explicit unsafe/raw patching for advanced users and experiments
 
-The default workflow is preserving and conservative. Unknown resources are retained exactly, original ordering is preserved where possible, and rewrites recompute only the container structures that must change.
+The default workflow is preserving and conservative. Unknown resources are retained exactly, original ordering is preserved where possible, and rewrites recompute only the container structures that must change. Canonical rewrite is available as an explicit mode for deterministic layout normalization; in this first increment it still preserves the parsed block and section order.
 
 ## Build And Test
 

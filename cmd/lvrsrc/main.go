@@ -239,9 +239,6 @@ func (a *cliApp) newRewriteCmd() *cobra.Command {
 		Short: "Rewrite an RSRC file in preserving mode",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if canonical {
-				return fmt.Errorf("canonical rewrite mode is not implemented yet")
-			}
 			if a.v.GetString("out") == "" {
 				return fmt.Errorf("rewrite requires --out")
 			}
@@ -257,11 +254,15 @@ func (a *cliApp) newRewriteCmd() *cobra.Command {
 			}
 			defer closeFn()
 
-			_, err = file.WriteTo(w)
+			if canonical {
+				_, err = file.WriteCanonicalTo(w)
+			} else {
+				_, err = file.WriteTo(w)
+			}
 			return err
 		},
 	}
-	cmd.Flags().BoolVar(&canonical, "canonical", false, "rewrite using future canonical writer mode")
+	cmd.Flags().BoolVar(&canonical, "canonical", false, "rewrite using deterministic canonical layout while preserving parsed block and section order")
 	return cmd
 }
 

@@ -365,7 +365,7 @@ func TestRewriteCommandLibraryRoundTrip(t *testing.T) {
 	}
 }
 
-func TestRewriteCommandCanonicalFlagNotImplemented(t *testing.T) {
+func TestRewriteCommandCanonicalRoundTrip(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "rewritten.ctl")
 
@@ -379,12 +379,44 @@ func TestRewriteCommandCanonicalFlagNotImplemented(t *testing.T) {
 		"--canonical",
 	})
 
-	err := cmd.Execute()
-	if err == nil {
-		t.Fatal("Execute() error = nil, want non-nil")
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
 	}
-	if !strings.Contains(err.Error(), "canonical") {
-		t.Fatalf("Execute() error = %q, want canonical message", err)
+
+	written, err := os.ReadFile(outPath)
+	if err != nil {
+		t.Fatalf("ReadFile(out) error = %v", err)
+	}
+
+	f, err := lvrsrc.Parse(written, lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(rewritten) error = %v", err)
+	}
+
+	if issues := f.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+
+	outPath2 := filepath.Join(tempDir, "rewritten-2.ctl")
+	cmd = newRootCmd(new(bytes.Buffer), new(bytes.Buffer))
+	cmd.SetArgs([]string{
+		"rewrite",
+		outPath,
+		"--out", outPath2,
+		"--canonical",
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute(second) error = %v", err)
+	}
+
+	written2, err := os.ReadFile(outPath2)
+	if err != nil {
+		t.Fatalf("ReadFile(out2) error = %v", err)
+	}
+
+	if !bytes.Equal(written, written2) {
+		t.Fatal("canonical rewrite is not stable across repeated rewrites")
 	}
 }
 

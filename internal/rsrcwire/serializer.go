@@ -9,8 +9,25 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/binaryx"
 )
 
+type serializeMode uint8
+
+const (
+	serializeModePreserving serializeMode = iota
+	serializeModeCanonical
+)
+
 // Serialize encodes f back to RSRC wire format while preserving opaque data.
 func Serialize(f *File) ([]byte, error) {
+	return serialize(f, serializeModePreserving)
+}
+
+// SerializeCanonical encodes f using deterministic layout rules while preserving
+// the parsed block and section order.
+func SerializeCanonical(f *File) ([]byte, error) {
+	return serialize(f, serializeModeCanonical)
+}
+
+func serialize(f *File, mode serializeMode) ([]byte, error) {
 	if f == nil {
 		return nil, fmt.Errorf("serialize file: nil file")
 	}
@@ -20,7 +37,7 @@ func Serialize(f *File) ([]byte, error) {
 		return nil, err
 	}
 
-	nameTable, nameOffsets, err := serializeNames(f)
+	nameTable, nameOffsets, err := serializeNames(f, mode)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +165,14 @@ func serializeDataRegion(blocks []Block) ([]byte, [][]uint32, error) {
 	return buf.Bytes(), offsets, nil
 }
 
-func serializeNames(f *File) ([]byte, map[uint32]uint32, error) {
+func serializeNames(f *File, mode serializeMode) ([]byte, map[uint32]uint32, error) {
+	if mode == serializeModeCanonical {
+		return serializeNamesCanonical(f)
+	}
+	return serializeNamesPreserving(f)
+}
+
+func serializeNamesPreserving(f *File) ([]byte, map[uint32]uint32, error) {
 	type nameValue struct {
 		offset uint32
 		value  string
@@ -232,6 +256,77 @@ func serializeNames(f *File) ([]byte, map[uint32]uint32, error) {
 		}
 		offsetMap[entry.offset] = offset
 		offset += uint32(1 + len(entry.value))
+	}
+
+	return table.Bytes(), offsetMap, nil
+}
+
+func serializeNamesCanonical(f *File) ([]byte, map[uint32]uint32, error) {
+	values := make(map[uint32]string, len(f.Names))
+	for _, entry := range f.Names {
+		values[entry.Offset] = entry.Value
+	}
+
+	orderedOffsets := make([]uint32, 0, len(f.Names))
+	seenOffsets := make(map[uint32]struct{}, len(f.Names))
+	canonicalValues := make(map[uint32]string, len(f.Names))
+
+	for bi, block := range f.Blocks {
+		for si, section := range block.Sections {
+			if section.NameOffset == noNameOffset {
+				continue
+			}
+
+			value := section.Name
+			if value == "" {
+				var ok bool
+				value, ok = values[section.NameOffset]
+				if !ok {
+					return nil, nil, fmt.Errorf("serialize block %d section %d: missing name for offset %d", bi, si, section.NameOffset)
+				}
+			}
+
+			if existing, ok := canonicalValues[section.NameOffset]; ok && existing != value {
+				return nil, nil, fmt.Errorf(
+					"serialize block %d section %d: conflicting names for offset %d (%q != %q)",
+					bi,
+					si,
+					section.NameOffset,
+					existing,
+					value,
+				)
+			}
+			canonicalValues[section.NameOffset] = value
+
+			if _, ok := seenOffsets[section.NameOffset]; ok {
+				continue
+			}
+			seenOffsets[section.NameOffset] = struct{}{}
+			orderedOffsets = append(orderedOffsets, section.NameOffset)
+		}
+	}
+
+	if len(orderedOffsets) == 0 {
+		return nil, map[uint32]uint32{}, nil
+	}
+
+	table := bytes.NewBuffer(make([]byte, 0, len(orderedOffsets)*8))
+	offsetMap := make(map[uint32]uint32, len(orderedOffsets))
+	var nextOffset uint32
+
+	for _, originalOffset := range orderedOffsets {
+		value := canonicalValues[originalOffset]
+		if len(value) > 255 {
+			return nil, nil, fmt.Errorf("serialize canonical name at offset %d: string too long (%d)", originalOffset, len(value))
+		}
+		if err := table.WriteByte(byte(len(value))); err != nil {
+			return nil, nil, fmt.Errorf("serialize canonical name at offset %d: %w", originalOffset, err)
+		}
+		if _, err := table.WriteString(value); err != nil {
+			return nil, nil, fmt.Errorf("serialize canonical name at offset %d: %w", originalOffset, err)
+		}
+		offsetMap[originalOffset] = nextOffset
+		nextOffset += uint32(1 + len(value))
 	}
 
 	return table.Bytes(), offsetMap, nil

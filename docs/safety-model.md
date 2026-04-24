@@ -8,3 +8,7 @@
 
 Core rule: unknown sections are preserved byte-for-byte unless a mode explicitly
 allows canonicalization.
+
+Current canonicalization scope is intentionally narrow: it normalizes layout
+deterministically (offsets, compact referenced-name table, 4-byte zero padding)
+while preserving the parsed block and section order.

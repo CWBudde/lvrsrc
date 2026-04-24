@@ -358,6 +358,70 @@ func TestSerializeRecomputesOffsetsForModifiedPayloads(t *testing.T) {
 	}
 }
 
+func TestSerializeCanonicalCompactsReferencedNamesDeterministically(t *testing.T) {
+	data := buildSyntheticRSRC(t)
+
+	f, err := Parse(data)
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	f.Names = []NameEntry{
+		{Offset: 0, Value: "alpha", Consumed: 6},
+		{Offset: 32, Value: "unused", Consumed: 7},
+		{Offset: 40, Value: "beta!", Consumed: 6},
+	}
+	f.Blocks[0].Sections[0].NameOffset = 0
+	f.Blocks[0].Sections[1].NameOffset = 40
+
+	canonical, err := SerializeCanonical(f)
+	if err != nil {
+		t.Fatalf("SerializeCanonical() error = %v", err)
+	}
+
+	roundTrip, err := Parse(canonical)
+	if err != nil {
+		t.Fatalf("Parse(SerializeCanonical()) error = %v", err)
+	}
+
+	if got, want := len(roundTrip.Names), 2; got != want {
+		t.Fatalf("len(Names) = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Names[0].Offset, uint32(0); got != want {
+		t.Fatalf("Names[0].Offset = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Names[1].Offset, uint32(6); got != want {
+		t.Fatalf("Names[1].Offset = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Names[0].Value, "alpha"; got != want {
+		t.Fatalf("Names[0].Value = %q, want %q", got, want)
+	}
+	if got, want := roundTrip.Names[1].Value, "beta!"; got != want {
+		t.Fatalf("Names[1].Value = %q, want %q", got, want)
+	}
+	if got, want := roundTrip.Blocks[0].Sections[0].NameOffset, uint32(0); got != want {
+		t.Fatalf("Sections[0].NameOffset = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Blocks[0].Sections[1].NameOffset, uint32(6); got != want {
+		t.Fatalf("Sections[1].NameOffset = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Blocks[0].Sections[0].Index, int32(0); got != want {
+		t.Fatalf("Sections[0].Index = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Blocks[0].Sections[1].Index, int32(7); got != want {
+		t.Fatalf("Sections[1].Index = %d, want %d", got, want)
+	}
+
+	canonicalAgain, err := SerializeCanonical(roundTrip)
+	if err != nil {
+		t.Fatalf("SerializeCanonical(roundTrip) error = %v", err)
+	}
+
+	if !bytes.Equal(canonicalAgain, canonical) {
+		t.Fatalf("SerializeCanonical() is not stable across rewrites")
+	}
+}
+
 func buildSyntheticRSRC(t *testing.T) []byte {
 	t.Helper()
 

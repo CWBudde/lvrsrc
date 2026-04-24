@@ -22,11 +22,27 @@ type (
 )
 
 func (f *File) WriteTo(w io.Writer) (int64, error) {
+	return f.writeTo(w, false)
+}
+
+func (f *File) WriteCanonicalTo(w io.Writer) (int64, error) {
+	return f.writeTo(w, true)
+}
+
+func (f *File) writeTo(w io.Writer, canonical bool) (int64, error) {
 	if f == nil {
 		return 0, nil
 	}
 
-	data, err := rsrcwire.Serialize(toWireFile(f))
+	var (
+		data []byte
+		err  error
+	)
+	if canonical {
+		data, err = rsrcwire.SerializeCanonical(toWireFile(f))
+	} else {
+		data, err = rsrcwire.Serialize(toWireFile(f))
+	}
 	if err != nil {
 		return 0, err
 	}
@@ -35,11 +51,27 @@ func (f *File) WriteTo(w io.Writer) (int64, error) {
 }
 
 func (f *File) WriteToFile(path string) error {
+	return f.writeToFile(path, false)
+}
+
+func (f *File) WriteCanonicalToFile(path string) error {
+	return f.writeToFile(path, true)
+}
+
+func (f *File) writeToFile(path string, canonical bool) error {
 	if f == nil {
 		return nil
 	}
 
-	data, err := rsrcwire.Serialize(toWireFile(f))
+	var (
+		data []byte
+		err  error
+	)
+	if canonical {
+		data, err = rsrcwire.SerializeCanonical(toWireFile(f))
+	} else {
+		data, err = rsrcwire.Serialize(toWireFile(f))
+	}
 	if err != nil {
 		return err
 	}
