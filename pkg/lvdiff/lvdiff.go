@@ -119,10 +119,6 @@ func Files(a, b *lvrsrc.File) *Diff {
 // FilesWithOptions returns the structural diff between a and b using the
 // supplied options.
 func FilesWithOptions(a, b *lvrsrc.File, opts Options) *Diff {
-	if opts.DecodedDiffers == nil {
-		opts.DecodedDiffers = defaultDecodedDiffers()
-	}
-
 	d := &Diff{}
 
 	switch {
@@ -144,6 +140,12 @@ func FilesWithOptions(a, b *lvrsrc.File, opts Options) *Diff {
 			Message:  "file removed (nil on right)",
 		})
 		return d
+	}
+
+	// Build default decoded differs after the nil-file guard so per-file
+	// codecs.Context values can be derived from both sides.
+	if opts.DecodedDiffers == nil {
+		opts.DecodedDiffers = defaultDecodedDiffers(a, b)
 	}
 
 	diffHeaders(a, b, d)

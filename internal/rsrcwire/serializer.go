@@ -32,20 +32,25 @@ func serialize(f *File, mode serializeMode) ([]byte, error) {
 		return nil, fmt.Errorf("serialize file: nil file")
 	}
 
-	dataRegion, sectionDataOffsets, err := serializeDataRegion(f.Blocks)
+	blocks := f.Blocks
+	if mode == serializeModeCanonical {
+		blocks = canonicalizeBlocks(f)
+	}
+
+	dataRegion, sectionDataOffsets, err := serializeDataRegion(blocks)
 	if err != nil {
 		return nil, err
 	}
 
-	nameTable, nameOffsets, err := serializeNames(f, mode)
+	nameTable, nameOffsets, err := serializeNames(f, blocks, mode)
 	if err != nil {
 		return nil, err
 	}
 
 	blockInfoOffset := uint32(headerSize + listHeaderSize)
-	blockHeadersSize := len(f.Blocks) * blockHeaderSize
+	blockHeadersSize := len(blocks) * blockHeaderSize
 	sectionsSize := 0
-	for _, block := range f.Blocks {
+	for _, block := range blocks {
 		if len(block.Sections) == 0 {
 			return nil, fmt.Errorf("serialize block %q: empty section list", block.Type)
 		}
@@ -81,13 +86,13 @@ func serialize(f *File, mode serializeMode) ([]byte, error) {
 		}
 	}
 
-	blockCountMinusOne := uint32(len(f.Blocks) - 1)
+	blockCountMinusOne := uint32(len(blocks) - 1)
 	if err := binary.Write(full, binary.BigEndian, blockCountMinusOne); err != nil {
 		return nil, fmt.Errorf("write block count: %w", err)
 	}
 
 	nextBlockOffset := uint32(blockInfoSize + blockHeadersSize)
-	for i, block := range f.Blocks {
+	for i, block := range blocks {
 		if len(block.Type) != 4 {
 			return nil, fmt.Errorf("serialize block %d: type %q must be 4 bytes", i, block.Type)
 		}
@@ -104,7 +109,7 @@ func serialize(f *File, mode serializeMode) ([]byte, error) {
 		nextBlockOffset += uint32(len(block.Sections) * sectionStartSize)
 	}
 
-	for bi, block := range f.Blocks {
+	for bi, block := range blocks {
 		for si, section := range block.Sections {
 			nameOffset := section.NameOffset
 			if nameOffset != noNameOffset {
@@ -139,6 +144,141 @@ func serialize(f *File, mode serializeMode) ([]byte, error) {
 	return full.Bytes(), nil
 }
 
+func canonicalizeBlocks(f *File) []Block {
+	if len(f.Blocks) == 0 {
+		return nil
+	}
+
+	nameValues := make(map[uint32]string, len(f.Names))
+	for _, entry := range f.Names {
+		nameValues[entry.Offset] = entry.Value
+	}
+
+	blocks := make([]Block, len(f.Blocks))
+	for i, block := range f.Blocks {
+		blocks[i] = Block{
+			Type:                 block.Type,
+			SectionCountMinusOne: block.SectionCountMinusOne,
+			Offset:               block.Offset,
+		}
+		if len(block.Sections) == 0 {
+			continue
+		}
+		blocks[i].Sections = make([]Section, len(block.Sections))
+		copy(blocks[i].Sections, block.Sections)
+		sort.SliceStable(blocks[i].Sections, func(a, b int) bool {
+			left := blocks[i].Sections[a]
+			right := blocks[i].Sections[b]
+			if left.Index != right.Index {
+				return left.Index < right.Index
+			}
+
+			leftName := canonicalSectionName(left, nameValues)
+			rightName := canonicalSectionName(right, nameValues)
+			if leftName != rightName {
+				return leftName < rightName
+			}
+
+			if cmp := bytes.Compare(left.Payload, right.Payload); cmp != 0 {
+				return cmp < 0
+			}
+			return false
+		})
+	}
+
+	sort.SliceStable(blocks, func(i, j int) bool {
+		leftRank := canonicalBlockRank(blocks[i].Type)
+		rightRank := canonicalBlockRank(blocks[j].Type)
+		if leftRank != rightRank {
+			return leftRank < rightRank
+		}
+		return blocks[i].Type < blocks[j].Type
+	})
+
+	return blocks
+}
+
+func canonicalSectionName(section Section, values map[uint32]string) string {
+	if section.Name != "" {
+		return section.Name
+	}
+	if section.NameOffset == noNameOffset {
+		return ""
+	}
+	return values[section.NameOffset]
+}
+
+func canonicalBlockRank(blockType string) int {
+	switch blockType {
+	case "ADir":
+		return 0
+	case "LIBN":
+		return 10
+	case "LVSR":
+		return 20
+	case "RTSG":
+		return 30
+	case "LIvi":
+		return 40
+	case "vers":
+		return 50
+	case "CONP":
+		return 60
+	case "BDPW":
+		return 70
+	case "STRG":
+		return 80
+	case "PALM":
+		return 90
+	case "PLM2":
+		return 100
+	case "CPST":
+		return 110
+	case "ICON":
+		return 120
+	case "icl4":
+		return 121
+	case "icl8":
+		return 122
+	case "CPC2":
+		return 130
+	case "LIfp":
+		return 140
+	case "FPEx":
+		return 150
+	case "FPHb":
+		return 151
+	case "FPSE":
+		return 152
+	case "VPDP":
+		return 153
+	case "LIbd":
+		return 160
+	case "BDEx":
+		return 170
+	case "BDHb":
+		return 171
+	case "BDSE":
+		return 172
+	case "VITS":
+		return 180
+	case "DTHP":
+		return 190
+	case "MUID":
+		return 200
+	case "HIST":
+		return 210
+	case "VCTP":
+		return 220
+	case "FTAB":
+		return 230
+	case "STR ":
+		return 240
+	default:
+		return 1000
+	}
+}
+
 func serializeDataRegion(blocks []Block) ([]byte, [][]uint32, error) {
 	buf := bytes.NewBuffer(nil)
 	offsets := make([][]uint32, len(blocks))
@@ -165,14 +305,14 @@ func serializeDataRegion(blocks []Block) ([]byte, [][]uint32, error) {
 	return buf.Bytes(), offsets, nil
 }
 
-func serializeNames(f *File, mode serializeMode) ([]byte, map[uint32]uint32, error) {
+func serializeNames(f *File, blocks []Block, mode serializeMode) ([]byte, map[uint32]uint32, error) {
 	if mode == serializeModeCanonical {
-		return serializeNamesCanonical(f)
+		return serializeNamesCanonical(f, blocks)
 	}
-	return serializeNamesPreserving(f)
+	return serializeNamesPreserving(f, blocks)
 }
 
-func serializeNamesPreserving(f *File) ([]byte, map[uint32]uint32, error) {
+func serializeNamesPreserving(f *File, blocks []Block) ([]byte, map[uint32]uint32, error) {
 	type nameValue struct {
 		offset uint32
 		value  string
@@ -183,7 +323,7 @@ func serializeNamesPreserving(f *File) ([]byte, map[uint32]uint32, error) {
 		values[entry.Offset] = entry.Value
 	}
 
-	for bi, block := range f.Blocks {
+	for bi, block := range blocks {
 		for si, section := range block.Sections {
 			if section.NameOffset == noNameOffset {
 				continue
@@ -261,7 +401,7 @@ func serializeNamesPreserving(f *File) ([]byte, map[uint32]uint32, error) {
 	return table.Bytes(), offsetMap, nil
 }
 
-func serializeNamesCanonical(f *File) ([]byte, map[uint32]uint32, error) {
+func serializeNamesCanonical(f *File, blocks []Block) ([]byte, map[uint32]uint32, error) {
 	values := make(map[uint32]string, len(f.Names))
 	for _, entry := range f.Names {
 		values[entry.Offset] = entry.Value
@@ -271,7 +411,7 @@ func serializeNamesCanonical(f *File) ([]byte, map[uint32]uint32, error) {
 	seenOffsets := make(map[uint32]struct{}, len(f.Names))
 	canonicalValues := make(map[uint32]string, len(f.Names))
 
-	for bi, block := range f.Blocks {
+	for bi, block := range blocks {
 		for si, section := range block.Sections {
 			if section.NameOffset == noNameOffset {
 				continue

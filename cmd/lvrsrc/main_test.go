@@ -420,6 +420,115 @@ func TestRewriteCommandCanonicalRoundTrip(t *testing.T) {
 	}
 }
 
+func TestRewriteCommandCanonicalLibraryRoundTrip(t *testing.T) {
+	tempDir := t.TempDir()
+	outPath := filepath.Join(tempDir, "rewritten.llb")
+
+	cmd := newRootCmd(new(bytes.Buffer), new(bytes.Buffer))
+	cmd.SetArgs([]string{
+		"rewrite",
+		llbFixturePath(t, "empty-libfile.llb"),
+		"--out", outPath,
+		"--canonical",
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
+	}
+
+	written, err := os.ReadFile(outPath)
+	if err != nil {
+		t.Fatalf("ReadFile(out) error = %v", err)
+	}
+
+	f, err := lvrsrc.Parse(written, lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(rewritten) error = %v", err)
+	}
+	if issues := f.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+	if got, want := f.Kind, lvrsrc.FileKindLibrary; got != want {
+		t.Fatalf("Kind = %v, want %v", got, want)
+	}
+
+	outPath2 := filepath.Join(tempDir, "rewritten-2.llb")
+	cmd = newRootCmd(new(bytes.Buffer), new(bytes.Buffer))
+	cmd.SetArgs([]string{
+		"rewrite",
+		outPath,
+		"--out", outPath2,
+		"--canonical",
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute(second) error = %v", err)
+	}
+
+	written2, err := os.ReadFile(outPath2)
+	if err != nil {
+		t.Fatalf("ReadFile(out2) error = %v", err)
+	}
+
+	if !bytes.Equal(written, written2) {
+		t.Fatal("canonical library rewrite is not stable across repeated rewrites")
+	}
+}
+
+func TestRepairCommandRepairsHeaderMismatch(t *testing.T) {
+	path := writeErrorFixture(t)
+	outPath := filepath.Join(t.TempDir(), "repaired.ctl")
+
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{
+		"repair",
+		path,
+		"--out", outPath,
+	})
+
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
+	}
+
+	written, err := os.ReadFile(outPath)
+	if err != nil {
+		t.Fatalf("ReadFile(out) error = %v", err)
+	}
+
+	f, err := lvrsrc.Parse(written, lvrsrc.OpenOptions{Strict: true})
+	if err != nil {
+		t.Fatalf("Parse(repaired) error = %v", err)
+	}
+	if issues := f.Validate(); len(issues) != 0 {
+		t.Fatalf("Validate() issues = %+v, want none", issues)
+	}
+	if stderr.Len() != 0 {
+		t.Fatalf("unexpected stderr: %q", stderr.String())
+	}
+}
+
+func TestRepairCommandRefusesUnresolvedTruncatedNameTable(t *testing.T) {
+	path := writeMissingNameFixture(t)
+	outPath := filepath.Join(t.TempDir(), "repaired.ctl")
+
+	cmd := newRootCmd(new(bytes.Buffer), new(bytes.Buffer))
+	cmd.SetArgs([]string{
+		"repair",
+		path,
+		"--out", outPath,
+	})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("Execute() error = nil, want non-nil")
+	}
+	if !strings.Contains(err.Error(), "missing section name") {
+		t.Fatalf("Execute() error = %q, want missing-name refusal", err)
+	}
+}
+
 func fixturePath(t *testing.T, name string) string {
 	t.Helper()
 	return corpus.Path(name)
@@ -469,4 +578,45 @@ func writeErrorFixture(t *testing.T) string {
 		t.Fatalf("WriteFile() error = %v", err)
 	}
 	return path
+}
+
+func writeMissingNameFixture(t *testing.T) string {
+	t.Helper()
+
+	data, err := os.ReadFile(fixturePath(t, "config-data.ctl"))
+	if err != nil {
+		t.Fatalf("ReadFile() error = %v", err)
+	}
+
+	f, err := rsrcwire.Parse(data)
+	if err != nil {
+		t.Fatalf("Parse() error = %v", err)
+	}
+
+	blockIndex, sectionIndex, ok := firstNamedSection(t, f)
+	if !ok {
+		t.Fatal("fixture has no named sections")
+	}
+
+	blockInfoPos := int(f.Header.InfoOffset + f.BlockInfoList.BlockInfoOffset)
+	sectionPos := blockInfoPos + int(f.Blocks[blockIndex].Offset) + sectionIndex*20
+	binary.BigEndian.PutUint32(data[sectionPos+4:], f.Header.InfoSize)
+
+	path := filepath.Join(t.TempDir(), "missing-name.ctl")
+	if err := os.WriteFile(path, data, 0o644); err != nil {
+		t.Fatalf("WriteFile() error = %v", err)
+	}
+	return path
+}
+
+func firstNamedSection(t *testing.T, f *rsrcwire.File) (int, int, bool) {
+	t.Helper()
+	for bi, block := range f.Blocks {
+		for si, section := range block.Sections {
+			if section.NameOffset != ^uint32(0) {
+				return bi, si, true
+			}
+		}
+	}
+	return 0, 0, false
 }

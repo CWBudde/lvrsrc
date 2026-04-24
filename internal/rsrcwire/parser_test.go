@@ -422,6 +422,118 @@ func TestSerializeCanonicalCompactsReferencedNamesDeterministically(t *testing.T
 	}
 }
 
+func TestSerializeCanonicalReordersBlocksAndSections(t *testing.T) {
+	f := &File{
+		Header: Header{
+			Magic:         "RSRC\r\n",
+			FormatVersion: 3,
+			Type:          "LVIN",
+			Creator:       "LBVW",
+		},
+		SecondaryHeader: Header{
+			Magic:         "RSRC\r\n",
+			FormatVersion: 3,
+			Type:          "LVIN",
+			Creator:       "LBVW",
+		},
+		BlockInfoList: BlockInfoList{DatasetInt3: headerSize},
+		RawTail:       []byte{0xaa, 0xbb},
+		Blocks: []Block{
+			{
+				Type: "VCTP",
+				Sections: []Section{
+					{Index: 0, NameOffset: noNameOffset, Payload: []byte("z")},
+					{Index: 0, NameOffset: noNameOffset, Payload: []byte("a")},
+				},
+			},
+			{
+				Type: "LIBN",
+				Sections: []Section{
+					{Index: 5, NameOffset: 20, Name: "zeta", Payload: []byte("b")},
+					{Index: 1, NameOffset: 0, Name: "middle", Payload: []byte("a")},
+					{Index: 5, NameOffset: 40, Name: "alpha", Payload: []byte("c")},
+				},
+			},
+			{
+				Type: "ICON",
+				Sections: []Section{
+					{Index: 0, NameOffset: noNameOffset, Payload: bytes.Repeat([]byte{0x01}, 128)},
+				},
+			},
+			{
+				Type: "CPC2",
+				Sections: []Section{
+					{Index: 0, NameOffset: noNameOffset, Payload: []byte{0x00, 0x04}},
+				},
+			},
+		},
+		Names: []NameEntry{
+			{Offset: 0, Value: "middle", Consumed: 7},
+			{Offset: 20, Value: "zeta", Consumed: 5},
+			{Offset: 40, Value: "alpha", Consumed: 6},
+			{Offset: 60, Value: "unused", Consumed: 7},
+		},
+	}
+
+	canonical, err := SerializeCanonical(f)
+	if err != nil {
+		t.Fatalf("SerializeCanonical() error = %v", err)
+	}
+
+	roundTrip, err := Parse(canonical)
+	if err != nil {
+		t.Fatalf("Parse(SerializeCanonical()) error = %v", err)
+	}
+
+	if got, want := len(roundTrip.Blocks), 4; got != want {
+		t.Fatalf("len(Blocks) = %d, want %d", got, want)
+	}
+	if got, want := roundTrip.Blocks[0].Type, "LIBN"; got != want {
+		t.Fatalf("Blocks[0].Type = %q, want %q", got, want)
+	}
+	if got, want := roundTrip.Blocks[1].Type, "ICON"; got != want {
+		t.Fatalf("Blocks[1].Type = %q, want %q", got, want)
+	}
+	if got, want := roundTrip.Blocks[2].Type, "CPC2"; got != want {
+		t.Fatalf("Blocks[2].Type = %q, want %q", got, want)
+	}
+	if got, want := roundTrip.Blocks[3].Type, "VCTP"; got != want {
+		t.Fatalf("Blocks[3].Type = %q, want %q", got, want)
+	}
+
+	libn := roundTrip.Blocks[0]
+	if got, want := len(libn.Sections), 3; got != want {
+		t.Fatalf("len(LIBN.Sections) = %d, want %d", got, want)
+	}
+	if got, want := libn.Sections[0].Index, int32(1); got != want {
+		t.Fatalf("LIBN.Sections[0].Index = %d, want %d", got, want)
+	}
+	if got, want := libn.Sections[0].Name, "middle"; got != want {
+		t.Fatalf("LIBN.Sections[0].Name = %q, want %q", got, want)
+	}
+	if got, want := libn.Sections[1].Name, "alpha"; got != want {
+		t.Fatalf("LIBN.Sections[1].Name = %q, want %q", got, want)
+	}
+	if got, want := libn.Sections[2].Name, "zeta"; got != want {
+		t.Fatalf("LIBN.Sections[2].Name = %q, want %q", got, want)
+	}
+
+	vctp := roundTrip.Blocks[3]
+	if got, want := string(vctp.Sections[0].Payload), "a"; got != want {
+		t.Fatalf("VCTP.Sections[0].Payload = %q, want %q", got, want)
+	}
+	if got, want := string(vctp.Sections[1].Payload), "z"; got != want {
+		t.Fatalf("VCTP.Sections[1].Payload = %q, want %q", got, want)
+	}
+
+	if got, want := len(roundTrip.Names), 3; got != want {
+		t.Fatalf("len(Names) = %d, want %d", got, want)
+	}
+	if !bytes.Equal(roundTrip.RawTail, f.RawTail) {
+		t.Fatalf("RawTail = %x, want %x", roundTrip.RawTail, f.RawTail)
+	}
+}
+
 func buildSyntheticRSRC(t *testing.T) []byte {
 	t.Helper()
 

@@ -54,7 +54,7 @@ lvrsrc repair damaged.vi --out repaired.vi
 - `rewrite`: preserving round-trip by default, with optional deterministic canonical layout via `--canonical`
 - `set-meta`: safe metadata edits such as name, description, version stamps, and other supported low-risk fields
 - `diff`: structural and typed diffs between two files
-- `repair`: normalization and repair-oriented rewrite for files that can be recovered safely
+- `repair`: conservative structural repair for files that already parse leniently, followed by strict post-write validation
 
 ### Configuration
 
@@ -126,7 +126,9 @@ func main() {
 - Tier 2: typed edits on well-understood resources with post-encode validation
 - Tier 3: explicit unsafe/raw patching for advanced users and experiments
 
-The default workflow is preserving and conservative. Unknown resources are retained exactly, original ordering is preserved where possible, and rewrites recompute only the container structures that must change. Canonical rewrite is available as an explicit mode for deterministic layout normalization; in this first increment it still preserves the parsed block and section order.
+The default workflow is preserving and conservative. Unknown resources are retained exactly, original ordering is preserved where possible, and rewrites recompute only the container structures that must change. Canonical rewrite is available as an explicit mode for deterministic layout and ordering normalization; it now applies a corpus-guided block order, canonical section ordering within each block, and still preserves opaque `RawTail` bytes for safety.
+
+Repair is narrower than rewrite: it only operates on files that already parse in lenient mode, it does not guess missing names or payloads, and it only succeeds if the written output re-parses strictly with zero validation errors.
 
 ## Build And Test
 

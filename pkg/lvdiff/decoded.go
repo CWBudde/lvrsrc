@@ -15,14 +15,28 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
+
+// contextFromFile derives the per-file codec Context used when invoking
+// typed codecs during a diff. It mirrors pkg/lvmeta.contextFromFile so the
+// two dispatch paths agree on how FormatVersion and Kind reach codecs.
+func contextFromFile(f *lvrsrc.File) codecs.Context {
+	if f == nil {
+		return codecs.Context{}
+	}
+	return codecs.Context{
+		FileVersion: f.Header.FormatVersion,
+		Kind:        f.Kind,
+	}
+}
 
 type blobSummary struct {
 	Size int    `json:"size"`
 	Hash string `json:"hash"`
 }
 
-func defaultDecodedDiffers() map[string]DecodedDiffer {
+func defaultDecodedDiffers(a, b *lvrsrc.File) map[string]DecodedDiffer {
 	r := codecs.New()
 	r.Register(conpane.PointerCodec{})
 	r.Register(conpane.CountCodec{})
@@ -35,19 +49,22 @@ func defaultDecodedDiffers() map[string]DecodedDiffer {
 	r.Register(vers.Codec{})
 	r.Register(vctp.Codec{})
 
+	aCtx := contextFromFile(a)
+	bCtx := contextFromFile(b)
+
 	out := make(map[string]DecodedDiffer)
 	for _, cap := range r.Capabilities() {
 		codec := r.Lookup(cap.FourCC)
-		out[cap.FourCC] = makeCodecDiffer(codec)
+		out[cap.FourCC] = makeCodecDiffer(codec, aCtx, bCtx)
 	}
 	return out
 }
 
-func makeCodecDiffer(codec codecs.ResourceCodec) DecodedDiffer {
+func makeCodecDiffer(codec codecs.ResourceCodec, aCtx, bCtx codecs.Context) DecodedDiffer {
 	return func(blockType string, sectionIndex int32, oldPayload, newPayload []byte) []DiffItem {
 		prefix := fmt.Sprintf("blocks.%s/%d.decoded", blockType, sectionIndex)
-		oldValue, oldErr := codec.Decode(codecs.Context{}, oldPayload)
-		newValue, newErr := codec.Decode(codecs.Context{}, newPayload)
+		oldValue, oldErr := codec.Decode(aCtx, oldPayload)
+		newValue, newErr := codec.Decode(bCtx, newPayload)
 		switch {
 		case oldErr == nil && newErr == nil:
 			return diffDecodedValues(prefix, reflect.ValueOf(oldValue), reflect.ValueOf(newValue))

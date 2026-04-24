@@ -9,6 +9,11 @@
 Core rule: unknown sections are preserved byte-for-byte unless a mode explicitly
 allows canonicalization.
 
-Current canonicalization scope is intentionally narrow: it normalizes layout
-deterministically (offsets, compact referenced-name table, 4-byte zero padding)
-while preserving the parsed block and section order.
+Current canonicalization scope normalizes both layout and ordering
+deterministically: corpus-guided block ordering, stable section ordering within
+each block, compact referenced-name tables, and 4-byte zero padding. Opaque
+`RawTail` bytes are still preserved for now rather than discarded.
+
+Repair is conservative rather than forensic. It only accepts files that already
+parse in lenient mode, only applies narrow structural fixes, and refuses any
+case that would require guessing missing names or payload bytes.

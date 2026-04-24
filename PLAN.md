@@ -219,7 +219,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 - [x] Define `Version` type and `VersionRange` _(Version in `pkg/lvvi`; VersionRange in `internal/codecs` from 4.1)_
 - [x] Define `FileKind` enum _(existed from Phase 1.2 in `internal/rsrcwire` / `pkg/lvrsrc`; re-exported in `pkg/lvvi`)_
 - [x] Implement `(f *File) DetectVersion() (Version, bool)` in `pkg/lvvi` _(implemented as package function `lvvi.DetectVersion(*lvrsrc.File)` to avoid `pkg/lvrsrc` ↔ `pkg/lvvi` import cycle)_
-- [ ] Wire version context into all codec calls _(deferred: no codec calls exist yet; will be wired in Phase 4.4/4.5 when `pkg/lvmeta` and `pkg/lvvi` dispatch codecs)_
+- [x] Wire version context into all codec calls _(wired 2026-04-24: `pkg/lvmeta` (`contextFromFile` in `pkg/lvmeta/lvmeta.go`), `pkg/lvvi/model.go`, and now `pkg/lvdiff/decoded.go` all derive `codecs.Context{FileVersion, Kind}` from `*lvrsrc.File`; `pkg/lvdiff`'s default decoded differs carry per-file contexts via closures, with `aCtx` used for the old payload and `bCtx` for the new — see `pkg/lvdiff/decoded.go`'s `contextFromFile` + `makeCodecDiffer`)_
 
 ### 4.3 Initial Typed Codecs (low-risk resources)
 
@@ -323,16 +323,16 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 5.4 Canonical Writer
 
-- [ ] Implement canonical ordering of blocks and sections
+- [x] Implement canonical ordering of blocks and sections
 - [x] Implement canonical padding/alignment policy
 - [x] Implement deterministic serialization
 - [x] Add `--canonical` flag to `lvrsrc rewrite`
 
 ### 5.5 Repair Command
 
-- [ ] Define repair heuristics (truncated name table, offset drift, header mismatch)
-- [ ] Implement `lvrsrc repair <file> --out <repaired.vi>` command (after validator is mature)
-- [ ] Write repair tests with intentionally corrupted fixtures
+- [x] Define repair heuristics (truncated name table, offset drift, header mismatch)
+- [x] Implement `lvrsrc repair <file> --out <repaired.vi>` command (after validator is mature)
+- [x] Write repair tests with intentionally corrupted fixtures
 
 ### 5.6 v1.0 Readiness Checklist
 

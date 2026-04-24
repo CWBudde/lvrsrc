@@ -9,6 +9,7 @@ import (
 	"strings"
 	"text/tabwriter"
 
+	irepair "github.com/CWBudde/lvrsrc/internal/repair"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -76,6 +77,7 @@ func newRootCmd(stdout, stderr io.Writer) *cobra.Command {
 		app.newListResourcesCmd(),
 		app.newValidateCmd(),
 		app.newRewriteCmd(),
+		app.newRepairCmd(),
 		app.newDiffCmd(),
 		app.newSetMetaCmd(),
 	)
@@ -264,6 +266,45 @@ func (a *cliApp) newRewriteCmd() *cobra.Command {
 	}
 	cmd.Flags().BoolVar(&canonical, "canonical", false, "rewrite using deterministic canonical layout while preserving parsed block and section order")
 	return cmd
+}
+
+func (a *cliApp) newRepairCmd() *cobra.Command {
+	return &cobra.Command{
+		Use:   "repair <file>",
+		Short: "Repair a leniently parsed RSRC file using conservative structural heuristics",
+		Long: "repair opens the input in lenient mode, applies a narrow allowlist of\n" +
+			"structural repairs, writes the result in preserving mode, and then\n" +
+			"requires a strict re-parse plus zero validation errors on the output.\n\n" +
+			"It does not attempt salvage of files that fail lenient parsing, and it\n" +
+			"refuses repairs that would require guessing missing names or payload\n" +
+			"bytes.",
+		Args: cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			outPath := a.v.GetString("out")
+			if outPath == "" {
+				return fmt.Errorf("repair requires --out")
+			}
+
+			file, err := lvrsrc.Open(args[0], lvrsrc.OpenOptions{Strict: false})
+			if err != nil {
+				return fmt.Errorf("lenient parse: %w", err)
+			}
+
+			repaired, _, err := irepair.File(file)
+			if err != nil {
+				return err
+			}
+
+			if err := repaired.WriteToFile(outPath); err != nil {
+				return fmt.Errorf("write output: %w", err)
+			}
+
+			if err := postWriteValidate(outPath, true); err != nil {
+				return err
+			}
+			return nil
+		},
+	}
 }
 
 func (a *cliApp) outputWriter(cmd *cobra.Command) (io.Writer, func(), error) {
