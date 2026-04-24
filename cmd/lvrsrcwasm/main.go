@@ -1,14 +1,25 @@
 //go:build js && wasm
 
-// Package main provides a WebAssembly entry point for inspecting LabVIEW RSRC/VI files in the browser.
+// Package main provides a WebAssembly entry point for the lvrsrc web demo.
+//
+// The demo focuses on user-facing views (icon, version, description, link
+// metadata, container schema, typed resource list), not on raw-byte tools. It
+// exposes a single JS-callable handler, parseVI, that returns a pre-decoded
+// bundle ready for the UI.
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"syscall/js"
 
-	"github.com/CWBudde/lvrsrc/pkg/lvdiff"
+	"github.com/CWBudde/lvrsrc/internal/codecs"
+	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
+	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -29,6 +40,7 @@ type WASMParseData struct {
 	Header          WASMHeader     `json:"header"`
 	SecondaryHeader WASMHeader     `json:"secondary_header"`
 	Resources       []WASMResource `json:"resources"`
+	Info            WASMInfo       `json:"info"`
 }
 
 type WASMSummary struct {
@@ -36,42 +48,8 @@ type WASMSummary struct {
 	ResourceCount      int `json:"resource_count"`
 	NamedResourceCount int `json:"named_resource_count"`
 	NameCount          int `json:"name_count"`
-	RawTailBytes       int `json:"raw_tail_bytes"`
 	TotalPayloadBytes  int `json:"total_payload_bytes"`
-	WarningCount       int `json:"warning_count"`
-	ErrorCount         int `json:"error_count"`
-}
-
-type WASMValidationData struct {
-	Summary WASMValidationSummary `json:"summary"`
-	Issues  []lvrsrc.Issue        `json:"issues"`
-}
-
-type WASMValidationSummary struct {
-	IssueCount   int `json:"issue_count"`
-	WarningCount int `json:"warning_count"`
-	ErrorCount   int `json:"error_count"`
-}
-
-type WASMDumpData struct {
-	JSON string `json:"json"`
-}
-
-type WASMDiffData struct {
-	Summary WASMDiffSummary `json:"summary"`
-	Diff    *lvdiff.Diff    `json:"diff"`
-}
-
-type WASMDiffSummary struct {
-	ItemCount      int  `json:"item_count"`
-	AddedCount     int  `json:"added_count"`
-	RemovedCount   int  `json:"removed_count"`
-	ModifiedCount  int  `json:"modified_count"`
-	HeaderCount    int  `json:"header_count"`
-	BlockCount     int  `json:"block_count"`
-	SectionCount   int  `json:"section_count"`
-	DecodedCount   int  `json:"decoded_count"`
-	HasDifferences bool `json:"has_differences"`
+	DecodedCount       int `json:"decoded_count"`
 }
 
 // WASMHeader is a JSON-friendly file header.
@@ -86,21 +64,48 @@ type WASMHeader struct {
 	DataSize      uint32 `json:"data_size"`
 }
 
-// WASMResource is a single resource (block section) in the RSRC file.
+// WASMResource is a single resource section.
 type WASMResource struct {
 	Type    string `json:"type"`
 	ID      int32  `json:"id"`
 	Name    string `json:"name,omitempty"`
 	Size    int    `json:"size"`
-	Preview string `json:"preview,omitempty"` // hex preview (first 64 bytes)
+	Decoded bool   `json:"decoded"`
+}
+
+// WASMInfo is the decoded user-facing metadata.
+type WASMInfo struct {
+	DisplayName string         `json:"display_name,omitempty"`
+	Version     string         `json:"version,omitempty"`
+	Description string         `json:"description,omitempty"`
+	HasDesc     bool           `json:"has_desc"`
+	Icon        *WASMIcon      `json:"icon,omitempty"`
+	Deps        WASMDeps       `json:"deps"`
+}
+
+// WASMIcon carries the packed 1-bit mono icon (32x32, 128 bytes) as base64.
+// Colour icons (icl4, icl8) are deliberately omitted until a palette is in
+// place; the mono icon renders cleanly without one.
+type WASMIcon struct {
+	Width  int    `json:"width"`
+	Height int    `json:"height"`
+	Packed string `json:"packed"` // base64-encoded raw bytes
+}
+
+// WASMDeps groups decoded link-info entries by source.
+type WASMDeps struct {
+	FrontPanel   []WASMDepEntry `json:"front_panel"`
+	BlockDiagram []WASMDepEntry `json:"block_diagram"`
+}
+
+// WASMDepEntry is one decoded link-info reference.
+type WASMDepEntry struct {
+	LinkType   string   `json:"link_type"`
+	Qualifiers []string `json:"qualifiers"`
 }
 
 func main() {
 	registerHandler("parseVI", handleParse)
-	registerHandler("dumpVI", handleDump)
-	registerHandler("validateVI", handleValidate)
-	registerHandler("diffVI", handleDiff)
-	registerHandler("resourcePayloadVI", handleResourcePayload)
 	select {}
 }
 
@@ -127,103 +132,18 @@ func handleParse(args []js.Value) (any, error) {
 	if err != nil {
 		return nil, err
 	}
-	issues := file.Validate()
 	resources := buildResources(file)
-	warnings, errors := countIssues(issues)
 
 	result := WASMParseData{
 		Kind:            kindName(file.Kind),
 		Compression:     string(file.Compression),
-		Summary:         buildSummary(file, resources, warnings, errors),
+		Summary:         buildSummary(file, resources),
 		Header:          headerToWASM(file.Header),
 		SecondaryHeader: headerToWASM(file.SecondaryHeader),
 		Resources:       resources,
+		Info:            buildInfo(file),
 	}
 	return result, nil
-}
-
-func handleDump(args []js.Value) (any, error) {
-	file, err := parseFileArg(args, 0)
-	if err != nil {
-		return nil, err
-	}
-	b, err := json.MarshalIndent(file, "", "  ")
-	if err != nil {
-		return nil, fmt.Errorf("failed to encode dump: %w", err)
-	}
-	return WASMDumpData{JSON: string(b)}, nil
-}
-
-func handleValidate(args []js.Value) (any, error) {
-	file, err := parseFileArg(args, 0)
-	if err != nil {
-		return nil, err
-	}
-	issues := file.Validate()
-	if issues == nil {
-		issues = []lvrsrc.Issue{}
-	}
-	warnings, errors := countIssues(issues)
-	return WASMValidationData{
-		Summary: WASMValidationSummary{
-			IssueCount:   len(issues),
-			WarningCount: warnings,
-			ErrorCount:   errors,
-		},
-		Issues: issues,
-	}, nil
-}
-
-func handleDiff(args []js.Value) (any, error) {
-	left, err := parseFileArg(args, 0)
-	if err != nil {
-		return nil, err
-	}
-	right, err := parseFileArg(args, 1)
-	if err != nil {
-		return nil, err
-	}
-	diff := lvdiff.Files(left, right)
-	return WASMDiffData{
-		Summary: buildDiffSummary(diff),
-		Diff:    diff,
-	}, nil
-}
-
-func handleResourcePayload(args []js.Value) (any, error) {
-	file, err := parseFileArg(args, 0)
-	if err != nil {
-		return nil, err
-	}
-	if len(args) < 3 {
-		return nil, fmt.Errorf("resource lookup requires file bytes, type, and id")
-	}
-	resourceType := args[1].String()
-	resourceID := int32(args[2].Int())
-	for _, block := range file.Blocks {
-		if block.Type != resourceType {
-			continue
-		}
-		for _, section := range block.Sections {
-			if section.Index != resourceID {
-				continue
-			}
-			return struct {
-				Type    string `json:"type"`
-				ID      int32  `json:"id"`
-				Name    string `json:"name,omitempty"`
-				Size    int    `json:"size"`
-				Payload string `json:"payload"`
-			}{
-				Type:    block.Type,
-				ID:      section.Index,
-				Name:    section.Name,
-				Size:    len(section.Payload),
-				Payload: hexEncode(section.Payload),
-			}, nil
-		}
-	}
-	return nil, fmt.Errorf("resource %s/%d not found", resourceType, resourceID)
 }
 
 func parseFileArg(args []js.Value, idx int) (*lvrsrc.File, error) {
@@ -245,87 +165,185 @@ func readBytesArg(v js.Value) []byte {
 	return data
 }
 
+// typedFourCCs lists FourCCs handled by a typed (non-opaque) codec. The web
+// demo uses this only to flag rows in the resource list; the source of truth
+// is internal/codecs/registry.go.
+var typedFourCCs = map[string]struct{}{
+	"vers": {},
+	"STRG": {},
+	"ICON": {},
+	"icl4": {},
+	"icl8": {},
+	"CONP": {},
+	"CPC2": {},
+	"LIfp": {},
+	"LIbd": {},
+	"VCTP": {},
+}
+
 func buildResources(file *lvrsrc.File) []WASMResource {
-	resources := make([]WASMResource, 0, len(file.Resources()))
+	out := make([]WASMResource, 0)
 	for _, block := range file.Blocks {
+		_, typed := typedFourCCs[block.Type]
 		for _, section := range block.Sections {
-			preview := section.Payload
-			if len(preview) > 64 {
-				preview = preview[:64]
-			}
-			resources = append(resources, WASMResource{
+			out = append(out, WASMResource{
 				Type:    block.Type,
 				ID:      section.Index,
 				Name:    section.Name,
 				Size:    len(section.Payload),
-				Preview: hexEncode(preview),
+				Decoded: typed,
 			})
 		}
 	}
-	return resources
+	return out
 }
 
-func buildSummary(file *lvrsrc.File, resources []WASMResource, warnings, errors int) WASMSummary {
-	namedResources := 0
-	totalPayloadBytes := 0
-	for _, resource := range resources {
-		if resource.Name != "" {
-			namedResources++
+func buildSummary(file *lvrsrc.File, resources []WASMResource) WASMSummary {
+	named := 0
+	total := 0
+	decoded := 0
+	for _, r := range resources {
+		if r.Name != "" {
+			named++
 		}
-		totalPayloadBytes += resource.Size
+		total += r.Size
+		if r.Decoded {
+			decoded++
+		}
 	}
 	return WASMSummary{
 		BlockCount:         len(file.Blocks),
 		ResourceCount:      len(resources),
-		NamedResourceCount: namedResources,
+		NamedResourceCount: named,
 		NameCount:          len(file.Names),
-		RawTailBytes:       len(file.RawTail),
-		TotalPayloadBytes:  totalPayloadBytes,
-		WarningCount:       warnings,
-		ErrorCount:         errors,
+		TotalPayloadBytes:  total,
+		DecodedCount:       decoded,
 	}
 }
 
-func countIssues(issues []lvrsrc.Issue) (warnings, errors int) {
-	for _, issue := range issues {
-		switch issue.Severity {
-		case lvrsrc.SeverityWarning:
-			warnings++
-		case lvrsrc.SeverityError:
-			errors++
+func buildInfo(file *lvrsrc.File) WASMInfo {
+	info := WASMInfo{
+		Deps: WASMDeps{
+			FrontPanel:   []WASMDepEntry{},
+			BlockDiagram: []WASMDepEntry{},
+		},
+	}
+	if file == nil {
+		return info
+	}
+
+	ctx := codecs.Context{
+		FileVersion: file.Header.FormatVersion,
+		Kind:        file.Kind,
+	}
+
+	// Display name: first LVSR section's Name, fallback to any non-empty
+	// section name, otherwise empty.
+	info.DisplayName = firstSectionName(file, "LVSR")
+
+	// Version (vers).
+	if payload, ok := firstPayload(file, string(vers.FourCC)); ok {
+		if raw, err := (vers.Codec{}).Decode(ctx, payload); err == nil {
+			if v, ok := raw.(vers.Value); ok {
+				info.Version = v.Text
+			}
 		}
 	}
-	return warnings, errors
+
+	// Description (STRG).
+	if payload, ok := firstPayload(file, string(strg.FourCC)); ok {
+		if raw, err := (strg.Codec{}).Decode(ctx, payload); err == nil {
+			if s, ok := raw.(strg.Value); ok && s.Text != "" {
+				info.Description = s.Text
+				info.HasDesc = true
+			}
+		}
+	}
+
+	// Icon (ICON, mono). Send the packed 128-byte payload unchanged; the UI
+	// unpacks and renders it.
+	if payload, ok := firstPayload(file, string(iconcodec.MonoFourCC)); ok && len(payload) == 128 {
+		info.Icon = &WASMIcon{
+			Width:  iconcodec.Width,
+			Height: iconcodec.Height,
+			Packed: base64.StdEncoding.EncodeToString(payload),
+		}
+	}
+
+	// Dependencies — LIfp (front panel) and LIbd (block diagram).
+	if payload, ok := firstPayload(file, string(lifp.FourCC)); ok {
+		info.Deps.FrontPanel = decodeLIfp(ctx, payload)
+	}
+	if payload, ok := firstPayload(file, string(libd.FourCC)); ok {
+		info.Deps.BlockDiagram = decodeLIbd(ctx, payload)
+	}
+
+	return info
 }
 
-func buildDiffSummary(diff *lvdiff.Diff) WASMDiffSummary {
-	if diff == nil {
-		return WASMDiffSummary{}
-	}
-	var summary WASMDiffSummary
-	summary.ItemCount = len(diff.Items)
-	summary.HasDifferences = !diff.IsEmpty()
-	for _, item := range diff.Items {
-		switch item.Category {
-		case lvdiff.CategoryAdded:
-			summary.AddedCount++
-		case lvdiff.CategoryRemoved:
-			summary.RemovedCount++
-		case lvdiff.CategoryModified:
-			summary.ModifiedCount++
+func firstPayload(file *lvrsrc.File, fourCC string) ([]byte, bool) {
+	for _, block := range file.Blocks {
+		if block.Type != fourCC {
+			continue
 		}
-		switch item.Kind {
-		case lvdiff.KindHeader:
-			summary.HeaderCount++
-		case lvdiff.KindBlock:
-			summary.BlockCount++
-		case lvdiff.KindSection:
-			summary.SectionCount++
-		case lvdiff.KindDecoded:
-			summary.DecodedCount++
+		if len(block.Sections) == 0 {
+			continue
+		}
+		return block.Sections[0].Payload, true
+	}
+	return nil, false
+}
+
+func firstSectionName(file *lvrsrc.File, fourCC string) string {
+	for _, block := range file.Blocks {
+		if block.Type != fourCC {
+			continue
+		}
+		for _, section := range block.Sections {
+			if section.Name != "" {
+				return section.Name
+			}
 		}
 	}
-	return summary
+	return ""
+}
+
+func decodeLIfp(ctx codecs.Context, payload []byte) []WASMDepEntry {
+	raw, err := (lifp.Codec{}).Decode(ctx, payload)
+	if err != nil {
+		return []WASMDepEntry{}
+	}
+	v, ok := raw.(lifp.Value)
+	if !ok {
+		return []WASMDepEntry{}
+	}
+	out := make([]WASMDepEntry, 0, len(v.Entries))
+	for _, entry := range v.Entries {
+		out = append(out, WASMDepEntry{
+			LinkType:   entry.LinkType,
+			Qualifiers: append([]string{}, entry.Qualifiers...),
+		})
+	}
+	return out
+}
+
+func decodeLIbd(ctx codecs.Context, payload []byte) []WASMDepEntry {
+	raw, err := (libd.Codec{}).Decode(ctx, payload)
+	if err != nil {
+		return []WASMDepEntry{}
+	}
+	v, ok := raw.(libd.Value)
+	if !ok {
+		return []WASMDepEntry{}
+	}
+	out := make([]WASMDepEntry, 0, len(v.Entries))
+	for _, entry := range v.Entries {
+		out = append(out, WASMDepEntry{
+			LinkType:   entry.LinkType,
+			Qualifiers: append([]string{}, entry.Qualifiers...),
+		})
+	}
+	return out
 }
 
 func successResult(data any) string {
@@ -364,15 +382,4 @@ func kindName(k lvrsrc.FileKind) string {
 	default:
 		return "Unknown"
 	}
-}
-
-const hexChars = "0123456789abcdef"
-
-func hexEncode(b []byte) string {
-	buf := make([]byte, len(b)*2)
-	for i, v := range b {
-		buf[i*2] = hexChars[v>>4]
-		buf[i*2+1] = hexChars[v&0xf]
-	}
-	return string(buf)
 }

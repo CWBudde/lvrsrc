@@ -6,19 +6,13 @@ let wasmError = null;
 const MAX_FILE_BYTES = 50 * 1024 * 1024; // 50 MiB
 
 const state = {
-  activeTab: "overview",
-  resourceFilter: "",
+  activeTab: "info",
   primary: null,
-  compare: null,
-  resourceDetail: null,
 };
 
 const refs = {
   dropZone: document.getElementById("drop-zone"),
   fileInput: document.getElementById("file-input"),
-  compareInput: document.getElementById("compare-input"),
-  compareBtn: document.getElementById("compare-btn"),
-  compareClearBtn: document.getElementById("compare-clear-btn"),
   loadingEl: document.getElementById("loading"),
   loadingMessage: document.getElementById("loading-message"),
   errorEl: document.getElementById("error"),
@@ -27,22 +21,14 @@ const refs = {
   fileNameEl: document.getElementById("file-name"),
   fileKindEl: document.getElementById("file-kind"),
   fileCompressionEl: document.getElementById("file-compression"),
-  compareStatusEl: document.getElementById("compare-status"),
   clearBtn: document.getElementById("clear-btn"),
-  exportJsonBtn: document.getElementById("export-json-btn"),
-  summaryCardsEl: document.getElementById("summary-cards"),
-  resourceFilterInput: document.getElementById("resource-filter"),
+  infoHero: document.getElementById("info-hero"),
+  infoDescriptionCard: document.getElementById("info-description-card"),
+  infoDescription: document.getElementById("info-description"),
+  infoDepsCard: document.getElementById("info-deps-card"),
+  infoDeps: document.getElementById("info-deps"),
+  schemaDiagram: document.getElementById("schema-diagram"),
   resourcesList: document.getElementById("resources-list"),
-  validationSummary: document.getElementById("validation-summary"),
-  validationList: document.getElementById("validation-list"),
-  jsonOutput: document.getElementById("json-output"),
-  diffSummary: document.getElementById("diff-summary"),
-  diffList: document.getElementById("diff-list"),
-  resourceModal: document.getElementById("resource-modal"),
-  resourceModalTitle: document.getElementById("resource-modal-title"),
-  resourceModalMeta: document.getElementById("resource-modal-meta"),
-  resourceModalPayload: document.getElementById("resource-modal-payload"),
-  resourceDownloadBtn: document.getElementById("resource-download-btn"),
 };
 
 async function initWasm() {
@@ -78,214 +64,51 @@ function bindEvents() {
     refs.dropZone.classList.remove("drag-over");
     const file = event.dataTransfer.files[0];
     if (file) {
-      void processPrimaryFile(file);
+      void processFile(file);
     }
   });
 
   refs.fileInput.addEventListener("change", () => {
     if (refs.fileInput.files[0]) {
-      void processPrimaryFile(refs.fileInput.files[0]);
+      void processFile(refs.fileInput.files[0]);
     }
-  });
-
-  refs.compareBtn.addEventListener("click", () => {
-    if (!state.primary) {
-      showError("Load a primary file before selecting a comparison file.");
-      return;
-    }
-    refs.compareInput.click();
-  });
-
-  refs.compareInput.addEventListener("change", () => {
-    if (refs.compareInput.files[0]) {
-      void processCompareFile(refs.compareInput.files[0]);
-    }
-  });
-
-  refs.compareClearBtn.addEventListener("click", () => {
-    state.compare = null;
-    refs.compareInput.value = "";
-    renderCompareStatus();
-    renderDiff();
   });
 
   refs.clearBtn.addEventListener("click", resetState);
 
-  refs.exportJsonBtn.addEventListener("click", () => {
-    if (!state.primary?.dump) {
-      return;
-    }
-    downloadText(
-      buildDownloadName(state.primary.name, "json"),
-      state.primary.dump.json,
-      "application/json",
-    );
-  });
-
-  refs.resourceFilterInput.addEventListener("input", (event) => {
-    state.resourceFilter = event.target.value.trim();
-    renderResources();
-  });
-
   document.querySelectorAll(".tab").forEach((button) => {
     button.addEventListener("click", () => setActiveTab(button.dataset.tab));
   });
-
-  refs.resourcesList.addEventListener("click", (event) => {
-    const trigger = event.target.closest(
-      "[data-resource-type][data-resource-id]",
-    );
-    if (!trigger) {
-      return;
-    }
-    const resourceType = trigger.getAttribute("data-resource-type");
-    const resourceID = Number(trigger.getAttribute("data-resource-id"));
-    void openResourceDetail(resourceType, resourceID);
-  });
-
-  refs.resourceModal.addEventListener("click", (event) => {
-    if (
-      event.target === refs.resourceModal ||
-      event.target.closest("[data-close-modal]")
-    ) {
-      closeResourceDetail();
-    }
-  });
-
-  refs.resourceDownloadBtn.addEventListener("click", () => {
-    if (!state.resourceDetail) {
-      return;
-    }
-    const payload = hexToBytes(state.resourceDetail.payload);
-    const fileName = `${buildBaseName(state.primary.name)}-${state.resourceDetail.type}-${state.resourceDetail.id}.bin`;
-    downloadBlob(
-      fileName,
-      new Blob([payload], { type: "application/octet-stream" }),
-    );
-  });
 }
 
-async function processPrimaryFile(file) {
+async function processFile(file) {
   clearError();
-  closeResourceDetail();
-
   if (file.size > MAX_FILE_BYTES) {
-    showError(
-      `File is ${(file.size / (1024 * 1024)).toFixed(1)} MiB; limit is ${MAX_FILE_BYTES / (1024 * 1024)} MiB.`,
-    );
+    showError(`File too large (max ${formatBytes(MAX_FILE_BYTES)}).`);
     return;
   }
 
+  showLoading(`Parsing ${file.name}…`);
   try {
     await waitForWasm();
     const bytes = await readFileBytes(file);
-
-    showLoading("Parsing file…");
     const parse = invokeWasm("parseVI", bytes).data;
-
-    showLoading("Validating file…");
-    const validation = invokeWasm("validateVI", bytes).data;
-
-    showLoading("Building JSON view…");
-    const dump = invokeWasm("dumpVI", bytes).data;
-
-    state.primary = {
-      name: file.name,
-      bytes,
-      parse,
-      validation,
-      dump,
-    };
-
-    if (state.compare?.bytes) {
-      showLoading("Computing diff…");
-      state.compare.diff = invokeWasm(
-        "diffVI",
-        state.primary.bytes,
-        state.compare.bytes,
-      ).data;
-    }
-
-    hideLoading();
+    state.primary = { name: file.name, parse };
+    refs.fileInput.value = "";
     render();
   } catch (err) {
+    showError(err.message || String(err));
+    state.primary = null;
+    render();
+  } finally {
     hideLoading();
-    showError(err.message);
   }
-}
-
-async function processCompareFile(file) {
-  clearError();
-
-  if (!state.primary) {
-    showError("Load a primary file before selecting a comparison file.");
-    return;
-  }
-
-  if (file.size > MAX_FILE_BYTES) {
-    showError(
-      `Comparison file is ${(file.size / (1024 * 1024)).toFixed(1)} MiB; limit is ${MAX_FILE_BYTES / (1024 * 1024)} MiB.`,
-    );
-    return;
-  }
-
-  try {
-    await waitForWasm();
-    const bytes = await readFileBytes(file);
-
-    showLoading("Computing diff…");
-    state.compare = {
-      name: file.name,
-      bytes,
-      diff: invokeWasm("diffVI", state.primary.bytes, bytes).data,
-    };
-
-    hideLoading();
-    renderCompareStatus();
-    renderDiff();
-  } catch (err) {
-    hideLoading();
-    showError(err.message);
-  }
-}
-
-async function openResourceDetail(resourceType, resourceID) {
-  if (!state.primary?.bytes) {
-    return;
-  }
-
-  try {
-    showLoading("Loading resource payload…");
-    state.resourceDetail = invokeWasm(
-      "resourcePayloadVI",
-      state.primary.bytes,
-      resourceType,
-      resourceID,
-    ).data;
-    hideLoading();
-    renderResourceDetail();
-  } catch (err) {
-    hideLoading();
-    showError(err.message);
-  }
-}
-
-function closeResourceDetail() {
-  state.resourceDetail = null;
-  refs.resourceModal.classList.add("hidden");
 }
 
 function resetState() {
   state.primary = null;
-  state.compare = null;
-  state.resourceDetail = null;
-  state.resourceFilter = "";
   refs.fileInput.value = "";
-  refs.compareInput.value = "";
-  refs.resourceFilterInput.value = "";
   clearError();
-  hideLoading();
-  closeResourceDetail();
   render();
 }
 
@@ -302,7 +125,6 @@ function setActiveTab(tabName) {
 function render() {
   if (!state.primary) {
     refs.resultsEl.classList.add("hidden");
-    refs.compareStatusEl.textContent = "";
     return;
   }
 
@@ -310,246 +132,302 @@ function render() {
   refs.fileKindEl.textContent = state.primary.parse.kind;
   refs.fileCompressionEl.textContent =
     state.primary.parse.compression || "uncompressed";
-  refs.exportJsonBtn.disabled = !state.primary.dump;
 
-  renderCompareStatus();
-  renderSummaryCards();
-  renderHeader("primary-header", state.primary.parse.header);
-  renderHeader("secondary-header", state.primary.parse.secondary_header);
-  renderResources();
-  renderValidation();
-  renderDump();
-  renderDiff();
+  renderInfo();
+  renderStructure();
 
   refs.resultsEl.classList.remove("hidden");
 }
 
-function renderCompareStatus() {
-  if (!state.primary) {
-    refs.compareStatusEl.textContent = "";
-    return;
+// Info tab ------------------------------------------------------------------
+
+function renderInfo() {
+  const info = state.primary.parse.info;
+  const fileName = state.primary.name;
+  const displayName = info.display_name || fileName;
+
+  refs.infoHero.innerHTML = `
+    <div class="info-hero-icon">${renderIcon(info.icon)}</div>
+    <div class="info-hero-meta">
+      <h2 class="info-hero-title">${escHtml(displayName)}</h2>
+      <p class="info-hero-subtitle">${escHtml(fileName)}</p>
+      <dl class="info-hero-facts">
+        ${renderFact("Kind", state.primary.parse.kind)}
+        ${info.version ? renderFact("Version", info.version) : ""}
+        ${renderFact("Format", formatHex(state.primary.parse.header.format_version))}
+      </dl>
+    </div>`;
+
+  if (info.has_desc && info.description) {
+    refs.infoDescriptionCard.classList.remove("hidden");
+    refs.infoDescription.textContent = info.description;
+  } else {
+    refs.infoDescriptionCard.classList.add("hidden");
+    refs.infoDescription.textContent = "";
   }
-  if (!state.compare) {
-    refs.compareStatusEl.textContent = "No comparison file loaded";
-    return;
+
+  const fp = info.deps?.front_panel ?? [];
+  const bd = info.deps?.block_diagram ?? [];
+  if (fp.length === 0 && bd.length === 0) {
+    refs.infoDepsCard.classList.add("hidden");
+    refs.infoDeps.innerHTML = "";
+  } else {
+    refs.infoDepsCard.classList.remove("hidden");
+    refs.infoDeps.innerHTML = `
+      ${renderDepGroup("Front panel imports", fp)}
+      ${renderDepGroup("Block diagram imports", bd)}`;
   }
-  refs.compareStatusEl.textContent = `Comparing with ${state.compare.name}`;
 }
 
-function renderSummaryCards() {
-  const summary = state.primary.parse.summary;
-  const cards = [
-    ["Blocks", formatCount(summary.block_count)],
-    ["Resources", formatCount(summary.resource_count)],
-    ["Named Resources", formatCount(summary.named_resource_count)],
-    ["Name Entries", formatCount(summary.name_count)],
-    ["Payload Bytes", formatBytes(summary.total_payload_bytes)],
-    [
-      "Validation",
-      `${summary.error_count} errors / ${summary.warning_count} warnings`,
-    ],
-  ];
-
-  refs.summaryCardsEl.innerHTML = cards
-    .map(
-      ([label, value]) => `
-        <div class="summary-card">
-          <span class="summary-label">${escHtml(label)}</span>
-          <strong class="summary-value">${escHtml(value)}</strong>
-        </div>`,
-    )
-    .join("");
+function renderFact(label, value) {
+  return `
+    <div class="info-fact">
+      <dt>${escHtml(label)}</dt>
+      <dd>${escHtml(value)}</dd>
+    </div>`;
 }
 
-function renderHeader(tableID, header) {
-  const table = document.getElementById(tableID);
-  const rows = [
-    ["Magic", header.magic],
-    ["Format version", header.format_version],
-    ["Type", header.type],
-    ["Creator", header.creator],
-    ["Info offset", formatHex(header.info_offset)],
-    ["Info size", formatBytes(header.info_size)],
-    ["Data offset", formatHex(header.data_offset)],
-    ["Data size", formatBytes(header.data_size)],
-  ];
-
-  table.innerHTML = rows
-    .map(
-      ([label, value]) =>
-        `<tr><td>${escHtml(String(label))}</td><td>${escHtml(String(value))}</td></tr>`,
-    )
-    .join("");
-}
-
-function renderResources() {
-  const resources = state.primary?.parse?.resources || [];
-  const query = state.resourceFilter.toLowerCase();
-  const filtered = resources.filter((resource) => {
-    if (!query) {
-      return true;
+function renderIcon(icon) {
+  if (!icon || !icon.packed) {
+    return `<div class="info-icon-placeholder" aria-hidden="true">VI</div>`;
+  }
+  const bits = unpackBits(icon.packed, icon.width, icon.height);
+  const cell = 4; // px per icon pixel
+  const w = icon.width * cell;
+  const h = icon.height * cell;
+  let rects = "";
+  for (let y = 0; y < icon.height; y++) {
+    for (let x = 0; x < icon.width; x++) {
+      if (bits[y * icon.width + x]) {
+        rects += `<rect x="${x * cell}" y="${y * cell}" width="${cell}" height="${cell}"/>`;
+      }
     }
-    return [
-      resource.type,
-      String(resource.id),
-      resource.name || "",
-      resource.preview || "",
-    ]
-      .join(" ")
-      .toLowerCase()
-      .includes(query);
-  });
+  }
+  return `
+    <svg class="info-icon-svg"
+         viewBox="0 0 ${w} ${h}"
+         width="${w}" height="${h}"
+         role="img"
+         aria-label="VI icon">
+      <rect x="0" y="0" width="${w}" height="${h}" class="info-icon-bg"/>
+      <g class="info-icon-fg">${rects}</g>
+    </svg>`;
+}
 
-  if (filtered.length === 0) {
-    refs.resourcesList.innerHTML = query
-      ? "<p>No resources match the current filter.</p>"
-      : "<p>No resources found.</p>";
+function unpackBits(base64Packed, width, height) {
+  const packed = atob(base64Packed);
+  const bitsPerRow = width;
+  const rowStride = Math.ceil(bitsPerRow / 8);
+  const out = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const byte = packed.charCodeAt(y * rowStride + (x >> 3));
+      const bit = (byte >> (7 - (x & 7))) & 1;
+      out[y * width + x] = bit;
+    }
+  }
+  return out;
+}
+
+function renderDepGroup(label, entries) {
+  if (entries.length === 0) {
+    return "";
+  }
+  const rows = entries
+    .map((entry) => {
+      const qualifier = (entry.qualifiers || []).filter(Boolean).join(" :: ");
+      return `
+        <li class="info-dep-row">
+          <span class="info-dep-qualifier">${escHtml(qualifier) || "<em>unnamed</em>"}</span>
+          ${entry.link_type ? `<span class="info-dep-kind">${escHtml(entry.link_type)}</span>` : ""}
+        </li>`;
+    })
+    .join("");
+  return `
+    <section class="info-dep-group">
+      <h4>${escHtml(label)} <span class="info-dep-count">${entries.length}</span></h4>
+      <ul class="info-dep-list">${rows}</ul>
+    </section>`;
+}
+
+// Structure tab -------------------------------------------------------------
+
+function renderStructure() {
+  renderSchemaDiagram();
+  renderResourcesList();
+}
+
+function renderSchemaDiagram() {
+  const { header, summary } = state.primary.parse;
+  const headerRange = `bytes <code>${formatHex(0)}</code> – <code>${formatHex(32)}</code> (32 B)`;
+  const dataRange = `bytes <code>${formatHex(header.data_offset)}</code> – <code>${formatHex(header.data_offset + header.data_size)}</code> (${formatBytes(header.data_size)})`;
+  const infoRange = `bytes <code>${formatHex(header.info_offset)}</code> – <code>${formatHex(header.info_offset + header.info_size)}</code> (${formatBytes(header.info_size)})`;
+
+  const headerFacts = [
+    ["magic", escHtml(header.magic)],
+    ["format_version", formatHex(header.format_version)],
+    ["type", escHtml(header.type)],
+    ["creator", escHtml(header.creator)],
+    ["info_offset", formatHex(header.info_offset)],
+    ["info_size", `${formatBytes(header.info_size)} (${header.info_size})`],
+    ["data_offset", formatHex(header.data_offset)],
+    ["data_size", `${formatBytes(header.data_size)} (${header.data_size})`],
+  ];
+
+  refs.schemaDiagram.innerHTML = `
+    <div class="schema-blueprint">
+      <div class="schema-region schema-region-primary">
+        <div class="schema-region-header">
+          <span class="schema-region-title">Primary Header</span>
+          <span class="schema-region-range">${headerRange}</span>
+        </div>
+        <table class="info-table schema-header-fields">
+          <tbody>
+            ${headerFacts.map(([k, v]) => `<tr><td>${escHtml(k)}</td><td>${v}</td></tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="schema-arrow"><code>data_offset</code> points here ↓</div>
+
+      <div class="schema-region schema-region-data">
+        <div class="schema-region-header">
+          <span class="schema-region-title">Data Section</span>
+          <span class="schema-region-range">${dataRange}</span>
+        </div>
+        <p class="subtle-text schema-region-desc">
+          Contiguous block of section payloads. Descriptors in the metadata
+          pool point into this region.
+        </p>
+        <div class="schema-pills">
+          <span class="validation-pill">${summary.block_count} blocks</span>
+          <span class="validation-pill">${summary.resource_count} sections</span>
+          <span class="validation-pill">${summary.decoded_count} decoded · ${summary.resource_count - summary.decoded_count} opaque</span>
+          <span class="validation-pill">${formatBytes(summary.total_payload_bytes)} payload</span>
+        </div>
+      </div>
+
+      <div class="schema-arrow"><code>info_offset</code> points here ↓</div>
+
+      <div class="schema-region schema-region-meta">
+        <div class="schema-region-header">
+          <span class="schema-region-title">Metadata Pool</span>
+          <span class="schema-region-range">${infoRange}</span>
+        </div>
+        <p class="subtle-text schema-region-desc">
+          Duplicate header plus the tables that describe every block and section.
+        </p>
+        <div class="schema-subregion-list">
+          <div class="schema-subregion">
+            <strong>Secondary Header</strong>
+            <span class="subtle-text">32 B — duplicate of primary</span>
+          </div>
+          <div class="schema-subregion">
+            <strong>Block Info List</strong>
+            <span class="subtle-text">${summary.block_count} entries — per-FourCC type, count, offset</span>
+          </div>
+          <div class="schema-subregion">
+            <strong>Section Descriptors</strong>
+            <span class="subtle-text">${summary.resource_count} descriptors — id, name_offset, data_offset, size</span>
+          </div>
+          <div class="schema-subregion">
+            <strong>Name Table</strong>
+            <span class="subtle-text">${summary.name_count} Pascal-style strings</span>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderResourcesList() {
+  const resources = state.primary.parse.resources || [];
+  if (resources.length === 0) {
+    refs.resourcesList.innerHTML = "<p>No resources in this file.</p>";
     return;
   }
 
-  const rows = filtered
-    .map(
-      (resource) => `
-        <tr>
-          <td><span class="type-tag">${escHtml(String(resource.type))}</span></td>
-          <td>${Number(resource.id)}</td>
-          <td>${escHtml(String(resource.name || ""))}</td>
-          <td>${formatBytes(resource.size)}</td>
-          <td class="hex-preview">${escHtml(String(resource.preview || ""))}</td>
+  const groups = groupByType(resources);
+  const rows = [...groups.entries()]
+    .map(([type, sections]) => {
+      const totalBytes = sections.reduce((n, s) => n + (s.size || 0), 0);
+      const decoded = sections[0].decoded;
+      const role = RESOURCE_ROLES[type] || "Opaque — bytes preserved";
+      const tierClass = decoded ? "resource-row-decoded" : "resource-row-opaque";
+      const decodedBadge = decoded
+        ? `<span class="resource-decoded-badge">decoded</span>`
+        : "";
+      const sectionDetail =
+        sections.length === 1
+          ? `<span class="subtle-text">section ${sections[0].id}${sections[0].name ? ` · ${escHtml(sections[0].name)}` : ""}</span>`
+          : `<span class="subtle-text">${sections.length} sections</span>`;
+      return `
+        <tr class="${tierClass}">
+          <td><span class="type-tag">${escHtml(type)}</span></td>
           <td>
-            <button
-              class="btn-inline"
-              type="button"
-              data-resource-type="${escAttr(String(resource.type))}"
-              data-resource-id="${Number(resource.id)}"
-            >
-              View
-            </button>
+            <div class="resource-role">${escHtml(role)} ${decodedBadge}</div>
+            ${sectionDetail}
           </td>
-        </tr>`,
-    )
+          <td class="resource-size">${formatBytes(totalBytes)}</td>
+        </tr>`;
+    })
     .join("");
 
   refs.resourcesList.innerHTML = `
     <table class="resource-table">
       <thead>
         <tr>
-          <th>Type</th>
-          <th>ID</th>
-          <th>Name</th>
+          <th>FourCC</th>
+          <th>Role</th>
           <th>Size</th>
-          <th>Hex preview</th>
-          <th></th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>`;
 }
 
-function renderValidation() {
-  const validation = state.primary?.validation;
-  if (!validation) {
-    refs.validationSummary.innerHTML = "";
-    refs.validationList.innerHTML = "<p>No validation data loaded.</p>";
-    return;
+function groupByType(resources) {
+  const groups = new Map();
+  for (const r of resources) {
+    const list = groups.get(r.type) || [];
+    list.push(r);
+    groups.set(r.type, list);
   }
-
-  refs.validationSummary.innerHTML = `
-    <div class="validation-pill validation-pill-error">${validation.summary.error_count} errors</div>
-    <div class="validation-pill validation-pill-warning">${validation.summary.warning_count} warnings</div>
-    <div class="validation-pill">${validation.summary.issue_count} total issues</div>`;
-
-  const issues = validation.issues ?? [];
-  if (issues.length === 0) {
-    refs.validationList.innerHTML =
-      "<p>This file passed structural validation.</p>";
-    return;
-  }
-
-  refs.validationList.innerHTML = issues
-    .map(
-      (issue) => `
-        <article class="issue-card issue-${escAttr(issue.severity)}">
-          <div class="issue-row">
-            <span class="issue-severity">${escHtml(issue.severity)}</span>
-            <code>${escHtml(issue.code)}</code>
-          </div>
-          <p>${escHtml(issue.message)}</p>
-          <p class="issue-location">${escHtml(formatLocation(issue.location))}</p>
-        </article>`,
-    )
-    .join("");
+  return groups;
 }
 
-function renderDump() {
-  refs.jsonOutput.textContent = state.primary?.dump?.json || "";
-}
+// Catalogue of human-readable roles, indexed by FourCC. Sourced from
+// docs/resource-registry.md — keep in sync.
+const RESOURCE_ROLES = {
+  LVSR: "LabVIEW Save Record — carries the VI display name",
+  vers: "Version stamp",
+  STRG: "VI description / string resource",
+  LIBN: "Library-name list (.lvlib membership)",
+  LIvi: "VI dependencies",
+  LIfp: "Front-panel imports",
+  LIbd: "Block-diagram imports",
+  BDPW: "Block-diagram password hash",
+  ICON: "1-bit VI icon",
+  icl4: "4-bit colour icon",
+  icl8: "8-bit colour icon",
+  FPHb: "Front-panel heap",
+  BDHb: "Block-diagram heap",
+  VCTP: "Type descriptor pool",
+  HIST: "Edit history counters",
+  VITS: "VI settings",
+  CONP: "Connector pane selector",
+  CPC2: "Connector pane count / variant",
+  RTSG: "Runtime signature",
+  FTAB: "Font table",
+  MUID: "Module unique ID",
+  DTHP: "Default data-heap pointer",
+  FPEx: "Front-panel extra",
+  BDEx: "Block-diagram extra",
+  FPSE: "Front-panel section entry",
+  BDSE: "Block-diagram section entry",
+  VPDP: "VI probe-data pointer",
+};
 
-function renderDiff() {
-  if (!state.compare?.diff) {
-    refs.diffSummary.innerHTML = `
-      <div class="diff-callout">
-        <p>Add a second file to compare structural differences.</p>
-      </div>`;
-    refs.diffList.innerHTML = "";
-    return;
-  }
-
-  const summary = state.compare.diff.summary;
-  refs.diffSummary.innerHTML = `
-    <div class="validation-pill">${summary.item_count} diff items</div>
-    <div class="validation-pill">${summary.header_count} header</div>
-    <div class="validation-pill">${summary.block_count} block</div>
-    <div class="validation-pill">${summary.section_count} section</div>
-    <div class="validation-pill">${summary.added_count} added</div>
-    <div class="validation-pill">${summary.removed_count} removed</div>
-    <div class="validation-pill">${summary.modified_count} modified</div>`;
-
-  const items = state.compare.diff.diff?.items || [];
-  if (items.length === 0) {
-    refs.diffList.innerHTML = "<p>No structural differences detected.</p>";
-    return;
-  }
-
-  const rows = items
-    .map(
-      (item) => `
-        <tr>
-          <td><span class="type-tag">${escHtml(item.kind)}</span></td>
-          <td>${escHtml(item.category)}</td>
-          <td><code>${escHtml(item.path)}</code></td>
-          <td>${escHtml(item.message || formatDiffChange(item.old, item.new))}</td>
-        </tr>`,
-    )
-    .join("");
-
-  refs.diffList.innerHTML = `
-    <table class="resource-table">
-      <thead>
-        <tr>
-          <th>Kind</th>
-          <th>Category</th>
-          <th>Path</th>
-          <th>Change</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>`;
-}
-
-function renderResourceDetail() {
-  if (!state.resourceDetail) {
-    refs.resourceModal.classList.add("hidden");
-    return;
-  }
-
-  refs.resourceModalTitle.textContent = `${state.resourceDetail.type} / ${state.resourceDetail.id}`;
-  refs.resourceModalMeta.textContent = `${state.resourceDetail.name || "unnamed resource"} · ${formatBytes(state.resourceDetail.size)}`;
-  refs.resourceModalPayload.textContent = chunkHex(
-    state.resourceDetail.payload,
-  );
-  refs.resourceModal.classList.remove("hidden");
-}
+// Utilities -----------------------------------------------------------------
 
 function invokeWasm(name, ...args) {
   const fn = globalThis[name];
@@ -617,98 +495,20 @@ function formatBytes(value) {
     return `${size} bytes`;
   }
   const units = ["KiB", "MiB", "GiB"];
-  let scaled = size;
-  let unitIndex = -1;
-  while (scaled >= 1024 && unitIndex < units.length - 1) {
-    scaled /= 1024;
-    unitIndex += 1;
+  let n = size / 1024;
+  let i = 0;
+  while (n >= 1024 && i < units.length - 1) {
+    n /= 1024;
+    i++;
   }
-  return `${scaled.toFixed(scaled >= 10 ? 1 : 2)} ${units[unitIndex]}`;
-}
-
-function formatCount(value) {
-  return Number(value).toLocaleString();
-}
-
-function formatLocation(location) {
-  const parts = [];
-  if (location.area) {
-    parts.push(location.area);
-  }
-  if (location.blockType) {
-    parts.push(`block ${location.blockType}`);
-  }
-  if (location.sectionIndex !== undefined && location.sectionIndex !== null) {
-    parts.push(`section ${location.sectionIndex}`);
-  }
-  if (location.nameOffset) {
-    parts.push(`name offset ${formatHex(location.nameOffset)}`);
-  }
-  parts.push(`offset ${formatHex(location.offset || 0)}`);
-  return parts.join(" · ");
-}
-
-function formatDiffChange(oldValue, newValue) {
-  const oldText =
-    oldValue === undefined || oldValue === null
-      ? "none"
-      : JSON.stringify(oldValue);
-  const newText =
-    newValue === undefined || newValue === null
-      ? "none"
-      : JSON.stringify(newValue);
-  return `${oldText} -> ${newText}`;
-}
-
-function buildBaseName(name) {
-  return name.replace(/\.[^.]+$/, "");
-}
-
-function buildDownloadName(name, extension) {
-  return `${buildBaseName(name)}.${extension}`;
-}
-
-function downloadText(name, content, mimeType) {
-  downloadBlob(name, new Blob([content], { type: mimeType }));
-}
-
-function downloadBlob(name, blob) {
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = name;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-  URL.revokeObjectURL(url);
-}
-
-function chunkHex(hex) {
-  const chunks = [];
-  for (let index = 0; index < hex.length; index += 64) {
-    chunks.push(hex.slice(index, index + 64));
-  }
-  return chunks.join("\n");
-}
-
-function hexToBytes(hex) {
-  const clean = hex.trim();
-  const output = new Uint8Array(clean.length / 2);
-  for (let index = 0; index < clean.length; index += 2) {
-    output[index / 2] = parseInt(clean.slice(index, index + 2), 16);
-  }
-  return output;
+  return `${n.toFixed(n < 10 ? 2 : 1)} ${units[i]}`;
 }
 
 function escHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function escAttr(value) {
-  return escHtml(value);
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
