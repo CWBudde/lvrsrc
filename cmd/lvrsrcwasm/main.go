@@ -17,7 +17,6 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
-	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
@@ -27,6 +26,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
+	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 )
 
 var wasmHandlers []js.Func
