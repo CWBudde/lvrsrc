@@ -488,11 +488,11 @@ This is the structurally largest block still opaque. `pylabview`'s `LVheap.py` i
 Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap/nodes`:
 
 - [x] `HeapNode` base type with attributes + children — `internal/codecs/heap/node.go` ships `Node{Tag, RawTagID, HasExplicitTag, Scope, SizeSpec, Attribs, Content, ByteSize, Children, parent}` and a top-level `Walk(content)` that returns `WalkResult{Flat, Roots}` mirroring pylabview's flat `section.objects` plus a parent/child tree projection. Variable-size foundation (`readU124`, `readS124`, `readS24`) ported in `varsize.go`. **Verified: 22 541 heap entries from 42 corpus FPHb/BDHb streams (84 top-level roots) decode cleanly**, no errors, full byte-accounting (no trailing or short reads). pylabview's TagClose-as-sibling tree shape is reproduced exactly.
-- [ ] `HeapNodeStdInt` (U124 / S24 variable-length encoding) — **deferred to next turn**: per-tag typed payload decoders sit on top of the base walker. The base walker already preserves the raw `Content` bytes for these nodes so callers can re-parse later without breaking round-trip.
-- [ ] `HeapNodeTypeId` — deferred (same reason).
-- [ ] `HeapNodeRect` — deferred.
-- [ ] `HeapNodePoint` — deferred.
-- [ ] `HeapNodeString` — deferred.
+- [x] `HeapNodeStdInt` (U124 / S24 variable-length encoding) — `Node.AsStdInt(signed bool) (int64, error)` reads the node's `Content` as a big-endian integer of length `len(Content)`. Supports both signed and unsigned variants; rejects bool-shaped nodes and content > 8 bytes. Note: the U124/S24 variable-length encoding is used by the *attribute list* and *content size header*, not the StdInt content body itself; pylabview's `HeapNodeStdInt` reads `len(content)` BE bytes — which is what `AsStdInt` does.
+- [x] `HeapNodeTypeId` — `Node.AsTypeID() (int64, error)`, alias for `AsStdInt(true)` matching pylabview's `HeapNodeTypeId(HeapNodeStdInt)` with `signed=True, btlen=-1`.
+- [x] `HeapNodeRect` — `Node.AsRect() (Rect, error)` returns `Rect{Left, Top, Right, Bottom}` (4 × BE int16, exactly 8 bytes).
+- [x] `HeapNodePoint` — `Node.AsPoint() (Point, error)` returns `Point{X, Y}` (2 × BE int16, exactly 4 bytes).
+- [x] `HeapNodeString` — `Node.AsString() (text string, isNull bool, error)`. SizeSpec 0/7 (bool-shaped) is treated as the pylabview `[NULL]` marker; SizeSpec 6 with empty content is a legitimate empty string. Returned bytes are not transcoded.
 - [x] `HeapNodeBool` — already covered by the base walker via `SizeSpec` 0/7 + `Node.IsBool()` / `Node.BoolValue()` helpers (no separate node type needed because pylabview encodes bools entirely in the SizeSpec field, with no content body).
 - [ ] `HeapNodeTDDataFill` and `HeapNodeTDDataFillLeaf` — deferred (largest remaining piece; depends on the LVdatatype TDObjectFoo subclass family from Phase 8.1's open-question list).
 - [x] Opaque-bytes fallback for every node type `pylabview` itself leaves partially decoded — `Node.Content` IS the opaque-bytes fallback. Every node, regardless of tag, has its content preserved verbatim so unparsed nodes round-trip exactly.
