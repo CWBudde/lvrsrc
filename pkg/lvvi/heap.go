@@ -1,7 +1,11 @@
 package lvvi
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdhb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fphb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/heap"
 )
@@ -140,6 +144,68 @@ func projectHeapTree(w heap.WalkResult) HeapTree {
 		}
 	}
 	return HeapTree{Nodes: nodes, Roots: roots}
+}
+
+// BlockDiagram returns the decoded BDHb (Block-Diagram Heap) tree for
+// the wrapped file. Returns ok=false when no BDHb section is present or
+// the codec failed to decode it. The returned HeapTree shares the same
+// projection conventions as FrontPanel() — Parent/Children indices are
+// pre-resolved, and Scope is one of "open", "leaf", "close".
+func (m *Model) BlockDiagram() (HeapTree, bool) {
+	if m == nil || m.file == nil {
+		return HeapTree{}, false
+	}
+	refs := sectionsOf(m.file, string(bdhb.FourCC))
+	if len(refs) == 0 {
+		return HeapTree{}, false
+	}
+	ctx := codecs.Context{FileVersion: m.file.Header.FormatVersion, Kind: m.file.Kind}
+	raw, err := (bdhb.Codec{}).Decode(ctx, refs[0].Payload)
+	if err != nil {
+		return HeapTree{}, false
+	}
+	v, ok := raw.(bdhb.Value)
+	if !ok {
+		return HeapTree{}, false
+	}
+	return projectHeapTree(v.Tree), true
+}
+
+// HeapTagName resolves a HeapNode's Tag to its best-known symbolic name.
+//
+// LabVIEW heaps reuse the same int-tag namespace for several different
+// enum families (system tags, class tags, field tags, …); pylabview
+// disambiguates by tracking a context-stack as it walks the stream. We
+// don't yet replicate that full state machine, so the resolver tries
+// the families in priority order and returns the first hit:
+//
+//   1. Negative tags map onto pylabview's SL_SYSTEM_TAGS.
+//   2. Positive tags are tried against ClassTag (object classes), then
+//      FieldTag (per-field tags). ClassTag wins ties because in practice
+//      the demo cares about object boundaries first.
+//
+// Unresolved tags fall back to a numeric label like "Tag(1234)" so the
+// UI never has to deal with an empty string. Callers that want to
+// distinguish "resolved" from "fallback" can check for a parenthesis in
+// the result.
+func HeapTagName(n HeapNode) string {
+	tag := n.Tag
+	if tag < 0 {
+		st := heap.SystemTag(tag)
+		if name := st.String(); !strings.Contains(name, "(") {
+			return name
+		}
+	} else {
+		ct := heap.ClassTag(tag)
+		if name := ct.String(); !strings.Contains(name, "(") {
+			return name
+		}
+		ft := heap.FieldTag(tag)
+		if name := ft.String(); !strings.Contains(name, "(") {
+			return name
+		}
+	}
+	return fmt.Sprintf("Tag(%d)", tag)
 }
 
 func scopeString(s heap.NodeScope) string {

@@ -74,6 +74,8 @@
 
         <div class="tabs">
           <button class="tab active" data-tab="info">Info</button>
+          <button class="tab" data-tab="frontpanel">Front Panel</button>
+          <button class="tab" data-tab="blockdiagram">Block Diagram</button>
           <button class="tab" data-tab="structure">Structure</button>
         </div>
 
@@ -105,6 +107,76 @@
               flat list.
             </p>
             <div id="info-types" class="info-types"></div>
+          </div>
+        </div>
+
+        <div id="tab-frontpanel" class="tab-content">
+          <div class="card heap-fidelity-card">
+            <h3>Render fidelity</h3>
+            <p class="subtle-text">
+              This is an <strong>approximate</strong>, structural view of
+              the Front-Panel heap (FPHb). It shows the decoded
+              tag-stream tree with class names resolved where pylabview's
+              enums match. We do <strong>not</strong> render positioned UI
+              skins, custom images, or runtime-only state — those need
+              per-class field decoders that are out of scope for v1.
+              Unrecognised tags appear as numeric placeholders to make
+              gaps obvious.
+            </p>
+          </div>
+          <div id="fp-summary-card" class="card hidden">
+            <h3>Objects by class</h3>
+            <p class="subtle-text">
+              Frequency of each opening-scope tag — what's actually on
+              this front panel.
+            </p>
+            <div id="fp-histogram" class="heap-hist"></div>
+          </div>
+          <div id="fp-tree-card" class="card hidden">
+            <h3>Object tree</h3>
+            <p class="subtle-text">
+              Tree of opening-scope nodes (close markers and pure-leaf
+              fields are folded into their parents). Click a row to
+              expand its children.
+            </p>
+            <div id="fp-tree" class="heap-tree"></div>
+          </div>
+          <div id="fp-empty" class="card hidden">
+            <p>No FPHb (front-panel heap) section in this file.</p>
+          </div>
+        </div>
+
+        <div id="tab-blockdiagram" class="tab-content">
+          <div class="card heap-fidelity-card">
+            <h3>Render fidelity</h3>
+            <p class="subtle-text">
+              This is an <strong>approximate</strong>, structural view of
+              the Block-Diagram heap (BDHb). It shows the decoded
+              tag-stream tree with class names resolved where pylabview's
+              enums match. Wire routing, terminal positions, and
+              graphical layout are <strong>not</strong> rendered — they
+              require the per-object field decoders that are out of
+              scope for v1.
+            </p>
+          </div>
+          <div id="bd-summary-card" class="card hidden">
+            <h3>Primitives and structures</h3>
+            <p class="subtle-text">
+              Frequency of each opening-scope tag — what's on this block
+              diagram (loops, structures, primitives, SubVI calls).
+            </p>
+            <div id="bd-histogram" class="heap-hist"></div>
+          </div>
+          <div id="bd-tree-card" class="card hidden">
+            <h3>Diagram tree</h3>
+            <p class="subtle-text">
+              Tree of opening-scope nodes. Unrecognised tags appear with
+              their numeric placeholder.
+            </p>
+            <div id="bd-tree" class="heap-tree"></div>
+          </div>
+          <div id="bd-empty" class="card hidden">
+            <p>No BDHb (block-diagram heap) section in this file.</p>
           </div>
         </div>
 

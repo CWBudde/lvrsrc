@@ -105,6 +105,119 @@ func TestModelFrontPanelOnCorpusHasConsistentTreeIndices(t *testing.T) {
 		totalRoots, totalNodes, exercised)
 }
 
+func TestModelBlockDiagramReturnsFalseWhenNoBDHb(t *testing.T) {
+	m, _ := DecodeKnownResources(&lvrsrc.File{})
+	if _, ok := m.BlockDiagram(); ok {
+		t.Error("BlockDiagram() ok = true on empty file, want false")
+	}
+}
+
+func TestModelBlockDiagramOnCorpus(t *testing.T) {
+	entries, err := os.ReadDir(corpus.Dir())
+	if err != nil {
+		t.Skipf("corpus directory not present: %v", err)
+	}
+	totalNodes := 0
+	exercised := 0
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		ext := filepath.Ext(e.Name())
+		if ext != ".vi" && ext != ".ctl" && ext != ".vit" {
+			continue
+		}
+		f, err := lvrsrc.Open(filepath.Join(corpus.Dir(), e.Name()), lvrsrc.OpenOptions{})
+		if err != nil {
+			t.Fatalf("open %s: %v", e.Name(), err)
+		}
+		m, _ := DecodeKnownResources(f)
+		tree, ok := m.BlockDiagram()
+		if !ok {
+			continue
+		}
+		exercised++
+		totalNodes += len(tree.Nodes)
+		// Same Parent/Children consistency invariants as FrontPanel.
+		for i, n := range tree.Nodes {
+			for _, ci := range n.Children {
+				if tree.Nodes[ci].Parent != i {
+					t.Fatalf("%s: BDHb child/parent mismatch at %d→%d", e.Name(), i, ci)
+				}
+			}
+		}
+	}
+	if exercised == 0 {
+		t.Skip("no BDHb-bearing corpus VIs exercised")
+	}
+	t.Logf("BlockDiagram: %d total nodes across %d corpus VIs", totalNodes, exercised)
+}
+
+func TestHeapTagNameKnownAndFallback(t *testing.T) {
+	// SystemTag: -3 → SL__object.
+	if got := HeapTagName(HeapNode{Tag: -3, Scope: "open"}); got != "SL__object" {
+		t.Errorf("HeapTagName(-3) = %q, want SL__object", got)
+	}
+	// Unknown positive tag falls back to a numeric label, not empty.
+	got := HeapTagName(HeapNode{Tag: 99999, Scope: "leaf"})
+	if got == "" {
+		t.Error("HeapTagName(unknown) = empty, want a numeric fallback")
+	}
+}
+
+func TestHeapTagNameResolvesCorpusOpenTags(t *testing.T) {
+	entries, err := os.ReadDir(corpus.Dir())
+	if err != nil {
+		t.Skipf("corpus directory not present: %v", err)
+	}
+	for _, e := range entries {
+		f, err := lvrsrc.Open(filepath.Join(corpus.Dir(), e.Name()), lvrsrc.OpenOptions{})
+		if err != nil {
+			continue
+		}
+		m, _ := DecodeKnownResources(f)
+		tree, ok := m.FrontPanel()
+		if !ok || len(tree.Nodes) == 0 {
+			continue
+		}
+		// At least some open-scope nodes must resolve to a non-numeric
+		// tag name; otherwise the resolver is useless.
+		resolved := 0
+		opens := 0
+		for _, n := range tree.Nodes {
+			if n.Scope != "open" {
+				continue
+			}
+			opens++
+			name := HeapTagName(n)
+			// Numeric fallbacks contain "(" — e.g. "ClassTag(123)".
+			if name != "" && !containsRune(name, '(') {
+				resolved++
+			}
+		}
+		if opens == 0 {
+			continue
+		}
+		if resolved == 0 {
+			t.Errorf("%s: HeapTagName resolved 0/%d open tags — resolver coverage is empty",
+				e.Name(), opens)
+		}
+		t.Logf("%s: HeapTagName resolved %d/%d open-scope FPHb tags",
+			e.Name(), resolved, opens)
+		return
+	}
+	t.Skip("no FPHb-bearing corpus VI")
+}
+
+func containsRune(s string, r rune) bool {
+	for _, c := range s {
+		if c == r {
+			return true
+		}
+	}
+	return false
+}
+
 func TestModelFrontPanelScopeStrings(t *testing.T) {
 	entries, err := os.ReadDir(corpus.Dir())
 	if err != nil {

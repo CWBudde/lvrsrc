@@ -17,6 +17,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
+	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
@@ -89,6 +90,34 @@ type WASMInfo struct {
 	Flags       *WASMFlags         `json:"flags,omitempty"`
 	Types       []WASMTypeEntry    `json:"types,omitempty"`
 	Connector   *WASMConnectorPane `json:"connector,omitempty"`
+	FrontPanel  *WASMHeapTree      `json:"front_panel,omitempty"`
+	BlockDiag   *WASMHeapTree      `json:"block_diagram,omitempty"`
+}
+
+// WASMHeapTree is the JS-friendly projection of a decoded FPHb / BDHb
+// heap. It carries a flat node list (one entry per tag) plus the
+// indices of the top-level entries. Class-name resolution happens
+// server-side via lvvi.HeapTagName.
+type WASMHeapTree struct {
+	Nodes []WASMHeapNode `json:"nodes"`
+	Roots []int          `json:"roots"`
+	// Histogram maps the resolved tag name to the count of open-scope
+	// nodes carrying it. This is what the demo summarises in the
+	// "objects by class" card without re-walking on the JS side.
+	Histogram map[string]int `json:"histogram,omitempty"`
+}
+
+// WASMHeapNode is the compact projection of one heap entry. Content
+// bytes are intentionally not surfaced (they would multiply the JSON
+// payload several-fold and aren't useful for an approximate render);
+// callers that need them can fall back to the resource list.
+type WASMHeapNode struct {
+	Tag         int32  `json:"tag"`
+	TagName     string `json:"tag_name"`
+	Scope       string `json:"scope"`
+	Parent      int    `json:"parent"`
+	Children    []int  `json:"children,omitempty"`
+	ContentSize int    `json:"content_size,omitempty"`
 }
 
 // WASMTypeEntry is a JSON-friendly projection of a VCTP type-descriptor
@@ -370,7 +399,40 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 	// Connector pane — read CONP + CPC2 and resolve CONP through VCTP.
 	info.Connector = decodeConnector(ctx, file, info.Types)
 
+	// Front-panel and block-diagram heaps — projected via pkg/lvvi so
+	// the JS side gets a cycle-free, per-node tag-name-resolved tree.
+	model, _ := lvvi.DecodeKnownResources(file)
+	if fp, ok := model.FrontPanel(); ok {
+		info.FrontPanel = projectHeapTreeForWASM(fp)
+	}
+	if bd, ok := model.BlockDiagram(); ok {
+		info.BlockDiag = projectHeapTreeForWASM(bd)
+	}
+
 	return info
+}
+
+func projectHeapTreeForWASM(t lvvi.HeapTree) *WASMHeapTree {
+	out := &WASMHeapTree{
+		Nodes:     make([]WASMHeapNode, len(t.Nodes)),
+		Roots:     append([]int(nil), t.Roots...),
+		Histogram: make(map[string]int),
+	}
+	for i, n := range t.Nodes {
+		name := lvvi.HeapTagName(n)
+		out.Nodes[i] = WASMHeapNode{
+			Tag:         n.Tag,
+			TagName:     name,
+			Scope:       n.Scope,
+			Parent:      n.Parent,
+			Children:    append([]int(nil), n.Children...),
+			ContentSize: len(n.Content),
+		}
+		if n.Scope == "open" {
+			out.Histogram[name]++
+		}
+	}
+	return out
 }
 
 func decodeTypes(ctx codecs.Context, file *lvrsrc.File) []WASMTypeEntry {

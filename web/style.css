@@ -849,6 +849,127 @@ header h1 {
   font-family: var(--mono);
 }
 
+/* Heap tree (Front Panel + Block Diagram tabs) */
+.heap-fidelity-card {
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+
+.heap-hist-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.heap-hist-pill,
+.heap-hist-pill-fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--badge-bg);
+}
+
+.heap-hist-pill-fallback {
+  opacity: 0.55;
+  font-style: italic;
+}
+
+.heap-hist-count {
+  display: inline-block;
+  min-width: 1.5em;
+  text-align: center;
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0 0.35em;
+  font-size: 0.75rem;
+}
+
+.heap-tree {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.heap-node {
+  margin: 0.15rem 0;
+  padding: 0.2rem 0.4rem;
+  border-left: 2px solid var(--border);
+}
+
+.heap-node[open] {
+  border-left-color: var(--accent);
+}
+
+.heap-node-summary,
+.heap-node-leaf {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  list-style: none;
+}
+
+details.heap-node > summary.heap-node-summary {
+  cursor: pointer;
+}
+
+details.heap-node > summary.heap-node-summary::-webkit-details-marker {
+  display: none;
+}
+
+details.heap-node > summary.heap-node-summary::before {
+  content: "▶";
+  font-size: 0.6em;
+  color: var(--text-muted);
+  width: 0.8em;
+  display: inline-block;
+}
+
+details.heap-node[open] > summary.heap-node-summary::before {
+  content: "▼";
+}
+
+.heap-node-leaf::before {
+  content: "•";
+  color: var(--text-muted);
+  width: 0.8em;
+  display: inline-block;
+}
+
+.heap-node-children {
+  margin-left: 1.25rem;
+}
+
+.heap-node-tag {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.heap-node-tag-fallback {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.heap-node-count,
+.heap-node-leafcount,
+.heap-node-size {
+  font-size: 0.75rem;
+  padding: 0.05em 0.4em;
+  border-radius: 4px;
+  background: var(--badge-bg);
+  color: var(--text-muted);
+}
+
+.heap-node-leafcount {
+  color: color-mix(in srgb, var(--accent) 80%, var(--text-muted));
+}
+
 /* Utility */
 .hidden {
   display: none !important;

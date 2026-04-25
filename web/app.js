@@ -33,6 +33,16 @@ const refs = {
   infoTypes: document.getElementById("info-types"),
   schemaDiagram: document.getElementById("schema-diagram"),
   resourcesList: document.getElementById("resources-list"),
+  fpEmpty: document.getElementById("fp-empty"),
+  fpSummaryCard: document.getElementById("fp-summary-card"),
+  fpHistogram: document.getElementById("fp-histogram"),
+  fpTreeCard: document.getElementById("fp-tree-card"),
+  fpTree: document.getElementById("fp-tree"),
+  bdEmpty: document.getElementById("bd-empty"),
+  bdSummaryCard: document.getElementById("bd-summary-card"),
+  bdHistogram: document.getElementById("bd-histogram"),
+  bdTreeCard: document.getElementById("bd-tree-card"),
+  bdTree: document.getElementById("bd-tree"),
 };
 
 async function initWasm() {
@@ -138,6 +148,24 @@ function render() {
     state.primary.parse.compression || "uncompressed";
 
   renderInfo();
+  renderHeapTree(
+    state.primary.parse.info.front_panel,
+    refs.fpEmpty,
+    refs.fpSummaryCard,
+    refs.fpHistogram,
+    refs.fpTreeCard,
+    refs.fpTree,
+    "fp",
+  );
+  renderHeapTree(
+    state.primary.parse.info.block_diagram,
+    refs.bdEmpty,
+    refs.bdSummaryCard,
+    refs.bdHistogram,
+    refs.bdTreeCard,
+    refs.bdTree,
+    "bd",
+  );
   renderStructure();
 
   refs.resultsEl.classList.remove("hidden");
@@ -434,6 +462,121 @@ function renderTypesList(types) {
     ${namedHtml}
     <div class="info-type-hist-label subtle-text">All ${types.length} typedescs by kind:</div>
     <div class="info-type-hist">${histRows}</div>`;
+}
+
+// Heap-tree tabs (Front Panel & Block Diagram) -----------------------------
+
+// Cap on how many top-level open-scope nodes we render eagerly per panel.
+// Heaps have hundreds of children at depth 1; rendering them all up front
+// makes the tab feel laggy on large VIs. Beyond this, we render a "show
+// more" affordance.
+const HEAP_TOP_LEVEL_LIMIT = 200;
+
+function renderHeapTree(
+  tree,
+  emptyEl,
+  summaryCard,
+  histogramEl,
+  treeCard,
+  treeEl,
+  idPrefix,
+) {
+  if (!tree || !Array.isArray(tree.nodes) || tree.nodes.length === 0) {
+    emptyEl.classList.remove("hidden");
+    summaryCard.classList.add("hidden");
+    treeCard.classList.add("hidden");
+    histogramEl.innerHTML = "";
+    treeEl.innerHTML = "";
+    return;
+  }
+  emptyEl.classList.add("hidden");
+  summaryCard.classList.remove("hidden");
+  treeCard.classList.remove("hidden");
+
+  // Histogram: top classes by count, sorted descending.
+  const hist = tree.histogram || {};
+  const sorted = Object.entries(hist).sort((a, b) => b[1] - a[1]);
+  const totalOpens = sorted.reduce((s, [, n]) => s + n, 0);
+  if (sorted.length === 0) {
+    histogramEl.innerHTML =
+      '<p class="subtle-text">No opening-scope nodes — the heap is degenerate.</p>';
+  } else {
+    histogramEl.innerHTML = `
+      <p class="subtle-text">${totalOpens} opening-scope nodes across ${sorted.length} distinct tags.</p>
+      <div class="heap-hist-grid">
+        ${sorted
+          .map(([name, n]) => {
+            const cls = name.includes("(") ? "heap-hist-pill-fallback" : "heap-hist-pill";
+            return `
+              <span class="${cls}">${escHtml(name)}<span class="heap-hist-count">${n}</span></span>`;
+          })
+          .join("")}
+      </div>`;
+  }
+
+  // Build the open-only structure: skip "close" and "leaf" nodes for the
+  // tree view. Pure-leaf nodes (fields) are folded into their open
+  // parents as a count badge.
+  const openOnly = new Set();
+  const leafCounts = new Array(tree.nodes.length).fill(0);
+  for (let i = 0; i < tree.nodes.length; i++) {
+    const n = tree.nodes[i];
+    if (n.scope === "open") openOnly.add(i);
+    else if (n.scope === "leaf" && n.parent >= 0) leafCounts[n.parent]++;
+  }
+
+  // Roots: filter to open-scope only; top-level leafs go into a special
+  // "loose leafs" section if any (rare; keep simple).
+  const openRoots = tree.roots.filter((i) => openOnly.has(i));
+  const visibleRoots = openRoots.slice(0, HEAP_TOP_LEVEL_LIMIT);
+  const truncated = openRoots.length - visibleRoots.length;
+
+  treeEl.innerHTML = visibleRoots
+    .map((idx) => renderHeapTreeNode(tree, idx, openOnly, leafCounts, idPrefix))
+    .join("");
+  if (truncated > 0) {
+    treeEl.innerHTML += `<p class="subtle-text">… and ${truncated} more top-level objects (collapsed).</p>`;
+  }
+}
+
+function renderHeapTreeNode(tree, idx, openOnly, leafCounts, idPrefix) {
+  const n = tree.nodes[idx];
+  const childOpens = (n.children || []).filter((i) => openOnly.has(i));
+  const leafCount = leafCounts[idx];
+  const tagName = n.tag_name || "Tag(?)";
+  const isResolved = !tagName.includes("(");
+  const tagClass = isResolved ? "heap-node-tag" : "heap-node-tag-fallback";
+
+  const summary = `
+    <span class="${tagClass}">${escHtml(tagName)}</span>
+    ${
+      childOpens.length > 0
+        ? `<span class="heap-node-count">${childOpens.length} child${childOpens.length === 1 ? "" : "ren"}</span>`
+        : ""
+    }
+    ${
+      leafCount > 0
+        ? `<span class="heap-node-leafcount" title="${leafCount} field/leaf entries">${leafCount} field${leafCount === 1 ? "" : "s"}</span>`
+        : ""
+    }
+    ${
+      n.content_size > 0
+        ? `<span class="heap-node-size subtle-text">${n.content_size} B</span>`
+        : ""
+    }`;
+
+  if (childOpens.length === 0) {
+    return `<div class="heap-node heap-node-leaf">${summary}</div>`;
+  }
+
+  const childHtml = childOpens
+    .map((ci) => renderHeapTreeNode(tree, ci, openOnly, leafCounts, idPrefix))
+    .join("");
+  return `
+    <details class="heap-node">
+      <summary class="heap-node-summary">${summary}</summary>
+      <div class="heap-node-children">${childHtml}</div>
+    </details>`;
 }
 
 // Structure tab -------------------------------------------------------------
