@@ -179,10 +179,10 @@ func (m *Model) BlockDiagram() (HeapTree, bool) {
 // don't yet replicate that full state machine, so the resolver tries
 // the families in priority order and returns the first hit:
 //
-//   1. Negative tags map onto pylabview's SL_SYSTEM_TAGS.
-//   2. Positive tags are tried against ClassTag (object classes), then
-//      FieldTag (per-field tags). ClassTag wins ties because in practice
-//      the demo cares about object boundaries first.
+//  1. Negative tags map onto pylabview's SL_SYSTEM_TAGS.
+//  2. Positive tags are tried against ClassTag (object classes), then
+//     FieldTag (per-field tags). ClassTag wins ties because in practice
+//     the demo cares about object boundaries first.
 //
 // Unresolved tags fall back to a numeric label like "Tag(1234)" so the
 // UI never has to deal with an empty string. Callers that want to

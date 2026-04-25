@@ -523,10 +523,10 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 10.2 Front-panel and block-diagram render (demo-side)
 
-- [ ] Render a best-effort front-panel preview from the decoded tree: controls, indicators, labels, visible groupings (ignore custom skins / images for v1)
-- [ ] Render a block-diagram overview: structures (while/for/case/sequence), primitives, SubVI references — deliberately skip wire routing in v1
-- [ ] Gracefully degrade for object types the decoder can't reach yet; surface them as opaque placeholder boxes with their tag label
-- [ ] Add a "render fidelity" legend explaining what's approximate
+- [x] Render a best-effort front-panel preview from the decoded tree: controls, indicators, labels, visible groupings (ignore custom skins / images for v1) — new "Front Panel" tab in the web demo renders a tree-view of FPHb opening-scope nodes with class names resolved by `lvvi.HeapTagName` (SystemTag → ClassTag → FieldTag fallback). Each node shows its class label, child count, and folded leaf-field count; pure leafs are surfaced as field-count badges on the parent.
+- [x] Render a block-diagram overview: structures (while/for/case/sequence), primitives, SubVI references — deliberately skip wire routing in v1 — sibling "Block Diagram" tab rendering the BDHb tree with the same projection. `pkg/lvvi.Model.BlockDiagram()` mirrors `FrontPanel()`, returning a cycle-free `HeapTree` with parent/children indices.
+- [x] Gracefully degrade for object types the decoder can't reach yet; surface them as opaque placeholder boxes with their tag label — unresolved tags fall back to `Tag(N)` form, rendered with a muted/italic style (`heap-node-tag-fallback`, `heap-hist-pill-fallback`) so coverage gaps are visually obvious. Verified on the corpus: action.ctl resolves 50/50 open-scope FPHb tags; degenerate cases never produce blank labels.
+- [x] Add a "render fidelity" legend explaining what's approximate — each new tab leads with a `heap-fidelity-card` that calls out what's structural-only (no positioned UI skins, no wire routing), why (per-class field decoders are out of scope for v1), and how unresolved tags are flagged. Histogram card on each tab summarises object counts by class.
 
 ### 10.3 v1.0 acceptance gate
 
