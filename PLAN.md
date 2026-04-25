@@ -506,8 +506,8 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 9.5 Public surface
 
-- [ ] `pkg/lvvi.Model` gains `FrontPanel()` returning the decoded tree
-- [ ] `pkg/lvdiff` decoded differ for FPHb (structural, tolerates tag ordering noise)
+- [x] `pkg/lvvi.Model` gains `FrontPanel()` returning the decoded tree — `Model.FrontPanel() (HeapTree, bool)` projects the internal `heap.WalkResult` into a cycle-free public form (`HeapTree{Nodes, Roots}` with each `HeapNode` carrying a `Parent` index and `Children` index slice). Verified across 21 corpus VIs (15164 nodes / 42 roots projected with consistent parent/children indices and `Scope ∈ {open, leaf, close}`).
+- [x] `pkg/lvdiff` decoded differ for FPHb (structural, tolerates tag ordering noise) — `fphb.Codec` is registered in `defaultDecodedDiffers` (Phase 9.4); Phase 9.5 makes the diff structural by extending `ignoreDecodedField` to suppress `heap.Envelope.Compressed` (round-trip cache), `heap.WalkResult.Roots` (redundant with `Tree.Flat`), and `heap.Node.Children` (redundant with the per-position flat walk + `Parent` edge). Identical files now produce zero FPHb decoded items; cross-file diffs no longer surface noise from the duplicated tree projection or the recompressed-bytes cache.
 
 ---
 

@@ -279,8 +279,45 @@ func summarizeBlob(b []byte) blobSummary {
 	}
 }
 
+// ignoreDecodedField reports whether a decoded-value struct field should
+// be skipped when computing a structural diff. The hook exists to silence
+// noise produced by codec-internal cache fields and tree-projection
+// fields that are redundant with other, already-compared fields.
+//
+// Currently suppressed:
+//   - vctp.Value.Compressed: a cache of the on-disk compressed bytes,
+//     redundant with the inflated content + descriptors.
+//   - heap.Envelope.Compressed: same idea — a round-trip cache that
+//     mirrors Content after decompression.
+//   - heap.WalkResult.Roots: the tree projection. Every node it
+//     reaches is also visited via WalkResult.Flat, so diffing both
+//     paths double-reports every change.
+//   - heap.Node.Children: the child pointer slice. Node positions are
+//     compared positionally through the flat list; the parent/child
+//     edge is captured by the Parent index in the lvvi-level
+//     projection. Skipping Children avoids deep recursion that
+//     duplicates per-position field diffs.
 func ignoreDecodedField(t reflect.Type, name string) bool {
-	return t.PkgPath() == "github.com/CWBudde/lvrsrc/internal/codecs/vctp" &&
-		t.Name() == "Value" &&
-		name == "Compressed"
+	switch t.PkgPath() {
+	case "github.com/CWBudde/lvrsrc/internal/codecs/vctp":
+		if t.Name() == "Value" && name == "Compressed" {
+			return true
+		}
+	case "github.com/CWBudde/lvrsrc/internal/codecs/heap":
+		switch t.Name() {
+		case "Envelope":
+			if name == "Compressed" {
+				return true
+			}
+		case "WalkResult":
+			if name == "Roots" {
+				return true
+			}
+		case "Node":
+			if name == "Children" {
+				return true
+			}
+		}
+	}
+	return false
 }
