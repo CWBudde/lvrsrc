@@ -1,6 +1,6 @@
 # Resource Coverage
 
-Typed coverage: 25/27 resource types (92.6%) across 21 corpus fixtures.
+Typed coverage: 26/27 resource types (96.3%) across 21 corpus fixtures.
 
 | FourCC | Corpus fixtures | Typed decode | Typed encode | Typed validate | Safety | Package | Read versions | Write versions |
 | ------ | --------------: | :----------: | :----------: | :------------: | ------ | ------- | ------------- | -------------- |
@@ -12,7 +12,7 @@ Typed coverage: 25/27 resource types (92.6%) across 21 corpus fixtures.
 | `CPC2` | 21 | yes | yes | yes | Tier 2 | `internal/codecs/conpane` | all | all |
 | `DTHP` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/dthp` | all | all |
 | `FPEx` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/fpex` | all | all |
-| `FPHb` | 21 | no | no | no | Opaque | `internal/codecs (fallback)` | all | all |
+| `FPHb` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/fphb` | all | all |
 | `FPSE` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/fpse` | all | all |
 | `FTAB` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/ftab` | all | all |
 | `HIST` | 21 | yes | yes | yes | Tier 1 | `internal/codecs/hist` | all | all |

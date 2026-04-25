@@ -16,6 +16,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fphb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
 	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
@@ -277,6 +278,7 @@ var shippedCodecs = []codecSpec{
 	{codec: ftab.Codec{}, packagePath: "internal/codecs/ftab"},
 	{codec: vits.Codec{}, packagePath: "internal/codecs/vits"},
 	{codec: livi.Codec{}, packagePath: "internal/codecs/livi"},
+	{codec: fphb.Codec{}, packagePath: "internal/codecs/fphb"},
 }
 
 func scanCorpus(dir string) (int, map[string]int, error) {

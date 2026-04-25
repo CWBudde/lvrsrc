@@ -10,6 +10,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fphb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
 	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
@@ -492,6 +493,7 @@ func newLvviRegistry() *codecs.Registry {
 	r.Register(ftab.Codec{})
 	r.Register(vits.Codec{})
 	r.Register(livi.Codec{})
+	r.Register(fphb.Codec{})
 	return r
 }
 

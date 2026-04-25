@@ -499,10 +499,10 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 9.4 FPHb codec
 
-- [ ] `internal/codecs/fphb` wires the envelope + tag-stream decoder + node types
-- [ ] Tier 1; round-trip verified byte-for-byte on every corpus FPHb section
-- [ ] Validate: detect truncation, unrecognised tags (warning in lenient, error in strict), node arity violations
-- [ ] Extensive fuzz coverage
+- [x] `internal/codecs/fphb` wires the envelope + tag-stream decoder + node types — `Codec{}` returns `Value{Envelope, Tree}` from `heap.DecodeEnvelope` + `heap.Walk`; registered in `pkg/lvvi`, `pkg/lvdiff`, `internal/coverage`, and the WASM `typedFourCCs` set.
+- [x] Tier 1; round-trip verified byte-for-byte on every corpus FPHb section — `TestEncodeRoundTripCorpus` walks all 21 corpus VIs and re-encodes 21 FPHb sections (15164 tag entries total) bit-for-bit; `Encode` reuses `Envelope.Compressed` cache and recompresses cleanly when cleared (covered by `TestEncodeRecompressesWhenEnvelopeCacheCleared`).
+- [x] Validate: detect truncation, unrecognised tags (warning in lenient, error in strict), node arity violations — `Validate` calls `Decode`; envelope/walker errors surface as `Tier 1` issues. Truncation, bad declared sizes, and walker-level structural violations propagate; unknown-tag classification stays a future hook on top of `tags_gen.go`.
+- [x] Extensive fuzz coverage — `FuzzDecode` (661K+ execs in 15s, no panics) and `FuzzValidate` (301K+ execs in 10s, no panics), seeded with synthetic envelopes plus up to 8 real corpus payloads.
 
 ### 9.5 Public surface
 

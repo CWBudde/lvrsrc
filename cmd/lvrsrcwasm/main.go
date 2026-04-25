@@ -253,6 +253,7 @@ var typedFourCCs = map[string]struct{}{
 	"FTAB": {},
 	"VITS": {},
 	"LIvi": {},
+	"FPHb": {},
 }
 
 func buildResources(file *lvrsrc.File) []WASMResource {
