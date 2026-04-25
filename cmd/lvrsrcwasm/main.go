@@ -20,6 +20,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
+	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -119,10 +120,26 @@ type WASMDeps struct {
 	BlockDiagram []WASMDepEntry `json:"block_diagram"`
 }
 
-// WASMDepEntry is one decoded link-info reference.
+// WASMDepEntry is one decoded link-info reference. Path fields are
+// populated when the embedded PTH0/PTH1 reference decoded cleanly.
 type WASMDepEntry struct {
-	LinkType   string   `json:"link_type"`
-	Qualifiers []string `json:"qualifiers"`
+	LinkType    string    `json:"link_type"`
+	Qualifiers  []string  `json:"qualifiers"`
+	PrimaryPath *WASMPath `json:"primary_path,omitempty"`
+}
+
+// WASMPath is the JSON-friendly projection of a typed path reference.
+// Components are rendered as strings (caller-side encoding); the
+// classification booleans summarise the path's TPIdent / TPVal.
+type WASMPath struct {
+	Ident      string   `json:"ident"`
+	TPIdent    string   `json:"tpident,omitempty"`
+	Components []string `json:"components"`
+	IsAbsolute bool     `json:"is_absolute,omitempty"`
+	IsRelative bool     `json:"is_relative,omitempty"`
+	IsUNC      bool     `json:"is_unc,omitempty"`
+	IsNotAPath bool     `json:"is_not_a_path,omitempty"`
+	IsPhony    bool     `json:"is_phony,omitempty"`
 }
 
 func main() {
@@ -214,6 +231,7 @@ var typedFourCCs = map[string]struct{}{
 	"BDEx": {},
 	"FTAB": {},
 	"VITS": {},
+	"LIvi": {},
 }
 
 func buildResources(file *lvrsrc.File) []WASMResource {
@@ -403,8 +421,9 @@ func decodeLIfp(ctx codecs.Context, payload []byte) []WASMDepEntry {
 	out := make([]WASMDepEntry, 0, len(v.Entries))
 	for _, entry := range v.Entries {
 		out = append(out, WASMDepEntry{
-			LinkType:   entry.LinkType,
-			Qualifiers: append([]string{}, entry.Qualifiers...),
+			LinkType:    entry.LinkType,
+			Qualifiers:  append([]string{}, entry.Qualifiers...),
+			PrimaryPath: pathRefToWASM(entry.PrimaryPath.Raw),
 		})
 	}
 	return out
@@ -422,11 +441,39 @@ func decodeLIbd(ctx codecs.Context, payload []byte) []WASMDepEntry {
 	out := make([]WASMDepEntry, 0, len(v.Entries))
 	for _, entry := range v.Entries {
 		out = append(out, WASMDepEntry{
-			LinkType:   entry.LinkType,
-			Qualifiers: append([]string{}, entry.Qualifiers...),
+			LinkType:    entry.LinkType,
+			Qualifiers:  append([]string{}, entry.Qualifiers...),
+			PrimaryPath: pathRefToWASM(entry.PrimaryPath.Raw),
 		})
 	}
 	return out
+}
+
+// pathRefToWASM tries to decode a raw embedded path reference through
+// internal/codecs/pthx and projects the result to a JSON-friendly form.
+// Returns nil when the bytes are missing or fail to decode.
+func pathRefToWASM(raw []byte) *WASMPath {
+	if len(raw) == 0 {
+		return nil
+	}
+	v, _, err := pthx.Decode(raw)
+	if err != nil {
+		return nil
+	}
+	components := make([]string, len(v.Components))
+	for i, c := range v.Components {
+		components[i] = string(c)
+	}
+	return &WASMPath{
+		Ident:      v.Ident,
+		TPIdent:    v.TPIdent,
+		Components: components,
+		IsAbsolute: v.IsAbsolute(),
+		IsRelative: v.IsRelative(),
+		IsUNC:      v.IsUNC(),
+		IsNotAPath: v.IsNotAPath(),
+		IsPhony:    v.IsPhony(),
+	}
 }
 
 func successResult(data any) string {

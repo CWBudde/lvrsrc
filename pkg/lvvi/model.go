@@ -12,9 +12,13 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
 	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
+	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/livi"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
+	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
@@ -72,6 +76,53 @@ type LVSRFlags struct {
 	AutoErrorHandling bool
 	HasBreakpoints    bool
 	Debuggable        bool
+}
+
+// DependencyEntry is one decoded link reference from an LIfp / LIbd /
+// LIvi block. It surfaces the per-entry metadata callers most often
+// need, without committing to the full LinkObjRef subclass family
+// (deferred to Phase 9).
+type DependencyEntry struct {
+	// LinkType is the entry's 4-byte type code (e.g. "VILB", "VICC"),
+	// preserved verbatim from on disk. Callers can treat it as a
+	// stable opaque identifier for grouping or filtering.
+	LinkType string
+	// Qualifiers are the decoded Pascal-string qualifier names that
+	// disambiguate the link target.
+	Qualifiers []string
+	// PrimaryPath is the decoded primary path reference, when one was
+	// successfully parsed through internal/codecs/pthx. Callers
+	// inspect Path.Components for the rendered segments.
+	PrimaryPath DependencyPath
+	// HasPrimaryPath reports whether PrimaryPath was populated.
+	HasPrimaryPath bool
+	// SecondaryPath is the optional secondary path reference, when
+	// one was emitted. Callers should check HasSecondaryPath before
+	// using it.
+	SecondaryPath DependencyPath
+	// HasSecondaryPath reports whether SecondaryPath was populated.
+	HasSecondaryPath bool
+}
+
+// DependencyPath is the typed view of an embedded path reference,
+// suitable for UI rendering. It is a thin re-projection of pthx.Value
+// so callers do not have to import the internal codec.
+type DependencyPath struct {
+	// Ident is the path FourCC ("PTH0", "PTH1", "PTH2").
+	Ident string
+	// TPIdent is the 4-character path-type code from PTH1/PTH2 (e.g.
+	// "abs ", "rel ", "unc ", "!pth"); empty for PTH0.
+	TPIdent string
+	// Components are the path segments in their on-disk order.
+	Components []string
+	// IsAbsolute / IsRelative / IsUNC / IsNotAPath / IsPhony summarise
+	// the path's classification when known. See internal/codecs/pthx
+	// for the full semantics.
+	IsAbsolute bool
+	IsRelative bool
+	IsUNC      bool
+	IsNotAPath bool
+	IsPhony    bool
 }
 
 // Model is the higher-level, read-oriented view of a LabVIEW file.
@@ -142,6 +193,33 @@ func (m *Model) Flags() (LVSRFlags, bool) {
 		HasBreakpoints:    m.lvsr.HasBreakpoints(),
 		Debuggable:        m.lvsr.Debuggable(),
 	}, true
+}
+
+// FrontPanelImports returns the decoded LIfp dependency entries for
+// the wrapped file. Returns nil and ok=false when no LIfp block is
+// present or it cannot be decoded.
+func (m *Model) FrontPanelImports() ([]DependencyEntry, bool) {
+	if m == nil || m.file == nil {
+		return nil, false
+	}
+	return decodeLifpEntries(m.file)
+}
+
+// BlockDiagramImports returns the decoded LIbd dependency entries for
+// the wrapped file.
+func (m *Model) BlockDiagramImports() ([]DependencyEntry, bool) {
+	if m == nil || m.file == nil {
+		return nil, false
+	}
+	return decodeLibdEntries(m.file)
+}
+
+// VIDependencies surfaces the LIvi block's metadata. Phase 7.2 only
+// decoded the envelope; per-entry parsing lands in Phase 7.3 / 9.
+// Until then this returns ok=false to signal "no per-entry view yet";
+// callers can read raw counts via Model.File().Blocks if needed.
+func (m *Model) VIDependencies() ([]DependencyEntry, bool) {
+	return nil, false
 }
 
 // BreakpointCount returns the integer stored at flag-word index 28 of
@@ -283,6 +361,7 @@ func newLvviRegistry() *codecs.Registry {
 	r.Register(bdex.Codec{})
 	r.Register(ftab.Codec{})
 	r.Register(vits.Codec{})
+	r.Register(livi.Codec{})
 	return r
 }
 
@@ -322,4 +401,103 @@ func appendIfMultiple(issues []Issue, fourCC string, count int) []Issue {
 		Message:  fmt.Sprintf("found %d %q sections; model uses the first", count, fourCC),
 		Location: lvrsrc.IssueLocation{Area: "resource", BlockType: fourCC},
 	})
+}
+
+func decodeLifpEntries(f *lvrsrc.File) ([]DependencyEntry, bool) {
+	refs := sectionsOf(f, lifp.FourCC)
+	if len(refs) == 0 {
+		return nil, false
+	}
+	ctx := codecs.Context{FileVersion: f.Header.FormatVersion, Kind: f.Kind}
+	raw, err := (lifp.Codec{}).Decode(ctx, refs[0].Payload)
+	if err != nil {
+		return nil, false
+	}
+	v, ok := raw.(lifp.Value)
+	if !ok {
+		return nil, false
+	}
+	out := make([]DependencyEntry, 0, len(v.Entries))
+	for _, e := range v.Entries {
+		out = append(out, projectLifpEntry(e))
+	}
+	return out, true
+}
+
+func decodeLibdEntries(f *lvrsrc.File) ([]DependencyEntry, bool) {
+	refs := sectionsOf(f, libd.FourCC)
+	if len(refs) == 0 {
+		return nil, false
+	}
+	ctx := codecs.Context{FileVersion: f.Header.FormatVersion, Kind: f.Kind}
+	raw, err := (libd.Codec{}).Decode(ctx, refs[0].Payload)
+	if err != nil {
+		return nil, false
+	}
+	v, ok := raw.(libd.Value)
+	if !ok {
+		return nil, false
+	}
+	out := make([]DependencyEntry, 0, len(v.Entries))
+	for _, e := range v.Entries {
+		out = append(out, projectLibdEntry(e))
+	}
+	return out, true
+}
+
+func projectLifpEntry(e lifp.Entry) DependencyEntry {
+	out := DependencyEntry{
+		LinkType:   e.LinkType,
+		Qualifiers: append([]string{}, e.Qualifiers...),
+	}
+	if len(e.PrimaryPath.Raw) > 0 {
+		if pv, err := e.PrimaryPath.Decoded(); err == nil {
+			out.PrimaryPath = projectPath(pv)
+			out.HasPrimaryPath = true
+		}
+	}
+	if e.SecondaryPath != nil && len(e.SecondaryPath.Raw) > 0 {
+		if sv, err := e.SecondaryPath.Decoded(); err == nil {
+			out.SecondaryPath = projectPath(sv)
+			out.HasSecondaryPath = true
+		}
+	}
+	return out
+}
+
+func projectLibdEntry(e libd.Entry) DependencyEntry {
+	out := DependencyEntry{
+		LinkType:   e.LinkType,
+		Qualifiers: append([]string{}, e.Qualifiers...),
+	}
+	if len(e.PrimaryPath.Raw) > 0 {
+		if pv, err := e.PrimaryPath.Decoded(); err == nil {
+			out.PrimaryPath = projectPath(pv)
+			out.HasPrimaryPath = true
+		}
+	}
+	if e.SecondaryPath != nil && len(e.SecondaryPath.Raw) > 0 {
+		if sv, err := e.SecondaryPath.Decoded(); err == nil {
+			out.SecondaryPath = projectPath(sv)
+			out.HasSecondaryPath = true
+		}
+	}
+	return out
+}
+
+func projectPath(v pthx.Value) DependencyPath {
+	components := make([]string, len(v.Components))
+	for i, c := range v.Components {
+		components[i] = string(c)
+	}
+	return DependencyPath{
+		Ident:      v.Ident,
+		TPIdent:    v.TPIdent,
+		Components: components,
+		IsAbsolute: v.IsAbsolute(),
+		IsRelative: v.IsRelative(),
+		IsUNC:      v.IsUNC(),
+		IsNotAPath: v.IsNotAPath(),
+		IsPhony:    v.IsPhony(),
+	}
 }

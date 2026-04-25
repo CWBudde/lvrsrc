@@ -21,6 +21,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/livi"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
 	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
@@ -76,6 +77,7 @@ func defaultDecodedDiffers(a, b *lvrsrc.File) map[string]DecodedDiffer {
 	r.Register(bdex.Codec{})
 	r.Register(ftab.Codec{})
 	r.Register(vits.Codec{})
+	r.Register(livi.Codec{})
 
 	aCtx := contextFromFile(a)
 	bCtx := contextFromFile(b)

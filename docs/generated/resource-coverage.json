@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 24,
-    "typedResourceTypes": 24,
-    "opaqueResourceTypes": 3,
-    "typedCoveragePct": 88.88888888888889
+    "typedCodecCount": 25,
+    "typedResourceTypes": 25,
+    "opaqueResourceTypes": 2,
+    "typedCoveragePct": 92.5925925925926
   },
   "resources": [
     {
@@ -319,12 +319,12 @@
       "fourCC": "LIvi",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/livi",
       "readVersions": {
         "min": 0,
         "max": 0

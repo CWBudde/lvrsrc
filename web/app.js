@@ -269,10 +269,14 @@ function renderDepGroup(label, entries) {
   const rows = entries
     .map((entry) => {
       const qualifier = (entry.qualifiers || []).filter(Boolean).join(" :: ");
+      const path = renderDepPath(entry.primary_path);
       return `
         <li class="info-dep-row">
-          <span class="info-dep-qualifier">${escHtml(qualifier) || "<em>unnamed</em>"}</span>
-          ${entry.link_type ? `<span class="info-dep-kind">${escHtml(entry.link_type)}</span>` : ""}
+          <div class="info-dep-row-main">
+            <span class="info-dep-qualifier">${escHtml(qualifier) || "<em>unnamed</em>"}</span>
+            ${entry.link_type ? `<span class="info-dep-kind">${escHtml(entry.link_type)}</span>` : ""}
+          </div>
+          ${path}
         </li>`;
     })
     .join("");
@@ -281,6 +285,28 @@ function renderDepGroup(label, entries) {
       <h4>${escHtml(label)} <span class="info-dep-count">${entries.length}</span></h4>
       <ul class="info-dep-list">${rows}</ul>
     </section>`;
+}
+
+function renderDepPath(path) {
+  if (!path) {
+    return "";
+  }
+  const components = (path.components || []).filter((c) => c.length > 0);
+  // Path display: PTH1 uses "/" as separator since TPIdent encodes the
+  // root style; PTH0 treats components as drive/folder/file segments
+  // joined with "/" too. Empty components are dropped (they are common
+  // padding in Tools.lvlib paths).
+  const rendered = components.map(escHtml).join(" / ");
+  let prefix = "";
+  if (path.is_absolute) prefix = "abs ";
+  else if (path.is_relative) prefix = "rel ";
+  else if (path.is_unc) prefix = "unc ";
+  else if (path.is_not_a_path) prefix = "!pth";
+  else if (path.is_phony) prefix = "phony ";
+  if (rendered === "" && prefix === "") {
+    return "";
+  }
+  return `<div class="info-dep-path"><code>${prefix}${rendered || "<em>empty</em>"}</code></div>`;
 }
 
 // Structure tab -------------------------------------------------------------

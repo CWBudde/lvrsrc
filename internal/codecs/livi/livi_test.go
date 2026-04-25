@@ -49,8 +49,8 @@ func TestDecodeAcceptsLVCCMarkerForCTLFiles(t *testing.T) {
 	if val.Marker != "LVCC" {
 		t.Errorf("Marker = %q, want %q", val.Marker, "LVCC")
 	}
-	if val.EntryCount != 0 || len(val.Entries) != 0 {
-		t.Errorf("Entries = %+v, want none", val.Entries)
+	if val.EntryCount != 0 || len(val.Body) != 0 {
+		t.Errorf("Body = %+v, want empty", val.Body)
 	}
 }
 

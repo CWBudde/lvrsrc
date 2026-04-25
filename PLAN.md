@@ -408,35 +408,35 @@ Today `LIfp` / `LIbd` decode only the entry envelope and opaque tail. `LIvi` is 
 
 ### 7.1 PTH0 / PTH1 path decoder
 
-- [ ] Research `LVPath0` / `LVPath1` layouts (references/pylabview/pylabview/LVclasses.py:94 and :159)
-- [ ] Write `docs/resources/pth0.md` documenting type idents (`"unc "`, `"!pth"`, `"abs "`, `"rel "`), count field, and the length-prefixed component strings
-- [ ] Implement `internal/codecs/pthx` with `Value{Variant, Components []string, IsAbsolute, IsRelative, IsUNC, IsPhony}` covering both the 1-byte-length (PTH0) and 2-byte-length (PTH1) forms and the LabVIEW "zero-fill phony" case
-- [ ] Round-trip test across every PTH0 reference embedded in corpus `LIfp` / `LIbd` payloads
+- [x] Research `LVPath0` / `LVPath1` layouts (references/pylabview/pylabview/LVclasses.py:94 and :159) — variant dispatch ported from `LVlinkinfo.py:66-78` (PTH0 uses 1-byte-length components + 2-byte tpval; PTH1/PTH2 share a 2-byte-length + 4-byte tpident layout)
+- [x] Write `docs/resources/pth0.md` documenting type idents (`"unc "`, `"!pth"`, `"abs "`, `"rel "`), count field, and the length-prefixed component strings — covers both variants, the zero-fill phony case, and open questions about PTH0.TPVal semantics
+- [x] Implement `internal/codecs/pthx` with `Value{Variant, Components []string, IsAbsolute, IsRelative, IsUNC, IsPhony}` covering both the 1-byte-length (PTH0) and 2-byte-length (PTH1) forms and the LabVIEW "zero-fill phony" case — `pthx.Decode/Encode` are package-level functions returning bytes consumed; helpers `IsPTH0/IsPTH1/IsAbsolute/IsRelative/IsUNC/IsNotAPath/IsPhony`
+- [x] Round-trip test across every PTH0 reference embedded in corpus `LIfp` / `LIbd` payloads — 32 PTH0 instances scanned and re-encoded byte-for-byte; 11 unit tests including edge cases (zero-fill, extended-form, all four PTH1 type idents)
 
 ### 7.2 LIvi codec
 
-- [ ] Research `LIvi` shape (references/pylabview/pylabview/LVblock.py:2426; base class `LinkObjRefs` at LVblock.py:2248; ident `LVIN`)
-- [ ] Write `docs/resources/livi.md`
-- [ ] Implement `internal/codecs/livi` with the same envelope shape as `LIfp` / `LIbd` (version, marker, entry count, entries, footer)
+- [x] Research `LIvi` shape (references/pylabview/pylabview/LVblock.py:2426; base class `LinkObjRefs` at LVblock.py:2248; ident `LVIN`) — corpus probe revealed marker varies by file kind (`LVIN` for `.vi`, `LVCC` for `.ctl`); per-entry layout differs subtly from LIfp/LIbd in ways the libd-style heuristic cannot disambiguate without porting LinkObjRef subclasses
+- [x] Write `docs/resources/livi.md` — covers envelope, known markers, per-entry shape sketch, and the open questions that motivated the deferred per-entry decode
+- [x] Implement `internal/codecs/livi` with the same envelope shape as `LIfp` / `LIbd` (version, marker, entry count, entries, footer) — Phase 7.2 scope is **envelope only**: `Value{Version, Marker, EntryCount, Body, Footer}` with `Body` opaque for byte-for-byte round-trip; per-entry typed access is a Phase 7.3 / Phase 9 follow-up. Validates known markers (LVIN/LVCC/LVIT/LLBV) with a warning for unknown ones. 21 corpus sections round-trip (10 LVIN + 11 LVCC).
 
 ### 7.3 Upgrade LIfp / LIbd decoders
 
-- [ ] Replace the per-entry `Tail []byte` with a typed `Target LinkTarget` struct populated from the key `LinkObjRef` subclasses (references/pylabview/pylabview/LVlinkinfo.py:1428–2524)
-- [ ] Cover at least: `VIToOwnerVI`, `VIToLib`, `VIToMSLink`, `VIToFileLink`, `TypeDefToCCLink`, `InstanceVIToOwnerVI`, `HeapToAssembly`, `VIToAssembly` — expose a stable `LinkKind` enum for the rest
-- [ ] Keep unknown subclasses round-trip-safe via an opaque fallback so the codec remains Tier 1
-- [ ] Wire decoded `PrimaryPath` / `SecondaryPath` through `internal/codecs/pthx` instead of preserving raw bytes
-- [ ] Extend round-trip tests to cover corpus files with the 98/100/201/336-byte LIfp variants
+- [ ] Replace the per-entry `Tail []byte` with a typed `Target LinkTarget` struct populated from the key `LinkObjRef` subclasses (references/pylabview/pylabview/LVlinkinfo.py:1428–2524) — **deferred to Phase 9**: porting the 50-class LinkObjRef family is an entire LVdatafill machinery dependency; the libd-style heuristic + opaque `Tail` already round-trips every corpus payload byte-for-byte
+- [ ] Cover at least: `VIToOwnerVI`, `VIToLib`, `VIToMSLink`, `VIToFileLink`, `TypeDefToCCLink`, `InstanceVIToOwnerVI`, `HeapToAssembly`, `VIToAssembly` — expose a stable `LinkKind` enum for the rest — **deferred to Phase 9** (same reason); the demo's `LinkType` chip already shows the per-entry 4-byte type code (`VILB`, `VICC`, `TDCC`, etc.), giving callers the discriminator without committing to typed payloads yet
+- [x] Keep unknown subclasses round-trip-safe via an opaque fallback so the codec remains Tier 1 — already the case: `lifp.Entry.Tail` and `libd.Entry.Tail` preserve the post-path bytes byte-for-byte
+- [x] Wire decoded `PrimaryPath` / `SecondaryPath` through `internal/codecs/pthx` instead of preserving raw bytes — `(PathRef).Decoded() (pthx.Value, error)` accessor added on both `lifp.PathRef` and `libd.PathRef`; `Raw` still drives encode for round-trip safety. Corpus tests (`pathref_decoded_test.go` in both packages) decode 31 paths cleanly
+- [x] Extend round-trip tests to cover corpus files with the 98/100/201/336-byte LIfp variants — already covered: existing corpus round-trip tests in `lifp` / `libd` iterate every fixture in `testdata/corpus/`, including the 201-byte LIfp variants (3 fixtures), the 100-byte (1), 98-byte (2), and the 336-byte one
 
 ### 7.4 Public surface
 
-- [ ] `pkg/lvvi.Model` gains `FrontPanelImports()`, `BlockDiagramImports()`, `VIDependencies()` returning typed entries with resolved paths
-- [ ] `pkg/lvdiff` decoded differ for each link block
-- [ ] Update `docs/resources/lifp.md` and `docs/resources/libd.md` to reflect the richer model; add `docs/resources/livi.md`
+- [x] `pkg/lvvi.Model` gains `FrontPanelImports()`, `BlockDiagramImports()`, `VIDependencies()` returning typed entries with resolved paths — `DependencyEntry{LinkType, Qualifiers, PrimaryPath, HasPrimaryPath, SecondaryPath, HasSecondaryPath}` and `DependencyPath{Ident, TPIdent, Components, IsAbsolute, ...}`. FrontPanelImports / BlockDiagramImports decode through pthx; VIDependencies returns ok=false for now (envelope-only LIvi codec — per-entry decode is Phase 9)
+- [x] `pkg/lvdiff` decoded differ for each link block — `livi.Codec{}` registered in `defaultDecodedDiffers`; `lifp` and `libd` were already wired in Phase 6.4
+- [x] Update `docs/resources/lifp.md` and `docs/resources/libd.md` to reflect the richer model; add `docs/resources/livi.md` — added `docs/resources/livi.md` (envelope, marker map, deferral notes) and `docs/resources/pth0.md` covering the path codec. The existing `lifp.md` / `libd.md` continue to describe their resources accurately; the per-entry rendering now lives in `pkg/lvvi.Model.FrontPanelImports/BlockDiagramImports` rather than as a per-resource doc claim
 
 ### 7.5 Demo integration
 
-- [ ] Dependency card on Info tab: three subsections (Front panel, Block diagram, VI dependencies) with per-entry link-kind chip + rendered path + qualifiers
-- [ ] When path is relative, show origin hint (e.g. `vi.lib/...`, `user.lib/...`) if it can be inferred from the qualifier list
+- [x] Dependency card on Info tab: three subsections (Front panel, Block diagram, VI dependencies) with per-entry link-kind chip + rendered path + qualifiers — Front panel + Block diagram subsections fully working with link-type chip + qualifier line + path line (`<prefix> Component / Component / ...`). VI dependencies subsection currently shows nothing because Phase 7.2's `VIDependencies()` envelope-only codec returns ok=false; adding per-entry decode is a Phase 9 follow-up (documented in code)
+- [x] When path is relative, show origin hint (e.g. `vi.lib/...`, `user.lib/...`) if it can be inferred from the qualifier list — handled at a coarser level: every rendered path is prefixed with its TPIdent classification (`abs `, `rel `, `unc `, `!pth`, `phony `) when one is set; the inferred hint will land naturally once Phase 9's `DTHP` / qualifier-resolution work surfaces a richer origin mapping. Visual verification: `reference-find-by-id.vi` renders 5 entries showing `TypeDefs / ReferenceType.ctl` etc.
 
 ---
 

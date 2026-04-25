@@ -23,6 +23,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/livi"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
 	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
@@ -275,6 +276,7 @@ var shippedCodecs = []codecSpec{
 	{codec: bdex.Codec{}, packagePath: "internal/codecs/bdex"},
 	{codec: ftab.Codec{}, packagePath: "internal/codecs/ftab"},
 	{codec: vits.Codec{}, packagePath: "internal/codecs/vits"},
+	{codec: livi.Codec{}, packagePath: "internal/codecs/livi"},
 }
 
 func scanCorpus(dir string) (int, map[string]int, error) {

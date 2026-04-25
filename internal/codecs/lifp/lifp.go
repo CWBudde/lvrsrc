@@ -19,6 +19,7 @@ import (
 	"fmt"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/validate"
 )
 
@@ -60,6 +61,15 @@ type PathRef struct {
 	Class       string
 	DeclaredLen uint32
 	Raw         []byte
+}
+
+// Decoded parses the path through internal/codecs/pthx and returns the
+// typed Value. Errors indicate the on-disk bytes did not match a PTH0 /
+// PTH1 / PTH2 layout — round-trip preservation is unaffected because
+// callers should still use Raw for re-encoding.
+func (p PathRef) Decoded() (pthx.Value, error) {
+	v, _, err := pthx.Decode(p.Raw)
+	return v, err
 }
 
 type parseKey struct {

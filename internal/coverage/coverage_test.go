@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 24 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 24", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 25 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 25", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 24 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 24", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 25 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 25", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 3 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 3", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 2 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 2", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -216,7 +216,7 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 24/27 resource types",
+		"Typed coverage: 25/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",
