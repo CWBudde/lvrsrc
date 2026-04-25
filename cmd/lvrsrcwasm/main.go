@@ -15,9 +15,11 @@ import (
 	"syscall/js"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
@@ -75,12 +77,30 @@ type WASMResource struct {
 
 // WASMInfo is the decoded user-facing metadata.
 type WASMInfo struct {
-	DisplayName string         `json:"display_name,omitempty"`
-	Version     string         `json:"version,omitempty"`
-	Description string         `json:"description,omitempty"`
-	HasDesc     bool           `json:"has_desc"`
-	Icon        *WASMIcon      `json:"icon,omitempty"`
-	Deps        WASMDeps       `json:"deps"`
+	DisplayName string     `json:"display_name,omitempty"`
+	Version     string     `json:"version,omitempty"`
+	Description string     `json:"description,omitempty"`
+	HasDesc     bool       `json:"has_desc"`
+	Icon        *WASMIcon  `json:"icon,omitempty"`
+	Deps        WASMDeps   `json:"deps"`
+	Flags       *WASMFlags `json:"flags,omitempty"`
+}
+
+// WASMFlags surfaces the decoded LVSR flag set (plus password presence
+// derived by combining LVSR.Locked with BDPW). Only flags whose bit is
+// actually set are reported as true; the JS layer renders one chip per
+// true flag.
+type WASMFlags struct {
+	SuspendOnRun       bool `json:"suspend_on_run"`
+	Locked             bool `json:"locked"`
+	RunOnOpen          bool `json:"run_on_open"`
+	SavedForPrevious   bool `json:"saved_for_previous"`
+	SeparateCode       bool `json:"separate_code"`
+	ClearIndicators    bool `json:"clear_indicators"`
+	AutoErrorHandling  bool `json:"auto_error_handling"`
+	HasBreakpoints     bool `json:"has_breakpoints"`
+	Debuggable         bool `json:"debuggable"`
+	PasswordProtected  bool `json:"password_protected"`
 }
 
 // WASMIcon carries the 32x32 VI icon pre-expanded into row-major RGBA bytes
@@ -297,7 +317,51 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 		info.Deps.BlockDiagram = decodeLIbd(ctx, payload)
 	}
 
+	// Flags — surface every set LVSR bit. Combine LVSR.Locked with
+	// BDPW's empty-password sentinel to derive PasswordProtected:
+	// a VI is "password protected" only when the lock bit is set AND
+	// BDPW's password hash is not the MD5 of the empty string.
+	info.Flags = decodeFlags(ctx, file)
+
 	return info
+}
+
+func decodeFlags(ctx codecs.Context, file *lvrsrc.File) *WASMFlags {
+	payload, ok := firstPayload(file, string(lvsr.FourCC))
+	if !ok {
+		return nil
+	}
+	raw, err := (lvsr.Codec{}).Decode(ctx, payload)
+	if err != nil {
+		return nil
+	}
+	lv, ok := raw.(lvsr.Value)
+	if !ok {
+		return nil
+	}
+	flags := &WASMFlags{
+		SuspendOnRun:      lv.SuspendOnRun(),
+		Locked:            lv.Locked(),
+		RunOnOpen:         lv.RunOnOpen(),
+		SavedForPrevious:  lv.SavedForPrevious(),
+		SeparateCode:      lv.SeparateCode(),
+		ClearIndicators:   lv.ClearIndicators(),
+		AutoErrorHandling: lv.AutoErrorHandling(),
+		HasBreakpoints:    lv.HasBreakpoints(),
+		Debuggable:        lv.Debuggable(),
+	}
+
+	// Derive PasswordProtected: Locked + BDPW non-empty hash.
+	if flags.Locked {
+		if pwPayload, ok := firstPayload(file, string(bdpw.FourCC)); ok {
+			if pwRaw, err := (bdpw.Codec{}).Decode(ctx, pwPayload); err == nil {
+				if pw, ok := pwRaw.(bdpw.Value); ok && pw.HasPassword() {
+					flags.PasswordProtected = true
+				}
+			}
+		}
+	}
+	return flags
 }
 
 func firstPayload(file *lvrsrc.File, fourCC string) ([]byte, bool) {

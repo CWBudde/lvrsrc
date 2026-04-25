@@ -374,29 +374,29 @@ This phase clears the long tail of small, well-understood blocks where `pylabvie
 For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests, and per-resource docs in `docs/resources/`:
 
 - [x] `LIBN` — library-name list (LVblock.py:4683–4756) — `internal/codecs/libn`; 4-byte BE count + Pascal-string list (`padto=1`, no padding); 13 corpus sections round-trip; `docs/resources/libn.md`
-- [ ] `BDPW` — block-diagram password (MD5, hash1, hash2, empty-password sentinel) (LVblock.py:4334–4680; cross-check references/pylavi/pylavi/resource_types.py:54–94)
-- [ ] `FTAB` — font table (LVblock.py:2892–3075)
+- [x] `BDPW` — block-diagram password (MD5, hash1, hash2, empty-password sentinel) (LVblock.py:4334–4680; cross-check references/pylavi/pylavi/resource_types.py:54–94) — `internal/codecs/bdpw`; three concatenated MD5 hashes; ships `(Value).HasPassword()` against the `d41d8cd98f00b204e9800998ecf8427e` empty sentinel and `(Value).PasswordMatches(string)` for safe verification; 10 corpus sections round-trip; `docs/resources/bdpw.md`
+- [x] `FTAB` — font table (LVblock.py:2892–3075) — `internal/codecs/ftab`; section header + variable-width entry table (12 or 16 bytes, gated by `Prop1 & 0x00010000`) + Pascal-string name pool; pylabview's no-shared-offsets append algorithm reproduced; 21 corpus sections round-trip byte-for-byte; `docs/resources/ftab.md`
 - [x] `DTHP` — data-type-heap pointer (LVblock.py:3177–3276) — `internal/codecs/dthp`; variable-size U2p2 fields (`tdCount` + optional `indexShift`); zero-count payloads correctly omit shift; 21 corpus sections round-trip; `docs/resources/dthp.md`
 - [x] `RTSG` — runtime signature GUID (LVblock.py:5383–5434) — `internal/codecs/rtsg`; 16-byte GUID preserved verbatim; 21 corpus sections round-trip; `docs/resources/rtsg.md`
 - [x] `MUID` — module unique ID (LVblock.py:1272–1286) — `internal/codecs/muid`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/muid.md`
 - [x] `FPSE` — front-panel size estimate (LVblock.py:1288–1298) — `internal/codecs/fpse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/fpse.md`
 - [x] `BDSE` — block-diagram size estimate (LVblock.py:1383–1393) — `internal/codecs/bdse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/bdse.md`
 - [x] `HIST` — edit history counters (LVblock.py:3078–3085; pylabview is a stub — research further before deciding on final shape) — `internal/codecs/hist`; pylabview ships only a stub; corpus is uniformly 40 bytes so the codec preserves bytes verbatim and exposes a `Counters() [10]uint32` accessor for callers; 21 corpus sections round-trip; field semantics still unknown (documented in `docs/resources/hist.md`)
-- [ ] `VITS` — VI settings (LVblock.py:7015–7120; LVVariant name/value pairs with endianness-aware decoding; scope to stable top-level keys first, leave variant-content interpretation opaque)
-- [ ] `FPEx` / `BDEx` — heap-aux blocks (not present in pylabview; corpus-only research — 4-byte zero / 8-byte / 16-byte outliers; start as Tier 1 shape-only and escalate if patterns emerge)
+- [x] `VITS` — VI settings (LVblock.py:7015–7120; LVVariant name/value pairs with endianness-aware decoding; scope to stable top-level keys first, leave variant-content interpretation opaque) — `internal/codecs/vits`; envelope-only decode (`[u32 count] + N × [u32 nameLen + name + u32 varLen + variant]`); variant content preserved as opaque bytes (LVdatafill decoding deferred to Phase 9); 21 corpus sections totalling 33 tag entries round-trip byte-for-byte; `docs/resources/vits.md`
+- [x] `FPEx` / `BDEx` — heap-aux blocks (not present in pylabview; corpus-only research — 4-byte zero / 8-byte / 16-byte outliers; start as Tier 1 shape-only and escalate if patterns emerge) — `internal/codecs/fpex` and `internal/codecs/bdex`; corpus probe revealed a clean `[u32 count] + count × u32` shape with all entries zero in current corpus; both codecs ship with strict size validation (`size == 4 + 4*count`); 21 corpus sections each round-trip byte-for-byte; `docs/resources/{fpex,bdex}.md`
 - [x] `VPDP` — VI probe-data pointer (LVblock.py:5055–5061; pylabview is a stub) — `internal/codecs/vpdp`; pylabview is a stub; corpus value is always `0x00000000`; codec exposes the 4-byte value verbatim with a sentinel-check helper; 21 corpus sections round-trip; `docs/resources/vpdp.md`
 
 ### 6.4 Safety tier follow-through
 
-- [x] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2 — every codec shipped in 6.3a–6.3e (MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST) declares `SafetyTier1` in its Capability; mutation paths intentionally absent
-- [ ] Update `internal/coverage` manifest and verify the README badge reflects the new count (target: ≥ 20 typed FourCCs)
-- [ ] Extend `pkg/lvdiff` decoded differs for every new codec
+- [x] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2 — every codec shipped in Phase 6.3 (LVSR, MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST, BDPW, FPEx, BDEx, FTAB, VITS) declares `SafetyTier1` in its Capability; mutation paths intentionally absent
+- [x] Update `internal/coverage` manifest and verify the README badge reflects the new count (target: ≥ 20 typed FourCCs) — `internal/coverage/coverage.go` now registers all 14 new codecs in `shippedCodecs`; regenerated artifacts (`docs/generated/resource-coverage.{json,md,svg}`) report **24/27 typed (88.9%)** across the 21-fixture corpus, well above the ≥ 20 target. The README badge auto-updates from the regenerated SVG. Coverage tests adjusted (TypedCodecCount, OpaqueResourceTypes, BDPW row).
+- [x] Extend `pkg/lvdiff` decoded differs for every new codec — `pkg/lvdiff/decoded.go` `defaultDecodedDiffers` registers all 14 new typed codecs alongside the existing 10. `Diff` now produces structural decoded diffs for these resources instead of opaque hash deltas.
 
 ### 6.5 Demo integration
 
 - [x] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB — `internal/codecs/icon.PickBest` drives the server-side selection; WASM now sends base64 RGBA + the chosen FourCC; JS paints to a hidden canvas and embeds the PNG via `canvas.toDataURL()` with `image-rendering: pixelated` so the 32×32 source stays crisp at 128 px. A small `icl8` / `icl4` / `ICON` badge sits below the icon
-- [ ] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`)
-- [x] Structure tab: "decoded" badges light up for every FourCC newly covered — `cmd/lvrsrcwasm/main.go` `typedFourCCs` set updated to include `LVSR`, `MUID`, `FPSE`, `BDSE`, `VPDP`, `DTHP`, `RTSG`, `LIBN`, `HIST`; `pkg/lvvi.newLvviRegistry` registers the same codecs so `Model.ListResources` reports `Decoded: true`. Re-evaluate after Phase 6.3 finishes (BDPW, FTAB, VITS, FPEx/BDEx still pending)
+- [x] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`) — `cmd/lvrsrcwasm/main.go` `decodeFlags` projects every set LVSR bit (plus a derived `PasswordProtected` that combines LVSR.Locked with `BDPW.HasPassword`) into a `WASMFlags` struct; `web/app.js` renders one chip per true flag with three colour variants (warn / info / debug) styled in `web/style.css`. Verified visually on `format-string.vi` which surfaces "separate code", "auto error handling", "debuggable"
+- [x] Structure tab: "decoded" badges light up for every FourCC newly covered — `cmd/lvrsrcwasm/main.go` `typedFourCCs` set extended to include all 14 new codecs (LVSR, MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST, BDPW, FPEx, BDEx, FTAB, VITS); `pkg/lvvi.newLvviRegistry` registers the same set so `Model.ListResources` reports `Decoded: true` for each
 
 ---
 

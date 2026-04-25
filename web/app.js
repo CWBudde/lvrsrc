@@ -156,6 +156,7 @@ function renderInfo() {
         ${info.version ? renderFact("Version", info.version) : ""}
         ${renderFact("Format", formatHex(state.primary.parse.header.format_version))}
       </dl>
+      ${renderFlagChips(info.flags)}
     </div>`;
 
   if (info.has_desc && info.description) {
@@ -185,6 +186,38 @@ function renderFact(label, value) {
       <dt>${escHtml(label)}</dt>
       <dd>${escHtml(value)}</dd>
     </div>`;
+}
+
+// Maps each WASM-side flag field to its display label and chip variant.
+// Variant controls colour: "warn" for safety/lock-relevant flags,
+// "info" for benign settings, "debug" for debug-related state.
+const FLAG_CHIPS = [
+  { key: "password_protected", label: "password", variant: "warn" },
+  { key: "locked", label: "locked", variant: "warn" },
+  { key: "run_on_open", label: "run on open", variant: "warn" },
+  { key: "saved_for_previous", label: "saved for previous", variant: "info" },
+  { key: "separate_code", label: "separate code", variant: "info" },
+  { key: "clear_indicators", label: "clear indicators on run", variant: "info" },
+  { key: "auto_error_handling", label: "auto error handling", variant: "info" },
+  { key: "suspend_on_run", label: "suspend on run", variant: "debug" },
+  { key: "debuggable", label: "debuggable", variant: "debug" },
+  { key: "has_breakpoints", label: "breakpoints", variant: "debug" },
+];
+
+function renderFlagChips(flags) {
+  if (!flags) {
+    return "";
+  }
+  const chips = FLAG_CHIPS.filter((c) => flags[c.key])
+    .map(
+      (c) =>
+        `<span class="info-flag-chip info-flag-chip-${c.variant}">${escHtml(c.label)}</span>`,
+    )
+    .join("");
+  if (chips === "") {
+    return "";
+  }
+  return `<div class="info-flag-row">${chips}</div>`;
 }
 
 function renderIcon(icon) {

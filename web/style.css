@@ -373,6 +373,63 @@ header h1 {
   font-size: 0.9rem;
 }
 
+/* Info tab -- flag chips */
+.info-flag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.85rem;
+}
+
+.info-flag-chip {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--badge-bg);
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+.info-flag-chip-warn {
+  color: #b8530a;
+  border-color: #f3b878;
+  background: #fff4e6;
+}
+
+.info-flag-chip-info {
+  color: #1c7ed6;
+  border-color: #74c0fc;
+  background: #e7f5ff;
+}
+
+.info-flag-chip-debug {
+  color: #6741d9;
+  border-color: #b197fc;
+  background: #f3f0ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .info-flag-chip-warn {
+    color: #ffd8a8;
+    border-color: #5c3a16;
+    background: #2c1d0e;
+  }
+  .info-flag-chip-info {
+    color: #74c0fc;
+    border-color: #1c3d5a;
+    background: #0f2944;
+  }
+  .info-flag-chip-debug {
+    color: #b197fc;
+    border-color: #2a1f4a;
+    background: #18112e;
+  }
+}
+
 /* Info tab -- description */
 .info-description {
   font-size: 0.95rem;
