@@ -189,6 +189,11 @@ var typedFourCCs = map[string]struct{}{
 	"RTSG": {},
 	"LIBN": {},
 	"HIST": {},
+	"BDPW": {},
+	"FPEx": {},
+	"BDEx": {},
+	"FTAB": {},
+	"VITS": {},
 }
 
 func buildResources(file *lvrsrc.File) []WASMResource {

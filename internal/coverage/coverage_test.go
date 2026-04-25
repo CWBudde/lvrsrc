@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 10 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 10", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 24 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 24", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 10 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 10", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 24 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 24", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 17 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 17", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 3 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 3", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -155,14 +155,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	}
 
 	bdpw := findResource(t, m, "BDPW")
-	if bdpw.Typed.Decode || bdpw.Typed.Encode || bdpw.Typed.Validate {
-		t.Fatalf("BDPW typed support = %+v, want all false", bdpw.Typed)
+	if !bdpw.Typed.Decode || !bdpw.Typed.Encode || !bdpw.Typed.Validate {
+		t.Fatalf("BDPW typed support = %+v, want all true", bdpw.Typed)
 	}
-	if bdpw.SafetyTier != "Opaque" {
-		t.Fatalf("BDPW SafetyTier = %q, want %q", bdpw.SafetyTier, "Opaque")
+	if bdpw.SafetyTier != "Tier 1" {
+		t.Fatalf("BDPW SafetyTier = %q, want %q", bdpw.SafetyTier, "Tier 1")
 	}
-	if bdpw.Package != "internal/codecs (fallback)" {
-		t.Fatalf("BDPW Package = %q, want %q", bdpw.Package, "internal/codecs (fallback)")
+	if bdpw.Package != "internal/codecs/bdpw" {
+		t.Fatalf("BDPW Package = %q, want %q", bdpw.Package, "internal/codecs/bdpw")
 	}
 	if bdpw.CorpusFixtures != 10 {
 		t.Fatalf("BDPW CorpusFixtures = %d, want 10", bdpw.CorpusFixtures)
@@ -216,7 +216,7 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 10/27 resource types",
+		"Typed coverage: 24/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",

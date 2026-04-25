@@ -8,13 +8,27 @@ import (
 	"reflect"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
+	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
+	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
 	"github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
+	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
+	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
+	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vits"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vpdp"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -48,6 +62,20 @@ func defaultDecodedDiffers(a, b *lvrsrc.File) map[string]DecodedDiffer {
 	r.Register(strg.Codec{})
 	r.Register(vers.Codec{})
 	r.Register(vctp.Codec{})
+	r.Register(lvsr.Codec{})
+	r.Register(muid.Codec{})
+	r.Register(fpse.Codec{})
+	r.Register(bdse.Codec{})
+	r.Register(vpdp.Codec{})
+	r.Register(dthp.Codec{})
+	r.Register(rtsg.Codec{})
+	r.Register(libn.Codec{})
+	r.Register(hist.Codec{})
+	r.Register(bdpw.Codec{})
+	r.Register(fpex.Codec{})
+	r.Register(bdex.Codec{})
+	r.Register(ftab.Codec{})
+	r.Register(vits.Codec{})
 
 	aCtx := contextFromFile(a)
 	bCtx := contextFromFile(b)

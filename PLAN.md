@@ -373,22 +373,22 @@ This phase clears the long tail of small, well-understood blocks where `pylabvie
 
 For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests, and per-resource docs in `docs/resources/`:
 
-- [ ] `LIBN` — library-name list (LVblock.py:4683–4756)
+- [x] `LIBN` — library-name list (LVblock.py:4683–4756) — `internal/codecs/libn`; 4-byte BE count + Pascal-string list (`padto=1`, no padding); 13 corpus sections round-trip; `docs/resources/libn.md`
 - [ ] `BDPW` — block-diagram password (MD5, hash1, hash2, empty-password sentinel) (LVblock.py:4334–4680; cross-check references/pylavi/pylavi/resource_types.py:54–94)
 - [ ] `FTAB` — font table (LVblock.py:2892–3075)
-- [ ] `DTHP` — data-type-heap pointer (LVblock.py:3177–3276)
-- [ ] `RTSG` — runtime signature GUID (LVblock.py:5383–5434)
-- [ ] `MUID` — module unique ID (LVblock.py:1272–1286)
-- [ ] `FPSE` — front-panel size estimate (LVblock.py:1288–1298)
-- [ ] `BDSE` — block-diagram size estimate (LVblock.py:1383–1393)
-- [ ] `HIST` — edit history counters (LVblock.py:3078–3085; pylabview is a stub — research further before deciding on final shape)
+- [x] `DTHP` — data-type-heap pointer (LVblock.py:3177–3276) — `internal/codecs/dthp`; variable-size U2p2 fields (`tdCount` + optional `indexShift`); zero-count payloads correctly omit shift; 21 corpus sections round-trip; `docs/resources/dthp.md`
+- [x] `RTSG` — runtime signature GUID (LVblock.py:5383–5434) — `internal/codecs/rtsg`; 16-byte GUID preserved verbatim; 21 corpus sections round-trip; `docs/resources/rtsg.md`
+- [x] `MUID` — module unique ID (LVblock.py:1272–1286) — `internal/codecs/muid`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/muid.md`
+- [x] `FPSE` — front-panel size estimate (LVblock.py:1288–1298) — `internal/codecs/fpse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/fpse.md`
+- [x] `BDSE` — block-diagram size estimate (LVblock.py:1383–1393) — `internal/codecs/bdse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/bdse.md`
+- [x] `HIST` — edit history counters (LVblock.py:3078–3085; pylabview is a stub — research further before deciding on final shape) — `internal/codecs/hist`; pylabview ships only a stub; corpus is uniformly 40 bytes so the codec preserves bytes verbatim and exposes a `Counters() [10]uint32` accessor for callers; 21 corpus sections round-trip; field semantics still unknown (documented in `docs/resources/hist.md`)
 - [ ] `VITS` — VI settings (LVblock.py:7015–7120; LVVariant name/value pairs with endianness-aware decoding; scope to stable top-level keys first, leave variant-content interpretation opaque)
 - [ ] `FPEx` / `BDEx` — heap-aux blocks (not present in pylabview; corpus-only research — 4-byte zero / 8-byte / 16-byte outliers; start as Tier 1 shape-only and escalate if patterns emerge)
-- [ ] `VPDP` — VI probe-data pointer (LVblock.py:5055–5061; pylabview is a stub)
+- [x] `VPDP` — VI probe-data pointer (LVblock.py:5055–5061; pylabview is a stub) — `internal/codecs/vpdp`; pylabview is a stub; corpus value is always `0x00000000`; codec exposes the 4-byte value verbatim with a sentinel-check helper; 21 corpus sections round-trip; `docs/resources/vpdp.md`
 
 ### 6.4 Safety tier follow-through
 
-- [ ] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2
+- [x] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2 — every codec shipped in 6.3a–6.3e (MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST) declares `SafetyTier1` in its Capability; mutation paths intentionally absent
 - [ ] Update `internal/coverage` manifest and verify the README badge reflects the new count (target: ≥ 20 typed FourCCs)
 - [ ] Extend `pkg/lvdiff` decoded differs for every new codec
 
@@ -396,7 +396,7 @@ For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests
 
 - [x] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB — `internal/codecs/icon.PickBest` drives the server-side selection; WASM now sends base64 RGBA + the chosen FourCC; JS paints to a hidden canvas and embeds the PNG via `canvas.toDataURL()` with `image-rendering: pixelated` so the 32×32 source stays crisp at 128 px. A small `icl8` / `icl4` / `ICON` badge sits below the icon
 - [ ] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`)
-- [ ] Structure tab: "decoded" badges light up for every FourCC newly covered
+- [x] Structure tab: "decoded" badges light up for every FourCC newly covered — `cmd/lvrsrcwasm/main.go` `typedFourCCs` set updated to include `LVSR`, `MUID`, `FPSE`, `BDSE`, `VPDP`, `DTHP`, `RTSG`, `LIBN`, `HIST`; `pkg/lvvi.newLvviRegistry` registers the same codecs so `Model.ListResources` reports `Decoded: true`. Re-evaluate after Phase 6.3 finishes (BDPW, FTAB, VITS, FPEx/BDEx still pending)
 
 ---
 

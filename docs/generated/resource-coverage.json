@@ -5,22 +5,22 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 10,
-    "typedResourceTypes": 10,
-    "opaqueResourceTypes": 17,
-    "typedCoveragePct": 37.03703703703704
+    "typedCodecCount": 24,
+    "typedResourceTypes": 24,
+    "opaqueResourceTypes": 3,
+    "typedCoveragePct": 88.88888888888889
   },
   "resources": [
     {
       "fourCC": "BDEx",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/bdex",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -53,12 +53,12 @@
       "fourCC": "BDPW",
       "corpusFixtures": 10,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/bdpw",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -72,12 +72,12 @@
       "fourCC": "BDSE",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/bdse",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -129,12 +129,12 @@
       "fourCC": "DTHP",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/dthp",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -148,12 +148,12 @@
       "fourCC": "FPEx",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/fpex",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -186,12 +186,12 @@
       "fourCC": "FPSE",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/fpse",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -205,12 +205,12 @@
       "fourCC": "FTAB",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/ftab",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -224,12 +224,12 @@
       "fourCC": "HIST",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/hist",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -262,12 +262,12 @@
       "fourCC": "LIBN",
       "corpusFixtures": 13,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/libn",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -338,12 +338,12 @@
       "fourCC": "LVSR",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/lvsr",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -357,12 +357,12 @@
       "fourCC": "MUID",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/muid",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -376,12 +376,12 @@
       "fourCC": "RTSG",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/rtsg",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -433,12 +433,12 @@
       "fourCC": "VITS",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/vits",
       "readVersions": {
         "min": 0,
         "max": 0
@@ -452,12 +452,12 @@
       "fourCC": "VPDP",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/vpdp",
       "readVersions": {
         "min": 0,
         "max": 0

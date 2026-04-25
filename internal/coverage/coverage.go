@@ -10,13 +10,27 @@ import (
 	"strings"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
+	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
+	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
 	"github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
+	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
+	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
+	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vits"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vpdp"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -247,6 +261,20 @@ var shippedCodecs = []codecSpec{
 	{codec: strg.Codec{}, packagePath: "internal/codecs/strg"},
 	{codec: vers.Codec{}, packagePath: "internal/codecs/vers"},
 	{codec: vctp.Codec{}, packagePath: "internal/codecs/vctp"},
+	{codec: lvsr.Codec{}, packagePath: "internal/codecs/lvsr"},
+	{codec: muid.Codec{}, packagePath: "internal/codecs/muid"},
+	{codec: fpse.Codec{}, packagePath: "internal/codecs/fpse"},
+	{codec: bdse.Codec{}, packagePath: "internal/codecs/bdse"},
+	{codec: vpdp.Codec{}, packagePath: "internal/codecs/vpdp"},
+	{codec: dthp.Codec{}, packagePath: "internal/codecs/dthp"},
+	{codec: rtsg.Codec{}, packagePath: "internal/codecs/rtsg"},
+	{codec: libn.Codec{}, packagePath: "internal/codecs/libn"},
+	{codec: hist.Codec{}, packagePath: "internal/codecs/hist"},
+	{codec: bdpw.Codec{}, packagePath: "internal/codecs/bdpw"},
+	{codec: fpex.Codec{}, packagePath: "internal/codecs/fpex"},
+	{codec: bdex.Codec{}, packagePath: "internal/codecs/bdex"},
+	{codec: ftab.Codec{}, packagePath: "internal/codecs/ftab"},
+	{codec: vits.Codec{}, packagePath: "internal/codecs/vits"},
 }
 
 func scanCorpus(dir string) (int, map[string]int, error) {

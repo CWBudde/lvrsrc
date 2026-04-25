@@ -4,9 +4,13 @@ import (
 	"fmt"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/ftab"
 	"github.com/CWBudde/lvrsrc/internal/codecs/hist"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
@@ -14,6 +18,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vits"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vpdp"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
@@ -273,6 +278,11 @@ func newLvviRegistry() *codecs.Registry {
 	r.Register(rtsg.Codec{})
 	r.Register(libn.Codec{})
 	r.Register(hist.Codec{})
+	r.Register(bdpw.Codec{})
+	r.Register(fpex.Codec{})
+	r.Register(bdex.Codec{})
+	r.Register(ftab.Codec{})
+	r.Register(vits.Codec{})
 	return r
 }
 
