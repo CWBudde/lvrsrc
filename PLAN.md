@@ -473,15 +473,15 @@ This is the structurally largest block still opaque. `pylabview`'s `LVheap.py` i
 
 ### 9.1 ZLIB wrapping and envelope
 
-- [ ] Research `HeapVerb` wrapper (references/pylabview/pylabview/LVblock.py:5094) — Zlib decompression applied before heap parsing
-- [ ] Implement the wrapper in `internal/codecs/heap` shared between FPHb and BDHb
-- [ ] Add fuzz target for the envelope parser
+- [x] Research `HeapVerb` wrapper (references/pylabview/pylabview/LVblock.py:5094) — Zlib decompression applied before heap parsing — confirmed against the corpus: payload is `[u32 BE declared_size][zlib bytes]`; after inflation, `[u32 BE content_len][content_len bytes of tag-stream]`. Two nested size headers, with `declared_size == 4 + content_len`. Same shape as VCTP plus one extra inner size word.
+- [x] Implement the wrapper in `internal/codecs/heap` shared between FPHb and BDHb — `internal/codecs/heap/envelope.go` ships `Envelope{DeclaredSize, ContentLen, Content, Compressed}` with `DecodeEnvelope` and `EncodeEnvelope`. Strict size validation at both nesting levels. The `Compressed` field caches the original on-disk byte run so re-encoding without touching `Content` reproduces the on-disk payload byte-for-byte; touching `Content` (or building a fresh Envelope) triggers a recompress through the standard library's zlib writer. Verified: 21 FPHb + 21 BDHb corpus envelopes decode and round-trip byte-for-byte through the Compressed cache.
+- [x] Add fuzz target for the envelope parser — `internal/codecs/heap/envelope_fuzz_test.go` defines `FuzzDecodeEnvelope` (random bytes → never panics) and `FuzzEncodeRoundTrip` (random Content → encode → decode → byte-equal). 10s smoke runs hit 393K and 44K execs respectively without any panic or assertion failure.
 
 ### 9.2 Tag-enum system
 
-- [ ] Port `SL_SYSTEM_TAGS`, `OBJ_FIELD_TAGS`, `SL_CLASS_TAGS` (references/pylabview/pylabview/LVheap.py)
-- [ ] Port the ~30 specialised tag enums (plot data, tree nodes, tabs, cursors, digital buses, scales, …) — scope to those actually observed in corpus first
-- [ ] Ship as generated Go code with a regenerator script under `scripts/`
+- [x] Port `SL_SYSTEM_TAGS`, `OBJ_FIELD_TAGS`, `SL_CLASS_TAGS` (references/pylabview/pylabview/LVheap.py) — all three core enums shipped as Go types `SystemTag`, `FieldTag`, `ClassTag` with full member lists (5 / 616 / 373 entries) and `String()` accessors. pylabview's two case-distinct duplicates (`OF__commentSelLabData` / `OF__CommentSelLabData`) and value-aliased pairs (`OF__tagDLLPath = OF__recursiveFunc = 430`) both round-trip cleanly.
+- [x] Port the ~30 specialised tag enums (plot data, tree nodes, tabs, cursors, digital buses, scales, …) — scope to those actually observed in corpus first — all 42 enum classes (HEAP_FORMAT, NODE_SCOPE, ENUM_TAGS, SL_*_TAGS, OBJ_*_TAGS) ported in a single pass since the generator is mechanical. Per-enum `String()` methods + `*Names` lookup tables for callers that prefer the maps directly. Out-of-range values fall back to `Type(N)` style strings.
+- [x] Ship as generated Go code with a regenerator script under `scripts/` — `scripts/gen-heap-tags/main.go` parses `references/pylabview/pylabview/LVheap.py` via regex (class header + `Name = number` lines, ignoring docstrings and methods) and emits `internal/codecs/heap/tags_gen.go` (~3.2K lines covering all 42 types). Re-run with `go run ./scripts/gen-heap-tags > internal/codecs/heap/tags_gen.go`. Spot-check tests in `tags_test.go` lock the core SystemTag/SystemAttribTag/NodeScope/HeapFormat/FieldTag values to their pylabview source-of-truth so the generator can never drift silently.
 
 ### 9.3 Node types
 
