@@ -27,6 +27,10 @@ const refs = {
   infoDescription: document.getElementById("info-description"),
   infoDepsCard: document.getElementById("info-deps-card"),
   infoDeps: document.getElementById("info-deps"),
+  infoConnectorCard: document.getElementById("info-connector-card"),
+  infoConnector: document.getElementById("info-connector"),
+  infoTypesCard: document.getElementById("info-types-card"),
+  infoTypes: document.getElementById("info-types"),
   schemaDiagram: document.getElementById("schema-diagram"),
   resourcesList: document.getElementById("resources-list"),
 };
@@ -178,6 +182,9 @@ function renderInfo() {
       ${renderDepGroup("Front panel imports", fp)}
       ${renderDepGroup("Block diagram imports", bd)}`;
   }
+
+  renderConnectorPane(info.connector);
+  renderTypesList(info.types);
 }
 
 function renderFact(label, value) {
@@ -307,6 +314,126 @@ function renderDepPath(path) {
     return "";
   }
   return `<div class="info-dep-path"><code>${prefix}${rendered || "<em>empty</em>"}</code></div>`;
+}
+
+function renderConnectorPane(connector) {
+  if (!connector) {
+    refs.infoConnectorCard.classList.add("hidden");
+    refs.infoConnector.innerHTML = "";
+    return;
+  }
+  refs.infoConnectorCard.classList.remove("hidden");
+
+  const layout = connectorLayout(connector.cpc2 || 0);
+  const svg = renderConnectorSVG(layout);
+  const summary = `
+    <div class="info-connector-meta">
+      <span class="info-connector-line">${layout.terminals} terminals · CPC2 = ${connector.cpc2 || 0}</span>
+      <span class="subtle-text">CONP = ${connector.conp || 0}${
+        connector.pane_type
+          ? ` · resolved to <code>${escHtml(connector.pane_type.full_type)}</code>${
+              connector.pane_type.label
+                ? ` "<em>${escHtml(connector.pane_type.label)}</em>"`
+                : ""
+            }`
+          : ""
+      }</span>
+    </div>`;
+  refs.infoConnector.innerHTML = svg + summary;
+}
+
+// connectorLayout returns rows of terminal counts for a given CPC2 value.
+// The classic LabVIEW pane shapes vary; we approximate by mapping the
+// observed corpus values 1..4 to common pane patterns and falling back to
+// a rough N-up grid for unfamiliar values.
+function connectorLayout(cpc2) {
+  switch (cpc2) {
+    case 1:
+      return { rows: [4, 2, 2, 4], terminals: 12 };
+    case 2:
+      return { rows: [4, 4], terminals: 8 };
+    case 3:
+      return { rows: [2, 1, 1, 2], terminals: 6 };
+    case 4:
+      return { rows: [3, 1, 1, 3], terminals: 8 };
+    default:
+      // Default: a single column of CPC2 placeholder cells (or 1 terminal).
+      const n = Math.max(1, cpc2);
+      return { rows: [Math.min(n, 8)], terminals: Math.min(n, 8) };
+  }
+}
+
+function renderConnectorSVG(layout) {
+  // Render rows × max-cols on a canvas. Cells are 22×16 with 2px gap;
+  // SVG width depends on max columns.
+  const cellW = 22;
+  const cellH = 16;
+  const gap = 2;
+  const maxCols = Math.max(...layout.rows);
+  const w = maxCols * (cellW + gap) + gap;
+  const h = layout.rows.length * (cellH + gap) + gap;
+  let cells = "";
+  for (let r = 0; r < layout.rows.length; r++) {
+    const cols = layout.rows[r];
+    const xOff = (maxCols - cols) * (cellW + gap) / 2 + gap;
+    const y = r * (cellH + gap) + gap;
+    for (let c = 0; c < cols; c++) {
+      const x = xOff + c * (cellW + gap);
+      cells += `<rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" rx="2"/>`;
+    }
+  }
+  return `
+    <svg class="info-connector-svg"
+         viewBox="0 0 ${w} ${h}"
+         width="${w}" height="${h}"
+         role="img"
+         aria-label="Connector pane (${layout.terminals} terminals)">
+      <rect x="0" y="0" width="${w}" height="${h}" class="info-connector-bg"/>
+      <g class="info-connector-cells">${cells}</g>
+    </svg>`;
+}
+
+function renderTypesList(types) {
+  if (!Array.isArray(types) || types.length === 0) {
+    refs.infoTypesCard.classList.add("hidden");
+    refs.infoTypes.innerHTML = "";
+    return;
+  }
+  refs.infoTypesCard.classList.remove("hidden");
+  // Show named typedescs first, then a collapsed-by-default block with
+  // every entry. Limit the named list to 12 to keep the card compact.
+  const named = types.filter((t) => t.label && t.label.length > 0);
+  const namedLimit = 12;
+  const namedRows = named
+    .slice(0, namedLimit)
+    .map(
+      (t) => `
+      <li class="info-type-row">
+        <span class="info-type-index">[${t.index}]</span>
+        <span class="info-type-kind">${escHtml(t.full_type)}</span>
+        <span class="info-type-label">${escHtml(t.label)}</span>
+      </li>`,
+    )
+    .join("");
+  const namedHtml = named.length === 0
+    ? `<p class="subtle-text">No named typedescs in this VI's pool.</p>`
+    : `
+      <ul class="info-type-list">${namedRows}</ul>
+      ${named.length > namedLimit ? `<p class="subtle-text">Showing ${namedLimit} of ${named.length} named typedescs.</p>` : ""}`;
+  // Histogram of all types.
+  const counts = {};
+  for (const t of types) counts[t.full_type] = (counts[t.full_type] || 0) + 1;
+  const histRows = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(
+      ([type, n]) =>
+        `<span class="info-type-pill">${escHtml(type)} <span class="info-type-pill-count">${n}</span></span>`,
+    )
+    .join("");
+  refs.infoTypes.innerHTML = `
+    ${namedHtml}
+    <div class="info-type-hist-label subtle-text">All ${types.length} typedescs by kind:</div>
+    <div class="info-type-hist">${histRows}</div>`;
 }
 
 // Structure tab -------------------------------------------------------------

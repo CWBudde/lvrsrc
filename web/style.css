@@ -498,6 +498,118 @@ header h1 {
   border-radius: 3px;
 }
 
+/* Connector pane */
+.info-connector {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.info-connector-svg {
+  background: var(--icon-bg);
+  border-radius: 6px;
+  display: block;
+}
+
+.info-connector-svg .info-connector-bg {
+  fill: var(--icon-bg);
+}
+
+.info-connector-svg .info-connector-cells rect {
+  fill: var(--accent);
+  opacity: 0.8;
+}
+
+.info-connector-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-connector-line {
+  font-weight: 600;
+}
+
+.info-connector-meta code {
+  font-family: var(--mono);
+  background: var(--badge-bg);
+  padding: 0.05rem 0.35rem;
+  border-radius: 3px;
+}
+
+/* Types card */
+.info-types {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-type-list {
+  list-style: none;
+  display: grid;
+  gap: 0.3rem;
+  padding: 0;
+  margin: 0.25rem 0;
+}
+
+.info-type-row {
+  display: grid;
+  grid-template-columns: 3.5rem 6rem 1fr;
+  gap: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-size: 0.85rem;
+  align-items: baseline;
+}
+
+.info-type-index {
+  font-family: var(--mono);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.info-type-kind {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.info-type-label {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.info-type-hist-label {
+  margin-top: 0.5rem;
+}
+
+.info-type-hist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.info-type-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.info-type-pill-count {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
 .info-dep-qualifier {
   font-family: var(--mono);
   font-size: 0.85rem;

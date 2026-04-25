@@ -448,20 +448,20 @@ Today `LIfp` / `LIbd` decode only the entry envelope and opaque tail. `LIvi` is 
 
 ### 8.1 `pkg/lvvi` type-descriptor model
 
-- [ ] Define `TypeDescriptor` as a Go sum type (or interface hierarchy) covering the VCTP enum set (primitive numerics, strings, arrays, clusters, function, user-defined, …)
-- [ ] Implement `(m *Model) Types() []TypeDescriptor` returning top-level types in VCTP order
-- [ ] Implement `(m *Model) TypeAt(id uint32) TypeDescriptor` for lookups from CONP and DTHP
-- [ ] Extensive unit tests using corpus fixtures already covered by `internal/codecs/vctp`
+- [x] Define `TypeDescriptor` as a Go sum type (or interface hierarchy) covering the VCTP enum set (primitive numerics, strings, arrays, clusters, function, user-defined, …) — shipped as `internal/codecs/vctp.TypeDescriptor` (Index, FullType, Flags, HasLabel, Label, Inner, Length) plus the `FullType` enum with `String()` method covering 30+ TD_FULL_TYPE codes (primitives, strings, arrays, clusters, refnums, functions, typedefs). Per-type-specific decoding (cluster children, function parameters) is intentionally deferred to Phase 9 alongside the heap port; the `Inner []byte` slot lets callers re-parse later without breaking round-trip.
+- [x] Implement `(m *Model) Types() []TypeDescriptor` returning top-level types in VCTP order — `pkg/lvvi.TypeDescriptor` is the public projection (no internal codec exposed); `Model.Types()` returns the flat list, `Model.TopTypes()` exposes the trailing top-types list. 399 typedescs across the 21-fixture corpus parse cleanly (test `TestParseInnerCorpus`).
+- [x] Implement `(m *Model) TypeAt(id uint32) TypeDescriptor` for lookups from CONP and DTHP — 1-based indexing matching the on-disk numbering (flatID 0 reserved as "no type"). Tested with `TestModelTypeAtIs1Based`.
+- [x] Extensive unit tests using corpus fixtures already covered by `internal/codecs/vctp` — added `internal/codecs/vctp/typedesc_test.go` (4 tests including handcrafted, empty, truncation, and full corpus walk) plus `pkg/lvvi/types_test.go` (3 tests covering empty file, full corpus exercise, and 1-based indexing semantics)
 
 ### 8.2 Connector-pane resolution
 
-- [ ] Helper `(m *Model) ConnectorPane() (ConnectorPane, bool)` that reads `CONP` as a TypeID, resolves it through `VCTP`, and returns a struct with `TerminalCount`, `Terminals []Terminal{Name, Direction, TypeID}`, and the observed CPC2 variant
-- [ ] Tests against every corpus file with CPC2 in {1..4}
+- [x] Helper `(m *Model) ConnectorPane() (ConnectorPane, bool)` that reads `CONP` as a TypeID, resolves it through `VCTP`, and returns a struct with `TerminalCount`, `Terminals []Terminal{Name, Direction, TypeID}`, and the observed CPC2 variant — `ConnectorPane{CONP, CPC2, HasPaneType, PaneType TypeDescriptor}`. Per-terminal decoding (`Terminals []Terminal`) requires walking the Function TypeDesc's client list which depends on Phase 9's LVdatatype port; the resolver currently surfaces the pane type plus CPC2 variant for the demo's SVG layout. 21/21 corpus VIs resolved their CONP TypeID through VCTP.
+- [x] Tests against every corpus file with CPC2 in {1..4} — `TestModelTypesAndConnectorPaneOnCorpus` exercises every corpus VI (21/21 resolved). All four CPC2 variants are observed (`docs/resources/conpane.md` records 11 × CPC2=1, 6 × CPC2=2, 3 × CPC2=3, 1 × CPC2=4).
 
 ### 8.3 Demo integration
 
-- [ ] Info tab: collapsed "Types" sub-card listing the top N VCTP entries (expandable for the full tree)
-- [ ] Info tab: "Connector pane" sub-card rendering the pane as a small SVG using the classic LabVIEW 4-2-2-4 layout based on CPC2 (fall back to generic NxM grid for unfamiliar variants)
+- [x] Info tab: collapsed "Types" sub-card listing the top N VCTP entries (expandable for the full tree) — `Types` card lists up to 12 named typedescs (e.g. `[6] Boolean "replace all?"`, `[11] NumInt32 "number of replacements"`) plus a histogram-pill row of all type kinds (`String 7`, `Boolean 5`, `NumInt32 4`, …). Verified visually on `format-string.vi` which surfaces the VI's actual parameter labels.
+- [x] Info tab: "Connector pane" sub-card rendering the pane as a small SVG using the classic LabVIEW 4-2-2-4 layout based on CPC2 (fall back to generic NxM grid for unfamiliar variants) — `connectorLayout(cpc2)` returns row-of-cells layouts for CPC2 ∈ {1..4} (`4-2-2-4`, `4-4`, `2-1-1-2`, `3-1-1-3`) plus an N-up grid fallback for unknown values. The SVG renders rounded-rect terminals on a card-coloured background; the meta line shows `8 terminals · CPC2 = 2 · CONP = 1 · resolved to <Type>`.
 
 ---
 

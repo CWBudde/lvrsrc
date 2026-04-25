@@ -16,12 +16,14 @@ import (
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
+	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
@@ -78,13 +80,32 @@ type WASMResource struct {
 
 // WASMInfo is the decoded user-facing metadata.
 type WASMInfo struct {
-	DisplayName string     `json:"display_name,omitempty"`
-	Version     string     `json:"version,omitempty"`
-	Description string     `json:"description,omitempty"`
-	HasDesc     bool       `json:"has_desc"`
-	Icon        *WASMIcon  `json:"icon,omitempty"`
-	Deps        WASMDeps   `json:"deps"`
-	Flags       *WASMFlags `json:"flags,omitempty"`
+	DisplayName string             `json:"display_name,omitempty"`
+	Version     string             `json:"version,omitempty"`
+	Description string             `json:"description,omitempty"`
+	HasDesc     bool               `json:"has_desc"`
+	Icon        *WASMIcon          `json:"icon,omitempty"`
+	Deps        WASMDeps           `json:"deps"`
+	Flags       *WASMFlags         `json:"flags,omitempty"`
+	Types       []WASMTypeEntry    `json:"types,omitempty"`
+	Connector   *WASMConnectorPane `json:"connector,omitempty"`
+}
+
+// WASMTypeEntry is a JSON-friendly projection of a VCTP type-descriptor
+// suitable for listing in a UI.
+type WASMTypeEntry struct {
+	Index    int    `json:"index"`
+	FullType string `json:"full_type"`
+	Label    string `json:"label,omitempty"`
+}
+
+// WASMConnectorPane bundles the CONP / CPC2 raw values plus the type
+// resolved through VCTP. The JS renders the layout from CPC2.
+type WASMConnectorPane struct {
+	CONP       uint16         `json:"conp"`
+	CPC2       uint16         `json:"cpc2"`
+	HasPane    bool           `json:"has_pane,omitempty"`
+	PaneType   *WASMTypeEntry `json:"pane_type,omitempty"`
 }
 
 // WASMFlags surfaces the decoded LVSR flag set (plus password presence
@@ -341,7 +362,71 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 	// BDPW's password hash is not the MD5 of the empty string.
 	info.Flags = decodeFlags(ctx, file)
 
+	// Types — surface the flat VCTP descriptor list (top N for the demo).
+	info.Types = decodeTypes(ctx, file)
+
+	// Connector pane — read CONP + CPC2 and resolve CONP through VCTP.
+	info.Connector = decodeConnector(ctx, file, info.Types)
+
 	return info
+}
+
+func decodeTypes(ctx codecs.Context, file *lvrsrc.File) []WASMTypeEntry {
+	payload, ok := firstPayload(file, string(vctp.FourCC))
+	if !ok {
+		return nil
+	}
+	raw, err := (vctp.Codec{}).Decode(ctx, payload)
+	if err != nil {
+		return nil
+	}
+	v, ok := raw.(vctp.Value)
+	if !ok {
+		return nil
+	}
+	descs, _, err := vctp.ParseInner(v.Inflated)
+	if err != nil {
+		return nil
+	}
+	out := make([]WASMTypeEntry, 0, len(descs))
+	for _, d := range descs {
+		out = append(out, WASMTypeEntry{
+			Index:    d.Index,
+			FullType: d.FullType.String(),
+			Label:    d.Label,
+		})
+	}
+	return out
+}
+
+func decodeConnector(ctx codecs.Context, file *lvrsrc.File, types []WASMTypeEntry) *WASMConnectorPane {
+	conpPayload, hasCONP := firstPayload(file, string(conpane.PointerFourCC))
+	cpc2Payload, hasCPC2 := firstPayload(file, string(conpane.CountFourCC))
+	if !hasCONP && !hasCPC2 {
+		return nil
+	}
+	out := &WASMConnectorPane{}
+	if hasCONP {
+		if raw, err := (conpane.PointerCodec{}).Decode(ctx, conpPayload); err == nil {
+			if v, ok := raw.(conpane.Value); ok {
+				out.CONP = v.Value
+			}
+		}
+	}
+	if hasCPC2 {
+		if raw, err := (conpane.CountCodec{}).Decode(ctx, cpc2Payload); err == nil {
+			if v, ok := raw.(conpane.Value); ok {
+				out.CPC2 = v.Value
+			}
+		}
+	}
+	// Resolve CONP (1-based) into the typedesc list we just built.
+	if int(out.CONP) > 0 && int(out.CONP) <= len(types) {
+		td := types[out.CONP-1]
+		out.HasPane = true
+		out.PaneType = &td
+	}
+	return out
 }
 
 func decodeFlags(ctx codecs.Context, file *lvrsrc.File) *WASMFlags {

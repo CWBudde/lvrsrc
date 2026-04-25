@@ -7,6 +7,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
+	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
 	"github.com/CWBudde/lvrsrc/internal/codecs/dthp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpex"
 	"github.com/CWBudde/lvrsrc/internal/codecs/fpse"
@@ -21,6 +22,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/codecs/rtsg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
+	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vits"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vpdp"
@@ -76,6 +78,45 @@ type LVSRFlags struct {
 	AutoErrorHandling bool
 	HasBreakpoints    bool
 	Debuggable        bool
+}
+
+// ConnectorPane summarises the VI's connector pane: the CONP scalar
+// (a TypeID into VCTP that locates the function-typed pane descriptor)
+// and the CPC2 scalar (a count/variant code that selects the on-screen
+// layout). The resolved `PaneType` is populated when CONP points at a
+// VCTP entry that decoded cleanly.
+//
+// Per-terminal decoding (names, directions) requires walking the
+// Function TypeDesc's internal client list, which is part of Phase 9's
+// LinkObjRef / type-tree work — not yet ported. For now callers get the
+// raw CONP/CPC2 values plus the resolved type metadata, which is enough
+// to render an approximate pane shape with placeholder terminals.
+type ConnectorPane struct {
+	// CONP is the raw u16 from the CONP resource.
+	CONP uint16
+	// CPC2 is the raw u16 from the CPC2 resource.
+	CPC2 uint16
+	// HasPaneType is true when CONP resolved to a valid VCTP entry.
+	HasPaneType bool
+	// PaneType is the resolved descriptor (typically Function-typed)
+	// when HasPaneType is set.
+	PaneType TypeDescriptor
+}
+
+// TypeDescriptor is the lvvi-level projection of a VCTP type-descriptor
+// record. It surfaces the per-record header (FullType, Flags) plus the
+// trailing label when one is present, while keeping the raw inner bytes
+// hidden so callers don't have to import the internal codec.
+//
+// Index is 0-based and matches the on-disk flat ID ordering. Top-level
+// IDs from CONP / DTHP are 1-based, so callers should subtract 1 before
+// indexing.
+type TypeDescriptor struct {
+	Index    int
+	FullType string // human-friendly type name from internal/codecs/vctp.FullType.String()
+	Flags    uint8
+	HasLabel bool
+	Label    string
 }
 
 // DependencyEntry is one decoded link reference from an LIfp / LIbd /
@@ -193,6 +234,95 @@ func (m *Model) Flags() (LVSRFlags, bool) {
 		HasBreakpoints:    m.lvsr.HasBreakpoints(),
 		Debuggable:        m.lvsr.Debuggable(),
 	}, true
+}
+
+// Types returns the flat list of decoded VCTP type descriptors in their
+// on-disk order. Returns nil and ok=false when no VCTP block is present
+// or it cannot be parsed.
+func (m *Model) Types() ([]TypeDescriptor, bool) {
+	if m == nil || m.file == nil {
+		return nil, false
+	}
+	descs, _, ok := decodeVCTP(m.file)
+	if !ok {
+		return nil, false
+	}
+	out := make([]TypeDescriptor, len(descs))
+	for i, d := range descs {
+		out[i] = projectTypeDesc(d)
+	}
+	return out, true
+}
+
+// TypeAt looks up a type descriptor by 1-based flat ID — the same
+// numbering CONP and DTHP use. Returns ok=false when the id is out of
+// range or VCTP cannot be decoded.
+func (m *Model) TypeAt(flatID uint32) (TypeDescriptor, bool) {
+	if m == nil || m.file == nil || flatID == 0 {
+		return TypeDescriptor{}, false
+	}
+	descs, _, ok := decodeVCTP(m.file)
+	if !ok {
+		return TypeDescriptor{}, false
+	}
+	idx := int(flatID) - 1
+	if idx < 0 || idx >= len(descs) {
+		return TypeDescriptor{}, false
+	}
+	return projectTypeDesc(descs[idx]), true
+}
+
+// TopTypes returns the top-types list — the trailing index list inside
+// VCTP that points into the flat descriptor list. Indices are 1-based.
+func (m *Model) TopTypes() ([]uint32, bool) {
+	if m == nil || m.file == nil {
+		return nil, false
+	}
+	_, tops, ok := decodeVCTP(m.file)
+	if !ok {
+		return nil, false
+	}
+	return append([]uint32(nil), tops...), true
+}
+
+// ConnectorPane resolves the VI's CONP + CPC2 resources and returns
+// the combined view. Returns ok=false when neither resource is present;
+// when only one is present, the other field stays at zero. CONP is
+// resolved against VCTP to populate `PaneType` when a matching entry
+// exists.
+func (m *Model) ConnectorPane() (ConnectorPane, bool) {
+	if m == nil || m.file == nil {
+		return ConnectorPane{}, false
+	}
+	ctx := codecs.Context{FileVersion: m.file.Header.FormatVersion, Kind: m.file.Kind}
+
+	var pane ConnectorPane
+	any := false
+
+	if refs := sectionsOf(m.file, conpane.PointerFourCC); len(refs) > 0 {
+		if raw, err := (conpane.PointerCodec{}).Decode(ctx, refs[0].Payload); err == nil {
+			if v, ok := raw.(conpane.Value); ok {
+				pane.CONP = v.Value
+				any = true
+			}
+		}
+	}
+	if refs := sectionsOf(m.file, conpane.CountFourCC); len(refs) > 0 {
+		if raw, err := (conpane.CountCodec{}).Decode(ctx, refs[0].Payload); err == nil {
+			if v, ok := raw.(conpane.Value); ok {
+				pane.CPC2 = v.Value
+				any = true
+			}
+		}
+	}
+	if !any {
+		return ConnectorPane{}, false
+	}
+	if td, ok := m.TypeAt(uint32(pane.CONP)); ok {
+		pane.PaneType = td
+		pane.HasPaneType = true
+	}
+	return pane, true
 }
 
 // FrontPanelImports returns the decoded LIfp dependency entries for
@@ -499,5 +629,36 @@ func projectPath(v pthx.Value) DependencyPath {
 		IsUNC:      v.IsUNC(),
 		IsNotAPath: v.IsNotAPath(),
 		IsPhony:    v.IsPhony(),
+	}
+}
+
+func decodeVCTP(f *lvrsrc.File) ([]vctp.TypeDescriptor, []uint32, bool) {
+	refs := sectionsOf(f, vctp.FourCC)
+	if len(refs) == 0 {
+		return nil, nil, false
+	}
+	ctx := codecs.Context{FileVersion: f.Header.FormatVersion, Kind: f.Kind}
+	raw, err := (vctp.Codec{}).Decode(ctx, refs[0].Payload)
+	if err != nil {
+		return nil, nil, false
+	}
+	v, ok := raw.(vctp.Value)
+	if !ok {
+		return nil, nil, false
+	}
+	descs, tops, err := vctp.ParseInner(v.Inflated)
+	if err != nil {
+		return nil, nil, false
+	}
+	return descs, tops, true
+}
+
+func projectTypeDesc(d vctp.TypeDescriptor) TypeDescriptor {
+	return TypeDescriptor{
+		Index:    d.Index,
+		FullType: d.FullType.String(),
+		Flags:    d.Flags,
+		HasLabel: d.HasLabel,
+		Label:    d.Label,
 	}
 }
