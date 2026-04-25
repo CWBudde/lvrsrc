@@ -86,13 +86,6 @@ func TestDecodePTH1AbsolutePath(t *testing.T) {
 	// PTH1 ident + totlen + tpident "abs " + 2 components with 2-byte lengths
 	payload := []byte{
 		'P', 'T', 'H', '1',
-		0, 0, 0, 19, // totlen = 4 (tpident) + 2+2 + 2+5 = 15... let me recalc
-		// Actually: tpident=4 + (2+len1) + (2+len2) = 4 + 4 + 7 = 15
-		// Adjust: 0,0,0,15
-	}
-	// Recompute properly:
-	payload = []byte{
-		'P', 'T', 'H', '1',
 		0, 0, 0, 15,
 		'a', 'b', 's', ' ',
 		0, 2, 'h', 'i',

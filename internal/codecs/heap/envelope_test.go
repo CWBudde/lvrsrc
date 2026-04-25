@@ -99,7 +99,9 @@ func TestDecodeEnvelopeRejectsInnerLengthMismatch(t *testing.T) {
 	if _, err := w.Write(inflated); err != nil {
 		t.Fatalf("zlib write: %v", err)
 	}
-	w.Close()
+	if err := w.Close(); err != nil {
+		t.Fatalf("zlib close: %v", err)
+	}
 	payload := make([]byte, 4+buf.Len())
 	binary.BigEndian.PutUint32(payload[:4], uint32(len(inflated)))
 	copy(payload[4:], buf.Bytes())

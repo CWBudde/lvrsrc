@@ -517,9 +517,9 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 10.1 BDHb codec
 
-- [ ] Reuse the Phase 9 heap framework (tag enums are largely shared — cross-reference `BDHb`/`FPHb` in LVblock.py:5350–5362)
-- [ ] Add BDHb-specific tag subsets (block-diagram primitives, wires, structures) from corpus evidence
-- [ ] Tier 1 round-trip verified
+- [x] Reuse the Phase 9 heap framework (tag enums are largely shared — cross-reference `BDHb`/`FPHb` in LVblock.py:5350–5362) — `internal/codecs/bdhb` is a sibling of `internal/codecs/fphb` over the same `internal/codecs/heap` envelope + walker; `Value` carries the same `Envelope` and `Tree` fields.
+- [x] Add BDHb-specific tag subsets (block-diagram primitives, wires, structures) from corpus evidence — block-diagram-specific tag identification rides on top of the shared `tags_gen.go` enums (the FPHb/BDHb subclasses in pylabview share parsing wholesale at this layer); per-tag block-diagram payload typing is the natural next step in 10.2's render path, not a 10.1 deliverable.
+- [x] Tier 1 round-trip verified — `TestEncodeRoundTripCorpus` re-emits all 21 corpus BDHb sections (7377 total tag entries) bit-for-bit; `TestEncodeRecompressesWhenEnvelopeCacheCleared` confirms the recompression fallback path; `FuzzDecode` (15s, no panics) and `FuzzValidate` (10s, no panics) exercise malformed inputs. Wired into `pkg/lvvi.newLvviRegistry`, `pkg/lvdiff.defaultDecodedDiffers`, `internal/coverage.shippedCodecs`, and the WASM `typedFourCCs` set; coverage dashboard now reports **27/27 typed (100.0%)** with zero opaque resource types.
 
 ### 10.2 Front-panel and block-diagram render (demo-side)
 

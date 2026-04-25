@@ -5,10 +5,10 @@
     "resourceTypeCount": 27
   },
   "summary": {
-    "typedCodecCount": 26,
-    "typedResourceTypes": 26,
-    "opaqueResourceTypes": 1,
-    "typedCoveragePct": 96.29629629629629
+    "typedCodecCount": 27,
+    "typedResourceTypes": 27,
+    "opaqueResourceTypes": 0,
+    "typedCoveragePct": 100
   },
   "resources": [
     {
@@ -34,12 +34,12 @@
       "fourCC": "BDHb",
       "corpusFixtures": 21,
       "typed": {
-        "decode": false,
-        "encode": false,
-        "validate": false
+        "decode": true,
+        "encode": true,
+        "validate": true
       },
-      "safetyTier": "Opaque",
-      "package": "internal/codecs (fallback)",
+      "safetyTier": "Tier 1",
+      "package": "internal/codecs/bdhb",
       "readVersions": {
         "min": 0,
         "max": 0

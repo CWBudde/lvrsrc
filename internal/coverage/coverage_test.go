@@ -22,14 +22,14 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
 	}
-	if m.Summary.TypedCodecCount != 26 {
-		t.Fatalf("Summary.TypedCodecCount = %d, want 26", m.Summary.TypedCodecCount)
+	if m.Summary.TypedCodecCount != 27 {
+		t.Fatalf("Summary.TypedCodecCount = %d, want 27", m.Summary.TypedCodecCount)
 	}
-	if m.Summary.TypedResourceTypes != 26 {
-		t.Fatalf("Summary.TypedResourceTypes = %d, want 26", m.Summary.TypedResourceTypes)
+	if m.Summary.TypedResourceTypes != 27 {
+		t.Fatalf("Summary.TypedResourceTypes = %d, want 27", m.Summary.TypedResourceTypes)
 	}
-	if m.Summary.OpaqueResourceTypes != 1 {
-		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 1", m.Summary.OpaqueResourceTypes)
+	if m.Summary.OpaqueResourceTypes != 0 {
+		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 0", m.Summary.OpaqueResourceTypes)
 	}
 
 	if len(m.Resources) != 27 {
@@ -167,6 +167,20 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if bdpw.CorpusFixtures != 10 {
 		t.Fatalf("BDPW CorpusFixtures = %d, want 10", bdpw.CorpusFixtures)
 	}
+
+	bdhb := findResource(t, m, "BDHb")
+	if !bdhb.Typed.Decode || !bdhb.Typed.Encode || !bdhb.Typed.Validate {
+		t.Fatalf("BDHb typed support = %+v, want all true", bdhb.Typed)
+	}
+	if bdhb.SafetyTier != "Tier 1" {
+		t.Fatalf("BDHb SafetyTier = %q, want %q", bdhb.SafetyTier, "Tier 1")
+	}
+	if bdhb.Package != "internal/codecs/bdhb" {
+		t.Fatalf("BDHb Package = %q, want %q", bdhb.Package, "internal/codecs/bdhb")
+	}
+	if bdhb.CorpusFixtures != 21 {
+		t.Fatalf("BDHb CorpusFixtures = %d, want 21", bdhb.CorpusFixtures)
+	}
 }
 
 func TestGeneratedArtifactsStayInSync(t *testing.T) {
@@ -216,7 +230,7 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 	md := RenderMarkdown(m)
 	for _, want := range []string{
 		"# Resource Coverage",
-		"Typed coverage: 26/27 resource types",
+		"Typed coverage: 27/27 resource types",
 		"`CONP`",
 		"`CPC2`",
 		"`ICON`",
@@ -228,6 +242,7 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 		"`STRG`",
 		"`vers`",
 		"`BDPW`",
+		"`BDHb`",
 	} {
 		if !strings.Contains(md, want) {
 			t.Fatalf("RenderMarkdown() missing %q", want)

@@ -152,12 +152,16 @@ func decodeValue(payload []byte) (Value, error) {
 	}, nil
 }
 
-func inflate(compressed []byte) ([]byte, error) {
+func inflate(compressed []byte) (_ []byte, err error) {
 	r, err := zlib.NewReader(bytes.NewReader(compressed))
 	if err != nil {
 		return nil, err
 	}
-	defer r.Close()
+	defer func() {
+		if closeErr := r.Close(); err == nil && closeErr != nil {
+			err = closeErr
+		}
+	}()
 
 	inflated, err := io.ReadAll(r)
 	if err != nil {
@@ -170,8 +174,11 @@ func deflate(inflated []byte) ([]byte, error) {
 	var buf bytes.Buffer
 	w := zlib.NewWriter(&buf)
 	if _, err := w.Write(inflated); err != nil {
-		_ = w.Close()
-		return nil, fmt.Errorf("VCTP: deflate payload: %w", err)
+		writeErr := fmt.Errorf("VCTP: deflate payload: %w", err)
+		if closeErr := w.Close(); closeErr != nil {
+			return nil, fmt.Errorf("%v; additionally failed to close zlib writer: %w", writeErr, closeErr)
+		}
+		return nil, writeErr
 	}
 	if err := w.Close(); err != nil {
 		return nil, fmt.Errorf("VCTP: finalize deflate payload: %w", err)
