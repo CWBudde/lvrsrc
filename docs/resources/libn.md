@@ -13,21 +13,21 @@ charset interpretation to the caller.
 
 ## Wire layout
 
-| Offset | Size | Field   | Notes                                             |
-| -----: | ---: | ------- | ------------------------------------------------- |
-|      0 |    4 | `Count` | Big-endian unsigned 32-bit number of names.       |
-|      4 |    1 | `Len`   | First name's Pascal length byte.                  |
-|      5 |  Len | `Bytes` | First name's raw bytes (no NUL terminator).       |
-|    ... |  ... | ...     | Remaining name pairs, no padding between them.    |
+| Offset | Size | Field   | Notes                                          |
+| -----: | ---: | ------- | ---------------------------------------------- |
+|      0 |    4 | `Count` | Big-endian unsigned 32-bit number of names.    |
+|      4 |    1 | `Len`   | First name's Pascal length byte.               |
+|      5 |  Len | `Bytes` | First name's raw bytes (no NUL terminator).    |
+|    ... |  ... | ...     | Remaining name pairs, no padding between them. |
 
 Names use pylabview's `padto=1` Pascal-string variant, which means **no
 alignment padding** between entries.
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                |
-| -------- | --------------------- | ---------------------------------------- |
-| error    | `libn.payload.malformed` | Payload could not be parsed cleanly.  |
+| Severity | Code                     | Condition                            |
+| -------- | ------------------------ | ------------------------------------ |
+| error    | `libn.payload.malformed` | Payload could not be parsed cleanly. |
 
 The decoder rejects payloads with truncated counts, truncated name bytes,
 and trailing data after the last name.

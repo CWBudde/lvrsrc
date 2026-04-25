@@ -102,10 +102,10 @@ type WASMTypeEntry struct {
 // WASMConnectorPane bundles the CONP / CPC2 raw values plus the type
 // resolved through VCTP. The JS renders the layout from CPC2.
 type WASMConnectorPane struct {
-	CONP       uint16         `json:"conp"`
-	CPC2       uint16         `json:"cpc2"`
-	HasPane    bool           `json:"has_pane,omitempty"`
-	PaneType   *WASMTypeEntry `json:"pane_type,omitempty"`
+	CONP     uint16         `json:"conp"`
+	CPC2     uint16         `json:"cpc2"`
+	HasPane  bool           `json:"has_pane,omitempty"`
+	PaneType *WASMTypeEntry `json:"pane_type,omitempty"`
 }
 
 // WASMFlags surfaces the decoded LVSR flag set (plus password presence
@@ -113,16 +113,16 @@ type WASMConnectorPane struct {
 // actually set are reported as true; the JS layer renders one chip per
 // true flag.
 type WASMFlags struct {
-	SuspendOnRun       bool `json:"suspend_on_run"`
-	Locked             bool `json:"locked"`
-	RunOnOpen          bool `json:"run_on_open"`
-	SavedForPrevious   bool `json:"saved_for_previous"`
-	SeparateCode       bool `json:"separate_code"`
-	ClearIndicators    bool `json:"clear_indicators"`
-	AutoErrorHandling  bool `json:"auto_error_handling"`
-	HasBreakpoints     bool `json:"has_breakpoints"`
-	Debuggable         bool `json:"debuggable"`
-	PasswordProtected  bool `json:"password_protected"`
+	SuspendOnRun      bool `json:"suspend_on_run"`
+	Locked            bool `json:"locked"`
+	RunOnOpen         bool `json:"run_on_open"`
+	SavedForPrevious  bool `json:"saved_for_previous"`
+	SeparateCode      bool `json:"separate_code"`
+	ClearIndicators   bool `json:"clear_indicators"`
+	AutoErrorHandling bool `json:"auto_error_handling"`
+	HasBreakpoints    bool `json:"has_breakpoints"`
+	Debuggable        bool `json:"debuggable"`
+	PasswordProtected bool `json:"password_protected"`
 }
 
 // WASMIcon carries the 32x32 VI icon pre-expanded into row-major RGBA bytes
@@ -254,6 +254,7 @@ var typedFourCCs = map[string]struct{}{
 	"VITS": {},
 	"LIvi": {},
 	"FPHb": {},
+	"BDHb": {},
 }
 
 func buildResources(file *lvrsrc.File) []WASMResource {

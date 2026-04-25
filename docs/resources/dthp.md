@@ -18,10 +18,10 @@ A 16-bit big-endian word represents the value directly when its high bit
 combined with the next 16-bit word to form a 31-bit value. See
 `references/pylabview/pylabview/LVmisc.py:336` (`readVariableSizeFieldU2p2`).
 
-| Offset | Size | Field        | Notes                                                                        |
-| -----: | ---: | ------------ | ---------------------------------------------------------------------------- |
-|      0 |  2/4 | `TDCount`    | Variable-size U2p2: number of TypeDescs in the heap-used slice.              |
-|        |  2/4 | `IndexShift` | Variable-size U2p2: starting index into VCTP. **Omitted when TDCount = 0.**  |
+| Offset | Size | Field        | Notes                                                                       |
+| -----: | ---: | ------------ | --------------------------------------------------------------------------- |
+|      0 |  2/4 | `TDCount`    | Variable-size U2p2: number of TypeDescs in the heap-used slice.             |
+|        |  2/4 | `IndexShift` | Variable-size U2p2: starting index into VCTP. **Omitted when TDCount = 0.** |
 
 **Total size:** 2 bytes when `TDCount` is zero (no IndexShift field).
 Otherwise the sum of both fields' encoded widths — typically 4 bytes in
@@ -29,8 +29,8 @@ the corpus (both values fit in 15 bits).
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                    |
-| -------- | --------------------- | -------------------------------------------- |
+| Severity | Code                     | Condition                                     |
+| -------- | ------------------------ | --------------------------------------------- |
 | error    | `dthp.payload.malformed` | Payload could not be parsed (short/trailing). |
 
 ## References

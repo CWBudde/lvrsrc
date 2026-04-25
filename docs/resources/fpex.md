@@ -19,17 +19,17 @@ without committing data yet.
 
 ## Wire layout
 
-| Offset | Size | Field     | Notes                                            |
-| -----: | ---: | --------- | ------------------------------------------------ |
-|      0 |    4 | `Count`   | Big-endian unsigned 32-bit entry count.          |
-|      4 |  4×N | `Entries` | `Count` BE-uint32 entries (always zero so far).  |
+| Offset | Size | Field     | Notes                                           |
+| -----: | ---: | --------- | ----------------------------------------------- |
+|      0 |    4 | `Count`   | Big-endian unsigned 32-bit entry count.         |
+|      4 |  4×N | `Entries` | `Count` BE-uint32 entries (always zero so far). |
 
 **Total size:** `4 + 4*Count` bytes.
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                         |
-| -------- | --------------------- | ------------------------------------------------- |
+| Severity | Code                     | Condition                                                                        |
+| -------- | ------------------------ | -------------------------------------------------------------------------------- |
 | error    | `fpex.payload.malformed` | Payload size does not equal `4 + 4*Count`, or the count field itself is missing. |
 
 ## References

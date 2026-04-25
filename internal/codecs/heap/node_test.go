@@ -159,9 +159,9 @@ func TestDecodeEntryRejectsReservedSizeSpec5(t *testing.T) {
 func TestWalkOpenLeafCloseFormsTree(t *testing.T) {
 	// Build a 3-entry stream: TagOpen(rawID 50) + TagLeaf(rawID 60) + TagClose(rawID 50).
 	// All sizeSpec=0 (bool false), hasAttrList=0.
-	open := []byte{0x00, 50}     // sizeSpec=0, hasAttr=0, scope=TagOpen=0
-	leaf := []byte{0x04, 60}     // scope=TagLeaf=1
-	close := []byte{0x08, 50}    // scope=TagClose=2
+	open := []byte{0x00, 50}  // sizeSpec=0, hasAttr=0, scope=TagOpen=0
+	leaf := []byte{0x04, 60}  // scope=TagLeaf=1
+	close := []byte{0x08, 50} // scope=TagClose=2
 	payload := append(append(open, leaf...), close...)
 
 	res, err := Walk(payload)

@@ -63,9 +63,9 @@ func TestModelFlagsSurfacesLockedBit(t *testing.T) {
 func TestModelFlagsSurfacesAllBits(t *testing.T) {
 	// Build a payload that sets every documented bit.
 	flags := make([]uint32, 6)
-	flags[0] = 0x00001000 | 0x00002000 | 0x00004000                          // suspend, locked, run-on-open
-	flags[1] = 0x00000004 | 0x00000400 | 0x01000000 | 0x20000000             // saved-for-prev, sep-code, clear-ind, auto-err
-	flags[5] = 0x20000000 | 0x40000000 | 0x00000200                          // breakpoints + debuggable (both bits)
+	flags[0] = 0x00001000 | 0x00002000 | 0x00004000              // suspend, locked, run-on-open
+	flags[1] = 0x00000004 | 0x00000400 | 0x01000000 | 0x20000000 // saved-for-prev, sep-code, clear-ind, auto-err
+	flags[5] = 0x20000000 | 0x40000000 | 0x00000200              // breakpoints + debuggable (both bits)
 
 	m, _ := DecodeKnownResources(fileWithLVSR(buildLVSRPayload(0x19010002, flags...)))
 	got, ok := m.Flags()

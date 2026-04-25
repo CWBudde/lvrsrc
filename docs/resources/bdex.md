@@ -14,17 +14,17 @@ Corpus distribution: 15 sections at 4 bytes (`Count = 0`), 5 at 8 bytes
 
 ## Wire layout
 
-| Offset | Size | Field     | Notes                                       |
-| -----: | ---: | --------- | ------------------------------------------- |
-|      0 |    4 | `Count`   | Big-endian unsigned 32-bit entry count.     |
-|      4 |  4×N | `Entries` | `Count` BE-uint32 entries.                  |
+| Offset | Size | Field     | Notes                                   |
+| -----: | ---: | --------- | --------------------------------------- |
+|      0 |    4 | `Count`   | Big-endian unsigned 32-bit entry count. |
+|      4 |  4×N | `Entries` | `Count` BE-uint32 entries.              |
 
 **Total size:** `4 + 4*Count` bytes.
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                         |
-| -------- | --------------------- | ------------------------------------------------- |
+| Severity | Code                     | Condition                                                                        |
+| -------- | ------------------------ | -------------------------------------------------------------------------------- |
 | error    | `bdex.payload.malformed` | Payload size does not equal `4 + 4*Count`, or the count field itself is missing. |
 
 ## References

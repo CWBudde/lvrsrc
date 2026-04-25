@@ -13,17 +13,17 @@ can verify it stayed at the expected sentinel.
 
 ## Wire layout
 
-| Offset | Size | Field   | Notes                                 |
-| -----: | ---: | ------- | ------------------------------------- |
-|      0 |    4 | `Flags` | Big-endian unsigned 32-bit value.     |
+| Offset | Size | Field   | Notes                             |
+| -----: | ---: | ------- | --------------------------------- |
+|      0 |    4 | `Flags` | Big-endian unsigned 32-bit value. |
 
 **Total size:** 4 bytes.
 
 ## Validation rules
 
-| Severity | Code               | Condition                         |
-| -------- | ------------------ | --------------------------------- |
-| error    | `vpdp.payload.size` | Payload is not exactly 4 bytes.  |
+| Severity | Code                | Condition                       |
+| -------- | ------------------- | ------------------------------- |
+| error    | `vpdp.payload.size` | Payload is not exactly 4 bytes. |
 
 ## References
 

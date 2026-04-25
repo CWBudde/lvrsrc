@@ -81,10 +81,14 @@ type Node struct {
 func (n *Node) Parent() *Node { return n.parent }
 
 // HasContent reports whether the entry carries non-bool content bytes.
-func (n *Node) HasContent() bool { return n.SizeSpec != SizeSpecBoolFalse && n.SizeSpec != SizeSpecBoolTrue }
+func (n *Node) HasContent() bool {
+	return n.SizeSpec != SizeSpecBoolFalse && n.SizeSpec != SizeSpecBoolTrue
+}
 
 // IsBool reports whether the SizeSpec encodes a bare boolean.
-func (n *Node) IsBool() bool { return n.SizeSpec == SizeSpecBoolFalse || n.SizeSpec == SizeSpecBoolTrue }
+func (n *Node) IsBool() bool {
+	return n.SizeSpec == SizeSpecBoolFalse || n.SizeSpec == SizeSpecBoolTrue
+}
 
 // BoolValue returns the bool encoded by SizeSpec. It is meaningful only
 // when IsBool returns true.

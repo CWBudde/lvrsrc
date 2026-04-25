@@ -11,6 +11,7 @@ import (
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdhb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
@@ -279,6 +280,7 @@ var shippedCodecs = []codecSpec{
 	{codec: vits.Codec{}, packagePath: "internal/codecs/vits"},
 	{codec: livi.Codec{}, packagePath: "internal/codecs/livi"},
 	{codec: fphb.Codec{}, packagePath: "internal/codecs/fphb"},
+	{codec: bdhb.Codec{}, packagePath: "internal/codecs/bdhb"},
 }
 
 func scanCorpus(dir string) (int, map[string]int, error) {

@@ -13,6 +13,7 @@
 ### Task 1: Add failing tests for repair heuristics and CLI behavior
 
 **Files:**
+
 - Create: `internal/repair/repair_test.go`
 - Modify: `cmd/lvrsrc/main_test.go`
 
@@ -24,6 +25,7 @@
 ### Task 2: Implement conservative repair package
 
 **Files:**
+
 - Create: `internal/repair/repair.go`
 
 - [ ] Define the allowlist of repairable issue codes and explicit refusal rules.
@@ -33,6 +35,7 @@
 ### Task 3: Wire the CLI command and post-write safety gate
 
 **Files:**
+
 - Modify: `cmd/lvrsrc/main.go`
 
 - [ ] Add `repair` to the root command set.
@@ -42,6 +45,7 @@
 ### Task 4: Document and mark Phase 5.5 progress
 
 **Files:**
+
 - Modify: `README.md`
 - Modify: `docs/safety-model.md`
 - Modify: `PLAN.md`
@@ -52,6 +56,7 @@
 ### Task 5: Verify end-to-end
 
 **Files:**
+
 - None
 
 - [ ] Run `gofmt -w` on touched Go files.

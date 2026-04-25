@@ -5,7 +5,7 @@
 **Status:** decode + encode + validate, round-trip verified across 21 corpus
 sections (10 with marker `LVIN` from `.vi` fixtures, 11 with marker `LVCC`
 from `.ctl` fixtures). The codec exposes the outer envelope; per-entry
-parsing is deferred — see *Open questions* below.
+parsing is deferred — see _Open questions_ below.
 
 `LIvi` records dependencies between this VI/CTL and other VIs, classes,
 and project libraries. Sister to `LIfp` (front-panel imports) and `LIbd`
@@ -13,13 +13,13 @@ and project libraries. Sister to `LIfp` (front-panel imports) and `LIbd`
 
 ## Wire layout
 
-| Offset | Size | Field        | Notes                                                                |
-| -----: | ---: | ------------ | -------------------------------------------------------------------- |
-|      0 |    2 | `Version`    | Big-endian uint16. Corpus is uniformly `0x0001`.                     |
-|      2 |    4 | `Marker`     | File-kind FourCC (`LVIN` for `.vi`, `LVCC` for `.ctl`, etc.).        |
-|      6 |    4 | `EntryCount` | Big-endian uint32 number of dependency entries.                      |
-|     10 |  ... | `Body`       | `EntryCount` entries in their on-disk form. Layout described below.  |
-|   N-2  |    2 | `Footer`     | Big-endian uint16 trailing value (corpus: always `0x0003`).          |
+| Offset | Size | Field        | Notes                                                               |
+| -----: | ---: | ------------ | ------------------------------------------------------------------- |
+|      0 |    2 | `Version`    | Big-endian uint16. Corpus is uniformly `0x0001`.                    |
+|      2 |    4 | `Marker`     | File-kind FourCC (`LVIN` for `.vi`, `LVCC` for `.ctl`, etc.).       |
+|      6 |    4 | `EntryCount` | Big-endian uint32 number of dependency entries.                     |
+|     10 |  ... | `Body`       | `EntryCount` entries in their on-disk form. Layout described below. |
+|    N-2 |    2 | `Footer`     | Big-endian uint16 trailing value (corpus: always `0x0003`).         |
 
 The `Marker` field mirrors the file's content type. `Validate` warns on
 an unknown marker but Decode accepts any 4-byte value so future kinds

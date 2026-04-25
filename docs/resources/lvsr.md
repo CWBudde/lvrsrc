@@ -27,14 +27,14 @@ is not part of the uint32 grid, and the codec round-trips it verbatim.
 
 ## Flag bits
 
-Each boolean is addressed by a `(word-index, mask)` pair where *word-index*
+Each boolean is addressed by a `(word-index, mask)` pair where _word-index_
 counts 4-byte big-endian `uint32` slots starting after the `Version` header
 (so word 0 is `Raw[0:4]`, word 1 is `Raw[4:8]`, etc.). A bit is considered
 set when **any** bit of the mask is set — this matches pylavi's
 `get_flag_set` semantics. Accessors return `false` when `Raw` is too short
 to reach the addressed word.
 
-| Accessor              | Word | Mask         | Meaning (cross-reference)                                           |
+| Accessor              | Word |     Mask     | Meaning (cross-reference)                                           |
 | --------------------- | :--: | :----------: | ------------------------------------------------------------------- |
 | `SuspendOnRun()`      |  0   | `0x00001000` | Suspend-when-called. pylabview `VI_EXEC_FLAGS.HasSetBP`.            |
 | `Locked()`            |  0   | `0x00002000` | Library containing the VI is locked. pylabview `LibProtected`.      |
@@ -56,9 +56,9 @@ payload is too short to reach word 28. pylavi exposes the same index via
 
 ## Validation rules applied by `internal/codecs/lvsr`
 
-| Severity | Code                     | Condition                                      |
-| -------- | ------------------------ | ---------------------------------------------- |
-| error    | `lvsr.payload.too_short` | Payload is fewer than 4 bytes (no `Version`).  |
+| Severity | Code                     | Condition                                     |
+| -------- | ------------------------ | --------------------------------------------- |
+| error    | `lvsr.payload.too_short` | Payload is fewer than 4 bytes (no `Version`). |
 
 Higher-level validation (flag-word sanity, unknown LabVIEW version gates)
 is intentionally deferred — the codec is read-only and should not fail

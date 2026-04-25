@@ -19,11 +19,11 @@ when saving a VI:
 
 ## Wire layout
 
-| Offset | Size | Field         | Notes                                                           |
-| -----: | ---: | ------------- | --------------------------------------------------------------- |
+| Offset | Size | Field         | Notes                                                                             |
+| -----: | ---: | ------------- | --------------------------------------------------------------------------------- |
 |      0 |   16 | `PasswordMD5` | MD5 of the password. Empty-password sentinel: `d41d8cd98f00b204e9800998ecf8427e`. |
-|     16 |   16 | `Hash1`       | LabVIEW-derived verification hash.                              |
-|     32 |   16 | `Hash2`       | Second verification hash (LV >= 8.0).                           |
+|     16 |   16 | `Hash1`       | LabVIEW-derived verification hash.                                                |
+|     32 |   16 | `Hash2`       | Second verification hash (LV >= 8.0).                                             |
 
 **Total size:** 48 bytes.
 
@@ -36,7 +36,7 @@ The `Value` type exposes:
 - `PasswordMatches(password string) bool` — checks a candidate password
   by MD5-hashing it and comparing against `PasswordMD5`. Verifying a
   candidate is safe (no derivation secrets are stored client-side); the
-  codec deliberately does not provide a way to *change* the stored
+  codec deliberately does not provide a way to _change_ the stored
   password because `Hash1` and `Hash2` derivation has not been validated
   against arbitrary VIs.
 - `EmptyPasswordHex()` — the canonical hex string of the empty-password
@@ -44,9 +44,9 @@ The `Value` type exposes:
 
 ## Validation rules
 
-| Severity | Code               | Condition                          |
-| -------- | ------------------ | ---------------------------------- |
-| error    | `bdpw.payload.size` | Payload is not exactly 48 bytes.  |
+| Severity | Code                | Condition                        |
+| -------- | ------------------- | -------------------------------- |
+| error    | `bdpw.payload.size` | Payload is not exactly 48 bytes. |
 
 ## References
 

@@ -7,37 +7,37 @@ tier, and the Go package that implements the codec.
 
 These FourCCs appear in the 21-file `testdata/corpus/` set (as of 2026-04-24):
 
-| FourCC                                     | Count        | Typical size | Notes                                                                 |
-| ------------------------------------------ | ------------ | ------------ | --------------------------------------------------------------------- |
-| `LVSR`                                     | ≥1 per file  | 160 B        | LabVIEW Save Record. Carries the VI's display name in `Section.Name`. |
-| `vers`                                     | 1–5 per file | 12–14 B      | Version stamp — see [vers.md](resources/vers.md).                     |
-| `LIBN`                                     | 1 per file   | 16–27 B      | Library-name list (Pascal-string list of `.lvlib` membership).        |
-| `LIvi`                                     | 1 per file   | 51–176 B     | LabVIEW Info: VI dependencies (library imports, `PTH0` paths).        |
-| `LIfp`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Front Panel imports — see [lifp.md](resources/lifp.md). |
-| `LIbd`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Block Diagram imports — see [libd.md](resources/libd.md). |
-| `BDPW`                                     | 1 per file   | 48 B         | Block-diagram password hash (lockout info).                           |
-| `ICON`                                     | 1 per file   | 128 B        | 1-bit VI icon — see [icon.md](resources/icon.md).                     |
-| `icl4`                                     | 0–1 per file | 512 B        | 4-bit color icon — see [icon.md](resources/icon.md).                  |
-| `icl8`                                     | 1 per file   | 1024 B       | 8-bit color icon — see [icon.md](resources/icon.md).                  |
-| `FPHb`                                     | 1 per file   | variable     | Front panel heap.                                                     |
-| `BDHb`                                     | 1 per file   | variable     | Block diagram heap.                                                   |
-| `VCTP`                                     | 1 per file   | variable     | Type descriptor pool — see [vctp.md](resources/vctp.md).              |
-| `HIST`                                     | 1 per file   | 40 B         | Edit history counters.                                                |
-| `VITS`                                     | 1 per file   | variable     | VI settings / misc.                                                   |
+| FourCC                                     | Count        | Typical size | Notes                                                                     |
+| ------------------------------------------ | ------------ | ------------ | ------------------------------------------------------------------------- |
+| `LVSR`                                     | ≥1 per file  | 160 B        | LabVIEW Save Record. Carries the VI's display name in `Section.Name`.     |
+| `vers`                                     | 1–5 per file | 12–14 B      | Version stamp — see [vers.md](resources/vers.md).                         |
+| `LIBN`                                     | 1 per file   | 16–27 B      | Library-name list (Pascal-string list of `.lvlib` membership).            |
+| `LIvi`                                     | 1 per file   | 51–176 B     | LabVIEW Info: VI dependencies (library imports, `PTH0` paths).            |
+| `LIfp`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Front Panel imports — see [lifp.md](resources/lifp.md).     |
+| `LIbd`                                     | 1 per file   | 12–201 B     | LabVIEW Info: Block Diagram imports — see [libd.md](resources/libd.md).   |
+| `BDPW`                                     | 1 per file   | 48 B         | Block-diagram password hash (lockout info).                               |
+| `ICON`                                     | 1 per file   | 128 B        | 1-bit VI icon — see [icon.md](resources/icon.md).                         |
+| `icl4`                                     | 0–1 per file | 512 B        | 4-bit color icon — see [icon.md](resources/icon.md).                      |
+| `icl8`                                     | 1 per file   | 1024 B       | 8-bit color icon — see [icon.md](resources/icon.md).                      |
+| `FPHb`                                     | 1 per file   | variable     | Front panel heap.                                                         |
+| `BDHb`                                     | 1 per file   | variable     | Block diagram heap.                                                       |
+| `VCTP`                                     | 1 per file   | variable     | Type descriptor pool — see [vctp.md](resources/vctp.md).                  |
+| `HIST`                                     | 1 per file   | 40 B         | Edit history counters.                                                    |
+| `VITS`                                     | 1 per file   | variable     | VI settings / misc.                                                       |
 | `CONP`                                     | 1 per file   | 2 B          | Connector pane selector/pointer — see [conpane.md](resources/conpane.md). |
-| `CPC2`                                     | 1 per file   | 2 B          | Connector pane count/variant — see [conpane.md](resources/conpane.md). |
-| `RTSG`                                     | 1 per file   | 16 B         | Runtime signature.                                                    |
-| `FTAB`                                     | 1 per file   | ~100 B       | Font table.                                                           |
-| `MUID`                                     | 1 per file   | 4 B          | Module unique ID.                                                     |
-| `DTHP`                                     | 1 per file   | 4 B          | Default data heap pointer.                                            |
-| `FPEx` / `BDEx` / `FPSE` / `BDSE` / `VPDP` | 1 per file   | 4–8 B        | Small heap auxiliary blocks.                                          |
+| `CPC2`                                     | 1 per file   | 2 B          | Connector pane count/variant — see [conpane.md](resources/conpane.md).    |
+| `RTSG`                                     | 1 per file   | 16 B         | Runtime signature.                                                        |
+| `FTAB`                                     | 1 per file   | ~100 B       | Font table.                                                               |
+| `MUID`                                     | 1 per file   | 4 B          | Module unique ID.                                                         |
+| `DTHP`                                     | 1 per file   | 4 B          | Default data heap pointer.                                                |
+| `FPEx` / `BDEx` / `FPSE` / `BDSE` / `VPDP` | 1 per file   | 4–8 B        | Small heap auxiliary blocks.                                              |
 
 ## Compatibility table format
 
-The *Codec status* table below is the human-readable compatibility table for
+The _Codec status_ table below is the human-readable compatibility table for
 every shipped typed codec. Columns:
 
-- **FourCC** — 4-character resource type (see *Observed in corpus* above
+- **FourCC** — 4-character resource type (see _Observed in corpus_ above
   for where each one appears).
 - **Decode / Encode / Validate** — ✅ means the codec implements
   `codecs.ResourceCodec.Decode` / `Encode` / `Validate`; `—` means opaque

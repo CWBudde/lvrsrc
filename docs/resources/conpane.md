@@ -3,10 +3,10 @@
 The current corpus supports a minimal, fixed-width interpretation for the
 connector-pane resources:
 
-| FourCC | Payload size | Decoded shape |
-| ------ | -----------: | ------------- |
-| `CONP` | 2 B          | big-endian `uint16` |
-| `CPC2` | 2 B          | big-endian `uint16` |
+| FourCC | Payload size | Decoded shape       |
+| ------ | -----------: | ------------------- |
+| `CONP` |          2 B | big-endian `uint16` |
+| `CPC2` |          2 B | big-endian `uint16` |
 
 Neither resource carries an internal header, checksum, or trailing metadata in
 the observed samples.
@@ -24,8 +24,8 @@ The codec preserves the raw two-byte big-endian layout on re-encode.
 
 Current validation is intentionally narrow and corpus-grounded:
 
-| Severity | Code                | Condition |
-| -------- | ------------------- | --------- |
+| Severity | Code                | Condition                                    |
+| -------- | ------------------- | -------------------------------------------- |
 | error    | `conp.payload.size` | `CONP` payload length is not exactly 2 bytes |
 | error    | `cpc2.payload.size` | `CPC2` payload length is not exactly 2 bytes |
 
@@ -43,10 +43,10 @@ Observed `CPC2` value distribution:
 
 | Value | Fixtures |
 | ----: | -------: |
-| 1     | 11 |
-| 2     | 6 |
-| 3     | 3 |
-| 4     | 1 |
+|     1 |       11 |
+|     2 |        6 |
+|     3 |        3 |
+|     4 |        1 |
 
 Every observed `CONP` and `CPC2` section round-trips byte-for-byte through
 `internal/codecs/conpane`.

@@ -31,14 +31,14 @@ because it embeds an `RSRC` file).
 
 ## Per-entry shape
 
-| Offset | Size | Field     | Notes                                                   |
-| -----: | ---: | --------- | ------------------------------------------------------- |
-|      0 |    4 | `NameLen` | Big-endian byte length of the LStr name.                |
+| Offset | Size | Field     | Notes                                                                                                                                                                   |
+| -----: | ---: | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      0 |    4 | `NameLen` | Big-endian byte length of the LStr name.                                                                                                                                |
 |      4 |    L | `Name`    | Raw bytes of the name. Encoding is the VI's text encoding (`vi.textEncoding` in pylabview); the codec keeps the bytes opaque so callers can decode at the right moment. |
-|    4+L |    4 | `VarLen`  | Big-endian byte length of the LVVariant payload.        |
-|    8+L |    V | `Variant` | Opaque variant bytes. Length is exactly `VarLen`.       |
+|    4+L |    4 | `VarLen`  | Big-endian byte length of the LVVariant payload.                                                                                                                        |
+|    8+L |    V | `Variant` | Opaque variant bytes. Length is exactly `VarLen`.                                                                                                                       |
 
-## What the codec does *not* decode
+## What the codec does _not_ decode
 
 LVVariant content is a tagged datafill object that depends on the VI's
 consolidated type list and per-instance datafill nodes. Pulling that
@@ -54,8 +54,8 @@ payload reproduces the original bytes.
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                  |
-| -------- | --------------------- | ------------------------------------------ |
+| Severity | Code                     | Condition                                                                                                                      |
+| -------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
 | error    | `vits.payload.malformed` | Payload could not be parsed (truncated count, name, variant length, variant bytes, or trailing data after the declared count). |
 
 ## References

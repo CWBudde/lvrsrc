@@ -9,6 +9,7 @@ import (
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdex"
+	"github.com/CWBudde/lvrsrc/internal/codecs/bdhb"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdpw"
 	"github.com/CWBudde/lvrsrc/internal/codecs/bdse"
 	"github.com/CWBudde/lvrsrc/internal/codecs/conpane"
@@ -80,6 +81,7 @@ func defaultDecodedDiffers(a, b *lvrsrc.File) map[string]DecodedDiffer {
 	r.Register(vits.Codec{})
 	r.Register(livi.Codec{})
 	r.Register(fphb.Codec{})
+	r.Register(bdhb.Codec{})
 
 	aCtx := contextFromFile(a)
 	bCtx := contextFromFile(b)

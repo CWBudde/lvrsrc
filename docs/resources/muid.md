@@ -11,17 +11,17 @@ changes, so this counter effectively tracks total edits to the file.
 
 ## Wire layout
 
-| Offset | Size | Field | Notes                                |
-| -----: | ---: | ----- | ------------------------------------ |
-|      0 |    4 | `UID` | Big-endian unsigned 32-bit integer.  |
+| Offset | Size | Field | Notes                               |
+| -----: | ---: | ----- | ----------------------------------- |
+|      0 |    4 | `UID` | Big-endian unsigned 32-bit integer. |
 
 **Total size:** 4 bytes.
 
 ## Validation rules
 
-| Severity | Code              | Condition                          |
-| -------- | ----------------- | ---------------------------------- |
-| error    | `muid.payload.size` | Payload is not exactly 4 bytes.   |
+| Severity | Code                | Condition                       |
+| -------- | ------------------- | ------------------------------- |
+| error    | `muid.payload.size` | Payload is not exactly 4 bytes. |
 
 ## References
 

@@ -17,11 +17,11 @@ import (
 
 // oracleDoc is the JSON payload emitted by scripts/gen-oracle.py.
 type oracleDoc struct {
-	Oracle      string             `json:"oracle"`
-	SourcePath  string             `json:"source_path"`
-	FmtVersion  int                `json:"fmt_version"`
-	BlockCount  int                `json:"block_count"`
-	Blocks      []oracleBlockEntry `json:"blocks"`
+	Oracle     string             `json:"oracle"`
+	SourcePath string             `json:"source_path"`
+	FmtVersion int                `json:"fmt_version"`
+	BlockCount int                `json:"block_count"`
+	Blocks     []oracleBlockEntry `json:"blocks"`
 }
 
 type oracleBlockEntry struct {

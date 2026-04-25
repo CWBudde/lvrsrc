@@ -10,17 +10,17 @@ object graph (sibling of `FPSE`).
 
 ## Wire layout
 
-| Offset | Size | Field      | Notes                                 |
-| -----: | ---: | ---------- | ------------------------------------- |
+| Offset | Size | Field      | Notes                                  |
+| -----: | ---: | ---------- | -------------------------------------- |
 |      0 |    4 | `Estimate` | Big-endian unsigned 32-bit byte count. |
 
 **Total size:** 4 bytes.
 
 ## Validation rules
 
-| Severity | Code               | Condition                         |
-| -------- | ------------------ | --------------------------------- |
-| error    | `bdse.payload.size` | Payload is not exactly 4 bytes.  |
+| Severity | Code                | Condition                       |
+| -------- | ------------------- | ------------------------------- |
+| error    | `bdse.payload.size` | Payload is not exactly 4 bytes. |
 
 ## References
 

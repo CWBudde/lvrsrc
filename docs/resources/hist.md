@@ -14,17 +14,17 @@ to specific slot semantics.
 
 ## Wire layout
 
-| Offset | Size | Field | Notes                                              |
-| -----: | ---: | ----- | -------------------------------------------------- |
-|      0 |   40 | `Raw` | Ten consecutive big-endian uint32 counter slots.   |
+| Offset | Size | Field | Notes                                            |
+| -----: | ---: | ----- | ------------------------------------------------ |
+|      0 |   40 | `Raw` | Ten consecutive big-endian uint32 counter slots. |
 
 **Total size:** 40 bytes (uniform across the corpus).
 
 ## Validation rules
 
-| Severity | Code               | Condition                          |
-| -------- | ------------------ | ---------------------------------- |
-| error    | `hist.payload.size` | Payload is not exactly 40 bytes.  |
+| Severity | Code                | Condition                        |
+| -------- | ------------------- | -------------------------------- |
+| error    | `hist.payload.size` | Payload is not exactly 40 bytes. |
 
 ## References
 

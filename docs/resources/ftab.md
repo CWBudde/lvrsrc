@@ -28,12 +28,12 @@ shipped corpus sample uses the wide shape.
 
 ### Per-entry layout
 
-| Offset | Size | Field      | Notes                                          |
-| -----: | ---: | ---------- | ---------------------------------------------- |
+| Offset | Size | Field      | Notes                                                            |
+| -----: | ---: | ---------- | ---------------------------------------------------------------- |
 |      0 |    4 | `NameOffs` | Absolute offset into the payload to the name. `0` means no name. |
-|      4 |    2 | `Prop2`    | Big-endian u16, semantics not documented.      |
-|      6 |    2 | `Prop3`    | Big-endian u16.                                |
-|      8 |    2 | `Prop4`    | Big-endian u16.                                |
+|      4 |    2 | `Prop2`    | Big-endian u16, semantics not documented.                        |
+|      6 |    2 | `Prop3`    | Big-endian u16.                                                  |
+|      8 |    2 | `Prop4`    | Big-endian u16.                                                  |
 
 Then either:
 
@@ -55,8 +55,8 @@ distinct offsets in different entries.
 
 ## Validation rules
 
-| Severity | Code                  | Condition                                           |
-| -------- | --------------------- | --------------------------------------------------- |
+| Severity | Code                     | Condition                                                                                                                              |
+| -------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | error    | `ftab.payload.malformed` | Payload could not be parsed (header truncated, oversized count, truncated entry table, or out-of-bounds / overrunning name reference). |
 
 ## References

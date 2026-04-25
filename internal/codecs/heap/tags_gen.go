@@ -11,21 +11,21 @@ type HeapFormat int
 
 // Members of HeapFormat.
 const (
-	HeapFormatUnknown HeapFormat = 0 // Unknown
+	HeapFormatUnknown  HeapFormat = 0 // Unknown
 	HeapFormatVersionT HeapFormat = 1 // VersionT
-	HeapFormatXMLVer HeapFormat = 2 // XMLVer
-	HeapFormatBinVerA HeapFormat = 3 // BinVerA
-	HeapFormatBinVerB HeapFormat = 4 // BinVerB
-	HeapFormatBinVerC HeapFormat = 5 // BinVerC
+	HeapFormatXMLVer   HeapFormat = 2 // XMLVer
+	HeapFormatBinVerA  HeapFormat = 3 // BinVerA
+	HeapFormatBinVerB  HeapFormat = 4 // BinVerB
+	HeapFormatBinVerC  HeapFormat = 5 // BinVerC
 )
 
 var heapFormatNames = map[HeapFormat]string{
-	HeapFormatUnknown: "Unknown",
+	HeapFormatUnknown:  "Unknown",
 	HeapFormatVersionT: "VersionT",
-	HeapFormatXMLVer: "XMLVer",
-	HeapFormatBinVerA: "BinVerA",
-	HeapFormatBinVerB: "BinVerB",
-	HeapFormatBinVerC: "BinVerC",
+	HeapFormatXMLVer:   "XMLVer",
+	HeapFormatBinVerA:  "BinVerA",
+	HeapFormatBinVerB:  "BinVerB",
+	HeapFormatBinVerC:  "BinVerC",
 }
 
 // String returns the pylabview name when known, otherwise a `HeapFormat(N)` fallback.
@@ -41,14 +41,14 @@ type NodeScope int
 
 // Members of NodeScope.
 const (
-	NodeScopeTagOpen NodeScope = 0 // TagOpen
-	NodeScopeTagLeaf NodeScope = 1 // TagLeaf
+	NodeScopeTagOpen  NodeScope = 0 // TagOpen
+	NodeScopeTagLeaf  NodeScope = 1 // TagLeaf
 	NodeScopeTagClose NodeScope = 2 // TagClose
 )
 
 var nodeScopeNames = map[NodeScope]string{
-	NodeScopeTagOpen: "TagOpen",
-	NodeScopeTagLeaf: "TagLeaf",
+	NodeScopeTagOpen:  "TagOpen",
+	NodeScopeTagLeaf:  "TagLeaf",
 	NodeScopeTagClose: "TagClose",
 }
 
@@ -70,19 +70,19 @@ type SystemTag int
 
 // Members of SystemTag.
 const (
-	SystemTagObject SystemTag = -3 // SL__object
-	SystemTagArray SystemTag = -4 // SL__array
-	SystemTagReference SystemTag = -5 // SL__reference
+	SystemTagObject       SystemTag = -3 // SL__object
+	SystemTagArray        SystemTag = -4 // SL__array
+	SystemTagReference    SystemTag = -5 // SL__reference
 	SystemTagArrayElement SystemTag = -6 // SL__arrayElement
-	SystemTagRootObject SystemTag = -7 // SL__rootObject
+	SystemTagRootObject   SystemTag = -7 // SL__rootObject
 )
 
 var systemTagNames = map[SystemTag]string{
-	SystemTagRootObject: "SL__rootObject",
+	SystemTagRootObject:   "SL__rootObject",
 	SystemTagArrayElement: "SL__arrayElement",
-	SystemTagReference: "SL__reference",
-	SystemTagArray: "SL__array",
-	SystemTagObject: "SL__object",
+	SystemTagReference:    "SL__reference",
+	SystemTagArray:        "SL__array",
+	SystemTagObject:       "SL__object",
 }
 
 // String returns the pylabview name when known, otherwise a `SystemTag(N)` fallback.
@@ -98,21 +98,21 @@ type SystemAttribTag int
 
 // Members of SystemAttribTag.
 const (
-	SystemAttribTagClass SystemAttribTag = -2 // SL__class
-	SystemAttribTagUid SystemAttribTag = -3 // SL__uid
-	SystemAttribTagStockObj SystemAttribTag = -4 // SL__stockObj
-	SystemAttribTagElements SystemAttribTag = -5 // SL__elements
-	SystemAttribTagIndex SystemAttribTag = -6 // SL__index
+	SystemAttribTagClass       SystemAttribTag = -2 // SL__class
+	SystemAttribTagUid         SystemAttribTag = -3 // SL__uid
+	SystemAttribTagStockObj    SystemAttribTag = -4 // SL__stockObj
+	SystemAttribTagElements    SystemAttribTag = -5 // SL__elements
+	SystemAttribTagIndex       SystemAttribTag = -6 // SL__index
 	SystemAttribTagStockSource SystemAttribTag = -7 // SL__stockSource
 )
 
 var systemAttribTagNames = map[SystemAttribTag]string{
 	SystemAttribTagStockSource: "SL__stockSource",
-	SystemAttribTagIndex: "SL__index",
-	SystemAttribTagElements: "SL__elements",
-	SystemAttribTagStockObj: "SL__stockObj",
-	SystemAttribTagUid: "SL__uid",
-	SystemAttribTagClass: "SL__class",
+	SystemAttribTagIndex:       "SL__index",
+	SystemAttribTagElements:    "SL__elements",
+	SystemAttribTagStockObj:    "SL__stockObj",
+	SystemAttribTagUid:         "SL__uid",
+	SystemAttribTagClass:       "SL__class",
 }
 
 // String returns the pylabview name when known, otherwise a `SystemAttribTag(N)` fallback.
@@ -128,1240 +128,1240 @@ type FieldTag int
 
 // Members of FieldTag.
 const (
-	FieldTagActiveDiag FieldTag = 1 // OF__activeDiag
-	FieldTagActiveMarker FieldTag = 2 // OF__activeMarker
-	FieldTagActivePlot FieldTag = 3 // OF__activePlot
-	FieldTagActiveThumb FieldTag = 4 // OF__activeThumb
-	FieldTagActiveXScale FieldTag = 5 // OF__activeXScale
-	FieldTagActiveYScale FieldTag = 6 // OF__activeYScale
-	FieldTagAlarmName FieldTag = 7 // OF__alarmName
-	FieldTagBary FieldTag = 8 // OF__bary
-	FieldTagBgColor FieldTag = 9 // OF__bgColor
-	FieldTagBindings FieldTag = 10 // OF__bindings
-	FieldTagBlinkList FieldTag = 11 // OF__blinkList
-	FieldTagBorderColor FieldTag = 12 // OF__borderColor
-	FieldTagBotOrRight FieldTag = 13 // OF__botOrRight
-	FieldTagBounds FieldTag = 14 // OF__bounds
-	FieldTagBuf FieldTag = 15 // OF__buf
-	FieldTagCallOffset FieldTag = 16 // OF__callOffset
-	FieldTagCallType FieldTag = 17 // OF__callType
-	FieldTagCallee FieldTag = 18 // OF__callee
-	FieldTagCaller FieldTag = 19 // OF__caller
-	FieldTagCallerGlyphBounds FieldTag = 20 // OF__callerGlyphBounds
-	FieldTagCaseSelDCO FieldTag = 21 // OF__caseSelDCO
-	FieldTagCboxDsOffset FieldTag = 22 // OF__cboxDsOffset
-	FieldTagCboxTdOffset FieldTag = 23 // OF__cboxTdOffset
-	FieldTagCbrIcon FieldTag = 24 // OF__cbrIcon
-	FieldTagCinPath FieldTag = 25 // OF__cinPath
-	FieldTagClassName FieldTag = 26 // OF__className
-	FieldTagClumpNum FieldTag = 27 // OF__clumpNum
-	FieldTagCnst FieldTag = 28 // OF__cnst
-	FieldTagCode FieldTag = 29 // OF__code
-	FieldTagColor FieldTag = 30 // OF__color
-	FieldTagColorDSO FieldTag = 31 // OF__colorDSO
-	FieldTagColorTDO FieldTag = 32 // OF__colorTDO
-	FieldTagCols FieldTag = 33 // OF__cols
-	FieldTagCommentMode FieldTag = 34 // OF__commentMode
-	FieldTagCompanionDiag FieldTag = 35 // OF__companionDiag
-	FieldTagConId FieldTag = 36 // OF__conId
-	FieldTagConNum FieldTag = 37 // OF__conNum
-	FieldTagConPane FieldTag = 38 // OF__conPane
-	FieldTagConfState FieldTag = 39 // OF__confState
-	FieldTagConfigNode FieldTag = 40 // OF__configNode
-	FieldTagConnectorTM FieldTag = 41 // OF__connectorTM
-	FieldTagCons FieldTag = 42 // OF__cons
-	FieldTagContRect FieldTag = 43 // OF__contRect
-	FieldTagCtlDataObj FieldTag = 44 // OF__ctlDataObj
-	FieldTagDBounds FieldTag = 45 // OF__dBounds
-	FieldTagDIdx FieldTag = 46 // OF__dIdx
-	FieldTagDataNodeList FieldTag = 47 // OF__dataNodeList
-	FieldTagDco FieldTag = 48 // OF__dco
-	FieldTagDcoAgg FieldTag = 49 // OF__dcoAgg
-	FieldTagDcoFiller FieldTag = 50 // OF__dcoFiller
-	FieldTagDcoList FieldTag = 51 // OF__dcoList
-	FieldTagDdo FieldTag = 52 // OF__ddo
-	FieldTagDdoIndex FieldTag = 53 // OF__ddoIndex
-	FieldTagDdoList FieldTag = 54 // OF__ddoList
-	FieldTagDdoListList FieldTag = 55 // OF__ddoListList
-	FieldTagDefaultDiag FieldTag = 56 // OF__defaultDiag
-	FieldTagDelDCO FieldTag = 57 // OF__delDCO
-	FieldTagDepth FieldTag = 58 // OF__depth
-	FieldTagDescription FieldTag = 59 // OF__description
-	FieldTagDiagDefined FieldTag = 60 // OF__diagDefined
-	FieldTagDiagFiller1 FieldTag = 61 // OF__diagFiller1
-	FieldTagDiagFiller2 FieldTag = 62 // OF__diagFiller2
-	FieldTagDiagramList FieldTag = 63 // OF__diagramList
-	FieldTagDocBounds FieldTag = 64 // OF__docBounds
-	FieldTagDsOffset FieldTag = 65 // OF__dsOffset
-	FieldTagDsw FieldTag = 66 // OF__dsw
-	FieldTagDynBounds FieldTag = 67 // OF__dynBounds
-	FieldTagDynLink FieldTag = 68 // OF__dynLink
-	FieldTagEOracleIdx FieldTag = 69 // OF__eOracleIdx
-	FieldTagEPtrOff FieldTag = 70 // OF__ePtrOff
-	FieldTagESizeOff FieldTag = 71 // OF__eSizeOff
-	FieldTagEltDCO FieldTag = 72 // OF__eltDCO
-	FieldTagEmbedToken FieldTag = 73 // OF__embedToken
-	FieldTagErrCode FieldTag = 74 // OF__errCode
-	FieldTagErrIn FieldTag = 75 // OF__errIn
-	FieldTagErrOfst FieldTag = 76 // OF__errOfst
-	FieldTagErrOut FieldTag = 77 // OF__errOut
-	FieldTagEventObj_unused FieldTag = 78 // OF__eventObj_unused
-	FieldTagFName FieldTag = 79 // OF__fName
-	FieldTagFgColor FieldTag = 80 // OF__fgColor
-	FieldTagFiller FieldTag = 81 // OF__filler
-	FieldTagFilterNodeList FieldTag = 82 // OF__filterNodeList
-	FieldTagFirstNodeIdx FieldTag = 83 // OF__firstNodeIdx
-	FieldTagFocusRow FieldTag = 84 // OF__focusRow
-	FieldTagFormat FieldTag = 85 // OF__format
-	FieldTagFormula FieldTag = 86 // OF__formula
-	FieldTagFrontRow FieldTag = 87 // OF__frontRow
-	FieldTagFuncTD FieldTag = 88 // OF__funcTD
-	FieldTagGraphCursor FieldTag = 89 // OF__graphCursor
-	FieldTagGraphType FieldTag = 90 // OF__graphType
-	FieldTagGrowAreaBounds FieldTag = 91 // OF__growAreaBounds
-	FieldTagGrowObj FieldTag = 92 // OF__growObj
-	FieldTagGrowTermsList FieldTag = 93 // OF__growTermsList
-	FieldTagGrowViewObj FieldTag = 94 // OF__growViewObj
-	FieldTagHFlags FieldTag = 95 // OF__hFlags
-	FieldTagHGrowNodeList FieldTag = 96 // OF__hGrowNodeList
-	FieldTagHSEnd FieldTag = 97 // OF__hSEnd
-	FieldTagHSStart FieldTag = 98 // OF__hSStart
-	FieldTagHeaderImage FieldTag = 99 // OF__headerImage
-	FieldTagHierarchyColor FieldTag = 100 // OF__hierarchyColor
-	FieldTagHistDSOffset FieldTag = 101 // OF__histDSOffset
-	FieldTagHistTD FieldTag = 102 // OF__histTD
-	FieldTagHistTDOffset FieldTag = 103 // OF__histTDOffset
-	FieldTagHoodBounds FieldTag = 104 // OF__hoodBounds
-	FieldTagHotPoint FieldTag = 105 // OF__hotPoint
-	FieldTagHowGrow FieldTag = 106 // OF__howGrow
-	FieldTagI FieldTag = 107 // OF__i
-	FieldTagIconBounds FieldTag = 108 // OF__iconBounds
-	FieldTagId FieldTag = 109 // OF__id
-	FieldTagImage FieldTag = 110 // OF__image
-	FieldTagInArrDCO FieldTag = 111 // OF__inArrDCO
-	FieldTagInVILib FieldTag = 112 // OF__inVILib
-	FieldTagIndex FieldTag = 113 // OF__index
-	FieldTagIndexPosCol FieldTag = 114 // OF__indexPosCol
-	FieldTagIndexPosRow FieldTag = 115 // OF__indexPosRow
-	FieldTagIndexing FieldTag = 116 // OF__indexing
-	FieldTagInnerLpTunDCO FieldTag = 117 // OF__innerLpTunDCO
-	FieldTagInnerR FieldTag = 118 // OF__innerR
-	FieldTagInnerSeq FieldTag = 119 // OF__innerSeq
-	FieldTagInplace FieldTag = 120 // OF__inplace
-	FieldTagInstance FieldTag = 121 // OF__instance
-	FieldTagInstanceSelector FieldTag = 122 // OF__instanceSelector
-	FieldTagInstrStyle FieldTag = 123 // OF__instrStyle
-	FieldTagIntermediateList FieldTag = 124 // OF__intermediateList
-	FieldTagInvokeFlags FieldTag = 125 // OF__invokeFlags
-	FieldTagKeyMappingList FieldTag = 126 // OF__keyMappingList
-	FieldTagLabel FieldTag = 127 // OF__label
-	FieldTagLastSignalKind FieldTag = 128 // OF__lastSignalKind
-	FieldTagLegendLbl FieldTag = 129 // OF__legendLbl
-	FieldTagLenDCO FieldTag = 130 // OF__lenDCO
-	FieldTagLengthDCOList FieldTag = 131 // OF__lengthDCOList
-	FieldTagLevel FieldTag = 132 // OF__level
-	FieldTagLibPath FieldTag = 133 // OF__libPath
-	FieldTagListFlags FieldTag = 134 // OF__listFlags
-	FieldTagListboxFlags FieldTag = 135 // OF__listboxFlags
-	FieldTagLoopEndDCO FieldTag = 136 // OF__loopEndDCO
-	FieldTagLoopIndexDCO FieldTag = 137 // OF__loopIndexDCO
-	FieldTagLoopTimingDCO FieldTag = 138 // OF__loopTimingDCO
-	FieldTagLpTunDCO FieldTag = 139 // OF__lpTunDCO
-	FieldTagLsrDCOList FieldTag = 140 // OF__lsrDCOList
-	FieldTagMJasterWizard FieldTag = 141 // OF__mJasterWizard
-	FieldTagMask FieldTag = 142 // OF__mask
-	FieldTagMaster_unused FieldTag = 143 // OF__master_unused
-	FieldTagMasterPart FieldTag = 144 // OF__masterPart
-	FieldTagMate FieldTag = 145 // OF__mate
-	FieldTagMaxPaneSize FieldTag = 146 // OF__maxPaneSize
-	FieldTagMaxPanelSize FieldTag = 147 // OF__maxPanelSize
-	FieldTagMclFlags FieldTag = 148 // OF__mclFlags
-	FieldTagMenuInstanceUsed FieldTag = 149 // OF__menuInstanceUsed
-	FieldTagMethCode FieldTag = 150 // OF__methCode
-	FieldTagMethName FieldTag = 151 // OF__methName
-	FieldTagMinPaneSize FieldTag = 152 // OF__minPaneSize
-	FieldTagMinPanelSize FieldTag = 153 // OF__minPanelSize
-	FieldTagNChunks FieldTag = 154 // OF__nChunks
-	FieldTagNConnections FieldTag = 155 // OF__nConnections
-	FieldTagNDims FieldTag = 156 // OF__nDims
-	FieldTagNInputs FieldTag = 157 // OF__nInputs
-	FieldTagNLabels FieldTag = 158 // OF__nLabels
-	FieldTagNMajDivs FieldTag = 159 // OF__nMajDivs
-	FieldTagNRC FieldTag = 160 // OF__nRC
-	FieldTagNVisItems FieldTag = 161 // OF__nVisItems
-	FieldTagNmxFiller FieldTag = 162 // OF__nmxFiller
-	FieldTagNodeInfo FieldTag = 163 // OF__nodeInfo
-	FieldTagNodeList FieldTag = 164 // OF__nodeList
-	FieldTagNodeName FieldTag = 165 // OF__nodeName
-	FieldTagNumFrozenCols FieldTag = 166 // OF__numFrozenCols
-	FieldTagNumFrozenRows FieldTag = 167 // OF__numFrozenRows
-	FieldTagNumRows FieldTag = 168 // OF__numRows
-	FieldTagNumSubVIs FieldTag = 169 // OF__numSubVIs
-	FieldTagOMId FieldTag = 170 // OF__oMId
-	FieldTagORC FieldTag = 171 // OF__oRC
-	FieldTagObjFlags FieldTag = 172 // OF__objFlags
-	FieldTagOmidDSOffset FieldTag = 173 // OF__omidDSOffset
-	FieldTagOmidTDOffset FieldTag = 174 // OF__omidTDOffset
-	FieldTagOmidTypeDesc FieldTag = 175 // OF__omidTypeDesc
-	FieldTagOrderList FieldTag = 176 // OF__orderList
-	FieldTagOrigin FieldTag = 177 // OF__origin
-	FieldTagOtherSide FieldTag = 178 // OF__otherSide
-	FieldTagOuterR FieldTag = 179 // OF__outerR
-	FieldTagOutputDCO FieldTag = 180 // OF__outputDCO
-	FieldTagOutputNode FieldTag = 181 // OF__outputNode
-	FieldTagOwnerSignal FieldTag = 182 // OF__ownerSignal
-	FieldTagPBounds FieldTag = 183 // OF__pBounds
-	FieldTagPMap FieldTag = 184 // OF__pMap
-	FieldTagPMapOfst FieldTag = 185 // OF__pMapOfst
-	FieldTagPageList FieldTag = 186 // OF__pageList
-	FieldTagPaneFlags FieldTag = 187 // OF__paneFlags
-	FieldTagPaneHierarchy FieldTag = 188 // OF__paneHierarchy
-	FieldTagParamIdx FieldTag = 189 // OF__paramIdx
-	FieldTagParamTableOffset FieldTag = 190 // OF__paramTableOffset
-	FieldTagParmIndex FieldTag = 191 // OF__parmIndex
-	FieldTagPartID FieldTag = 192 // OF__partID
-	FieldTagPartOrder FieldTag = 193 // OF__partOrder
-	FieldTagPartsList FieldTag = 194 // OF__partsList
-	FieldTagPattern FieldTag = 195 // OF__pattern
-	FieldTagPctTransparent FieldTag = 196 // OF__pctTransparent
-	FieldTagPermDCOList FieldTag = 197 // OF__permDCOList
-	FieldTagPermutation FieldTag = 198 // OF__permutation
-	FieldTagPixmap FieldTag = 199 // OF__pixmap
-	FieldTagPos FieldTag = 200 // OF__pos
-	FieldTagPreferredInstIndex FieldTag = 201 // OF__preferredInstIndex
-	FieldTagPrimIndex FieldTag = 202 // OF__primIndex
-	FieldTagPrimResID FieldTag = 203 // OF__primResID
-	FieldTagPriv FieldTag = 204 // OF__priv
-	FieldTagPrivDataList FieldTag = 205 // OF__privDataList
-	FieldTagPropList FieldTag = 206 // OF__propList
-	FieldTagRefList FieldTag = 207 // OF__refList
-	FieldTagResetJumpLabel FieldTag = 208 // OF__resetJumpLabel
-	FieldTagRevisionInfoCreator FieldTag = 209 // OF__revisionInfoCreator
-	FieldTagRevisionInfoTlkitID FieldTag = 210 // OF__revisionInfoTlkitID
-	FieldTagRevisionInfoTlkitVersion FieldTag = 211 // OF__revisionInfoTlkitVersion
-	FieldTagRingDsOffset FieldTag = 212 // OF__ringDsOffset
-	FieldTagRingTdOffset FieldTag = 213 // OF__ringTdOffset
-	FieldTagRoot FieldTag = 214 // OF__root
-	FieldTagRowHeight FieldTag = 215 // OF__rowHeight
-	FieldTagRsrDCO FieldTag = 216 // OF__rsrDCO
-	FieldTagRsrcID FieldTag = 217 // OF__rsrcID
-	FieldTagRtPopupData FieldTag = 218 // OF__rtPopupData
-	FieldTagRtPopupString FieldTag = 219 // OF__rtPopupString
-	FieldTagRtPopupVersion FieldTag = 220 // OF__rtPopupVersion
-	FieldTagRtdsoff FieldTag = 221 // OF__rtdsoff
-	FieldTagSavedState FieldTag = 222 // OF__savedState
-	FieldTagScreenRes FieldTag = 223 // OF__screenRes
-	FieldTagScriptName FieldTag = 224 // OF__scriptName
-	FieldTagSdllName FieldTag = 225 // OF__sdllName
-	FieldTagSelLabData FieldTag = 226 // OF__selLabData
-	FieldTagSelString FieldTag = 227 // OF__selString
-	FieldTagSelectionColor FieldTag = 228 // OF__selectionColor
-	FieldTagSeqLocDCOList FieldTag = 229 // OF__seqLocDCOList
-	FieldTagSequenceList FieldTag = 230 // OF__sequenceList
-	FieldTagShortCount FieldTag = 231 // OF__shortCount
-	FieldTagSignalIndex FieldTag = 232 // OF__signalIndex
-	FieldTagSignalList FieldTag = 233 // OF__signalList
-	FieldTagSimDiagFlags FieldTag = 234 // OF__simDiagFlags
-	FieldTagSimparam FieldTag = 235 // OF__simparam
-	FieldTagSimtype FieldTag = 236 // OF__simtype
-	FieldTagSimulationDiag FieldTag = 237 // OF__simulationDiag
-	FieldTagSizeRect FieldTag = 238 // OF__sizeRect
-	FieldTagSlaveList_unused FieldTag = 239 // OF__slaveList_unused
-	FieldTagSlocFiller FieldTag = 240 // OF__slocFiller
-	FieldTagSnFiller FieldTag = 241 // OF__snFiller
-	FieldTagSplitterFlags FieldTag = 242 // OF__splitterFlags
-	FieldTagSrDCOList FieldTag = 243 // OF__srDCOList
-	FieldTagSrcDCO FieldTag = 244 // OF__srcDCO
-	FieldTagStamp FieldTag = 245 // OF__stamp
-	FieldTagState FieldTag = 246 // OF__state
-	FieldTagStateTD FieldTag = 247 // OF__stateTD
-	FieldTagStreamData FieldTag = 248 // OF__streamData
-	FieldTagStrings FieldTag = 249 // OF__strings
-	FieldTagStructColor FieldTag = 250 // OF__structColor
-	FieldTagSubPanelFlags FieldTag = 251 // OF__subPanelFlags
-	FieldTagSubVIGlyphBounds FieldTag = 252 // OF__subVIGlyphBounds
-	FieldTagSymmetry FieldTag = 253 // OF__symmetry
-	FieldTagTInset FieldTag = 254 // OF__tInset
-	FieldTagTabWidth FieldTag = 255 // OF__tabWidth
-	FieldTagTable FieldTag = 256 // OF__table
-	FieldTagTableFlags FieldTag = 257 // OF__tableFlags
-	FieldTagTagDevice FieldTag = 258 // OF__tagDevice
-	FieldTagTagDisplayFilter FieldTag = 259 // OF__tagDisplayFilter
-	FieldTagTagSubTypeClass FieldTag = 260 // OF__tagSubTypeClass
-	FieldTagTagType FieldTag = 261 // OF__tagType
-	FieldTagTagTypeClass FieldTag = 262 // OF__tagTypeClass
-	FieldTagTblOffset FieldTag = 263 // OF__tblOffset
-	FieldTagTdOffset FieldTag = 264 // OF__tdOffset
-	FieldTagTermBMPs FieldTag = 265 // OF__termBMPs
-	FieldTagTermBounds FieldTag = 266 // OF__termBounds
-	FieldTagTermHotPoint FieldTag = 267 // OF__termHotPoint
-	FieldTagTermList FieldTag = 268 // OF__termList
-	FieldTagTextDivider FieldTag = 269 // OF__textDivider
-	FieldTagTextRec FieldTag = 270 // OF__textRec
-	FieldTagThreadInfo FieldTag = 271 // OF__threadInfo
-	FieldTagTimeDataNodeDMux FieldTag = 272 // OF__timeDataNodeDMux
-	FieldTagTimeDataNodeMux FieldTag = 273 // OF__timeDataNodeMux
-	FieldTagTimeLoop FieldTag = 274 // OF__timeLoop
-	FieldTagTimeOutDCO FieldTag = 275 // OF__timeOutDCO
-	FieldTagTool FieldTag = 276 // OF__tool
-	FieldTagTopOrLeft FieldTag = 277 // OF__topOrLeft
-	FieldTagTreeFlags FieldTag = 278 // OF__treeFlags
-	FieldTagTsH FieldTag = 279 // OF__tsH
-	FieldTagTunnelList FieldTag = 280 // OF__tunnelList
-	FieldTagType FieldTag = 281 // OF__type
-	FieldTagTypeCode FieldTag = 282 // OF__typeCode
-	FieldTagTypeDesc FieldTag = 283 // OF__typeDesc
-	FieldTagUserDiagram FieldTag = 284 // OF__userDiagram
-	FieldTagVTblPtr FieldTag = 285 // OF__vTblPtr
-	FieldTagVarTypeDesc FieldTag = 286 // OF__varTypeDesc
-	FieldTagVblName FieldTag = 287 // OF__vblName
-	FieldTagVersion FieldTag = 288 // OF__version
-	FieldTagViPath FieldTag = 289 // OF__viPath
-	FieldTagViState FieldTag = 290 // OF__viState
-	FieldTagVisClust FieldTag = 291 // OF__visClust
-	FieldTagWidth FieldTag = 292 // OF__width
-	FieldTagWinFlags FieldTag = 293 // OF__winFlags
-	FieldTagWireGlyphID FieldTag = 294 // OF__wireGlyphID
-	FieldTagWireID FieldTag = 295 // OF__wireID
-	FieldTagWireTable FieldTag = 296 // OF__wireTable
-	FieldTagWizData FieldTag = 297 // OF__wizData
-	FieldTagWizDataH FieldTag = 298 // OF__wizDataH
-	FieldTagWizDataID FieldTag = 299 // OF__wizDataID
-	FieldTagWizID FieldTag = 300 // OF__wizID
-	FieldTagWizVersion FieldTag = 301 // OF__wizVersion
-	FieldTagXflags FieldTag = 302 // OF__xflags
-	FieldTagZPlaneList FieldTag = 303 // OF__zPlaneList
-	FieldTagZPlaneListList FieldTag = 304 // OF__zPlaneListList
-	FieldTagZoom FieldTag = 305 // OF__zoom
-	FieldTagSrcDCO1 FieldTag = 306 // OF__srcDCO1
-	FieldTagSrcDCO2 FieldTag = 307 // OF__srcDCO2
-	FieldTagSrcDCO3 FieldTag = 308 // OF__srcDCO3
-	FieldTagSrcDCO4 FieldTag = 309 // OF__srcDCO4
-	FieldTagCRectAbove FieldTag = 310 // OF__cRectAbove
-	FieldTagCRectBelow FieldTag = 311 // OF__cRectBelow
-	FieldTagVariantIndex FieldTag = 312 // OF__variantIndex
-	FieldTagTermListLength FieldTag = 313 // OF__termListLength
-	FieldTagRefListLength FieldTag = 314 // OF__refListLength
-	FieldTagHGrowNodeListLength FieldTag = 315 // OF__hGrowNodeListLength
-	FieldTagDataTypeDesc FieldTag = 316 // OF__dataTypeDesc
-	FieldTagHair FieldTag = 317 // OF__hair
-	FieldTagDisplayName FieldTag = 318 // OF__displayName
-	FieldTagSelLabFlags FieldTag = 319 // OF__selLabFlags
-	FieldTagLastSelRow FieldTag = 320 // OF__lastSelRow
-	FieldTagLastSelCol FieldTag = 321 // OF__lastSelCol
-	FieldTagScrollPosV FieldTag = 322 // OF__scrollPosV
-	FieldTagScrollPosH FieldTag = 323 // OF__scrollPosH
-	FieldTagTotalBounds FieldTag = 324 // OF__totalBounds
-	FieldTagSrcRect FieldTag = 325 // OF__srcRect
-	FieldTagLabelPosRow FieldTag = 326 // OF__labelPosRow
-	FieldTagLabelPosCol FieldTag = 327 // OF__labelPosCol
-	FieldTagSimparamOut FieldTag = 328 // OF__simparamOut
-	FieldTagInnerMate FieldTag = 329 // OF__innerMate
-	FieldTagOuterMate FieldTag = 330 // OF__outerMate
-	FieldTagFlatSeq FieldTag = 331 // OF__flatSeq
-	FieldTagTimeSeq FieldTag = 332 // OF__timeSeq
-	FieldTagSlaveMods FieldTag = 333 // OF__slaveMods
-	FieldTagSlaveOwner FieldTag = 334 // OF__slaveOwner
-	FieldTagSimConfigNode FieldTag = 335 // OF__simConfigNode
-	FieldTagSimOutputNode FieldTag = 336 // OF__simOutputNode
-	FieldTagGlyphs FieldTag = 337 // OF__glyphs
-	FieldTagPUseStoredSize FieldTag = 338 // OF__pUseStoredSize
-	FieldTagPUseStoredPos FieldTag = 339 // OF__pUseStoredPos
-	FieldTagPRuntimeType FieldTag = 340 // OF__pRuntimeType
-	FieldTagPRuntimeTop FieldTag = 341 // OF__pRuntimeTop
-	FieldTagPRuntimeLeft FieldTag = 342 // OF__pRuntimeLeft
-	FieldTagPRuntimeWidth FieldTag = 343 // OF__pRuntimeWidth
-	FieldTagPRuntimeHeight FieldTag = 344 // OF__pRuntimeHeight
-	FieldTagPRuntimeMonitor FieldTag = 345 // OF__pRuntimeMonitor
-	FieldTagLibVersion FieldTag = 346 // OF__libVersion
-	FieldTagRatio FieldTag = 347 // OF__ratio
-	FieldTagAnnexDDOFlag FieldTag = 348 // OF__annexDDOFlag
-	FieldTagXCtlState FieldTag = 349 // OF__xCtlState
-	FieldTagWizList FieldTag = 350 // OF__wizList
-	FieldTagLockedObjectList FieldTag = 351 // OF__lockedObjectList
-	FieldTagLockedSignalList FieldTag = 352 // OF__lockedSignalList
-	FieldTagMasterStateEnum FieldTag = 353 // OF__masterStateEnum
-	FieldTag_Quit_StateEnum FieldTag = 354 // OF___Quit_StateEnum
-	FieldTagStopCodeEnum FieldTag = 355 // OF__stopCodeEnum
-	FieldTagStateLoop FieldTag = 356 // OF__stateLoop
-	FieldTagStateCase FieldTag = 357 // OF__stateCase
-	FieldTagStateCaseOutputTunnel FieldTag = 358 // OF__stateCaseOutputTunnel
-	FieldTagStateList FieldTag = 359 // OF__stateList
-	FieldTagIsSubVICall FieldTag = 360 // OF__isSubVICall
-	FieldTagName FieldTag = 361 // OF__name
-	FieldTagTransitionEnum FieldTag = 362 // OF__transitionEnum
-	FieldTagTransitionCase FieldTag = 363 // OF__transitionCase
-	FieldTagTransCaseOutputTunnel FieldTag = 364 // OF__transCaseOutputTunnel
-	FieldTagTransitionList FieldTag = 365 // OF__transitionList
-	FieldTagStateBounds FieldTag = 366 // OF__stateBounds
-	FieldTagTerminal FieldTag = 367 // OF__terminal
-	FieldTagStateConst FieldTag = 368 // OF__stateConst
-	FieldTagExitAngle FieldTag = 369 // OF__exitAngle
-	FieldTagEntranceAngle FieldTag = 370 // OF__entranceAngle
-	FieldTagStiffness FieldTag = 371 // OF__stiffness
-	FieldTagLabelPos FieldTag = 372 // OF__labelPos
-	FieldTagPinCorner FieldTag = 373 // OF__pinCorner
-	FieldTagCurrentlyScripting FieldTag = 374 // OF__currentlyScripting
-	FieldTagTextNodeLabel FieldTag = 375 // OF__textNodeLabel
-	FieldTagHeapFlags FieldTag = 376 // OF__heapFlags
-	FieldTagRefreshFilter FieldTag = 377 // OF__refreshFilter
-	FieldTagPlugInData FieldTag = 378 // OF__plugInData
-	FieldTagXTunDDO FieldTag = 379 // OF__xTunDDO
-	FieldTagGridFlags FieldTag = 380 // OF__gridFlags
-	FieldTagHeaderFiles FieldTag = 381 // OF__headerFiles
-	FieldTagSceneView FieldTag = 382 // OF__sceneView
-	FieldTagLastAutoScale FieldTag = 383 // OF__lastAutoScale
-	FieldTagAutoScaleDelay FieldTag = 384 // OF__autoScaleDelay
-	FieldTagReserveCB FieldTag = 385 // OF__reserveCB
-	FieldTagUnreserveCB FieldTag = 386 // OF__unreserveCB
-	FieldTagAbortCB FieldTag = 387 // OF__abortCB
-	FieldTagParamInfo FieldTag = 388 // OF__paramInfo
-	FieldTagExtFuncFlags FieldTag = 389 // OF__extFuncFlags
-	FieldTagTMI FieldTag = 390 // OF__tMI
-	FieldTagLineNumbers FieldTag = 391 // OF__lineNumbers
-	FieldTagFPath FieldTag = 392 // OF__fPath
-	FieldTagMDate FieldTag = 393 // OF__mDate
-	FieldTagErrHandle FieldTag = 394 // OF__errHandle
-	FieldTagXTunnelDir FieldTag = 395 // OF__xTunnelDir
-	FieldTagSCFlag FieldTag = 396 // OF__sCFlag
-	FieldTagSCStNGuid FieldTag = 397 // OF__sCStNGuid
-	FieldTagSCDiagSubType FieldTag = 398 // OF__sCDiagSubType
-	FieldTagSCDiagFlag FieldTag = 399 // OF__sCDiagFlag
-	FieldTagIsLoopCaseTransition FieldTag = 400 // OF__isLoopCaseTransition
-	FieldTagSelectorXNode FieldTag = 401 // OF__selectorXNode
-	FieldTagIFeedbackLoop FieldTag = 402 // OF__iFeedbackLoop
-	FieldTagCellPosRow FieldTag = 403 // OF__cellPosRow
-	FieldTagCellPosCol FieldTag = 404 // OF__cellPosCol
-	FieldTagFont FieldTag = 405 // OF__font
-	FieldTagMode FieldTag = 406 // OF__mode
-	FieldTagHeight FieldTag = 407 // OF__height
-	FieldTagGlyphIndex FieldTag = 408 // OF__glyphIndex
-	FieldTagFlags FieldTag = 409 // OF__flags
-	FieldTagAttributeList FieldTag = 410 // OF__attributeList
-	FieldTagQtWidget FieldTag = 411 // OF__qtWidget
-	FieldTagFLoopCondTerm FieldTag = 412 // OF__fLoopCondTerm
-	FieldTagIsInterface FieldTag = 413 // OF__isInterface
-	FieldTagLoopLimitDCO FieldTag = 414 // OF__loopLimitDCO
-	FieldTagLoopTestDCO FieldTag = 415 // OF__loopTestDCO
-	FieldTagOverrideType FieldTag = 416 // OF__overrideType
-	FieldTagMaxWordLength FieldTag = 417 // OF__maxWordLength
-	FieldTagOverride FieldTag = 418 // OF__override
-	FieldTagOverflow FieldTag = 419 // OF__overflow
-	FieldTagQuantize FieldTag = 420 // OF__quantize
-	FieldTagTunOrdList FieldTag = 421 // OF__tunOrdList
-	FieldTagMultiSegPipeFlange1Size FieldTag = 422 // OF__multiSegPipeFlange1Size
-	FieldTagMultiSegPipeFlange2Size FieldTag = 423 // OF__multiSegPipeFlange2Size
-	FieldTagMultiSegPipeFlange1Depth FieldTag = 424 // OF__multiSegPipeFlange1Depth
-	FieldTagMultiSegPipeFlange2Depth FieldTag = 425 // OF__multiSegPipeFlange2Depth
-	FieldTagMultiSegPipeWidth FieldTag = 426 // OF__multiSegPipeWidth
-	FieldTagStaticState FieldTag = 427 // OF__staticState
-	FieldTagFuncName FieldTag = 428 // OF__funcName
-	FieldTagMFilePath FieldTag = 429 // OF__mFilePath
-	FieldTagTagDLLPath FieldTag = 430 // OF__tagDLLPath
-	FieldTagRecursiveFunc FieldTag = 430 // OF__recursiveFunc
-	FieldTagTagDLLName FieldTag = 431 // OF__tagDLLName
-	FieldTagPoser FieldTag = 432 // OF__poser
-	FieldTagDataValRefDCO FieldTag = 433 // OF__dataValRefDCO
-	FieldTagWrite FieldTag = 434 // OF__write
-	FieldTagShowTimestamp FieldTag = 435 // OF__showTimestamp
-	FieldTagName4 FieldTag = 436 // OF__name4
-	FieldTagPrivDataDSO FieldTag = 437 // OF__privDataDSO
-	FieldTagPrivDataTMI FieldTag = 438 // OF__privDataTMI
-	FieldTagDisabledList FieldTag = 439 // OF__disabledList
-	FieldTagTunnelLink FieldTag = 451 // OF__tunnelLink
-	FieldTagActiveBus FieldTag = 452 // OF__activeBus
-	FieldTagTerminal_ID FieldTag = 453 // OF__terminal_ID
-	FieldTagImplementingNode FieldTag = 454 // OF__implementingNode
-	FieldTagFboxlineList FieldTag = 455 // OF__fboxlineList
-	FieldTagCompressedWireTable FieldTag = 456 // OF__compressedWireTable
-	FieldTagSharedCloneAllocationFlags FieldTag = 457 // OF__sharedCloneAllocationFlags
-	FieldTagInitOrderIndex FieldTag = 458 // OF__initOrderIndex
-	FieldTagRingSparseValues FieldTag = 459 // OF__ringSparseValues
-	FieldTagRingDisabledIndicies FieldTag = 460 // OF__ringDisabledIndicies
-	FieldTagScrollbarMin FieldTag = 461 // OF__scrollbarMin
-	FieldTagScrollbarMax FieldTag = 462 // OF__scrollbarMax
-	FieldTagScrollbarInc FieldTag = 463 // OF__scrollbarInc
-	FieldTagScrollbarVis FieldTag = 464 // OF__scrollbarVis
-	FieldTagBrowseOptions FieldTag = 465 // OF__browseOptions
+	FieldTagActiveDiag                            FieldTag = 1   // OF__activeDiag
+	FieldTagActiveMarker                          FieldTag = 2   // OF__activeMarker
+	FieldTagActivePlot                            FieldTag = 3   // OF__activePlot
+	FieldTagActiveThumb                           FieldTag = 4   // OF__activeThumb
+	FieldTagActiveXScale                          FieldTag = 5   // OF__activeXScale
+	FieldTagActiveYScale                          FieldTag = 6   // OF__activeYScale
+	FieldTagAlarmName                             FieldTag = 7   // OF__alarmName
+	FieldTagBary                                  FieldTag = 8   // OF__bary
+	FieldTagBgColor                               FieldTag = 9   // OF__bgColor
+	FieldTagBindings                              FieldTag = 10  // OF__bindings
+	FieldTagBlinkList                             FieldTag = 11  // OF__blinkList
+	FieldTagBorderColor                           FieldTag = 12  // OF__borderColor
+	FieldTagBotOrRight                            FieldTag = 13  // OF__botOrRight
+	FieldTagBounds                                FieldTag = 14  // OF__bounds
+	FieldTagBuf                                   FieldTag = 15  // OF__buf
+	FieldTagCallOffset                            FieldTag = 16  // OF__callOffset
+	FieldTagCallType                              FieldTag = 17  // OF__callType
+	FieldTagCallee                                FieldTag = 18  // OF__callee
+	FieldTagCaller                                FieldTag = 19  // OF__caller
+	FieldTagCallerGlyphBounds                     FieldTag = 20  // OF__callerGlyphBounds
+	FieldTagCaseSelDCO                            FieldTag = 21  // OF__caseSelDCO
+	FieldTagCboxDsOffset                          FieldTag = 22  // OF__cboxDsOffset
+	FieldTagCboxTdOffset                          FieldTag = 23  // OF__cboxTdOffset
+	FieldTagCbrIcon                               FieldTag = 24  // OF__cbrIcon
+	FieldTagCinPath                               FieldTag = 25  // OF__cinPath
+	FieldTagClassName                             FieldTag = 26  // OF__className
+	FieldTagClumpNum                              FieldTag = 27  // OF__clumpNum
+	FieldTagCnst                                  FieldTag = 28  // OF__cnst
+	FieldTagCode                                  FieldTag = 29  // OF__code
+	FieldTagColor                                 FieldTag = 30  // OF__color
+	FieldTagColorDSO                              FieldTag = 31  // OF__colorDSO
+	FieldTagColorTDO                              FieldTag = 32  // OF__colorTDO
+	FieldTagCols                                  FieldTag = 33  // OF__cols
+	FieldTagCommentMode                           FieldTag = 34  // OF__commentMode
+	FieldTagCompanionDiag                         FieldTag = 35  // OF__companionDiag
+	FieldTagConId                                 FieldTag = 36  // OF__conId
+	FieldTagConNum                                FieldTag = 37  // OF__conNum
+	FieldTagConPane                               FieldTag = 38  // OF__conPane
+	FieldTagConfState                             FieldTag = 39  // OF__confState
+	FieldTagConfigNode                            FieldTag = 40  // OF__configNode
+	FieldTagConnectorTM                           FieldTag = 41  // OF__connectorTM
+	FieldTagCons                                  FieldTag = 42  // OF__cons
+	FieldTagContRect                              FieldTag = 43  // OF__contRect
+	FieldTagCtlDataObj                            FieldTag = 44  // OF__ctlDataObj
+	FieldTagDBounds                               FieldTag = 45  // OF__dBounds
+	FieldTagDIdx                                  FieldTag = 46  // OF__dIdx
+	FieldTagDataNodeList                          FieldTag = 47  // OF__dataNodeList
+	FieldTagDco                                   FieldTag = 48  // OF__dco
+	FieldTagDcoAgg                                FieldTag = 49  // OF__dcoAgg
+	FieldTagDcoFiller                             FieldTag = 50  // OF__dcoFiller
+	FieldTagDcoList                               FieldTag = 51  // OF__dcoList
+	FieldTagDdo                                   FieldTag = 52  // OF__ddo
+	FieldTagDdoIndex                              FieldTag = 53  // OF__ddoIndex
+	FieldTagDdoList                               FieldTag = 54  // OF__ddoList
+	FieldTagDdoListList                           FieldTag = 55  // OF__ddoListList
+	FieldTagDefaultDiag                           FieldTag = 56  // OF__defaultDiag
+	FieldTagDelDCO                                FieldTag = 57  // OF__delDCO
+	FieldTagDepth                                 FieldTag = 58  // OF__depth
+	FieldTagDescription                           FieldTag = 59  // OF__description
+	FieldTagDiagDefined                           FieldTag = 60  // OF__diagDefined
+	FieldTagDiagFiller1                           FieldTag = 61  // OF__diagFiller1
+	FieldTagDiagFiller2                           FieldTag = 62  // OF__diagFiller2
+	FieldTagDiagramList                           FieldTag = 63  // OF__diagramList
+	FieldTagDocBounds                             FieldTag = 64  // OF__docBounds
+	FieldTagDsOffset                              FieldTag = 65  // OF__dsOffset
+	FieldTagDsw                                   FieldTag = 66  // OF__dsw
+	FieldTagDynBounds                             FieldTag = 67  // OF__dynBounds
+	FieldTagDynLink                               FieldTag = 68  // OF__dynLink
+	FieldTagEOracleIdx                            FieldTag = 69  // OF__eOracleIdx
+	FieldTagEPtrOff                               FieldTag = 70  // OF__ePtrOff
+	FieldTagESizeOff                              FieldTag = 71  // OF__eSizeOff
+	FieldTagEltDCO                                FieldTag = 72  // OF__eltDCO
+	FieldTagEmbedToken                            FieldTag = 73  // OF__embedToken
+	FieldTagErrCode                               FieldTag = 74  // OF__errCode
+	FieldTagErrIn                                 FieldTag = 75  // OF__errIn
+	FieldTagErrOfst                               FieldTag = 76  // OF__errOfst
+	FieldTagErrOut                                FieldTag = 77  // OF__errOut
+	FieldTagEventObj_unused                       FieldTag = 78  // OF__eventObj_unused
+	FieldTagFName                                 FieldTag = 79  // OF__fName
+	FieldTagFgColor                               FieldTag = 80  // OF__fgColor
+	FieldTagFiller                                FieldTag = 81  // OF__filler
+	FieldTagFilterNodeList                        FieldTag = 82  // OF__filterNodeList
+	FieldTagFirstNodeIdx                          FieldTag = 83  // OF__firstNodeIdx
+	FieldTagFocusRow                              FieldTag = 84  // OF__focusRow
+	FieldTagFormat                                FieldTag = 85  // OF__format
+	FieldTagFormula                               FieldTag = 86  // OF__formula
+	FieldTagFrontRow                              FieldTag = 87  // OF__frontRow
+	FieldTagFuncTD                                FieldTag = 88  // OF__funcTD
+	FieldTagGraphCursor                           FieldTag = 89  // OF__graphCursor
+	FieldTagGraphType                             FieldTag = 90  // OF__graphType
+	FieldTagGrowAreaBounds                        FieldTag = 91  // OF__growAreaBounds
+	FieldTagGrowObj                               FieldTag = 92  // OF__growObj
+	FieldTagGrowTermsList                         FieldTag = 93  // OF__growTermsList
+	FieldTagGrowViewObj                           FieldTag = 94  // OF__growViewObj
+	FieldTagHFlags                                FieldTag = 95  // OF__hFlags
+	FieldTagHGrowNodeList                         FieldTag = 96  // OF__hGrowNodeList
+	FieldTagHSEnd                                 FieldTag = 97  // OF__hSEnd
+	FieldTagHSStart                               FieldTag = 98  // OF__hSStart
+	FieldTagHeaderImage                           FieldTag = 99  // OF__headerImage
+	FieldTagHierarchyColor                        FieldTag = 100 // OF__hierarchyColor
+	FieldTagHistDSOffset                          FieldTag = 101 // OF__histDSOffset
+	FieldTagHistTD                                FieldTag = 102 // OF__histTD
+	FieldTagHistTDOffset                          FieldTag = 103 // OF__histTDOffset
+	FieldTagHoodBounds                            FieldTag = 104 // OF__hoodBounds
+	FieldTagHotPoint                              FieldTag = 105 // OF__hotPoint
+	FieldTagHowGrow                               FieldTag = 106 // OF__howGrow
+	FieldTagI                                     FieldTag = 107 // OF__i
+	FieldTagIconBounds                            FieldTag = 108 // OF__iconBounds
+	FieldTagId                                    FieldTag = 109 // OF__id
+	FieldTagImage                                 FieldTag = 110 // OF__image
+	FieldTagInArrDCO                              FieldTag = 111 // OF__inArrDCO
+	FieldTagInVILib                               FieldTag = 112 // OF__inVILib
+	FieldTagIndex                                 FieldTag = 113 // OF__index
+	FieldTagIndexPosCol                           FieldTag = 114 // OF__indexPosCol
+	FieldTagIndexPosRow                           FieldTag = 115 // OF__indexPosRow
+	FieldTagIndexing                              FieldTag = 116 // OF__indexing
+	FieldTagInnerLpTunDCO                         FieldTag = 117 // OF__innerLpTunDCO
+	FieldTagInnerR                                FieldTag = 118 // OF__innerR
+	FieldTagInnerSeq                              FieldTag = 119 // OF__innerSeq
+	FieldTagInplace                               FieldTag = 120 // OF__inplace
+	FieldTagInstance                              FieldTag = 121 // OF__instance
+	FieldTagInstanceSelector                      FieldTag = 122 // OF__instanceSelector
+	FieldTagInstrStyle                            FieldTag = 123 // OF__instrStyle
+	FieldTagIntermediateList                      FieldTag = 124 // OF__intermediateList
+	FieldTagInvokeFlags                           FieldTag = 125 // OF__invokeFlags
+	FieldTagKeyMappingList                        FieldTag = 126 // OF__keyMappingList
+	FieldTagLabel                                 FieldTag = 127 // OF__label
+	FieldTagLastSignalKind                        FieldTag = 128 // OF__lastSignalKind
+	FieldTagLegendLbl                             FieldTag = 129 // OF__legendLbl
+	FieldTagLenDCO                                FieldTag = 130 // OF__lenDCO
+	FieldTagLengthDCOList                         FieldTag = 131 // OF__lengthDCOList
+	FieldTagLevel                                 FieldTag = 132 // OF__level
+	FieldTagLibPath                               FieldTag = 133 // OF__libPath
+	FieldTagListFlags                             FieldTag = 134 // OF__listFlags
+	FieldTagListboxFlags                          FieldTag = 135 // OF__listboxFlags
+	FieldTagLoopEndDCO                            FieldTag = 136 // OF__loopEndDCO
+	FieldTagLoopIndexDCO                          FieldTag = 137 // OF__loopIndexDCO
+	FieldTagLoopTimingDCO                         FieldTag = 138 // OF__loopTimingDCO
+	FieldTagLpTunDCO                              FieldTag = 139 // OF__lpTunDCO
+	FieldTagLsrDCOList                            FieldTag = 140 // OF__lsrDCOList
+	FieldTagMJasterWizard                         FieldTag = 141 // OF__mJasterWizard
+	FieldTagMask                                  FieldTag = 142 // OF__mask
+	FieldTagMaster_unused                         FieldTag = 143 // OF__master_unused
+	FieldTagMasterPart                            FieldTag = 144 // OF__masterPart
+	FieldTagMate                                  FieldTag = 145 // OF__mate
+	FieldTagMaxPaneSize                           FieldTag = 146 // OF__maxPaneSize
+	FieldTagMaxPanelSize                          FieldTag = 147 // OF__maxPanelSize
+	FieldTagMclFlags                              FieldTag = 148 // OF__mclFlags
+	FieldTagMenuInstanceUsed                      FieldTag = 149 // OF__menuInstanceUsed
+	FieldTagMethCode                              FieldTag = 150 // OF__methCode
+	FieldTagMethName                              FieldTag = 151 // OF__methName
+	FieldTagMinPaneSize                           FieldTag = 152 // OF__minPaneSize
+	FieldTagMinPanelSize                          FieldTag = 153 // OF__minPanelSize
+	FieldTagNChunks                               FieldTag = 154 // OF__nChunks
+	FieldTagNConnections                          FieldTag = 155 // OF__nConnections
+	FieldTagNDims                                 FieldTag = 156 // OF__nDims
+	FieldTagNInputs                               FieldTag = 157 // OF__nInputs
+	FieldTagNLabels                               FieldTag = 158 // OF__nLabels
+	FieldTagNMajDivs                              FieldTag = 159 // OF__nMajDivs
+	FieldTagNRC                                   FieldTag = 160 // OF__nRC
+	FieldTagNVisItems                             FieldTag = 161 // OF__nVisItems
+	FieldTagNmxFiller                             FieldTag = 162 // OF__nmxFiller
+	FieldTagNodeInfo                              FieldTag = 163 // OF__nodeInfo
+	FieldTagNodeList                              FieldTag = 164 // OF__nodeList
+	FieldTagNodeName                              FieldTag = 165 // OF__nodeName
+	FieldTagNumFrozenCols                         FieldTag = 166 // OF__numFrozenCols
+	FieldTagNumFrozenRows                         FieldTag = 167 // OF__numFrozenRows
+	FieldTagNumRows                               FieldTag = 168 // OF__numRows
+	FieldTagNumSubVIs                             FieldTag = 169 // OF__numSubVIs
+	FieldTagOMId                                  FieldTag = 170 // OF__oMId
+	FieldTagORC                                   FieldTag = 171 // OF__oRC
+	FieldTagObjFlags                              FieldTag = 172 // OF__objFlags
+	FieldTagOmidDSOffset                          FieldTag = 173 // OF__omidDSOffset
+	FieldTagOmidTDOffset                          FieldTag = 174 // OF__omidTDOffset
+	FieldTagOmidTypeDesc                          FieldTag = 175 // OF__omidTypeDesc
+	FieldTagOrderList                             FieldTag = 176 // OF__orderList
+	FieldTagOrigin                                FieldTag = 177 // OF__origin
+	FieldTagOtherSide                             FieldTag = 178 // OF__otherSide
+	FieldTagOuterR                                FieldTag = 179 // OF__outerR
+	FieldTagOutputDCO                             FieldTag = 180 // OF__outputDCO
+	FieldTagOutputNode                            FieldTag = 181 // OF__outputNode
+	FieldTagOwnerSignal                           FieldTag = 182 // OF__ownerSignal
+	FieldTagPBounds                               FieldTag = 183 // OF__pBounds
+	FieldTagPMap                                  FieldTag = 184 // OF__pMap
+	FieldTagPMapOfst                              FieldTag = 185 // OF__pMapOfst
+	FieldTagPageList                              FieldTag = 186 // OF__pageList
+	FieldTagPaneFlags                             FieldTag = 187 // OF__paneFlags
+	FieldTagPaneHierarchy                         FieldTag = 188 // OF__paneHierarchy
+	FieldTagParamIdx                              FieldTag = 189 // OF__paramIdx
+	FieldTagParamTableOffset                      FieldTag = 190 // OF__paramTableOffset
+	FieldTagParmIndex                             FieldTag = 191 // OF__parmIndex
+	FieldTagPartID                                FieldTag = 192 // OF__partID
+	FieldTagPartOrder                             FieldTag = 193 // OF__partOrder
+	FieldTagPartsList                             FieldTag = 194 // OF__partsList
+	FieldTagPattern                               FieldTag = 195 // OF__pattern
+	FieldTagPctTransparent                        FieldTag = 196 // OF__pctTransparent
+	FieldTagPermDCOList                           FieldTag = 197 // OF__permDCOList
+	FieldTagPermutation                           FieldTag = 198 // OF__permutation
+	FieldTagPixmap                                FieldTag = 199 // OF__pixmap
+	FieldTagPos                                   FieldTag = 200 // OF__pos
+	FieldTagPreferredInstIndex                    FieldTag = 201 // OF__preferredInstIndex
+	FieldTagPrimIndex                             FieldTag = 202 // OF__primIndex
+	FieldTagPrimResID                             FieldTag = 203 // OF__primResID
+	FieldTagPriv                                  FieldTag = 204 // OF__priv
+	FieldTagPrivDataList                          FieldTag = 205 // OF__privDataList
+	FieldTagPropList                              FieldTag = 206 // OF__propList
+	FieldTagRefList                               FieldTag = 207 // OF__refList
+	FieldTagResetJumpLabel                        FieldTag = 208 // OF__resetJumpLabel
+	FieldTagRevisionInfoCreator                   FieldTag = 209 // OF__revisionInfoCreator
+	FieldTagRevisionInfoTlkitID                   FieldTag = 210 // OF__revisionInfoTlkitID
+	FieldTagRevisionInfoTlkitVersion              FieldTag = 211 // OF__revisionInfoTlkitVersion
+	FieldTagRingDsOffset                          FieldTag = 212 // OF__ringDsOffset
+	FieldTagRingTdOffset                          FieldTag = 213 // OF__ringTdOffset
+	FieldTagRoot                                  FieldTag = 214 // OF__root
+	FieldTagRowHeight                             FieldTag = 215 // OF__rowHeight
+	FieldTagRsrDCO                                FieldTag = 216 // OF__rsrDCO
+	FieldTagRsrcID                                FieldTag = 217 // OF__rsrcID
+	FieldTagRtPopupData                           FieldTag = 218 // OF__rtPopupData
+	FieldTagRtPopupString                         FieldTag = 219 // OF__rtPopupString
+	FieldTagRtPopupVersion                        FieldTag = 220 // OF__rtPopupVersion
+	FieldTagRtdsoff                               FieldTag = 221 // OF__rtdsoff
+	FieldTagSavedState                            FieldTag = 222 // OF__savedState
+	FieldTagScreenRes                             FieldTag = 223 // OF__screenRes
+	FieldTagScriptName                            FieldTag = 224 // OF__scriptName
+	FieldTagSdllName                              FieldTag = 225 // OF__sdllName
+	FieldTagSelLabData                            FieldTag = 226 // OF__selLabData
+	FieldTagSelString                             FieldTag = 227 // OF__selString
+	FieldTagSelectionColor                        FieldTag = 228 // OF__selectionColor
+	FieldTagSeqLocDCOList                         FieldTag = 229 // OF__seqLocDCOList
+	FieldTagSequenceList                          FieldTag = 230 // OF__sequenceList
+	FieldTagShortCount                            FieldTag = 231 // OF__shortCount
+	FieldTagSignalIndex                           FieldTag = 232 // OF__signalIndex
+	FieldTagSignalList                            FieldTag = 233 // OF__signalList
+	FieldTagSimDiagFlags                          FieldTag = 234 // OF__simDiagFlags
+	FieldTagSimparam                              FieldTag = 235 // OF__simparam
+	FieldTagSimtype                               FieldTag = 236 // OF__simtype
+	FieldTagSimulationDiag                        FieldTag = 237 // OF__simulationDiag
+	FieldTagSizeRect                              FieldTag = 238 // OF__sizeRect
+	FieldTagSlaveList_unused                      FieldTag = 239 // OF__slaveList_unused
+	FieldTagSlocFiller                            FieldTag = 240 // OF__slocFiller
+	FieldTagSnFiller                              FieldTag = 241 // OF__snFiller
+	FieldTagSplitterFlags                         FieldTag = 242 // OF__splitterFlags
+	FieldTagSrDCOList                             FieldTag = 243 // OF__srDCOList
+	FieldTagSrcDCO                                FieldTag = 244 // OF__srcDCO
+	FieldTagStamp                                 FieldTag = 245 // OF__stamp
+	FieldTagState                                 FieldTag = 246 // OF__state
+	FieldTagStateTD                               FieldTag = 247 // OF__stateTD
+	FieldTagStreamData                            FieldTag = 248 // OF__streamData
+	FieldTagStrings                               FieldTag = 249 // OF__strings
+	FieldTagStructColor                           FieldTag = 250 // OF__structColor
+	FieldTagSubPanelFlags                         FieldTag = 251 // OF__subPanelFlags
+	FieldTagSubVIGlyphBounds                      FieldTag = 252 // OF__subVIGlyphBounds
+	FieldTagSymmetry                              FieldTag = 253 // OF__symmetry
+	FieldTagTInset                                FieldTag = 254 // OF__tInset
+	FieldTagTabWidth                              FieldTag = 255 // OF__tabWidth
+	FieldTagTable                                 FieldTag = 256 // OF__table
+	FieldTagTableFlags                            FieldTag = 257 // OF__tableFlags
+	FieldTagTagDevice                             FieldTag = 258 // OF__tagDevice
+	FieldTagTagDisplayFilter                      FieldTag = 259 // OF__tagDisplayFilter
+	FieldTagTagSubTypeClass                       FieldTag = 260 // OF__tagSubTypeClass
+	FieldTagTagType                               FieldTag = 261 // OF__tagType
+	FieldTagTagTypeClass                          FieldTag = 262 // OF__tagTypeClass
+	FieldTagTblOffset                             FieldTag = 263 // OF__tblOffset
+	FieldTagTdOffset                              FieldTag = 264 // OF__tdOffset
+	FieldTagTermBMPs                              FieldTag = 265 // OF__termBMPs
+	FieldTagTermBounds                            FieldTag = 266 // OF__termBounds
+	FieldTagTermHotPoint                          FieldTag = 267 // OF__termHotPoint
+	FieldTagTermList                              FieldTag = 268 // OF__termList
+	FieldTagTextDivider                           FieldTag = 269 // OF__textDivider
+	FieldTagTextRec                               FieldTag = 270 // OF__textRec
+	FieldTagThreadInfo                            FieldTag = 271 // OF__threadInfo
+	FieldTagTimeDataNodeDMux                      FieldTag = 272 // OF__timeDataNodeDMux
+	FieldTagTimeDataNodeMux                       FieldTag = 273 // OF__timeDataNodeMux
+	FieldTagTimeLoop                              FieldTag = 274 // OF__timeLoop
+	FieldTagTimeOutDCO                            FieldTag = 275 // OF__timeOutDCO
+	FieldTagTool                                  FieldTag = 276 // OF__tool
+	FieldTagTopOrLeft                             FieldTag = 277 // OF__topOrLeft
+	FieldTagTreeFlags                             FieldTag = 278 // OF__treeFlags
+	FieldTagTsH                                   FieldTag = 279 // OF__tsH
+	FieldTagTunnelList                            FieldTag = 280 // OF__tunnelList
+	FieldTagType                                  FieldTag = 281 // OF__type
+	FieldTagTypeCode                              FieldTag = 282 // OF__typeCode
+	FieldTagTypeDesc                              FieldTag = 283 // OF__typeDesc
+	FieldTagUserDiagram                           FieldTag = 284 // OF__userDiagram
+	FieldTagVTblPtr                               FieldTag = 285 // OF__vTblPtr
+	FieldTagVarTypeDesc                           FieldTag = 286 // OF__varTypeDesc
+	FieldTagVblName                               FieldTag = 287 // OF__vblName
+	FieldTagVersion                               FieldTag = 288 // OF__version
+	FieldTagViPath                                FieldTag = 289 // OF__viPath
+	FieldTagViState                               FieldTag = 290 // OF__viState
+	FieldTagVisClust                              FieldTag = 291 // OF__visClust
+	FieldTagWidth                                 FieldTag = 292 // OF__width
+	FieldTagWinFlags                              FieldTag = 293 // OF__winFlags
+	FieldTagWireGlyphID                           FieldTag = 294 // OF__wireGlyphID
+	FieldTagWireID                                FieldTag = 295 // OF__wireID
+	FieldTagWireTable                             FieldTag = 296 // OF__wireTable
+	FieldTagWizData                               FieldTag = 297 // OF__wizData
+	FieldTagWizDataH                              FieldTag = 298 // OF__wizDataH
+	FieldTagWizDataID                             FieldTag = 299 // OF__wizDataID
+	FieldTagWizID                                 FieldTag = 300 // OF__wizID
+	FieldTagWizVersion                            FieldTag = 301 // OF__wizVersion
+	FieldTagXflags                                FieldTag = 302 // OF__xflags
+	FieldTagZPlaneList                            FieldTag = 303 // OF__zPlaneList
+	FieldTagZPlaneListList                        FieldTag = 304 // OF__zPlaneListList
+	FieldTagZoom                                  FieldTag = 305 // OF__zoom
+	FieldTagSrcDCO1                               FieldTag = 306 // OF__srcDCO1
+	FieldTagSrcDCO2                               FieldTag = 307 // OF__srcDCO2
+	FieldTagSrcDCO3                               FieldTag = 308 // OF__srcDCO3
+	FieldTagSrcDCO4                               FieldTag = 309 // OF__srcDCO4
+	FieldTagCRectAbove                            FieldTag = 310 // OF__cRectAbove
+	FieldTagCRectBelow                            FieldTag = 311 // OF__cRectBelow
+	FieldTagVariantIndex                          FieldTag = 312 // OF__variantIndex
+	FieldTagTermListLength                        FieldTag = 313 // OF__termListLength
+	FieldTagRefListLength                         FieldTag = 314 // OF__refListLength
+	FieldTagHGrowNodeListLength                   FieldTag = 315 // OF__hGrowNodeListLength
+	FieldTagDataTypeDesc                          FieldTag = 316 // OF__dataTypeDesc
+	FieldTagHair                                  FieldTag = 317 // OF__hair
+	FieldTagDisplayName                           FieldTag = 318 // OF__displayName
+	FieldTagSelLabFlags                           FieldTag = 319 // OF__selLabFlags
+	FieldTagLastSelRow                            FieldTag = 320 // OF__lastSelRow
+	FieldTagLastSelCol                            FieldTag = 321 // OF__lastSelCol
+	FieldTagScrollPosV                            FieldTag = 322 // OF__scrollPosV
+	FieldTagScrollPosH                            FieldTag = 323 // OF__scrollPosH
+	FieldTagTotalBounds                           FieldTag = 324 // OF__totalBounds
+	FieldTagSrcRect                               FieldTag = 325 // OF__srcRect
+	FieldTagLabelPosRow                           FieldTag = 326 // OF__labelPosRow
+	FieldTagLabelPosCol                           FieldTag = 327 // OF__labelPosCol
+	FieldTagSimparamOut                           FieldTag = 328 // OF__simparamOut
+	FieldTagInnerMate                             FieldTag = 329 // OF__innerMate
+	FieldTagOuterMate                             FieldTag = 330 // OF__outerMate
+	FieldTagFlatSeq                               FieldTag = 331 // OF__flatSeq
+	FieldTagTimeSeq                               FieldTag = 332 // OF__timeSeq
+	FieldTagSlaveMods                             FieldTag = 333 // OF__slaveMods
+	FieldTagSlaveOwner                            FieldTag = 334 // OF__slaveOwner
+	FieldTagSimConfigNode                         FieldTag = 335 // OF__simConfigNode
+	FieldTagSimOutputNode                         FieldTag = 336 // OF__simOutputNode
+	FieldTagGlyphs                                FieldTag = 337 // OF__glyphs
+	FieldTagPUseStoredSize                        FieldTag = 338 // OF__pUseStoredSize
+	FieldTagPUseStoredPos                         FieldTag = 339 // OF__pUseStoredPos
+	FieldTagPRuntimeType                          FieldTag = 340 // OF__pRuntimeType
+	FieldTagPRuntimeTop                           FieldTag = 341 // OF__pRuntimeTop
+	FieldTagPRuntimeLeft                          FieldTag = 342 // OF__pRuntimeLeft
+	FieldTagPRuntimeWidth                         FieldTag = 343 // OF__pRuntimeWidth
+	FieldTagPRuntimeHeight                        FieldTag = 344 // OF__pRuntimeHeight
+	FieldTagPRuntimeMonitor                       FieldTag = 345 // OF__pRuntimeMonitor
+	FieldTagLibVersion                            FieldTag = 346 // OF__libVersion
+	FieldTagRatio                                 FieldTag = 347 // OF__ratio
+	FieldTagAnnexDDOFlag                          FieldTag = 348 // OF__annexDDOFlag
+	FieldTagXCtlState                             FieldTag = 349 // OF__xCtlState
+	FieldTagWizList                               FieldTag = 350 // OF__wizList
+	FieldTagLockedObjectList                      FieldTag = 351 // OF__lockedObjectList
+	FieldTagLockedSignalList                      FieldTag = 352 // OF__lockedSignalList
+	FieldTagMasterStateEnum                       FieldTag = 353 // OF__masterStateEnum
+	FieldTag_Quit_StateEnum                       FieldTag = 354 // OF___Quit_StateEnum
+	FieldTagStopCodeEnum                          FieldTag = 355 // OF__stopCodeEnum
+	FieldTagStateLoop                             FieldTag = 356 // OF__stateLoop
+	FieldTagStateCase                             FieldTag = 357 // OF__stateCase
+	FieldTagStateCaseOutputTunnel                 FieldTag = 358 // OF__stateCaseOutputTunnel
+	FieldTagStateList                             FieldTag = 359 // OF__stateList
+	FieldTagIsSubVICall                           FieldTag = 360 // OF__isSubVICall
+	FieldTagName                                  FieldTag = 361 // OF__name
+	FieldTagTransitionEnum                        FieldTag = 362 // OF__transitionEnum
+	FieldTagTransitionCase                        FieldTag = 363 // OF__transitionCase
+	FieldTagTransCaseOutputTunnel                 FieldTag = 364 // OF__transCaseOutputTunnel
+	FieldTagTransitionList                        FieldTag = 365 // OF__transitionList
+	FieldTagStateBounds                           FieldTag = 366 // OF__stateBounds
+	FieldTagTerminal                              FieldTag = 367 // OF__terminal
+	FieldTagStateConst                            FieldTag = 368 // OF__stateConst
+	FieldTagExitAngle                             FieldTag = 369 // OF__exitAngle
+	FieldTagEntranceAngle                         FieldTag = 370 // OF__entranceAngle
+	FieldTagStiffness                             FieldTag = 371 // OF__stiffness
+	FieldTagLabelPos                              FieldTag = 372 // OF__labelPos
+	FieldTagPinCorner                             FieldTag = 373 // OF__pinCorner
+	FieldTagCurrentlyScripting                    FieldTag = 374 // OF__currentlyScripting
+	FieldTagTextNodeLabel                         FieldTag = 375 // OF__textNodeLabel
+	FieldTagHeapFlags                             FieldTag = 376 // OF__heapFlags
+	FieldTagRefreshFilter                         FieldTag = 377 // OF__refreshFilter
+	FieldTagPlugInData                            FieldTag = 378 // OF__plugInData
+	FieldTagXTunDDO                               FieldTag = 379 // OF__xTunDDO
+	FieldTagGridFlags                             FieldTag = 380 // OF__gridFlags
+	FieldTagHeaderFiles                           FieldTag = 381 // OF__headerFiles
+	FieldTagSceneView                             FieldTag = 382 // OF__sceneView
+	FieldTagLastAutoScale                         FieldTag = 383 // OF__lastAutoScale
+	FieldTagAutoScaleDelay                        FieldTag = 384 // OF__autoScaleDelay
+	FieldTagReserveCB                             FieldTag = 385 // OF__reserveCB
+	FieldTagUnreserveCB                           FieldTag = 386 // OF__unreserveCB
+	FieldTagAbortCB                               FieldTag = 387 // OF__abortCB
+	FieldTagParamInfo                             FieldTag = 388 // OF__paramInfo
+	FieldTagExtFuncFlags                          FieldTag = 389 // OF__extFuncFlags
+	FieldTagTMI                                   FieldTag = 390 // OF__tMI
+	FieldTagLineNumbers                           FieldTag = 391 // OF__lineNumbers
+	FieldTagFPath                                 FieldTag = 392 // OF__fPath
+	FieldTagMDate                                 FieldTag = 393 // OF__mDate
+	FieldTagErrHandle                             FieldTag = 394 // OF__errHandle
+	FieldTagXTunnelDir                            FieldTag = 395 // OF__xTunnelDir
+	FieldTagSCFlag                                FieldTag = 396 // OF__sCFlag
+	FieldTagSCStNGuid                             FieldTag = 397 // OF__sCStNGuid
+	FieldTagSCDiagSubType                         FieldTag = 398 // OF__sCDiagSubType
+	FieldTagSCDiagFlag                            FieldTag = 399 // OF__sCDiagFlag
+	FieldTagIsLoopCaseTransition                  FieldTag = 400 // OF__isLoopCaseTransition
+	FieldTagSelectorXNode                         FieldTag = 401 // OF__selectorXNode
+	FieldTagIFeedbackLoop                         FieldTag = 402 // OF__iFeedbackLoop
+	FieldTagCellPosRow                            FieldTag = 403 // OF__cellPosRow
+	FieldTagCellPosCol                            FieldTag = 404 // OF__cellPosCol
+	FieldTagFont                                  FieldTag = 405 // OF__font
+	FieldTagMode                                  FieldTag = 406 // OF__mode
+	FieldTagHeight                                FieldTag = 407 // OF__height
+	FieldTagGlyphIndex                            FieldTag = 408 // OF__glyphIndex
+	FieldTagFlags                                 FieldTag = 409 // OF__flags
+	FieldTagAttributeList                         FieldTag = 410 // OF__attributeList
+	FieldTagQtWidget                              FieldTag = 411 // OF__qtWidget
+	FieldTagFLoopCondTerm                         FieldTag = 412 // OF__fLoopCondTerm
+	FieldTagIsInterface                           FieldTag = 413 // OF__isInterface
+	FieldTagLoopLimitDCO                          FieldTag = 414 // OF__loopLimitDCO
+	FieldTagLoopTestDCO                           FieldTag = 415 // OF__loopTestDCO
+	FieldTagOverrideType                          FieldTag = 416 // OF__overrideType
+	FieldTagMaxWordLength                         FieldTag = 417 // OF__maxWordLength
+	FieldTagOverride                              FieldTag = 418 // OF__override
+	FieldTagOverflow                              FieldTag = 419 // OF__overflow
+	FieldTagQuantize                              FieldTag = 420 // OF__quantize
+	FieldTagTunOrdList                            FieldTag = 421 // OF__tunOrdList
+	FieldTagMultiSegPipeFlange1Size               FieldTag = 422 // OF__multiSegPipeFlange1Size
+	FieldTagMultiSegPipeFlange2Size               FieldTag = 423 // OF__multiSegPipeFlange2Size
+	FieldTagMultiSegPipeFlange1Depth              FieldTag = 424 // OF__multiSegPipeFlange1Depth
+	FieldTagMultiSegPipeFlange2Depth              FieldTag = 425 // OF__multiSegPipeFlange2Depth
+	FieldTagMultiSegPipeWidth                     FieldTag = 426 // OF__multiSegPipeWidth
+	FieldTagStaticState                           FieldTag = 427 // OF__staticState
+	FieldTagFuncName                              FieldTag = 428 // OF__funcName
+	FieldTagMFilePath                             FieldTag = 429 // OF__mFilePath
+	FieldTagTagDLLPath                            FieldTag = 430 // OF__tagDLLPath
+	FieldTagRecursiveFunc                         FieldTag = 430 // OF__recursiveFunc
+	FieldTagTagDLLName                            FieldTag = 431 // OF__tagDLLName
+	FieldTagPoser                                 FieldTag = 432 // OF__poser
+	FieldTagDataValRefDCO                         FieldTag = 433 // OF__dataValRefDCO
+	FieldTagWrite                                 FieldTag = 434 // OF__write
+	FieldTagShowTimestamp                         FieldTag = 435 // OF__showTimestamp
+	FieldTagName4                                 FieldTag = 436 // OF__name4
+	FieldTagPrivDataDSO                           FieldTag = 437 // OF__privDataDSO
+	FieldTagPrivDataTMI                           FieldTag = 438 // OF__privDataTMI
+	FieldTagDisabledList                          FieldTag = 439 // OF__disabledList
+	FieldTagTunnelLink                            FieldTag = 451 // OF__tunnelLink
+	FieldTagActiveBus                             FieldTag = 452 // OF__activeBus
+	FieldTagTerminal_ID                           FieldTag = 453 // OF__terminal_ID
+	FieldTagImplementingNode                      FieldTag = 454 // OF__implementingNode
+	FieldTagFboxlineList                          FieldTag = 455 // OF__fboxlineList
+	FieldTagCompressedWireTable                   FieldTag = 456 // OF__compressedWireTable
+	FieldTagSharedCloneAllocationFlags            FieldTag = 457 // OF__sharedCloneAllocationFlags
+	FieldTagInitOrderIndex                        FieldTag = 458 // OF__initOrderIndex
+	FieldTagRingSparseValues                      FieldTag = 459 // OF__ringSparseValues
+	FieldTagRingDisabledIndicies                  FieldTag = 460 // OF__ringDisabledIndicies
+	FieldTagScrollbarMin                          FieldTag = 461 // OF__scrollbarMin
+	FieldTagScrollbarMax                          FieldTag = 462 // OF__scrollbarMax
+	FieldTagScrollbarInc                          FieldTag = 463 // OF__scrollbarInc
+	FieldTagScrollbarVis                          FieldTag = 464 // OF__scrollbarVis
+	FieldTagBrowseOptions                         FieldTag = 465 // OF__browseOptions
 	FieldTagDecomposeArraySplitNodeSplitDimension FieldTag = 466 // OF__decomposeArraySplitNodeSplitDimension
-	FieldTagRowHeaders FieldTag = 467 // OF__rowHeaders
-	FieldTagColumnHeaders FieldTag = 468 // OF__columnHeaders
-	FieldTagActiveCell FieldTag = 469 // OF__activeCell
-	FieldTagScaleDMin FieldTag = 470 // OF__scaleDMin
-	FieldTagScaleDMax FieldTag = 471 // OF__scaleDMax
-	FieldTagScaleDStart FieldTag = 472 // OF__scaleDStart
-	FieldTagScaleDIncr FieldTag = 473 // OF__scaleDIncr
-	FieldTagScaleDMinInc FieldTag = 474 // OF__scaleDMinInc
-	FieldTagScaleDMultiplier FieldTag = 475 // OF__scaleDMultiplier
-	FieldTagScaleDOffset FieldTag = 476 // OF__scaleDOffset
-	FieldTagScaleRRef FieldTag = 477 // OF__scaleRRef
-	FieldTagScaleRngf FieldTag = 478 // OF__scaleRngf
-	FieldTagScaleCenter FieldTag = 479 // OF__scaleCenter
-	FieldTagScaleRadius FieldTag = 480 // OF__scaleRadius
-	FieldTagScaleRMin FieldTag = 481 // OF__scaleRMin
-	FieldTagScaleRMax FieldTag = 482 // OF__scaleRMax
-	FieldTagScaleFunIdx FieldTag = 483 // OF__scaleFunIdx
-	FieldTagScaleLoColor FieldTag = 484 // OF__scaleLoColor
-	FieldTagScaleHiColor FieldTag = 485 // OF__scaleHiColor
-	FieldTagScaleColorData FieldTag = 486 // OF__scaleColorData
-	FieldTagMinDataSel FieldTag = 487 // OF__minDataSel
-	FieldTagMaxDataSel FieldTag = 488 // OF__maxDataSel
-	FieldTagPivotDataSel FieldTag = 489 // OF__pivotDataSel
-	FieldTagAbsTime_min FieldTag = 490 // OF__absTime_min
-	FieldTagAbsTime_max FieldTag = 491 // OF__absTime_max
-	FieldTagAbsTime_inc FieldTag = 492 // OF__absTime_inc
-	FieldTagBaseListboxItemStrings FieldTag = 493 // OF__baseListboxItemStrings
-	FieldTagBaseListboxDoubleClickedRow FieldTag = 494 // OF__baseListboxDoubleClickedRow
-	FieldTagBaseListboxClickedColumnHeader FieldTag = 495 // OF__baseListboxClickedColumnHeader
-	FieldTagBaseListboxDragRow FieldTag = 496 // OF__baseListboxDragRow
-	FieldTagListboxClickedCell FieldTag = 497 // OF__listboxClickedCell
-	FieldTagListboxDisabledItems FieldTag = 498 // OF__listboxDisabledItems
-	FieldTagListboxGlyphColumns FieldTag = 499 // OF__listboxGlyphColumns
-	FieldTagTreeNodeArray FieldTag = 500 // OF__treeNodeArray
-	FieldTagTreeDragIntoRow FieldTag = 501 // OF__treeDragIntoRow
-	FieldTagArrayIndices FieldTag = 502 // OF__arrayIndices
-	FieldTagArraySelectionStart FieldTag = 503 // OF__arraySelectionStart
-	FieldTagArraySelectionEnd FieldTag = 504 // OF__arraySelectionEnd
-	FieldTagComboBoxIndex FieldTag = 505 // OF__comboBoxIndex
-	FieldTagComboBoxValues FieldTag = 506 // OF__comboBoxValues
-	FieldTagTabArrayFirstTab FieldTag = 507 // OF__tabArrayFirstTab
-	FieldTagTabArrayFg FieldTag = 508 // OF__tabArrayFg
-	FieldTagTabArrayBg FieldTag = 509 // OF__tabArrayBg
-	FieldTagTabArrayTabInfoArray FieldTag = 510 // OF__tabArrayTabInfoArray
-	FieldTagTabControlPageSelValue FieldTag = 511 // OF__tabControlPageSelValue
-	FieldTagTabControlPageInfoArray FieldTag = 512 // OF__tabControlPageInfoArray
-	FieldTagStdNumMin FieldTag = 513 // OF__StdNumMin
-	FieldTagStdNumMax FieldTag = 514 // OF__StdNumMax
-	FieldTagStdNumInc FieldTag = 515 // OF__StdNumInc
-	FieldTagCBRExecAlias FieldTag = 516 // OF__CBRExecAlias
-	FieldTagCBRExecResolved FieldTag = 517 // OF__CBRExecResolved
-	FieldTagCBRRefPathAlias FieldTag = 518 // OF__CBRRefPathAlias
-	FieldTagCBRRefPath FieldTag = 519 // OF__CBRRefPath
-	FieldTagCBRCfgMode FieldTag = 520 // OF__CBRCfgMode
-	FieldTagCommentSelInfoArray FieldTag = 521 // OF__commentSelInfoArray
-	FieldTagCommentSelLabData FieldTag = 522 // OF__commentSelLabData
-	FieldTagGVNGrowTerms FieldTag = 523 // OF__GVNGrowTerms
-	FieldTagGVNMaxGrowTerms FieldTag = 524 // OF__GVNMaxGrowTerms
-	FieldTagGVMinGVWidth FieldTag = 525 // OF__GVMinGVWidth
-	FieldTagGVHoodTermWidth FieldTag = 526 // OF__GVHoodTermWidth
-	FieldTagGVGrowTermsInfo FieldTag = 527 // OF__GVGrowTermsInfo
-	FieldTagPlugInDLLName FieldTag = 528 // OF__PlugInDLLName
-	FieldTagPlugInLoadProcName FieldTag = 529 // OF__PlugInLoadProcName
-	FieldTagPropItemName FieldTag = 530 // OF__PropItemName
-	FieldTagPropItemCode FieldTag = 531 // OF__PropItemCode
-	FieldTagActiveXItemDataSize FieldTag = 532 // OF__ActiveXItemDataSize
-	FieldTagActiveXItemObjMgrFlags FieldTag = 533 // OF__ActiveXItemObjMgrFlags
-	FieldTagActiveXItemOrigVarType FieldTag = 534 // OF__ActiveXItemOrigVarType
-	FieldTagActiveXItemOrigIndex FieldTag = 535 // OF__ActiveXItemOrigIndex
-	FieldTagDotNetItemDataSize FieldTag = 536 // OF__DotNetItemDataSize
-	FieldTagDotNetItemObjMgrFlags FieldTag = 537 // OF__DotNetItemObjMgrFlags
-	FieldTagDotNetItemDotNetFlags FieldTag = 538 // OF__DotNetItemDotNetFlags
-	FieldTagDotNetItemType FieldTag = 539 // OF__DotNetItemType
-	FieldTagSharedVariableCustomRule FieldTag = 540 // OF__SharedVariableCustomRule
-	FieldTagGraphMPlot FieldTag = 541 // OF__GraphMPlot
-	FieldTagGraphActivePlot FieldTag = 542 // OF__GraphActivePlot
-	FieldTagGraphActiveCursor FieldTag = 543 // OF__GraphActiveCursor
-	FieldTagGraphCursors FieldTag = 544 // OF__GraphCursors
-	FieldTagGraphFlags FieldTag = 545 // OF__GraphFlags
-	FieldTagGraphTreeData FieldTag = 546 // OF__GraphTreeData
-	FieldTagGraphPlotImages FieldTag = 547 // OF__GraphPlotImages
-	FieldTagGraphAnnotations FieldTag = 548 // OF__GraphAnnotations
-	FieldTagGraphActivePort FieldTag = 549 // OF__GraphActivePort
-	FieldTagGraphCursorButtons FieldTag = 550 // OF__GraphCursorButtons
-	FieldTagGraphCursorLegendData FieldTag = 551 // OF__GraphCursorLegendData
-	FieldTagGraphPlotLegendData FieldTag = 552 // OF__GraphPlotLegendData
-	FieldTagGraphMinPlotNum FieldTag = 553 // OF__GraphMinPlotNum
-	FieldTagGraphBusOrg FieldTag = 554 // OF__GraphBusOrg
-	FieldTagGraphScalePalette FieldTag = 555 // OF__GraphScalePalette
-	FieldTagGraphScaleData FieldTag = 556 // OF__GraphScaleData
-	FieldTagIntensityGraphCT FieldTag = 557 // OF__IntensityGraphCT
-	FieldTagIntensityGraphBMP FieldTag = 558 // OF__IntensityGraphBMP
-	FieldTagIntensityGraphBounds FieldTag = 559 // OF__IntensityGraphBounds
-	FieldTagSimDiagFeedThroughData FieldTag = 560 // OF__SimDiagFeedThroughData
-	FieldTagSimDiagSimNodeMapData FieldTag = 561 // OF__SimDiagSimNodeMapData
-	FieldTagSimDiagCompNodeMapData FieldTag = 562 // OF__SimDiagCompNodeMapData
-	FieldTagSimDiagSignalMapData FieldTag = 563 // OF__SimDiagSignalMapData
-	FieldTagSimDiagAdditionalData FieldTag = 564 // OF__SimDiagAdditionalData
-	FieldTagSelectDefaultCase FieldTag = 565 // OF__SelectDefaultCase
-	FieldTagSelectNRightType FieldTag = 566 // OF__SelectNRightType
-	FieldTagSelectRangeArray32 FieldTag = 567 // OF__SelectRangeArray32
-	FieldTagSelectRangeArray64 FieldTag = 568 // OF__SelectRangeArray64
-	FieldTagSelectStringArray FieldTag = 569 // OF__SelectStringArray
-	FieldTagEventNodeEvents FieldTag = 570 // OF__EventNodeEvents
-	FieldTagDefaultData FieldTag = 571 // OF__DefaultData
-	FieldTagParForWorkers FieldTag = 572 // OF__ParForWorkers
-	FieldTagParForIndexDistribution FieldTag = 573 // OF__ParForIndexDistribution
-	FieldTagStateData FieldTag = 574 // OF__StateData
-	FieldTagMinButSize FieldTag = 575 // OF__MinButSize
-	FieldTagPossibleMSNDCOTypes FieldTag = 576 // OF__possibleMSNDCOTypes
-	FieldTagFeedbackNodeDelay FieldTag = 577 // OF__feedbackNodeDelay
-	FieldTagEnglishName FieldTag = 578 // OF__englishName
-	FieldTagSharedVariableDynamicResID FieldTag = 579 // OF__SharedVariableDynamicResID
-	FieldTagParForNumStaticWorkers FieldTag = 580 // OF__ParForNumStaticWorkers
-	FieldTagOMRCFlags FieldTag = 581 // OF__OMRCFlags
-	FieldTagSimDiagSimParamData FieldTag = 582 // OF__SimDiagSimParamData
-	FieldTagSelectSelLabFlags FieldTag = 583 // OF__SelectSelLabFlags
-	FieldTagSelectSelLabData FieldTag = 584 // OF__SelectSelLabData
-	FieldTagCommentSelLabFlags FieldTag = 585 // OF__CommentSelLabFlags
-	FieldTagCommentSelLabData2 FieldTag = 586 // OF__CommentSelLabData
-	FieldTagUDClassItemDataSize FieldTag = 587 // OF__UDClassItemDataSize
-	FieldTagUDClassItemPropName FieldTag = 588 // OF__UDClassItemPropName
-	FieldTagConstValue FieldTag = 589 // OF__ConstValue
-	FieldTagEventNodeOccurrence FieldTag = 590 // OF__EventNodeOccurrence
-	FieldTagEventSelLabFlags FieldTag = 591 // OF__EventSelLabFlags
-	FieldTagEventSelLabData FieldTag = 592 // OF__EventSelLabData
-	FieldTagChunkSize FieldTag = 593 // OF__ChunkSize
-	FieldTagDebuggingEnabled FieldTag = 594 // OF__DebuggingEnabled
-	FieldTagSlaveFBInputNode FieldTag = 595 // OF__SlaveFBInputNode
-	FieldTagHiddenFBNode FieldTag = 596 // OF__HiddenFBNode
-	FieldTagInnerChunkSize FieldTag = 597 // OF__InnerChunkSize
-	FieldTagSavedSize FieldTag = 598 // OF__savedSize
-	FieldTagNodeFlags2 FieldTag = 599 // OF__nodeFlags2
-	FieldTagOutputInstanceNumberFromP FieldTag = 600 // OF__OutputInstanceNumberFromP
-	FieldTagCBRSaveStyle FieldTag = 601 // OF__CBRSaveStyle
-	FieldTagJoinCBRTimeout FieldTag = 602 // OF__JoinCBRTimeout
-	FieldTagOffScreenSceneView FieldTag = 603 // OF__OffScreenSceneView
-	FieldTagOffScreenGLContext FieldTag = 604 // OF__OffScreenGLContext
-	FieldTagScaleRMin32 FieldTag = 605 // OF__scaleRMin32
-	FieldTagScaleRMax32 FieldTag = 606 // OF__scaleRMax32
-	FieldTagTunnelType FieldTag = 607 // OF__TunnelType
-	FieldTagDefaultTunnelType FieldTag = 608 // OF__DefaultTunnelType
-	FieldTagFpgaImplementation FieldTag = 609 // OF__FpgaImplementation
-	FieldTagIsConditional FieldTag = 610 // OF__IsConditional
-	FieldTagConditionDCOList FieldTag = 611 // OF__ConditionDCOList
-	FieldTagLpTunConditionDCO FieldTag = 612 // OF__LpTunConditionDCO
-	FieldTagMSNFlags FieldTag = 613 // OF__MSNFlags
-	FieldTagArrayOfStringsIsCellArray FieldTag = 614 // OF__arrayOfStringsIsCellArray
-	FieldTagMouseWheelSupport FieldTag = 615 // OF__MouseWheelSupport
-	FieldTagGraphMPlot2013 FieldTag = 616 // OF__GraphMPlot2013
-	FieldTagGraphBusOrg2013 FieldTag = 617 // OF__GraphBusOrg2013
-	FieldTagAttachedObject FieldTag = 618 // OF__attachedObject
-	FieldTagAttachment FieldTag = 619 // OF__attachment
-	FieldTagScaleAutoscalePadding FieldTag = 620 // OF__ScaleAutoscalePadding
-	FieldTagThralledTunnelUID FieldTag = 621 // OF__ThralledTunnelUID
-	FieldTagGraphCursors2014 FieldTag = 622 // OF__GraphCursors2014
-	FieldTagGraphAnnotations2014 FieldTag = 623 // OF__GraphAnnotations2014
-	FieldTagKSLHDefaultValueMatchesCtlVI FieldTag = 624 // OF__kSLHDefaultValueMatchesCtlVI
-	FieldTagKSLHFieldDefaultValueMatchesCtlVI FieldTag = 625 // OF__kSLHFieldDefaultValueMatchesCtlVI
-	FieldTagFpgaEnableBoundsMux FieldTag = 626 // OF__FpgaEnableBoundsMux
+	FieldTagRowHeaders                            FieldTag = 467 // OF__rowHeaders
+	FieldTagColumnHeaders                         FieldTag = 468 // OF__columnHeaders
+	FieldTagActiveCell                            FieldTag = 469 // OF__activeCell
+	FieldTagScaleDMin                             FieldTag = 470 // OF__scaleDMin
+	FieldTagScaleDMax                             FieldTag = 471 // OF__scaleDMax
+	FieldTagScaleDStart                           FieldTag = 472 // OF__scaleDStart
+	FieldTagScaleDIncr                            FieldTag = 473 // OF__scaleDIncr
+	FieldTagScaleDMinInc                          FieldTag = 474 // OF__scaleDMinInc
+	FieldTagScaleDMultiplier                      FieldTag = 475 // OF__scaleDMultiplier
+	FieldTagScaleDOffset                          FieldTag = 476 // OF__scaleDOffset
+	FieldTagScaleRRef                             FieldTag = 477 // OF__scaleRRef
+	FieldTagScaleRngf                             FieldTag = 478 // OF__scaleRngf
+	FieldTagScaleCenter                           FieldTag = 479 // OF__scaleCenter
+	FieldTagScaleRadius                           FieldTag = 480 // OF__scaleRadius
+	FieldTagScaleRMin                             FieldTag = 481 // OF__scaleRMin
+	FieldTagScaleRMax                             FieldTag = 482 // OF__scaleRMax
+	FieldTagScaleFunIdx                           FieldTag = 483 // OF__scaleFunIdx
+	FieldTagScaleLoColor                          FieldTag = 484 // OF__scaleLoColor
+	FieldTagScaleHiColor                          FieldTag = 485 // OF__scaleHiColor
+	FieldTagScaleColorData                        FieldTag = 486 // OF__scaleColorData
+	FieldTagMinDataSel                            FieldTag = 487 // OF__minDataSel
+	FieldTagMaxDataSel                            FieldTag = 488 // OF__maxDataSel
+	FieldTagPivotDataSel                          FieldTag = 489 // OF__pivotDataSel
+	FieldTagAbsTime_min                           FieldTag = 490 // OF__absTime_min
+	FieldTagAbsTime_max                           FieldTag = 491 // OF__absTime_max
+	FieldTagAbsTime_inc                           FieldTag = 492 // OF__absTime_inc
+	FieldTagBaseListboxItemStrings                FieldTag = 493 // OF__baseListboxItemStrings
+	FieldTagBaseListboxDoubleClickedRow           FieldTag = 494 // OF__baseListboxDoubleClickedRow
+	FieldTagBaseListboxClickedColumnHeader        FieldTag = 495 // OF__baseListboxClickedColumnHeader
+	FieldTagBaseListboxDragRow                    FieldTag = 496 // OF__baseListboxDragRow
+	FieldTagListboxClickedCell                    FieldTag = 497 // OF__listboxClickedCell
+	FieldTagListboxDisabledItems                  FieldTag = 498 // OF__listboxDisabledItems
+	FieldTagListboxGlyphColumns                   FieldTag = 499 // OF__listboxGlyphColumns
+	FieldTagTreeNodeArray                         FieldTag = 500 // OF__treeNodeArray
+	FieldTagTreeDragIntoRow                       FieldTag = 501 // OF__treeDragIntoRow
+	FieldTagArrayIndices                          FieldTag = 502 // OF__arrayIndices
+	FieldTagArraySelectionStart                   FieldTag = 503 // OF__arraySelectionStart
+	FieldTagArraySelectionEnd                     FieldTag = 504 // OF__arraySelectionEnd
+	FieldTagComboBoxIndex                         FieldTag = 505 // OF__comboBoxIndex
+	FieldTagComboBoxValues                        FieldTag = 506 // OF__comboBoxValues
+	FieldTagTabArrayFirstTab                      FieldTag = 507 // OF__tabArrayFirstTab
+	FieldTagTabArrayFg                            FieldTag = 508 // OF__tabArrayFg
+	FieldTagTabArrayBg                            FieldTag = 509 // OF__tabArrayBg
+	FieldTagTabArrayTabInfoArray                  FieldTag = 510 // OF__tabArrayTabInfoArray
+	FieldTagTabControlPageSelValue                FieldTag = 511 // OF__tabControlPageSelValue
+	FieldTagTabControlPageInfoArray               FieldTag = 512 // OF__tabControlPageInfoArray
+	FieldTagStdNumMin                             FieldTag = 513 // OF__StdNumMin
+	FieldTagStdNumMax                             FieldTag = 514 // OF__StdNumMax
+	FieldTagStdNumInc                             FieldTag = 515 // OF__StdNumInc
+	FieldTagCBRExecAlias                          FieldTag = 516 // OF__CBRExecAlias
+	FieldTagCBRExecResolved                       FieldTag = 517 // OF__CBRExecResolved
+	FieldTagCBRRefPathAlias                       FieldTag = 518 // OF__CBRRefPathAlias
+	FieldTagCBRRefPath                            FieldTag = 519 // OF__CBRRefPath
+	FieldTagCBRCfgMode                            FieldTag = 520 // OF__CBRCfgMode
+	FieldTagCommentSelInfoArray                   FieldTag = 521 // OF__commentSelInfoArray
+	FieldTagCommentSelLabData                     FieldTag = 522 // OF__commentSelLabData
+	FieldTagGVNGrowTerms                          FieldTag = 523 // OF__GVNGrowTerms
+	FieldTagGVNMaxGrowTerms                       FieldTag = 524 // OF__GVNMaxGrowTerms
+	FieldTagGVMinGVWidth                          FieldTag = 525 // OF__GVMinGVWidth
+	FieldTagGVHoodTermWidth                       FieldTag = 526 // OF__GVHoodTermWidth
+	FieldTagGVGrowTermsInfo                       FieldTag = 527 // OF__GVGrowTermsInfo
+	FieldTagPlugInDLLName                         FieldTag = 528 // OF__PlugInDLLName
+	FieldTagPlugInLoadProcName                    FieldTag = 529 // OF__PlugInLoadProcName
+	FieldTagPropItemName                          FieldTag = 530 // OF__PropItemName
+	FieldTagPropItemCode                          FieldTag = 531 // OF__PropItemCode
+	FieldTagActiveXItemDataSize                   FieldTag = 532 // OF__ActiveXItemDataSize
+	FieldTagActiveXItemObjMgrFlags                FieldTag = 533 // OF__ActiveXItemObjMgrFlags
+	FieldTagActiveXItemOrigVarType                FieldTag = 534 // OF__ActiveXItemOrigVarType
+	FieldTagActiveXItemOrigIndex                  FieldTag = 535 // OF__ActiveXItemOrigIndex
+	FieldTagDotNetItemDataSize                    FieldTag = 536 // OF__DotNetItemDataSize
+	FieldTagDotNetItemObjMgrFlags                 FieldTag = 537 // OF__DotNetItemObjMgrFlags
+	FieldTagDotNetItemDotNetFlags                 FieldTag = 538 // OF__DotNetItemDotNetFlags
+	FieldTagDotNetItemType                        FieldTag = 539 // OF__DotNetItemType
+	FieldTagSharedVariableCustomRule              FieldTag = 540 // OF__SharedVariableCustomRule
+	FieldTagGraphMPlot                            FieldTag = 541 // OF__GraphMPlot
+	FieldTagGraphActivePlot                       FieldTag = 542 // OF__GraphActivePlot
+	FieldTagGraphActiveCursor                     FieldTag = 543 // OF__GraphActiveCursor
+	FieldTagGraphCursors                          FieldTag = 544 // OF__GraphCursors
+	FieldTagGraphFlags                            FieldTag = 545 // OF__GraphFlags
+	FieldTagGraphTreeData                         FieldTag = 546 // OF__GraphTreeData
+	FieldTagGraphPlotImages                       FieldTag = 547 // OF__GraphPlotImages
+	FieldTagGraphAnnotations                      FieldTag = 548 // OF__GraphAnnotations
+	FieldTagGraphActivePort                       FieldTag = 549 // OF__GraphActivePort
+	FieldTagGraphCursorButtons                    FieldTag = 550 // OF__GraphCursorButtons
+	FieldTagGraphCursorLegendData                 FieldTag = 551 // OF__GraphCursorLegendData
+	FieldTagGraphPlotLegendData                   FieldTag = 552 // OF__GraphPlotLegendData
+	FieldTagGraphMinPlotNum                       FieldTag = 553 // OF__GraphMinPlotNum
+	FieldTagGraphBusOrg                           FieldTag = 554 // OF__GraphBusOrg
+	FieldTagGraphScalePalette                     FieldTag = 555 // OF__GraphScalePalette
+	FieldTagGraphScaleData                        FieldTag = 556 // OF__GraphScaleData
+	FieldTagIntensityGraphCT                      FieldTag = 557 // OF__IntensityGraphCT
+	FieldTagIntensityGraphBMP                     FieldTag = 558 // OF__IntensityGraphBMP
+	FieldTagIntensityGraphBounds                  FieldTag = 559 // OF__IntensityGraphBounds
+	FieldTagSimDiagFeedThroughData                FieldTag = 560 // OF__SimDiagFeedThroughData
+	FieldTagSimDiagSimNodeMapData                 FieldTag = 561 // OF__SimDiagSimNodeMapData
+	FieldTagSimDiagCompNodeMapData                FieldTag = 562 // OF__SimDiagCompNodeMapData
+	FieldTagSimDiagSignalMapData                  FieldTag = 563 // OF__SimDiagSignalMapData
+	FieldTagSimDiagAdditionalData                 FieldTag = 564 // OF__SimDiagAdditionalData
+	FieldTagSelectDefaultCase                     FieldTag = 565 // OF__SelectDefaultCase
+	FieldTagSelectNRightType                      FieldTag = 566 // OF__SelectNRightType
+	FieldTagSelectRangeArray32                    FieldTag = 567 // OF__SelectRangeArray32
+	FieldTagSelectRangeArray64                    FieldTag = 568 // OF__SelectRangeArray64
+	FieldTagSelectStringArray                     FieldTag = 569 // OF__SelectStringArray
+	FieldTagEventNodeEvents                       FieldTag = 570 // OF__EventNodeEvents
+	FieldTagDefaultData                           FieldTag = 571 // OF__DefaultData
+	FieldTagParForWorkers                         FieldTag = 572 // OF__ParForWorkers
+	FieldTagParForIndexDistribution               FieldTag = 573 // OF__ParForIndexDistribution
+	FieldTagStateData                             FieldTag = 574 // OF__StateData
+	FieldTagMinButSize                            FieldTag = 575 // OF__MinButSize
+	FieldTagPossibleMSNDCOTypes                   FieldTag = 576 // OF__possibleMSNDCOTypes
+	FieldTagFeedbackNodeDelay                     FieldTag = 577 // OF__feedbackNodeDelay
+	FieldTagEnglishName                           FieldTag = 578 // OF__englishName
+	FieldTagSharedVariableDynamicResID            FieldTag = 579 // OF__SharedVariableDynamicResID
+	FieldTagParForNumStaticWorkers                FieldTag = 580 // OF__ParForNumStaticWorkers
+	FieldTagOMRCFlags                             FieldTag = 581 // OF__OMRCFlags
+	FieldTagSimDiagSimParamData                   FieldTag = 582 // OF__SimDiagSimParamData
+	FieldTagSelectSelLabFlags                     FieldTag = 583 // OF__SelectSelLabFlags
+	FieldTagSelectSelLabData                      FieldTag = 584 // OF__SelectSelLabData
+	FieldTagCommentSelLabFlags                    FieldTag = 585 // OF__CommentSelLabFlags
+	FieldTagCommentSelLabData2                    FieldTag = 586 // OF__CommentSelLabData
+	FieldTagUDClassItemDataSize                   FieldTag = 587 // OF__UDClassItemDataSize
+	FieldTagUDClassItemPropName                   FieldTag = 588 // OF__UDClassItemPropName
+	FieldTagConstValue                            FieldTag = 589 // OF__ConstValue
+	FieldTagEventNodeOccurrence                   FieldTag = 590 // OF__EventNodeOccurrence
+	FieldTagEventSelLabFlags                      FieldTag = 591 // OF__EventSelLabFlags
+	FieldTagEventSelLabData                       FieldTag = 592 // OF__EventSelLabData
+	FieldTagChunkSize                             FieldTag = 593 // OF__ChunkSize
+	FieldTagDebuggingEnabled                      FieldTag = 594 // OF__DebuggingEnabled
+	FieldTagSlaveFBInputNode                      FieldTag = 595 // OF__SlaveFBInputNode
+	FieldTagHiddenFBNode                          FieldTag = 596 // OF__HiddenFBNode
+	FieldTagInnerChunkSize                        FieldTag = 597 // OF__InnerChunkSize
+	FieldTagSavedSize                             FieldTag = 598 // OF__savedSize
+	FieldTagNodeFlags2                            FieldTag = 599 // OF__nodeFlags2
+	FieldTagOutputInstanceNumberFromP             FieldTag = 600 // OF__OutputInstanceNumberFromP
+	FieldTagCBRSaveStyle                          FieldTag = 601 // OF__CBRSaveStyle
+	FieldTagJoinCBRTimeout                        FieldTag = 602 // OF__JoinCBRTimeout
+	FieldTagOffScreenSceneView                    FieldTag = 603 // OF__OffScreenSceneView
+	FieldTagOffScreenGLContext                    FieldTag = 604 // OF__OffScreenGLContext
+	FieldTagScaleRMin32                           FieldTag = 605 // OF__scaleRMin32
+	FieldTagScaleRMax32                           FieldTag = 606 // OF__scaleRMax32
+	FieldTagTunnelType                            FieldTag = 607 // OF__TunnelType
+	FieldTagDefaultTunnelType                     FieldTag = 608 // OF__DefaultTunnelType
+	FieldTagFpgaImplementation                    FieldTag = 609 // OF__FpgaImplementation
+	FieldTagIsConditional                         FieldTag = 610 // OF__IsConditional
+	FieldTagConditionDCOList                      FieldTag = 611 // OF__ConditionDCOList
+	FieldTagLpTunConditionDCO                     FieldTag = 612 // OF__LpTunConditionDCO
+	FieldTagMSNFlags                              FieldTag = 613 // OF__MSNFlags
+	FieldTagArrayOfStringsIsCellArray             FieldTag = 614 // OF__arrayOfStringsIsCellArray
+	FieldTagMouseWheelSupport                     FieldTag = 615 // OF__MouseWheelSupport
+	FieldTagGraphMPlot2013                        FieldTag = 616 // OF__GraphMPlot2013
+	FieldTagGraphBusOrg2013                       FieldTag = 617 // OF__GraphBusOrg2013
+	FieldTagAttachedObject                        FieldTag = 618 // OF__attachedObject
+	FieldTagAttachment                            FieldTag = 619 // OF__attachment
+	FieldTagScaleAutoscalePadding                 FieldTag = 620 // OF__ScaleAutoscalePadding
+	FieldTagThralledTunnelUID                     FieldTag = 621 // OF__ThralledTunnelUID
+	FieldTagGraphCursors2014                      FieldTag = 622 // OF__GraphCursors2014
+	FieldTagGraphAnnotations2014                  FieldTag = 623 // OF__GraphAnnotations2014
+	FieldTagKSLHDefaultValueMatchesCtlVI          FieldTag = 624 // OF__kSLHDefaultValueMatchesCtlVI
+	FieldTagKSLHFieldDefaultValueMatchesCtlVI     FieldTag = 625 // OF__kSLHFieldDefaultValueMatchesCtlVI
+	FieldTagFpgaEnableBoundsMux                   FieldTag = 626 // OF__FpgaEnableBoundsMux
 )
 
 var fieldTagNames = map[FieldTag]string{
-	FieldTagActiveDiag: "OF__activeDiag",
-	FieldTagActiveMarker: "OF__activeMarker",
-	FieldTagActivePlot: "OF__activePlot",
-	FieldTagActiveThumb: "OF__activeThumb",
-	FieldTagActiveXScale: "OF__activeXScale",
-	FieldTagActiveYScale: "OF__activeYScale",
-	FieldTagAlarmName: "OF__alarmName",
-	FieldTagBary: "OF__bary",
-	FieldTagBgColor: "OF__bgColor",
-	FieldTagBindings: "OF__bindings",
-	FieldTagBlinkList: "OF__blinkList",
-	FieldTagBorderColor: "OF__borderColor",
-	FieldTagBotOrRight: "OF__botOrRight",
-	FieldTagBounds: "OF__bounds",
-	FieldTagBuf: "OF__buf",
-	FieldTagCallOffset: "OF__callOffset",
-	FieldTagCallType: "OF__callType",
-	FieldTagCallee: "OF__callee",
-	FieldTagCaller: "OF__caller",
-	FieldTagCallerGlyphBounds: "OF__callerGlyphBounds",
-	FieldTagCaseSelDCO: "OF__caseSelDCO",
-	FieldTagCboxDsOffset: "OF__cboxDsOffset",
-	FieldTagCboxTdOffset: "OF__cboxTdOffset",
-	FieldTagCbrIcon: "OF__cbrIcon",
-	FieldTagCinPath: "OF__cinPath",
-	FieldTagClassName: "OF__className",
-	FieldTagClumpNum: "OF__clumpNum",
-	FieldTagCnst: "OF__cnst",
-	FieldTagCode: "OF__code",
-	FieldTagColor: "OF__color",
-	FieldTagColorDSO: "OF__colorDSO",
-	FieldTagColorTDO: "OF__colorTDO",
-	FieldTagCols: "OF__cols",
-	FieldTagCommentMode: "OF__commentMode",
-	FieldTagCompanionDiag: "OF__companionDiag",
-	FieldTagConId: "OF__conId",
-	FieldTagConNum: "OF__conNum",
-	FieldTagConPane: "OF__conPane",
-	FieldTagConfState: "OF__confState",
-	FieldTagConfigNode: "OF__configNode",
-	FieldTagConnectorTM: "OF__connectorTM",
-	FieldTagCons: "OF__cons",
-	FieldTagContRect: "OF__contRect",
-	FieldTagCtlDataObj: "OF__ctlDataObj",
-	FieldTagDBounds: "OF__dBounds",
-	FieldTagDIdx: "OF__dIdx",
-	FieldTagDataNodeList: "OF__dataNodeList",
-	FieldTagDco: "OF__dco",
-	FieldTagDcoAgg: "OF__dcoAgg",
-	FieldTagDcoFiller: "OF__dcoFiller",
-	FieldTagDcoList: "OF__dcoList",
-	FieldTagDdo: "OF__ddo",
-	FieldTagDdoIndex: "OF__ddoIndex",
-	FieldTagDdoList: "OF__ddoList",
-	FieldTagDdoListList: "OF__ddoListList",
-	FieldTagDefaultDiag: "OF__defaultDiag",
-	FieldTagDelDCO: "OF__delDCO",
-	FieldTagDepth: "OF__depth",
-	FieldTagDescription: "OF__description",
-	FieldTagDiagDefined: "OF__diagDefined",
-	FieldTagDiagFiller1: "OF__diagFiller1",
-	FieldTagDiagFiller2: "OF__diagFiller2",
-	FieldTagDiagramList: "OF__diagramList",
-	FieldTagDocBounds: "OF__docBounds",
-	FieldTagDsOffset: "OF__dsOffset",
-	FieldTagDsw: "OF__dsw",
-	FieldTagDynBounds: "OF__dynBounds",
-	FieldTagDynLink: "OF__dynLink",
-	FieldTagEOracleIdx: "OF__eOracleIdx",
-	FieldTagEPtrOff: "OF__ePtrOff",
-	FieldTagESizeOff: "OF__eSizeOff",
-	FieldTagEltDCO: "OF__eltDCO",
-	FieldTagEmbedToken: "OF__embedToken",
-	FieldTagErrCode: "OF__errCode",
-	FieldTagErrIn: "OF__errIn",
-	FieldTagErrOfst: "OF__errOfst",
-	FieldTagErrOut: "OF__errOut",
-	FieldTagEventObj_unused: "OF__eventObj_unused",
-	FieldTagFName: "OF__fName",
-	FieldTagFgColor: "OF__fgColor",
-	FieldTagFiller: "OF__filler",
-	FieldTagFilterNodeList: "OF__filterNodeList",
-	FieldTagFirstNodeIdx: "OF__firstNodeIdx",
-	FieldTagFocusRow: "OF__focusRow",
-	FieldTagFormat: "OF__format",
-	FieldTagFormula: "OF__formula",
-	FieldTagFrontRow: "OF__frontRow",
-	FieldTagFuncTD: "OF__funcTD",
-	FieldTagGraphCursor: "OF__graphCursor",
-	FieldTagGraphType: "OF__graphType",
-	FieldTagGrowAreaBounds: "OF__growAreaBounds",
-	FieldTagGrowObj: "OF__growObj",
-	FieldTagGrowTermsList: "OF__growTermsList",
-	FieldTagGrowViewObj: "OF__growViewObj",
-	FieldTagHFlags: "OF__hFlags",
-	FieldTagHGrowNodeList: "OF__hGrowNodeList",
-	FieldTagHSEnd: "OF__hSEnd",
-	FieldTagHSStart: "OF__hSStart",
-	FieldTagHeaderImage: "OF__headerImage",
-	FieldTagHierarchyColor: "OF__hierarchyColor",
-	FieldTagHistDSOffset: "OF__histDSOffset",
-	FieldTagHistTD: "OF__histTD",
-	FieldTagHistTDOffset: "OF__histTDOffset",
-	FieldTagHoodBounds: "OF__hoodBounds",
-	FieldTagHotPoint: "OF__hotPoint",
-	FieldTagHowGrow: "OF__howGrow",
-	FieldTagI: "OF__i",
-	FieldTagIconBounds: "OF__iconBounds",
-	FieldTagId: "OF__id",
-	FieldTagImage: "OF__image",
-	FieldTagInArrDCO: "OF__inArrDCO",
-	FieldTagInVILib: "OF__inVILib",
-	FieldTagIndex: "OF__index",
-	FieldTagIndexPosCol: "OF__indexPosCol",
-	FieldTagIndexPosRow: "OF__indexPosRow",
-	FieldTagIndexing: "OF__indexing",
-	FieldTagInnerLpTunDCO: "OF__innerLpTunDCO",
-	FieldTagInnerR: "OF__innerR",
-	FieldTagInnerSeq: "OF__innerSeq",
-	FieldTagInplace: "OF__inplace",
-	FieldTagInstance: "OF__instance",
-	FieldTagInstanceSelector: "OF__instanceSelector",
-	FieldTagInstrStyle: "OF__instrStyle",
-	FieldTagIntermediateList: "OF__intermediateList",
-	FieldTagInvokeFlags: "OF__invokeFlags",
-	FieldTagKeyMappingList: "OF__keyMappingList",
-	FieldTagLabel: "OF__label",
-	FieldTagLastSignalKind: "OF__lastSignalKind",
-	FieldTagLegendLbl: "OF__legendLbl",
-	FieldTagLenDCO: "OF__lenDCO",
-	FieldTagLengthDCOList: "OF__lengthDCOList",
-	FieldTagLevel: "OF__level",
-	FieldTagLibPath: "OF__libPath",
-	FieldTagListFlags: "OF__listFlags",
-	FieldTagListboxFlags: "OF__listboxFlags",
-	FieldTagLoopEndDCO: "OF__loopEndDCO",
-	FieldTagLoopIndexDCO: "OF__loopIndexDCO",
-	FieldTagLoopTimingDCO: "OF__loopTimingDCO",
-	FieldTagLpTunDCO: "OF__lpTunDCO",
-	FieldTagLsrDCOList: "OF__lsrDCOList",
-	FieldTagMJasterWizard: "OF__mJasterWizard",
-	FieldTagMask: "OF__mask",
-	FieldTagMaster_unused: "OF__master_unused",
-	FieldTagMasterPart: "OF__masterPart",
-	FieldTagMate: "OF__mate",
-	FieldTagMaxPaneSize: "OF__maxPaneSize",
-	FieldTagMaxPanelSize: "OF__maxPanelSize",
-	FieldTagMclFlags: "OF__mclFlags",
-	FieldTagMenuInstanceUsed: "OF__menuInstanceUsed",
-	FieldTagMethCode: "OF__methCode",
-	FieldTagMethName: "OF__methName",
-	FieldTagMinPaneSize: "OF__minPaneSize",
-	FieldTagMinPanelSize: "OF__minPanelSize",
-	FieldTagNChunks: "OF__nChunks",
-	FieldTagNConnections: "OF__nConnections",
-	FieldTagNDims: "OF__nDims",
-	FieldTagNInputs: "OF__nInputs",
-	FieldTagNLabels: "OF__nLabels",
-	FieldTagNMajDivs: "OF__nMajDivs",
-	FieldTagNRC: "OF__nRC",
-	FieldTagNVisItems: "OF__nVisItems",
-	FieldTagNmxFiller: "OF__nmxFiller",
-	FieldTagNodeInfo: "OF__nodeInfo",
-	FieldTagNodeList: "OF__nodeList",
-	FieldTagNodeName: "OF__nodeName",
-	FieldTagNumFrozenCols: "OF__numFrozenCols",
-	FieldTagNumFrozenRows: "OF__numFrozenRows",
-	FieldTagNumRows: "OF__numRows",
-	FieldTagNumSubVIs: "OF__numSubVIs",
-	FieldTagOMId: "OF__oMId",
-	FieldTagORC: "OF__oRC",
-	FieldTagObjFlags: "OF__objFlags",
-	FieldTagOmidDSOffset: "OF__omidDSOffset",
-	FieldTagOmidTDOffset: "OF__omidTDOffset",
-	FieldTagOmidTypeDesc: "OF__omidTypeDesc",
-	FieldTagOrderList: "OF__orderList",
-	FieldTagOrigin: "OF__origin",
-	FieldTagOtherSide: "OF__otherSide",
-	FieldTagOuterR: "OF__outerR",
-	FieldTagOutputDCO: "OF__outputDCO",
-	FieldTagOutputNode: "OF__outputNode",
-	FieldTagOwnerSignal: "OF__ownerSignal",
-	FieldTagPBounds: "OF__pBounds",
-	FieldTagPMap: "OF__pMap",
-	FieldTagPMapOfst: "OF__pMapOfst",
-	FieldTagPageList: "OF__pageList",
-	FieldTagPaneFlags: "OF__paneFlags",
-	FieldTagPaneHierarchy: "OF__paneHierarchy",
-	FieldTagParamIdx: "OF__paramIdx",
-	FieldTagParamTableOffset: "OF__paramTableOffset",
-	FieldTagParmIndex: "OF__parmIndex",
-	FieldTagPartID: "OF__partID",
-	FieldTagPartOrder: "OF__partOrder",
-	FieldTagPartsList: "OF__partsList",
-	FieldTagPattern: "OF__pattern",
-	FieldTagPctTransparent: "OF__pctTransparent",
-	FieldTagPermDCOList: "OF__permDCOList",
-	FieldTagPermutation: "OF__permutation",
-	FieldTagPixmap: "OF__pixmap",
-	FieldTagPos: "OF__pos",
-	FieldTagPreferredInstIndex: "OF__preferredInstIndex",
-	FieldTagPrimIndex: "OF__primIndex",
-	FieldTagPrimResID: "OF__primResID",
-	FieldTagPriv: "OF__priv",
-	FieldTagPrivDataList: "OF__privDataList",
-	FieldTagPropList: "OF__propList",
-	FieldTagRefList: "OF__refList",
-	FieldTagResetJumpLabel: "OF__resetJumpLabel",
-	FieldTagRevisionInfoCreator: "OF__revisionInfoCreator",
-	FieldTagRevisionInfoTlkitID: "OF__revisionInfoTlkitID",
-	FieldTagRevisionInfoTlkitVersion: "OF__revisionInfoTlkitVersion",
-	FieldTagRingDsOffset: "OF__ringDsOffset",
-	FieldTagRingTdOffset: "OF__ringTdOffset",
-	FieldTagRoot: "OF__root",
-	FieldTagRowHeight: "OF__rowHeight",
-	FieldTagRsrDCO: "OF__rsrDCO",
-	FieldTagRsrcID: "OF__rsrcID",
-	FieldTagRtPopupData: "OF__rtPopupData",
-	FieldTagRtPopupString: "OF__rtPopupString",
-	FieldTagRtPopupVersion: "OF__rtPopupVersion",
-	FieldTagRtdsoff: "OF__rtdsoff",
-	FieldTagSavedState: "OF__savedState",
-	FieldTagScreenRes: "OF__screenRes",
-	FieldTagScriptName: "OF__scriptName",
-	FieldTagSdllName: "OF__sdllName",
-	FieldTagSelLabData: "OF__selLabData",
-	FieldTagSelString: "OF__selString",
-	FieldTagSelectionColor: "OF__selectionColor",
-	FieldTagSeqLocDCOList: "OF__seqLocDCOList",
-	FieldTagSequenceList: "OF__sequenceList",
-	FieldTagShortCount: "OF__shortCount",
-	FieldTagSignalIndex: "OF__signalIndex",
-	FieldTagSignalList: "OF__signalList",
-	FieldTagSimDiagFlags: "OF__simDiagFlags",
-	FieldTagSimparam: "OF__simparam",
-	FieldTagSimtype: "OF__simtype",
-	FieldTagSimulationDiag: "OF__simulationDiag",
-	FieldTagSizeRect: "OF__sizeRect",
-	FieldTagSlaveList_unused: "OF__slaveList_unused",
-	FieldTagSlocFiller: "OF__slocFiller",
-	FieldTagSnFiller: "OF__snFiller",
-	FieldTagSplitterFlags: "OF__splitterFlags",
-	FieldTagSrDCOList: "OF__srDCOList",
-	FieldTagSrcDCO: "OF__srcDCO",
-	FieldTagStamp: "OF__stamp",
-	FieldTagState: "OF__state",
-	FieldTagStateTD: "OF__stateTD",
-	FieldTagStreamData: "OF__streamData",
-	FieldTagStrings: "OF__strings",
-	FieldTagStructColor: "OF__structColor",
-	FieldTagSubPanelFlags: "OF__subPanelFlags",
-	FieldTagSubVIGlyphBounds: "OF__subVIGlyphBounds",
-	FieldTagSymmetry: "OF__symmetry",
-	FieldTagTInset: "OF__tInset",
-	FieldTagTabWidth: "OF__tabWidth",
-	FieldTagTable: "OF__table",
-	FieldTagTableFlags: "OF__tableFlags",
-	FieldTagTagDevice: "OF__tagDevice",
-	FieldTagTagDisplayFilter: "OF__tagDisplayFilter",
-	FieldTagTagSubTypeClass: "OF__tagSubTypeClass",
-	FieldTagTagType: "OF__tagType",
-	FieldTagTagTypeClass: "OF__tagTypeClass",
-	FieldTagTblOffset: "OF__tblOffset",
-	FieldTagTdOffset: "OF__tdOffset",
-	FieldTagTermBMPs: "OF__termBMPs",
-	FieldTagTermBounds: "OF__termBounds",
-	FieldTagTermHotPoint: "OF__termHotPoint",
-	FieldTagTermList: "OF__termList",
-	FieldTagTextDivider: "OF__textDivider",
-	FieldTagTextRec: "OF__textRec",
-	FieldTagThreadInfo: "OF__threadInfo",
-	FieldTagTimeDataNodeDMux: "OF__timeDataNodeDMux",
-	FieldTagTimeDataNodeMux: "OF__timeDataNodeMux",
-	FieldTagTimeLoop: "OF__timeLoop",
-	FieldTagTimeOutDCO: "OF__timeOutDCO",
-	FieldTagTool: "OF__tool",
-	FieldTagTopOrLeft: "OF__topOrLeft",
-	FieldTagTreeFlags: "OF__treeFlags",
-	FieldTagTsH: "OF__tsH",
-	FieldTagTunnelList: "OF__tunnelList",
-	FieldTagType: "OF__type",
-	FieldTagTypeCode: "OF__typeCode",
-	FieldTagTypeDesc: "OF__typeDesc",
-	FieldTagUserDiagram: "OF__userDiagram",
-	FieldTagVTblPtr: "OF__vTblPtr",
-	FieldTagVarTypeDesc: "OF__varTypeDesc",
-	FieldTagVblName: "OF__vblName",
-	FieldTagVersion: "OF__version",
-	FieldTagViPath: "OF__viPath",
-	FieldTagViState: "OF__viState",
-	FieldTagVisClust: "OF__visClust",
-	FieldTagWidth: "OF__width",
-	FieldTagWinFlags: "OF__winFlags",
-	FieldTagWireGlyphID: "OF__wireGlyphID",
-	FieldTagWireID: "OF__wireID",
-	FieldTagWireTable: "OF__wireTable",
-	FieldTagWizData: "OF__wizData",
-	FieldTagWizDataH: "OF__wizDataH",
-	FieldTagWizDataID: "OF__wizDataID",
-	FieldTagWizID: "OF__wizID",
-	FieldTagWizVersion: "OF__wizVersion",
-	FieldTagXflags: "OF__xflags",
-	FieldTagZPlaneList: "OF__zPlaneList",
-	FieldTagZPlaneListList: "OF__zPlaneListList",
-	FieldTagZoom: "OF__zoom",
-	FieldTagSrcDCO1: "OF__srcDCO1",
-	FieldTagSrcDCO2: "OF__srcDCO2",
-	FieldTagSrcDCO3: "OF__srcDCO3",
-	FieldTagSrcDCO4: "OF__srcDCO4",
-	FieldTagCRectAbove: "OF__cRectAbove",
-	FieldTagCRectBelow: "OF__cRectBelow",
-	FieldTagVariantIndex: "OF__variantIndex",
-	FieldTagTermListLength: "OF__termListLength",
-	FieldTagRefListLength: "OF__refListLength",
-	FieldTagHGrowNodeListLength: "OF__hGrowNodeListLength",
-	FieldTagDataTypeDesc: "OF__dataTypeDesc",
-	FieldTagHair: "OF__hair",
-	FieldTagDisplayName: "OF__displayName",
-	FieldTagSelLabFlags: "OF__selLabFlags",
-	FieldTagLastSelRow: "OF__lastSelRow",
-	FieldTagLastSelCol: "OF__lastSelCol",
-	FieldTagScrollPosV: "OF__scrollPosV",
-	FieldTagScrollPosH: "OF__scrollPosH",
-	FieldTagTotalBounds: "OF__totalBounds",
-	FieldTagSrcRect: "OF__srcRect",
-	FieldTagLabelPosRow: "OF__labelPosRow",
-	FieldTagLabelPosCol: "OF__labelPosCol",
-	FieldTagSimparamOut: "OF__simparamOut",
-	FieldTagInnerMate: "OF__innerMate",
-	FieldTagOuterMate: "OF__outerMate",
-	FieldTagFlatSeq: "OF__flatSeq",
-	FieldTagTimeSeq: "OF__timeSeq",
-	FieldTagSlaveMods: "OF__slaveMods",
-	FieldTagSlaveOwner: "OF__slaveOwner",
-	FieldTagSimConfigNode: "OF__simConfigNode",
-	FieldTagSimOutputNode: "OF__simOutputNode",
-	FieldTagGlyphs: "OF__glyphs",
-	FieldTagPUseStoredSize: "OF__pUseStoredSize",
-	FieldTagPUseStoredPos: "OF__pUseStoredPos",
-	FieldTagPRuntimeType: "OF__pRuntimeType",
-	FieldTagPRuntimeTop: "OF__pRuntimeTop",
-	FieldTagPRuntimeLeft: "OF__pRuntimeLeft",
-	FieldTagPRuntimeWidth: "OF__pRuntimeWidth",
-	FieldTagPRuntimeHeight: "OF__pRuntimeHeight",
-	FieldTagPRuntimeMonitor: "OF__pRuntimeMonitor",
-	FieldTagLibVersion: "OF__libVersion",
-	FieldTagRatio: "OF__ratio",
-	FieldTagAnnexDDOFlag: "OF__annexDDOFlag",
-	FieldTagXCtlState: "OF__xCtlState",
-	FieldTagWizList: "OF__wizList",
-	FieldTagLockedObjectList: "OF__lockedObjectList",
-	FieldTagLockedSignalList: "OF__lockedSignalList",
-	FieldTagMasterStateEnum: "OF__masterStateEnum",
-	FieldTag_Quit_StateEnum: "OF___Quit_StateEnum",
-	FieldTagStopCodeEnum: "OF__stopCodeEnum",
-	FieldTagStateLoop: "OF__stateLoop",
-	FieldTagStateCase: "OF__stateCase",
-	FieldTagStateCaseOutputTunnel: "OF__stateCaseOutputTunnel",
-	FieldTagStateList: "OF__stateList",
-	FieldTagIsSubVICall: "OF__isSubVICall",
-	FieldTagName: "OF__name",
-	FieldTagTransitionEnum: "OF__transitionEnum",
-	FieldTagTransitionCase: "OF__transitionCase",
-	FieldTagTransCaseOutputTunnel: "OF__transCaseOutputTunnel",
-	FieldTagTransitionList: "OF__transitionList",
-	FieldTagStateBounds: "OF__stateBounds",
-	FieldTagTerminal: "OF__terminal",
-	FieldTagStateConst: "OF__stateConst",
-	FieldTagExitAngle: "OF__exitAngle",
-	FieldTagEntranceAngle: "OF__entranceAngle",
-	FieldTagStiffness: "OF__stiffness",
-	FieldTagLabelPos: "OF__labelPos",
-	FieldTagPinCorner: "OF__pinCorner",
-	FieldTagCurrentlyScripting: "OF__currentlyScripting",
-	FieldTagTextNodeLabel: "OF__textNodeLabel",
-	FieldTagHeapFlags: "OF__heapFlags",
-	FieldTagRefreshFilter: "OF__refreshFilter",
-	FieldTagPlugInData: "OF__plugInData",
-	FieldTagXTunDDO: "OF__xTunDDO",
-	FieldTagGridFlags: "OF__gridFlags",
-	FieldTagHeaderFiles: "OF__headerFiles",
-	FieldTagSceneView: "OF__sceneView",
-	FieldTagLastAutoScale: "OF__lastAutoScale",
-	FieldTagAutoScaleDelay: "OF__autoScaleDelay",
-	FieldTagReserveCB: "OF__reserveCB",
-	FieldTagUnreserveCB: "OF__unreserveCB",
-	FieldTagAbortCB: "OF__abortCB",
-	FieldTagParamInfo: "OF__paramInfo",
-	FieldTagExtFuncFlags: "OF__extFuncFlags",
-	FieldTagTMI: "OF__tMI",
-	FieldTagLineNumbers: "OF__lineNumbers",
-	FieldTagFPath: "OF__fPath",
-	FieldTagMDate: "OF__mDate",
-	FieldTagErrHandle: "OF__errHandle",
-	FieldTagXTunnelDir: "OF__xTunnelDir",
-	FieldTagSCFlag: "OF__sCFlag",
-	FieldTagSCStNGuid: "OF__sCStNGuid",
-	FieldTagSCDiagSubType: "OF__sCDiagSubType",
-	FieldTagSCDiagFlag: "OF__sCDiagFlag",
-	FieldTagIsLoopCaseTransition: "OF__isLoopCaseTransition",
-	FieldTagSelectorXNode: "OF__selectorXNode",
-	FieldTagIFeedbackLoop: "OF__iFeedbackLoop",
-	FieldTagCellPosRow: "OF__cellPosRow",
-	FieldTagCellPosCol: "OF__cellPosCol",
-	FieldTagFont: "OF__font",
-	FieldTagMode: "OF__mode",
-	FieldTagHeight: "OF__height",
-	FieldTagGlyphIndex: "OF__glyphIndex",
-	FieldTagFlags: "OF__flags",
-	FieldTagAttributeList: "OF__attributeList",
-	FieldTagQtWidget: "OF__qtWidget",
-	FieldTagFLoopCondTerm: "OF__fLoopCondTerm",
-	FieldTagIsInterface: "OF__isInterface",
-	FieldTagLoopLimitDCO: "OF__loopLimitDCO",
-	FieldTagLoopTestDCO: "OF__loopTestDCO",
-	FieldTagOverrideType: "OF__overrideType",
-	FieldTagMaxWordLength: "OF__maxWordLength",
-	FieldTagOverride: "OF__override",
-	FieldTagOverflow: "OF__overflow",
-	FieldTagQuantize: "OF__quantize",
-	FieldTagTunOrdList: "OF__tunOrdList",
-	FieldTagMultiSegPipeFlange1Size: "OF__multiSegPipeFlange1Size",
-	FieldTagMultiSegPipeFlange2Size: "OF__multiSegPipeFlange2Size",
-	FieldTagMultiSegPipeFlange1Depth: "OF__multiSegPipeFlange1Depth",
-	FieldTagMultiSegPipeFlange2Depth: "OF__multiSegPipeFlange2Depth",
-	FieldTagMultiSegPipeWidth: "OF__multiSegPipeWidth",
-	FieldTagStaticState: "OF__staticState",
-	FieldTagFuncName: "OF__funcName",
-	FieldTagMFilePath: "OF__mFilePath",
-	FieldTagRecursiveFunc: "OF__tagDLLPath",
-	FieldTagTagDLLName: "OF__tagDLLName",
-	FieldTagPoser: "OF__poser",
-	FieldTagDataValRefDCO: "OF__dataValRefDCO",
-	FieldTagWrite: "OF__write",
-	FieldTagShowTimestamp: "OF__showTimestamp",
-	FieldTagName4: "OF__name4",
-	FieldTagPrivDataDSO: "OF__privDataDSO",
-	FieldTagPrivDataTMI: "OF__privDataTMI",
-	FieldTagDisabledList: "OF__disabledList",
-	FieldTagTunnelLink: "OF__tunnelLink",
-	FieldTagActiveBus: "OF__activeBus",
-	FieldTagTerminal_ID: "OF__terminal_ID",
-	FieldTagImplementingNode: "OF__implementingNode",
-	FieldTagFboxlineList: "OF__fboxlineList",
-	FieldTagCompressedWireTable: "OF__compressedWireTable",
+	FieldTagActiveDiag:                 "OF__activeDiag",
+	FieldTagActiveMarker:               "OF__activeMarker",
+	FieldTagActivePlot:                 "OF__activePlot",
+	FieldTagActiveThumb:                "OF__activeThumb",
+	FieldTagActiveXScale:               "OF__activeXScale",
+	FieldTagActiveYScale:               "OF__activeYScale",
+	FieldTagAlarmName:                  "OF__alarmName",
+	FieldTagBary:                       "OF__bary",
+	FieldTagBgColor:                    "OF__bgColor",
+	FieldTagBindings:                   "OF__bindings",
+	FieldTagBlinkList:                  "OF__blinkList",
+	FieldTagBorderColor:                "OF__borderColor",
+	FieldTagBotOrRight:                 "OF__botOrRight",
+	FieldTagBounds:                     "OF__bounds",
+	FieldTagBuf:                        "OF__buf",
+	FieldTagCallOffset:                 "OF__callOffset",
+	FieldTagCallType:                   "OF__callType",
+	FieldTagCallee:                     "OF__callee",
+	FieldTagCaller:                     "OF__caller",
+	FieldTagCallerGlyphBounds:          "OF__callerGlyphBounds",
+	FieldTagCaseSelDCO:                 "OF__caseSelDCO",
+	FieldTagCboxDsOffset:               "OF__cboxDsOffset",
+	FieldTagCboxTdOffset:               "OF__cboxTdOffset",
+	FieldTagCbrIcon:                    "OF__cbrIcon",
+	FieldTagCinPath:                    "OF__cinPath",
+	FieldTagClassName:                  "OF__className",
+	FieldTagClumpNum:                   "OF__clumpNum",
+	FieldTagCnst:                       "OF__cnst",
+	FieldTagCode:                       "OF__code",
+	FieldTagColor:                      "OF__color",
+	FieldTagColorDSO:                   "OF__colorDSO",
+	FieldTagColorTDO:                   "OF__colorTDO",
+	FieldTagCols:                       "OF__cols",
+	FieldTagCommentMode:                "OF__commentMode",
+	FieldTagCompanionDiag:              "OF__companionDiag",
+	FieldTagConId:                      "OF__conId",
+	FieldTagConNum:                     "OF__conNum",
+	FieldTagConPane:                    "OF__conPane",
+	FieldTagConfState:                  "OF__confState",
+	FieldTagConfigNode:                 "OF__configNode",
+	FieldTagConnectorTM:                "OF__connectorTM",
+	FieldTagCons:                       "OF__cons",
+	FieldTagContRect:                   "OF__contRect",
+	FieldTagCtlDataObj:                 "OF__ctlDataObj",
+	FieldTagDBounds:                    "OF__dBounds",
+	FieldTagDIdx:                       "OF__dIdx",
+	FieldTagDataNodeList:               "OF__dataNodeList",
+	FieldTagDco:                        "OF__dco",
+	FieldTagDcoAgg:                     "OF__dcoAgg",
+	FieldTagDcoFiller:                  "OF__dcoFiller",
+	FieldTagDcoList:                    "OF__dcoList",
+	FieldTagDdo:                        "OF__ddo",
+	FieldTagDdoIndex:                   "OF__ddoIndex",
+	FieldTagDdoList:                    "OF__ddoList",
+	FieldTagDdoListList:                "OF__ddoListList",
+	FieldTagDefaultDiag:                "OF__defaultDiag",
+	FieldTagDelDCO:                     "OF__delDCO",
+	FieldTagDepth:                      "OF__depth",
+	FieldTagDescription:                "OF__description",
+	FieldTagDiagDefined:                "OF__diagDefined",
+	FieldTagDiagFiller1:                "OF__diagFiller1",
+	FieldTagDiagFiller2:                "OF__diagFiller2",
+	FieldTagDiagramList:                "OF__diagramList",
+	FieldTagDocBounds:                  "OF__docBounds",
+	FieldTagDsOffset:                   "OF__dsOffset",
+	FieldTagDsw:                        "OF__dsw",
+	FieldTagDynBounds:                  "OF__dynBounds",
+	FieldTagDynLink:                    "OF__dynLink",
+	FieldTagEOracleIdx:                 "OF__eOracleIdx",
+	FieldTagEPtrOff:                    "OF__ePtrOff",
+	FieldTagESizeOff:                   "OF__eSizeOff",
+	FieldTagEltDCO:                     "OF__eltDCO",
+	FieldTagEmbedToken:                 "OF__embedToken",
+	FieldTagErrCode:                    "OF__errCode",
+	FieldTagErrIn:                      "OF__errIn",
+	FieldTagErrOfst:                    "OF__errOfst",
+	FieldTagErrOut:                     "OF__errOut",
+	FieldTagEventObj_unused:            "OF__eventObj_unused",
+	FieldTagFName:                      "OF__fName",
+	FieldTagFgColor:                    "OF__fgColor",
+	FieldTagFiller:                     "OF__filler",
+	FieldTagFilterNodeList:             "OF__filterNodeList",
+	FieldTagFirstNodeIdx:               "OF__firstNodeIdx",
+	FieldTagFocusRow:                   "OF__focusRow",
+	FieldTagFormat:                     "OF__format",
+	FieldTagFormula:                    "OF__formula",
+	FieldTagFrontRow:                   "OF__frontRow",
+	FieldTagFuncTD:                     "OF__funcTD",
+	FieldTagGraphCursor:                "OF__graphCursor",
+	FieldTagGraphType:                  "OF__graphType",
+	FieldTagGrowAreaBounds:             "OF__growAreaBounds",
+	FieldTagGrowObj:                    "OF__growObj",
+	FieldTagGrowTermsList:              "OF__growTermsList",
+	FieldTagGrowViewObj:                "OF__growViewObj",
+	FieldTagHFlags:                     "OF__hFlags",
+	FieldTagHGrowNodeList:              "OF__hGrowNodeList",
+	FieldTagHSEnd:                      "OF__hSEnd",
+	FieldTagHSStart:                    "OF__hSStart",
+	FieldTagHeaderImage:                "OF__headerImage",
+	FieldTagHierarchyColor:             "OF__hierarchyColor",
+	FieldTagHistDSOffset:               "OF__histDSOffset",
+	FieldTagHistTD:                     "OF__histTD",
+	FieldTagHistTDOffset:               "OF__histTDOffset",
+	FieldTagHoodBounds:                 "OF__hoodBounds",
+	FieldTagHotPoint:                   "OF__hotPoint",
+	FieldTagHowGrow:                    "OF__howGrow",
+	FieldTagI:                          "OF__i",
+	FieldTagIconBounds:                 "OF__iconBounds",
+	FieldTagId:                         "OF__id",
+	FieldTagImage:                      "OF__image",
+	FieldTagInArrDCO:                   "OF__inArrDCO",
+	FieldTagInVILib:                    "OF__inVILib",
+	FieldTagIndex:                      "OF__index",
+	FieldTagIndexPosCol:                "OF__indexPosCol",
+	FieldTagIndexPosRow:                "OF__indexPosRow",
+	FieldTagIndexing:                   "OF__indexing",
+	FieldTagInnerLpTunDCO:              "OF__innerLpTunDCO",
+	FieldTagInnerR:                     "OF__innerR",
+	FieldTagInnerSeq:                   "OF__innerSeq",
+	FieldTagInplace:                    "OF__inplace",
+	FieldTagInstance:                   "OF__instance",
+	FieldTagInstanceSelector:           "OF__instanceSelector",
+	FieldTagInstrStyle:                 "OF__instrStyle",
+	FieldTagIntermediateList:           "OF__intermediateList",
+	FieldTagInvokeFlags:                "OF__invokeFlags",
+	FieldTagKeyMappingList:             "OF__keyMappingList",
+	FieldTagLabel:                      "OF__label",
+	FieldTagLastSignalKind:             "OF__lastSignalKind",
+	FieldTagLegendLbl:                  "OF__legendLbl",
+	FieldTagLenDCO:                     "OF__lenDCO",
+	FieldTagLengthDCOList:              "OF__lengthDCOList",
+	FieldTagLevel:                      "OF__level",
+	FieldTagLibPath:                    "OF__libPath",
+	FieldTagListFlags:                  "OF__listFlags",
+	FieldTagListboxFlags:               "OF__listboxFlags",
+	FieldTagLoopEndDCO:                 "OF__loopEndDCO",
+	FieldTagLoopIndexDCO:               "OF__loopIndexDCO",
+	FieldTagLoopTimingDCO:              "OF__loopTimingDCO",
+	FieldTagLpTunDCO:                   "OF__lpTunDCO",
+	FieldTagLsrDCOList:                 "OF__lsrDCOList",
+	FieldTagMJasterWizard:              "OF__mJasterWizard",
+	FieldTagMask:                       "OF__mask",
+	FieldTagMaster_unused:              "OF__master_unused",
+	FieldTagMasterPart:                 "OF__masterPart",
+	FieldTagMate:                       "OF__mate",
+	FieldTagMaxPaneSize:                "OF__maxPaneSize",
+	FieldTagMaxPanelSize:               "OF__maxPanelSize",
+	FieldTagMclFlags:                   "OF__mclFlags",
+	FieldTagMenuInstanceUsed:           "OF__menuInstanceUsed",
+	FieldTagMethCode:                   "OF__methCode",
+	FieldTagMethName:                   "OF__methName",
+	FieldTagMinPaneSize:                "OF__minPaneSize",
+	FieldTagMinPanelSize:               "OF__minPanelSize",
+	FieldTagNChunks:                    "OF__nChunks",
+	FieldTagNConnections:               "OF__nConnections",
+	FieldTagNDims:                      "OF__nDims",
+	FieldTagNInputs:                    "OF__nInputs",
+	FieldTagNLabels:                    "OF__nLabels",
+	FieldTagNMajDivs:                   "OF__nMajDivs",
+	FieldTagNRC:                        "OF__nRC",
+	FieldTagNVisItems:                  "OF__nVisItems",
+	FieldTagNmxFiller:                  "OF__nmxFiller",
+	FieldTagNodeInfo:                   "OF__nodeInfo",
+	FieldTagNodeList:                   "OF__nodeList",
+	FieldTagNodeName:                   "OF__nodeName",
+	FieldTagNumFrozenCols:              "OF__numFrozenCols",
+	FieldTagNumFrozenRows:              "OF__numFrozenRows",
+	FieldTagNumRows:                    "OF__numRows",
+	FieldTagNumSubVIs:                  "OF__numSubVIs",
+	FieldTagOMId:                       "OF__oMId",
+	FieldTagORC:                        "OF__oRC",
+	FieldTagObjFlags:                   "OF__objFlags",
+	FieldTagOmidDSOffset:               "OF__omidDSOffset",
+	FieldTagOmidTDOffset:               "OF__omidTDOffset",
+	FieldTagOmidTypeDesc:               "OF__omidTypeDesc",
+	FieldTagOrderList:                  "OF__orderList",
+	FieldTagOrigin:                     "OF__origin",
+	FieldTagOtherSide:                  "OF__otherSide",
+	FieldTagOuterR:                     "OF__outerR",
+	FieldTagOutputDCO:                  "OF__outputDCO",
+	FieldTagOutputNode:                 "OF__outputNode",
+	FieldTagOwnerSignal:                "OF__ownerSignal",
+	FieldTagPBounds:                    "OF__pBounds",
+	FieldTagPMap:                       "OF__pMap",
+	FieldTagPMapOfst:                   "OF__pMapOfst",
+	FieldTagPageList:                   "OF__pageList",
+	FieldTagPaneFlags:                  "OF__paneFlags",
+	FieldTagPaneHierarchy:              "OF__paneHierarchy",
+	FieldTagParamIdx:                   "OF__paramIdx",
+	FieldTagParamTableOffset:           "OF__paramTableOffset",
+	FieldTagParmIndex:                  "OF__parmIndex",
+	FieldTagPartID:                     "OF__partID",
+	FieldTagPartOrder:                  "OF__partOrder",
+	FieldTagPartsList:                  "OF__partsList",
+	FieldTagPattern:                    "OF__pattern",
+	FieldTagPctTransparent:             "OF__pctTransparent",
+	FieldTagPermDCOList:                "OF__permDCOList",
+	FieldTagPermutation:                "OF__permutation",
+	FieldTagPixmap:                     "OF__pixmap",
+	FieldTagPos:                        "OF__pos",
+	FieldTagPreferredInstIndex:         "OF__preferredInstIndex",
+	FieldTagPrimIndex:                  "OF__primIndex",
+	FieldTagPrimResID:                  "OF__primResID",
+	FieldTagPriv:                       "OF__priv",
+	FieldTagPrivDataList:               "OF__privDataList",
+	FieldTagPropList:                   "OF__propList",
+	FieldTagRefList:                    "OF__refList",
+	FieldTagResetJumpLabel:             "OF__resetJumpLabel",
+	FieldTagRevisionInfoCreator:        "OF__revisionInfoCreator",
+	FieldTagRevisionInfoTlkitID:        "OF__revisionInfoTlkitID",
+	FieldTagRevisionInfoTlkitVersion:   "OF__revisionInfoTlkitVersion",
+	FieldTagRingDsOffset:               "OF__ringDsOffset",
+	FieldTagRingTdOffset:               "OF__ringTdOffset",
+	FieldTagRoot:                       "OF__root",
+	FieldTagRowHeight:                  "OF__rowHeight",
+	FieldTagRsrDCO:                     "OF__rsrDCO",
+	FieldTagRsrcID:                     "OF__rsrcID",
+	FieldTagRtPopupData:                "OF__rtPopupData",
+	FieldTagRtPopupString:              "OF__rtPopupString",
+	FieldTagRtPopupVersion:             "OF__rtPopupVersion",
+	FieldTagRtdsoff:                    "OF__rtdsoff",
+	FieldTagSavedState:                 "OF__savedState",
+	FieldTagScreenRes:                  "OF__screenRes",
+	FieldTagScriptName:                 "OF__scriptName",
+	FieldTagSdllName:                   "OF__sdllName",
+	FieldTagSelLabData:                 "OF__selLabData",
+	FieldTagSelString:                  "OF__selString",
+	FieldTagSelectionColor:             "OF__selectionColor",
+	FieldTagSeqLocDCOList:              "OF__seqLocDCOList",
+	FieldTagSequenceList:               "OF__sequenceList",
+	FieldTagShortCount:                 "OF__shortCount",
+	FieldTagSignalIndex:                "OF__signalIndex",
+	FieldTagSignalList:                 "OF__signalList",
+	FieldTagSimDiagFlags:               "OF__simDiagFlags",
+	FieldTagSimparam:                   "OF__simparam",
+	FieldTagSimtype:                    "OF__simtype",
+	FieldTagSimulationDiag:             "OF__simulationDiag",
+	FieldTagSizeRect:                   "OF__sizeRect",
+	FieldTagSlaveList_unused:           "OF__slaveList_unused",
+	FieldTagSlocFiller:                 "OF__slocFiller",
+	FieldTagSnFiller:                   "OF__snFiller",
+	FieldTagSplitterFlags:              "OF__splitterFlags",
+	FieldTagSrDCOList:                  "OF__srDCOList",
+	FieldTagSrcDCO:                     "OF__srcDCO",
+	FieldTagStamp:                      "OF__stamp",
+	FieldTagState:                      "OF__state",
+	FieldTagStateTD:                    "OF__stateTD",
+	FieldTagStreamData:                 "OF__streamData",
+	FieldTagStrings:                    "OF__strings",
+	FieldTagStructColor:                "OF__structColor",
+	FieldTagSubPanelFlags:              "OF__subPanelFlags",
+	FieldTagSubVIGlyphBounds:           "OF__subVIGlyphBounds",
+	FieldTagSymmetry:                   "OF__symmetry",
+	FieldTagTInset:                     "OF__tInset",
+	FieldTagTabWidth:                   "OF__tabWidth",
+	FieldTagTable:                      "OF__table",
+	FieldTagTableFlags:                 "OF__tableFlags",
+	FieldTagTagDevice:                  "OF__tagDevice",
+	FieldTagTagDisplayFilter:           "OF__tagDisplayFilter",
+	FieldTagTagSubTypeClass:            "OF__tagSubTypeClass",
+	FieldTagTagType:                    "OF__tagType",
+	FieldTagTagTypeClass:               "OF__tagTypeClass",
+	FieldTagTblOffset:                  "OF__tblOffset",
+	FieldTagTdOffset:                   "OF__tdOffset",
+	FieldTagTermBMPs:                   "OF__termBMPs",
+	FieldTagTermBounds:                 "OF__termBounds",
+	FieldTagTermHotPoint:               "OF__termHotPoint",
+	FieldTagTermList:                   "OF__termList",
+	FieldTagTextDivider:                "OF__textDivider",
+	FieldTagTextRec:                    "OF__textRec",
+	FieldTagThreadInfo:                 "OF__threadInfo",
+	FieldTagTimeDataNodeDMux:           "OF__timeDataNodeDMux",
+	FieldTagTimeDataNodeMux:            "OF__timeDataNodeMux",
+	FieldTagTimeLoop:                   "OF__timeLoop",
+	FieldTagTimeOutDCO:                 "OF__timeOutDCO",
+	FieldTagTool:                       "OF__tool",
+	FieldTagTopOrLeft:                  "OF__topOrLeft",
+	FieldTagTreeFlags:                  "OF__treeFlags",
+	FieldTagTsH:                        "OF__tsH",
+	FieldTagTunnelList:                 "OF__tunnelList",
+	FieldTagType:                       "OF__type",
+	FieldTagTypeCode:                   "OF__typeCode",
+	FieldTagTypeDesc:                   "OF__typeDesc",
+	FieldTagUserDiagram:                "OF__userDiagram",
+	FieldTagVTblPtr:                    "OF__vTblPtr",
+	FieldTagVarTypeDesc:                "OF__varTypeDesc",
+	FieldTagVblName:                    "OF__vblName",
+	FieldTagVersion:                    "OF__version",
+	FieldTagViPath:                     "OF__viPath",
+	FieldTagViState:                    "OF__viState",
+	FieldTagVisClust:                   "OF__visClust",
+	FieldTagWidth:                      "OF__width",
+	FieldTagWinFlags:                   "OF__winFlags",
+	FieldTagWireGlyphID:                "OF__wireGlyphID",
+	FieldTagWireID:                     "OF__wireID",
+	FieldTagWireTable:                  "OF__wireTable",
+	FieldTagWizData:                    "OF__wizData",
+	FieldTagWizDataH:                   "OF__wizDataH",
+	FieldTagWizDataID:                  "OF__wizDataID",
+	FieldTagWizID:                      "OF__wizID",
+	FieldTagWizVersion:                 "OF__wizVersion",
+	FieldTagXflags:                     "OF__xflags",
+	FieldTagZPlaneList:                 "OF__zPlaneList",
+	FieldTagZPlaneListList:             "OF__zPlaneListList",
+	FieldTagZoom:                       "OF__zoom",
+	FieldTagSrcDCO1:                    "OF__srcDCO1",
+	FieldTagSrcDCO2:                    "OF__srcDCO2",
+	FieldTagSrcDCO3:                    "OF__srcDCO3",
+	FieldTagSrcDCO4:                    "OF__srcDCO4",
+	FieldTagCRectAbove:                 "OF__cRectAbove",
+	FieldTagCRectBelow:                 "OF__cRectBelow",
+	FieldTagVariantIndex:               "OF__variantIndex",
+	FieldTagTermListLength:             "OF__termListLength",
+	FieldTagRefListLength:              "OF__refListLength",
+	FieldTagHGrowNodeListLength:        "OF__hGrowNodeListLength",
+	FieldTagDataTypeDesc:               "OF__dataTypeDesc",
+	FieldTagHair:                       "OF__hair",
+	FieldTagDisplayName:                "OF__displayName",
+	FieldTagSelLabFlags:                "OF__selLabFlags",
+	FieldTagLastSelRow:                 "OF__lastSelRow",
+	FieldTagLastSelCol:                 "OF__lastSelCol",
+	FieldTagScrollPosV:                 "OF__scrollPosV",
+	FieldTagScrollPosH:                 "OF__scrollPosH",
+	FieldTagTotalBounds:                "OF__totalBounds",
+	FieldTagSrcRect:                    "OF__srcRect",
+	FieldTagLabelPosRow:                "OF__labelPosRow",
+	FieldTagLabelPosCol:                "OF__labelPosCol",
+	FieldTagSimparamOut:                "OF__simparamOut",
+	FieldTagInnerMate:                  "OF__innerMate",
+	FieldTagOuterMate:                  "OF__outerMate",
+	FieldTagFlatSeq:                    "OF__flatSeq",
+	FieldTagTimeSeq:                    "OF__timeSeq",
+	FieldTagSlaveMods:                  "OF__slaveMods",
+	FieldTagSlaveOwner:                 "OF__slaveOwner",
+	FieldTagSimConfigNode:              "OF__simConfigNode",
+	FieldTagSimOutputNode:              "OF__simOutputNode",
+	FieldTagGlyphs:                     "OF__glyphs",
+	FieldTagPUseStoredSize:             "OF__pUseStoredSize",
+	FieldTagPUseStoredPos:              "OF__pUseStoredPos",
+	FieldTagPRuntimeType:               "OF__pRuntimeType",
+	FieldTagPRuntimeTop:                "OF__pRuntimeTop",
+	FieldTagPRuntimeLeft:               "OF__pRuntimeLeft",
+	FieldTagPRuntimeWidth:              "OF__pRuntimeWidth",
+	FieldTagPRuntimeHeight:             "OF__pRuntimeHeight",
+	FieldTagPRuntimeMonitor:            "OF__pRuntimeMonitor",
+	FieldTagLibVersion:                 "OF__libVersion",
+	FieldTagRatio:                      "OF__ratio",
+	FieldTagAnnexDDOFlag:               "OF__annexDDOFlag",
+	FieldTagXCtlState:                  "OF__xCtlState",
+	FieldTagWizList:                    "OF__wizList",
+	FieldTagLockedObjectList:           "OF__lockedObjectList",
+	FieldTagLockedSignalList:           "OF__lockedSignalList",
+	FieldTagMasterStateEnum:            "OF__masterStateEnum",
+	FieldTag_Quit_StateEnum:            "OF___Quit_StateEnum",
+	FieldTagStopCodeEnum:               "OF__stopCodeEnum",
+	FieldTagStateLoop:                  "OF__stateLoop",
+	FieldTagStateCase:                  "OF__stateCase",
+	FieldTagStateCaseOutputTunnel:      "OF__stateCaseOutputTunnel",
+	FieldTagStateList:                  "OF__stateList",
+	FieldTagIsSubVICall:                "OF__isSubVICall",
+	FieldTagName:                       "OF__name",
+	FieldTagTransitionEnum:             "OF__transitionEnum",
+	FieldTagTransitionCase:             "OF__transitionCase",
+	FieldTagTransCaseOutputTunnel:      "OF__transCaseOutputTunnel",
+	FieldTagTransitionList:             "OF__transitionList",
+	FieldTagStateBounds:                "OF__stateBounds",
+	FieldTagTerminal:                   "OF__terminal",
+	FieldTagStateConst:                 "OF__stateConst",
+	FieldTagExitAngle:                  "OF__exitAngle",
+	FieldTagEntranceAngle:              "OF__entranceAngle",
+	FieldTagStiffness:                  "OF__stiffness",
+	FieldTagLabelPos:                   "OF__labelPos",
+	FieldTagPinCorner:                  "OF__pinCorner",
+	FieldTagCurrentlyScripting:         "OF__currentlyScripting",
+	FieldTagTextNodeLabel:              "OF__textNodeLabel",
+	FieldTagHeapFlags:                  "OF__heapFlags",
+	FieldTagRefreshFilter:              "OF__refreshFilter",
+	FieldTagPlugInData:                 "OF__plugInData",
+	FieldTagXTunDDO:                    "OF__xTunDDO",
+	FieldTagGridFlags:                  "OF__gridFlags",
+	FieldTagHeaderFiles:                "OF__headerFiles",
+	FieldTagSceneView:                  "OF__sceneView",
+	FieldTagLastAutoScale:              "OF__lastAutoScale",
+	FieldTagAutoScaleDelay:             "OF__autoScaleDelay",
+	FieldTagReserveCB:                  "OF__reserveCB",
+	FieldTagUnreserveCB:                "OF__unreserveCB",
+	FieldTagAbortCB:                    "OF__abortCB",
+	FieldTagParamInfo:                  "OF__paramInfo",
+	FieldTagExtFuncFlags:               "OF__extFuncFlags",
+	FieldTagTMI:                        "OF__tMI",
+	FieldTagLineNumbers:                "OF__lineNumbers",
+	FieldTagFPath:                      "OF__fPath",
+	FieldTagMDate:                      "OF__mDate",
+	FieldTagErrHandle:                  "OF__errHandle",
+	FieldTagXTunnelDir:                 "OF__xTunnelDir",
+	FieldTagSCFlag:                     "OF__sCFlag",
+	FieldTagSCStNGuid:                  "OF__sCStNGuid",
+	FieldTagSCDiagSubType:              "OF__sCDiagSubType",
+	FieldTagSCDiagFlag:                 "OF__sCDiagFlag",
+	FieldTagIsLoopCaseTransition:       "OF__isLoopCaseTransition",
+	FieldTagSelectorXNode:              "OF__selectorXNode",
+	FieldTagIFeedbackLoop:              "OF__iFeedbackLoop",
+	FieldTagCellPosRow:                 "OF__cellPosRow",
+	FieldTagCellPosCol:                 "OF__cellPosCol",
+	FieldTagFont:                       "OF__font",
+	FieldTagMode:                       "OF__mode",
+	FieldTagHeight:                     "OF__height",
+	FieldTagGlyphIndex:                 "OF__glyphIndex",
+	FieldTagFlags:                      "OF__flags",
+	FieldTagAttributeList:              "OF__attributeList",
+	FieldTagQtWidget:                   "OF__qtWidget",
+	FieldTagFLoopCondTerm:              "OF__fLoopCondTerm",
+	FieldTagIsInterface:                "OF__isInterface",
+	FieldTagLoopLimitDCO:               "OF__loopLimitDCO",
+	FieldTagLoopTestDCO:                "OF__loopTestDCO",
+	FieldTagOverrideType:               "OF__overrideType",
+	FieldTagMaxWordLength:              "OF__maxWordLength",
+	FieldTagOverride:                   "OF__override",
+	FieldTagOverflow:                   "OF__overflow",
+	FieldTagQuantize:                   "OF__quantize",
+	FieldTagTunOrdList:                 "OF__tunOrdList",
+	FieldTagMultiSegPipeFlange1Size:    "OF__multiSegPipeFlange1Size",
+	FieldTagMultiSegPipeFlange2Size:    "OF__multiSegPipeFlange2Size",
+	FieldTagMultiSegPipeFlange1Depth:   "OF__multiSegPipeFlange1Depth",
+	FieldTagMultiSegPipeFlange2Depth:   "OF__multiSegPipeFlange2Depth",
+	FieldTagMultiSegPipeWidth:          "OF__multiSegPipeWidth",
+	FieldTagStaticState:                "OF__staticState",
+	FieldTagFuncName:                   "OF__funcName",
+	FieldTagMFilePath:                  "OF__mFilePath",
+	FieldTagRecursiveFunc:              "OF__tagDLLPath",
+	FieldTagTagDLLName:                 "OF__tagDLLName",
+	FieldTagPoser:                      "OF__poser",
+	FieldTagDataValRefDCO:              "OF__dataValRefDCO",
+	FieldTagWrite:                      "OF__write",
+	FieldTagShowTimestamp:              "OF__showTimestamp",
+	FieldTagName4:                      "OF__name4",
+	FieldTagPrivDataDSO:                "OF__privDataDSO",
+	FieldTagPrivDataTMI:                "OF__privDataTMI",
+	FieldTagDisabledList:               "OF__disabledList",
+	FieldTagTunnelLink:                 "OF__tunnelLink",
+	FieldTagActiveBus:                  "OF__activeBus",
+	FieldTagTerminal_ID:                "OF__terminal_ID",
+	FieldTagImplementingNode:           "OF__implementingNode",
+	FieldTagFboxlineList:               "OF__fboxlineList",
+	FieldTagCompressedWireTable:        "OF__compressedWireTable",
 	FieldTagSharedCloneAllocationFlags: "OF__sharedCloneAllocationFlags",
-	FieldTagInitOrderIndex: "OF__initOrderIndex",
-	FieldTagRingSparseValues: "OF__ringSparseValues",
-	FieldTagRingDisabledIndicies: "OF__ringDisabledIndicies",
-	FieldTagScrollbarMin: "OF__scrollbarMin",
-	FieldTagScrollbarMax: "OF__scrollbarMax",
-	FieldTagScrollbarInc: "OF__scrollbarInc",
-	FieldTagScrollbarVis: "OF__scrollbarVis",
-	FieldTagBrowseOptions: "OF__browseOptions",
+	FieldTagInitOrderIndex:             "OF__initOrderIndex",
+	FieldTagRingSparseValues:           "OF__ringSparseValues",
+	FieldTagRingDisabledIndicies:       "OF__ringDisabledIndicies",
+	FieldTagScrollbarMin:               "OF__scrollbarMin",
+	FieldTagScrollbarMax:               "OF__scrollbarMax",
+	FieldTagScrollbarInc:               "OF__scrollbarInc",
+	FieldTagScrollbarVis:               "OF__scrollbarVis",
+	FieldTagBrowseOptions:              "OF__browseOptions",
 	FieldTagDecomposeArraySplitNodeSplitDimension: "OF__decomposeArraySplitNodeSplitDimension",
-	FieldTagRowHeaders: "OF__rowHeaders",
-	FieldTagColumnHeaders: "OF__columnHeaders",
-	FieldTagActiveCell: "OF__activeCell",
-	FieldTagScaleDMin: "OF__scaleDMin",
-	FieldTagScaleDMax: "OF__scaleDMax",
-	FieldTagScaleDStart: "OF__scaleDStart",
-	FieldTagScaleDIncr: "OF__scaleDIncr",
-	FieldTagScaleDMinInc: "OF__scaleDMinInc",
-	FieldTagScaleDMultiplier: "OF__scaleDMultiplier",
-	FieldTagScaleDOffset: "OF__scaleDOffset",
-	FieldTagScaleRRef: "OF__scaleRRef",
-	FieldTagScaleRngf: "OF__scaleRngf",
-	FieldTagScaleCenter: "OF__scaleCenter",
-	FieldTagScaleRadius: "OF__scaleRadius",
-	FieldTagScaleRMin: "OF__scaleRMin",
-	FieldTagScaleRMax: "OF__scaleRMax",
-	FieldTagScaleFunIdx: "OF__scaleFunIdx",
-	FieldTagScaleLoColor: "OF__scaleLoColor",
-	FieldTagScaleHiColor: "OF__scaleHiColor",
-	FieldTagScaleColorData: "OF__scaleColorData",
-	FieldTagMinDataSel: "OF__minDataSel",
-	FieldTagMaxDataSel: "OF__maxDataSel",
-	FieldTagPivotDataSel: "OF__pivotDataSel",
-	FieldTagAbsTime_min: "OF__absTime_min",
-	FieldTagAbsTime_max: "OF__absTime_max",
-	FieldTagAbsTime_inc: "OF__absTime_inc",
-	FieldTagBaseListboxItemStrings: "OF__baseListboxItemStrings",
-	FieldTagBaseListboxDoubleClickedRow: "OF__baseListboxDoubleClickedRow",
-	FieldTagBaseListboxClickedColumnHeader: "OF__baseListboxClickedColumnHeader",
-	FieldTagBaseListboxDragRow: "OF__baseListboxDragRow",
-	FieldTagListboxClickedCell: "OF__listboxClickedCell",
-	FieldTagListboxDisabledItems: "OF__listboxDisabledItems",
-	FieldTagListboxGlyphColumns: "OF__listboxGlyphColumns",
-	FieldTagTreeNodeArray: "OF__treeNodeArray",
-	FieldTagTreeDragIntoRow: "OF__treeDragIntoRow",
-	FieldTagArrayIndices: "OF__arrayIndices",
-	FieldTagArraySelectionStart: "OF__arraySelectionStart",
-	FieldTagArraySelectionEnd: "OF__arraySelectionEnd",
-	FieldTagComboBoxIndex: "OF__comboBoxIndex",
-	FieldTagComboBoxValues: "OF__comboBoxValues",
-	FieldTagTabArrayFirstTab: "OF__tabArrayFirstTab",
-	FieldTagTabArrayFg: "OF__tabArrayFg",
-	FieldTagTabArrayBg: "OF__tabArrayBg",
-	FieldTagTabArrayTabInfoArray: "OF__tabArrayTabInfoArray",
-	FieldTagTabControlPageSelValue: "OF__tabControlPageSelValue",
-	FieldTagTabControlPageInfoArray: "OF__tabControlPageInfoArray",
-	FieldTagStdNumMin: "OF__StdNumMin",
-	FieldTagStdNumMax: "OF__StdNumMax",
-	FieldTagStdNumInc: "OF__StdNumInc",
-	FieldTagCBRExecAlias: "OF__CBRExecAlias",
-	FieldTagCBRExecResolved: "OF__CBRExecResolved",
-	FieldTagCBRRefPathAlias: "OF__CBRRefPathAlias",
-	FieldTagCBRRefPath: "OF__CBRRefPath",
-	FieldTagCBRCfgMode: "OF__CBRCfgMode",
-	FieldTagCommentSelInfoArray: "OF__commentSelInfoArray",
-	FieldTagCommentSelLabData: "OF__commentSelLabData",
-	FieldTagGVNGrowTerms: "OF__GVNGrowTerms",
-	FieldTagGVNMaxGrowTerms: "OF__GVNMaxGrowTerms",
-	FieldTagGVMinGVWidth: "OF__GVMinGVWidth",
-	FieldTagGVHoodTermWidth: "OF__GVHoodTermWidth",
-	FieldTagGVGrowTermsInfo: "OF__GVGrowTermsInfo",
-	FieldTagPlugInDLLName: "OF__PlugInDLLName",
-	FieldTagPlugInLoadProcName: "OF__PlugInLoadProcName",
-	FieldTagPropItemName: "OF__PropItemName",
-	FieldTagPropItemCode: "OF__PropItemCode",
-	FieldTagActiveXItemDataSize: "OF__ActiveXItemDataSize",
-	FieldTagActiveXItemObjMgrFlags: "OF__ActiveXItemObjMgrFlags",
-	FieldTagActiveXItemOrigVarType: "OF__ActiveXItemOrigVarType",
-	FieldTagActiveXItemOrigIndex: "OF__ActiveXItemOrigIndex",
-	FieldTagDotNetItemDataSize: "OF__DotNetItemDataSize",
-	FieldTagDotNetItemObjMgrFlags: "OF__DotNetItemObjMgrFlags",
-	FieldTagDotNetItemDotNetFlags: "OF__DotNetItemDotNetFlags",
-	FieldTagDotNetItemType: "OF__DotNetItemType",
-	FieldTagSharedVariableCustomRule: "OF__SharedVariableCustomRule",
-	FieldTagGraphMPlot: "OF__GraphMPlot",
-	FieldTagGraphActivePlot: "OF__GraphActivePlot",
-	FieldTagGraphActiveCursor: "OF__GraphActiveCursor",
-	FieldTagGraphCursors: "OF__GraphCursors",
-	FieldTagGraphFlags: "OF__GraphFlags",
-	FieldTagGraphTreeData: "OF__GraphTreeData",
-	FieldTagGraphPlotImages: "OF__GraphPlotImages",
-	FieldTagGraphAnnotations: "OF__GraphAnnotations",
-	FieldTagGraphActivePort: "OF__GraphActivePort",
-	FieldTagGraphCursorButtons: "OF__GraphCursorButtons",
-	FieldTagGraphCursorLegendData: "OF__GraphCursorLegendData",
-	FieldTagGraphPlotLegendData: "OF__GraphPlotLegendData",
-	FieldTagGraphMinPlotNum: "OF__GraphMinPlotNum",
-	FieldTagGraphBusOrg: "OF__GraphBusOrg",
-	FieldTagGraphScalePalette: "OF__GraphScalePalette",
-	FieldTagGraphScaleData: "OF__GraphScaleData",
-	FieldTagIntensityGraphCT: "OF__IntensityGraphCT",
-	FieldTagIntensityGraphBMP: "OF__IntensityGraphBMP",
-	FieldTagIntensityGraphBounds: "OF__IntensityGraphBounds",
-	FieldTagSimDiagFeedThroughData: "OF__SimDiagFeedThroughData",
-	FieldTagSimDiagSimNodeMapData: "OF__SimDiagSimNodeMapData",
-	FieldTagSimDiagCompNodeMapData: "OF__SimDiagCompNodeMapData",
-	FieldTagSimDiagSignalMapData: "OF__SimDiagSignalMapData",
-	FieldTagSimDiagAdditionalData: "OF__SimDiagAdditionalData",
-	FieldTagSelectDefaultCase: "OF__SelectDefaultCase",
-	FieldTagSelectNRightType: "OF__SelectNRightType",
-	FieldTagSelectRangeArray32: "OF__SelectRangeArray32",
-	FieldTagSelectRangeArray64: "OF__SelectRangeArray64",
-	FieldTagSelectStringArray: "OF__SelectStringArray",
-	FieldTagEventNodeEvents: "OF__EventNodeEvents",
-	FieldTagDefaultData: "OF__DefaultData",
-	FieldTagParForWorkers: "OF__ParForWorkers",
-	FieldTagParForIndexDistribution: "OF__ParForIndexDistribution",
-	FieldTagStateData: "OF__StateData",
-	FieldTagMinButSize: "OF__MinButSize",
-	FieldTagPossibleMSNDCOTypes: "OF__possibleMSNDCOTypes",
-	FieldTagFeedbackNodeDelay: "OF__feedbackNodeDelay",
-	FieldTagEnglishName: "OF__englishName",
-	FieldTagSharedVariableDynamicResID: "OF__SharedVariableDynamicResID",
-	FieldTagParForNumStaticWorkers: "OF__ParForNumStaticWorkers",
-	FieldTagOMRCFlags: "OF__OMRCFlags",
-	FieldTagSimDiagSimParamData: "OF__SimDiagSimParamData",
-	FieldTagSelectSelLabFlags: "OF__SelectSelLabFlags",
-	FieldTagSelectSelLabData: "OF__SelectSelLabData",
-	FieldTagCommentSelLabFlags: "OF__CommentSelLabFlags",
-	FieldTagCommentSelLabData2: "OF__CommentSelLabData",
-	FieldTagUDClassItemDataSize: "OF__UDClassItemDataSize",
-	FieldTagUDClassItemPropName: "OF__UDClassItemPropName",
-	FieldTagConstValue: "OF__ConstValue",
-	FieldTagEventNodeOccurrence: "OF__EventNodeOccurrence",
-	FieldTagEventSelLabFlags: "OF__EventSelLabFlags",
-	FieldTagEventSelLabData: "OF__EventSelLabData",
-	FieldTagChunkSize: "OF__ChunkSize",
-	FieldTagDebuggingEnabled: "OF__DebuggingEnabled",
-	FieldTagSlaveFBInputNode: "OF__SlaveFBInputNode",
-	FieldTagHiddenFBNode: "OF__HiddenFBNode",
-	FieldTagInnerChunkSize: "OF__InnerChunkSize",
-	FieldTagSavedSize: "OF__savedSize",
-	FieldTagNodeFlags2: "OF__nodeFlags2",
-	FieldTagOutputInstanceNumberFromP: "OF__OutputInstanceNumberFromP",
-	FieldTagCBRSaveStyle: "OF__CBRSaveStyle",
-	FieldTagJoinCBRTimeout: "OF__JoinCBRTimeout",
-	FieldTagOffScreenSceneView: "OF__OffScreenSceneView",
-	FieldTagOffScreenGLContext: "OF__OffScreenGLContext",
-	FieldTagScaleRMin32: "OF__scaleRMin32",
-	FieldTagScaleRMax32: "OF__scaleRMax32",
-	FieldTagTunnelType: "OF__TunnelType",
-	FieldTagDefaultTunnelType: "OF__DefaultTunnelType",
-	FieldTagFpgaImplementation: "OF__FpgaImplementation",
-	FieldTagIsConditional: "OF__IsConditional",
-	FieldTagConditionDCOList: "OF__ConditionDCOList",
-	FieldTagLpTunConditionDCO: "OF__LpTunConditionDCO",
-	FieldTagMSNFlags: "OF__MSNFlags",
-	FieldTagArrayOfStringsIsCellArray: "OF__arrayOfStringsIsCellArray",
-	FieldTagMouseWheelSupport: "OF__MouseWheelSupport",
-	FieldTagGraphMPlot2013: "OF__GraphMPlot2013",
-	FieldTagGraphBusOrg2013: "OF__GraphBusOrg2013",
-	FieldTagAttachedObject: "OF__attachedObject",
-	FieldTagAttachment: "OF__attachment",
-	FieldTagScaleAutoscalePadding: "OF__ScaleAutoscalePadding",
-	FieldTagThralledTunnelUID: "OF__ThralledTunnelUID",
-	FieldTagGraphCursors2014: "OF__GraphCursors2014",
-	FieldTagGraphAnnotations2014: "OF__GraphAnnotations2014",
-	FieldTagKSLHDefaultValueMatchesCtlVI: "OF__kSLHDefaultValueMatchesCtlVI",
-	FieldTagKSLHFieldDefaultValueMatchesCtlVI: "OF__kSLHFieldDefaultValueMatchesCtlVI",
-	FieldTagFpgaEnableBoundsMux: "OF__FpgaEnableBoundsMux",
+	FieldTagRowHeaders:                            "OF__rowHeaders",
+	FieldTagColumnHeaders:                         "OF__columnHeaders",
+	FieldTagActiveCell:                            "OF__activeCell",
+	FieldTagScaleDMin:                             "OF__scaleDMin",
+	FieldTagScaleDMax:                             "OF__scaleDMax",
+	FieldTagScaleDStart:                           "OF__scaleDStart",
+	FieldTagScaleDIncr:                            "OF__scaleDIncr",
+	FieldTagScaleDMinInc:                          "OF__scaleDMinInc",
+	FieldTagScaleDMultiplier:                      "OF__scaleDMultiplier",
+	FieldTagScaleDOffset:                          "OF__scaleDOffset",
+	FieldTagScaleRRef:                             "OF__scaleRRef",
+	FieldTagScaleRngf:                             "OF__scaleRngf",
+	FieldTagScaleCenter:                           "OF__scaleCenter",
+	FieldTagScaleRadius:                           "OF__scaleRadius",
+	FieldTagScaleRMin:                             "OF__scaleRMin",
+	FieldTagScaleRMax:                             "OF__scaleRMax",
+	FieldTagScaleFunIdx:                           "OF__scaleFunIdx",
+	FieldTagScaleLoColor:                          "OF__scaleLoColor",
+	FieldTagScaleHiColor:                          "OF__scaleHiColor",
+	FieldTagScaleColorData:                        "OF__scaleColorData",
+	FieldTagMinDataSel:                            "OF__minDataSel",
+	FieldTagMaxDataSel:                            "OF__maxDataSel",
+	FieldTagPivotDataSel:                          "OF__pivotDataSel",
+	FieldTagAbsTime_min:                           "OF__absTime_min",
+	FieldTagAbsTime_max:                           "OF__absTime_max",
+	FieldTagAbsTime_inc:                           "OF__absTime_inc",
+	FieldTagBaseListboxItemStrings:                "OF__baseListboxItemStrings",
+	FieldTagBaseListboxDoubleClickedRow:           "OF__baseListboxDoubleClickedRow",
+	FieldTagBaseListboxClickedColumnHeader:        "OF__baseListboxClickedColumnHeader",
+	FieldTagBaseListboxDragRow:                    "OF__baseListboxDragRow",
+	FieldTagListboxClickedCell:                    "OF__listboxClickedCell",
+	FieldTagListboxDisabledItems:                  "OF__listboxDisabledItems",
+	FieldTagListboxGlyphColumns:                   "OF__listboxGlyphColumns",
+	FieldTagTreeNodeArray:                         "OF__treeNodeArray",
+	FieldTagTreeDragIntoRow:                       "OF__treeDragIntoRow",
+	FieldTagArrayIndices:                          "OF__arrayIndices",
+	FieldTagArraySelectionStart:                   "OF__arraySelectionStart",
+	FieldTagArraySelectionEnd:                     "OF__arraySelectionEnd",
+	FieldTagComboBoxIndex:                         "OF__comboBoxIndex",
+	FieldTagComboBoxValues:                        "OF__comboBoxValues",
+	FieldTagTabArrayFirstTab:                      "OF__tabArrayFirstTab",
+	FieldTagTabArrayFg:                            "OF__tabArrayFg",
+	FieldTagTabArrayBg:                            "OF__tabArrayBg",
+	FieldTagTabArrayTabInfoArray:                  "OF__tabArrayTabInfoArray",
+	FieldTagTabControlPageSelValue:                "OF__tabControlPageSelValue",
+	FieldTagTabControlPageInfoArray:               "OF__tabControlPageInfoArray",
+	FieldTagStdNumMin:                             "OF__StdNumMin",
+	FieldTagStdNumMax:                             "OF__StdNumMax",
+	FieldTagStdNumInc:                             "OF__StdNumInc",
+	FieldTagCBRExecAlias:                          "OF__CBRExecAlias",
+	FieldTagCBRExecResolved:                       "OF__CBRExecResolved",
+	FieldTagCBRRefPathAlias:                       "OF__CBRRefPathAlias",
+	FieldTagCBRRefPath:                            "OF__CBRRefPath",
+	FieldTagCBRCfgMode:                            "OF__CBRCfgMode",
+	FieldTagCommentSelInfoArray:                   "OF__commentSelInfoArray",
+	FieldTagCommentSelLabData:                     "OF__commentSelLabData",
+	FieldTagGVNGrowTerms:                          "OF__GVNGrowTerms",
+	FieldTagGVNMaxGrowTerms:                       "OF__GVNMaxGrowTerms",
+	FieldTagGVMinGVWidth:                          "OF__GVMinGVWidth",
+	FieldTagGVHoodTermWidth:                       "OF__GVHoodTermWidth",
+	FieldTagGVGrowTermsInfo:                       "OF__GVGrowTermsInfo",
+	FieldTagPlugInDLLName:                         "OF__PlugInDLLName",
+	FieldTagPlugInLoadProcName:                    "OF__PlugInLoadProcName",
+	FieldTagPropItemName:                          "OF__PropItemName",
+	FieldTagPropItemCode:                          "OF__PropItemCode",
+	FieldTagActiveXItemDataSize:                   "OF__ActiveXItemDataSize",
+	FieldTagActiveXItemObjMgrFlags:                "OF__ActiveXItemObjMgrFlags",
+	FieldTagActiveXItemOrigVarType:                "OF__ActiveXItemOrigVarType",
+	FieldTagActiveXItemOrigIndex:                  "OF__ActiveXItemOrigIndex",
+	FieldTagDotNetItemDataSize:                    "OF__DotNetItemDataSize",
+	FieldTagDotNetItemObjMgrFlags:                 "OF__DotNetItemObjMgrFlags",
+	FieldTagDotNetItemDotNetFlags:                 "OF__DotNetItemDotNetFlags",
+	FieldTagDotNetItemType:                        "OF__DotNetItemType",
+	FieldTagSharedVariableCustomRule:              "OF__SharedVariableCustomRule",
+	FieldTagGraphMPlot:                            "OF__GraphMPlot",
+	FieldTagGraphActivePlot:                       "OF__GraphActivePlot",
+	FieldTagGraphActiveCursor:                     "OF__GraphActiveCursor",
+	FieldTagGraphCursors:                          "OF__GraphCursors",
+	FieldTagGraphFlags:                            "OF__GraphFlags",
+	FieldTagGraphTreeData:                         "OF__GraphTreeData",
+	FieldTagGraphPlotImages:                       "OF__GraphPlotImages",
+	FieldTagGraphAnnotations:                      "OF__GraphAnnotations",
+	FieldTagGraphActivePort:                       "OF__GraphActivePort",
+	FieldTagGraphCursorButtons:                    "OF__GraphCursorButtons",
+	FieldTagGraphCursorLegendData:                 "OF__GraphCursorLegendData",
+	FieldTagGraphPlotLegendData:                   "OF__GraphPlotLegendData",
+	FieldTagGraphMinPlotNum:                       "OF__GraphMinPlotNum",
+	FieldTagGraphBusOrg:                           "OF__GraphBusOrg",
+	FieldTagGraphScalePalette:                     "OF__GraphScalePalette",
+	FieldTagGraphScaleData:                        "OF__GraphScaleData",
+	FieldTagIntensityGraphCT:                      "OF__IntensityGraphCT",
+	FieldTagIntensityGraphBMP:                     "OF__IntensityGraphBMP",
+	FieldTagIntensityGraphBounds:                  "OF__IntensityGraphBounds",
+	FieldTagSimDiagFeedThroughData:                "OF__SimDiagFeedThroughData",
+	FieldTagSimDiagSimNodeMapData:                 "OF__SimDiagSimNodeMapData",
+	FieldTagSimDiagCompNodeMapData:                "OF__SimDiagCompNodeMapData",
+	FieldTagSimDiagSignalMapData:                  "OF__SimDiagSignalMapData",
+	FieldTagSimDiagAdditionalData:                 "OF__SimDiagAdditionalData",
+	FieldTagSelectDefaultCase:                     "OF__SelectDefaultCase",
+	FieldTagSelectNRightType:                      "OF__SelectNRightType",
+	FieldTagSelectRangeArray32:                    "OF__SelectRangeArray32",
+	FieldTagSelectRangeArray64:                    "OF__SelectRangeArray64",
+	FieldTagSelectStringArray:                     "OF__SelectStringArray",
+	FieldTagEventNodeEvents:                       "OF__EventNodeEvents",
+	FieldTagDefaultData:                           "OF__DefaultData",
+	FieldTagParForWorkers:                         "OF__ParForWorkers",
+	FieldTagParForIndexDistribution:               "OF__ParForIndexDistribution",
+	FieldTagStateData:                             "OF__StateData",
+	FieldTagMinButSize:                            "OF__MinButSize",
+	FieldTagPossibleMSNDCOTypes:                   "OF__possibleMSNDCOTypes",
+	FieldTagFeedbackNodeDelay:                     "OF__feedbackNodeDelay",
+	FieldTagEnglishName:                           "OF__englishName",
+	FieldTagSharedVariableDynamicResID:            "OF__SharedVariableDynamicResID",
+	FieldTagParForNumStaticWorkers:                "OF__ParForNumStaticWorkers",
+	FieldTagOMRCFlags:                             "OF__OMRCFlags",
+	FieldTagSimDiagSimParamData:                   "OF__SimDiagSimParamData",
+	FieldTagSelectSelLabFlags:                     "OF__SelectSelLabFlags",
+	FieldTagSelectSelLabData:                      "OF__SelectSelLabData",
+	FieldTagCommentSelLabFlags:                    "OF__CommentSelLabFlags",
+	FieldTagCommentSelLabData2:                    "OF__CommentSelLabData",
+	FieldTagUDClassItemDataSize:                   "OF__UDClassItemDataSize",
+	FieldTagUDClassItemPropName:                   "OF__UDClassItemPropName",
+	FieldTagConstValue:                            "OF__ConstValue",
+	FieldTagEventNodeOccurrence:                   "OF__EventNodeOccurrence",
+	FieldTagEventSelLabFlags:                      "OF__EventSelLabFlags",
+	FieldTagEventSelLabData:                       "OF__EventSelLabData",
+	FieldTagChunkSize:                             "OF__ChunkSize",
+	FieldTagDebuggingEnabled:                      "OF__DebuggingEnabled",
+	FieldTagSlaveFBInputNode:                      "OF__SlaveFBInputNode",
+	FieldTagHiddenFBNode:                          "OF__HiddenFBNode",
+	FieldTagInnerChunkSize:                        "OF__InnerChunkSize",
+	FieldTagSavedSize:                             "OF__savedSize",
+	FieldTagNodeFlags2:                            "OF__nodeFlags2",
+	FieldTagOutputInstanceNumberFromP:             "OF__OutputInstanceNumberFromP",
+	FieldTagCBRSaveStyle:                          "OF__CBRSaveStyle",
+	FieldTagJoinCBRTimeout:                        "OF__JoinCBRTimeout",
+	FieldTagOffScreenSceneView:                    "OF__OffScreenSceneView",
+	FieldTagOffScreenGLContext:                    "OF__OffScreenGLContext",
+	FieldTagScaleRMin32:                           "OF__scaleRMin32",
+	FieldTagScaleRMax32:                           "OF__scaleRMax32",
+	FieldTagTunnelType:                            "OF__TunnelType",
+	FieldTagDefaultTunnelType:                     "OF__DefaultTunnelType",
+	FieldTagFpgaImplementation:                    "OF__FpgaImplementation",
+	FieldTagIsConditional:                         "OF__IsConditional",
+	FieldTagConditionDCOList:                      "OF__ConditionDCOList",
+	FieldTagLpTunConditionDCO:                     "OF__LpTunConditionDCO",
+	FieldTagMSNFlags:                              "OF__MSNFlags",
+	FieldTagArrayOfStringsIsCellArray:             "OF__arrayOfStringsIsCellArray",
+	FieldTagMouseWheelSupport:                     "OF__MouseWheelSupport",
+	FieldTagGraphMPlot2013:                        "OF__GraphMPlot2013",
+	FieldTagGraphBusOrg2013:                       "OF__GraphBusOrg2013",
+	FieldTagAttachedObject:                        "OF__attachedObject",
+	FieldTagAttachment:                            "OF__attachment",
+	FieldTagScaleAutoscalePadding:                 "OF__ScaleAutoscalePadding",
+	FieldTagThralledTunnelUID:                     "OF__ThralledTunnelUID",
+	FieldTagGraphCursors2014:                      "OF__GraphCursors2014",
+	FieldTagGraphAnnotations2014:                  "OF__GraphAnnotations2014",
+	FieldTagKSLHDefaultValueMatchesCtlVI:          "OF__kSLHDefaultValueMatchesCtlVI",
+	FieldTagKSLHFieldDefaultValueMatchesCtlVI:     "OF__kSLHFieldDefaultValueMatchesCtlVI",
+	FieldTagFpgaEnableBoundsMux:                   "OF__FpgaEnableBoundsMux",
 }
 
 // String returns the pylabview name when known, otherwise a `FieldTag(N)` fallback.
@@ -1377,755 +1377,755 @@ type ClassTag int
 
 // Members of ClassTag.
 const (
-	ClassTagFontRun ClassTag = 0 // SL__fontRun
-	ClassTagTextHair ClassTag = 1 // SL__textHair
-	ClassTagPrNodeList ClassTag = 3 // SL__prNodeList
-	ClassTagPrFrameList ClassTag = 4 // SL__prFrameList
-	ClassTagPrVIPartList ClassTag = 5 // SL__prVIPartList
-	ClassTagGeneric ClassTag = 6 // SL__generic
-	ClassTagList ClassTag = 7 // SL__list
-	ClassTagDataObj ClassTag = 8 // SL__dataObj
-	ClassTagCosm ClassTag = 9 // SL__cosm
-	ClassTagLabel ClassTag = 10 // SL__label
-	ClassTagMultiCosm ClassTag = 11 // SL__multiCosm
-	ClassTagBigMultiCosm ClassTag = 12 // SL__bigMultiCosm
-	ClassTagMultiLabel ClassTag = 13 // SL__multiLabel
-	ClassTagBigMultiLabel ClassTag = 14 // SL__bigMultiLabel
-	ClassTagDCO ClassTag = 17 // SL__dCO
-	ClassTagFPDCO ClassTag = 18 // SL__fPDCO
-	ClassTagBDConstDCO ClassTag = 19 // SL__bDConstDCO
-	ClassTagBDDCO ClassTag = 20 // SL__bDDCO
-	ClassTagTerm ClassTag = 21 // SL__term
-	ClassTagFPTerm ClassTag = 22 // SL__fPTerm
-	ClassTagSignal ClassTag = 23 // SL__signal
-	ClassTagWire ClassTag = 24 // SL__wire
-	ClassTagHSignal ClassTag = 25 // SL__hSignal
-	ClassTagHNode ClassTag = 26 // SL__hNode
-	ClassTagDiag ClassTag = 27 // SL__diag
-	ClassTagNode ClassTag = 28 // SL__node
-	ClassTagSRN ClassTag = 29 // SL__sRN
-	ClassTagSNode ClassTag = 30 // SL__sNode
-	ClassTagGrowableNode ClassTag = 31 // SL__growableNode
-	ClassTagForLoop ClassTag = 32 // SL__forLoop
-	ClassTagWhileLoop ClassTag = 33 // SL__whileLoop
-	ClassTagLpTun ClassTag = 34 // SL__lpTun
-	ClassTagInnerLpTun ClassTag = 35 // SL__innerLpTun
-	ClassTagLCnt ClassTag = 36 // SL__lCnt
-	ClassTagLTst ClassTag = 37 // SL__lTst
-	ClassTagLMax ClassTag = 38 // SL__lMax
-	ClassTagLSR ClassTag = 39 // SL__lSR
-	ClassTagRSR ClassTag = 40 // SL__rSR
-	ClassTagSequence ClassTag = 41 // SL__sequence
-	ClassTagSeqTun ClassTag = 42 // SL__seqTun
-	ClassTagSLoc ClassTag = 43 // SL__sLoc
-	ClassTagSelect ClassTag = 44 // SL__select
-	ClassTagSelTun ClassTag = 45 // SL__selTun
-	ClassTagCaseSel ClassTag = 46 // SL__caseSel
-	ClassTagPrim ClassTag = 47 // SL__prim
-	ClassTagParm ClassTag = 48 // SL__parm
-	ClassTagIUse ClassTag = 49 // SL__iUse
-	ClassTagGRef ClassTag = 50 // SL__gRef
-	ClassTagIUseDCO ClassTag = 51 // SL__iUseDCO
-	ClassTagMux ClassTag = 52 // SL__mux
-	ClassTagMxDCO ClassTag = 53 // SL__mxDCO
-	ClassTagDemux ClassTag = 54 // SL__demux
-	ClassTagDmxDCO ClassTag = 55 // SL__dmxDCO
-	ClassTagCodeVI ClassTag = 56 // SL__codeVI
-	ClassTagCodeVIArg ClassTag = 57 // SL__codeVIArg
-	ClassTagABuild ClassTag = 58 // SL__aBuild
-	ClassTagABuildDCO ClassTag = 59 // SL__aBuildDCO
-	ClassTagCABuild ClassTag = 60 // SL__cABuild
-	ClassTagCABuildDCO ClassTag = 61 // SL__cABuildDCO
-	ClassTagConcat ClassTag = 62 // SL__concat
-	ClassTagConcatDCO ClassTag = 63 // SL__concatDCO
-	ClassTagDecimate ClassTag = 64 // SL__decimate
-	ClassTagDecimateDCO ClassTag = 65 // SL__decimateDCO
-	ClassTagInterLeave ClassTag = 66 // SL__interLeave
-	ClassTagInterLeaveDCO ClassTag = 67 // SL__interLeaveDCO
-	ClassTagAIndx ClassTag = 68 // SL__aIndx
-	ClassTagAIDCO ClassTag = 69 // SL__aIDCO
-	ClassTagSubset ClassTag = 72 // SL__subset
-	ClassTagSubsetDCO ClassTag = 73 // SL__subsetDCO
-	ClassTagFBox ClassTag = 74 // SL__fBox
-	ClassTagFBoxDCO ClassTag = 75 // SL__fBoxDCO
-	ClassTagSupC ClassTag = 76 // SL__supC
-	ClassTagDDO ClassTag = 77 // SL__dDO
-	ClassTagBDFixed ClassTag = 78 // SL__bDFixed
-	ClassTagStdBool ClassTag = 79 // SL__stdBool
-	ClassTagStdNum ClassTag = 80 // SL__stdNum
-	ClassTagStdString ClassTag = 81 // SL__stdString
-	ClassTagIndArr ClassTag = 82 // SL__indArr
-	ClassTagStdClust ClassTag = 83 // SL__stdClust
-	ClassTagStdVar ClassTag = 84 // SL__stdVar
-	ClassTagStdRefNum ClassTag = 85 // SL__stdRefNum
-	ClassTagStdColorNum ClassTag = 86 // SL__stdColorNum
-	ClassTagStdRing ClassTag = 87 // SL__stdRing
-	ClassTagStdSlide ClassTag = 88 // SL__stdSlide
-	ClassTagStdKnob ClassTag = 89 // SL__stdKnob
-	ClassTagStdPath ClassTag = 91 // SL__stdPath
-	ClassTagStdTable ClassTag = 92 // SL__stdTable
-	ClassTagStdHandle ClassTag = 93 // SL__stdHandle
-	ClassTagStdGraph ClassTag = 94 // SL__stdGraph
-	ClassTagStdPict ClassTag = 95 // SL__stdPict
-	ClassTagStdPixMap ClassTag = 96 // SL__stdPixMap
-	ClassTagUserItem ClassTag = 97 // SL__userItem
-	ClassTagNmxDCO ClassTag = 98 // SL__nmxDCO
-	ClassTagNMux ClassTag = 99 // SL__nMux
-	ClassTagTypeDef ClassTag = 100 // SL__typeDef
-	ClassTagStdRamp ClassTag = 101 // SL__stdRamp
-	ClassTagUCast ClassTag = 102 // SL__uCast
-	ClassTagGRefDCO ClassTag = 103 // SL__gRefDCO
-	ClassTagAnnex ClassTag = 104 // SL__annex
-	ClassTagStdListbox ClassTag = 105 // SL__stdListbox
-	ClassTagExtFunc ClassTag = 106 // SL__extFunc
-	ClassTagExtFuncArg ClassTag = 107 // SL__extFuncArg
-	ClassTagCpdArith ClassTag = 108 // SL__cpdArith
-	ClassTagCpdArithDCO ClassTag = 109 // SL__cpdArithDCO
-	ClassTagCrossList ClassTag = 124 // SL__crossList
-	ClassTagOHExt ClassTag = 126 // SL__oHExt
-	ClassTagConPane ClassTag = 127 // SL__conPane
-	ClassTagLoop ClassTag = 128 // SL__loop
-	ClassTagMultiDiagSNode ClassTag = 129 // SL__multiDiagSNode
-	ClassTagInstrTypeRec ClassTag = 130 // SL__instrTypeRec
-	ClassTagTypeDesc ClassTag = 131 // SL__typeDesc
-	ClassTagEditSelectionBkUp ClassTag = 132 // SL__editSelectionBkUp
-	ClassTagBHExt ClassTag = 133 // SL__bHExt
-	ClassTagTransTable ClassTag = 134 // SL__transTable
-	ClassTagTextSelectionBkUp ClassTag = 135 // SL__textSelectionBkUp
-	ClassTagObjInfoTable ClassTag = 136 // SL__objInfoTable
-	ClassTagRecipeBkUp ClassTag = 137 // SL__recipeBkUp
-	ClassTagRecipe ClassTag = 138 // SL__recipe
-	ClassTagDataBkUp ClassTag = 139 // SL__dataBkUp
-	ClassTagPropNode ClassTag = 140 // SL__propNode
-	ClassTagPropItem ClassTag = 141 // SL__propItem
-	ClassTagHGrowCItem ClassTag = 142 // SL__hGrowCItem
-	ClassTagScale ClassTag = 143 // SL__scale
-	ClassTagScanfArg ClassTag = 144 // SL__scanfArg
-	ClassTagPrintfArg ClassTag = 145 // SL__printfArg
-	ClassTagScanf ClassTag = 146 // SL__scanf
-	ClassTagPrintf ClassTag = 147 // SL__printf
-	ClassTagStdTag ClassTag = 148 // SL__stdTag
-	ClassTagSelLabel ClassTag = 149 // SL__selLabel
-	ClassTagWizardData ClassTag = 166 // SL__wizardData
-	ClassTagHGrowNode ClassTag = 168 // SL__hGrowNode
-	ClassTagInvokeNode ClassTag = 169 // SL__invokeNode
-	ClassTagInvokeItem ClassTag = 170 // SL__invokeItem
-	ClassTagOleVariant ClassTag = 171 // SL__oleVariant
-	ClassTagGrouper ClassTag = 172 // SL__grouper
-	ClassTagIUseCore ClassTag = 173 // SL__iUseCore
-	ClassTagCallByRefNode ClassTag = 174 // SL__callByRefNode
-	ClassTagStdCont ClassTag = 175 // SL__stdCont
-	ClassTagCEData ClassTag = 176 // SL__cEData
-	ClassTagSubVIFromSelBkUp ClassTag = 177 // SL__subVIFromSelBkUp
-	ClassTagSelListBkUp ClassTag = 178 // SL__selListBkUp
-	ClassTagSNDCO ClassTag = 179 // SL__sNDCO
-	ClassTagScriptNode ClassTag = 180 // SL__scriptNode
-	ClassTagStdComboBox ClassTag = 181 // SL__stdComboBox
-	ClassTagCtlRefConst ClassTag = 182 // SL__ctlRefConst
-	ClassTagCtlRefDCO ClassTag = 183 // SL__ctlRefDCO
-	ClassTagStdMeasureData ClassTag = 184 // SL__stdMeasureData
-	ClassTagAReplace ClassTag = 185 // SL__aReplace
-	ClassTagARepDCO ClassTag = 186 // SL__aRepDCO
-	ClassTagAInsert ClassTag = 187 // SL__aInsert
-	ClassTagAInsDCO ClassTag = 188 // SL__aInsDCO
-	ClassTagADelete ClassTag = 189 // SL__aDelete
-	ClassTagADelDCO ClassTag = 190 // SL__aDelDCO
-	ClassTagTextNode ClassTag = 191 // SL__textNode
-	ClassTagExprNode ClassTag = 192 // SL__exprNode
-	ClassTagCLStrObj ClassTag = 193 // SL__cLStrObj
-	ClassTagStdLvVariant ClassTag = 194 // SL__stdLvVariant
-	ClassTagTabControl ClassTag = 195 // SL__tabControl
-	ClassTagPlaceholderNode ClassTag = 196 // SL__placeholderNode
-	ClassTagPolyIUse ClassTag = 197 // SL__polyIUse
-	ClassTagPolyIUseDCO ClassTag = 198 // SL__polyIUseDCO
-	ClassTagPage ClassTag = 199 // SL__page
-	ClassTagTabArray ClassTag = 200 // SL__tabArray
-	ClassTagPart ClassTag = 201 // SL__part
-	ClassTagFlatSequence ClassTag = 202 // SL__flatSequence
-	ClassTagFlatSeqTun ClassTag = 203 // SL__flatSeqTun
-	ClassTagGrowViewObj ClassTag = 204 // SL__growViewObj
-	ClassTagCommentNode ClassTag = 205 // SL__commentNode
-	ClassTagCommentTun ClassTag = 206 // SL__commentTun
-	ClassTagStdSubPanel ClassTag = 207 // SL__stdSubPanel
-	ClassTagMergeSignal ClassTag = 208 // SL__mergeSignal
-	ClassTagMergeSignalDCO ClassTag = 209 // SL__mergeSignalDCO
-	ClassTagGrid ClassTag = 210 // SL__grid
-	ClassTagSplitSignal ClassTag = 211 // SL__splitSignal
-	ClassTagSplitSignalDCO ClassTag = 212 // SL__splitSignalDCO
-	ClassTagEventStruct ClassTag = 213 // SL__eventStruct
-	ClassTagEventDataNode ClassTag = 214 // SL__eventDataNode
-	ClassTagEventDynDCO ClassTag = 215 // SL__eventDynDCO
-	ClassTagEventTimeOut ClassTag = 216 // SL__eventTimeOut
-	ClassTagDropFeedback ClassTag = 217 // SL__dropFeedback
-	ClassTagMasterWiz ClassTag = 218 // SL__masterWiz
-	ClassTagSubWizard ClassTag = 219 // SL__subWizard
-	ClassTagStateDiagWiz ClassTag = 220 // SL__stateDiagWiz
-	ClassTagState ClassTag = 221 // SL__state
-	ClassTagTransition ClassTag = 222 // SL__transition
-	ClassTagAbsTime ClassTag = 223 // SL__absTime
-	ClassTagNumLabel ClassTag = 224 // SL__numLabel
-	ClassTagTableControl ClassTag = 225 // SL__tableControl
-	ClassTagDigitalTable ClassTag = 226 // SL__digitalTable
-	ClassTagExternalNode ClassTag = 227 // SL__externalNode
-	ClassTagExternalTun ClassTag = 228 // SL__externalTun
-	ClassTagPolySelector ClassTag = 229 // SL__polySelector
-	ClassTagListbox ClassTag = 230 // SL__listbox
-	ClassTagTreeControl ClassTag = 231 // SL__treeControl
-	ClassTagExternalSignal ClassTag = 232 // SL__externalSignal
-	ClassTagBaseTableControl ClassTag = 233 // SL__baseTableControl
-	ClassTagBaseListbox ClassTag = 234 // SL__baseListbox
-	ClassTagEventRegNode ClassTag = 235 // SL__eventRegNode
-	ClassTagEventRegItem ClassTag = 236 // SL__eventRegItem
-	ClassTagConstructorNode ClassTag = 237 // SL__constructorNode
-	ClassTagPlugInDDO ClassTag = 238 // SL__plugInDDO
-	ClassTagRadioClust ClassTag = 239 // SL__radioClust
-	ClassTagExternalStructNode ClassTag = 240 // SL__externalStructNode
-	ClassTagStubDDO ClassTag = 241 // SL__stubDDO
-	ClassTagGraphSplitBar ClassTag = 242 // SL__graphSplitBar
-	ClassTagEventRItem ClassTag = 243 // SL__eventRItem
-	ClassTagEventRegCallback ClassTag = 244 // SL__eventRegCallback
-	ClassTagEventRegCBItem ClassTag = 245 // SL__eventRegCBItem
-	ClassTagExternalDiagram ClassTag = 246 // SL__externalDiagram
-	ClassTagSubVIFromCodeGenBkUp ClassTag = 247 // SL__subVIFromCodeGenBkUp
-	ClassTagOldStatVIRef ClassTag = 248 // SL__oldStatVIRef
-	ClassTagLTiming ClassTag = 249 // SL__lTiming
-	ClassTagTimeDataNode ClassTag = 250 // SL__timeDataNode
-	ClassTagTimeLoop ClassTag = 251 // SL__timeLoop
-	ClassTagTimeLoopExtNode ClassTag = 252 // SL__timeLoopExtNode
-	ClassTagSimDiag ClassTag = 253 // SL__simDiag
-	ClassTagSimNode ClassTag = 254 // SL__simNode
-	ClassTagCompDiag ClassTag = 255 // SL__compDiag
-	ClassTagSimTun ClassTag = 256 // SL__simTun
-	ClassTagKeyMapList ClassTag = 257 // SL__keyMapList
-	ClassTagXControl ClassTag = 258 // SL__xControl
-	ClassTagStatVIRef ClassTag = 259 // SL__statVIRef
-	ClassTagDynIUse ClassTag = 260 // SL__dynIUse
-	ClassTagXNode ClassTag = 261 // SL__xNode
-	ClassTagXTunnel ClassTag = 262 // SL__xTunnel
-	ClassTagXStructure ClassTag = 263 // SL__xStructure
-	ClassTagXDiagram ClassTag = 264 // SL__xDiagram
-	ClassTagXSignal ClassTag = 265 // SL__xSignal
-	ClassTagDynPolyIUse ClassTag = 266 // SL__dynPolyIUse
-	ClassTagDynLink ClassTag = 267 // SL__dynLink
-	ClassTagUdClassDDO ClassTag = 268 // SL__udClassDDO
-	ClassTagSimDCO ClassTag = 269 // SL__simDCO
-	ClassTagBaseRefNum ClassTag = 270 // SL__baseRefNum
-	ClassTagPrivDataHelper ClassTag = 271 // SL__privDataHelper
-	ClassTagPropItemInfo ClassTag = 272 // SL__propItemInfo
-	ClassTagAxItemInfo ClassTag = 273 // SL__axItemInfo
-	ClassTagDnetItemInfo ClassTag = 274 // SL__dnetItemInfo
-	ClassTagUdClassPropItemPrivInfo ClassTag = 275 // SL__udClassPropItemPrivInfo
-	ClassTagAInit ClassTag = 276 // SL__aInit
-	ClassTagAInitDCO ClassTag = 277 // SL__aInitDCO
-	ClassTagAReshape ClassTag = 278 // SL__aReshape
-	ClassTagAReshapeDCO ClassTag = 279 // SL__aReshapeDCO
-	ClassTagSharedGrowArrayNode ClassTag = 280 // SL__sharedGrowArrayNode
-	ClassTagGrowArrayNode ClassTag = 281 // SL__growArrayNode
-	ClassTagSharedGrowArrayDCO ClassTag = 282 // SL__sharedGrowArrayDCO
-	ClassTagGrowArrayDCO ClassTag = 283 // SL__growArrayDCO
-	ClassTagPane ClassTag = 284 // SL__pane
-	ClassTagSplitter ClassTag = 285 // SL__splitter
-	ClassTagDynIUseCore ClassTag = 286 // SL__dynIUseCore
-	ClassTagTimeFlatSequenceFrame ClassTag = 287 // SL__timeFlatSequenceFrame
-	ClassTagXDataNode ClassTag = 288 // SL__xDataNode
-	ClassTagSequenceFrame ClassTag = 289 // SL__sequenceFrame
-	ClassTagTimeSequence ClassTag = 290 // SL__timeSequence
-	ClassTagTimeFlatSequence ClassTag = 291 // SL__timeFlatSequence
-	ClassTagCallParentDynIUse ClassTag = 292 // SL__callParentDynIUse
-	ClassTagMatedLpTun ClassTag = 293 // SL__matedLpTun
-	ClassTagMatedSeqTun ClassTag = 294 // SL__matedSeqTun
-	ClassTagMatedLSR ClassTag = 295 // SL__matedLSR
-	ClassTagMatedRSR ClassTag = 296 // SL__matedRSR
-	ClassTagScrollbar ClassTag = 297 // SL__scrollbar
-	ClassTagMathScriptNode ClassTag = 298 // SL__mathScriptNode
-	ClassTagMathScriptNodeDCO ClassTag = 299 // SL__mathScriptNodeDCO
-	ClassTagSdfDiag ClassTag = 300 // SL__sdfDiag
-	ClassTagSdfNode ClassTag = 301 // SL__sdfNode
-	ClassTagSdfcompDiag ClassTag = 302 // SL__sdfcompDiag
-	ClassTagSdfTun ClassTag = 303 // SL__sdfTun
-	ClassTagSdfDCO ClassTag = 304 // SL__sdfDCO
-	ClassTagScenegraphdisplay ClassTag = 305 // SL__scenegraphdisplay
-	ClassTagHtmlControl ClassTag = 306 // SL__htmlControl
-	ClassTagCodeWizard ClassTag = 307 // SL__codeWizard
-	ClassTagCBoxDPIdx ClassTag = 308 // SL__cBoxDPIdx
-	ClassTagCBoxDCODPIdx ClassTag = 309 // SL__cBoxDCODPIdx
-	ClassTagAbstractDiagram ClassTag = 310 // SL__abstractDiagram
-	ClassTagMathDiagram ClassTag = 311 // SL__mathDiagram
-	ClassTagBasicObj ClassTag = 312 // SL__basicObj
-	ClassTagRegionNode ClassTag = 313 // SL__regionNode
-	ClassTagStateNode ClassTag = 314 // SL__stateNode
-	ClassTagJunctionNode ClassTag = 315 // SL__junctionNode
-	ClassTagRegionTun ClassTag = 316 // SL__regionTun
-	ClassTagMultiSegmentPipe ClassTag = 317 // SL__multiSegmentPipe
-	ClassTagLDCO ClassTag = 318 // SL__lDCO
-	ClassTagRDCO ClassTag = 319 // SL__rDCO
-	ClassTagForkNode ClassTag = 320 // SL__forkNode
-	ClassTagJoinNode ClassTag = 321 // SL__joinNode
-	ClassTagScDiag ClassTag = 322 // SL__scDiag
-	ClassTagIndArrInterface ClassTag = 323 // SL__indArrInterface
-	ClassTagLeftFeedback ClassTag = 324 // SL__leftFeedback
-	ClassTagRightFeedback ClassTag = 325 // SL__rightFeedback
-	ClassTagInitFeedback ClassTag = 326 // SL__initFeedback
-	ClassTagQtCont ClassTag = 327 // SL__qtCont
-	ClassTagSharedVariable ClassTag = 328 // SL__sharedVariable
-	ClassTagSharedVariableDCO ClassTag = 329 // SL__sharedVariableDCO
-	ClassTagHiddenFBNode ClassTag = 330 // SL__hiddenFBNode
-	ClassTagOverridableParm ClassTag = 331 // SL__overridableParm
-	ClassTagTernaryDDO ClassTag = 332 // SL__ternaryDDO
+	ClassTagFontRun                     ClassTag = 0   // SL__fontRun
+	ClassTagTextHair                    ClassTag = 1   // SL__textHair
+	ClassTagPrNodeList                  ClassTag = 3   // SL__prNodeList
+	ClassTagPrFrameList                 ClassTag = 4   // SL__prFrameList
+	ClassTagPrVIPartList                ClassTag = 5   // SL__prVIPartList
+	ClassTagGeneric                     ClassTag = 6   // SL__generic
+	ClassTagList                        ClassTag = 7   // SL__list
+	ClassTagDataObj                     ClassTag = 8   // SL__dataObj
+	ClassTagCosm                        ClassTag = 9   // SL__cosm
+	ClassTagLabel                       ClassTag = 10  // SL__label
+	ClassTagMultiCosm                   ClassTag = 11  // SL__multiCosm
+	ClassTagBigMultiCosm                ClassTag = 12  // SL__bigMultiCosm
+	ClassTagMultiLabel                  ClassTag = 13  // SL__multiLabel
+	ClassTagBigMultiLabel               ClassTag = 14  // SL__bigMultiLabel
+	ClassTagDCO                         ClassTag = 17  // SL__dCO
+	ClassTagFPDCO                       ClassTag = 18  // SL__fPDCO
+	ClassTagBDConstDCO                  ClassTag = 19  // SL__bDConstDCO
+	ClassTagBDDCO                       ClassTag = 20  // SL__bDDCO
+	ClassTagTerm                        ClassTag = 21  // SL__term
+	ClassTagFPTerm                      ClassTag = 22  // SL__fPTerm
+	ClassTagSignal                      ClassTag = 23  // SL__signal
+	ClassTagWire                        ClassTag = 24  // SL__wire
+	ClassTagHSignal                     ClassTag = 25  // SL__hSignal
+	ClassTagHNode                       ClassTag = 26  // SL__hNode
+	ClassTagDiag                        ClassTag = 27  // SL__diag
+	ClassTagNode                        ClassTag = 28  // SL__node
+	ClassTagSRN                         ClassTag = 29  // SL__sRN
+	ClassTagSNode                       ClassTag = 30  // SL__sNode
+	ClassTagGrowableNode                ClassTag = 31  // SL__growableNode
+	ClassTagForLoop                     ClassTag = 32  // SL__forLoop
+	ClassTagWhileLoop                   ClassTag = 33  // SL__whileLoop
+	ClassTagLpTun                       ClassTag = 34  // SL__lpTun
+	ClassTagInnerLpTun                  ClassTag = 35  // SL__innerLpTun
+	ClassTagLCnt                        ClassTag = 36  // SL__lCnt
+	ClassTagLTst                        ClassTag = 37  // SL__lTst
+	ClassTagLMax                        ClassTag = 38  // SL__lMax
+	ClassTagLSR                         ClassTag = 39  // SL__lSR
+	ClassTagRSR                         ClassTag = 40  // SL__rSR
+	ClassTagSequence                    ClassTag = 41  // SL__sequence
+	ClassTagSeqTun                      ClassTag = 42  // SL__seqTun
+	ClassTagSLoc                        ClassTag = 43  // SL__sLoc
+	ClassTagSelect                      ClassTag = 44  // SL__select
+	ClassTagSelTun                      ClassTag = 45  // SL__selTun
+	ClassTagCaseSel                     ClassTag = 46  // SL__caseSel
+	ClassTagPrim                        ClassTag = 47  // SL__prim
+	ClassTagParm                        ClassTag = 48  // SL__parm
+	ClassTagIUse                        ClassTag = 49  // SL__iUse
+	ClassTagGRef                        ClassTag = 50  // SL__gRef
+	ClassTagIUseDCO                     ClassTag = 51  // SL__iUseDCO
+	ClassTagMux                         ClassTag = 52  // SL__mux
+	ClassTagMxDCO                       ClassTag = 53  // SL__mxDCO
+	ClassTagDemux                       ClassTag = 54  // SL__demux
+	ClassTagDmxDCO                      ClassTag = 55  // SL__dmxDCO
+	ClassTagCodeVI                      ClassTag = 56  // SL__codeVI
+	ClassTagCodeVIArg                   ClassTag = 57  // SL__codeVIArg
+	ClassTagABuild                      ClassTag = 58  // SL__aBuild
+	ClassTagABuildDCO                   ClassTag = 59  // SL__aBuildDCO
+	ClassTagCABuild                     ClassTag = 60  // SL__cABuild
+	ClassTagCABuildDCO                  ClassTag = 61  // SL__cABuildDCO
+	ClassTagConcat                      ClassTag = 62  // SL__concat
+	ClassTagConcatDCO                   ClassTag = 63  // SL__concatDCO
+	ClassTagDecimate                    ClassTag = 64  // SL__decimate
+	ClassTagDecimateDCO                 ClassTag = 65  // SL__decimateDCO
+	ClassTagInterLeave                  ClassTag = 66  // SL__interLeave
+	ClassTagInterLeaveDCO               ClassTag = 67  // SL__interLeaveDCO
+	ClassTagAIndx                       ClassTag = 68  // SL__aIndx
+	ClassTagAIDCO                       ClassTag = 69  // SL__aIDCO
+	ClassTagSubset                      ClassTag = 72  // SL__subset
+	ClassTagSubsetDCO                   ClassTag = 73  // SL__subsetDCO
+	ClassTagFBox                        ClassTag = 74  // SL__fBox
+	ClassTagFBoxDCO                     ClassTag = 75  // SL__fBoxDCO
+	ClassTagSupC                        ClassTag = 76  // SL__supC
+	ClassTagDDO                         ClassTag = 77  // SL__dDO
+	ClassTagBDFixed                     ClassTag = 78  // SL__bDFixed
+	ClassTagStdBool                     ClassTag = 79  // SL__stdBool
+	ClassTagStdNum                      ClassTag = 80  // SL__stdNum
+	ClassTagStdString                   ClassTag = 81  // SL__stdString
+	ClassTagIndArr                      ClassTag = 82  // SL__indArr
+	ClassTagStdClust                    ClassTag = 83  // SL__stdClust
+	ClassTagStdVar                      ClassTag = 84  // SL__stdVar
+	ClassTagStdRefNum                   ClassTag = 85  // SL__stdRefNum
+	ClassTagStdColorNum                 ClassTag = 86  // SL__stdColorNum
+	ClassTagStdRing                     ClassTag = 87  // SL__stdRing
+	ClassTagStdSlide                    ClassTag = 88  // SL__stdSlide
+	ClassTagStdKnob                     ClassTag = 89  // SL__stdKnob
+	ClassTagStdPath                     ClassTag = 91  // SL__stdPath
+	ClassTagStdTable                    ClassTag = 92  // SL__stdTable
+	ClassTagStdHandle                   ClassTag = 93  // SL__stdHandle
+	ClassTagStdGraph                    ClassTag = 94  // SL__stdGraph
+	ClassTagStdPict                     ClassTag = 95  // SL__stdPict
+	ClassTagStdPixMap                   ClassTag = 96  // SL__stdPixMap
+	ClassTagUserItem                    ClassTag = 97  // SL__userItem
+	ClassTagNmxDCO                      ClassTag = 98  // SL__nmxDCO
+	ClassTagNMux                        ClassTag = 99  // SL__nMux
+	ClassTagTypeDef                     ClassTag = 100 // SL__typeDef
+	ClassTagStdRamp                     ClassTag = 101 // SL__stdRamp
+	ClassTagUCast                       ClassTag = 102 // SL__uCast
+	ClassTagGRefDCO                     ClassTag = 103 // SL__gRefDCO
+	ClassTagAnnex                       ClassTag = 104 // SL__annex
+	ClassTagStdListbox                  ClassTag = 105 // SL__stdListbox
+	ClassTagExtFunc                     ClassTag = 106 // SL__extFunc
+	ClassTagExtFuncArg                  ClassTag = 107 // SL__extFuncArg
+	ClassTagCpdArith                    ClassTag = 108 // SL__cpdArith
+	ClassTagCpdArithDCO                 ClassTag = 109 // SL__cpdArithDCO
+	ClassTagCrossList                   ClassTag = 124 // SL__crossList
+	ClassTagOHExt                       ClassTag = 126 // SL__oHExt
+	ClassTagConPane                     ClassTag = 127 // SL__conPane
+	ClassTagLoop                        ClassTag = 128 // SL__loop
+	ClassTagMultiDiagSNode              ClassTag = 129 // SL__multiDiagSNode
+	ClassTagInstrTypeRec                ClassTag = 130 // SL__instrTypeRec
+	ClassTagTypeDesc                    ClassTag = 131 // SL__typeDesc
+	ClassTagEditSelectionBkUp           ClassTag = 132 // SL__editSelectionBkUp
+	ClassTagBHExt                       ClassTag = 133 // SL__bHExt
+	ClassTagTransTable                  ClassTag = 134 // SL__transTable
+	ClassTagTextSelectionBkUp           ClassTag = 135 // SL__textSelectionBkUp
+	ClassTagObjInfoTable                ClassTag = 136 // SL__objInfoTable
+	ClassTagRecipeBkUp                  ClassTag = 137 // SL__recipeBkUp
+	ClassTagRecipe                      ClassTag = 138 // SL__recipe
+	ClassTagDataBkUp                    ClassTag = 139 // SL__dataBkUp
+	ClassTagPropNode                    ClassTag = 140 // SL__propNode
+	ClassTagPropItem                    ClassTag = 141 // SL__propItem
+	ClassTagHGrowCItem                  ClassTag = 142 // SL__hGrowCItem
+	ClassTagScale                       ClassTag = 143 // SL__scale
+	ClassTagScanfArg                    ClassTag = 144 // SL__scanfArg
+	ClassTagPrintfArg                   ClassTag = 145 // SL__printfArg
+	ClassTagScanf                       ClassTag = 146 // SL__scanf
+	ClassTagPrintf                      ClassTag = 147 // SL__printf
+	ClassTagStdTag                      ClassTag = 148 // SL__stdTag
+	ClassTagSelLabel                    ClassTag = 149 // SL__selLabel
+	ClassTagWizardData                  ClassTag = 166 // SL__wizardData
+	ClassTagHGrowNode                   ClassTag = 168 // SL__hGrowNode
+	ClassTagInvokeNode                  ClassTag = 169 // SL__invokeNode
+	ClassTagInvokeItem                  ClassTag = 170 // SL__invokeItem
+	ClassTagOleVariant                  ClassTag = 171 // SL__oleVariant
+	ClassTagGrouper                     ClassTag = 172 // SL__grouper
+	ClassTagIUseCore                    ClassTag = 173 // SL__iUseCore
+	ClassTagCallByRefNode               ClassTag = 174 // SL__callByRefNode
+	ClassTagStdCont                     ClassTag = 175 // SL__stdCont
+	ClassTagCEData                      ClassTag = 176 // SL__cEData
+	ClassTagSubVIFromSelBkUp            ClassTag = 177 // SL__subVIFromSelBkUp
+	ClassTagSelListBkUp                 ClassTag = 178 // SL__selListBkUp
+	ClassTagSNDCO                       ClassTag = 179 // SL__sNDCO
+	ClassTagScriptNode                  ClassTag = 180 // SL__scriptNode
+	ClassTagStdComboBox                 ClassTag = 181 // SL__stdComboBox
+	ClassTagCtlRefConst                 ClassTag = 182 // SL__ctlRefConst
+	ClassTagCtlRefDCO                   ClassTag = 183 // SL__ctlRefDCO
+	ClassTagStdMeasureData              ClassTag = 184 // SL__stdMeasureData
+	ClassTagAReplace                    ClassTag = 185 // SL__aReplace
+	ClassTagARepDCO                     ClassTag = 186 // SL__aRepDCO
+	ClassTagAInsert                     ClassTag = 187 // SL__aInsert
+	ClassTagAInsDCO                     ClassTag = 188 // SL__aInsDCO
+	ClassTagADelete                     ClassTag = 189 // SL__aDelete
+	ClassTagADelDCO                     ClassTag = 190 // SL__aDelDCO
+	ClassTagTextNode                    ClassTag = 191 // SL__textNode
+	ClassTagExprNode                    ClassTag = 192 // SL__exprNode
+	ClassTagCLStrObj                    ClassTag = 193 // SL__cLStrObj
+	ClassTagStdLvVariant                ClassTag = 194 // SL__stdLvVariant
+	ClassTagTabControl                  ClassTag = 195 // SL__tabControl
+	ClassTagPlaceholderNode             ClassTag = 196 // SL__placeholderNode
+	ClassTagPolyIUse                    ClassTag = 197 // SL__polyIUse
+	ClassTagPolyIUseDCO                 ClassTag = 198 // SL__polyIUseDCO
+	ClassTagPage                        ClassTag = 199 // SL__page
+	ClassTagTabArray                    ClassTag = 200 // SL__tabArray
+	ClassTagPart                        ClassTag = 201 // SL__part
+	ClassTagFlatSequence                ClassTag = 202 // SL__flatSequence
+	ClassTagFlatSeqTun                  ClassTag = 203 // SL__flatSeqTun
+	ClassTagGrowViewObj                 ClassTag = 204 // SL__growViewObj
+	ClassTagCommentNode                 ClassTag = 205 // SL__commentNode
+	ClassTagCommentTun                  ClassTag = 206 // SL__commentTun
+	ClassTagStdSubPanel                 ClassTag = 207 // SL__stdSubPanel
+	ClassTagMergeSignal                 ClassTag = 208 // SL__mergeSignal
+	ClassTagMergeSignalDCO              ClassTag = 209 // SL__mergeSignalDCO
+	ClassTagGrid                        ClassTag = 210 // SL__grid
+	ClassTagSplitSignal                 ClassTag = 211 // SL__splitSignal
+	ClassTagSplitSignalDCO              ClassTag = 212 // SL__splitSignalDCO
+	ClassTagEventStruct                 ClassTag = 213 // SL__eventStruct
+	ClassTagEventDataNode               ClassTag = 214 // SL__eventDataNode
+	ClassTagEventDynDCO                 ClassTag = 215 // SL__eventDynDCO
+	ClassTagEventTimeOut                ClassTag = 216 // SL__eventTimeOut
+	ClassTagDropFeedback                ClassTag = 217 // SL__dropFeedback
+	ClassTagMasterWiz                   ClassTag = 218 // SL__masterWiz
+	ClassTagSubWizard                   ClassTag = 219 // SL__subWizard
+	ClassTagStateDiagWiz                ClassTag = 220 // SL__stateDiagWiz
+	ClassTagState                       ClassTag = 221 // SL__state
+	ClassTagTransition                  ClassTag = 222 // SL__transition
+	ClassTagAbsTime                     ClassTag = 223 // SL__absTime
+	ClassTagNumLabel                    ClassTag = 224 // SL__numLabel
+	ClassTagTableControl                ClassTag = 225 // SL__tableControl
+	ClassTagDigitalTable                ClassTag = 226 // SL__digitalTable
+	ClassTagExternalNode                ClassTag = 227 // SL__externalNode
+	ClassTagExternalTun                 ClassTag = 228 // SL__externalTun
+	ClassTagPolySelector                ClassTag = 229 // SL__polySelector
+	ClassTagListbox                     ClassTag = 230 // SL__listbox
+	ClassTagTreeControl                 ClassTag = 231 // SL__treeControl
+	ClassTagExternalSignal              ClassTag = 232 // SL__externalSignal
+	ClassTagBaseTableControl            ClassTag = 233 // SL__baseTableControl
+	ClassTagBaseListbox                 ClassTag = 234 // SL__baseListbox
+	ClassTagEventRegNode                ClassTag = 235 // SL__eventRegNode
+	ClassTagEventRegItem                ClassTag = 236 // SL__eventRegItem
+	ClassTagConstructorNode             ClassTag = 237 // SL__constructorNode
+	ClassTagPlugInDDO                   ClassTag = 238 // SL__plugInDDO
+	ClassTagRadioClust                  ClassTag = 239 // SL__radioClust
+	ClassTagExternalStructNode          ClassTag = 240 // SL__externalStructNode
+	ClassTagStubDDO                     ClassTag = 241 // SL__stubDDO
+	ClassTagGraphSplitBar               ClassTag = 242 // SL__graphSplitBar
+	ClassTagEventRItem                  ClassTag = 243 // SL__eventRItem
+	ClassTagEventRegCallback            ClassTag = 244 // SL__eventRegCallback
+	ClassTagEventRegCBItem              ClassTag = 245 // SL__eventRegCBItem
+	ClassTagExternalDiagram             ClassTag = 246 // SL__externalDiagram
+	ClassTagSubVIFromCodeGenBkUp        ClassTag = 247 // SL__subVIFromCodeGenBkUp
+	ClassTagOldStatVIRef                ClassTag = 248 // SL__oldStatVIRef
+	ClassTagLTiming                     ClassTag = 249 // SL__lTiming
+	ClassTagTimeDataNode                ClassTag = 250 // SL__timeDataNode
+	ClassTagTimeLoop                    ClassTag = 251 // SL__timeLoop
+	ClassTagTimeLoopExtNode             ClassTag = 252 // SL__timeLoopExtNode
+	ClassTagSimDiag                     ClassTag = 253 // SL__simDiag
+	ClassTagSimNode                     ClassTag = 254 // SL__simNode
+	ClassTagCompDiag                    ClassTag = 255 // SL__compDiag
+	ClassTagSimTun                      ClassTag = 256 // SL__simTun
+	ClassTagKeyMapList                  ClassTag = 257 // SL__keyMapList
+	ClassTagXControl                    ClassTag = 258 // SL__xControl
+	ClassTagStatVIRef                   ClassTag = 259 // SL__statVIRef
+	ClassTagDynIUse                     ClassTag = 260 // SL__dynIUse
+	ClassTagXNode                       ClassTag = 261 // SL__xNode
+	ClassTagXTunnel                     ClassTag = 262 // SL__xTunnel
+	ClassTagXStructure                  ClassTag = 263 // SL__xStructure
+	ClassTagXDiagram                    ClassTag = 264 // SL__xDiagram
+	ClassTagXSignal                     ClassTag = 265 // SL__xSignal
+	ClassTagDynPolyIUse                 ClassTag = 266 // SL__dynPolyIUse
+	ClassTagDynLink                     ClassTag = 267 // SL__dynLink
+	ClassTagUdClassDDO                  ClassTag = 268 // SL__udClassDDO
+	ClassTagSimDCO                      ClassTag = 269 // SL__simDCO
+	ClassTagBaseRefNum                  ClassTag = 270 // SL__baseRefNum
+	ClassTagPrivDataHelper              ClassTag = 271 // SL__privDataHelper
+	ClassTagPropItemInfo                ClassTag = 272 // SL__propItemInfo
+	ClassTagAxItemInfo                  ClassTag = 273 // SL__axItemInfo
+	ClassTagDnetItemInfo                ClassTag = 274 // SL__dnetItemInfo
+	ClassTagUdClassPropItemPrivInfo     ClassTag = 275 // SL__udClassPropItemPrivInfo
+	ClassTagAInit                       ClassTag = 276 // SL__aInit
+	ClassTagAInitDCO                    ClassTag = 277 // SL__aInitDCO
+	ClassTagAReshape                    ClassTag = 278 // SL__aReshape
+	ClassTagAReshapeDCO                 ClassTag = 279 // SL__aReshapeDCO
+	ClassTagSharedGrowArrayNode         ClassTag = 280 // SL__sharedGrowArrayNode
+	ClassTagGrowArrayNode               ClassTag = 281 // SL__growArrayNode
+	ClassTagSharedGrowArrayDCO          ClassTag = 282 // SL__sharedGrowArrayDCO
+	ClassTagGrowArrayDCO                ClassTag = 283 // SL__growArrayDCO
+	ClassTagPane                        ClassTag = 284 // SL__pane
+	ClassTagSplitter                    ClassTag = 285 // SL__splitter
+	ClassTagDynIUseCore                 ClassTag = 286 // SL__dynIUseCore
+	ClassTagTimeFlatSequenceFrame       ClassTag = 287 // SL__timeFlatSequenceFrame
+	ClassTagXDataNode                   ClassTag = 288 // SL__xDataNode
+	ClassTagSequenceFrame               ClassTag = 289 // SL__sequenceFrame
+	ClassTagTimeSequence                ClassTag = 290 // SL__timeSequence
+	ClassTagTimeFlatSequence            ClassTag = 291 // SL__timeFlatSequence
+	ClassTagCallParentDynIUse           ClassTag = 292 // SL__callParentDynIUse
+	ClassTagMatedLpTun                  ClassTag = 293 // SL__matedLpTun
+	ClassTagMatedSeqTun                 ClassTag = 294 // SL__matedSeqTun
+	ClassTagMatedLSR                    ClassTag = 295 // SL__matedLSR
+	ClassTagMatedRSR                    ClassTag = 296 // SL__matedRSR
+	ClassTagScrollbar                   ClassTag = 297 // SL__scrollbar
+	ClassTagMathScriptNode              ClassTag = 298 // SL__mathScriptNode
+	ClassTagMathScriptNodeDCO           ClassTag = 299 // SL__mathScriptNodeDCO
+	ClassTagSdfDiag                     ClassTag = 300 // SL__sdfDiag
+	ClassTagSdfNode                     ClassTag = 301 // SL__sdfNode
+	ClassTagSdfcompDiag                 ClassTag = 302 // SL__sdfcompDiag
+	ClassTagSdfTun                      ClassTag = 303 // SL__sdfTun
+	ClassTagSdfDCO                      ClassTag = 304 // SL__sdfDCO
+	ClassTagScenegraphdisplay           ClassTag = 305 // SL__scenegraphdisplay
+	ClassTagHtmlControl                 ClassTag = 306 // SL__htmlControl
+	ClassTagCodeWizard                  ClassTag = 307 // SL__codeWizard
+	ClassTagCBoxDPIdx                   ClassTag = 308 // SL__cBoxDPIdx
+	ClassTagCBoxDCODPIdx                ClassTag = 309 // SL__cBoxDCODPIdx
+	ClassTagAbstractDiagram             ClassTag = 310 // SL__abstractDiagram
+	ClassTagMathDiagram                 ClassTag = 311 // SL__mathDiagram
+	ClassTagBasicObj                    ClassTag = 312 // SL__basicObj
+	ClassTagRegionNode                  ClassTag = 313 // SL__regionNode
+	ClassTagStateNode                   ClassTag = 314 // SL__stateNode
+	ClassTagJunctionNode                ClassTag = 315 // SL__junctionNode
+	ClassTagRegionTun                   ClassTag = 316 // SL__regionTun
+	ClassTagMultiSegmentPipe            ClassTag = 317 // SL__multiSegmentPipe
+	ClassTagLDCO                        ClassTag = 318 // SL__lDCO
+	ClassTagRDCO                        ClassTag = 319 // SL__rDCO
+	ClassTagForkNode                    ClassTag = 320 // SL__forkNode
+	ClassTagJoinNode                    ClassTag = 321 // SL__joinNode
+	ClassTagScDiag                      ClassTag = 322 // SL__scDiag
+	ClassTagIndArrInterface             ClassTag = 323 // SL__indArrInterface
+	ClassTagLeftFeedback                ClassTag = 324 // SL__leftFeedback
+	ClassTagRightFeedback               ClassTag = 325 // SL__rightFeedback
+	ClassTagInitFeedback                ClassTag = 326 // SL__initFeedback
+	ClassTagQtCont                      ClassTag = 327 // SL__qtCont
+	ClassTagSharedVariable              ClassTag = 328 // SL__sharedVariable
+	ClassTagSharedVariableDCO           ClassTag = 329 // SL__sharedVariableDCO
+	ClassTagHiddenFBNode                ClassTag = 330 // SL__hiddenFBNode
+	ClassTagOverridableParm             ClassTag = 331 // SL__overridableParm
+	ClassTagTernaryDDO                  ClassTag = 332 // SL__ternaryDDO
 	ClassTagDecomposeRecomposeStructure ClassTag = 333 // SL__decomposeRecomposeStructure
-	ClassTagDecomposeRecomposeTunnel ClassTag = 334 // SL__decomposeRecomposeTunnel
-	ClassTagDecomposeArrayNode ClassTag = 335 // SL__decomposeArrayNode
-	ClassTagDecomposeClusterNode ClassTag = 336 // SL__decomposeClusterNode
-	ClassTagDecomposeVariantNode ClassTag = 337 // SL__decomposeVariantNode
-	ClassTagDecomposeMatchNode ClassTag = 338 // SL__decomposeMatchNode
-	ClassTagDecomposeDataValRefNode ClassTag = 339 // SL__decomposeDataValRefNode
-	ClassTagDataValRefPoserInterface ClassTag = 340 // SL__dataValRefPoserInterface
-	ClassTagDecomposeDCO ClassTag = 341 // SL__decomposeDCO
-	ClassTagDecomposeClusterDCO ClassTag = 342 // SL__decomposeClusterDCO
-	ClassTagPoserInterface ClassTag = 343 // SL__poserInterface
-	ClassTagArrayPoserInterface ClassTag = 344 // SL__arrayPoserInterface
-	ClassTagClusterPoserInterface ClassTag = 345 // SL__clusterPoserInterface
-	ClassTagVariantPoserInterface ClassTag = 346 // SL__variantPoserInterface
-	ClassTagMatchPoserInterface ClassTag = 347 // SL__matchPoserInterface
-	ClassTagMathScriptCallByRefNode ClassTag = 349 // SL__mathScriptCallByRefNode
-	ClassTagFBoxLine ClassTag = 351 // SL__FBoxLine
-	ClassTagSceneGraphDisplayPart ClassTag = 352 // SL__sceneGraphDisplayPart
-	ClassTagFxpUnbundle ClassTag = 353 // SL__fxpUnbundle
-	ClassTagFxpUnbundleDCO ClassTag = 354 // SL__fxpUnbundleDCO
-	ClassTagDecomposeArrayNodeDCO ClassTag = 355 // SL__decomposeArrayNodeDCO
-	ClassTagDecomposeArraySplitNode ClassTag = 356 // SL__decomposeArraySplitNode
-	ClassTagArraySplitPoserInterface ClassTag = 357 // SL__arraySplitPoserInterface
-	ClassTagDecomposeArraySPlitNodeDCO ClassTag = 358 // SL__decomposeArraySPlitNodeDCO
-	ClassTagGenIUse ClassTag = 359 // SL__genIUse
-	ClassTagParForWorkers ClassTag = 361 // SL__parForWorkers
-	ClassTagSharedVariableDynamicOpen ClassTag = 362 // SL__sharedVariableDynamicOpen
-	ClassTagSharedVariableDynamicRead ClassTag = 363 // SL__sharedVariableDynamicRead
-	ClassTagSharedVariableDynamicWrite ClassTag = 364 // SL__sharedVariableDynamicWrite
-	ClassTagSharedVariableDynamicDCO ClassTag = 365 // SL__sharedVariableDynamicDCO
-	ClassTagConditionalFeedbackDCO ClassTag = 366 // SL__conditionalFeedbackDCO
-	ClassTagChunkSize ClassTag = 367 // SL__chunkSize
-	ClassTagSlaveFBInputNode ClassTag = 368 // SL__slaveFBInputNode
-	ClassTagInnerChunkSize ClassTag = 369 // SL__innerChunkSize
-	ClassTagMergeErrors ClassTag = 370 // SL__mergeErrors
-	ClassTagMergeErrorsDCO ClassTag = 371 // SL__mergeErrorsDCO
-	ClassTagDexChannelCreateNode ClassTag = 372 // SL__dexChannelCreateNode
-	ClassTagDexChannelShutdownNode ClassTag = 373 // SL__dexChannelShutdownNode
-	ClassTagLpTunConditionDCO ClassTag = 374 // SL__lpTunConditionDCO
-	ClassTagAttachment ClassTag = 375 // SL__attachment
-	ClassTagConpaneConnection ClassTag = 500 // SL__ConpaneConnection
-	ClassTagComplexScalar ClassTag = 550 // SL__ComplexScalar
-	ClassTagTime128 ClassTag = 551 // SL__Time128
-	ClassTagImage ClassTag = 600 // SL__Image
-	ClassTagKeyMappingBinding ClassTag = 700 // SL__KeyMappingBinding
-	ClassTagExtFuncParam ClassTag = 740 // SL__ExtFuncParam
-	ClassTagExtFuncAdded ClassTag = 750 // SL__ExtFuncAdded
-	ClassTagSubCosm ClassTag = 800 // SL__SubCosm
-	ClassTagEmbedObject ClassTag = 900 // SL__EmbedObject
-	ClassTagSubLabel ClassTag = 901 // SL__SubLabel
-	ClassTagSceneView ClassTag = 902 // SL__SceneView
-	ClassTagSceneColor ClassTag = 903 // SL__SceneColor
-	ClassTagSceneEyePoint ClassTag = 904 // SL__SceneEyePoint
-	ClassTagTableAttribute ClassTag = 905 // SL__TableAttribute
-	ClassTagBrowseOptions ClassTag = 906 // SL__BrowseOptions
-	ClassTagStorageRowCol ClassTag = 907 // SL__StorageRowCol
-	ClassTagColorPair ClassTag = 908 // SL__ColorPair
-	ClassTagTreeNode ClassTag = 909 // SL__TreeNode
-	ClassTagRelativeRowCol ClassTag = 910 // SL__RelativeRowCol
-	ClassTagTabInfoItem ClassTag = 911 // SL__TabInfoItem
-	ClassTagPageInfoItem ClassTag = 912 // SL__PageInfoItem
-	ClassTagTreeElt ClassTag = 913 // SL__TreeElt
-	ClassTagExpressionInfo ClassTag = 914 // SL__ExpressionInfo
-	ClassTagSelectorInfoElement ClassTag = 915 // SL__SelectorInfoElement
-	ClassTagGrowTermInfo ClassTag = 916 // SL__GrowTermInfo
-	ClassTagMappedPoint ClassTag = 917 // SL__MappedPoint
-	ClassTagPlotData ClassTag = 918 // SL__PlotData
-	ClassTagCursorData ClassTag = 919 // SL__CursorData
-	ClassTagPlotImages ClassTag = 920 // SL__PlotImages
-	ClassTagCursorButtonsRec ClassTag = 921 // SL__CursorButtonsRec
-	ClassTagPlotLegendData ClassTag = 922 // SL__PlotLegendData
-	ClassTagDigitlaBusOrgClust ClassTag = 923 // SL__DigitlaBusOrgClust
-	ClassTagScaleLegendData ClassTag = 924 // SL__ScaleLegendData
-	ClassTagScaleData ClassTag = 925 // SL__ScaleData
-	ClassTagObjNodeMapEntry ClassTag = 927 // SL__ObjNodeMapEntry
-	ClassTagObjMapEntry ClassTag = 928 // SL__ObjMapEntry
-	ClassTagEventSpec ClassTag = 929 // SL__EventSpec
-	ClassTagSelectorRange ClassTag = 930 // SL__SelectorRange
+	ClassTagDecomposeRecomposeTunnel    ClassTag = 334 // SL__decomposeRecomposeTunnel
+	ClassTagDecomposeArrayNode          ClassTag = 335 // SL__decomposeArrayNode
+	ClassTagDecomposeClusterNode        ClassTag = 336 // SL__decomposeClusterNode
+	ClassTagDecomposeVariantNode        ClassTag = 337 // SL__decomposeVariantNode
+	ClassTagDecomposeMatchNode          ClassTag = 338 // SL__decomposeMatchNode
+	ClassTagDecomposeDataValRefNode     ClassTag = 339 // SL__decomposeDataValRefNode
+	ClassTagDataValRefPoserInterface    ClassTag = 340 // SL__dataValRefPoserInterface
+	ClassTagDecomposeDCO                ClassTag = 341 // SL__decomposeDCO
+	ClassTagDecomposeClusterDCO         ClassTag = 342 // SL__decomposeClusterDCO
+	ClassTagPoserInterface              ClassTag = 343 // SL__poserInterface
+	ClassTagArrayPoserInterface         ClassTag = 344 // SL__arrayPoserInterface
+	ClassTagClusterPoserInterface       ClassTag = 345 // SL__clusterPoserInterface
+	ClassTagVariantPoserInterface       ClassTag = 346 // SL__variantPoserInterface
+	ClassTagMatchPoserInterface         ClassTag = 347 // SL__matchPoserInterface
+	ClassTagMathScriptCallByRefNode     ClassTag = 349 // SL__mathScriptCallByRefNode
+	ClassTagFBoxLine                    ClassTag = 351 // SL__FBoxLine
+	ClassTagSceneGraphDisplayPart       ClassTag = 352 // SL__sceneGraphDisplayPart
+	ClassTagFxpUnbundle                 ClassTag = 353 // SL__fxpUnbundle
+	ClassTagFxpUnbundleDCO              ClassTag = 354 // SL__fxpUnbundleDCO
+	ClassTagDecomposeArrayNodeDCO       ClassTag = 355 // SL__decomposeArrayNodeDCO
+	ClassTagDecomposeArraySplitNode     ClassTag = 356 // SL__decomposeArraySplitNode
+	ClassTagArraySplitPoserInterface    ClassTag = 357 // SL__arraySplitPoserInterface
+	ClassTagDecomposeArraySPlitNodeDCO  ClassTag = 358 // SL__decomposeArraySPlitNodeDCO
+	ClassTagGenIUse                     ClassTag = 359 // SL__genIUse
+	ClassTagParForWorkers               ClassTag = 361 // SL__parForWorkers
+	ClassTagSharedVariableDynamicOpen   ClassTag = 362 // SL__sharedVariableDynamicOpen
+	ClassTagSharedVariableDynamicRead   ClassTag = 363 // SL__sharedVariableDynamicRead
+	ClassTagSharedVariableDynamicWrite  ClassTag = 364 // SL__sharedVariableDynamicWrite
+	ClassTagSharedVariableDynamicDCO    ClassTag = 365 // SL__sharedVariableDynamicDCO
+	ClassTagConditionalFeedbackDCO      ClassTag = 366 // SL__conditionalFeedbackDCO
+	ClassTagChunkSize                   ClassTag = 367 // SL__chunkSize
+	ClassTagSlaveFBInputNode            ClassTag = 368 // SL__slaveFBInputNode
+	ClassTagInnerChunkSize              ClassTag = 369 // SL__innerChunkSize
+	ClassTagMergeErrors                 ClassTag = 370 // SL__mergeErrors
+	ClassTagMergeErrorsDCO              ClassTag = 371 // SL__mergeErrorsDCO
+	ClassTagDexChannelCreateNode        ClassTag = 372 // SL__dexChannelCreateNode
+	ClassTagDexChannelShutdownNode      ClassTag = 373 // SL__dexChannelShutdownNode
+	ClassTagLpTunConditionDCO           ClassTag = 374 // SL__lpTunConditionDCO
+	ClassTagAttachment                  ClassTag = 375 // SL__attachment
+	ClassTagConpaneConnection           ClassTag = 500 // SL__ConpaneConnection
+	ClassTagComplexScalar               ClassTag = 550 // SL__ComplexScalar
+	ClassTagTime128                     ClassTag = 551 // SL__Time128
+	ClassTagImage                       ClassTag = 600 // SL__Image
+	ClassTagKeyMappingBinding           ClassTag = 700 // SL__KeyMappingBinding
+	ClassTagExtFuncParam                ClassTag = 740 // SL__ExtFuncParam
+	ClassTagExtFuncAdded                ClassTag = 750 // SL__ExtFuncAdded
+	ClassTagSubCosm                     ClassTag = 800 // SL__SubCosm
+	ClassTagEmbedObject                 ClassTag = 900 // SL__EmbedObject
+	ClassTagSubLabel                    ClassTag = 901 // SL__SubLabel
+	ClassTagSceneView                   ClassTag = 902 // SL__SceneView
+	ClassTagSceneColor                  ClassTag = 903 // SL__SceneColor
+	ClassTagSceneEyePoint               ClassTag = 904 // SL__SceneEyePoint
+	ClassTagTableAttribute              ClassTag = 905 // SL__TableAttribute
+	ClassTagBrowseOptions               ClassTag = 906 // SL__BrowseOptions
+	ClassTagStorageRowCol               ClassTag = 907 // SL__StorageRowCol
+	ClassTagColorPair                   ClassTag = 908 // SL__ColorPair
+	ClassTagTreeNode                    ClassTag = 909 // SL__TreeNode
+	ClassTagRelativeRowCol              ClassTag = 910 // SL__RelativeRowCol
+	ClassTagTabInfoItem                 ClassTag = 911 // SL__TabInfoItem
+	ClassTagPageInfoItem                ClassTag = 912 // SL__PageInfoItem
+	ClassTagTreeElt                     ClassTag = 913 // SL__TreeElt
+	ClassTagExpressionInfo              ClassTag = 914 // SL__ExpressionInfo
+	ClassTagSelectorInfoElement         ClassTag = 915 // SL__SelectorInfoElement
+	ClassTagGrowTermInfo                ClassTag = 916 // SL__GrowTermInfo
+	ClassTagMappedPoint                 ClassTag = 917 // SL__MappedPoint
+	ClassTagPlotData                    ClassTag = 918 // SL__PlotData
+	ClassTagCursorData                  ClassTag = 919 // SL__CursorData
+	ClassTagPlotImages                  ClassTag = 920 // SL__PlotImages
+	ClassTagCursorButtonsRec            ClassTag = 921 // SL__CursorButtonsRec
+	ClassTagPlotLegendData              ClassTag = 922 // SL__PlotLegendData
+	ClassTagDigitlaBusOrgClust          ClassTag = 923 // SL__DigitlaBusOrgClust
+	ClassTagScaleLegendData             ClassTag = 924 // SL__ScaleLegendData
+	ClassTagScaleData                   ClassTag = 925 // SL__ScaleData
+	ClassTagObjNodeMapEntry             ClassTag = 927 // SL__ObjNodeMapEntry
+	ClassTagObjMapEntry                 ClassTag = 928 // SL__ObjMapEntry
+	ClassTagEventSpec                   ClassTag = 929 // SL__EventSpec
+	ClassTagSelectorRange               ClassTag = 930 // SL__SelectorRange
 )
 
 var classTagNames = map[ClassTag]string{
-	ClassTagFontRun: "SL__fontRun",
-	ClassTagTextHair: "SL__textHair",
-	ClassTagPrNodeList: "SL__prNodeList",
-	ClassTagPrFrameList: "SL__prFrameList",
-	ClassTagPrVIPartList: "SL__prVIPartList",
-	ClassTagGeneric: "SL__generic",
-	ClassTagList: "SL__list",
-	ClassTagDataObj: "SL__dataObj",
-	ClassTagCosm: "SL__cosm",
-	ClassTagLabel: "SL__label",
-	ClassTagMultiCosm: "SL__multiCosm",
-	ClassTagBigMultiCosm: "SL__bigMultiCosm",
-	ClassTagMultiLabel: "SL__multiLabel",
-	ClassTagBigMultiLabel: "SL__bigMultiLabel",
-	ClassTagDCO: "SL__dCO",
-	ClassTagFPDCO: "SL__fPDCO",
-	ClassTagBDConstDCO: "SL__bDConstDCO",
-	ClassTagBDDCO: "SL__bDDCO",
-	ClassTagTerm: "SL__term",
-	ClassTagFPTerm: "SL__fPTerm",
-	ClassTagSignal: "SL__signal",
-	ClassTagWire: "SL__wire",
-	ClassTagHSignal: "SL__hSignal",
-	ClassTagHNode: "SL__hNode",
-	ClassTagDiag: "SL__diag",
-	ClassTagNode: "SL__node",
-	ClassTagSRN: "SL__sRN",
-	ClassTagSNode: "SL__sNode",
-	ClassTagGrowableNode: "SL__growableNode",
-	ClassTagForLoop: "SL__forLoop",
-	ClassTagWhileLoop: "SL__whileLoop",
-	ClassTagLpTun: "SL__lpTun",
-	ClassTagInnerLpTun: "SL__innerLpTun",
-	ClassTagLCnt: "SL__lCnt",
-	ClassTagLTst: "SL__lTst",
-	ClassTagLMax: "SL__lMax",
-	ClassTagLSR: "SL__lSR",
-	ClassTagRSR: "SL__rSR",
-	ClassTagSequence: "SL__sequence",
-	ClassTagSeqTun: "SL__seqTun",
-	ClassTagSLoc: "SL__sLoc",
-	ClassTagSelect: "SL__select",
-	ClassTagSelTun: "SL__selTun",
-	ClassTagCaseSel: "SL__caseSel",
-	ClassTagPrim: "SL__prim",
-	ClassTagParm: "SL__parm",
-	ClassTagIUse: "SL__iUse",
-	ClassTagGRef: "SL__gRef",
-	ClassTagIUseDCO: "SL__iUseDCO",
-	ClassTagMux: "SL__mux",
-	ClassTagMxDCO: "SL__mxDCO",
-	ClassTagDemux: "SL__demux",
-	ClassTagDmxDCO: "SL__dmxDCO",
-	ClassTagCodeVI: "SL__codeVI",
-	ClassTagCodeVIArg: "SL__codeVIArg",
-	ClassTagABuild: "SL__aBuild",
-	ClassTagABuildDCO: "SL__aBuildDCO",
-	ClassTagCABuild: "SL__cABuild",
-	ClassTagCABuildDCO: "SL__cABuildDCO",
-	ClassTagConcat: "SL__concat",
-	ClassTagConcatDCO: "SL__concatDCO",
-	ClassTagDecimate: "SL__decimate",
-	ClassTagDecimateDCO: "SL__decimateDCO",
-	ClassTagInterLeave: "SL__interLeave",
-	ClassTagInterLeaveDCO: "SL__interLeaveDCO",
-	ClassTagAIndx: "SL__aIndx",
-	ClassTagAIDCO: "SL__aIDCO",
-	ClassTagSubset: "SL__subset",
-	ClassTagSubsetDCO: "SL__subsetDCO",
-	ClassTagFBox: "SL__fBox",
-	ClassTagFBoxDCO: "SL__fBoxDCO",
-	ClassTagSupC: "SL__supC",
-	ClassTagDDO: "SL__dDO",
-	ClassTagBDFixed: "SL__bDFixed",
-	ClassTagStdBool: "SL__stdBool",
-	ClassTagStdNum: "SL__stdNum",
-	ClassTagStdString: "SL__stdString",
-	ClassTagIndArr: "SL__indArr",
-	ClassTagStdClust: "SL__stdClust",
-	ClassTagStdVar: "SL__stdVar",
-	ClassTagStdRefNum: "SL__stdRefNum",
-	ClassTagStdColorNum: "SL__stdColorNum",
-	ClassTagStdRing: "SL__stdRing",
-	ClassTagStdSlide: "SL__stdSlide",
-	ClassTagStdKnob: "SL__stdKnob",
-	ClassTagStdPath: "SL__stdPath",
-	ClassTagStdTable: "SL__stdTable",
-	ClassTagStdHandle: "SL__stdHandle",
-	ClassTagStdGraph: "SL__stdGraph",
-	ClassTagStdPict: "SL__stdPict",
-	ClassTagStdPixMap: "SL__stdPixMap",
-	ClassTagUserItem: "SL__userItem",
-	ClassTagNmxDCO: "SL__nmxDCO",
-	ClassTagNMux: "SL__nMux",
-	ClassTagTypeDef: "SL__typeDef",
-	ClassTagStdRamp: "SL__stdRamp",
-	ClassTagUCast: "SL__uCast",
-	ClassTagGRefDCO: "SL__gRefDCO",
-	ClassTagAnnex: "SL__annex",
-	ClassTagStdListbox: "SL__stdListbox",
-	ClassTagExtFunc: "SL__extFunc",
-	ClassTagExtFuncArg: "SL__extFuncArg",
-	ClassTagCpdArith: "SL__cpdArith",
-	ClassTagCpdArithDCO: "SL__cpdArithDCO",
-	ClassTagCrossList: "SL__crossList",
-	ClassTagOHExt: "SL__oHExt",
-	ClassTagConPane: "SL__conPane",
-	ClassTagLoop: "SL__loop",
-	ClassTagMultiDiagSNode: "SL__multiDiagSNode",
-	ClassTagInstrTypeRec: "SL__instrTypeRec",
-	ClassTagTypeDesc: "SL__typeDesc",
-	ClassTagEditSelectionBkUp: "SL__editSelectionBkUp",
-	ClassTagBHExt: "SL__bHExt",
-	ClassTagTransTable: "SL__transTable",
-	ClassTagTextSelectionBkUp: "SL__textSelectionBkUp",
-	ClassTagObjInfoTable: "SL__objInfoTable",
-	ClassTagRecipeBkUp: "SL__recipeBkUp",
-	ClassTagRecipe: "SL__recipe",
-	ClassTagDataBkUp: "SL__dataBkUp",
-	ClassTagPropNode: "SL__propNode",
-	ClassTagPropItem: "SL__propItem",
-	ClassTagHGrowCItem: "SL__hGrowCItem",
-	ClassTagScale: "SL__scale",
-	ClassTagScanfArg: "SL__scanfArg",
-	ClassTagPrintfArg: "SL__printfArg",
-	ClassTagScanf: "SL__scanf",
-	ClassTagPrintf: "SL__printf",
-	ClassTagStdTag: "SL__stdTag",
-	ClassTagSelLabel: "SL__selLabel",
-	ClassTagWizardData: "SL__wizardData",
-	ClassTagHGrowNode: "SL__hGrowNode",
-	ClassTagInvokeNode: "SL__invokeNode",
-	ClassTagInvokeItem: "SL__invokeItem",
-	ClassTagOleVariant: "SL__oleVariant",
-	ClassTagGrouper: "SL__grouper",
-	ClassTagIUseCore: "SL__iUseCore",
-	ClassTagCallByRefNode: "SL__callByRefNode",
-	ClassTagStdCont: "SL__stdCont",
-	ClassTagCEData: "SL__cEData",
-	ClassTagSubVIFromSelBkUp: "SL__subVIFromSelBkUp",
-	ClassTagSelListBkUp: "SL__selListBkUp",
-	ClassTagSNDCO: "SL__sNDCO",
-	ClassTagScriptNode: "SL__scriptNode",
-	ClassTagStdComboBox: "SL__stdComboBox",
-	ClassTagCtlRefConst: "SL__ctlRefConst",
-	ClassTagCtlRefDCO: "SL__ctlRefDCO",
-	ClassTagStdMeasureData: "SL__stdMeasureData",
-	ClassTagAReplace: "SL__aReplace",
-	ClassTagARepDCO: "SL__aRepDCO",
-	ClassTagAInsert: "SL__aInsert",
-	ClassTagAInsDCO: "SL__aInsDCO",
-	ClassTagADelete: "SL__aDelete",
-	ClassTagADelDCO: "SL__aDelDCO",
-	ClassTagTextNode: "SL__textNode",
-	ClassTagExprNode: "SL__exprNode",
-	ClassTagCLStrObj: "SL__cLStrObj",
-	ClassTagStdLvVariant: "SL__stdLvVariant",
-	ClassTagTabControl: "SL__tabControl",
-	ClassTagPlaceholderNode: "SL__placeholderNode",
-	ClassTagPolyIUse: "SL__polyIUse",
-	ClassTagPolyIUseDCO: "SL__polyIUseDCO",
-	ClassTagPage: "SL__page",
-	ClassTagTabArray: "SL__tabArray",
-	ClassTagPart: "SL__part",
-	ClassTagFlatSequence: "SL__flatSequence",
-	ClassTagFlatSeqTun: "SL__flatSeqTun",
-	ClassTagGrowViewObj: "SL__growViewObj",
-	ClassTagCommentNode: "SL__commentNode",
-	ClassTagCommentTun: "SL__commentTun",
-	ClassTagStdSubPanel: "SL__stdSubPanel",
-	ClassTagMergeSignal: "SL__mergeSignal",
-	ClassTagMergeSignalDCO: "SL__mergeSignalDCO",
-	ClassTagGrid: "SL__grid",
-	ClassTagSplitSignal: "SL__splitSignal",
-	ClassTagSplitSignalDCO: "SL__splitSignalDCO",
-	ClassTagEventStruct: "SL__eventStruct",
-	ClassTagEventDataNode: "SL__eventDataNode",
-	ClassTagEventDynDCO: "SL__eventDynDCO",
-	ClassTagEventTimeOut: "SL__eventTimeOut",
-	ClassTagDropFeedback: "SL__dropFeedback",
-	ClassTagMasterWiz: "SL__masterWiz",
-	ClassTagSubWizard: "SL__subWizard",
-	ClassTagStateDiagWiz: "SL__stateDiagWiz",
-	ClassTagState: "SL__state",
-	ClassTagTransition: "SL__transition",
-	ClassTagAbsTime: "SL__absTime",
-	ClassTagNumLabel: "SL__numLabel",
-	ClassTagTableControl: "SL__tableControl",
-	ClassTagDigitalTable: "SL__digitalTable",
-	ClassTagExternalNode: "SL__externalNode",
-	ClassTagExternalTun: "SL__externalTun",
-	ClassTagPolySelector: "SL__polySelector",
-	ClassTagListbox: "SL__listbox",
-	ClassTagTreeControl: "SL__treeControl",
-	ClassTagExternalSignal: "SL__externalSignal",
-	ClassTagBaseTableControl: "SL__baseTableControl",
-	ClassTagBaseListbox: "SL__baseListbox",
-	ClassTagEventRegNode: "SL__eventRegNode",
-	ClassTagEventRegItem: "SL__eventRegItem",
-	ClassTagConstructorNode: "SL__constructorNode",
-	ClassTagPlugInDDO: "SL__plugInDDO",
-	ClassTagRadioClust: "SL__radioClust",
-	ClassTagExternalStructNode: "SL__externalStructNode",
-	ClassTagStubDDO: "SL__stubDDO",
-	ClassTagGraphSplitBar: "SL__graphSplitBar",
-	ClassTagEventRItem: "SL__eventRItem",
-	ClassTagEventRegCallback: "SL__eventRegCallback",
-	ClassTagEventRegCBItem: "SL__eventRegCBItem",
-	ClassTagExternalDiagram: "SL__externalDiagram",
-	ClassTagSubVIFromCodeGenBkUp: "SL__subVIFromCodeGenBkUp",
-	ClassTagOldStatVIRef: "SL__oldStatVIRef",
-	ClassTagLTiming: "SL__lTiming",
-	ClassTagTimeDataNode: "SL__timeDataNode",
-	ClassTagTimeLoop: "SL__timeLoop",
-	ClassTagTimeLoopExtNode: "SL__timeLoopExtNode",
-	ClassTagSimDiag: "SL__simDiag",
-	ClassTagSimNode: "SL__simNode",
-	ClassTagCompDiag: "SL__compDiag",
-	ClassTagSimTun: "SL__simTun",
-	ClassTagKeyMapList: "SL__keyMapList",
-	ClassTagXControl: "SL__xControl",
-	ClassTagStatVIRef: "SL__statVIRef",
-	ClassTagDynIUse: "SL__dynIUse",
-	ClassTagXNode: "SL__xNode",
-	ClassTagXTunnel: "SL__xTunnel",
-	ClassTagXStructure: "SL__xStructure",
-	ClassTagXDiagram: "SL__xDiagram",
-	ClassTagXSignal: "SL__xSignal",
-	ClassTagDynPolyIUse: "SL__dynPolyIUse",
-	ClassTagDynLink: "SL__dynLink",
-	ClassTagUdClassDDO: "SL__udClassDDO",
-	ClassTagSimDCO: "SL__simDCO",
-	ClassTagBaseRefNum: "SL__baseRefNum",
-	ClassTagPrivDataHelper: "SL__privDataHelper",
-	ClassTagPropItemInfo: "SL__propItemInfo",
-	ClassTagAxItemInfo: "SL__axItemInfo",
-	ClassTagDnetItemInfo: "SL__dnetItemInfo",
-	ClassTagUdClassPropItemPrivInfo: "SL__udClassPropItemPrivInfo",
-	ClassTagAInit: "SL__aInit",
-	ClassTagAInitDCO: "SL__aInitDCO",
-	ClassTagAReshape: "SL__aReshape",
-	ClassTagAReshapeDCO: "SL__aReshapeDCO",
-	ClassTagSharedGrowArrayNode: "SL__sharedGrowArrayNode",
-	ClassTagGrowArrayNode: "SL__growArrayNode",
-	ClassTagSharedGrowArrayDCO: "SL__sharedGrowArrayDCO",
-	ClassTagGrowArrayDCO: "SL__growArrayDCO",
-	ClassTagPane: "SL__pane",
-	ClassTagSplitter: "SL__splitter",
-	ClassTagDynIUseCore: "SL__dynIUseCore",
-	ClassTagTimeFlatSequenceFrame: "SL__timeFlatSequenceFrame",
-	ClassTagXDataNode: "SL__xDataNode",
-	ClassTagSequenceFrame: "SL__sequenceFrame",
-	ClassTagTimeSequence: "SL__timeSequence",
-	ClassTagTimeFlatSequence: "SL__timeFlatSequence",
-	ClassTagCallParentDynIUse: "SL__callParentDynIUse",
-	ClassTagMatedLpTun: "SL__matedLpTun",
-	ClassTagMatedSeqTun: "SL__matedSeqTun",
-	ClassTagMatedLSR: "SL__matedLSR",
-	ClassTagMatedRSR: "SL__matedRSR",
-	ClassTagScrollbar: "SL__scrollbar",
-	ClassTagMathScriptNode: "SL__mathScriptNode",
-	ClassTagMathScriptNodeDCO: "SL__mathScriptNodeDCO",
-	ClassTagSdfDiag: "SL__sdfDiag",
-	ClassTagSdfNode: "SL__sdfNode",
-	ClassTagSdfcompDiag: "SL__sdfcompDiag",
-	ClassTagSdfTun: "SL__sdfTun",
-	ClassTagSdfDCO: "SL__sdfDCO",
-	ClassTagScenegraphdisplay: "SL__scenegraphdisplay",
-	ClassTagHtmlControl: "SL__htmlControl",
-	ClassTagCodeWizard: "SL__codeWizard",
-	ClassTagCBoxDPIdx: "SL__cBoxDPIdx",
-	ClassTagCBoxDCODPIdx: "SL__cBoxDCODPIdx",
-	ClassTagAbstractDiagram: "SL__abstractDiagram",
-	ClassTagMathDiagram: "SL__mathDiagram",
-	ClassTagBasicObj: "SL__basicObj",
-	ClassTagRegionNode: "SL__regionNode",
-	ClassTagStateNode: "SL__stateNode",
-	ClassTagJunctionNode: "SL__junctionNode",
-	ClassTagRegionTun: "SL__regionTun",
-	ClassTagMultiSegmentPipe: "SL__multiSegmentPipe",
-	ClassTagLDCO: "SL__lDCO",
-	ClassTagRDCO: "SL__rDCO",
-	ClassTagForkNode: "SL__forkNode",
-	ClassTagJoinNode: "SL__joinNode",
-	ClassTagScDiag: "SL__scDiag",
-	ClassTagIndArrInterface: "SL__indArrInterface",
-	ClassTagLeftFeedback: "SL__leftFeedback",
-	ClassTagRightFeedback: "SL__rightFeedback",
-	ClassTagInitFeedback: "SL__initFeedback",
-	ClassTagQtCont: "SL__qtCont",
-	ClassTagSharedVariable: "SL__sharedVariable",
-	ClassTagSharedVariableDCO: "SL__sharedVariableDCO",
-	ClassTagHiddenFBNode: "SL__hiddenFBNode",
-	ClassTagOverridableParm: "SL__overridableParm",
-	ClassTagTernaryDDO: "SL__ternaryDDO",
+	ClassTagFontRun:                     "SL__fontRun",
+	ClassTagTextHair:                    "SL__textHair",
+	ClassTagPrNodeList:                  "SL__prNodeList",
+	ClassTagPrFrameList:                 "SL__prFrameList",
+	ClassTagPrVIPartList:                "SL__prVIPartList",
+	ClassTagGeneric:                     "SL__generic",
+	ClassTagList:                        "SL__list",
+	ClassTagDataObj:                     "SL__dataObj",
+	ClassTagCosm:                        "SL__cosm",
+	ClassTagLabel:                       "SL__label",
+	ClassTagMultiCosm:                   "SL__multiCosm",
+	ClassTagBigMultiCosm:                "SL__bigMultiCosm",
+	ClassTagMultiLabel:                  "SL__multiLabel",
+	ClassTagBigMultiLabel:               "SL__bigMultiLabel",
+	ClassTagDCO:                         "SL__dCO",
+	ClassTagFPDCO:                       "SL__fPDCO",
+	ClassTagBDConstDCO:                  "SL__bDConstDCO",
+	ClassTagBDDCO:                       "SL__bDDCO",
+	ClassTagTerm:                        "SL__term",
+	ClassTagFPTerm:                      "SL__fPTerm",
+	ClassTagSignal:                      "SL__signal",
+	ClassTagWire:                        "SL__wire",
+	ClassTagHSignal:                     "SL__hSignal",
+	ClassTagHNode:                       "SL__hNode",
+	ClassTagDiag:                        "SL__diag",
+	ClassTagNode:                        "SL__node",
+	ClassTagSRN:                         "SL__sRN",
+	ClassTagSNode:                       "SL__sNode",
+	ClassTagGrowableNode:                "SL__growableNode",
+	ClassTagForLoop:                     "SL__forLoop",
+	ClassTagWhileLoop:                   "SL__whileLoop",
+	ClassTagLpTun:                       "SL__lpTun",
+	ClassTagInnerLpTun:                  "SL__innerLpTun",
+	ClassTagLCnt:                        "SL__lCnt",
+	ClassTagLTst:                        "SL__lTst",
+	ClassTagLMax:                        "SL__lMax",
+	ClassTagLSR:                         "SL__lSR",
+	ClassTagRSR:                         "SL__rSR",
+	ClassTagSequence:                    "SL__sequence",
+	ClassTagSeqTun:                      "SL__seqTun",
+	ClassTagSLoc:                        "SL__sLoc",
+	ClassTagSelect:                      "SL__select",
+	ClassTagSelTun:                      "SL__selTun",
+	ClassTagCaseSel:                     "SL__caseSel",
+	ClassTagPrim:                        "SL__prim",
+	ClassTagParm:                        "SL__parm",
+	ClassTagIUse:                        "SL__iUse",
+	ClassTagGRef:                        "SL__gRef",
+	ClassTagIUseDCO:                     "SL__iUseDCO",
+	ClassTagMux:                         "SL__mux",
+	ClassTagMxDCO:                       "SL__mxDCO",
+	ClassTagDemux:                       "SL__demux",
+	ClassTagDmxDCO:                      "SL__dmxDCO",
+	ClassTagCodeVI:                      "SL__codeVI",
+	ClassTagCodeVIArg:                   "SL__codeVIArg",
+	ClassTagABuild:                      "SL__aBuild",
+	ClassTagABuildDCO:                   "SL__aBuildDCO",
+	ClassTagCABuild:                     "SL__cABuild",
+	ClassTagCABuildDCO:                  "SL__cABuildDCO",
+	ClassTagConcat:                      "SL__concat",
+	ClassTagConcatDCO:                   "SL__concatDCO",
+	ClassTagDecimate:                    "SL__decimate",
+	ClassTagDecimateDCO:                 "SL__decimateDCO",
+	ClassTagInterLeave:                  "SL__interLeave",
+	ClassTagInterLeaveDCO:               "SL__interLeaveDCO",
+	ClassTagAIndx:                       "SL__aIndx",
+	ClassTagAIDCO:                       "SL__aIDCO",
+	ClassTagSubset:                      "SL__subset",
+	ClassTagSubsetDCO:                   "SL__subsetDCO",
+	ClassTagFBox:                        "SL__fBox",
+	ClassTagFBoxDCO:                     "SL__fBoxDCO",
+	ClassTagSupC:                        "SL__supC",
+	ClassTagDDO:                         "SL__dDO",
+	ClassTagBDFixed:                     "SL__bDFixed",
+	ClassTagStdBool:                     "SL__stdBool",
+	ClassTagStdNum:                      "SL__stdNum",
+	ClassTagStdString:                   "SL__stdString",
+	ClassTagIndArr:                      "SL__indArr",
+	ClassTagStdClust:                    "SL__stdClust",
+	ClassTagStdVar:                      "SL__stdVar",
+	ClassTagStdRefNum:                   "SL__stdRefNum",
+	ClassTagStdColorNum:                 "SL__stdColorNum",
+	ClassTagStdRing:                     "SL__stdRing",
+	ClassTagStdSlide:                    "SL__stdSlide",
+	ClassTagStdKnob:                     "SL__stdKnob",
+	ClassTagStdPath:                     "SL__stdPath",
+	ClassTagStdTable:                    "SL__stdTable",
+	ClassTagStdHandle:                   "SL__stdHandle",
+	ClassTagStdGraph:                    "SL__stdGraph",
+	ClassTagStdPict:                     "SL__stdPict",
+	ClassTagStdPixMap:                   "SL__stdPixMap",
+	ClassTagUserItem:                    "SL__userItem",
+	ClassTagNmxDCO:                      "SL__nmxDCO",
+	ClassTagNMux:                        "SL__nMux",
+	ClassTagTypeDef:                     "SL__typeDef",
+	ClassTagStdRamp:                     "SL__stdRamp",
+	ClassTagUCast:                       "SL__uCast",
+	ClassTagGRefDCO:                     "SL__gRefDCO",
+	ClassTagAnnex:                       "SL__annex",
+	ClassTagStdListbox:                  "SL__stdListbox",
+	ClassTagExtFunc:                     "SL__extFunc",
+	ClassTagExtFuncArg:                  "SL__extFuncArg",
+	ClassTagCpdArith:                    "SL__cpdArith",
+	ClassTagCpdArithDCO:                 "SL__cpdArithDCO",
+	ClassTagCrossList:                   "SL__crossList",
+	ClassTagOHExt:                       "SL__oHExt",
+	ClassTagConPane:                     "SL__conPane",
+	ClassTagLoop:                        "SL__loop",
+	ClassTagMultiDiagSNode:              "SL__multiDiagSNode",
+	ClassTagInstrTypeRec:                "SL__instrTypeRec",
+	ClassTagTypeDesc:                    "SL__typeDesc",
+	ClassTagEditSelectionBkUp:           "SL__editSelectionBkUp",
+	ClassTagBHExt:                       "SL__bHExt",
+	ClassTagTransTable:                  "SL__transTable",
+	ClassTagTextSelectionBkUp:           "SL__textSelectionBkUp",
+	ClassTagObjInfoTable:                "SL__objInfoTable",
+	ClassTagRecipeBkUp:                  "SL__recipeBkUp",
+	ClassTagRecipe:                      "SL__recipe",
+	ClassTagDataBkUp:                    "SL__dataBkUp",
+	ClassTagPropNode:                    "SL__propNode",
+	ClassTagPropItem:                    "SL__propItem",
+	ClassTagHGrowCItem:                  "SL__hGrowCItem",
+	ClassTagScale:                       "SL__scale",
+	ClassTagScanfArg:                    "SL__scanfArg",
+	ClassTagPrintfArg:                   "SL__printfArg",
+	ClassTagScanf:                       "SL__scanf",
+	ClassTagPrintf:                      "SL__printf",
+	ClassTagStdTag:                      "SL__stdTag",
+	ClassTagSelLabel:                    "SL__selLabel",
+	ClassTagWizardData:                  "SL__wizardData",
+	ClassTagHGrowNode:                   "SL__hGrowNode",
+	ClassTagInvokeNode:                  "SL__invokeNode",
+	ClassTagInvokeItem:                  "SL__invokeItem",
+	ClassTagOleVariant:                  "SL__oleVariant",
+	ClassTagGrouper:                     "SL__grouper",
+	ClassTagIUseCore:                    "SL__iUseCore",
+	ClassTagCallByRefNode:               "SL__callByRefNode",
+	ClassTagStdCont:                     "SL__stdCont",
+	ClassTagCEData:                      "SL__cEData",
+	ClassTagSubVIFromSelBkUp:            "SL__subVIFromSelBkUp",
+	ClassTagSelListBkUp:                 "SL__selListBkUp",
+	ClassTagSNDCO:                       "SL__sNDCO",
+	ClassTagScriptNode:                  "SL__scriptNode",
+	ClassTagStdComboBox:                 "SL__stdComboBox",
+	ClassTagCtlRefConst:                 "SL__ctlRefConst",
+	ClassTagCtlRefDCO:                   "SL__ctlRefDCO",
+	ClassTagStdMeasureData:              "SL__stdMeasureData",
+	ClassTagAReplace:                    "SL__aReplace",
+	ClassTagARepDCO:                     "SL__aRepDCO",
+	ClassTagAInsert:                     "SL__aInsert",
+	ClassTagAInsDCO:                     "SL__aInsDCO",
+	ClassTagADelete:                     "SL__aDelete",
+	ClassTagADelDCO:                     "SL__aDelDCO",
+	ClassTagTextNode:                    "SL__textNode",
+	ClassTagExprNode:                    "SL__exprNode",
+	ClassTagCLStrObj:                    "SL__cLStrObj",
+	ClassTagStdLvVariant:                "SL__stdLvVariant",
+	ClassTagTabControl:                  "SL__tabControl",
+	ClassTagPlaceholderNode:             "SL__placeholderNode",
+	ClassTagPolyIUse:                    "SL__polyIUse",
+	ClassTagPolyIUseDCO:                 "SL__polyIUseDCO",
+	ClassTagPage:                        "SL__page",
+	ClassTagTabArray:                    "SL__tabArray",
+	ClassTagPart:                        "SL__part",
+	ClassTagFlatSequence:                "SL__flatSequence",
+	ClassTagFlatSeqTun:                  "SL__flatSeqTun",
+	ClassTagGrowViewObj:                 "SL__growViewObj",
+	ClassTagCommentNode:                 "SL__commentNode",
+	ClassTagCommentTun:                  "SL__commentTun",
+	ClassTagStdSubPanel:                 "SL__stdSubPanel",
+	ClassTagMergeSignal:                 "SL__mergeSignal",
+	ClassTagMergeSignalDCO:              "SL__mergeSignalDCO",
+	ClassTagGrid:                        "SL__grid",
+	ClassTagSplitSignal:                 "SL__splitSignal",
+	ClassTagSplitSignalDCO:              "SL__splitSignalDCO",
+	ClassTagEventStruct:                 "SL__eventStruct",
+	ClassTagEventDataNode:               "SL__eventDataNode",
+	ClassTagEventDynDCO:                 "SL__eventDynDCO",
+	ClassTagEventTimeOut:                "SL__eventTimeOut",
+	ClassTagDropFeedback:                "SL__dropFeedback",
+	ClassTagMasterWiz:                   "SL__masterWiz",
+	ClassTagSubWizard:                   "SL__subWizard",
+	ClassTagStateDiagWiz:                "SL__stateDiagWiz",
+	ClassTagState:                       "SL__state",
+	ClassTagTransition:                  "SL__transition",
+	ClassTagAbsTime:                     "SL__absTime",
+	ClassTagNumLabel:                    "SL__numLabel",
+	ClassTagTableControl:                "SL__tableControl",
+	ClassTagDigitalTable:                "SL__digitalTable",
+	ClassTagExternalNode:                "SL__externalNode",
+	ClassTagExternalTun:                 "SL__externalTun",
+	ClassTagPolySelector:                "SL__polySelector",
+	ClassTagListbox:                     "SL__listbox",
+	ClassTagTreeControl:                 "SL__treeControl",
+	ClassTagExternalSignal:              "SL__externalSignal",
+	ClassTagBaseTableControl:            "SL__baseTableControl",
+	ClassTagBaseListbox:                 "SL__baseListbox",
+	ClassTagEventRegNode:                "SL__eventRegNode",
+	ClassTagEventRegItem:                "SL__eventRegItem",
+	ClassTagConstructorNode:             "SL__constructorNode",
+	ClassTagPlugInDDO:                   "SL__plugInDDO",
+	ClassTagRadioClust:                  "SL__radioClust",
+	ClassTagExternalStructNode:          "SL__externalStructNode",
+	ClassTagStubDDO:                     "SL__stubDDO",
+	ClassTagGraphSplitBar:               "SL__graphSplitBar",
+	ClassTagEventRItem:                  "SL__eventRItem",
+	ClassTagEventRegCallback:            "SL__eventRegCallback",
+	ClassTagEventRegCBItem:              "SL__eventRegCBItem",
+	ClassTagExternalDiagram:             "SL__externalDiagram",
+	ClassTagSubVIFromCodeGenBkUp:        "SL__subVIFromCodeGenBkUp",
+	ClassTagOldStatVIRef:                "SL__oldStatVIRef",
+	ClassTagLTiming:                     "SL__lTiming",
+	ClassTagTimeDataNode:                "SL__timeDataNode",
+	ClassTagTimeLoop:                    "SL__timeLoop",
+	ClassTagTimeLoopExtNode:             "SL__timeLoopExtNode",
+	ClassTagSimDiag:                     "SL__simDiag",
+	ClassTagSimNode:                     "SL__simNode",
+	ClassTagCompDiag:                    "SL__compDiag",
+	ClassTagSimTun:                      "SL__simTun",
+	ClassTagKeyMapList:                  "SL__keyMapList",
+	ClassTagXControl:                    "SL__xControl",
+	ClassTagStatVIRef:                   "SL__statVIRef",
+	ClassTagDynIUse:                     "SL__dynIUse",
+	ClassTagXNode:                       "SL__xNode",
+	ClassTagXTunnel:                     "SL__xTunnel",
+	ClassTagXStructure:                  "SL__xStructure",
+	ClassTagXDiagram:                    "SL__xDiagram",
+	ClassTagXSignal:                     "SL__xSignal",
+	ClassTagDynPolyIUse:                 "SL__dynPolyIUse",
+	ClassTagDynLink:                     "SL__dynLink",
+	ClassTagUdClassDDO:                  "SL__udClassDDO",
+	ClassTagSimDCO:                      "SL__simDCO",
+	ClassTagBaseRefNum:                  "SL__baseRefNum",
+	ClassTagPrivDataHelper:              "SL__privDataHelper",
+	ClassTagPropItemInfo:                "SL__propItemInfo",
+	ClassTagAxItemInfo:                  "SL__axItemInfo",
+	ClassTagDnetItemInfo:                "SL__dnetItemInfo",
+	ClassTagUdClassPropItemPrivInfo:     "SL__udClassPropItemPrivInfo",
+	ClassTagAInit:                       "SL__aInit",
+	ClassTagAInitDCO:                    "SL__aInitDCO",
+	ClassTagAReshape:                    "SL__aReshape",
+	ClassTagAReshapeDCO:                 "SL__aReshapeDCO",
+	ClassTagSharedGrowArrayNode:         "SL__sharedGrowArrayNode",
+	ClassTagGrowArrayNode:               "SL__growArrayNode",
+	ClassTagSharedGrowArrayDCO:          "SL__sharedGrowArrayDCO",
+	ClassTagGrowArrayDCO:                "SL__growArrayDCO",
+	ClassTagPane:                        "SL__pane",
+	ClassTagSplitter:                    "SL__splitter",
+	ClassTagDynIUseCore:                 "SL__dynIUseCore",
+	ClassTagTimeFlatSequenceFrame:       "SL__timeFlatSequenceFrame",
+	ClassTagXDataNode:                   "SL__xDataNode",
+	ClassTagSequenceFrame:               "SL__sequenceFrame",
+	ClassTagTimeSequence:                "SL__timeSequence",
+	ClassTagTimeFlatSequence:            "SL__timeFlatSequence",
+	ClassTagCallParentDynIUse:           "SL__callParentDynIUse",
+	ClassTagMatedLpTun:                  "SL__matedLpTun",
+	ClassTagMatedSeqTun:                 "SL__matedSeqTun",
+	ClassTagMatedLSR:                    "SL__matedLSR",
+	ClassTagMatedRSR:                    "SL__matedRSR",
+	ClassTagScrollbar:                   "SL__scrollbar",
+	ClassTagMathScriptNode:              "SL__mathScriptNode",
+	ClassTagMathScriptNodeDCO:           "SL__mathScriptNodeDCO",
+	ClassTagSdfDiag:                     "SL__sdfDiag",
+	ClassTagSdfNode:                     "SL__sdfNode",
+	ClassTagSdfcompDiag:                 "SL__sdfcompDiag",
+	ClassTagSdfTun:                      "SL__sdfTun",
+	ClassTagSdfDCO:                      "SL__sdfDCO",
+	ClassTagScenegraphdisplay:           "SL__scenegraphdisplay",
+	ClassTagHtmlControl:                 "SL__htmlControl",
+	ClassTagCodeWizard:                  "SL__codeWizard",
+	ClassTagCBoxDPIdx:                   "SL__cBoxDPIdx",
+	ClassTagCBoxDCODPIdx:                "SL__cBoxDCODPIdx",
+	ClassTagAbstractDiagram:             "SL__abstractDiagram",
+	ClassTagMathDiagram:                 "SL__mathDiagram",
+	ClassTagBasicObj:                    "SL__basicObj",
+	ClassTagRegionNode:                  "SL__regionNode",
+	ClassTagStateNode:                   "SL__stateNode",
+	ClassTagJunctionNode:                "SL__junctionNode",
+	ClassTagRegionTun:                   "SL__regionTun",
+	ClassTagMultiSegmentPipe:            "SL__multiSegmentPipe",
+	ClassTagLDCO:                        "SL__lDCO",
+	ClassTagRDCO:                        "SL__rDCO",
+	ClassTagForkNode:                    "SL__forkNode",
+	ClassTagJoinNode:                    "SL__joinNode",
+	ClassTagScDiag:                      "SL__scDiag",
+	ClassTagIndArrInterface:             "SL__indArrInterface",
+	ClassTagLeftFeedback:                "SL__leftFeedback",
+	ClassTagRightFeedback:               "SL__rightFeedback",
+	ClassTagInitFeedback:                "SL__initFeedback",
+	ClassTagQtCont:                      "SL__qtCont",
+	ClassTagSharedVariable:              "SL__sharedVariable",
+	ClassTagSharedVariableDCO:           "SL__sharedVariableDCO",
+	ClassTagHiddenFBNode:                "SL__hiddenFBNode",
+	ClassTagOverridableParm:             "SL__overridableParm",
+	ClassTagTernaryDDO:                  "SL__ternaryDDO",
 	ClassTagDecomposeRecomposeStructure: "SL__decomposeRecomposeStructure",
-	ClassTagDecomposeRecomposeTunnel: "SL__decomposeRecomposeTunnel",
-	ClassTagDecomposeArrayNode: "SL__decomposeArrayNode",
-	ClassTagDecomposeClusterNode: "SL__decomposeClusterNode",
-	ClassTagDecomposeVariantNode: "SL__decomposeVariantNode",
-	ClassTagDecomposeMatchNode: "SL__decomposeMatchNode",
-	ClassTagDecomposeDataValRefNode: "SL__decomposeDataValRefNode",
-	ClassTagDataValRefPoserInterface: "SL__dataValRefPoserInterface",
-	ClassTagDecomposeDCO: "SL__decomposeDCO",
-	ClassTagDecomposeClusterDCO: "SL__decomposeClusterDCO",
-	ClassTagPoserInterface: "SL__poserInterface",
-	ClassTagArrayPoserInterface: "SL__arrayPoserInterface",
-	ClassTagClusterPoserInterface: "SL__clusterPoserInterface",
-	ClassTagVariantPoserInterface: "SL__variantPoserInterface",
-	ClassTagMatchPoserInterface: "SL__matchPoserInterface",
-	ClassTagMathScriptCallByRefNode: "SL__mathScriptCallByRefNode",
-	ClassTagFBoxLine: "SL__FBoxLine",
-	ClassTagSceneGraphDisplayPart: "SL__sceneGraphDisplayPart",
-	ClassTagFxpUnbundle: "SL__fxpUnbundle",
-	ClassTagFxpUnbundleDCO: "SL__fxpUnbundleDCO",
-	ClassTagDecomposeArrayNodeDCO: "SL__decomposeArrayNodeDCO",
-	ClassTagDecomposeArraySplitNode: "SL__decomposeArraySplitNode",
-	ClassTagArraySplitPoserInterface: "SL__arraySplitPoserInterface",
-	ClassTagDecomposeArraySPlitNodeDCO: "SL__decomposeArraySPlitNodeDCO",
-	ClassTagGenIUse: "SL__genIUse",
-	ClassTagParForWorkers: "SL__parForWorkers",
-	ClassTagSharedVariableDynamicOpen: "SL__sharedVariableDynamicOpen",
-	ClassTagSharedVariableDynamicRead: "SL__sharedVariableDynamicRead",
-	ClassTagSharedVariableDynamicWrite: "SL__sharedVariableDynamicWrite",
-	ClassTagSharedVariableDynamicDCO: "SL__sharedVariableDynamicDCO",
-	ClassTagConditionalFeedbackDCO: "SL__conditionalFeedbackDCO",
-	ClassTagChunkSize: "SL__chunkSize",
-	ClassTagSlaveFBInputNode: "SL__slaveFBInputNode",
-	ClassTagInnerChunkSize: "SL__innerChunkSize",
-	ClassTagMergeErrors: "SL__mergeErrors",
-	ClassTagMergeErrorsDCO: "SL__mergeErrorsDCO",
-	ClassTagDexChannelCreateNode: "SL__dexChannelCreateNode",
-	ClassTagDexChannelShutdownNode: "SL__dexChannelShutdownNode",
-	ClassTagLpTunConditionDCO: "SL__lpTunConditionDCO",
-	ClassTagAttachment: "SL__attachment",
-	ClassTagConpaneConnection: "SL__ConpaneConnection",
-	ClassTagComplexScalar: "SL__ComplexScalar",
-	ClassTagTime128: "SL__Time128",
-	ClassTagImage: "SL__Image",
-	ClassTagKeyMappingBinding: "SL__KeyMappingBinding",
-	ClassTagExtFuncParam: "SL__ExtFuncParam",
-	ClassTagExtFuncAdded: "SL__ExtFuncAdded",
-	ClassTagSubCosm: "SL__SubCosm",
-	ClassTagEmbedObject: "SL__EmbedObject",
-	ClassTagSubLabel: "SL__SubLabel",
-	ClassTagSceneView: "SL__SceneView",
-	ClassTagSceneColor: "SL__SceneColor",
-	ClassTagSceneEyePoint: "SL__SceneEyePoint",
-	ClassTagTableAttribute: "SL__TableAttribute",
-	ClassTagBrowseOptions: "SL__BrowseOptions",
-	ClassTagStorageRowCol: "SL__StorageRowCol",
-	ClassTagColorPair: "SL__ColorPair",
-	ClassTagTreeNode: "SL__TreeNode",
-	ClassTagRelativeRowCol: "SL__RelativeRowCol",
-	ClassTagTabInfoItem: "SL__TabInfoItem",
-	ClassTagPageInfoItem: "SL__PageInfoItem",
-	ClassTagTreeElt: "SL__TreeElt",
-	ClassTagExpressionInfo: "SL__ExpressionInfo",
-	ClassTagSelectorInfoElement: "SL__SelectorInfoElement",
-	ClassTagGrowTermInfo: "SL__GrowTermInfo",
-	ClassTagMappedPoint: "SL__MappedPoint",
-	ClassTagPlotData: "SL__PlotData",
-	ClassTagCursorData: "SL__CursorData",
-	ClassTagPlotImages: "SL__PlotImages",
-	ClassTagCursorButtonsRec: "SL__CursorButtonsRec",
-	ClassTagPlotLegendData: "SL__PlotLegendData",
-	ClassTagDigitlaBusOrgClust: "SL__DigitlaBusOrgClust",
-	ClassTagScaleLegendData: "SL__ScaleLegendData",
-	ClassTagScaleData: "SL__ScaleData",
-	ClassTagObjNodeMapEntry: "SL__ObjNodeMapEntry",
-	ClassTagObjMapEntry: "SL__ObjMapEntry",
-	ClassTagEventSpec: "SL__EventSpec",
-	ClassTagSelectorRange: "SL__SelectorRange",
+	ClassTagDecomposeRecomposeTunnel:    "SL__decomposeRecomposeTunnel",
+	ClassTagDecomposeArrayNode:          "SL__decomposeArrayNode",
+	ClassTagDecomposeClusterNode:        "SL__decomposeClusterNode",
+	ClassTagDecomposeVariantNode:        "SL__decomposeVariantNode",
+	ClassTagDecomposeMatchNode:          "SL__decomposeMatchNode",
+	ClassTagDecomposeDataValRefNode:     "SL__decomposeDataValRefNode",
+	ClassTagDataValRefPoserInterface:    "SL__dataValRefPoserInterface",
+	ClassTagDecomposeDCO:                "SL__decomposeDCO",
+	ClassTagDecomposeClusterDCO:         "SL__decomposeClusterDCO",
+	ClassTagPoserInterface:              "SL__poserInterface",
+	ClassTagArrayPoserInterface:         "SL__arrayPoserInterface",
+	ClassTagClusterPoserInterface:       "SL__clusterPoserInterface",
+	ClassTagVariantPoserInterface:       "SL__variantPoserInterface",
+	ClassTagMatchPoserInterface:         "SL__matchPoserInterface",
+	ClassTagMathScriptCallByRefNode:     "SL__mathScriptCallByRefNode",
+	ClassTagFBoxLine:                    "SL__FBoxLine",
+	ClassTagSceneGraphDisplayPart:       "SL__sceneGraphDisplayPart",
+	ClassTagFxpUnbundle:                 "SL__fxpUnbundle",
+	ClassTagFxpUnbundleDCO:              "SL__fxpUnbundleDCO",
+	ClassTagDecomposeArrayNodeDCO:       "SL__decomposeArrayNodeDCO",
+	ClassTagDecomposeArraySplitNode:     "SL__decomposeArraySplitNode",
+	ClassTagArraySplitPoserInterface:    "SL__arraySplitPoserInterface",
+	ClassTagDecomposeArraySPlitNodeDCO:  "SL__decomposeArraySPlitNodeDCO",
+	ClassTagGenIUse:                     "SL__genIUse",
+	ClassTagParForWorkers:               "SL__parForWorkers",
+	ClassTagSharedVariableDynamicOpen:   "SL__sharedVariableDynamicOpen",
+	ClassTagSharedVariableDynamicRead:   "SL__sharedVariableDynamicRead",
+	ClassTagSharedVariableDynamicWrite:  "SL__sharedVariableDynamicWrite",
+	ClassTagSharedVariableDynamicDCO:    "SL__sharedVariableDynamicDCO",
+	ClassTagConditionalFeedbackDCO:      "SL__conditionalFeedbackDCO",
+	ClassTagChunkSize:                   "SL__chunkSize",
+	ClassTagSlaveFBInputNode:            "SL__slaveFBInputNode",
+	ClassTagInnerChunkSize:              "SL__innerChunkSize",
+	ClassTagMergeErrors:                 "SL__mergeErrors",
+	ClassTagMergeErrorsDCO:              "SL__mergeErrorsDCO",
+	ClassTagDexChannelCreateNode:        "SL__dexChannelCreateNode",
+	ClassTagDexChannelShutdownNode:      "SL__dexChannelShutdownNode",
+	ClassTagLpTunConditionDCO:           "SL__lpTunConditionDCO",
+	ClassTagAttachment:                  "SL__attachment",
+	ClassTagConpaneConnection:           "SL__ConpaneConnection",
+	ClassTagComplexScalar:               "SL__ComplexScalar",
+	ClassTagTime128:                     "SL__Time128",
+	ClassTagImage:                       "SL__Image",
+	ClassTagKeyMappingBinding:           "SL__KeyMappingBinding",
+	ClassTagExtFuncParam:                "SL__ExtFuncParam",
+	ClassTagExtFuncAdded:                "SL__ExtFuncAdded",
+	ClassTagSubCosm:                     "SL__SubCosm",
+	ClassTagEmbedObject:                 "SL__EmbedObject",
+	ClassTagSubLabel:                    "SL__SubLabel",
+	ClassTagSceneView:                   "SL__SceneView",
+	ClassTagSceneColor:                  "SL__SceneColor",
+	ClassTagSceneEyePoint:               "SL__SceneEyePoint",
+	ClassTagTableAttribute:              "SL__TableAttribute",
+	ClassTagBrowseOptions:               "SL__BrowseOptions",
+	ClassTagStorageRowCol:               "SL__StorageRowCol",
+	ClassTagColorPair:                   "SL__ColorPair",
+	ClassTagTreeNode:                    "SL__TreeNode",
+	ClassTagRelativeRowCol:              "SL__RelativeRowCol",
+	ClassTagTabInfoItem:                 "SL__TabInfoItem",
+	ClassTagPageInfoItem:                "SL__PageInfoItem",
+	ClassTagTreeElt:                     "SL__TreeElt",
+	ClassTagExpressionInfo:              "SL__ExpressionInfo",
+	ClassTagSelectorInfoElement:         "SL__SelectorInfoElement",
+	ClassTagGrowTermInfo:                "SL__GrowTermInfo",
+	ClassTagMappedPoint:                 "SL__MappedPoint",
+	ClassTagPlotData:                    "SL__PlotData",
+	ClassTagCursorData:                  "SL__CursorData",
+	ClassTagPlotImages:                  "SL__PlotImages",
+	ClassTagCursorButtonsRec:            "SL__CursorButtonsRec",
+	ClassTagPlotLegendData:              "SL__PlotLegendData",
+	ClassTagDigitlaBusOrgClust:          "SL__DigitlaBusOrgClust",
+	ClassTagScaleLegendData:             "SL__ScaleLegendData",
+	ClassTagScaleData:                   "SL__ScaleData",
+	ClassTagObjNodeMapEntry:             "SL__ObjNodeMapEntry",
+	ClassTagObjMapEntry:                 "SL__ObjMapEntry",
+	ClassTagEventSpec:                   "SL__EventSpec",
+	ClassTagSelectorRange:               "SL__SelectorRange",
 }
 
 // String returns the pylabview name when known, otherwise a `ClassTag(N)` fallback.
@@ -2161,31 +2161,31 @@ type FontRunTag int
 
 // Members of FontRunTag.
 const (
-	FontRunTagTextRecObject FontRunTag = 0 // OF__textRecObject
-	FontRunTagFlags FontRunTag = 1 // OF__flags
-	FontRunTagMode FontRunTag = 2 // OF__mode
-	FontRunTagText FontRunTag = 3 // OF__text
-	FontRunTagView FontRunTag = 4 // OF__view
-	FontRunTagBgColor FontRunTag = 5 // OF__bgColor
-	FontRunTagFr FontRunTag = 6 // OF__fr
-	FontRunTagCurfr FontRunTag = 7 // OF__curfr
-	FontRunTagFontofst FontRunTag = 8 // OF__fontofst
-	FontRunTagFontid FontRunTag = 9 // OF__fontid
-	FontRunTagFontcolor FontRunTag = 10 // OF__fontcolor
+	FontRunTagTextRecObject FontRunTag = 0  // OF__textRecObject
+	FontRunTagFlags         FontRunTag = 1  // OF__flags
+	FontRunTagMode          FontRunTag = 2  // OF__mode
+	FontRunTagText          FontRunTag = 3  // OF__text
+	FontRunTagView          FontRunTag = 4  // OF__view
+	FontRunTagBgColor       FontRunTag = 5  // OF__bgColor
+	FontRunTagFr            FontRunTag = 6  // OF__fr
+	FontRunTagCurfr         FontRunTag = 7  // OF__curfr
+	FontRunTagFontofst      FontRunTag = 8  // OF__fontofst
+	FontRunTagFontid        FontRunTag = 9  // OF__fontid
+	FontRunTagFontcolor     FontRunTag = 10 // OF__fontcolor
 )
 
 var fontRunTagNames = map[FontRunTag]string{
 	FontRunTagTextRecObject: "OF__textRecObject",
-	FontRunTagFlags: "OF__flags",
-	FontRunTagMode: "OF__mode",
-	FontRunTagText: "OF__text",
-	FontRunTagView: "OF__view",
-	FontRunTagBgColor: "OF__bgColor",
-	FontRunTagFr: "OF__fr",
-	FontRunTagCurfr: "OF__curfr",
-	FontRunTagFontofst: "OF__fontofst",
-	FontRunTagFontid: "OF__fontid",
-	FontRunTagFontcolor: "OF__fontcolor",
+	FontRunTagFlags:         "OF__flags",
+	FontRunTagMode:          "OF__mode",
+	FontRunTagText:          "OF__text",
+	FontRunTagView:          "OF__view",
+	FontRunTagBgColor:       "OF__bgColor",
+	FontRunTagFr:            "OF__fr",
+	FontRunTagCurfr:         "OF__curfr",
+	FontRunTagFontofst:      "OF__fontofst",
+	FontRunTagFontid:        "OF__fontid",
+	FontRunTagFontcolor:     "OF__fontcolor",
 }
 
 // String returns the pylabview name when known, otherwise a `FontRunTag(N)` fallback.
@@ -2201,31 +2201,31 @@ type TextHairTag int
 
 // Members of TextHairTag.
 const (
-	TextHairTagTextRecObject TextHairTag = 0 // OF__textRecObject
-	TextHairTagFlags TextHairTag = 1 // OF__flags
-	TextHairTagMode TextHairTag = 2 // OF__mode
-	TextHairTagText TextHairTag = 3 // OF__text
-	TextHairTagView TextHairTag = 4 // OF__view
-	TextHairTagBgColor TextHairTag = 5 // OF__bgColor
-	TextHairTagFr TextHairTag = 6 // OF__fr
-	TextHairTagCurfr TextHairTag = 7 // OF__curfr
-	TextHairTagFontofst TextHairTag = 8 // OF__fontofst
-	TextHairTagFontid TextHairTag = 9 // OF__fontid
-	TextHairTagFontcolor TextHairTag = 10 // OF__fontcolor
+	TextHairTagTextRecObject TextHairTag = 0  // OF__textRecObject
+	TextHairTagFlags         TextHairTag = 1  // OF__flags
+	TextHairTagMode          TextHairTag = 2  // OF__mode
+	TextHairTagText          TextHairTag = 3  // OF__text
+	TextHairTagView          TextHairTag = 4  // OF__view
+	TextHairTagBgColor       TextHairTag = 5  // OF__bgColor
+	TextHairTagFr            TextHairTag = 6  // OF__fr
+	TextHairTagCurfr         TextHairTag = 7  // OF__curfr
+	TextHairTagFontofst      TextHairTag = 8  // OF__fontofst
+	TextHairTagFontid        TextHairTag = 9  // OF__fontid
+	TextHairTagFontcolor     TextHairTag = 10 // OF__fontcolor
 )
 
 var textHairTagNames = map[TextHairTag]string{
 	TextHairTagTextRecObject: "OF__textRecObject",
-	TextHairTagFlags: "OF__flags",
-	TextHairTagMode: "OF__mode",
-	TextHairTagText: "OF__text",
-	TextHairTagView: "OF__view",
-	TextHairTagBgColor: "OF__bgColor",
-	TextHairTagFr: "OF__fr",
-	TextHairTagCurfr: "OF__curfr",
-	TextHairTagFontofst: "OF__fontofst",
-	TextHairTagFontid: "OF__fontid",
-	TextHairTagFontcolor: "OF__fontcolor",
+	TextHairTagFlags:         "OF__flags",
+	TextHairTagMode:          "OF__mode",
+	TextHairTagText:          "OF__text",
+	TextHairTagView:          "OF__view",
+	TextHairTagBgColor:       "OF__bgColor",
+	TextHairTagFr:            "OF__fr",
+	TextHairTagCurfr:         "OF__curfr",
+	TextHairTagFontofst:      "OF__fontofst",
+	TextHairTagFontid:        "OF__fontid",
+	TextHairTagFontcolor:     "OF__fontcolor",
 }
 
 // String returns the pylabview name when known, otherwise a `TextHairTag(N)` fallback.
@@ -2241,12 +2241,12 @@ type ComplexScalarTag int
 
 // Members of ComplexScalarTag.
 const (
-	ComplexScalarTagReal ComplexScalarTag = 0 // OF__real
+	ComplexScalarTagReal      ComplexScalarTag = 0 // OF__real
 	ComplexScalarTagImaginary ComplexScalarTag = 1 // OF__imaginary
 )
 
 var complexScalarTagNames = map[ComplexScalarTag]string{
-	ComplexScalarTagReal: "OF__real",
+	ComplexScalarTagReal:      "OF__real",
 	ComplexScalarTagImaginary: "OF__imaginary",
 }
 
@@ -2263,12 +2263,12 @@ type Time128Tag int
 
 // Members of Time128Tag.
 const (
-	Time128TagSeconds Time128Tag = 0 // OF__Seconds
+	Time128TagSeconds           Time128Tag = 0 // OF__Seconds
 	Time128TagFractionalSeconds Time128Tag = 1 // OF__FractionalSeconds
 )
 
 var time128TagNames = map[Time128Tag]string{
-	Time128TagSeconds: "OF__Seconds",
+	Time128TagSeconds:           "OF__Seconds",
 	Time128TagFractionalSeconds: "OF__FractionalSeconds",
 }
 
@@ -2285,19 +2285,19 @@ type ImageTag int
 
 // Members of ImageTag.
 const (
-	ImageTagImageResID ImageTag = 0 // OF__ImageResID
+	ImageTagImageResID          ImageTag = 0 // OF__ImageResID
 	ImageTagImageInternalsResID ImageTag = 1 // OF__ImageInternalsResID
-	ImageTagImageData1 ImageTag = 2 // OF__ImageData1
-	ImageTagImageData2 ImageTag = 3 // OF__ImageData2
-	ImageTagImageData3 ImageTag = 4 // OF__ImageData3
+	ImageTagImageData1          ImageTag = 2 // OF__ImageData1
+	ImageTagImageData2          ImageTag = 3 // OF__ImageData2
+	ImageTagImageData3          ImageTag = 4 // OF__ImageData3
 )
 
 var imageTagNames = map[ImageTag]string{
-	ImageTagImageResID: "OF__ImageResID",
+	ImageTagImageResID:          "OF__ImageResID",
 	ImageTagImageInternalsResID: "OF__ImageInternalsResID",
-	ImageTagImageData1: "OF__ImageData1",
-	ImageTagImageData2: "OF__ImageData2",
-	ImageTagImageData3: "OF__ImageData3",
+	ImageTagImageData1:          "OF__ImageData1",
+	ImageTagImageData2:          "OF__ImageData2",
+	ImageTagImageData3:          "OF__ImageData3",
 }
 
 // String returns the pylabview name when known, otherwise a `ImageTag(N)` fallback.
@@ -2313,17 +2313,17 @@ type SubcosmTag int
 
 // Members of SubcosmTag.
 const (
-	SubcosmTagBounds SubcosmTag = 0 // OF__Bounds
+	SubcosmTagBounds  SubcosmTag = 0 // OF__Bounds
 	SubcosmTagFGColor SubcosmTag = 1 // OF__FGColor
 	SubcosmTagBGColor SubcosmTag = 2 // OF__BGColor
-	SubcosmTagImage SubcosmTag = 3 // OF__Image
+	SubcosmTagImage   SubcosmTag = 3 // OF__Image
 )
 
 var subcosmTagNames = map[SubcosmTag]string{
-	SubcosmTagBounds: "OF__Bounds",
+	SubcosmTagBounds:  "OF__Bounds",
 	SubcosmTagFGColor: "OF__FGColor",
 	SubcosmTagBGColor: "OF__BGColor",
-	SubcosmTagImage: "OF__Image",
+	SubcosmTagImage:   "OF__Image",
 }
 
 // String returns the pylabview name when known, otherwise a `SubcosmTag(N)` fallback.
@@ -2339,12 +2339,12 @@ type EmbedObjectTag int
 
 // Members of EmbedObjectTag.
 const (
-	EmbedObjectTagType EmbedObjectTag = 0 // OF__Type
+	EmbedObjectTagType  EmbedObjectTag = 0 // OF__Type
 	EmbedObjectTagFlags EmbedObjectTag = 1 // OF__Flags
 )
 
 var embedObjectTagNames = map[EmbedObjectTag]string{
-	EmbedObjectTagType: "OF__Type",
+	EmbedObjectTagType:  "OF__Type",
 	EmbedObjectTagFlags: "OF__Flags",
 }
 
@@ -2361,23 +2361,23 @@ type SceneGraphTag int
 
 // Members of SceneGraphTag.
 const (
-	SceneGraphTagModelView SceneGraphTag = 0 // OF__ModelView
-	SceneGraphTagProjection SceneGraphTag = 1 // OF__Projection
-	SceneGraphTagBackgroundColor SceneGraphTag = 2 // OF__BackgroundColor
+	SceneGraphTagModelView        SceneGraphTag = 0 // OF__ModelView
+	SceneGraphTagProjection       SceneGraphTag = 1 // OF__Projection
+	SceneGraphTagBackgroundColor  SceneGraphTag = 2 // OF__BackgroundColor
 	SceneGraphTagCameraController SceneGraphTag = 3 // OF__CameraController
-	SceneGraphTagAutoProjection SceneGraphTag = 4 // OF__AutoProjection
-	SceneGraphTagZoom SceneGraphTag = 5 // OF__Zoom
-	SceneGraphTagEyePoint SceneGraphTag = 6 // OF__EyePoint
+	SceneGraphTagAutoProjection   SceneGraphTag = 4 // OF__AutoProjection
+	SceneGraphTagZoom             SceneGraphTag = 5 // OF__Zoom
+	SceneGraphTagEyePoint         SceneGraphTag = 6 // OF__EyePoint
 )
 
 var sceneGraphTagNames = map[SceneGraphTag]string{
-	SceneGraphTagModelView: "OF__ModelView",
-	SceneGraphTagProjection: "OF__Projection",
-	SceneGraphTagBackgroundColor: "OF__BackgroundColor",
+	SceneGraphTagModelView:        "OF__ModelView",
+	SceneGraphTagProjection:       "OF__Projection",
+	SceneGraphTagBackgroundColor:  "OF__BackgroundColor",
 	SceneGraphTagCameraController: "OF__CameraController",
-	SceneGraphTagAutoProjection: "OF__AutoProjection",
-	SceneGraphTagZoom: "OF__Zoom",
-	SceneGraphTagEyePoint: "OF__EyePoint",
+	SceneGraphTagAutoProjection:   "OF__AutoProjection",
+	SceneGraphTagZoom:             "OF__Zoom",
+	SceneGraphTagEyePoint:         "OF__EyePoint",
 }
 
 // String returns the pylabview name when known, otherwise a `SceneGraphTag(N)` fallback.
@@ -2393,16 +2393,16 @@ type SceneColorTag int
 
 // Members of SceneColorTag.
 const (
-	SceneColorTagRed SceneColorTag = 0 // OF__red
+	SceneColorTagRed   SceneColorTag = 0 // OF__red
 	SceneColorTagGreen SceneColorTag = 1 // OF__green
-	SceneColorTagBlue SceneColorTag = 2 // OF__blue
+	SceneColorTagBlue  SceneColorTag = 2 // OF__blue
 	SceneColorTagAlpha SceneColorTag = 3 // OF__alpha
 )
 
 var sceneColorTagNames = map[SceneColorTag]string{
-	SceneColorTagRed: "OF__red",
+	SceneColorTagRed:   "OF__red",
 	SceneColorTagGreen: "OF__green",
-	SceneColorTagBlue: "OF__blue",
+	SceneColorTagBlue:  "OF__blue",
 	SceneColorTagAlpha: "OF__alpha",
 }
 
@@ -2445,27 +2445,27 @@ type AttributeListItemTag int
 const (
 	AttributeListItemTagCellPosRow AttributeListItemTag = 403 // OF__cellPosRow
 	AttributeListItemTagCellPosCol AttributeListItemTag = 404 // OF__cellPosCol
-	AttributeListItemTagFont AttributeListItemTag = 405 // OF__font
-	AttributeListItemTagMode AttributeListItemTag = 406 // OF__mode
-	AttributeListItemTagFgColor AttributeListItemTag = 80 // OF__fgColor
-	AttributeListItemTagBgColor AttributeListItemTag = 9 // OF__bgColor
-	AttributeListItemTagWidth AttributeListItemTag = 292 // OF__width
-	AttributeListItemTagHeight AttributeListItemTag = 407 // OF__height
-	AttributeListItemTagFlags AttributeListItemTag = 409 // OF__flags
+	AttributeListItemTagFont       AttributeListItemTag = 405 // OF__font
+	AttributeListItemTagMode       AttributeListItemTag = 406 // OF__mode
+	AttributeListItemTagFgColor    AttributeListItemTag = 80  // OF__fgColor
+	AttributeListItemTagBgColor    AttributeListItemTag = 9   // OF__bgColor
+	AttributeListItemTagWidth      AttributeListItemTag = 292 // OF__width
+	AttributeListItemTagHeight     AttributeListItemTag = 407 // OF__height
+	AttributeListItemTagFlags      AttributeListItemTag = 409 // OF__flags
 	AttributeListItemTagGlyphIndex AttributeListItemTag = 408 // OF__glyphIndex
 )
 
 var attributeListItemTagNames = map[AttributeListItemTag]string{
-	AttributeListItemTagBgColor: "OF__bgColor",
-	AttributeListItemTagFgColor: "OF__fgColor",
-	AttributeListItemTagWidth: "OF__width",
+	AttributeListItemTagBgColor:    "OF__bgColor",
+	AttributeListItemTagFgColor:    "OF__fgColor",
+	AttributeListItemTagWidth:      "OF__width",
 	AttributeListItemTagCellPosRow: "OF__cellPosRow",
 	AttributeListItemTagCellPosCol: "OF__cellPosCol",
-	AttributeListItemTagFont: "OF__font",
-	AttributeListItemTagMode: "OF__mode",
-	AttributeListItemTagHeight: "OF__height",
+	AttributeListItemTagFont:       "OF__font",
+	AttributeListItemTagMode:       "OF__mode",
+	AttributeListItemTagHeight:     "OF__height",
 	AttributeListItemTagGlyphIndex: "OF__glyphIndex",
-	AttributeListItemTagFlags: "OF__flags",
+	AttributeListItemTagFlags:      "OF__flags",
 }
 
 // String returns the pylabview name when known, otherwise a `AttributeListItemTag(N)` fallback.
@@ -2481,21 +2481,21 @@ type BrowseOptionsTag int
 
 // Members of BrowseOptionsTag.
 const (
-	BrowseOptionsTagPattern BrowseOptionsTag = 0 // OF__pattern
+	BrowseOptionsTagPattern      BrowseOptionsTag = 0 // OF__pattern
 	BrowseOptionsTagMatchPattern BrowseOptionsTag = 1 // OF__matchPattern
-	BrowseOptionsTagMode BrowseOptionsTag = 2 // OF__mode
-	BrowseOptionsTagStartPath BrowseOptionsTag = 3 // OF__startPath
+	BrowseOptionsTagMode         BrowseOptionsTag = 2 // OF__mode
+	BrowseOptionsTagStartPath    BrowseOptionsTag = 3 // OF__startPath
 	BrowseOptionsTagPatternLabel BrowseOptionsTag = 4 // OF__patternLabel
-	BrowseOptionsTagButtonLabel BrowseOptionsTag = 5 // OF__buttonLabel
+	BrowseOptionsTagButtonLabel  BrowseOptionsTag = 5 // OF__buttonLabel
 )
 
 var browseOptionsTagNames = map[BrowseOptionsTag]string{
-	BrowseOptionsTagPattern: "OF__pattern",
+	BrowseOptionsTagPattern:      "OF__pattern",
 	BrowseOptionsTagMatchPattern: "OF__matchPattern",
-	BrowseOptionsTagMode: "OF__mode",
-	BrowseOptionsTagStartPath: "OF__startPath",
+	BrowseOptionsTagMode:         "OF__mode",
+	BrowseOptionsTagStartPath:    "OF__startPath",
 	BrowseOptionsTagPatternLabel: "OF__patternLabel",
-	BrowseOptionsTagButtonLabel: "OF__buttonLabel",
+	BrowseOptionsTagButtonLabel:  "OF__buttonLabel",
 }
 
 // String returns the pylabview name when known, otherwise a `BrowseOptionsTag(N)` fallback.
@@ -2555,14 +2555,14 @@ type TreeNodeTag int
 
 // Members of TreeNodeTag.
 const (
-	TreeNodeTagNodeFlags TreeNodeTag = 0 // OF__nodeFlags
-	TreeNodeTagTag TreeNodeTag = 1 // OF__tag
+	TreeNodeTagNodeFlags   TreeNodeTag = 0 // OF__nodeFlags
+	TreeNodeTagTag         TreeNodeTag = 1 // OF__tag
 	TreeNodeTagIndentLevel TreeNodeTag = 2 // OF__indentLevel
 )
 
 var treeNodeTagNames = map[TreeNodeTag]string{
-	TreeNodeTagNodeFlags: "OF__nodeFlags",
-	TreeNodeTagTag: "OF__tag",
+	TreeNodeTagNodeFlags:   "OF__nodeFlags",
+	TreeNodeTagTag:         "OF__tag",
 	TreeNodeTagIndentLevel: "OF__indentLevel",
 }
 
@@ -2581,17 +2581,17 @@ type TabInfoItemTag int
 const (
 	TabInfoItemTagItemFlags TabInfoItemTag = 0 // OF__itemFlags
 	TabInfoItemTagTextWidth TabInfoItemTag = 1 // OF__textWidth
-	TabInfoItemTagCaption TabInfoItemTag = 2 // OF__caption
-	TabInfoItemTagFg TabInfoItemTag = 3 // OF__fg
-	TabInfoItemTagBg TabInfoItemTag = 4 // OF__bg
+	TabInfoItemTagCaption   TabInfoItemTag = 2 // OF__caption
+	TabInfoItemTagFg        TabInfoItemTag = 3 // OF__fg
+	TabInfoItemTagBg        TabInfoItemTag = 4 // OF__bg
 )
 
 var tabInfoItemTagNames = map[TabInfoItemTag]string{
 	TabInfoItemTagItemFlags: "OF__itemFlags",
 	TabInfoItemTagTextWidth: "OF__textWidth",
-	TabInfoItemTagCaption: "OF__caption",
-	TabInfoItemTagFg: "OF__fg",
-	TabInfoItemTagBg: "OF__bg",
+	TabInfoItemTagCaption:   "OF__caption",
+	TabInfoItemTagFg:        "OF__fg",
+	TabInfoItemTagBg:        "OF__bg",
 }
 
 // String returns the pylabview name when known, otherwise a `TabInfoItemTag(N)` fallback.
@@ -2608,16 +2608,16 @@ type PageInfoItemTag int
 // Members of PageInfoItemTag.
 const (
 	PageInfoItemTagItemFlags PageInfoItemTag = 0 // OF__itemFlags
-	PageInfoItemTagCaption PageInfoItemTag = 1 // OF__caption
-	PageInfoItemTagFg PageInfoItemTag = 2 // OF__fg
-	PageInfoItemTagBg PageInfoItemTag = 3 // OF__bg
+	PageInfoItemTagCaption   PageInfoItemTag = 1 // OF__caption
+	PageInfoItemTagFg        PageInfoItemTag = 2 // OF__fg
+	PageInfoItemTagBg        PageInfoItemTag = 3 // OF__bg
 )
 
 var pageInfoItemTagNames = map[PageInfoItemTag]string{
 	PageInfoItemTagItemFlags: "OF__itemFlags",
-	PageInfoItemTagCaption: "OF__caption",
-	PageInfoItemTagFg: "OF__fg",
-	PageInfoItemTagBg: "OF__bg",
+	PageInfoItemTagCaption:   "OF__caption",
+	PageInfoItemTagFg:        "OF__fg",
+	PageInfoItemTagBg:        "OF__bg",
 }
 
 // String returns the pylabview name when known, otherwise a `PageInfoItemTag(N)` fallback.
@@ -2655,55 +2655,55 @@ type PlotDataTag int
 
 // Members of PlotDataTag.
 const (
-	PlotDataTagColor PlotDataTag = 0 // OF__color
-	PlotDataTagFlags PlotDataTag = 1 // OF__flags
-	PlotDataTagInterp PlotDataTag = 2 // OF__interp
-	PlotDataTagLineStyle PlotDataTag = 3 // OF__lineStyle
-	PlotDataTagPointStyle PlotDataTag = 4 // OF__pointStyle
-	PlotDataTagFillStyle PlotDataTag = 5 // OF__fillStyle
-	PlotDataTagWidth PlotDataTag = 6 // OF__width
-	PlotDataTagPlotFlags PlotDataTag = 7 // OF__plotFlags
-	PlotDataTagPlotName PlotDataTag = 8 // OF__plotName
-	PlotDataTagCnt PlotDataTag = 9 // OF__cnt
-	PlotDataTagMapped PlotDataTag = 10 // OF__mapped
-	PlotDataTagPointColor PlotDataTag = 11 // OF__pointColor
-	PlotDataTagFillColor PlotDataTag = 12 // OF__fillColor
-	PlotDataTagXScale PlotDataTag = 13 // OF__xScale
-	PlotDataTagYScale PlotDataTag = 14 // OF__yScale
-	PlotDataTagMBits PlotDataTag = 15 // OF__mBits
-	PlotDataTagGtoIndex PlotDataTag = 16 // OF__gtoIndex
-	PlotDataTagUnused PlotDataTag = 17 // OF__unused
-	PlotDataTagFxpWordLength PlotDataTag = 18 // OF__fxpWordLength
+	PlotDataTagColor            PlotDataTag = 0  // OF__color
+	PlotDataTagFlags            PlotDataTag = 1  // OF__flags
+	PlotDataTagInterp           PlotDataTag = 2  // OF__interp
+	PlotDataTagLineStyle        PlotDataTag = 3  // OF__lineStyle
+	PlotDataTagPointStyle       PlotDataTag = 4  // OF__pointStyle
+	PlotDataTagFillStyle        PlotDataTag = 5  // OF__fillStyle
+	PlotDataTagWidth            PlotDataTag = 6  // OF__width
+	PlotDataTagPlotFlags        PlotDataTag = 7  // OF__plotFlags
+	PlotDataTagPlotName         PlotDataTag = 8  // OF__plotName
+	PlotDataTagCnt              PlotDataTag = 9  // OF__cnt
+	PlotDataTagMapped           PlotDataTag = 10 // OF__mapped
+	PlotDataTagPointColor       PlotDataTag = 11 // OF__pointColor
+	PlotDataTagFillColor        PlotDataTag = 12 // OF__fillColor
+	PlotDataTagXScale           PlotDataTag = 13 // OF__xScale
+	PlotDataTagYScale           PlotDataTag = 14 // OF__yScale
+	PlotDataTagMBits            PlotDataTag = 15 // OF__mBits
+	PlotDataTagGtoIndex         PlotDataTag = 16 // OF__gtoIndex
+	PlotDataTagUnused           PlotDataTag = 17 // OF__unused
+	PlotDataTagFxpWordLength    PlotDataTag = 18 // OF__fxpWordLength
 	PlotDataTagFxpIntegerLength PlotDataTag = 19 // OF__fxpIntegerLength
-	PlotDataTagFxpIsSigned PlotDataTag = 20 // OF__fxpIsSigned
-	PlotDataTagFxpFracDigits PlotDataTag = 21 // OF__fxpFracDigits
-	PlotDataTagFxpStyle PlotDataTag = 22 // OF__fxpStyle
+	PlotDataTagFxpIsSigned      PlotDataTag = 20 // OF__fxpIsSigned
+	PlotDataTagFxpFracDigits    PlotDataTag = 21 // OF__fxpFracDigits
+	PlotDataTagFxpStyle         PlotDataTag = 22 // OF__fxpStyle
 )
 
 var plotDataTagNames = map[PlotDataTag]string{
-	PlotDataTagColor: "OF__color",
-	PlotDataTagFlags: "OF__flags",
-	PlotDataTagInterp: "OF__interp",
-	PlotDataTagLineStyle: "OF__lineStyle",
-	PlotDataTagPointStyle: "OF__pointStyle",
-	PlotDataTagFillStyle: "OF__fillStyle",
-	PlotDataTagWidth: "OF__width",
-	PlotDataTagPlotFlags: "OF__plotFlags",
-	PlotDataTagPlotName: "OF__plotName",
-	PlotDataTagCnt: "OF__cnt",
-	PlotDataTagMapped: "OF__mapped",
-	PlotDataTagPointColor: "OF__pointColor",
-	PlotDataTagFillColor: "OF__fillColor",
-	PlotDataTagXScale: "OF__xScale",
-	PlotDataTagYScale: "OF__yScale",
-	PlotDataTagMBits: "OF__mBits",
-	PlotDataTagGtoIndex: "OF__gtoIndex",
-	PlotDataTagUnused: "OF__unused",
-	PlotDataTagFxpWordLength: "OF__fxpWordLength",
+	PlotDataTagColor:            "OF__color",
+	PlotDataTagFlags:            "OF__flags",
+	PlotDataTagInterp:           "OF__interp",
+	PlotDataTagLineStyle:        "OF__lineStyle",
+	PlotDataTagPointStyle:       "OF__pointStyle",
+	PlotDataTagFillStyle:        "OF__fillStyle",
+	PlotDataTagWidth:            "OF__width",
+	PlotDataTagPlotFlags:        "OF__plotFlags",
+	PlotDataTagPlotName:         "OF__plotName",
+	PlotDataTagCnt:              "OF__cnt",
+	PlotDataTagMapped:           "OF__mapped",
+	PlotDataTagPointColor:       "OF__pointColor",
+	PlotDataTagFillColor:        "OF__fillColor",
+	PlotDataTagXScale:           "OF__xScale",
+	PlotDataTagYScale:           "OF__yScale",
+	PlotDataTagMBits:            "OF__mBits",
+	PlotDataTagGtoIndex:         "OF__gtoIndex",
+	PlotDataTagUnused:           "OF__unused",
+	PlotDataTagFxpWordLength:    "OF__fxpWordLength",
 	PlotDataTagFxpIntegerLength: "OF__fxpIntegerLength",
-	PlotDataTagFxpIsSigned: "OF__fxpIsSigned",
-	PlotDataTagFxpFracDigits: "OF__fxpFracDigits",
-	PlotDataTagFxpStyle: "OF__fxpStyle",
+	PlotDataTagFxpIsSigned:      "OF__fxpIsSigned",
+	PlotDataTagFxpFracDigits:    "OF__fxpFracDigits",
+	PlotDataTagFxpStyle:         "OF__fxpStyle",
 }
 
 // String returns the pylabview name when known, otherwise a `PlotDataTag(N)` fallback.
@@ -2719,58 +2719,58 @@ type CursorDataTag int
 
 // Members of CursorDataTag.
 const (
-	CursorDataTagFlags CursorDataTag = 0 // OF__flags
-	CursorDataTagPlot CursorDataTag = 1 // OF__plot
-	CursorDataTagGlyph CursorDataTag = 2 // OF__glyph
-	CursorDataTagLineStyle CursorDataTag = 3 // OF__lineStyle
-	CursorDataTagLineWidth CursorDataTag = 4 // OF__lineWidth
-	CursorDataTagColor CursorDataTag = 5 // OF__color
-	CursorDataTagName CursorDataTag = 6 // OF__name
-	CursorDataTagX CursorDataTag = 7 // OF__x
-	CursorDataTagY CursorDataTag = 8 // OF__y
-	CursorDataTagZ CursorDataTag = 9 // OF__z
-	CursorDataTagIndex CursorDataTag = 10 // OF__index
-	CursorDataTagLoc CursorDataTag = 11 // OF__loc
-	CursorDataTagFont CursorDataTag = 12 // OF__font
-	CursorDataTagMode CursorDataTag = 13 // OF__mode
-	CursorDataTagTxSize CursorDataTag = 14 // OF__txSize
-	CursorDataTagTxOffset CursorDataTag = 15 // OF__txOffset
-	CursorDataTagActive CursorDataTag = 16 // OF__active
-	CursorDataTagPort CursorDataTag = 17 // OF__port
-	CursorDataTagXScale CursorDataTag = 18 // OF__xScale
-	CursorDataTagYScale CursorDataTag = 19 // OF__yScale
+	CursorDataTagFlags      CursorDataTag = 0  // OF__flags
+	CursorDataTagPlot       CursorDataTag = 1  // OF__plot
+	CursorDataTagGlyph      CursorDataTag = 2  // OF__glyph
+	CursorDataTagLineStyle  CursorDataTag = 3  // OF__lineStyle
+	CursorDataTagLineWidth  CursorDataTag = 4  // OF__lineWidth
+	CursorDataTagColor      CursorDataTag = 5  // OF__color
+	CursorDataTagName       CursorDataTag = 6  // OF__name
+	CursorDataTagX          CursorDataTag = 7  // OF__x
+	CursorDataTagY          CursorDataTag = 8  // OF__y
+	CursorDataTagZ          CursorDataTag = 9  // OF__z
+	CursorDataTagIndex      CursorDataTag = 10 // OF__index
+	CursorDataTagLoc        CursorDataTag = 11 // OF__loc
+	CursorDataTagFont       CursorDataTag = 12 // OF__font
+	CursorDataTagMode       CursorDataTag = 13 // OF__mode
+	CursorDataTagTxSize     CursorDataTag = 14 // OF__txSize
+	CursorDataTagTxOffset   CursorDataTag = 15 // OF__txOffset
+	CursorDataTagActive     CursorDataTag = 16 // OF__active
+	CursorDataTagPort       CursorDataTag = 17 // OF__port
+	CursorDataTagXScale     CursorDataTag = 18 // OF__xScale
+	CursorDataTagYScale     CursorDataTag = 19 // OF__yScale
 	CursorDataTagWatchPlots CursorDataTag = 20 // OF__watchPlots
-	CursorDataTagTxOffsetX CursorDataTag = 21 // OF__txOffsetX
-	CursorDataTagTxOffsetY CursorDataTag = 22 // OF__txOffsetY
-	CursorDataTagLoc32 CursorDataTag = 23 // OF__loc32
+	CursorDataTagTxOffsetX  CursorDataTag = 21 // OF__txOffsetX
+	CursorDataTagTxOffsetY  CursorDataTag = 22 // OF__txOffsetY
+	CursorDataTagLoc32      CursorDataTag = 23 // OF__loc32
 	CursorDataTagTxOffset32 CursorDataTag = 24 // OF__txOffset32
 )
 
 var cursorDataTagNames = map[CursorDataTag]string{
-	CursorDataTagFlags: "OF__flags",
-	CursorDataTagPlot: "OF__plot",
-	CursorDataTagGlyph: "OF__glyph",
-	CursorDataTagLineStyle: "OF__lineStyle",
-	CursorDataTagLineWidth: "OF__lineWidth",
-	CursorDataTagColor: "OF__color",
-	CursorDataTagName: "OF__name",
-	CursorDataTagX: "OF__x",
-	CursorDataTagY: "OF__y",
-	CursorDataTagZ: "OF__z",
-	CursorDataTagIndex: "OF__index",
-	CursorDataTagLoc: "OF__loc",
-	CursorDataTagFont: "OF__font",
-	CursorDataTagMode: "OF__mode",
-	CursorDataTagTxSize: "OF__txSize",
-	CursorDataTagTxOffset: "OF__txOffset",
-	CursorDataTagActive: "OF__active",
-	CursorDataTagPort: "OF__port",
-	CursorDataTagXScale: "OF__xScale",
-	CursorDataTagYScale: "OF__yScale",
+	CursorDataTagFlags:      "OF__flags",
+	CursorDataTagPlot:       "OF__plot",
+	CursorDataTagGlyph:      "OF__glyph",
+	CursorDataTagLineStyle:  "OF__lineStyle",
+	CursorDataTagLineWidth:  "OF__lineWidth",
+	CursorDataTagColor:      "OF__color",
+	CursorDataTagName:       "OF__name",
+	CursorDataTagX:          "OF__x",
+	CursorDataTagY:          "OF__y",
+	CursorDataTagZ:          "OF__z",
+	CursorDataTagIndex:      "OF__index",
+	CursorDataTagLoc:        "OF__loc",
+	CursorDataTagFont:       "OF__font",
+	CursorDataTagMode:       "OF__mode",
+	CursorDataTagTxSize:     "OF__txSize",
+	CursorDataTagTxOffset:   "OF__txOffset",
+	CursorDataTagActive:     "OF__active",
+	CursorDataTagPort:       "OF__port",
+	CursorDataTagXScale:     "OF__xScale",
+	CursorDataTagYScale:     "OF__yScale",
 	CursorDataTagWatchPlots: "OF__watchPlots",
-	CursorDataTagTxOffsetX: "OF__txOffsetX",
-	CursorDataTagTxOffsetY: "OF__txOffsetY",
-	CursorDataTagLoc32: "OF__loc32",
+	CursorDataTagTxOffsetX:  "OF__txOffsetX",
+	CursorDataTagTxOffsetY:  "OF__txOffsetY",
+	CursorDataTagLoc32:      "OF__loc32",
 	CursorDataTagTxOffset32: "OF__txOffset32",
 }
 
@@ -2811,17 +2811,17 @@ type CursButtonsRecTag int
 
 // Members of CursButtonsRecTag.
 const (
-	CursButtonsRecTagLeft CursButtonsRecTag = 0 // OF__left
+	CursButtonsRecTagLeft  CursButtonsRecTag = 0 // OF__left
 	CursButtonsRecTagRight CursButtonsRecTag = 1 // OF__right
-	CursButtonsRecTagUp CursButtonsRecTag = 2 // OF__up
-	CursButtonsRecTagDown CursButtonsRecTag = 3 // OF__down
+	CursButtonsRecTagUp    CursButtonsRecTag = 2 // OF__up
+	CursButtonsRecTagDown  CursButtonsRecTag = 3 // OF__down
 )
 
 var cursButtonsRecTagNames = map[CursButtonsRecTag]string{
-	CursButtonsRecTagLeft: "OF__left",
+	CursButtonsRecTagLeft:  "OF__left",
 	CursButtonsRecTagRight: "OF__right",
-	CursButtonsRecTagUp: "OF__up",
-	CursButtonsRecTagDown: "OF__down",
+	CursButtonsRecTagUp:    "OF__up",
+	CursButtonsRecTagDown:  "OF__down",
 }
 
 // String returns the pylabview name when known, otherwise a `CursButtonsRecTag(N)` fallback.
@@ -2837,14 +2837,14 @@ type PlotLegendDataTag int
 
 // Members of PlotLegendDataTag.
 const (
-	PlotLegendDataTagName PlotLegendDataTag = 0 // OF__name
-	PlotLegendDataTagMenu PlotLegendDataTag = 1 // OF__menu
+	PlotLegendDataTagName    PlotLegendDataTag = 0 // OF__name
+	PlotLegendDataTagMenu    PlotLegendDataTag = 1 // OF__menu
 	PlotLegendDataTagVisBool PlotLegendDataTag = 2 // OF__visBool
 )
 
 var plotLegendDataTagNames = map[PlotLegendDataTag]string{
-	PlotLegendDataTagName: "OF__name",
-	PlotLegendDataTagMenu: "OF__menu",
+	PlotLegendDataTagName:    "OF__name",
+	PlotLegendDataTagMenu:    "OF__menu",
 	PlotLegendDataTagVisBool: "OF__visBool",
 }
 
@@ -2862,14 +2862,14 @@ type DigitalBusOrgClustTag int
 // Members of DigitalBusOrgClustTag.
 const (
 	DigitalBusOrgClustTagArrayHandle DigitalBusOrgClustTag = 0 // OF__arrayHandle
-	DigitalBusOrgClustTagIsBus DigitalBusOrgClustTag = 1 // OF__isBus
-	DigitalBusOrgClustTagPData DigitalBusOrgClustTag = 2 // OF__pData
+	DigitalBusOrgClustTagIsBus       DigitalBusOrgClustTag = 1 // OF__isBus
+	DigitalBusOrgClustTagPData       DigitalBusOrgClustTag = 2 // OF__pData
 )
 
 var digitalBusOrgClustTagNames = map[DigitalBusOrgClustTag]string{
 	DigitalBusOrgClustTagArrayHandle: "OF__arrayHandle",
-	DigitalBusOrgClustTagIsBus: "OF__isBus",
-	DigitalBusOrgClustTagPData: "OF__pData",
+	DigitalBusOrgClustTagIsBus:       "OF__isBus",
+	DigitalBusOrgClustTagPData:       "OF__pData",
 }
 
 // String returns the pylabview name when known, otherwise a `DigitalBusOrgClustTag(N)` fallback.
@@ -2885,17 +2885,17 @@ type ScaleLegendDataTag int
 
 // Members of ScaleLegendDataTag.
 const (
-	ScaleLegendDataTagName ScaleLegendDataTag = 0 // OF__name
+	ScaleLegendDataTagName          ScaleLegendDataTag = 0 // OF__name
 	ScaleLegendDataTagAutoScaleLock ScaleLegendDataTag = 1 // OF__autoScaleLock
-	ScaleLegendDataTagAutoScale ScaleLegendDataTag = 2 // OF__autoScale
-	ScaleLegendDataTagFormatButton ScaleLegendDataTag = 3 // OF__formatButton
+	ScaleLegendDataTagAutoScale     ScaleLegendDataTag = 2 // OF__autoScale
+	ScaleLegendDataTagFormatButton  ScaleLegendDataTag = 3 // OF__formatButton
 )
 
 var scaleLegendDataTagNames = map[ScaleLegendDataTag]string{
-	ScaleLegendDataTagName: "OF__name",
+	ScaleLegendDataTagName:          "OF__name",
 	ScaleLegendDataTagAutoScaleLock: "OF__autoScaleLock",
-	ScaleLegendDataTagAutoScale: "OF__autoScale",
-	ScaleLegendDataTagFormatButton: "OF__formatButton",
+	ScaleLegendDataTagAutoScale:     "OF__autoScale",
+	ScaleLegendDataTagFormatButton:  "OF__formatButton",
 }
 
 // String returns the pylabview name when known, otherwise a `ScaleLegendDataTag(N)` fallback.
@@ -2911,29 +2911,29 @@ type ScaleDataTag int
 
 // Members of ScaleDataTag.
 const (
-	ScaleDataTagPartID ScaleDataTag = 0 // OF__partID
-	ScaleDataTagPartOrder ScaleDataTag = 1 // OF__partOrder
-	ScaleDataTagFlags ScaleDataTag = 2 // OF__flags
-	ScaleDataTagGridMaxColor ScaleDataTag = 3 // OF__gridMaxColor
-	ScaleDataTagGridMinColor ScaleDataTag = 4 // OF__gridMinColor
+	ScaleDataTagPartID           ScaleDataTag = 0 // OF__partID
+	ScaleDataTagPartOrder        ScaleDataTag = 1 // OF__partOrder
+	ScaleDataTagFlags            ScaleDataTag = 2 // OF__flags
+	ScaleDataTagGridMaxColor     ScaleDataTag = 3 // OF__gridMaxColor
+	ScaleDataTagGridMinColor     ScaleDataTag = 4 // OF__gridMinColor
 	ScaleDataTagGridMaxLineStyle ScaleDataTag = 5 // OF__gridMaxLineStyle
 	ScaleDataTagGridMinLineStyle ScaleDataTag = 6 // OF__gridMinLineStyle
-	ScaleDataTagScaleRect ScaleDataTag = 7 // OF__scaleRect
-	ScaleDataTagPort ScaleDataTag = 8 // OF__port
-	ScaleDataTagScaleFlavor ScaleDataTag = 9 // OF__scaleFlavor
+	ScaleDataTagScaleRect        ScaleDataTag = 7 // OF__scaleRect
+	ScaleDataTagPort             ScaleDataTag = 8 // OF__port
+	ScaleDataTagScaleFlavor      ScaleDataTag = 9 // OF__scaleFlavor
 )
 
 var scaleDataTagNames = map[ScaleDataTag]string{
-	ScaleDataTagPartID: "OF__partID",
-	ScaleDataTagPartOrder: "OF__partOrder",
-	ScaleDataTagFlags: "OF__flags",
-	ScaleDataTagGridMaxColor: "OF__gridMaxColor",
-	ScaleDataTagGridMinColor: "OF__gridMinColor",
+	ScaleDataTagPartID:           "OF__partID",
+	ScaleDataTagPartOrder:        "OF__partOrder",
+	ScaleDataTagFlags:            "OF__flags",
+	ScaleDataTagGridMaxColor:     "OF__gridMaxColor",
+	ScaleDataTagGridMinColor:     "OF__gridMinColor",
 	ScaleDataTagGridMaxLineStyle: "OF__gridMaxLineStyle",
 	ScaleDataTagGridMinLineStyle: "OF__gridMinLineStyle",
-	ScaleDataTagScaleRect: "OF__scaleRect",
-	ScaleDataTagPort: "OF__port",
-	ScaleDataTagScaleFlavor: "OF__scaleFlavor",
+	ScaleDataTagScaleRect:        "OF__scaleRect",
+	ScaleDataTagPort:             "OF__port",
+	ScaleDataTagScaleFlavor:      "OF__scaleFlavor",
 }
 
 // String returns the pylabview name when known, otherwise a `ScaleDataTag(N)` fallback.
@@ -2949,19 +2949,19 @@ type KeyMappingTag int
 
 // Members of KeyMappingTag.
 const (
-	KeyMappingTagVKey KeyMappingTag = 0 // OF__VKey
+	KeyMappingTagVKey     KeyMappingTag = 0 // OF__VKey
 	KeyMappingTagCharCode KeyMappingTag = 1 // OF__CharCode
-	KeyMappingTagMods KeyMappingTag = 2 // OF__Mods
-	KeyMappingTagObj KeyMappingTag = 3 // OF__Obj
-	KeyMappingTagAction KeyMappingTag = 4 // OF__Action
+	KeyMappingTagMods     KeyMappingTag = 2 // OF__Mods
+	KeyMappingTagObj      KeyMappingTag = 3 // OF__Obj
+	KeyMappingTagAction   KeyMappingTag = 4 // OF__Action
 )
 
 var keyMappingTagNames = map[KeyMappingTag]string{
-	KeyMappingTagVKey: "OF__VKey",
+	KeyMappingTagVKey:     "OF__VKey",
 	KeyMappingTagCharCode: "OF__CharCode",
-	KeyMappingTagMods: "OF__Mods",
-	KeyMappingTagObj: "OF__Obj",
-	KeyMappingTagAction: "OF__Action",
+	KeyMappingTagMods:     "OF__Mods",
+	KeyMappingTagObj:      "OF__Obj",
+	KeyMappingTagAction:   "OF__Action",
 }
 
 // String returns the pylabview name when known, otherwise a `KeyMappingTag(N)` fallback.
@@ -2999,12 +2999,12 @@ type GrowTermInfoTag int
 
 // Members of GrowTermInfoTag.
 const (
-	GrowTermInfoTagFlags GrowTermInfoTag = 0 // OF__flags
+	GrowTermInfoTagFlags    GrowTermInfoTag = 0 // OF__flags
 	GrowTermInfoTagTermOfst GrowTermInfoTag = 1 // OF__termOfst
 )
 
 var growTermInfoTagNames = map[GrowTermInfoTag]string{
-	GrowTermInfoTagFlags: "OF__flags",
+	GrowTermInfoTagFlags:    "OF__flags",
 	GrowTermInfoTagTermOfst: "OF__termOfst",
 }
 
@@ -3022,16 +3022,16 @@ type ConnectionTag int
 // Members of ConnectionTag.
 const (
 	ConnectionTagConnectionDCO ConnectionTag = 0 // OF__ConnectionDCO
-	ConnectionTagConNum ConnectionTag = 1 // OF__ConNum
-	ConnectionTagFlags ConnectionTag = 2 // OF__Flags
-	ConnectionTagTermRect ConnectionTag = 3 // OF__TermRect
+	ConnectionTagConNum        ConnectionTag = 1 // OF__ConNum
+	ConnectionTagFlags         ConnectionTag = 2 // OF__Flags
+	ConnectionTagTermRect      ConnectionTag = 3 // OF__TermRect
 )
 
 var connectionTagNames = map[ConnectionTag]string{
 	ConnectionTagConnectionDCO: "OF__ConnectionDCO",
-	ConnectionTagConNum: "OF__ConNum",
-	ConnectionTagFlags: "OF__Flags",
-	ConnectionTagTermRect: "OF__TermRect",
+	ConnectionTagConNum:        "OF__ConNum",
+	ConnectionTagFlags:         "OF__Flags",
+	ConnectionTagTermRect:      "OF__TermRect",
 }
 
 // String returns the pylabview name when known, otherwise a `ConnectionTag(N)` fallback.
@@ -3047,19 +3047,19 @@ type SelectorRangeTag int
 
 // Members of SelectorRangeTag.
 const (
-	SelectorRangeTagStart SelectorRangeTag = 0 // OF__start
-	SelectorRangeTagEnd SelectorRangeTag = 1 // OF__end
+	SelectorRangeTagStart          SelectorRangeTag = 0 // OF__start
+	SelectorRangeTagEnd            SelectorRangeTag = 1 // OF__end
 	SelectorRangeTagStartRangeType SelectorRangeTag = 2 // OF__startRangeType
-	SelectorRangeTagEndRangeType SelectorRangeTag = 3 // OF__endRangeType
-	SelectorRangeTagDiagramIdx SelectorRangeTag = 4 // OF__diagramIdx
+	SelectorRangeTagEndRangeType   SelectorRangeTag = 3 // OF__endRangeType
+	SelectorRangeTagDiagramIdx     SelectorRangeTag = 4 // OF__diagramIdx
 )
 
 var selectorRangeTagNames = map[SelectorRangeTag]string{
-	SelectorRangeTagStart: "OF__start",
-	SelectorRangeTagEnd: "OF__end",
+	SelectorRangeTagStart:          "OF__start",
+	SelectorRangeTagEnd:            "OF__end",
 	SelectorRangeTagStartRangeType: "OF__startRangeType",
-	SelectorRangeTagEndRangeType: "OF__endRangeType",
-	SelectorRangeTagDiagramIdx: "OF__diagramIdx",
+	SelectorRangeTagEndRangeType:   "OF__endRangeType",
+	SelectorRangeTagDiagramIdx:     "OF__diagramIdx",
 }
 
 // String returns the pylabview name when known, otherwise a `SelectorRangeTag(N)` fallback.
@@ -3076,26 +3076,26 @@ type EventSpecTag int
 // Members of EventSpecTag.
 const (
 	EventSpecTagDiagramIdx EventSpecTag = 0 // OF__diagramIdx
-	EventSpecTagSource EventSpecTag = 1 // OF__source
-	EventSpecTagRegFlags EventSpecTag = 2 // OF__regFlags
-	EventSpecTagESource EventSpecTag = 3 // OF__eSource
-	EventSpecTagType EventSpecTag = 4 // OF__type
-	EventSpecTagEFlags EventSpecTag = 5 // OF__eFlags
-	EventSpecTagDdoUID EventSpecTag = 6 // OF__ddoUID
-	EventSpecTagMenuTag EventSpecTag = 7 // OF__menuTag
-	EventSpecTagDynIndex EventSpecTag = 8 // OF__dynIndex
+	EventSpecTagSource     EventSpecTag = 1 // OF__source
+	EventSpecTagRegFlags   EventSpecTag = 2 // OF__regFlags
+	EventSpecTagESource    EventSpecTag = 3 // OF__eSource
+	EventSpecTagType       EventSpecTag = 4 // OF__type
+	EventSpecTagEFlags     EventSpecTag = 5 // OF__eFlags
+	EventSpecTagDdoUID     EventSpecTag = 6 // OF__ddoUID
+	EventSpecTagMenuTag    EventSpecTag = 7 // OF__menuTag
+	EventSpecTagDynIndex   EventSpecTag = 8 // OF__dynIndex
 )
 
 var eventSpecTagNames = map[EventSpecTag]string{
 	EventSpecTagDiagramIdx: "OF__diagramIdx",
-	EventSpecTagSource: "OF__source",
-	EventSpecTagRegFlags: "OF__regFlags",
-	EventSpecTagESource: "OF__eSource",
-	EventSpecTagType: "OF__type",
-	EventSpecTagEFlags: "OF__eFlags",
-	EventSpecTagDdoUID: "OF__ddoUID",
-	EventSpecTagMenuTag: "OF__menuTag",
-	EventSpecTagDynIndex: "OF__dynIndex",
+	EventSpecTagSource:     "OF__source",
+	EventSpecTagRegFlags:   "OF__regFlags",
+	EventSpecTagESource:    "OF__eSource",
+	EventSpecTagType:       "OF__type",
+	EventSpecTagEFlags:     "OF__eFlags",
+	EventSpecTagDdoUID:     "OF__ddoUID",
+	EventSpecTagMenuTag:    "OF__menuTag",
+	EventSpecTagDynIndex:   "OF__dynIndex",
 }
 
 // String returns the pylabview name when known, otherwise a `EventSpecTag(N)` fallback.
@@ -3111,41 +3111,41 @@ type BaseTableControlFlagsTag int
 
 // Members of BaseTableControlFlagsTag.
 const (
-	BaseTableControlFlagsTagBTCUnused0 BaseTableControlFlagsTag = 0 // BTCUnused0
-	BaseTableControlFlagsTagEditableHeaders BaseTableControlFlagsTag = 1 // EditableHeaders
-	BaseTableControlFlagsTagMoveableHeaders BaseTableControlFlagsTag = 2 // MoveableHeaders
-	BaseTableControlFlagsTagMultilineInput BaseTableControlFlagsTag = 3 // MultilineInput
-	BaseTableControlFlagsTagNoHorizontalLines BaseTableControlFlagsTag = 4 // NoHorizontalLines
-	BaseTableControlFlagsTagNoVerticalLines BaseTableControlFlagsTag = 5 // NoVerticalLines
-	BaseTableControlFlagsTagGlyphsInAllCells BaseTableControlFlagsTag = 6 // GlyphsInAllCells
-	BaseTableControlFlagsTagNoEmptyGlyphSpace BaseTableControlFlagsTag = 7 // NoEmptyGlyphSpace
-	BaseTableControlFlagsTagBTCUnused8 BaseTableControlFlagsTag = 8 // BTCUnused8
-	BaseTableControlFlagsTagAutosizeRows BaseTableControlFlagsTag = 9 // AutosizeRows
-	BaseTableControlFlagsTagSmoothScrolling BaseTableControlFlagsTag = 10 // SmoothScrolling
-	BaseTableControlFlagsTagTwoDimScrollbars BaseTableControlFlagsTag = 11 // TwoDimScrollbars
-	BaseTableControlFlagsTagBTCUnused12 BaseTableControlFlagsTag = 12 // BTCUnused12
-	BaseTableControlFlagsTagHasDefaultHeight BaseTableControlFlagsTag = 13 // HasDefaultHeight
-	BaseTableControlFlagsTagHasDefaultWidth BaseTableControlFlagsTag = 14 // HasDefaultWidth
-	BaseTableControlFlagsTagBTCBit15 BaseTableControlFlagsTag = 15 // BTCBit15
+	BaseTableControlFlagsTagBTCUnused0        BaseTableControlFlagsTag = 0  // BTCUnused0
+	BaseTableControlFlagsTagEditableHeaders   BaseTableControlFlagsTag = 1  // EditableHeaders
+	BaseTableControlFlagsTagMoveableHeaders   BaseTableControlFlagsTag = 2  // MoveableHeaders
+	BaseTableControlFlagsTagMultilineInput    BaseTableControlFlagsTag = 3  // MultilineInput
+	BaseTableControlFlagsTagNoHorizontalLines BaseTableControlFlagsTag = 4  // NoHorizontalLines
+	BaseTableControlFlagsTagNoVerticalLines   BaseTableControlFlagsTag = 5  // NoVerticalLines
+	BaseTableControlFlagsTagGlyphsInAllCells  BaseTableControlFlagsTag = 6  // GlyphsInAllCells
+	BaseTableControlFlagsTagNoEmptyGlyphSpace BaseTableControlFlagsTag = 7  // NoEmptyGlyphSpace
+	BaseTableControlFlagsTagBTCUnused8        BaseTableControlFlagsTag = 8  // BTCUnused8
+	BaseTableControlFlagsTagAutosizeRows      BaseTableControlFlagsTag = 9  // AutosizeRows
+	BaseTableControlFlagsTagSmoothScrolling   BaseTableControlFlagsTag = 10 // SmoothScrolling
+	BaseTableControlFlagsTagTwoDimScrollbars  BaseTableControlFlagsTag = 11 // TwoDimScrollbars
+	BaseTableControlFlagsTagBTCUnused12       BaseTableControlFlagsTag = 12 // BTCUnused12
+	BaseTableControlFlagsTagHasDefaultHeight  BaseTableControlFlagsTag = 13 // HasDefaultHeight
+	BaseTableControlFlagsTagHasDefaultWidth   BaseTableControlFlagsTag = 14 // HasDefaultWidth
+	BaseTableControlFlagsTagBTCBit15          BaseTableControlFlagsTag = 15 // BTCBit15
 )
 
 var baseTableControlFlagsTagNames = map[BaseTableControlFlagsTag]string{
-	BaseTableControlFlagsTagBTCUnused0: "BTCUnused0",
-	BaseTableControlFlagsTagEditableHeaders: "EditableHeaders",
-	BaseTableControlFlagsTagMoveableHeaders: "MoveableHeaders",
-	BaseTableControlFlagsTagMultilineInput: "MultilineInput",
+	BaseTableControlFlagsTagBTCUnused0:        "BTCUnused0",
+	BaseTableControlFlagsTagEditableHeaders:   "EditableHeaders",
+	BaseTableControlFlagsTagMoveableHeaders:   "MoveableHeaders",
+	BaseTableControlFlagsTagMultilineInput:    "MultilineInput",
 	BaseTableControlFlagsTagNoHorizontalLines: "NoHorizontalLines",
-	BaseTableControlFlagsTagNoVerticalLines: "NoVerticalLines",
-	BaseTableControlFlagsTagGlyphsInAllCells: "GlyphsInAllCells",
+	BaseTableControlFlagsTagNoVerticalLines:   "NoVerticalLines",
+	BaseTableControlFlagsTagGlyphsInAllCells:  "GlyphsInAllCells",
 	BaseTableControlFlagsTagNoEmptyGlyphSpace: "NoEmptyGlyphSpace",
-	BaseTableControlFlagsTagBTCUnused8: "BTCUnused8",
-	BaseTableControlFlagsTagAutosizeRows: "AutosizeRows",
-	BaseTableControlFlagsTagSmoothScrolling: "SmoothScrolling",
-	BaseTableControlFlagsTagTwoDimScrollbars: "TwoDimScrollbars",
-	BaseTableControlFlagsTagBTCUnused12: "BTCUnused12",
-	BaseTableControlFlagsTagHasDefaultHeight: "HasDefaultHeight",
-	BaseTableControlFlagsTagHasDefaultWidth: "HasDefaultWidth",
-	BaseTableControlFlagsTagBTCBit15: "BTCBit15",
+	BaseTableControlFlagsTagBTCUnused8:        "BTCUnused8",
+	BaseTableControlFlagsTagAutosizeRows:      "AutosizeRows",
+	BaseTableControlFlagsTagSmoothScrolling:   "SmoothScrolling",
+	BaseTableControlFlagsTagTwoDimScrollbars:  "TwoDimScrollbars",
+	BaseTableControlFlagsTagBTCUnused12:       "BTCUnused12",
+	BaseTableControlFlagsTagHasDefaultHeight:  "HasDefaultHeight",
+	BaseTableControlFlagsTagHasDefaultWidth:   "HasDefaultWidth",
+	BaseTableControlFlagsTagBTCBit15:          "BTCBit15",
 }
 
 // String returns the pylabview name when known, otherwise a `BaseTableControlFlagsTag(N)` fallback.
@@ -3161,41 +3161,41 @@ type BaseListboxFlagsTag int
 
 // Members of BaseListboxFlagsTag.
 const (
-	BaseListboxFlagsTagNoZeroSelection BaseListboxFlagsTag = 0 // NoZeroSelection
-	BaseListboxFlagsTagMultiselect BaseListboxFlagsTag = 1 // Multiselect
-	BaseListboxFlagsTagToggleItem BaseListboxFlagsTag = 2 // ToggleItem
-	BaseListboxFlagsTagDragging BaseListboxFlagsTag = 3 // Dragging
-	BaseListboxFlagsTagKbCaseSensitive BaseListboxFlagsTag = 4 // KbCaseSensitive
-	BaseListboxFlagsTagKbCaseInsensitive BaseListboxFlagsTag = 5 // KbCaseInsensitive
-	BaseListboxFlagsTagDisableTracking BaseListboxFlagsTag = 6 // DisableTracking
-	BaseListboxFlagsTagIsMulticolumn BaseListboxFlagsTag = 7 // IsMulticolumn
-	BaseListboxFlagsTagSingleCellSelect BaseListboxFlagsTag = 8 // SingleCellSelect
-	BaseListboxFlagsTagUseIndent BaseListboxFlagsTag = 9 // UseIndent
-	BaseListboxFlagsTagUse16PixelIcon BaseListboxFlagsTag = 10 // Use16PixelIcon
+	BaseListboxFlagsTagNoZeroSelection    BaseListboxFlagsTag = 0  // NoZeroSelection
+	BaseListboxFlagsTagMultiselect        BaseListboxFlagsTag = 1  // Multiselect
+	BaseListboxFlagsTagToggleItem         BaseListboxFlagsTag = 2  // ToggleItem
+	BaseListboxFlagsTagDragging           BaseListboxFlagsTag = 3  // Dragging
+	BaseListboxFlagsTagKbCaseSensitive    BaseListboxFlagsTag = 4  // KbCaseSensitive
+	BaseListboxFlagsTagKbCaseInsensitive  BaseListboxFlagsTag = 5  // KbCaseInsensitive
+	BaseListboxFlagsTagDisableTracking    BaseListboxFlagsTag = 6  // DisableTracking
+	BaseListboxFlagsTagIsMulticolumn      BaseListboxFlagsTag = 7  // IsMulticolumn
+	BaseListboxFlagsTagSingleCellSelect   BaseListboxFlagsTag = 8  // SingleCellSelect
+	BaseListboxFlagsTagUseIndent          BaseListboxFlagsTag = 9  // UseIndent
+	BaseListboxFlagsTagUse16PixelIcon     BaseListboxFlagsTag = 10 // Use16PixelIcon
 	BaseListboxFlagsTagGlyphClickEqDouble BaseListboxFlagsTag = 11 // GlyphClickEqDouble
-	BaseListboxFlagsTagShowGlyphs BaseListboxFlagsTag = 12 // ShowGlyphs
-	BaseListboxFlagsTagIsArray BaseListboxFlagsTag = 13 // IsArray
-	BaseListboxFlagsTagUnused14 BaseListboxFlagsTag = 14 // Unused14
-	BaseListboxFlagsTagUseResourceIcons BaseListboxFlagsTag = 15 // UseResourceIcons
+	BaseListboxFlagsTagShowGlyphs         BaseListboxFlagsTag = 12 // ShowGlyphs
+	BaseListboxFlagsTagIsArray            BaseListboxFlagsTag = 13 // IsArray
+	BaseListboxFlagsTagUnused14           BaseListboxFlagsTag = 14 // Unused14
+	BaseListboxFlagsTagUseResourceIcons   BaseListboxFlagsTag = 15 // UseResourceIcons
 )
 
 var baseListboxFlagsTagNames = map[BaseListboxFlagsTag]string{
-	BaseListboxFlagsTagNoZeroSelection: "NoZeroSelection",
-	BaseListboxFlagsTagMultiselect: "Multiselect",
-	BaseListboxFlagsTagToggleItem: "ToggleItem",
-	BaseListboxFlagsTagDragging: "Dragging",
-	BaseListboxFlagsTagKbCaseSensitive: "KbCaseSensitive",
-	BaseListboxFlagsTagKbCaseInsensitive: "KbCaseInsensitive",
-	BaseListboxFlagsTagDisableTracking: "DisableTracking",
-	BaseListboxFlagsTagIsMulticolumn: "IsMulticolumn",
-	BaseListboxFlagsTagSingleCellSelect: "SingleCellSelect",
-	BaseListboxFlagsTagUseIndent: "UseIndent",
-	BaseListboxFlagsTagUse16PixelIcon: "Use16PixelIcon",
+	BaseListboxFlagsTagNoZeroSelection:    "NoZeroSelection",
+	BaseListboxFlagsTagMultiselect:        "Multiselect",
+	BaseListboxFlagsTagToggleItem:         "ToggleItem",
+	BaseListboxFlagsTagDragging:           "Dragging",
+	BaseListboxFlagsTagKbCaseSensitive:    "KbCaseSensitive",
+	BaseListboxFlagsTagKbCaseInsensitive:  "KbCaseInsensitive",
+	BaseListboxFlagsTagDisableTracking:    "DisableTracking",
+	BaseListboxFlagsTagIsMulticolumn:      "IsMulticolumn",
+	BaseListboxFlagsTagSingleCellSelect:   "SingleCellSelect",
+	BaseListboxFlagsTagUseIndent:          "UseIndent",
+	BaseListboxFlagsTagUse16PixelIcon:     "Use16PixelIcon",
 	BaseListboxFlagsTagGlyphClickEqDouble: "GlyphClickEqDouble",
-	BaseListboxFlagsTagShowGlyphs: "ShowGlyphs",
-	BaseListboxFlagsTagIsArray: "IsArray",
-	BaseListboxFlagsTagUnused14: "Unused14",
-	BaseListboxFlagsTagUseResourceIcons: "UseResourceIcons",
+	BaseListboxFlagsTagShowGlyphs:         "ShowGlyphs",
+	BaseListboxFlagsTagIsArray:            "IsArray",
+	BaseListboxFlagsTagUnused14:           "Unused14",
+	BaseListboxFlagsTagUseResourceIcons:   "UseResourceIcons",
 }
 
 // String returns the pylabview name when known, otherwise a `BaseListboxFlagsTag(N)` fallback.
@@ -3205,4 +3205,3 @@ func (t BaseListboxFlagsTag) String() string {
 	}
 	return fmt.Sprintf("BaseListboxFlagsTag(%d)", int(t))
 }
-

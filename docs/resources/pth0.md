@@ -38,21 +38,21 @@ LabVIEW selects layout by the leading FourCC `Ident`:
 
 ### PTH0 body
 
-| Offset (within body) | Size | Field      | Notes                                   |
-| -------------------: | ---: | ---------- | --------------------------------------- |
-|                    0 |    2 | `TPVal`    | u16 BE, observed values `0` and `1`.    |
-|                    2 |    2 | `Count`    | u16 BE, number of components.           |
-|                    4 |    1 | `Len[0]`   | Pascal length byte for component `[0]`. |
-|                  ... |  ... | ...        | Components packed back-to-back.         |
+| Offset (within body) | Size | Field    | Notes                                   |
+| -------------------: | ---: | -------- | --------------------------------------- |
+|                    0 |    2 | `TPVal`  | u16 BE, observed values `0` and `1`.    |
+|                    2 |    2 | `Count`  | u16 BE, number of components.           |
+|                    4 |    1 | `Len[0]` | Pascal length byte for component `[0]`. |
+|                  ... |  ... | ...      | Components packed back-to-back.         |
 
 ### PTH1 / PTH2 body
 
-| Offset (within body) | Size | Field           | Notes                                                 |
-| -------------------: | ---: | --------------- | ----------------------------------------------------- |
-|                    0 |    4 | `TPIdent`       | One of `"abs "`, `"rel "`, `"unc "`, `"!pth"`.        |
-|                    4 |    2 | `Len[0]` (u16)  | Length of component `[0]`.                            |
-|                    6 |  ... | `Bytes[0]`      | Raw component bytes.                                  |
-|                  ... |  ... | ...             | Components packed until the body is consumed.         |
+| Offset (within body) | Size | Field          | Notes                                          |
+| -------------------: | ---: | -------------- | ---------------------------------------------- |
+|                    0 |    4 | `TPIdent`      | One of `"abs "`, `"rel "`, `"unc "`, `"!pth"`. |
+|                    4 |    2 | `Len[0]` (u16) | Length of component `[0]`.                     |
+|                    6 |  ... | `Bytes[0]`     | Raw component bytes.                           |
+|                  ... |  ... | ...            | Components packed until the body is consumed.  |
 
 ### Zero-fill phony PTH0
 

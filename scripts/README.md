@@ -35,14 +35,14 @@ What the oracle records (intentionally minimal):
 - `blocks[]`: for each block pylabview surfaced, the FourCC and the count
   of sections inside it. Blocks are sorted by FourCC so diffs stay stable.
 
-What it does *not* record: decoded payloads, byte offsets, or anything
+What it does _not_ record: decoded payloads, byte offsets, or anything
 downstream of pylabview's section parsing (pylabview emits warnings on some
 VITS sections; those warnings do not affect the block/section inventory).
 
 ## Troubleshooting
 
 - `ImportError: pylabview` — clone submodule/reference: `git clone
-  https://github.com/mefistotelis/pylabview references/pylabview`.
+https://github.com/mefistotelis/pylabview references/pylabview`.
 - `ModuleNotFoundError: PIL` — `pip install Pillow`.
 - Spurious `VITS` warnings on newer LV versions are expected and do not
   invalidate the generated oracle.

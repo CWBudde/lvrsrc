@@ -10,17 +10,17 @@ VI was compiled against.
 
 ## Wire layout
 
-| Offset | Size | Field  | Notes                                           |
-| -----: | ---: | ------ | ----------------------------------------------- |
+| Offset | Size | Field  | Notes                                                        |
+| -----: | ---: | ------ | ------------------------------------------------------------ |
 |      0 |   16 | `GUID` | Raw bytes, preserved verbatim. No byte-order interpretation. |
 
 **Total size:** 16 bytes.
 
 ## Validation rules
 
-| Severity | Code               | Condition                          |
-| -------- | ------------------ | ---------------------------------- |
-| error    | `rtsg.payload.size` | Payload is not exactly 16 bytes.  |
+| Severity | Code                | Condition                        |
+| -------- | ------------------- | -------------------------------- |
+| error    | `rtsg.payload.size` | Payload is not exactly 16 bytes. |
 
 ## References
 
