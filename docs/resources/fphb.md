@@ -95,6 +95,51 @@ Current front-panel rendering is intentionally structural:
   (heuristic layout, placeholders present) so consumers can tell the
   difference between "decoded faithfully" and "best effort".
 
+## Typed data fills (`OF__StdNumMin` / `Max` / `Inc`)
+
+pylabview's `HeapNodeTDDataFill` (LVheap.py:1911) interprets the
+content bytes of `OF__StdNumMin` (FieldTag 513), `OF__StdNumMax` (514),
+and `OF__StdNumInc` (515) leaves as a numeric value of the surrounding
+object's TypeDesc — the min / max / increment range stored on a
+numeric control or indicator.
+
+`pkg/lvvi.Model.HeapDataFill(tree, nodeIdx)` exposes this as a typed
+projection:
+
+1. Locate the node's parent (the surrounding `TagOpen`).
+2. Find the parent's `OF__typeDesc` child (FieldTag 283); its content
+   is the heap-local TypeID (a signed BE integer ≥ 1).
+3. Resolve via `VCTP.descriptors[DTHP.IndexShift + heapTypeID − 1]`.
+4. Switch on the resolved descriptor's `FullType` to pick a typed
+   decoder.
+
+Supported numeric kinds (`DataFillKind`): `Int` (NumInt8/16/32/64),
+`UInt` (NumUInt8/16/32/64 — sign-extended, then masked to width),
+`Float32` (NumFloat32), `Float64` (NumFloat64). Anything else
+(Boolean, Cluster, String, Function, refnum, complex, quad-float, …)
+falls back to `Kind = Raw` with the resolved `FullType` recorded so
+callers can still display the type name.
+
+Content lengths reflect pylabview's `shrinkRepeatedBits` truncation
+(LVheap.py:1942): an Int32 value of 0 may be encoded as a single
+`0x00` byte. The decoder sign-extends `len(Content)` bytes into the
+declared width.
+
+`DataFillValue.Raw` always holds the original content bytes regardless
+of `Kind`, so the heap codec stays round-trip-safe — typed access is
+strictly a projection.
+
+Coverage: across the 21-fixture corpus, **75** DataFill nodes were
+swept; **21** resolved to typed numeric kinds (12 `Int` from
+`load-vi.vi`-style `NumInt32` ranges, 9 `UInt` from
+`action.ctl` / `datatypes.ctl` `NumUInt16` ranges) and the remainder
+fell to `Raw` on non-numeric TDs or `Unknown` when no DTHP / parent
+typeDesc could be located. The complex-leg form
+(`HeapNodeTDDataFillLeaf` for `OF__real` / `OF__imaginary`) has no
+fixture coverage and therefore no typed decoder yet — it would
+currently return `ok = false` since those tags are not in the
+DataFill tag set.
+
 ## References
 
 - pylabview `LVblock.py:5350–5362` — `FPHb` / `BDHb` sibling subclasses
@@ -102,5 +147,9 @@ Current front-panel rendering is intentionally structural:
 - pylabview `LVheap.py` — full enum tables, mirrored into
   [`internal/codecs/heap/tags_gen.go`](../../internal/codecs/heap/tags_gen.go)
   by `scripts/gen-heap-tags`.
+- pylabview `LVheap.py:1911-2295` — `HeapNodeTDDataFill` /
+  `HeapNodeTDDataFillLeaf` reference for the typed-fill projection.
+- pylabview `LVblock.py:3280-3292` — `Block.getHeapTD` (DTHP
+  IndexShift + VCTP top-type lookup).
 - [`docs/resources/lifp.md`](lifp.md) — sibling `LIfp` codec for the
   small front-panel metadata block that pairs with `FPHb`.
