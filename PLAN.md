@@ -530,11 +530,43 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 10.3 v1.0 acceptance gate
 
-- [ ] `internal/coverage` reports typed codec support for every FourCC observed in the corpus
-- [ ] Per-phase `docs/resources/*.md` up to date; `docs/resource-registry.md` shows all observed types as typed
-- [ ] CLI / API surface frozen; any Tier 2 expansions beyond this phase go through a compat policy update
-- [ ] Demo published with the richer Info / Structure views active
-- [ ] Tick the items in Phase 5.6 and tag `v1.0.0`
+- [x] `internal/coverage` reports typed codec support for every FourCC observed in the corpus — `docs/generated/resource-coverage.{json,md,svg}` show **27/27 typed (100.0%)** with zero opaque resource types; `TestGeneratedArtifactsStayInSync` fails CI if the manifest drifts from the registered codec set.
+- [x] Per-phase `docs/resources/*.md` up to date; `docs/resource-registry.md` shows all observed types as typed — added [`docs/resources/fphb.md`](docs/resources/fphb.md) and [`docs/resources/bdhb.md`](docs/resources/bdhb.md) for the two heap codecs; `docs/resource-registry.md` now lists every shipped codec (was 10/27, now 27/27) and the opaque-fallback row was removed since no observed FourCC needs it.
+- [x] CLI / API surface frozen; any Tier 2 expansions beyond this phase go through a compat policy update — published [`docs/api-compat.md`](docs/api-compat.md) defining the supported `pkg/*` and CLI surface, the round-trip invariant, the rules for additive Tier 2 expansions, and the criteria that force a 2.0 bump.
+- [x] Demo published with the richer Info / Structure views active — `web/` is auto-deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main`; the live build carries the Phase 10.2 _Front Panel_ and _Block Diagram_ tabs over the shared `lvvi.HeapTree` projection.
+
+---
+
+## Phase 11 — SVG / Canvas Renderers & CLI Export
+
+> Target: 2–4 weeks | Exit: web demo can show geometry-based front-panel / block-diagram previews in addition to the current tree view; CLI can emit standalone SVG renderings; unresolved objects still render as labeled placeholders instead of disappearing | Tag: `v1.1.0`
+
+### 11.1 Renderer-neutral scene graph
+
+- [ ] Define a shared scene model (`internal/render` or equivalent) for boxes, labels, groups, ports/terminals, wires, and z-order so the demo and CLI do not each invent their own approximation rules
+- [ ] Project decoded `FPHb` / `BDHb` nodes into that scene graph with explicit bounds, text, and containment relationships wherever corpus evidence is strong enough
+- [ ] Keep partially decoded or unknown object classes visible as placeholder nodes carrying their resolved tag label and parent path, so exports remain complete even when fidelity is low
+- [ ] Keep coordinates vector-friendly (logical units + view box) so the same scene can drive SVG output and a browser canvas renderer
+
+### 11.2 Web demo visual render mode
+
+- [ ] Add a visual render mode to the existing "Front Panel" and "Block Diagram" tabs; keep the current tree view available as an inspection/debug fallback
+- [ ] Prefer SVG for the primary browser render so users can inspect DOM nodes, copy the output, and compare object bounds directly in devtools
+- [ ] Add an optional canvas path for larger diagrams where pan/zoom performance matters more than DOM inspectability
+- [ ] Surface fidelity warnings inline when a render falls back to placeholders, omitted wire routing, or heuristic sizing
+
+### 11.3 CLI render/export
+
+- [ ] Add `lvrsrc render <file>` with `--view=front-panel|block-diagram` and `--format=svg` so the same approximate render can be emitted outside the web demo
+- [ ] Support `--out <path>` for writing a standalone SVG artifact and stdout output for shell pipelines
+- [ ] Make the CLI output self-describing: title block / metadata, view box sized to the rendered scene, and visible placeholder styling for unresolved objects
+- [ ] Reuse the same scene-graph projection as the web demo rather than maintaining a separate CLI-only renderer
+
+### 11.4 Verification and docs
+
+- [ ] Add golden tests for scene-graph projection and SVG output on representative corpus files (simple VI, control, structure-heavy block diagram)
+- [ ] Add web-demo smoke coverage ensuring both tabs can switch between tree and visual modes without panics on files that have `FPHb` / `BDHb`
+- [ ] Document renderer limits and export semantics in `docs/cli.md` and the relevant `docs/resources/*.md` pages
 
 ---
 
@@ -571,3 +603,4 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 | `v0.8.0`  | VCTP navigation + connector-pane resolution/render                                        |
 | `v0.9.0`  | front-panel heap (`FPHb`) decoder                                                         |
 | `v1.0.0`  | block-diagram heap (`BDHb`), approximate FP/BD render, stable API                         |
+| `v1.1.0`  | SVG/canvas front-panel + block-diagram rendering, CLI SVG export                          |

@@ -62,22 +62,49 @@ the coverage badge.
 
 ## Codec status
 
-| FourCC     | Decode | Encode | Validate | Safety | Read versions | Write versions | Package                      |
-| ---------- | :----: | :----: | :------: | ------ | ------------- | -------------- | ---------------------------- |
-| `CONP`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
-| `CPC2`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane`    |
-| `ICON`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
-| `LIbd`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/libd`       |
-| `LIfp`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lifp`       |
-| `VCTP`     |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/vctp`       |
-| `icl4`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
-| `icl8`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`       |
-| `vers`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/vers`       |
-| `STRG`     |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/strg`       |
-| all others |   —    |   —    |    —     | Opaque | —             | —              | `internal/codecs` (fallback) |
+As of Phase 10.1, every FourCC observed in the 21-file corpus has a typed
+codec — see [generated/resource-coverage.md](generated/resource-coverage.md)
+for the machine-generated view (currently **27/27 typed, 100.0%**).
 
-The opaque fallback preserves payload bytes exactly on round-trip; it is used
-by `Registry.Lookup` for any FourCC without a registered codec.
+| FourCC | Decode | Encode | Validate | Safety | Read versions | Write versions | Package                   |
+| ------ | :----: | :----: | :------: | ------ | ------------- | -------------- | ------------------------- |
+| `BDEx` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/bdex`    |
+| `BDHb` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/bdhb`    |
+| `BDPW` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/bdpw`    |
+| `BDSE` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/bdse`    |
+| `CONP` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane` |
+| `CPC2` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/conpane` |
+| `DTHP` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/dthp`    |
+| `FPEx` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/fpex`    |
+| `FPHb` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/fphb`    |
+| `FPSE` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/fpse`    |
+| `FTAB` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/ftab`    |
+| `HIST` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/hist`    |
+| `ICON` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`    |
+| `LIBN` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/libn`    |
+| `LIbd` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/libd`    |
+| `LIfp` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lifp`    |
+| `LIvi` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/livi`    |
+| `LVSR` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/lvsr`    |
+| `MUID` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/muid`    |
+| `RTSG` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/rtsg`    |
+| `STRG` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/strg`    |
+| `VCTP` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/vctp`    |
+| `VITS` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/vits`    |
+| `VPDP` |   ✅   |   ✅   |    ✅    | Tier 1 | all           | all            | `internal/codecs/vpdp`    |
+| `icl4` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`    |
+| `icl8` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/icon`    |
+| `vers` |   ✅   |   ✅   |    ✅    | Tier 2 | all           | all            | `internal/codecs/vers`    |
+
+`PTH0` / `PTH1` / `PTH2` path payloads are decoded by
+`internal/codecs/pthx` when embedded inside other resources (`LIvi`,
+`LIfp`, `LIbd`); they do not appear as standalone RSRC blocks in the
+corpus and are therefore not listed as a top-level FourCC. See
+[pth0.md](resources/pth0.md) for the format.
+
+Any FourCC outside the table above (none observed in the current corpus)
+falls back to the opaque codec from `internal/codecs`, which preserves
+payload bytes exactly on round-trip but does not interpret them.
 
 ## Phase 4.3 disposition
 
