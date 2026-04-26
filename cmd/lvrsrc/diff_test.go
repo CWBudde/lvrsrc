@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/CWBudde/lvrsrc/pkg/lvdiff"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 )
 
@@ -163,3 +164,44 @@ func writeMutatedFixture(t *testing.T) string {
 	}
 	return path
 }
+
+// TestKindOrderCoversAllCases drives each switch arm of kindOrder so
+// the diff helper's relative-ordering table doesn't sit unexercised.
+func TestKindOrderCoversAllCases(t *testing.T) {
+	cases := []struct {
+		k    string
+		want int
+	}{
+		{"header", 0},
+		{"block", 1},
+		{"section", 2},
+		{"decoded", 3},
+		{"unknown-kind", 4},
+	}
+	for _, tc := range cases {
+		// Cast through lvdiff.Kind via the package-internal helper.
+		if got := kindOrder(stringToKind(tc.k)); got != tc.want {
+			t.Errorf("kindOrder(%q) = %d, want %d", tc.k, got, tc.want)
+		}
+		if got := kindHeading(stringToKind(tc.k)); got == "" {
+			t.Errorf("kindHeading(%q) returned empty", tc.k)
+		}
+	}
+}
+
+// TestFormatValueCoversBranches walks the formatValue type switch.
+func TestFormatValueCoversBranches(t *testing.T) {
+	if got := formatValue(nil); got != "" {
+		t.Errorf("formatValue(nil) = %q, want empty", got)
+	}
+	if got := formatValue("hi"); got != `"hi"` {
+		t.Errorf(`formatValue("hi") = %q, want %q`, got, `"hi"`)
+	}
+	if got := formatValue(42); got != "42" {
+		t.Errorf("formatValue(42) = %q, want 42", got)
+	}
+}
+
+func stringToKind(s string) lvdiffKind { return lvdiffKind(s) }
+
+type lvdiffKind = lvdiff.Kind

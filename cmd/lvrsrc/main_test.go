@@ -620,3 +620,139 @@ func firstNamedSection(t *testing.T, f *rsrcwire.File) (int, int, bool) {
 	}
 	return 0, 0, false
 }
+
+// TestKindLabelCoversAllFileKinds drives every arm of the kindLabel
+// switch.
+func TestKindLabelCoversAllFileKinds(t *testing.T) {
+	cases := []struct {
+		kind lvrsrc.FileKind
+		want string
+	}{
+		{lvrsrc.FileKindVI, "VI"},
+		{lvrsrc.FileKindControl, "Control"},
+		{lvrsrc.FileKindTemplate, "Template"},
+		{lvrsrc.FileKindLibrary, "Library"},
+		{lvrsrc.FileKindUnknown, "Unknown"},
+	}
+	for _, tc := range cases {
+		if got := kindLabel(tc.kind); got != tc.want {
+			t.Errorf("kindLabel(%v) = %q, want %q", tc.kind, got, tc.want)
+		}
+	}
+}
+
+// TestExitCodeErrorMethods covers Error/Unwrap/Code on nil, empty and
+// populated *exitCodeError values.
+func TestExitCodeErrorMethods(t *testing.T) {
+	var nilErr *exitCodeError
+	if got := nilErr.Error(); got != "" {
+		t.Errorf("nil.Error() = %q, want empty", got)
+	}
+	if got := nilErr.Unwrap(); got != nil {
+		t.Errorf("nil.Unwrap() = %v, want nil", got)
+	}
+	if got := nilErr.Code(); got != 1 {
+		t.Errorf("nil.Code() = %d, want 1", got)
+	}
+
+	empty := &exitCodeError{}
+	if got := empty.Error(); got != "" {
+		t.Errorf("empty.Error() = %q, want empty", got)
+	}
+	if got := empty.Code(); got != 1 {
+		t.Errorf("empty.Code() = %d, want 1", got)
+	}
+
+	wrapped := &exitCodeError{code: 42, err: errStub{"boom"}}
+	if got := wrapped.Error(); got != "boom" {
+		t.Errorf("wrapped.Error() = %q, want boom", got)
+	}
+	if got := wrapped.Code(); got != 42 {
+		t.Errorf("wrapped.Code() = %d, want 42", got)
+	}
+	if got := wrapped.Unwrap(); got == nil || got.Error() != "boom" {
+		t.Errorf("wrapped.Unwrap() = %v, want boom", got)
+	}
+}
+
+// TestColorizeOnNonTerminal asserts colorize returns the raw string when
+// the writer is not a terminal.
+func TestColorizeOnNonTerminal(t *testing.T) {
+	var buf bytes.Buffer
+	if got := colorize(&buf, "hi", colorRed); got != "hi" {
+		t.Errorf("colorize(buffer) = %q, want hi", got)
+	}
+	if got := isTerminalWriter(&buf); got {
+		t.Errorf("isTerminalWriter(*bytes.Buffer) = true, want false")
+	}
+}
+
+// TestIsTerminalWriterRegularFileFalse covers the Stat-but-not-tty path
+// (a regular *os.File backed by a temp file is not a TTY).
+func TestIsTerminalWriterRegularFileFalse(t *testing.T) {
+	tmp, err := os.CreateTemp(t.TempDir(), "term-*.txt")
+	if err != nil {
+		t.Fatalf("CreateTemp: %v", err)
+	}
+	defer tmp.Close()
+	if got := isTerminalWriter(tmp); got {
+		t.Errorf("isTerminalWriter(regular file) = true, want false")
+	}
+}
+
+// TestDumpCommandTextOutput exercises writeDumpText (the non-JSON dump
+// path used to be uncovered).
+func TestDumpCommandTextOutput(t *testing.T) {
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{"dump", fixturePath(t, "config-data.ctl")})
+	if err := cmd.Execute(); err != nil {
+		t.Fatalf("Execute() error = %v", err)
+	}
+	out := stdout.String()
+	if !strings.Contains(out, "Names:") {
+		t.Fatalf("dump text output missing Names header: %q", out)
+	}
+	if !strings.Contains(out, "Resources:") {
+		t.Fatalf("dump text output missing Resources header: %q", out)
+	}
+}
+
+type errStub struct{ msg string }
+
+func (e errStub) Error() string { return e.msg }
+
+// TestValidateCommandWarningTextOutput exercises the warning-status arm
+// of writeValidateText (text mode, no --json).
+func TestValidateCommandWarningTextOutput(t *testing.T) {
+	path := writeWarningFixture(t)
+
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{"validate", path})
+
+	err := cmd.Execute()
+	if err == nil {
+		t.Fatal("Execute() error = nil, want warning exit code")
+	}
+
+	out := stdout.String()
+	if !strings.Contains(out, "WARNING") {
+		t.Fatalf("validate output missing WARNING status: %q", out)
+	}
+}
+
+// TestRepairCommandRefusesCleanFile exercises the no-op branch in
+// newRepairCmd (file is already valid → repair refuses).
+func TestRepairCommandRefusesCleanFile(t *testing.T) {
+	stdout := new(bytes.Buffer)
+	stderr := new(bytes.Buffer)
+	cmd := newRootCmd(stdout, stderr)
+	cmd.SetArgs([]string{"repair", fixturePath(t, "config-data.ctl"), "--out", filepath.Join(t.TempDir(), "out.ctl")})
+
+	if err := cmd.Execute(); err == nil {
+		t.Fatalf("Execute() returned nil, want error for already-clean file")
+	}
+}
