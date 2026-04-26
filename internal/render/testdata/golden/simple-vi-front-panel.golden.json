@@ -11,9 +11,7 @@
   "warnings": [
     "Layout is heuristic: positions and sizes are derived from heap structure, not decoded LabVIEW geometry."
   ],
-  "roots": [
-    0
-  ],
+  "roots": [0],
   "nodes": [
     {
       "kind": "group",
@@ -25,16 +23,7 @@
         "Height": 8976
       },
       "parent": -1,
-      "children": [
-        1,
-        2,
-        3,
-        392,
-        393,
-        394,
-        395,
-        396
-      ],
+      "children": [1, 2, 3, 392, 393, 394, 395, 396],
       "z": 0,
       "heap_index": 0,
       "path": "SL__rootObject"
@@ -77,17 +66,7 @@
         "Height": 8754
       },
       "parent": 0,
-      "children": [
-        4,
-        5,
-        6,
-        7,
-        8,
-        13,
-        373,
-        374,
-        389
-      ],
+      "children": [4, 5, 6, 7, 8, 13, 373, 374, 389],
       "z": 10,
       "heap_index": 1,
       "path": "SL__rootObject/SL__eventDataNode"
@@ -158,12 +137,7 @@
         "Height": 100
       },
       "parent": 3,
-      "children": [
-        9,
-        10,
-        11,
-        12
-      ],
+      "children": [9, 10, 11, 12],
       "z": 20,
       "heap_index": 4,
       "path": "SL__rootObject/SL__eventDataNode/SL__demux"
@@ -234,19 +208,7 @@
         "Height": 8150
       },
       "parent": 3,
-      "children": [
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        99,
-        100,
-        101,
-        102,
-        369
-      ],
+      "children": [14, 15, 16, 17, 18, 19, 99, 100, 101, 102, 369],
       "z": 20,
       "heap_index": 8,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO"
@@ -331,16 +293,7 @@
         "Height": 1840
       },
       "parent": 13,
-      "children": [
-        20,
-        21,
-        22,
-        42,
-        55,
-        68,
-        82,
-        95
-      ],
+      "children": [20, 21, 22, 42, 55, 68, 82, 95],
       "z": 30,
       "heap_index": 12,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant"
@@ -383,19 +336,7 @@
         "Height": 460
       },
       "parent": 19,
-      "children": [
-        23,
-        24,
-        25,
-        26,
-        27,
-        28,
-        29,
-        30,
-        34,
-        35,
-        36
-      ],
+      "children": [23, 24, 25, 26, 27, 28, 29, 30, 34, 35, 36],
       "z": 40,
       "heap_index": 13,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -508,11 +449,7 @@
         "Height": 72
       },
       "parent": 22,
-      "children": [
-        31,
-        32,
-        33
-      ],
+      "children": [31, 32, 33],
       "z": 50,
       "heap_index": 19,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -597,13 +534,7 @@
         "Height": 128
       },
       "parent": 22,
-      "children": [
-        37,
-        38,
-        39,
-        40,
-        41
-      ],
+      "children": [37, 38, 39, 40, 41],
       "z": 50,
       "heap_index": 24,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/SL__baseRefNum"
@@ -688,17 +619,7 @@
         "Height": 294
       },
       "parent": 19,
-      "children": [
-        43,
-        44,
-        45,
-        46,
-        47,
-        48,
-        49,
-        50,
-        54
-      ],
+      "children": [43, 44, 45, 46, 47, 48, 49, 50, 54],
       "z": 40,
       "heap_index": 30,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -811,11 +732,7 @@
         "Height": 72
       },
       "parent": 42,
-      "children": [
-        51,
-        52,
-        53
-      ],
+      "children": [51, 52, 53],
       "z": 50,
       "heap_index": 36,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -886,17 +803,7 @@
         "Height": 294
       },
       "parent": 19,
-      "children": [
-        56,
-        57,
-        58,
-        59,
-        60,
-        61,
-        62,
-        63,
-        67
-      ],
+      "children": [56, 57, 58, 59, 60, 61, 62, 63, 67],
       "z": 40,
       "heap_index": 41,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -1009,11 +916,7 @@
         "Height": 72
       },
       "parent": 55,
-      "children": [
-        64,
-        65,
-        66
-      ],
+      "children": [64, 65, 66],
       "z": 50,
       "heap_index": 47,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -1084,18 +987,7 @@
         "Height": 322
       },
       "parent": 19,
-      "children": [
-        69,
-        70,
-        71,
-        72,
-        73,
-        74,
-        75,
-        76,
-        80,
-        81
-      ],
+      "children": [69, 70, 71, 72, 73, 74, 75, 76, 80, 81],
       "z": 40,
       "heap_index": 52,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -1208,11 +1100,7 @@
         "Height": 72
       },
       "parent": 68,
-      "children": [
-        77,
-        78,
-        79
-      ],
+      "children": [77, 78, 79],
       "z": 50,
       "heap_index": 58,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -1297,17 +1185,7 @@
         "Height": 294
       },
       "parent": 19,
-      "children": [
-        83,
-        84,
-        85,
-        86,
-        87,
-        88,
-        89,
-        93,
-        94
-      ],
+      "children": [83, 84, 85, 86, 87, 88, 89, 93, 94],
       "z": 40,
       "heap_index": 64,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -1406,11 +1284,7 @@
         "Height": 72
       },
       "parent": 82,
-      "children": [
-        90,
-        91,
-        92
-      ],
+      "children": [90, 91, 92],
       "z": 50,
       "heap_index": 69,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -1495,11 +1369,7 @@
         "Height": 72
       },
       "parent": 19,
-      "children": [
-        96,
-        97,
-        98
-      ],
+      "children": [96, 97, 98],
       "z": 40,
       "heap_index": 75,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__stdLvVariant/SL__arrayElement"
@@ -1598,12 +1468,7 @@
         "Height": 5996
       },
       "parent": 13,
-      "children": [
-        103,
-        104,
-        105,
-        237
-      ],
+      "children": [103, 104, 105, 237],
       "z": 30,
       "heap_index": 82,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun"
@@ -1646,15 +1511,7 @@
         "Height": 2966
       },
       "parent": 102,
-      "children": [
-        106,
-        107,
-        108,
-        109,
-        110,
-        235,
-        236
-      ],
+      "children": [106, 107, 108, 109, 110, 235, 236],
       "z": 40,
       "heap_index": 83,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement"
@@ -1725,14 +1582,7 @@
         "Height": 2800
       },
       "parent": 105,
-      "children": [
-        111,
-        112,
-        113,
-        114,
-        233,
-        234
-      ],
+      "children": [111, 112, 113, 114, 233, 234],
       "z": 50,
       "heap_index": 86,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux"
@@ -1789,16 +1639,7 @@
         "Height": 2662
       },
       "parent": 110,
-      "children": [
-        115,
-        116,
-        117,
-        137,
-        166,
-        195,
-        214,
-        227
-      ],
+      "children": [115, 116, 117, 137, 166, 195, 214, 227],
       "z": 60,
       "heap_index": 88,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant"
@@ -1841,19 +1682,7 @@
         "Height": 460
       },
       "parent": 114,
-      "children": [
-        118,
-        119,
-        120,
-        121,
-        122,
-        123,
-        124,
-        125,
-        129,
-        130,
-        131
-      ],
+      "children": [118, 119, 120, 121, 122, 123, 124, 125, 129, 130, 131],
       "z": 70,
       "heap_index": 89,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -1966,11 +1795,7 @@
         "Height": 72
       },
       "parent": 117,
-      "children": [
-        126,
-        127,
-        128
-      ],
+      "children": [126, 127, 128],
       "z": 80,
       "heap_index": 95,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -2055,13 +1880,7 @@
         "Height": 128
       },
       "parent": 117,
-      "children": [
-        132,
-        133,
-        134,
-        135,
-        136
-      ],
+      "children": [132, 133, 134, 135, 136],
       "z": 80,
       "heap_index": 100,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__baseRefNum"
@@ -2146,18 +1965,7 @@
         "Height": 622
       },
       "parent": 114,
-      "children": [
-        138,
-        139,
-        140,
-        141,
-        142,
-        143,
-        144,
-        145,
-        146,
-        147
-      ],
+      "children": [138, 139, 140, 141, 142, 143, 144, 145, 146, 147],
       "z": 70,
       "heap_index": 106,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -2298,14 +2106,7 @@
         "Height": 372
       },
       "parent": 137,
-      "children": [
-        148,
-        149,
-        150,
-        154,
-        158,
-        162
-      ],
+      "children": [148, 149, 150, 154, 158, 162],
       "z": 80,
       "heap_index": 114,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun"
@@ -2348,11 +2149,7 @@
         "Height": 72
       },
       "parent": 147,
-      "children": [
-        151,
-        152,
-        153
-      ],
+      "children": [151, 152, 153],
       "z": 90,
       "heap_index": 115,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2409,11 +2206,7 @@
         "Height": 72
       },
       "parent": 147,
-      "children": [
-        155,
-        156,
-        157
-      ],
+      "children": [155, 156, 157],
       "z": 90,
       "heap_index": 118,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2470,11 +2263,7 @@
         "Height": 72
       },
       "parent": 147,
-      "children": [
-        159,
-        160,
-        161
-      ],
+      "children": [159, 160, 161],
       "z": 90,
       "heap_index": 121,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2531,11 +2320,7 @@
         "Height": 72
       },
       "parent": 147,
-      "children": [
-        163,
-        164,
-        165
-      ],
+      "children": [163, 164, 165],
       "z": 90,
       "heap_index": 124,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2592,18 +2377,7 @@
         "Height": 622
       },
       "parent": 114,
-      "children": [
-        167,
-        168,
-        169,
-        170,
-        171,
-        172,
-        173,
-        174,
-        175,
-        176
-      ],
+      "children": [167, 168, 169, 170, 171, 172, 173, 174, 175, 176],
       "z": 70,
       "heap_index": 129,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -2744,14 +2518,7 @@
         "Height": 372
       },
       "parent": 166,
-      "children": [
-        177,
-        178,
-        179,
-        183,
-        187,
-        191
-      ],
+      "children": [177, 178, 179, 183, 187, 191],
       "z": 80,
       "heap_index": 137,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun"
@@ -2794,11 +2561,7 @@
         "Height": 72
       },
       "parent": 176,
-      "children": [
-        180,
-        181,
-        182
-      ],
+      "children": [180, 181, 182],
       "z": 90,
       "heap_index": 138,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2855,11 +2618,7 @@
         "Height": 72
       },
       "parent": 176,
-      "children": [
-        184,
-        185,
-        186
-      ],
+      "children": [184, 185, 186],
       "z": 90,
       "heap_index": 141,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2916,11 +2675,7 @@
         "Height": 72
       },
       "parent": 176,
-      "children": [
-        188,
-        189,
-        190
-      ],
+      "children": [188, 189, 190],
       "z": 90,
       "heap_index": 144,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -2977,11 +2732,7 @@
         "Height": 72
       },
       "parent": 176,
-      "children": [
-        192,
-        193,
-        194
-      ],
+      "children": [192, 193, 194],
       "z": 90,
       "heap_index": 147,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -3038,19 +2789,7 @@
         "Height": 432
       },
       "parent": 114,
-      "children": [
-        196,
-        197,
-        198,
-        199,
-        200,
-        201,
-        202,
-        203,
-        207,
-        208,
-        209
-      ],
+      "children": [196, 197, 198, 199, 200, 201, 202, 203, 207, 208, 209],
       "z": 70,
       "heap_index": 152,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -3163,11 +2902,7 @@
         "Height": 72
       },
       "parent": 195,
-      "children": [
-        204,
-        205,
-        206
-      ],
+      "children": [204, 205, 206],
       "z": 80,
       "heap_index": 158,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -3252,12 +2987,7 @@
         "Height": 100
       },
       "parent": 195,
-      "children": [
-        210,
-        211,
-        212,
-        213
-      ],
+      "children": [210, 211, 212, 213],
       "z": 80,
       "heap_index": 163,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__baseRefNum"
@@ -3328,17 +3058,7 @@
         "Height": 294
       },
       "parent": 114,
-      "children": [
-        215,
-        216,
-        217,
-        218,
-        219,
-        220,
-        221,
-        225,
-        226
-      ],
+      "children": [215, 216, 217, 218, 219, 220, 221, 225, 226],
       "z": 70,
       "heap_index": 168,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -3437,11 +3157,7 @@
         "Height": 72
       },
       "parent": 214,
-      "children": [
-        222,
-        223,
-        224
-      ],
+      "children": [222, 223, 224],
       "z": 80,
       "heap_index": 173,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -3526,13 +3242,7 @@
         "Height": 128
       },
       "parent": 114,
-      "children": [
-        228,
-        229,
-        230,
-        231,
-        232
-      ],
+      "children": [228, 229, 230, 231, 232],
       "z": 70,
       "heap_index": 179,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -3673,15 +3383,7 @@
         "Height": 2966
       },
       "parent": 102,
-      "children": [
-        238,
-        239,
-        240,
-        241,
-        242,
-        367,
-        368
-      ],
+      "children": [238, 239, 240, 241, 242, 367, 368],
       "z": 40,
       "heap_index": 191,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement"
@@ -3752,15 +3454,7 @@
         "Height": 2800
       },
       "parent": 237,
-      "children": [
-        243,
-        244,
-        245,
-        246,
-        247,
-        365,
-        366
-      ],
+      "children": [243, 244, 245, 246, 247, 365, 366],
       "z": 50,
       "heap_index": 194,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux"
@@ -3831,16 +3525,7 @@
         "Height": 2634
       },
       "parent": 242,
-      "children": [
-        248,
-        249,
-        250,
-        270,
-        299,
-        328,
-        347,
-        360
-      ],
+      "children": [248, 249, 250, 270, 299, 328, 347, 360],
       "z": 60,
       "heap_index": 197,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant"
@@ -3883,19 +3568,7 @@
         "Height": 460
       },
       "parent": 247,
-      "children": [
-        251,
-        252,
-        253,
-        254,
-        255,
-        256,
-        257,
-        258,
-        262,
-        263,
-        264
-      ],
+      "children": [251, 252, 253, 254, 255, 256, 257, 258, 262, 263, 264],
       "z": 70,
       "heap_index": 198,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -4008,11 +3681,7 @@
         "Height": 72
       },
       "parent": 250,
-      "children": [
-        259,
-        260,
-        261
-      ],
+      "children": [259, 260, 261],
       "z": 80,
       "heap_index": 204,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -4097,13 +3766,7 @@
         "Height": 128
       },
       "parent": 250,
-      "children": [
-        265,
-        266,
-        267,
-        268,
-        269
-      ],
+      "children": [265, 266, 267, 268, 269],
       "z": 80,
       "heap_index": 209,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__baseRefNum"
@@ -4188,18 +3851,7 @@
         "Height": 622
       },
       "parent": 247,
-      "children": [
-        271,
-        272,
-        273,
-        274,
-        275,
-        276,
-        277,
-        278,
-        279,
-        280
-      ],
+      "children": [271, 272, 273, 274, 275, 276, 277, 278, 279, 280],
       "z": 70,
       "heap_index": 215,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -4340,14 +3992,7 @@
         "Height": 372
       },
       "parent": 270,
-      "children": [
-        281,
-        282,
-        283,
-        287,
-        291,
-        295
-      ],
+      "children": [281, 282, 283, 287, 291, 295],
       "z": 80,
       "heap_index": 223,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun"
@@ -4390,11 +4035,7 @@
         "Height": 72
       },
       "parent": 280,
-      "children": [
-        284,
-        285,
-        286
-      ],
+      "children": [284, 285, 286],
       "z": 90,
       "heap_index": 224,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4451,11 +4092,7 @@
         "Height": 72
       },
       "parent": 280,
-      "children": [
-        288,
-        289,
-        290
-      ],
+      "children": [288, 289, 290],
       "z": 90,
       "heap_index": 227,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4512,11 +4149,7 @@
         "Height": 72
       },
       "parent": 280,
-      "children": [
-        292,
-        293,
-        294
-      ],
+      "children": [292, 293, 294],
       "z": 90,
       "heap_index": 230,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4573,11 +4206,7 @@
         "Height": 72
       },
       "parent": 280,
-      "children": [
-        296,
-        297,
-        298
-      ],
+      "children": [296, 297, 298],
       "z": 90,
       "heap_index": 233,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4634,18 +4263,7 @@
         "Height": 622
       },
       "parent": 247,
-      "children": [
-        300,
-        301,
-        302,
-        303,
-        304,
-        305,
-        306,
-        307,
-        308,
-        309
-      ],
+      "children": [300, 301, 302, 303, 304, 305, 306, 307, 308, 309],
       "z": 70,
       "heap_index": 238,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -4786,14 +4404,7 @@
         "Height": 372
       },
       "parent": 299,
-      "children": [
-        310,
-        311,
-        312,
-        316,
-        320,
-        324
-      ],
+      "children": [310, 311, 312, 316, 320, 324],
       "z": 80,
       "heap_index": 246,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun"
@@ -4836,11 +4447,7 @@
         "Height": 72
       },
       "parent": 309,
-      "children": [
-        313,
-        314,
-        315
-      ],
+      "children": [313, 314, 315],
       "z": 90,
       "heap_index": 247,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4897,11 +4504,7 @@
         "Height": 72
       },
       "parent": 309,
-      "children": [
-        317,
-        318,
-        319
-      ],
+      "children": [317, 318, 319],
       "z": 90,
       "heap_index": 250,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -4958,11 +4561,7 @@
         "Height": 72
       },
       "parent": 309,
-      "children": [
-        321,
-        322,
-        323
-      ],
+      "children": [321, 322, 323],
       "z": 90,
       "heap_index": 253,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -5019,11 +4618,7 @@
         "Height": 72
       },
       "parent": 309,
-      "children": [
-        325,
-        326,
-        327
-      ],
+      "children": [325, 326, 327],
       "z": 90,
       "heap_index": 256,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__simTun/SL__arrayElement"
@@ -5080,19 +4675,7 @@
         "Height": 432
       },
       "parent": 247,
-      "children": [
-        329,
-        330,
-        331,
-        332,
-        333,
-        334,
-        335,
-        336,
-        340,
-        341,
-        342
-      ],
+      "children": [329, 330, 331, 332, 333, 334, 335, 336, 340, 341, 342],
       "z": 70,
       "heap_index": 261,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -5205,11 +4788,7 @@
         "Height": 72
       },
       "parent": 328,
-      "children": [
-        337,
-        338,
-        339
-      ],
+      "children": [337, 338, 339],
       "z": 80,
       "heap_index": 267,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -5294,12 +4873,7 @@
         "Height": 100
       },
       "parent": 328,
-      "children": [
-        343,
-        344,
-        345,
-        346
-      ],
+      "children": [343, 344, 345, 346],
       "z": 80,
       "heap_index": 272,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/SL__baseRefNum"
@@ -5370,17 +4944,7 @@
         "Height": 294
       },
       "parent": 247,
-      "children": [
-        348,
-        349,
-        350,
-        351,
-        352,
-        353,
-        354,
-        358,
-        359
-      ],
+      "children": [348, 349, 350, 351, 352, 353, 354, 358, 359],
       "z": 70,
       "heap_index": 277,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -5479,11 +5043,7 @@
         "Height": 72
       },
       "parent": 347,
-      "children": [
-        355,
-        356,
-        357
-      ],
+      "children": [355, 356, 357],
       "z": 80,
       "heap_index": 282,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement/OF__image"
@@ -5568,12 +5128,7 @@
         "Height": 100
       },
       "parent": 247,
-      "children": [
-        361,
-        362,
-        363,
-        364
-      ],
+      "children": [361, 362, 363, 364],
       "z": 70,
       "heap_index": 288,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/SL__sdfTun/SL__arrayElement/SL__mux/SL__stdLvVariant/SL__arrayElement"
@@ -5700,11 +5255,7 @@
         "Height": 72
       },
       "parent": 13,
-      "children": [
-        370,
-        371,
-        372
-      ],
+      "children": [370, 371, 372],
       "z": 30,
       "heap_index": 300,
       "path": "SL__rootObject/SL__eventDataNode/SL__aInsDCO/OF__image"
@@ -5775,12 +5326,7 @@
         "Height": 290
       },
       "parent": 3,
-      "children": [
-        375,
-        376,
-        377,
-        378
-      ],
+      "children": [375, 376, 377, 378],
       "z": 20,
       "heap_index": 305,
       "path": "SL__rootObject/SL__eventDataNode/SL__lMax"
@@ -5837,12 +5383,7 @@
         "Height": 208
       },
       "parent": 374,
-      "children": [
-        379,
-        380,
-        381,
-        385
-      ],
+      "children": [379, 380, 381, 385],
       "z": 30,
       "heap_index": 307,
       "path": "SL__rootObject/SL__eventDataNode/SL__lMax/SL__seqTun"
@@ -5885,11 +5426,7 @@
         "Height": 72
       },
       "parent": 378,
-      "children": [
-        382,
-        383,
-        384
-      ],
+      "children": [382, 383, 384],
       "z": 40,
       "heap_index": 308,
       "path": "SL__rootObject/SL__eventDataNode/SL__lMax/SL__seqTun/SL__arrayElement"
@@ -5946,11 +5483,7 @@
         "Height": 72
       },
       "parent": 378,
-      "children": [
-        386,
-        387,
-        388
-      ],
+      "children": [386, 387, 388],
       "z": 40,
       "heap_index": 311,
       "path": "SL__rootObject/SL__eventDataNode/SL__lMax/SL__seqTun/SL__arrayElement"
@@ -6007,10 +5540,7 @@
         "Height": 46
       },
       "parent": 3,
-      "children": [
-        390,
-        391
-      ],
+      "children": [390, 391],
       "z": 20,
       "heap_index": 316,
       "path": "SL__rootObject/SL__eventDataNode/SL__oHExt"
@@ -6109,10 +5639,7 @@
         "Height": 46
       },
       "parent": 0,
-      "children": [
-        397,
-        398
-      ],
+      "children": [397, 398],
       "z": 10,
       "heap_index": 323,
       "path": "SL__rootObject/SL__multiCosm"

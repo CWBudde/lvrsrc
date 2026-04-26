@@ -694,7 +694,11 @@ func TestIsTerminalWriterRegularFileFalse(t *testing.T) {
 	if err != nil {
 		t.Fatalf("CreateTemp: %v", err)
 	}
-	defer tmp.Close()
+	t.Cleanup(func() {
+		if err := tmp.Close(); err != nil {
+			t.Errorf("Close() error = %v", err)
+		}
+	})
 	if got := isTerminalWriter(tmp); got {
 		t.Errorf("isTerminalWriter(regular file) = true, want false")
 	}
