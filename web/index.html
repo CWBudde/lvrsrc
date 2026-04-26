@@ -125,6 +125,7 @@
             </p>
             <div class="heap-mode-switch" role="tablist" aria-label="Front panel render mode">
               <button class="heap-mode-btn active" data-panel="frontpanel" data-mode="visual">Visual</button>
+              <button class="heap-mode-btn" data-panel="frontpanel" data-mode="canvas">Canvas</button>
               <button class="heap-mode-btn" data-panel="frontpanel" data-mode="tree">Tree</button>
             </div>
           </div>
@@ -147,6 +148,15 @@
               Use the tree mode when you need the raw structural/debug view.
             </p>
             <div id="fp-scene" class="scene-preview"></div>
+          </div>
+          <div id="fp-canvas-card" class="card hidden">
+            <h3>Canvas Render</h3>
+            <p class="subtle-text">
+              Raster preview drawn from the same shared scene graph. Prefer this
+              mode for larger diagrams when DOM-heavy SVG feels sluggish.
+            </p>
+            <div id="fp-canvas-note" class="subtle-text heap-canvas-note hidden"></div>
+            <div id="fp-canvas" class="scene-preview scene-preview-canvas"></div>
           </div>
           <div id="fp-tree-card" class="card hidden">
             <h3>Object tree</h3>
@@ -176,6 +186,7 @@
             </p>
             <div class="heap-mode-switch" role="tablist" aria-label="Block diagram render mode">
               <button class="heap-mode-btn active" data-panel="blockdiagram" data-mode="visual">Visual</button>
+              <button class="heap-mode-btn" data-panel="blockdiagram" data-mode="canvas">Canvas</button>
               <button class="heap-mode-btn" data-panel="blockdiagram" data-mode="tree">Tree</button>
             </div>
           </div>
@@ -198,6 +209,15 @@
               Use the tree mode when you need the raw structural/debug view.
             </p>
             <div id="bd-scene" class="scene-preview"></div>
+          </div>
+          <div id="bd-canvas-card" class="card hidden">
+            <h3>Canvas Render</h3>
+            <p class="subtle-text">
+              Raster preview drawn from the same shared scene graph. Prefer this
+              mode for larger diagrams when DOM-heavy SVG feels sluggish.
+            </p>
+            <div id="bd-canvas-note" class="subtle-text heap-canvas-note hidden"></div>
+            <div id="bd-canvas" class="scene-preview scene-preview-canvas"></div>
           </div>
           <div id="bd-tree-card" class="card hidden">
             <h3>Diagram tree</h3>

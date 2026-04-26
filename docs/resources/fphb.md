@@ -49,6 +49,13 @@ For navigation, `pkg/lvvi.Model.FrontPanel()` projects the same tree into
 a render-friendly `lvvi.HeapTree` with class names resolved through
 `lvvi.HeapTagName`. The web demo's _Front Panel_ tab is the consumer.
 
+Phase 11 adds a second projection on top of that tree: the shared
+`internal/render.Scene` graph. `internal/render.FrontPanelScene()` turns
+the decoded heap into grouped scene nodes with logical bounds, labels,
+placeholder markers, and a scene-level `ViewBox`. Both the CLI
+(`lvrsrc render --view front-panel`) and the web demo's `Visual` / `Canvas`
+modes use that shared projection.
+
 ## Coverage
 
 - 21/21 corpus FPHb sections round-trip bit-for-bit.
@@ -75,6 +82,18 @@ deliberately does not yet:
 These are tracked as Phase 11+ work (post-`v1.0`) and do not block any of
 the read-only inspection / validation / safe-edit flows the codec
 currently powers.
+
+## Render/export semantics
+
+Current front-panel rendering is intentionally structural:
+
+- SVG and canvas output come from inferred scene-graph bounds, not decoded
+  LabVIEW control coordinates.
+- Unresolved classes remain visible as placeholder nodes with their
+  `Tag(N)` label and parent path.
+- The web demo surfaces the same warnings the renderer emits
+  (heuristic layout, placeholders present) so consumers can tell the
+  difference between "decoded faithfully" and "best effort".
 
 ## References
 

@@ -173,6 +173,7 @@ testdata/          fixtures and regression corpus
 ## Documentation
 
 - [docs/generated/resource-coverage.md](docs/generated/resource-coverage.md)
+- [docs/cli.md](docs/cli.md)
 - [docs/format-overview.md](docs/format-overview.md)
 - [docs/formats/llb.md](docs/formats/llb.md)
 - [docs/wire-layout.md](docs/wire-layout.md)

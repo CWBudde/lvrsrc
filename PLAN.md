@@ -550,23 +550,23 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 11.2 Web demo visual render mode
 
-- [ ] Add a visual render mode to the existing "Front Panel" and "Block Diagram" tabs; keep the current tree view available as an inspection/debug fallback
-- [ ] Prefer SVG for the primary browser render so users can inspect DOM nodes, copy the output, and compare object bounds directly in devtools
-- [ ] Add an optional canvas path for larger diagrams where pan/zoom performance matters more than DOM inspectability
-- [ ] Surface fidelity warnings inline when a render falls back to placeholders, omitted wire routing, or heuristic sizing
+- [x] Add a visual render mode to the existing "Front Panel" and "Block Diagram" tabs; keep the current tree view available as an inspection/debug fallback — both tabs now expose an explicit `Visual | Tree` mode switch in `web/index.html` / `web/app.js`, with visual mode selected by default and the existing tree renderer retained as the fallback/debug surface.
+- [x] Prefer SVG for the primary browser render so users can inspect DOM nodes, copy the output, and compare object bounds directly in devtools — the WASM payload now carries `front_panel_svg` / `block_diagram_svg` emitted by `internal/render.SVG`, and the web demo mounts that SVG directly as the primary visible render in each heap tab.
+- [x] Add an optional canvas path for larger diagrams where pan/zoom performance matters more than DOM inspectability — the web demo now exposes a third `Canvas` mode beside `Visual` and `Tree`. WASM passes the shared scene graph through as JSON plus a `PreferCanvas` hint derived from `internal/render.PreferCanvas`, and `web/app.js` draws the same boxes/labels onto `<canvas>` with a size-based recommendation note for larger scenes.
+- [x] Surface fidelity warnings inline when a render falls back to placeholders, omitted wire routing, or heuristic sizing — `internal/render.ProjectHeapTree` now emits shared scene warnings (heuristic layout, placeholder nodes, missing block-diagram wires), WASM passes them through, and the web demo shows them in a dedicated "Fidelity Warnings" card above the active render.
 
 ### 11.3 CLI render/export
 
 - [x] Add `lvrsrc render <file>` with `--view=front-panel|block-diagram` and `--format=svg` so the same approximate render can be emitted outside the web demo — `cmd/lvrsrc/render.go` opens the file, decodes known resources through `pkg/lvvi`, projects the requested scene through `internal/render`, and emits SVG using the shared renderer. Tests in `cmd/lvrsrc/render_test.go` cover stdout SVG generation, `--out`, and unsupported-format rejection.
 - [x] Support `--out <path>` for writing a standalone SVG artifact and stdout output for shell pipelines — the new command reuses the root `--out` plumbing, so `lvrsrc render` works both as `lvrsrc render foo.vi > foo.svg` and `lvrsrc --out foo.svg render foo.vi`.
 - [x] Make the CLI output self-describing: title block / metadata, view box sized to the rendered scene, and visible placeholder styling for unresolved objects — `internal/render.SVG` emits a standalone `<svg>` with title / aria label, scene-sized `viewBox`, stable CSS classes, and dashed placeholder styling for unresolved nodes.
-- [ ] Reuse the same scene-graph projection as the web demo rather than maintaining a separate CLI-only renderer
+- [x] Reuse the same scene-graph projection as the web demo rather than maintaining a separate CLI-only renderer — both the CLI `render` command and the WASM/web-demo previews now flow through the same `internal/render` scene graph and SVG renderer, so layout rules and placeholder handling are shared.
 
 ### 11.4 Verification and docs
 
-- [ ] Add golden tests for scene-graph projection and SVG output on representative corpus files (simple VI, control, structure-heavy block diagram)
-- [ ] Add web-demo smoke coverage ensuring both tabs can switch between tree and visual modes without panics on files that have `FPHb` / `BDHb`
-- [ ] Document renderer limits and export semantics in `docs/cli.md` and the relevant `docs/resources/*.md` pages
+- [x] Add golden tests for scene-graph projection and SVG output on representative corpus files (simple VI, control, structure-heavy block diagram) — `internal/render/golden_test.go` snapshots the shared scene graph plus full SVG output for `format-string.vi` (simple VI front panel), `action.ctl` (control front panel), and `load-vi.vi` (structure-heavier block diagram). Goldens live under `internal/render/testdata/golden/`.
+- [x] Add web-demo smoke coverage ensuring both tabs can switch between tree and visual modes without panics on files that have `FPHb` / `BDHb` — `web/app_smoke_test.mjs` drives the real `web/app.js` module against a stub DOM and exercises `Visual`, `Canvas`, and `Tree` mode switching for both heap tabs; `web/smoke_test.go` wraps that script so it runs under `go test ./web`.
+- [x] Document renderer limits and export semantics in `docs/cli.md` and the relevant `docs/resources/*.md` pages — new CLI documentation lives in `docs/cli.md`; `docs/resources/fphb.md` and `docs/resources/bdhb.md` now describe the shared scene graph, current SVG/canvas render semantics, and the main approximation limits.
 
 ---
 

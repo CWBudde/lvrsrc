@@ -93,6 +93,8 @@ type WASMInfo struct {
 	Connector          *WASMConnectorPane `json:"connector,omitempty"`
 	FrontPanel         *WASMHeapTree      `json:"front_panel,omitempty"`
 	BlockDiag          *WASMHeapTree      `json:"block_diagram,omitempty"`
+	FrontPanelScene    *WASMScene         `json:"front_panel_scene,omitempty"`
+	BlockDiagScene     *WASMScene         `json:"block_diagram_scene,omitempty"`
 	FrontPanelSVG      string             `json:"front_panel_svg,omitempty"`
 	BlockDiagSVG       string             `json:"block_diagram_svg,omitempty"`
 	FrontPanelWarnings []string           `json:"front_panel_warnings,omitempty"`
@@ -110,6 +112,48 @@ type WASMHeapTree struct {
 	// nodes carrying it. This is what the demo summarises in the
 	// "objects by class" card without re-walking on the JS side.
 	Histogram map[string]int `json:"histogram,omitempty"`
+}
+
+type WASMScene struct {
+	View         string          `json:"view"`
+	ViewBox      WASMRect        `json:"view_box"`
+	Nodes        []WASMSceneNode `json:"nodes"`
+	Wires        []WASMWire      `json:"wires,omitempty"`
+	Roots        []int           `json:"roots"`
+	Warnings     []string        `json:"warnings,omitempty"`
+	PreferCanvas bool            `json:"prefer_canvas,omitempty"`
+}
+
+type WASMRect struct {
+	X      float64 `json:"x"`
+	Y      float64 `json:"y"`
+	Width  float64 `json:"width"`
+	Height float64 `json:"height"`
+}
+
+type WASMSceneNode struct {
+	Kind        string   `json:"kind"`
+	Label       string   `json:"label,omitempty"`
+	Bounds      WASMRect `json:"bounds"`
+	Parent      int      `json:"parent"`
+	Children    []int    `json:"children,omitempty"`
+	Z           int      `json:"z"`
+	Placeholder bool     `json:"placeholder,omitempty"`
+	HeapIndex   int      `json:"heap_index"`
+	Path        string   `json:"path,omitempty"`
+}
+
+type WASMWire struct {
+	From   int         `json:"from"`
+	To     int         `json:"to"`
+	Z      int         `json:"z"`
+	Points []WASMPoint `json:"points,omitempty"`
+	Label  string      `json:"label,omitempty"`
+}
+
+type WASMPoint struct {
+	X float64 `json:"x"`
+	Y float64 `json:"y"`
 }
 
 // WASMHeapNode is the compact projection of one heap entry. Content
@@ -414,12 +458,14 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 		info.BlockDiag = projectHeapTreeForWASM(bd)
 	}
 	if scene, ok := irender.FrontPanelScene(model); ok {
+		info.FrontPanelScene = projectSceneForWASM(scene)
 		if svg, err := irender.SVG(scene, irender.SVGOptions{Title: "LabVIEW front-panel render"}); err == nil {
 			info.FrontPanelSVG = svg
 		}
 		info.FrontPanelWarnings = append([]string(nil), scene.Warnings...)
 	}
 	if scene, ok := irender.BlockDiagramScene(model); ok {
+		info.BlockDiagScene = projectSceneForWASM(scene)
 		if svg, err := irender.SVG(scene, irender.SVGOptions{Title: "LabVIEW block-diagram render"}); err == nil {
 			info.BlockDiagSVG = svg
 		}
@@ -450,6 +496,49 @@ func projectHeapTreeForWASM(t lvvi.HeapTree) *WASMHeapTree {
 		}
 	}
 	return out
+}
+
+func projectSceneForWASM(scene irender.Scene) *WASMScene {
+	out := &WASMScene{
+		View:         string(scene.View),
+		ViewBox:      rectToWASM(scene.ViewBox),
+		Nodes:        make([]WASMSceneNode, len(scene.Nodes)),
+		Wires:        make([]WASMWire, len(scene.Wires)),
+		Roots:        append([]int(nil), scene.Roots...),
+		Warnings:     append([]string(nil), scene.Warnings...),
+		PreferCanvas: irender.PreferCanvas(scene),
+	}
+	for i, n := range scene.Nodes {
+		out.Nodes[i] = WASMSceneNode{
+			Kind:        string(n.Kind),
+			Label:       n.Label,
+			Bounds:      rectToWASM(n.Bounds),
+			Parent:      n.Parent,
+			Children:    append([]int(nil), n.Children...),
+			Z:           n.Z,
+			Placeholder: n.Placeholder,
+			HeapIndex:   n.HeapIndex,
+			Path:        n.Path,
+		}
+	}
+	for i, w := range scene.Wires {
+		points := make([]WASMPoint, len(w.Points))
+		for j, p := range w.Points {
+			points[j] = WASMPoint{X: p.X, Y: p.Y}
+		}
+		out.Wires[i] = WASMWire{
+			From:   w.From,
+			To:     w.To,
+			Z:      w.Z,
+			Points: points,
+			Label:  w.Label,
+		}
+	}
+	return out
+}
+
+func rectToWASM(r irender.Rect) WASMRect {
+	return WASMRect{X: r.X, Y: r.Y, Width: r.Width, Height: r.Height}
 }
 
 func decodeTypes(ctx codecs.Context, file *lvrsrc.File) []WASMTypeEntry {

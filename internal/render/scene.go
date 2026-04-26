@@ -81,19 +81,21 @@ type Scene struct {
 }
 
 const (
-	sceneMarginX      = 24.0
-	sceneMarginY      = 24.0
-	sceneRootGapY     = 20.0
-	sceneGroupPadX    = 16.0
-	sceneGroupPadY    = 12.0
-	sceneGroupIndentX = 18.0
-	sceneHeaderHeight = 22.0
-	sceneChildGapY    = 10.0
-	sceneTitleGapY    = 8.0
-	sceneMinGroupW    = 180.0
-	sceneMinLabelW    = 96.0
-	sceneLabelH       = 18.0
-	sceneCharW        = 7.0
+	sceneMarginX        = 24.0
+	sceneMarginY        = 24.0
+	sceneRootGapY       = 20.0
+	sceneGroupPadX      = 16.0
+	sceneGroupPadY      = 12.0
+	sceneGroupIndentX   = 18.0
+	sceneHeaderHeight   = 22.0
+	sceneChildGapY      = 10.0
+	sceneTitleGapY      = 8.0
+	sceneMinGroupW      = 180.0
+	sceneMinLabelW      = 96.0
+	sceneLabelH         = 18.0
+	sceneCharW          = 7.0
+	canvasNodeThreshold = 180
+	canvasAreaThreshold = 1200 * 1200
 )
 
 type layoutKind string
@@ -189,6 +191,13 @@ func BlockDiagramScene(m *lvvi.Model) (Scene, bool) {
 		return Scene{}, false
 	}
 	return ProjectHeapTree(tree, ViewBlockDiagram), true
+}
+
+// PreferCanvas reports whether a scene is large enough that a canvas
+// render path is likely to be more responsive than a DOM-heavy SVG view.
+func PreferCanvas(scene Scene) bool {
+	area := scene.ViewBox.Width * scene.ViewBox.Height
+	return len(scene.Nodes) >= canvasNodeThreshold || area >= canvasAreaThreshold
 }
 
 func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem {

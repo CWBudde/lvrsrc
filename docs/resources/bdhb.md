@@ -50,6 +50,11 @@ For navigation, `pkg/lvvi.Model.BlockDiagram()` projects the same tree
 into a render-friendly `lvvi.HeapTree` with class names resolved through
 `lvvi.HeapTagName`. The web demo's _Block Diagram_ tab is the consumer.
 
+Phase 11 layers the shared `internal/render.Scene` graph on top of that
+tree. `internal/render.BlockDiagramScene()` emits grouped scene nodes,
+logical bounds, placeholder markers, warnings, and a `ViewBox` that both
+the CLI (`lvrsrc render --view block-diagram`) and the web demo consume.
+
 ## Coverage
 
 - 21/21 corpus BDHb sections round-trip bit-for-bit;
@@ -81,6 +86,17 @@ deliberately does not yet:
 These are tracked as Phase 11+ work (post-`v1.0`) and do not block any of
 the read-only inspection / validation / safe-edit flows the codec
 currently powers.
+
+## Render/export semantics
+
+Current block-diagram rendering is intentionally structural:
+
+- SVG and canvas output come from inferred scene-graph bounds, not decoded
+  primitive coordinates or persisted wire geometry.
+- Unresolved classes remain visible as placeholder nodes with their
+  `Tag(N)` label and parent path.
+- Wire routing and terminal positions are not rendered yet; the renderer
+  emits explicit warnings and the web demo surfaces them inline.
 
 ## References
 

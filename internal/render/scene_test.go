@@ -158,6 +158,32 @@ func TestProjectHeapTreeAddsFidelityWarnings(t *testing.T) {
 	}
 }
 
+func TestPreferCanvasForLargeScenes(t *testing.T) {
+	small := Scene{
+		ViewBox: Rect{Width: 320, Height: 240},
+		Nodes: []Node{
+			{Kind: NodeKindBox, Bounds: Rect{Width: 120, Height: 60}},
+			{Kind: NodeKindLabel, Bounds: Rect{Width: 80, Height: 18}},
+		},
+	}
+	if PreferCanvas(small) {
+		t.Fatal("PreferCanvas(small) = true, want false")
+	}
+
+	large := Scene{
+		ViewBox: Rect{Width: 2400, Height: 1800},
+	}
+	for i := 0; i < 220; i++ {
+		large.Nodes = append(large.Nodes, Node{
+			Kind:   NodeKindBox,
+			Bounds: Rect{X: float64(i * 12), Y: float64(i * 8), Width: 180, Height: 90},
+		})
+	}
+	if !PreferCanvas(large) {
+		t.Fatal("PreferCanvas(large) = false, want true")
+	}
+}
+
 func TestFrontPanelSceneOnCorpusProducesPositiveViewBox(t *testing.T) {
 	entries, err := os.ReadDir(corpus.Dir())
 	if err != nil {

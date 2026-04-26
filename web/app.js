@@ -44,6 +44,9 @@ const refs = {
   fpWarnings: document.getElementById("fp-warnings"),
   fpSceneCard: document.getElementById("fp-scene-card"),
   fpScene: document.getElementById("fp-scene"),
+  fpCanvasCard: document.getElementById("fp-canvas-card"),
+  fpCanvasNote: document.getElementById("fp-canvas-note"),
+  fpCanvas: document.getElementById("fp-canvas"),
   fpTreeCard: document.getElementById("fp-tree-card"),
   fpTree: document.getElementById("fp-tree"),
   bdEmpty: document.getElementById("bd-empty"),
@@ -53,6 +56,9 @@ const refs = {
   bdWarnings: document.getElementById("bd-warnings"),
   bdSceneCard: document.getElementById("bd-scene-card"),
   bdScene: document.getElementById("bd-scene"),
+  bdCanvasCard: document.getElementById("bd-canvas-card"),
+  bdCanvasNote: document.getElementById("bd-canvas-note"),
+  bdCanvas: document.getElementById("bd-canvas"),
   bdTreeCard: document.getElementById("bd-tree-card"),
   bdTree: document.getElementById("bd-tree"),
 };
@@ -185,8 +191,12 @@ function render() {
     refs.fpWarnings,
     refs.fpSceneCard,
     refs.fpScene,
+    refs.fpCanvasCard,
+    refs.fpCanvasNote,
+    refs.fpCanvas,
     refs.fpTreeCard,
     refs.fpTree,
+    state.primary.parse.info.front_panel_scene,
     state.primary.parse.info.front_panel_svg,
     state.primary.parse.info.front_panel_warnings,
     state.heapMode.frontpanel,
@@ -201,8 +211,12 @@ function render() {
     refs.bdWarnings,
     refs.bdSceneCard,
     refs.bdScene,
+    refs.bdCanvasCard,
+    refs.bdCanvasNote,
+    refs.bdCanvas,
     refs.bdTreeCard,
     refs.bdTree,
+    state.primary.parse.info.block_diagram_scene,
     state.primary.parse.info.block_diagram_svg,
     state.primary.parse.info.block_diagram_warnings,
     state.heapMode.blockdiagram,
@@ -523,8 +537,12 @@ function renderHeapTree(
   warningEl,
   sceneCard,
   sceneEl,
+  canvasCard,
+  canvasNoteEl,
+  canvasEl,
   treeCard,
   treeEl,
+  sceneData,
   sceneSVG,
   sceneWarnings,
   heapMode,
@@ -535,10 +553,14 @@ function renderHeapTree(
     summaryCard.classList.add("hidden");
     warningCard.classList.add("hidden");
     sceneCard.classList.add("hidden");
+    canvasCard.classList.add("hidden");
     treeCard.classList.add("hidden");
     histogramEl.innerHTML = "";
     warningEl.innerHTML = "";
     sceneEl.innerHTML = "";
+    canvasNoteEl.textContent = "";
+    canvasNoteEl.classList.add("hidden");
+    canvasEl.innerHTML = "";
     treeEl.innerHTML = "";
     return;
   }
@@ -551,6 +573,15 @@ function renderHeapTree(
   } else {
     sceneCard.classList.add("hidden");
     sceneEl.innerHTML = "";
+  }
+  if (sceneData && heapMode === "canvas") {
+    canvasCard.classList.remove("hidden");
+    renderHeapCanvas(canvasEl, canvasNoteEl, sceneData);
+  } else {
+    canvasCard.classList.add("hidden");
+    canvasNoteEl.textContent = "";
+    canvasNoteEl.classList.add("hidden");
+    canvasEl.innerHTML = "";
   }
   treeCard.classList.toggle("hidden", heapMode !== "tree");
 
@@ -609,6 +640,84 @@ function renderHeapWarnings(cardEl, warningsEl, warnings) {
   }
   cardEl.classList.remove("hidden");
   warningsEl.innerHTML = `<ul>${list.map((w) => `<li>${escHtml(w)}</li>`).join("")}</ul>`;
+}
+
+function renderHeapCanvas(containerEl, noteEl, scene) {
+  containerEl.innerHTML = "";
+  const canvas = document.createElement("canvas");
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  const maxCSSWidth = Math.max(320, Math.min(960, scene.view_box?.width || 640));
+  const scale = maxCSSWidth / Math.max(1, scene.view_box?.width || maxCSSWidth);
+  const cssWidth = maxCSSWidth;
+  const cssHeight = Math.max(180, (scene.view_box?.height || 360) * scale);
+  canvas.width = Math.round(cssWidth * dpr);
+  canvas.height = Math.round(cssHeight * dpr);
+  canvas.style.width = `${cssWidth}px`;
+  canvas.style.height = `${cssHeight}px`;
+  canvas.className = "heap-canvas";
+  containerEl.appendChild(canvas);
+
+  if (scene.prefer_canvas) {
+    noteEl.textContent = "Canvas is recommended for this scene because it is relatively large.";
+    noteEl.classList.remove("hidden");
+  } else {
+    noteEl.textContent = "";
+    noteEl.classList.add("hidden");
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    containerEl.innerHTML = '<p class="subtle-text">Canvas context unavailable in this browser.</p>';
+    return;
+  }
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, cssWidth, cssHeight);
+  ctx.save();
+  ctx.scale(scale, scale);
+  ctx.translate(-(scene.view_box?.x || 0), -(scene.view_box?.y || 0));
+
+  const nodes = [...(scene.nodes || [])].sort((a, b) => (a.z || 0) - (b.z || 0));
+  for (const node of nodes) {
+    drawSceneNodeToCanvas(ctx, node);
+  }
+  ctx.restore();
+}
+
+function drawSceneNodeToCanvas(ctx, node) {
+  const bounds = node.bounds || { x: 0, y: 0, width: 0, height: 0 };
+  if (node.kind === "box") {
+    ctx.save();
+    ctx.beginPath();
+    roundedRectPath(ctx, bounds.x, bounds.y, bounds.width, bounds.height, 8);
+    ctx.fillStyle = "#f4f0e8";
+    ctx.strokeStyle = node.placeholder ? "#7d4f50" : "#5f4b32";
+    ctx.lineWidth = 1.5;
+    if (node.placeholder) {
+      ctx.setLineDash([6, 4]);
+    }
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
+    return;
+  }
+  if (node.kind === "label") {
+    ctx.save();
+    ctx.fillStyle = node.placeholder ? "#7d4f50" : "#16324f";
+    ctx.font = '13px "Helvetica Neue", Helvetica, Arial, sans-serif';
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(node.label || "", bounds.x, bounds.y + bounds.height - 4, Math.max(0, bounds.width));
+    ctx.restore();
+  }
+}
+
+function roundedRectPath(ctx, x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + width, y, x + width, y + height, r);
+  ctx.arcTo(x + width, y + height, x, y + height, r);
+  ctx.arcTo(x, y + height, x, y, r);
+  ctx.arcTo(x, y, x + width, y, r);
+  ctx.closePath();
 }
 
 function renderHeapTreeNode(tree, idx, openOnly, leafCounts, idPrefix) {
@@ -913,3 +1022,5 @@ function escHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }
+
+export { refs, render, setHeapMode, state };

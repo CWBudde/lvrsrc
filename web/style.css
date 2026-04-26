@@ -891,6 +891,10 @@ header h1 {
   margin: 0.35rem 0;
 }
 
+.heap-canvas-note {
+  margin-bottom: 0.75rem;
+}
+
 .scene-preview {
   overflow-x: auto;
 }
@@ -907,6 +911,20 @@ header h1 {
   border-radius: 14px;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.scene-preview-canvas {
+  padding: 0;
+}
+
+.heap-canvas {
+  display: block;
+  max-width: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(244, 240, 232, 0.9), rgba(235, 228, 214, 0.85)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(244, 240, 232, 0.75));
+  border: 1px solid rgba(95, 75, 50, 0.18);
+  border-radius: 14px;
 }
 
 .heap-hist-grid {
