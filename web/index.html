@@ -123,6 +123,10 @@
               Unrecognised tags appear as numeric placeholders to make
               gaps obvious.
             </p>
+            <div class="heap-mode-switch" role="tablist" aria-label="Front panel render mode">
+              <button class="heap-mode-btn active" data-panel="frontpanel" data-mode="visual">Visual</button>
+              <button class="heap-mode-btn" data-panel="frontpanel" data-mode="tree">Tree</button>
+            </div>
           </div>
           <div id="fp-summary-card" class="card hidden">
             <h3>Objects by class</h3>
@@ -131,6 +135,18 @@
               this front panel.
             </p>
             <div id="fp-histogram" class="heap-hist"></div>
+          </div>
+          <div id="fp-warning-card" class="card hidden">
+            <h3>Fidelity Warnings</h3>
+            <div id="fp-warnings" class="heap-warning-list"></div>
+          </div>
+          <div id="fp-scene-card" class="card hidden">
+            <h3>Visual Render</h3>
+            <p class="subtle-text">
+              Shared SVG preview emitted from the renderer-neutral scene graph.
+              Use the tree mode when you need the raw structural/debug view.
+            </p>
+            <div id="fp-scene" class="scene-preview"></div>
           </div>
           <div id="fp-tree-card" class="card hidden">
             <h3>Object tree</h3>
@@ -158,6 +174,10 @@
               require the per-object field decoders that are out of
               scope for v1.
             </p>
+            <div class="heap-mode-switch" role="tablist" aria-label="Block diagram render mode">
+              <button class="heap-mode-btn active" data-panel="blockdiagram" data-mode="visual">Visual</button>
+              <button class="heap-mode-btn" data-panel="blockdiagram" data-mode="tree">Tree</button>
+            </div>
           </div>
           <div id="bd-summary-card" class="card hidden">
             <h3>Primitives and structures</h3>
@@ -166,6 +186,18 @@
               diagram (loops, structures, primitives, SubVI calls).
             </p>
             <div id="bd-histogram" class="heap-hist"></div>
+          </div>
+          <div id="bd-warning-card" class="card hidden">
+            <h3>Fidelity Warnings</h3>
+            <div id="bd-warnings" class="heap-warning-list"></div>
+          </div>
+          <div id="bd-scene-card" class="card hidden">
+            <h3>Visual Render</h3>
+            <p class="subtle-text">
+              Shared SVG preview emitted from the renderer-neutral scene graph.
+              Use the tree mode when you need the raw structural/debug view.
+            </p>
+            <div id="bd-scene" class="scene-preview"></div>
           </div>
           <div id="bd-tree-card" class="card hidden">
             <h3>Diagram tree</h3>

@@ -855,6 +855,60 @@ header h1 {
   border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
 }
 
+.heap-mode-switch {
+  display: inline-flex;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 85%, var(--accent) 15%);
+  border: 1px solid color-mix(in srgb, var(--border) 78%, var(--accent) 22%);
+}
+
+.heap-mode-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.heap-mode-btn.active {
+  background: var(--accent);
+  color: var(--surface);
+}
+
+.heap-warning-list ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.heap-warning-list li {
+  color: var(--text);
+  margin: 0.35rem 0;
+}
+
+.scene-preview {
+  overflow-x: auto;
+}
+
+.scene-preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(244, 240, 232, 0.9), rgba(235, 228, 214, 0.85)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(244, 240, 232, 0.75));
+  border: 1px solid rgba(95, 75, 50, 0.18);
+  border-radius: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .heap-hist-grid {
   display: flex;
   flex-wrap: wrap;

@@ -132,6 +132,32 @@ func TestProjectHeapTreeStacksMultipleRootsTopToBottom(t *testing.T) {
 	}
 }
 
+func TestProjectHeapTreeAddsFidelityWarnings(t *testing.T) {
+	tree := lvvi.HeapTree{
+		Nodes: []lvvi.HeapNode{
+			{Tag: -3, Scope: "open", Parent: -1, Children: []int{1}},
+			{Tag: 99999, Scope: "open", Parent: 0},
+		},
+		Roots: []int{0},
+	}
+
+	fp := ProjectHeapTree(tree, ViewFrontPanel)
+	if len(fp.Warnings) == 0 {
+		t.Fatal("front-panel scene warnings = empty, want heuristic/placeholder warning")
+	}
+	if !containsString(fp.Warnings, "heuristic") {
+		t.Fatalf("front-panel warnings = %v, want heuristic warning", fp.Warnings)
+	}
+	if !containsString(fp.Warnings, "placeholder") {
+		t.Fatalf("front-panel warnings = %v, want placeholder warning", fp.Warnings)
+	}
+
+	bd := ProjectHeapTree(tree, ViewBlockDiagram)
+	if !containsString(bd.Warnings, "wire routing") {
+		t.Fatalf("block-diagram warnings = %v, want wire-routing warning", bd.Warnings)
+	}
+}
+
 func TestFrontPanelSceneOnCorpusProducesPositiveViewBox(t *testing.T) {
 	entries, err := os.ReadDir(corpus.Dir())
 	if err != nil {
@@ -162,6 +188,15 @@ func TestFrontPanelSceneOnCorpusProducesPositiveViewBox(t *testing.T) {
 		return
 	}
 	t.Skip("no corpus VI with a decodable FPHb scene")
+}
+
+func containsString(ss []string, needle string) bool {
+	for _, s := range ss {
+		if strings.Contains(strings.ToLower(s), strings.ToLower(needle)) {
+			return true
+		}
+	}
+	return false
 }
 
 func findNode(nodes []Node, pred func(Node) bool) (Node, bool) {

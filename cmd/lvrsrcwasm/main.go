@@ -25,6 +25,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vctp"
 	"github.com/CWBudde/lvrsrc/internal/codecs/vers"
+	irender "github.com/CWBudde/lvrsrc/internal/render"
 	"github.com/CWBudde/lvrsrc/pkg/lvrsrc"
 	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 )
@@ -81,17 +82,21 @@ type WASMResource struct {
 
 // WASMInfo is the decoded user-facing metadata.
 type WASMInfo struct {
-	DisplayName string             `json:"display_name,omitempty"`
-	Version     string             `json:"version,omitempty"`
-	Description string             `json:"description,omitempty"`
-	HasDesc     bool               `json:"has_desc"`
-	Icon        *WASMIcon          `json:"icon,omitempty"`
-	Deps        WASMDeps           `json:"deps"`
-	Flags       *WASMFlags         `json:"flags,omitempty"`
-	Types       []WASMTypeEntry    `json:"types,omitempty"`
-	Connector   *WASMConnectorPane `json:"connector,omitempty"`
-	FrontPanel  *WASMHeapTree      `json:"front_panel,omitempty"`
-	BlockDiag   *WASMHeapTree      `json:"block_diagram,omitempty"`
+	DisplayName        string             `json:"display_name,omitempty"`
+	Version            string             `json:"version,omitempty"`
+	Description        string             `json:"description,omitempty"`
+	HasDesc            bool               `json:"has_desc"`
+	Icon               *WASMIcon          `json:"icon,omitempty"`
+	Deps               WASMDeps           `json:"deps"`
+	Flags              *WASMFlags         `json:"flags,omitempty"`
+	Types              []WASMTypeEntry    `json:"types,omitempty"`
+	Connector          *WASMConnectorPane `json:"connector,omitempty"`
+	FrontPanel         *WASMHeapTree      `json:"front_panel,omitempty"`
+	BlockDiag          *WASMHeapTree      `json:"block_diagram,omitempty"`
+	FrontPanelSVG      string             `json:"front_panel_svg,omitempty"`
+	BlockDiagSVG       string             `json:"block_diagram_svg,omitempty"`
+	FrontPanelWarnings []string           `json:"front_panel_warnings,omitempty"`
+	BlockDiagWarnings  []string           `json:"block_diagram_warnings,omitempty"`
 }
 
 // WASMHeapTree is the JS-friendly projection of a decoded FPHb / BDHb
@@ -407,6 +412,18 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 	}
 	if bd, ok := model.BlockDiagram(); ok {
 		info.BlockDiag = projectHeapTreeForWASM(bd)
+	}
+	if scene, ok := irender.FrontPanelScene(model); ok {
+		if svg, err := irender.SVG(scene, irender.SVGOptions{Title: "LabVIEW front-panel render"}); err == nil {
+			info.FrontPanelSVG = svg
+		}
+		info.FrontPanelWarnings = append([]string(nil), scene.Warnings...)
+	}
+	if scene, ok := irender.BlockDiagramScene(model); ok {
+		if svg, err := irender.SVG(scene, irender.SVGOptions{Title: "LabVIEW block-diagram render"}); err == nil {
+			info.BlockDiagSVG = svg
+		}
+		info.BlockDiagWarnings = append([]string(nil), scene.Warnings...)
 	}
 
 	return info

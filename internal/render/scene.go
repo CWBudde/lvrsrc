@@ -160,6 +160,7 @@ func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 		scene.Roots = append(scene.Roots, rootIdx)
 		y += item.height + sceneRootGapY
 	}
+	scene.Warnings = sceneWarnings(scene)
 
 	return scene
 }
@@ -369,4 +370,23 @@ func textWidth(s string) float64 {
 		runes++
 	}
 	return float64(runes) * sceneCharW
+}
+
+func sceneWarnings(scene Scene) []string {
+	var warnings []string
+	warnings = append(warnings, "Layout is heuristic: positions and sizes are derived from heap structure, not decoded LabVIEW geometry.")
+
+	placeholders := 0
+	for _, node := range scene.Nodes {
+		if node.Placeholder {
+			placeholders++
+		}
+	}
+	if placeholders > 0 {
+		warnings = append(warnings, "Placeholder nodes are present for unresolved object classes or fields.")
+	}
+	if scene.View == ViewBlockDiagram {
+		warnings = append(warnings, "Block-diagram wire routing and terminal positions are not rendered yet.")
+	}
+	return warnings
 }

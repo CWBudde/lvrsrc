@@ -543,10 +543,10 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 11.1 Renderer-neutral scene graph
 
-- [ ] Define a shared scene model (`internal/render` or equivalent) for boxes, labels, groups, ports/terminals, wires, and z-order so the demo and CLI do not each invent their own approximation rules
-- [ ] Project decoded `FPHb` / `BDHb` nodes into that scene graph with explicit bounds, text, and containment relationships wherever corpus evidence is strong enough
-- [ ] Keep partially decoded or unknown object classes visible as placeholder nodes carrying their resolved tag label and parent path, so exports remain complete even when fidelity is low
-- [ ] Keep coordinates vector-friendly (logical units + view box) so the same scene can drive SVG output and a browser canvas renderer
+- [x] Define a shared scene model (`internal/render` or equivalent) for boxes, labels, groups, ports/terminals, wires, and z-order so the demo and CLI do not each invent their own approximation rules — `internal/render/scene.go` now defines `Scene`, `Node`, `Wire`, `Rect`, `View`, and deterministic heap-tree projection/layout helpers (`ProjectHeapTree`, `FrontPanelScene`, `BlockDiagramScene`). Tests in `internal/render/scene_test.go` lock the initial contract: explicit logical bounds, containment, placeholder labels/paths for unresolved tags, and corpus-backed front-panel scene generation.
+- [x] Project decoded `FPHb` / `BDHb` nodes into that scene graph with explicit bounds, text, and containment relationships wherever corpus evidence is strong enough — Phase 11.1's first pass is intentionally structural rather than geometry-faithful: every decoded open-scope heap object becomes a grouped scene node with a box, title label, logical bounds, z-order, and nested children; leaf entries remain visible as label nodes. Both `FrontPanelScene` and `BlockDiagramScene` now project real corpus files through that path.
+- [x] Keep partially decoded or unknown object classes visible as placeholder nodes carrying their resolved tag label and parent path, so exports remain complete even when fidelity is low — unresolved tags stay visible as `Placeholder` scene nodes, keep `Tag(N)` labels plus their full parent path, and carry through into both SVG output and the web-demo preview instead of disappearing.
+- [x] Keep coordinates vector-friendly (logical units + view box) so the same scene can drive SVG output and a browser canvas renderer — the scene graph stores logical `Rect` bounds plus a scene-level `ViewBox`, and `internal/render/svg.go` now proves the same coordinates can drive a standalone SVG renderer without any CLI- or web-specific layout fork.
 
 ### 11.2 Web demo visual render mode
 
@@ -557,9 +557,9 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ### 11.3 CLI render/export
 
-- [ ] Add `lvrsrc render <file>` with `--view=front-panel|block-diagram` and `--format=svg` so the same approximate render can be emitted outside the web demo
-- [ ] Support `--out <path>` for writing a standalone SVG artifact and stdout output for shell pipelines
-- [ ] Make the CLI output self-describing: title block / metadata, view box sized to the rendered scene, and visible placeholder styling for unresolved objects
+- [x] Add `lvrsrc render <file>` with `--view=front-panel|block-diagram` and `--format=svg` so the same approximate render can be emitted outside the web demo — `cmd/lvrsrc/render.go` opens the file, decodes known resources through `pkg/lvvi`, projects the requested scene through `internal/render`, and emits SVG using the shared renderer. Tests in `cmd/lvrsrc/render_test.go` cover stdout SVG generation, `--out`, and unsupported-format rejection.
+- [x] Support `--out <path>` for writing a standalone SVG artifact and stdout output for shell pipelines — the new command reuses the root `--out` plumbing, so `lvrsrc render` works both as `lvrsrc render foo.vi > foo.svg` and `lvrsrc --out foo.svg render foo.vi`.
+- [x] Make the CLI output self-describing: title block / metadata, view box sized to the rendered scene, and visible placeholder styling for unresolved objects — `internal/render.SVG` emits a standalone `<svg>` with title / aria label, scene-sized `viewBox`, stable CSS classes, and dashed placeholder styling for unresolved nodes.
 - [ ] Reuse the same scene-graph projection as the web demo rather than maintaining a separate CLI-only renderer
 
 ### 11.4 Verification and docs
