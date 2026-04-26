@@ -1,6 +1,7 @@
 package heap
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -141,4 +142,86 @@ func TestHeapFormatValues(t *testing.T) {
 			t.Errorf("%s = %d, want %d", tc.name, int(tc.got), tc.want)
 		}
 	}
+}
+
+// TestGeneratedStringers exercises every enum String() in tags_gen.go on
+// both branches: a known value (one map entry per type) plus a sentinel that
+// is guaranteed not to appear so the `Type(N)` fallback runs. This keeps the
+// auto-generated stringers from dominating the heap package's coverage gap.
+func TestGeneratedStringers(t *testing.T) {
+	const sentinel = 999_999
+	cases := []struct {
+		typeName string
+		named    fmt.Stringer
+		fallback fmt.Stringer
+	}{
+		{"HeapFormat", HeapFormatVersionT, HeapFormat(sentinel)},
+		{"NodeScope", NodeScopeTagOpen, NodeScope(sentinel)},
+		{"SystemTag", SystemTagObject, SystemTag(sentinel)},
+		{"SystemAttribTag", SystemAttribTagClass, SystemAttribTag(sentinel)},
+		{"FieldTag", FieldTagActiveDiag, FieldTag(sentinel)},
+		{"ClassTag", anyKey(classTagNames), ClassTag(sentinel)},
+		{"MultiDimClassTag", MultiDimClassTagMultiDimArray, MultiDimClassTag(sentinel)},
+		{"FontRunTag", anyKey(fontRunTagNames), FontRunTag(sentinel)},
+		{"TextHairTag", anyKey(textHairTagNames), TextHairTag(sentinel)},
+		{"ComplexScalarTag", anyKey(complexScalarTagNames), ComplexScalarTag(sentinel)},
+		{"Time128Tag", anyKey(time128TagNames), Time128Tag(sentinel)},
+		{"ImageTag", anyKey(imageTagNames), ImageTag(sentinel)},
+		{"SubcosmTag", anyKey(subcosmTagNames), SubcosmTag(sentinel)},
+		{"EmbedObjectTag", anyKey(embedObjectTagNames), EmbedObjectTag(sentinel)},
+		{"SceneGraphTag", anyKey(sceneGraphTagNames), SceneGraphTag(sentinel)},
+		{"SceneColorTag", anyKey(sceneColorTagNames), SceneColorTag(sentinel)},
+		{"SceneEyePointTag", anyKey(sceneEyePointTagNames), SceneEyePointTag(sentinel)},
+		{"AttributeListItemTag", anyKey(attributeListItemTagNames), AttributeListItemTag(sentinel)},
+		{"BrowseOptionsTag", anyKey(browseOptionsTagNames), BrowseOptionsTag(sentinel)},
+		{"RowColTag", anyKey(rowColTagNames), RowColTag(sentinel)},
+		{"ColorPairTag", anyKey(colorPairTagNames), ColorPairTag(sentinel)},
+		{"TreeNodeTag", anyKey(treeNodeTagNames), TreeNodeTag(sentinel)},
+		{"TabInfoItemTag", anyKey(tabInfoItemTagNames), TabInfoItemTag(sentinel)},
+		{"PageInfoItemTag", anyKey(pageInfoItemTagNames), PageInfoItemTag(sentinel)},
+		{"MappedPointTag", anyKey(mappedPointTagNames), MappedPointTag(sentinel)},
+		{"PlotDataTag", anyKey(plotDataTagNames), PlotDataTag(sentinel)},
+		{"CursorDataTag", anyKey(cursorDataTagNames), CursorDataTag(sentinel)},
+		{"PlotImagesTag", anyKey(plotImagesTagNames), PlotImagesTag(sentinel)},
+		{"CursButtonsRecTag", anyKey(cursButtonsRecTagNames), CursButtonsRecTag(sentinel)},
+		{"PlotLegendDataTag", anyKey(plotLegendDataTagNames), PlotLegendDataTag(sentinel)},
+		{"DigitalBusOrgClustTag", anyKey(digitalBusOrgClustTagNames), DigitalBusOrgClustTag(sentinel)},
+		{"ScaleLegendDataTag", anyKey(scaleLegendDataTagNames), ScaleLegendDataTag(sentinel)},
+		{"ScaleDataTag", anyKey(scaleDataTagNames), ScaleDataTag(sentinel)},
+		{"KeyMappingTag", anyKey(keyMappingTagNames), KeyMappingTag(sentinel)},
+		{"MultiDimTag", anyKey(multiDimTagNames), MultiDimTag(sentinel)},
+		{"GrowTermInfoTag", anyKey(growTermInfoTagNames), GrowTermInfoTag(sentinel)},
+		{"ConnectionTag", anyKey(connectionTagNames), ConnectionTag(sentinel)},
+		{"SelectorRangeTag", anyKey(selectorRangeTagNames), SelectorRangeTag(sentinel)},
+		{"EventSpecTag", anyKey(eventSpecTagNames), EventSpecTag(sentinel)},
+		{"BaseTableControlFlagsTag", anyKey(baseTableControlFlagsTagNames), BaseTableControlFlagsTag(sentinel)},
+		{"BaseListboxFlagsTag", anyKey(baseListboxFlagsTagNames), BaseListboxFlagsTag(sentinel)},
+	}
+
+	for _, tc := range cases {
+		t.Run(tc.typeName, func(t *testing.T) {
+			named := tc.named.String()
+			if named == "" {
+				t.Errorf("named %s.String() returned empty", tc.typeName)
+			}
+			if strings.HasPrefix(named, tc.typeName+"(") {
+				t.Errorf("named %s.String() unexpectedly fell back: %q", tc.typeName, named)
+			}
+			fb := tc.fallback.String()
+			wantPrefix := tc.typeName + "("
+			if !strings.HasPrefix(fb, wantPrefix) {
+				t.Errorf("fallback %s.String() = %q, want %s… prefix", tc.typeName, fb, wantPrefix)
+			}
+		})
+	}
+}
+
+// anyKey returns an arbitrary key from a generated stringer map, panicking
+// if the map is empty (which would indicate a regression in the generator).
+// Only used to dodge hardcoding a per-type member name in the test table.
+func anyKey[K comparable, V any](m map[K]V) K {
+	for k := range m {
+		return k
+	}
+	panic("empty stringer map")
 }

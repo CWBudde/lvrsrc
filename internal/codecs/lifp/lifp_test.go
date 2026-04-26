@@ -256,3 +256,110 @@ func assertHasCode(t *testing.T, issues []validate.Issue, code string, sev valid
 	}
 	t.Fatalf("expected issue code=%q severity=%q in: %+v", code, sev, issues)
 }
+
+// TestEncodeRejectsBadInput exercises the two error branches of Encode
+// (nil typed pointer + wrong concrete type) that the round-trip fixtures
+// never hit.
+func TestEncodeRejectsBadInput(t *testing.T) {
+	if _, err := (Codec{}).Encode(codecs.Context{}, (*Value)(nil)); err == nil {
+		t.Errorf("Encode(nil *Value) returned no error")
+	}
+	if _, err := (Codec{}).Encode(codecs.Context{}, "not a Value"); err == nil {
+		t.Errorf("Encode(string) returned no error")
+	}
+}
+
+// TestDecodeErrorPaths walks the decoder's malformed-input branches that
+// the corpus round-trip never reaches.
+func TestDecodeErrorPaths(t *testing.T) {
+	cases := []struct {
+		name    string
+		payload []byte
+	}{
+		{
+			name:    "too short",
+			payload: []byte{0x00, 0x01, 'L', 'I', 'f', 'p'},
+		},
+		{
+			name: "footer wrong size",
+			payload: []byte{
+				0x00, 0x01, 'L', 'I', 'f', 'p',
+				0x00, 0x00, 0x00, 0x00,
+				0x00, 0x03, 0xff,
+			},
+		},
+		{
+			name: "entry truncated",
+			payload: []byte{
+				0x00, 0x01, 'L', 'I', 'f', 'p',
+				0x00, 0x00, 0x00, 0x01,
+				0x00, 0x00,
+			},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			if _, err := (Codec{}).Decode(codecs.Context{}, tc.payload); err == nil {
+				t.Errorf("Decode(%q) = nil error, want error", tc.name)
+			}
+		})
+	}
+}
+
+// TestValidateReportsTrailingBytes covers the trailing-payload rejection
+// branch in decodeValue (consumed != len(rest)).
+func TestValidateReportsTrailingBytes(t *testing.T) {
+	payload := []byte{
+		0x00, 0x01, 'L', 'I', 'f', 'p',
+		0x00, 0x00, 0x00, 0x00,
+		0x00, 0x03,
+		0xff, 0xff,
+	}
+	issues := Codec{}.Validate(codecs.Context{}, payload)
+	if len(issues) == 0 {
+		t.Fatalf("Validate(trailing bytes) returned no issues")
+	}
+}
+
+// TestEncodeRejectsBadPathRef exercises the encodePathRef error branches
+// (bad class length, raw class mismatch, declared length mismatch) by
+// constructing a Value with a single malformed entry.
+func TestEncodeRejectsBadPathRef(t *testing.T) {
+	cases := []struct {
+		name string
+		path PathRef
+	}{
+		{name: "short class", path: PathRef{Class: "PT", DeclaredLen: 0}},
+		{
+			name: "raw class mismatch",
+			path: PathRef{
+				Class:       "PTH0",
+				DeclaredLen: 0,
+				Raw:         []byte{'P', 'T', 'H', '1', 0, 0, 0, 0},
+			},
+		},
+		{
+			name: "raw declared length mismatch",
+			path: PathRef{
+				Class:       "PTH0",
+				DeclaredLen: 5,
+				Raw:         []byte{'P', 'T', 'H', '0', 0, 0, 0, 0, 0, 0, 0, 0},
+			},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			v := Value{
+				Marker:     expectedMarker,
+				EntryCount: 1,
+				Entries: []Entry{{
+					LinkType:    "    ",
+					PrimaryPath: tc.path,
+				}},
+			}
+			if _, err := (Codec{}).Encode(codecs.Context{}, v); err == nil {
+				t.Errorf("Encode(%s) returned no error", tc.name)
+			}
+		})
+	}
+}

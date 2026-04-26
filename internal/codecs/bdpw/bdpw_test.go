@@ -190,3 +190,15 @@ func bytesRepeat(b byte, n int) []byte {
 	}
 	return out
 }
+
+// TestEncodeRejectsBadInput exercises the two error branches of Encode
+// (nil typed pointer + wrong concrete type) that the round-trip fixtures
+// never hit.
+func TestEncodeRejectsBadInput(t *testing.T) {
+	if _, err := (Codec{}).Encode(codecs.Context{}, (*Value)(nil)); err == nil {
+		t.Errorf("Encode(nil *Value) returned no error")
+	}
+	if _, err := (Codec{}).Encode(codecs.Context{}, "not a Value"); err == nil {
+		t.Errorf("Encode(string) returned no error")
+	}
+}

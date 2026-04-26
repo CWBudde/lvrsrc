@@ -163,3 +163,92 @@ func assertHasCode(t *testing.T, issues []validate.Issue, code string, sev valid
 	}
 	t.Fatalf("expected issue code=%q severity=%q in: %+v", code, sev, issues)
 }
+
+// TestEncodeRejectsBadInput exercises the two error branches of Encode
+// (nil typed pointer + wrong concrete type) that the round-trip fixtures
+// never hit.
+func TestEncodeRejectsBadInput(t *testing.T) {
+	if _, err := (Codec{}).Encode(codecs.Context{}, (*Value)(nil)); err == nil {
+		t.Errorf("Encode(nil *Value) returned no error")
+	}
+	if _, err := (Codec{}).Encode(codecs.Context{}, "not a Value"); err == nil {
+		t.Errorf("Encode(string) returned no error")
+	}
+}
+
+// TestDecodeRejectsBadPayloads exercises decodeValue's three error
+// branches (short header, bad zlib, declared/inflated mismatch).
+func TestDecodeRejectsBadPayloads(t *testing.T) {
+	cases := []struct {
+		name    string
+		payload []byte
+	}{
+		{name: "short header", payload: []byte{0x00}},
+		{name: "bad zlib", payload: append([]byte{0x00, 0x00, 0x00, 0x04}, []byte{0xff, 0xff, 0xff, 0xff}...)},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			if _, err := (Codec{}).Decode(codecs.Context{}, tc.payload); err == nil {
+				t.Errorf("Decode(%s) returned no error", tc.name)
+			}
+		})
+	}
+}
+
+// TestDecodeRejectsDeclaredSizeMismatch crafts a valid zlib payload whose
+// declared size disagrees with the inflated length to hit the third
+// decodeValue error branch.
+func TestDecodeRejectsDeclaredSizeMismatch(t *testing.T) {
+	body := make([]byte, 4)
+	for i := range body {
+		body[i] = byte(i)
+	}
+	compressed, err := deflate(body)
+	if err != nil {
+		t.Fatalf("deflate: %v", err)
+	}
+	payload := make([]byte, 4+len(compressed))
+	binary.BigEndian.PutUint32(payload[:4], 99)
+	copy(payload[4:], compressed)
+	if _, err := (Codec{}).Decode(codecs.Context{}, payload); err == nil {
+		t.Errorf("Decode(declared-size mismatch) returned no error")
+	}
+}
+
+// TestEncodeRejectsDeclaredSizeMismatch covers the early shape check in
+// Encode (DeclaredSize != len(Inflated)).
+func TestEncodeRejectsDeclaredSizeMismatch(t *testing.T) {
+	v := Value{DeclaredSize: 99, Inflated: []byte{1, 2, 3}}
+	if _, err := (Codec{}).Encode(codecs.Context{}, v); err == nil {
+		t.Errorf("Encode(size mismatch) returned no error")
+	}
+}
+
+// TestEncodeRecompressesWhenCompressedDrifted forces the recompress
+// fallback by storing Compressed bytes that don't inflate to Inflated.
+func TestEncodeRecompressesWhenCompressedDrifted(t *testing.T) {
+	body := []byte("hello world")
+	good, err := deflate(body)
+	if err != nil {
+		t.Fatalf("deflate: %v", err)
+	}
+	other, err := deflate([]byte("different"))
+	if err != nil {
+		t.Fatalf("deflate other: %v", err)
+	}
+	v := Value{
+		DeclaredSize: uint32(len(body)),
+		Inflated:     body,
+		Compressed:   other,
+	}
+	out, err := (Codec{}).Encode(codecs.Context{}, v)
+	if err != nil {
+		t.Fatalf("Encode: %v", err)
+	}
+	if bytes.Equal(out[4:], other) {
+		t.Errorf("Encode reused stale Compressed bytes; expected recompression")
+	}
+	if !bytes.Equal(out[4:], good) && len(out) <= 4 {
+		t.Errorf("Encode produced unexpectedly small output %d bytes", len(out))
+	}
+}

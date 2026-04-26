@@ -180,23 +180,155 @@ func RenderMarkdown(m Manifest) string {
 		m.Summary.TypedCoveragePct,
 		m.Corpus.FixtureCount,
 	))
-	b.WriteString("| FourCC | Corpus fixtures | Typed decode | Typed encode | Typed validate | Safety | Package | Read versions | Write versions |\n")
-	b.WriteString("| ------ | --------------: | :----------: | :----------: | :------------: | ------ | ------- | ------------- | -------------- |\n")
+	headers := []string{
+		"FourCC",
+		"Corpus fixtures",
+		"Typed decode",
+		"Typed encode",
+		"Typed validate",
+		"Safety",
+		"Package",
+		"Read versions",
+		"Write versions",
+	}
+	alignments := []markdownTableAlignment{
+		markdownAlignLeft,
+		markdownAlignRight,
+		markdownAlignCenter,
+		markdownAlignCenter,
+		markdownAlignCenter,
+		markdownAlignLeft,
+		markdownAlignLeft,
+		markdownAlignLeft,
+		markdownAlignLeft,
+	}
+	widths := make([]int, len(headers))
+	for i, header := range headers {
+		widths[i] = len(header)
+	}
+	rows := make([][]string, 0, len(m.Resources))
 	for _, r := range m.Resources {
-		b.WriteString(fmt.Sprintf(
-			"| `%s` | %d | %s | %s | %s | %s | `%s` | %s | %s |\n",
-			r.FourCC,
-			r.CorpusFixtures,
+		row := []string{
+			fmt.Sprintf("`%s`", r.FourCC),
+			fmt.Sprintf("%d", r.CorpusFixtures),
 			yesNo(r.Typed.Decode),
 			yesNo(r.Typed.Encode),
 			yesNo(r.Typed.Validate),
 			r.SafetyTier,
-			r.Package,
+			fmt.Sprintf("`%s`", r.Package),
 			formatVersionRange(r.ReadVersions),
 			formatVersionRange(r.WriteVersions),
-		))
+		}
+		for i, cell := range row {
+			if len(cell) > widths[i] {
+				widths[i] = len(cell)
+			}
+		}
+		rows = append(rows, row)
 	}
+	writeMarkdownTable(&b, headers, alignments, widths, rows)
 	return b.String()
+}
+
+type markdownTableAlignment int
+
+const (
+	markdownAlignLeft markdownTableAlignment = iota
+	markdownAlignRight
+	markdownAlignCenter
+)
+
+func writeMarkdownTable(b *strings.Builder, headers []string, alignments []markdownTableAlignment, widths []int, rows [][]string) {
+	writeMarkdownHeaderRow(b, headers, widths)
+	writeMarkdownSeparatorRow(b, alignments, widths)
+	for _, row := range rows {
+		writeMarkdownDataRow(b, row, alignments, widths)
+	}
+}
+
+func writeMarkdownHeaderRow(b *strings.Builder, row []string, widths []int) {
+	b.WriteString("|")
+	for i, cell := range row {
+		b.WriteString(" ")
+		b.WriteString(padRight(cell, widths[i]))
+		b.WriteString(" |")
+	}
+	b.WriteString("\n")
+}
+
+func writeMarkdownSeparatorRow(b *strings.Builder, alignments []markdownTableAlignment, widths []int) {
+	b.WriteString("|")
+	for i, alignment := range alignments {
+		b.WriteString(" ")
+		b.WriteString(markdownSeparator(alignment, widths[i]))
+		b.WriteString(" |")
+	}
+	b.WriteString("\n")
+}
+
+func writeMarkdownDataRow(b *strings.Builder, row []string, alignments []markdownTableAlignment, widths []int) {
+	b.WriteString("|")
+	for i, cell := range row {
+		b.WriteString(" ")
+		b.WriteString(padMarkdownCell(cell, widths[i], alignments[i]))
+		b.WriteString(" |")
+	}
+	b.WriteString("\n")
+}
+
+func markdownSeparator(alignment markdownTableAlignment, width int) string {
+	if width < 1 {
+		width = 1
+	}
+	switch alignment {
+	case markdownAlignRight:
+		if width == 1 {
+			return ":"
+		}
+		return strings.Repeat("-", width-1) + ":"
+	case markdownAlignCenter:
+		if width <= 2 {
+			return ":-:"
+		}
+		return ":" + strings.Repeat("-", width-2) + ":"
+	default:
+		return strings.Repeat("-", width)
+	}
+}
+
+func padMarkdownCell(value string, width int, alignment markdownTableAlignment) string {
+	switch alignment {
+	case markdownAlignRight:
+		return padLeft(value, width)
+	case markdownAlignCenter:
+		return padCenter(value, width)
+	default:
+		return padRight(value, width)
+	}
+}
+
+func padLeft(value string, width int) string {
+	if len(value) >= width {
+		return value
+	}
+	return strings.Repeat(" ", width-len(value)) + value
+}
+
+func padRight(value string, width int) string {
+	if len(value) >= width {
+		return value
+	}
+	return value + strings.Repeat(" ", width-len(value))
+}
+
+func padCenter(value string, width int) string {
+	if len(value) >= width {
+		return value
+	}
+	padding := width - len(value)
+	left := padding / 2
+	right := padding - left
+	return strings.Repeat(" ", left) + value + strings.Repeat(" ", right)
 }
 
 // RenderBadgeSVG renders a local badge suitable for README.md.

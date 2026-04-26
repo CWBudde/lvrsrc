@@ -1,6 +1,8 @@
 package lvmeta
 
 import (
+	"errors"
+	"strings"
 	"testing"
 
 	"github.com/CWBudde/lvrsrc/internal/codecs"
@@ -162,5 +164,98 @@ func TestMutatorStrictField(t *testing.T) {
 	m := Mutator{Strict: true}
 	if !m.Strict {
 		t.Fatalf("Mutator.Strict = false, want true")
+	}
+}
+
+// TestMutationErrorErrorFormatBranches walks every formatting arm of
+// MutationError.Error so the per-message variant table doesn't sit
+// unexercised. The branches differ only by which of FourCC, Offset and
+// Err are populated.
+func TestMutationErrorErrorFormatBranches(t *testing.T) {
+	underlying := errors.New("boom")
+	cases := []struct {
+		name     string
+		err      MutationError
+		contains []string
+	}{
+		{
+			name:     "fourcc offset and underlying",
+			err:      MutationError{FourCC: "STRG", Offset: 32, Cause: ErrCodecEncode, Err: underlying},
+			contains: []string{"STRG", "offset 32", "boom"},
+		},
+		{
+			name:     "fourcc and underlying",
+			err:      MutationError{FourCC: "vers", Cause: ErrCodecDecode, Err: underlying},
+			contains: []string{"vers", "boom"},
+		},
+		{
+			name:     "fourcc and offset only",
+			err:      MutationError{FourCC: "STRG", Offset: 16, Cause: ErrTargetMissing},
+			contains: []string{"STRG", "offset 16"},
+		},
+		{
+			name:     "fourcc only",
+			err:      MutationError{FourCC: "vers", Cause: ErrTargetAmbiguous},
+			contains: []string{"vers"},
+		},
+		{
+			name:     "underlying only",
+			err:      MutationError{Cause: ErrMutation, Err: underlying},
+			contains: []string{"boom"},
+		},
+		{
+			name:     "cause only",
+			err:      MutationError{Cause: ErrNilFile},
+			contains: []string{"nil file"},
+		},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := tc.err.Error()
+			for _, want := range tc.contains {
+				if !strings.Contains(got, want) {
+					t.Errorf("Error() = %q, want substring %q", got, want)
+				}
+			}
+		})
+	}
+}
+
+// TestMutationErrorUnwrapMatchesCauseAndUnderlying ensures errors.Is
+// reaches both the sentinel Cause and the optional underlying Err.
+func TestMutationErrorUnwrapMatchesCauseAndUnderlying(t *testing.T) {
+	underlying := errors.New("inner")
+	wrapped := &MutationError{Cause: ErrCodecEncode, Err: underlying}
+
+	if !errors.Is(wrapped, ErrCodecEncode) {
+		t.Errorf("errors.Is(MutationError, ErrCodecEncode) = false, want true")
+	}
+	if !errors.Is(wrapped, underlying) {
+		t.Errorf("errors.Is(MutationError, underlying) = false, want true")
+	}
+
+	bare := &MutationError{Cause: ErrTargetMissing}
+	if !errors.Is(bare, ErrTargetMissing) {
+		t.Errorf("errors.Is(bareMutationError, ErrTargetMissing) = false, want true")
+	}
+}
+
+// TestEffectiveRegistryFallsBackToDefault confirms that a zero-value
+// Mutator picks up the package-level shipped registry (the codec lookup
+// fallback in effectiveRegistry).
+func TestEffectiveRegistryFallsBackToDefault(t *testing.T) {
+	m := Mutator{}
+	r := m.effectiveRegistry()
+	if r == nil {
+		t.Fatalf("effectiveRegistry() = nil, want default registry")
+	}
+	if !r.Has("STRG") {
+		t.Errorf("default registry missing STRG codec")
+	}
+
+	custom := codecs.New()
+	m2 := Mutator{registry: custom}
+	if got := m2.effectiveRegistry(); got != custom {
+		t.Errorf("custom registry not honoured: got %p want %p", got, custom)
 	}
 }
