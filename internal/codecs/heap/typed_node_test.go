@@ -167,3 +167,45 @@ func TestAsStringEmptyContent(t *testing.T) {
 		t.Errorf("AsString = %q, want empty", got)
 	}
 }
+
+func TestAsFloat32(t *testing.T) {
+	// IEEE-754 big-endian: 1.0 = 0x3F800000
+	n := nodeWith([]byte{0x3F, 0x80, 0x00, 0x00}, 4)
+	got, err := n.AsFloat32()
+	if err != nil {
+		t.Fatalf("AsFloat32: %v", err)
+	}
+	if got != 1.0 {
+		t.Errorf("AsFloat32 = %v, want 1.0", got)
+	}
+}
+
+func TestAsFloat32WrongLengthRejected(t *testing.T) {
+	for _, sz := range []int{0, 1, 2, 3, 5, 8} {
+		n := nodeWith(make([]byte, sz), byte(sz))
+		if _, err := n.AsFloat32(); err == nil {
+			t.Errorf("AsFloat32(len=%d) returned nil error", sz)
+		}
+	}
+}
+
+func TestAsFloat64(t *testing.T) {
+	// 2.0 in IEEE-754 BE: 0x4000000000000000
+	n := nodeWith([]byte{0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 8)
+	got, err := n.AsFloat64()
+	if err != nil {
+		t.Fatalf("AsFloat64: %v", err)
+	}
+	if got != 2.0 {
+		t.Errorf("AsFloat64 = %v, want 2.0", got)
+	}
+}
+
+func TestAsFloat64WrongLengthRejected(t *testing.T) {
+	for _, sz := range []int{0, 1, 4, 6, 7, 9, 16} {
+		n := nodeWith(make([]byte, sz), byte(min(sz, 6)))
+		if _, err := n.AsFloat64(); err == nil {
+			t.Errorf("AsFloat64(len=%d) returned nil error", sz)
+		}
+	}
+}

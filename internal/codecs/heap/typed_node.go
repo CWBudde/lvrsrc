@@ -3,6 +3,7 @@ package heap
 import (
 	"encoding/binary"
 	"fmt"
+	"math"
 )
 
 // Rect is a heap-node rectangle: pylabview's HeapNodeRect (LVheap.py:1725).
@@ -86,6 +87,30 @@ func (n *Node) AsPoint() (Point, error) {
 		X: int16(binary.BigEndian.Uint16(c[0:2])),
 		Y: int16(binary.BigEndian.Uint16(c[2:4])),
 	}, nil
+}
+
+// AsFloat32 decodes the node's Content as a big-endian IEEE-754 float32.
+// pylabview's `HeapNodeTDDataFill.parseRSRCContentDirect` (LVheap.py:1986)
+// reads exactly 4 bytes for `NumFloat32`/`UnitFloat32`. Float content is
+// not subject to pylabview's `shrinkRepeatedBits` truncation — only
+// integers are.
+func (n *Node) AsFloat32() (float32, error) {
+	if len(n.Content) != 4 {
+		return 0, fmt.Errorf("AsFloat32: content is %d bytes, want 4", len(n.Content))
+	}
+	bits := binary.BigEndian.Uint32(n.Content)
+	return math.Float32frombits(bits), nil
+}
+
+// AsFloat64 decodes the node's Content as a big-endian IEEE-754 float64.
+// pylabview's `HeapNodeTDDataFill.parseRSRCContentDirect` reads exactly
+// 8 bytes for `NumFloat64`/`UnitFloat64`.
+func (n *Node) AsFloat64() (float64, error) {
+	if len(n.Content) != 8 {
+		return 0, fmt.Errorf("AsFloat64: content is %d bytes, want 8", len(n.Content))
+	}
+	bits := binary.BigEndian.Uint64(n.Content)
+	return math.Float64frombits(bits), nil
 }
 
 // AsString returns the node's Content as a Go string plus a NULL flag.
