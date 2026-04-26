@@ -4,6 +4,7 @@ import (
 	"math"
 	"strings"
 
+	"github.com/CWBudde/lvrsrc/internal/codecs/heap"
 	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 )
 
@@ -117,10 +118,19 @@ type layoutItem struct {
 	children    []*layoutItem
 	width       float64
 	height      float64
+	// bounds is the decoded OF__bounds rectangle for this group, when
+	// present. nil means the heuristic layout pass owns position and
+	// size for this item.
+	bounds *lvvi.Bounds
 }
 
 // ProjectHeapTree converts a decoded heap tree into a renderer-neutral
 // scene graph with explicit logical bounds and containment.
+//
+// Phase 11.1: items whose heap node carries a decoded OF__bounds child
+// are positioned and sized from those coordinates. Items without
+// decoded bounds keep the prior heuristic (vertical stack indented by
+// depth). The viewBox is sized to encompass both kinds.
 func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 	scene := Scene{View: view}
 	if len(tree.Roots) == 0 || len(tree.Nodes) == 0 {
@@ -140,31 +150,47 @@ func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 		return scene
 	}
 
-	maxW := 0.0
-	totalH := 0.0
-	for i, item := range items {
-		maxW = math.Max(maxW, item.width)
-		totalH += item.height
-		if i > 0 {
-			totalH += sceneRootGapY
+	// Roots without decoded bounds stack top-to-bottom from the
+	// margin; roots with bounds are placed at their decoded coords.
+	heuristicY := sceneMarginY
+	for _, item := range items {
+		var rootIdx int
+		if item.bounds != nil {
+			x := float64(item.bounds.Left) + sceneMarginX
+			y := float64(item.bounds.Top) + sceneMarginY
+			rootIdx = placeLayoutItem(&scene, item, x, y, -1, 0)
+		} else {
+			rootIdx = placeLayoutItem(&scene, item, sceneMarginX, heuristicY, -1, 0)
+			heuristicY += item.height + sceneRootGapY
 		}
-	}
-	scene.ViewBox = Rect{
-		X:      0,
-		Y:      0,
-		Width:  sceneMarginX*2 + maxW,
-		Height: sceneMarginY*2 + totalH,
+		scene.Roots = append(scene.Roots, rootIdx)
 	}
 
-	y := sceneMarginY
-	for _, item := range items {
-		rootIdx := placeLayoutItem(&scene, item, sceneMarginX, y, -1, 0)
-		scene.Roots = append(scene.Roots, rootIdx)
-		y += item.height + sceneRootGapY
-	}
-	scene.Warnings = sceneWarnings(scene)
+	scene.ViewBox = computeViewBox(scene, heuristicY)
+	scene.Warnings = sceneWarnings(scene, items)
 
 	return scene
+}
+
+// computeViewBox sizes the scene viewbox so it encompasses every
+// emitted node's bounds plus a fixed margin. heuristicEnd is the
+// y-extent the heuristic stack would have reached if every root used
+// it; we keep this floor so a heuristic-only scene retains its prior
+// layout shape.
+func computeViewBox(scene Scene, heuristicEnd float64) Rect {
+	maxX := sceneMarginX * 2
+	maxY := math.Max(heuristicEnd+sceneMarginY, sceneMarginY*2)
+	for _, n := range scene.Nodes {
+		right := n.Bounds.X + n.Bounds.Width + sceneMarginX
+		bottom := n.Bounds.Y + n.Bounds.Height + sceneMarginY
+		if right > maxX {
+			maxX = right
+		}
+		if bottom > maxY {
+			maxY = bottom
+		}
+	}
+	return Rect{X: 0, Y: 0, Width: maxX, Height: maxY}
 }
 
 // FrontPanelScene projects the decoded FPHb tree from the lvvi model
@@ -223,11 +249,22 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 			path:        path,
 			contentSize: len(n.Content),
 		}
+		if b, ok := lvvi.FindBoundsChild(tree, idx); ok {
+			b := b
+			item.bounds = &b
+		}
 		for _, ci := range n.Children {
 			if ci < 0 || ci >= len(tree.Nodes) {
 				continue
 			}
 			child := tree.Nodes[ci]
+			// OF__bounds leaves carry the parent's geometry only;
+			// they do not represent visible content, so once we've
+			// promoted the bounds onto the parent we drop the leaf
+			// from the layout to avoid the redundant text label.
+			if child.Scope == "leaf" && child.Tag == int32(heap.FieldTagBounds) {
+				continue
+			}
 			switch child.Scope {
 			case "open":
 				if childItem := buildLayoutItem(tree, ci, path); childItem != nil {
@@ -266,10 +303,32 @@ func measureLayout(item *layoutItem) {
 		item.width = math.Max(sceneMinLabelW, labelW+12)
 		item.height = sceneLabelH
 	case layoutKindGroup:
+		// Recurse into children regardless so they pick up their
+		// own decoded bounds before we measure the parent.
+		for _, child := range item.children {
+			measureLayout(child)
+		}
+		if item.bounds != nil {
+			// Decoded LabVIEW geometry takes precedence — render the
+			// group at the exact pixel size LabVIEW recorded, even if
+			// children would heuristically need more room. Visible
+			// overflow in this case is preferable to silently widening
+			// the box (which would misrepresent the source layout).
+			w := float64(item.bounds.Width())
+			h := float64(item.bounds.Height())
+			if w < 1 {
+				w = 1
+			}
+			if h < 1 {
+				h = 1
+			}
+			item.width = w
+			item.height = h
+			return
+		}
 		contentW := 0.0
 		contentH := 0.0
 		for i, child := range item.children {
-			measureLayout(child)
 			contentW = math.Max(contentW, child.width)
 			contentH += child.height
 			if i > 0 {
@@ -357,6 +416,17 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 
 		cy := y + sceneGroupPadY + sceneHeaderHeight + sceneTitleGapY
 		for _, child := range item.children {
+			if child.kind == layoutKindGroup && child.bounds != nil {
+				// Nested controls with their own decoded bounds use
+				// scene-absolute coordinates rather than stacking
+				// below the parent's title. Origin shift mirrors
+				// ProjectHeapTree so the math is consistent at every
+				// level.
+				cx := float64(child.bounds.Left) + sceneMarginX
+				cyAbs := float64(child.bounds.Top) + sceneMarginY
+				placeLayoutItem(scene, child, cx, cyAbs, groupIdx, depth+1)
+				continue
+			}
 			placeLayoutItem(scene, child, x+sceneGroupPadX+sceneGroupIndentX, cy, groupIdx, depth+1)
 			cy += child.height + sceneChildGapY
 		}
@@ -381,9 +451,18 @@ func textWidth(s string) float64 {
 	return float64(runes) * sceneCharW
 }
 
-func sceneWarnings(scene Scene) []string {
+func sceneWarnings(scene Scene, roots []*layoutItem) []string {
 	var warnings []string
-	warnings = append(warnings, "Layout is heuristic: positions and sizes are derived from heap structure, not decoded LabVIEW geometry.")
+	allRootsHaveBounds := len(roots) > 0
+	for _, item := range roots {
+		if item.bounds == nil {
+			allRootsHaveBounds = false
+			break
+		}
+	}
+	if !allRootsHaveBounds {
+		warnings = append(warnings, "Layout is heuristic: some positions and sizes are derived from heap structure rather than decoded LabVIEW geometry.")
+	}
 
 	placeholders := 0
 	for _, node := range scene.Nodes {
