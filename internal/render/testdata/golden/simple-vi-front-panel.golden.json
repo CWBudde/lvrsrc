@@ -111,7 +111,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -31,
+        "Width": 0,
         "Height": 22
       },
       "parent": 3,
@@ -389,7 +389,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 20,
@@ -860,7 +860,7 @@
       "bounds": {
         "X": 137,
         "Y": 36,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 51,
@@ -1044,7 +1044,7 @@
       "bounds": {
         "X": 137,
         "Y": 699,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 63,
@@ -1757,7 +1757,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 109,
@@ -2046,7 +2046,7 @@
       "bounds": {
         "X": 62,
         "Y": 40,
-        "Width": -20,
+        "Width": 0,
         "Height": 22
       },
       "parent": 128,
@@ -2477,7 +2477,7 @@
       "bounds": {
         "X": 59,
         "Y": 40,
-        "Width": -13,
+        "Width": 0,
         "Height": 22
       },
       "parent": 156,
@@ -2909,7 +2909,7 @@
       "bounds": {
         "X": 61,
         "Y": 40,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 184,
@@ -3182,7 +3182,7 @@
       "bounds": {
         "X": 57,
         "Y": 36,
-        "Width": -7,
+        "Width": 0,
         "Height": 22
       },
       "parent": 202,
@@ -3709,7 +3709,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 236,
@@ -3998,7 +3998,7 @@
       "bounds": {
         "X": 62,
         "Y": 40,
-        "Width": -20,
+        "Width": 0,
         "Height": 22
       },
       "parent": 255,
@@ -4429,7 +4429,7 @@
       "bounds": {
         "X": 59,
         "Y": 40,
-        "Width": -13,
+        "Width": 0,
         "Height": 22
       },
       "parent": 283,
@@ -4861,7 +4861,7 @@
       "bounds": {
         "X": 61,
         "Y": 40,
-        "Width": -15,
+        "Width": 0,
         "Height": 22
       },
       "parent": 311,
@@ -5134,7 +5134,7 @@
       "bounds": {
         "X": 57,
         "Y": 36,
-        "Width": -7,
+        "Width": 0,
         "Height": 22
       },
       "parent": 329,

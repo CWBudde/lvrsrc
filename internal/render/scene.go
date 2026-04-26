@@ -399,10 +399,14 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 		})
 		scene.Nodes[groupIdx].Children = append(scene.Nodes[groupIdx].Children, boxIdx)
 
+		// Title label is inset by sceneGroupPadX on both sides; for
+		// groups whose decoded bounds are smaller than the inset it
+		// would otherwise come out negative, so clamp to ≥ 0.
+		titleW := math.Max(0, item.width-sceneGroupPadX*2)
 		titleIdx := appendNode(scene, Node{
 			Kind:        NodeKindLabel,
 			Label:       item.label,
-			Bounds:      Rect{X: x + sceneGroupPadX, Y: y + sceneGroupPadY, Width: item.width - sceneGroupPadX*2, Height: sceneHeaderHeight},
+			Bounds:      Rect{X: x + sceneGroupPadX, Y: y + sceneGroupPadY, Width: titleW, Height: sceneHeaderHeight},
 			Parent:      groupIdx,
 			Z:           depth*10 + 2,
 			Placeholder: item.placeholder,

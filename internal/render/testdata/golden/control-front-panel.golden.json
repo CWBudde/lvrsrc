@@ -111,7 +111,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -31,
+        "Width": 0,
         "Height": 22
       },
       "parent": 3,
@@ -388,7 +388,7 @@
       "bounds": {
         "X": 40,
         "Y": 36,
-        "Width": -14,
+        "Width": 0,
         "Height": 22
       },
       "parent": 20,
@@ -859,7 +859,7 @@
       "bounds": {
         "X": 634,
         "Y": 36,
-        "Width": -16,
+        "Width": 0,
         "Height": 22
       },
       "parent": 51,
@@ -1043,7 +1043,7 @@
       "bounds": {
         "X": 634,
         "Y": 1156,
-        "Width": -16,
+        "Width": 0,
         "Height": 22
       },
       "parent": 63,
@@ -1759,7 +1759,7 @@
       "bounds": {
         "X": 40,
         "Y": 47,
-        "Width": -14,
+        "Width": 0,
         "Height": 22
       },
       "parent": 109,
@@ -2050,7 +2050,7 @@
       "bounds": {
         "X": 64,
         "Y": 99,
-        "Width": -14,
+        "Width": 0,
         "Height": 22
       },
       "parent": 128,
@@ -2340,7 +2340,7 @@
       "bounds": {
         "X": 61,
         "Y": 51,
-        "Width": -14,
+        "Width": 0,
         "Height": 22
       },
       "parent": 147,
@@ -2628,7 +2628,7 @@
       "bounds": {
         "X": 56,
         "Y": 36,
-        "Width": -20,
+        "Width": 0,
         "Height": 22
       },
       "parent": 166,
@@ -3119,7 +3119,7 @@
       "bounds": {
         "X": 71,
         "Y": 36,
-        "Width": -20,
+        "Width": 0,
         "Height": 22
       },
       "parent": 198,
@@ -3609,7 +3609,7 @@
       "bounds": {
         "X": 57,
         "Y": 47,
-        "Width": -6,
+        "Width": 0,
         "Height": 22
       },
       "parent": 230,
