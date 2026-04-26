@@ -20,6 +20,8 @@ import (
 	iconcodec "github.com/CWBudde/lvrsrc/internal/codecs/icon"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/linkobj"
+	"github.com/CWBudde/lvrsrc/internal/codecs/livi"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/pthx"
 	"github.com/CWBudde/lvrsrc/internal/codecs/strg"
@@ -215,16 +217,22 @@ type WASMIcon struct {
 
 // WASMDeps groups decoded link-info entries by source.
 type WASMDeps struct {
-	FrontPanel   []WASMDepEntry `json:"front_panel"`
-	BlockDiagram []WASMDepEntry `json:"block_diagram"`
+	FrontPanel     []WASMDepEntry `json:"front_panel"`
+	BlockDiagram   []WASMDepEntry `json:"block_diagram"`
+	VIDependencies []WASMDepEntry `json:"vi_dependencies"`
 }
 
 // WASMDepEntry is one decoded link-info reference. Path fields are
 // populated when the embedded PTH0/PTH1 reference decoded cleanly.
 type WASMDepEntry struct {
-	LinkType    string    `json:"link_type"`
-	Qualifiers  []string  `json:"qualifiers"`
-	PrimaryPath *WASMPath `json:"primary_path,omitempty"`
+	LinkType        string    `json:"link_type"`
+	LinkKind        string    `json:"link_kind,omitempty"` // human-readable description, e.g. "TypeDef → CustCtl"
+	Qualifiers      []string  `json:"qualifiers"`
+	PrimaryPath     *WASMPath `json:"primary_path,omitempty"`
+	SecondaryPath   *WASMPath `json:"secondary_path,omitempty"`
+	TypeID          uint32    `json:"type_id,omitempty"`
+	HasTypeID       bool      `json:"has_type_id,omitempty"`
+	OffsetCount     int       `json:"offset_count,omitempty"`
 }
 
 // WASMPath is the JSON-friendly projection of a typed path reference.
@@ -378,8 +386,9 @@ func buildSummary(file *lvrsrc.File, resources []WASMResource) WASMSummary {
 func buildInfo(file *lvrsrc.File) WASMInfo {
 	info := WASMInfo{
 		Deps: WASMDeps{
-			FrontPanel:   []WASMDepEntry{},
-			BlockDiagram: []WASMDepEntry{},
+			FrontPanel:     []WASMDepEntry{},
+			BlockDiagram:   []WASMDepEntry{},
+			VIDependencies: []WASMDepEntry{},
 		},
 	}
 	if file == nil {
@@ -428,12 +437,18 @@ func buildInfo(file *lvrsrc.File) WASMInfo {
 		}
 	}
 
-	// Dependencies — LIfp (front panel) and LIbd (block diagram).
+	// Dependencies — LIfp (front panel), LIbd (block diagram),
+	// LIvi (VI-level dependencies). Phase 7.3 widens these from
+	// "qualifier + path" to a typed LinkKind classification + per-
+	// TDCC TypeID + offset count.
 	if payload, ok := firstPayload(file, string(lifp.FourCC)); ok {
 		info.Deps.FrontPanel = decodeLIfp(ctx, payload)
 	}
 	if payload, ok := firstPayload(file, string(libd.FourCC)); ok {
 		info.Deps.BlockDiagram = decodeLIbd(ctx, payload)
+	}
+	if payload, ok := firstPayload(file, string(livi.FourCC)); ok {
+		info.Deps.VIDependencies = decodeLIvi(ctx, payload)
 	}
 
 	// Flags — surface every set LVSR bit. Combine LVSR.Locked with
@@ -675,11 +690,17 @@ func decodeLIfp(ctx codecs.Context, payload []byte) []WASMDepEntry {
 	}
 	out := make([]WASMDepEntry, 0, len(v.Entries))
 	for _, entry := range v.Entries {
-		out = append(out, WASMDepEntry{
+		w := WASMDepEntry{
 			LinkType:    entry.LinkType,
+			LinkKind:    linkobj.Description(linkobj.LookupKind(entry.LinkType)),
 			Qualifiers:  append([]string{}, entry.Qualifiers...),
 			PrimaryPath: pathRefToWASM(entry.PrimaryPath.Raw),
-		})
+		}
+		if entry.SecondaryPath != nil {
+			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
+		}
+		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		out = append(out, w)
 	}
 	return out
 }
@@ -695,13 +716,60 @@ func decodeLIbd(ctx codecs.Context, payload []byte) []WASMDepEntry {
 	}
 	out := make([]WASMDepEntry, 0, len(v.Entries))
 	for _, entry := range v.Entries {
-		out = append(out, WASMDepEntry{
+		w := WASMDepEntry{
 			LinkType:    entry.LinkType,
+			LinkKind:    linkobj.Description(linkobj.LookupKind(entry.LinkType)),
 			Qualifiers:  append([]string{}, entry.Qualifiers...),
 			PrimaryPath: pathRefToWASM(entry.PrimaryPath.Raw),
-		})
+		}
+		if entry.SecondaryPath != nil {
+			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
+		}
+		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		out = append(out, w)
 	}
 	return out
+}
+
+func decodeLIvi(ctx codecs.Context, payload []byte) []WASMDepEntry {
+	raw, err := (livi.Codec{}).Decode(ctx, payload)
+	if err != nil {
+		return []WASMDepEntry{}
+	}
+	v, ok := raw.(livi.Value)
+	if !ok {
+		return []WASMDepEntry{}
+	}
+	out := make([]WASMDepEntry, 0, len(v.Entries))
+	for _, entry := range v.Entries {
+		w := WASMDepEntry{
+			LinkType:    entry.LinkType,
+			LinkKind:    linkobj.Description(linkobj.LookupKind(entry.LinkType)),
+			Qualifiers:  append([]string{}, entry.Qualifiers...),
+			PrimaryPath: pathRefToWASM(entry.PrimaryPath.Raw),
+		}
+		if entry.SecondaryPath != nil {
+			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
+		}
+		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		out = append(out, w)
+	}
+	return out
+}
+
+// applyLinkTarget folds typed-target fields (TypeID, offset count) into
+// the WASM projection. Unknown idents fall back to OpaqueTarget which
+// adds no extra information.
+func applyLinkTarget(w *WASMDepEntry, target linkobj.LinkTarget, err error) {
+	if err != nil || target == nil {
+		return
+	}
+	switch t := target.(type) {
+	case linkobj.TypeDefToCCLink:
+		w.TypeID = t.TypeDescID
+		w.HasTypeID = true
+		w.OffsetCount = len(t.Offsets)
+	}
 }
 
 // pathRefToWASM tries to decode a raw embedded path reference through

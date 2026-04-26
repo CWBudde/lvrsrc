@@ -626,6 +626,14 @@ header h1 {
   flex: 0 0 auto;
 }
 
+.info-dep-meta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono, monospace);
+  flex: 0 0 auto;
+  opacity: 0.85;
+}
+
 /* Structure tab -- container layout */
 .schema-diagram {
   margin-top: 0.25rem;

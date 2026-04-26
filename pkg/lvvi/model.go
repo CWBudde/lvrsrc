@@ -18,6 +18,7 @@ import (
 	"github.com/CWBudde/lvrsrc/internal/codecs/libd"
 	"github.com/CWBudde/lvrsrc/internal/codecs/libn"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lifp"
+	"github.com/CWBudde/lvrsrc/internal/codecs/linkobj"
 	"github.com/CWBudde/lvrsrc/internal/codecs/livi"
 	"github.com/CWBudde/lvrsrc/internal/codecs/lvsr"
 	"github.com/CWBudde/lvrsrc/internal/codecs/muid"
@@ -123,13 +124,21 @@ type TypeDescriptor struct {
 
 // DependencyEntry is one decoded link reference from an LIfp / LIbd /
 // LIvi block. It surfaces the per-entry metadata callers most often
-// need, without committing to the full LinkObjRef subclass family
-// (deferred to Phase 9).
+// need, with stable LinkKind classification and typed fields for the
+// LinkObjRef subclasses ported in Phase 7.3.
 type DependencyEntry struct {
 	// LinkType is the entry's 4-byte type code (e.g. "VILB", "VICC"),
 	// preserved verbatim from on disk. Callers can treat it as a
 	// stable opaque identifier for grouping or filtering.
 	LinkType string
+	// LinkKind is the stable Go-named classification derived from
+	// LinkType. Callers can switch on this for typed handling without
+	// committing to the wire-level 4-byte string.
+	LinkKind LinkKind
+	// KindDescription is a short human-readable label for LinkKind
+	// (e.g. "TypeDef → CustCtl"), or "unknown link" if the kind hasn't
+	// been catalogued.
+	KindDescription string
 	// Qualifiers are the decoded Pascal-string qualifier names that
 	// disambiguate the link target.
 	Qualifiers []string
@@ -145,6 +154,17 @@ type DependencyEntry struct {
 	SecondaryPath DependencyPath
 	// HasSecondaryPath reports whether SecondaryPath was populated.
 	HasSecondaryPath bool
+
+	// TypeID is the VCTP type-descriptor index referenced by typed
+	// links (currently TDCC). Use Model.TypeAt(TypeID) to resolve it.
+	// Zero is also a valid TypeID (it points at the empty/null type),
+	// so callers must check HasTypeID before reading.
+	TypeID uint32
+	// HasTypeID reports whether the entry's LinkKind carries a TypeID.
+	HasTypeID bool
+	// Offsets is the LinkOffsetList — heap-relative offsets the
+	// LinkObj points back into. Empty for kinds that don't carry one.
+	Offsets []uint32
 }
 
 // DependencyPath is the typed view of an embedded path reference,
@@ -346,12 +366,16 @@ func (m *Model) BlockDiagramImports() ([]DependencyEntry, bool) {
 	return decodeLibdEntries(m.file)
 }
 
-// VIDependencies surfaces the LIvi block's metadata. Phase 7.2 only
-// decoded the envelope; per-entry parsing lands in Phase 7.3 / 9.
-// Until then this returns ok=false to signal "no per-entry view yet";
-// callers can read raw counts via Model.File().Blocks if needed.
+// VIDependencies returns the decoded LIvi dependency entries for this
+// VI/CTL/library, when an LIvi block is present. Phase 7.3 lifts this
+// from envelope-only to per-entry typed access; entries whose
+// LinkObjRef subclass hasn't been ported surface as DependencyEntry
+// with LinkKind=LinkKindUnknown but still carry path + qualifier info.
 func (m *Model) VIDependencies() ([]DependencyEntry, bool) {
-	return nil, false
+	if m == nil || m.file == nil {
+		return nil, false
+	}
+	return decodeLiviEntries(m.file)
 }
 
 // BreakpointCount returns the integer stored at flag-word index 28 of
@@ -579,44 +603,93 @@ func decodeLibdEntries(f *lvrsrc.File) ([]DependencyEntry, bool) {
 	return out, true
 }
 
+func decodeLiviEntries(f *lvrsrc.File) ([]DependencyEntry, bool) {
+	refs := sectionsOf(f, livi.FourCC)
+	if len(refs) == 0 {
+		return nil, false
+	}
+	ctx := codecs.Context{FileVersion: f.Header.FormatVersion, Kind: f.Kind}
+	raw, err := (livi.Codec{}).Decode(ctx, refs[0].Payload)
+	if err != nil {
+		return nil, false
+	}
+	v, ok := raw.(livi.Value)
+	if !ok {
+		return nil, false
+	}
+	out := make([]DependencyEntry, 0, len(v.Entries))
+	for _, e := range v.Entries {
+		out = append(out, projectLiviEntry(e))
+	}
+	return out, true
+}
+
 func projectLifpEntry(e lifp.Entry) DependencyEntry {
-	out := DependencyEntry{
-		LinkType:   e.LinkType,
-		Qualifiers: append([]string{}, e.Qualifiers...),
+	out := newDependencyEntry(e.LinkType, e.Qualifiers)
+	out.PrimaryPath, out.HasPrimaryPath = decodePath(e.PrimaryPath.Raw)
+	if e.SecondaryPath != nil {
+		out.SecondaryPath, out.HasSecondaryPath = decodePath(e.SecondaryPath.Raw)
 	}
-	if len(e.PrimaryPath.Raw) > 0 {
-		if pv, err := e.PrimaryPath.Decoded(); err == nil {
-			out.PrimaryPath = projectPath(pv)
-			out.HasPrimaryPath = true
-		}
-	}
-	if e.SecondaryPath != nil && len(e.SecondaryPath.Raw) > 0 {
-		if sv, err := e.SecondaryPath.Decoded(); err == nil {
-			out.SecondaryPath = projectPath(sv)
-			out.HasSecondaryPath = true
-		}
+	if target, err := e.Target(); err == nil {
+		applyTargetFields(&out, target)
 	}
 	return out
 }
 
 func projectLibdEntry(e libd.Entry) DependencyEntry {
-	out := DependencyEntry{
-		LinkType:   e.LinkType,
-		Qualifiers: append([]string{}, e.Qualifiers...),
+	out := newDependencyEntry(e.LinkType, e.Qualifiers)
+	out.PrimaryPath, out.HasPrimaryPath = decodePath(e.PrimaryPath.Raw)
+	if e.SecondaryPath != nil {
+		out.SecondaryPath, out.HasSecondaryPath = decodePath(e.SecondaryPath.Raw)
 	}
-	if len(e.PrimaryPath.Raw) > 0 {
-		if pv, err := e.PrimaryPath.Decoded(); err == nil {
-			out.PrimaryPath = projectPath(pv)
-			out.HasPrimaryPath = true
-		}
-	}
-	if e.SecondaryPath != nil && len(e.SecondaryPath.Raw) > 0 {
-		if sv, err := e.SecondaryPath.Decoded(); err == nil {
-			out.SecondaryPath = projectPath(sv)
-			out.HasSecondaryPath = true
-		}
+	if target, err := e.Target(); err == nil {
+		applyTargetFields(&out, target)
 	}
 	return out
+}
+
+func projectLiviEntry(e livi.Entry) DependencyEntry {
+	out := newDependencyEntry(e.LinkType, e.Qualifiers)
+	out.PrimaryPath, out.HasPrimaryPath = decodePath(e.PrimaryPath.Raw)
+	if e.SecondaryPath != nil {
+		out.SecondaryPath, out.HasSecondaryPath = decodePath(e.SecondaryPath.Raw)
+	}
+	if target, err := e.Target(); err == nil {
+		applyTargetFields(&out, target)
+	}
+	return out
+}
+
+func newDependencyEntry(linkType string, qualifiers []string) DependencyEntry {
+	kind := LookupLinkKind(linkType)
+	return DependencyEntry{
+		LinkType:        linkType,
+		LinkKind:        kind,
+		KindDescription: LinkKindDescription(kind),
+		Qualifiers:      append([]string{}, qualifiers...),
+	}
+}
+
+func decodePath(raw []byte) (DependencyPath, bool) {
+	if len(raw) == 0 {
+		return DependencyPath{}, false
+	}
+	v, _, err := pthx.Decode(raw)
+	if err != nil {
+		return DependencyPath{}, false
+	}
+	return projectPath(v), true
+}
+
+func applyTargetFields(out *DependencyEntry, target linkobj.LinkTarget) {
+	switch t := target.(type) {
+	case linkobj.TypeDefToCCLink:
+		out.TypeID = t.TypeDescID
+		out.HasTypeID = true
+		if len(t.Offsets) > 0 {
+			out.Offsets = append([]uint32{}, t.Offsets...)
+		}
+	}
 }
 
 func projectPath(v pthx.Value) DependencyPath {

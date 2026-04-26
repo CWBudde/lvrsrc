@@ -303,8 +303,10 @@ func TestModelImportsAndDependencies(t *testing.T) {
 				t.Errorf("BlockDiagramImports ok=%v but LIbd present=%v", bdOK, libd)
 			}
 
-			if _, ok := m.VIDependencies(); ok {
-				t.Errorf("VIDependencies returned ok=true (Phase 7.2 only decoded envelope)")
+			livi := blockExists(f, "LIvi")
+			_, viOK := m.VIDependencies()
+			if livi != viOK {
+				t.Errorf("VIDependencies ok=%v but LIvi present=%v", viOK, livi)
 			}
 
 			tops, topsOK := m.TopTypes()

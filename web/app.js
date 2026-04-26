@@ -257,14 +257,16 @@ function renderInfo() {
 
   const fp = info.deps?.front_panel ?? [];
   const bd = info.deps?.block_diagram ?? [];
-  if (fp.length === 0 && bd.length === 0) {
+  const vi = info.deps?.vi_dependencies ?? [];
+  if (fp.length === 0 && bd.length === 0 && vi.length === 0) {
     refs.infoDepsCard.classList.add("hidden");
     refs.infoDeps.innerHTML = "";
   } else {
     refs.infoDepsCard.classList.remove("hidden");
     refs.infoDeps.innerHTML = `
       ${renderDepGroup("Front panel imports", fp)}
-      ${renderDepGroup("Block diagram imports", bd)}`;
+      ${renderDepGroup("Block diagram imports", bd)}
+      ${renderDepGroup("VI dependencies", vi)}`;
   }
 
   renderConnectorPane(info.connector);
@@ -361,11 +363,32 @@ function renderDepGroup(label, entries) {
     .map((entry) => {
       const qualifier = (entry.qualifiers || []).filter(Boolean).join(" :: ");
       const path = renderDepPath(entry.primary_path);
+      // Prefer the human-friendly LinkKind ("TypeDef → CustCtl") and
+      // surface the 4-byte FourCC as a tooltip; fall back to the FourCC
+      // itself if the kind hasn't been catalogued.
+      const kindLabel = entry.link_kind || entry.link_type || "";
+      const kindTitle = entry.link_type ? `title="${escHtml(entry.link_type)}"` : "";
+      const kindChip = kindLabel
+        ? `<span class="info-dep-kind" ${kindTitle}>${escHtml(kindLabel)}</span>`
+        : "";
+      // Typed-target hints: TDCC carries a TypeID (1-based VCTP index)
+      // and an offset count. Render compactly to the right of the kind.
+      const meta = [];
+      if (entry.has_type_id) {
+        meta.push(`type #${entry.type_id}`);
+      }
+      if (entry.offset_count) {
+        meta.push(`${entry.offset_count} offset${entry.offset_count === 1 ? "" : "s"}`);
+      }
+      const metaChip = meta.length
+        ? `<span class="info-dep-meta">${escHtml(meta.join(" · "))}</span>`
+        : "";
       return `
         <li class="info-dep-row">
           <div class="info-dep-row-main">
             <span class="info-dep-qualifier">${escHtml(qualifier) || "<em>unnamed</em>"}</span>
-            ${entry.link_type ? `<span class="info-dep-kind">${escHtml(entry.link_type)}</span>` : ""}
+            ${kindChip}
+            ${metaChip}
           </div>
           ${path}
         </li>`;
