@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/CWBudde/lvrsrc/internal/corpus"
@@ -732,5 +733,251 @@ func assertEquivalentFiles(t *testing.T, got, want *File) {
 				t.Fatalf("block[%d].section[%d].Payload = %x, want %x", bi, si, gotSection.Payload, wantSection.Payload)
 			}
 		}
+	}
+}
+
+// TestCanonicalBlockRankCoversShippedFourCCs exercises every arm of the
+// canonical-order switch so the rank table doesn't sit unexercised.
+// Unknown types fall through to the default rank (1000) — verified
+// alongside the known mappings.
+func TestCanonicalBlockRankCoversShippedFourCCs(t *testing.T) {
+	cases := []struct {
+		fourCC string
+		want   int
+	}{
+		{"ADir", 0}, {"LIBN", 10}, {"LVSR", 20}, {"RTSG", 30},
+		{"LIvi", 40}, {"vers", 50}, {"CONP", 60}, {"BDPW", 70},
+		{"STRG", 80}, {"PALM", 90}, {"PLM2", 100}, {"CPST", 110},
+		{"ICON", 120}, {"icl4", 121}, {"icl8", 122}, {"CPC2", 130},
+		{"LIfp", 140}, {"FPEx", 150}, {"FPHb", 151}, {"FPSE", 152},
+		{"VPDP", 153}, {"LIbd", 160}, {"BDEx", 170}, {"BDHb", 171},
+		{"BDSE", 172}, {"VITS", 180}, {"DTHP", 190}, {"MUID", 200},
+		{"HIST", 210}, {"VCTP", 220}, {"FTAB", 230}, {"STR ", 240},
+		{"????", 1000},
+	}
+	for _, tc := range cases {
+		if got := canonicalBlockRank(tc.fourCC); got != tc.want {
+			t.Errorf("canonicalBlockRank(%q) = %d, want %d", tc.fourCC, got, tc.want)
+		}
+	}
+}
+
+// TestParseRejectsTruncatedInputs walks the parser's truncation guards
+// (header, secondary header, block info table, name table) using slices
+// of a known-good synthetic file.
+func TestParseRejectsTruncatedInputs(t *testing.T) {
+	full := buildSyntheticRSRC(t)
+
+	cases := []struct {
+		name string
+		data []byte
+	}{
+		{name: "empty", data: nil},
+		{name: "header only", data: full[:16]},
+		{name: "header truncated mid", data: full[:30]},
+		{name: "single byte", data: []byte{0xff}},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			if _, err := Parse(tc.data); err == nil {
+				t.Errorf("Parse(%s) returned no error", tc.name)
+			}
+		})
+	}
+}
+
+// TestParseRejectsBadMagic ensures the magic-bytes guard fires.
+func TestParseRejectsBadMagic(t *testing.T) {
+	full := buildSyntheticRSRC(t)
+	full[0] = 'X'
+	if _, err := Parse(full); err == nil {
+		t.Errorf("Parse(bad magic) returned no error")
+	}
+}
+
+// TestDetectFileKindCoversAllHeaderTypes drives every arm of the
+// header-type-to-FileKind switch so the table doesn't sit unexercised.
+func TestDetectFileKindCoversAllHeaderTypes(t *testing.T) {
+	cases := []struct {
+		headerType string
+		want       FileKind
+	}{
+		{"LVIN", FileKindVI},
+		{"LVCC", FileKindControl},
+		{"sVIN", FileKindTemplate},
+		{"LVAR", FileKindLibrary},
+		{"????", FileKindUnknown},
+	}
+	for _, tc := range cases {
+		if got := detectFileKind(tc.headerType); got != tc.want {
+			t.Errorf("detectFileKind(%q) = %v, want %v", tc.headerType, got, tc.want)
+		}
+	}
+}
+
+// TestValidateHeaderBoundsRejectsOutOfRange covers the four guard
+// branches in validateHeaderBounds (info OOB, data OOB, info underflow,
+// data underflow).
+func TestValidateHeaderBoundsRejectsOutOfRange(t *testing.T) {
+	good := Header{
+		InfoOffset: 32,
+		InfoSize:   16,
+		DataOffset: 32,
+		DataSize:   16,
+	}
+	cases := []struct {
+		name string
+		mod  func(*Header)
+		size int
+	}{
+		{name: "info exceeds size", mod: func(h *Header) { h.InfoSize = 1 << 30 }, size: 64},
+		{name: "data exceeds size", mod: func(h *Header) { h.DataSize = 1 << 30 }, size: 64},
+		{name: "info before header", mod: func(h *Header) { h.InfoOffset = 4 }, size: 1024},
+		{name: "data before header", mod: func(h *Header) { h.DataOffset = 4 }, size: 1024},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			h := good
+			tc.mod(&h)
+			if err := validateHeaderBounds(tc.size, h); err == nil {
+				t.Errorf("validateHeaderBounds(%s) returned nil error", tc.name)
+			}
+		})
+	}
+	if err := validateHeaderBounds(1024, good); err != nil {
+		t.Errorf("validateHeaderBounds(good) = %v, want nil", err)
+	}
+}
+
+// TestSerializeRejectsInvalidHeader exercises writeHeader's three shape
+// guards (magic, type, creator length) by mutating a known-good File.
+func TestSerializeRejectsInvalidHeader(t *testing.T) {
+	good := &File{
+		Header:          Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		SecondaryHeader: Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		BlockInfoList:   BlockInfoList{DatasetInt3: headerSize},
+	}
+
+	cases := []struct {
+		name string
+		mod  func(*File)
+	}{
+		{name: "short magic", mod: func(f *File) { f.Header.Magic = "RSRC" }},
+		{name: "short type", mod: func(f *File) { f.Header.Type = "LV" }},
+		{name: "short creator", mod: func(f *File) { f.Header.Creator = "LB" }},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			f := *good
+			tc.mod(&f)
+			if _, err := Serialize(&f); err == nil {
+				t.Errorf("Serialize(%s) returned no error", tc.name)
+			}
+		})
+	}
+}
+
+// TestSliceWriterAtRejectsBadOffsets covers the negative-offset and
+// out-of-bounds branches of sliceWriterAt.WriteAt.
+func TestSliceWriterAtRejectsBadOffsets(t *testing.T) {
+	w := sliceWriterAt(make([]byte, 4))
+
+	if _, err := w.WriteAt([]byte{1}, -1); err == nil {
+		t.Errorf("WriteAt(-1) returned no error")
+	}
+	if _, err := w.WriteAt([]byte{1, 2}, 3); err == nil {
+		t.Errorf("WriteAt(off=3 len=2 into 4-byte slice) returned no error")
+	}
+	if n, err := w.WriteAt([]byte{1, 2}, 0); err != nil || n != 2 {
+		t.Errorf("WriteAt(0,2) = (%d,%v), want (2,nil)", n, err)
+	}
+}
+
+// TestSerializeRejectsConflictingNames exercises the dedup conflict
+// branch in serializeNamesPreserving (two sections claim different
+// names for the same offset).
+func TestSerializeRejectsConflictingNames(t *testing.T) {
+	f := &File{
+		Header:          Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		SecondaryHeader: Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		BlockInfoList:   BlockInfoList{DatasetInt3: headerSize},
+		Names: []NameEntry{
+			{Offset: 0, Value: "alpha", Consumed: 6},
+		},
+		Blocks: []Block{
+			{
+				Type: "LIBN",
+				Sections: []Section{
+					{Index: 0, NameOffset: 0, Name: "different", Payload: []byte("x")},
+				},
+			},
+		},
+	}
+	if _, err := Serialize(f); err == nil {
+		t.Errorf("Serialize(conflicting names) returned no error")
+	}
+}
+
+// TestSerializeCanonicalRejectsMissingName covers the canonical
+// serializer's missing-name and oversize-name guards.
+func TestSerializeCanonicalRejectsMissingName(t *testing.T) {
+	missing := &File{
+		Header:          Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		SecondaryHeader: Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		BlockInfoList:   BlockInfoList{DatasetInt3: headerSize},
+		Blocks: []Block{
+			{
+				Type: "LIBN",
+				Sections: []Section{
+					{Index: 0, NameOffset: 99, Payload: []byte("x")},
+				},
+			},
+		},
+	}
+	if _, err := SerializeCanonical(missing); err == nil {
+		t.Errorf("SerializeCanonical(missing name) returned no error")
+	}
+
+	long := strings.Repeat("a", 256)
+	oversize := &File{
+		Header:          Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		SecondaryHeader: Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		BlockInfoList:   BlockInfoList{DatasetInt3: headerSize},
+		Names:           []NameEntry{{Offset: 0, Value: long, Consumed: int64(1 + len(long))}},
+		Blocks: []Block{
+			{
+				Type: "LIBN",
+				Sections: []Section{
+					{Index: 0, NameOffset: 0, Payload: []byte("x")},
+				},
+			},
+		},
+	}
+	if _, err := SerializeCanonical(oversize); err == nil {
+		t.Errorf("SerializeCanonical(oversize name) returned no error")
+	}
+}
+
+// TestSerializeCanonicalRejectsConflictingNames covers the canonical
+// dedup conflict branch (two sections claim different names for the
+// same offset).
+func TestSerializeCanonicalRejectsConflictingNames(t *testing.T) {
+	f := &File{
+		Header:          Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		SecondaryHeader: Header{Magic: "RSRC\r\n", Type: "LVIN", Creator: "LBVW", FormatVersion: 3},
+		BlockInfoList:   BlockInfoList{DatasetInt3: headerSize},
+		Names:           []NameEntry{{Offset: 0, Value: "alpha", Consumed: 6}},
+		Blocks: []Block{
+			{
+				Type: "LIBN",
+				Sections: []Section{
+					{Index: 0, NameOffset: 0, Name: "alpha", Payload: []byte("x")},
+					{Index: 1, NameOffset: 0, Name: "different", Payload: []byte("y")},
+				},
+			},
+		},
+	}
+	if _, err := SerializeCanonical(f); err == nil {
+		t.Errorf("SerializeCanonical(conflicting) returned no error")
 	}
 }

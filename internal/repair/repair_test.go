@@ -174,3 +174,119 @@ func containsAll(s string, parts ...string) bool {
 	}
 	return true
 }
+
+// TestFileRejectsNil covers the early-return guard.
+func TestFileRejectsNil(t *testing.T) {
+	if _, _, err := File(nil); err == nil {
+		t.Errorf("File(nil) error = nil, want non-nil")
+	}
+}
+
+// TestFileRejectsCleanFile covers the "no repairable errors" branch.
+func TestFileRejectsCleanFile(t *testing.T) {
+	clean := readCleanCorpusFile(t, "config-data.ctl")
+	_, _, err := File(clean)
+	if err == nil || !strings.Contains(err.Error(), "no repairable structural errors") {
+		t.Errorf("File(clean) error = %v, want no-repair sentinel", err)
+	}
+}
+
+// TestRebuildReferencedNamesCoversBranches drives the unexported
+// rebuildReferencedNames helper directly. The fixtures cover the
+// three branches: sentinel-skip, repeat-offset (continue), and
+// conflicting-names (error).
+func TestRebuildReferencedNamesCoversBranches(t *testing.T) {
+	t.Run("sentinel skipped", func(t *testing.T) {
+		f := &lvrsrc.File{
+			Blocks: []lvrsrc.Block{
+				{
+					Type: "LIBN",
+					Sections: []lvrsrc.Section{
+						{Index: 0, NameOffset: ^uint32(0), Payload: []byte("x")},
+					},
+				},
+			},
+		}
+		if err := rebuildReferencedNames(f); err != nil {
+			t.Fatalf("rebuildReferencedNames returned %v", err)
+		}
+		if f.Names != nil {
+			t.Errorf("Names = %+v, want nil", f.Names)
+		}
+	})
+
+	t.Run("repeat offset same value continues", func(t *testing.T) {
+		f := &lvrsrc.File{
+			Names: []lvrsrc.NameEntry{
+				{Offset: 0, Value: "alpha", Consumed: 6},
+			},
+			Blocks: []lvrsrc.Block{
+				{
+					Type: "LIBN",
+					Sections: []lvrsrc.Section{
+						{Index: 0, NameOffset: 0, Payload: []byte("x")},
+						{Index: 1, NameOffset: 0, Payload: []byte("y")},
+					},
+				},
+			},
+		}
+		if err := rebuildReferencedNames(f); err != nil {
+			t.Fatalf("rebuildReferencedNames returned %v", err)
+		}
+		if got := len(f.Names); got != 1 {
+			t.Errorf("Names length = %d, want 1", got)
+		}
+	})
+
+	t.Run("conflicting names errors", func(t *testing.T) {
+		f := &lvrsrc.File{
+			Blocks: []lvrsrc.Block{
+				{
+					Type: "LIBN",
+					Sections: []lvrsrc.Section{
+						{Index: 0, NameOffset: 0, Name: "alpha", Payload: []byte("x")},
+						{Index: 1, NameOffset: 0, Name: "different", Payload: []byte("y")},
+					},
+				},
+			},
+		}
+		if err := rebuildReferencedNames(f); err == nil {
+			t.Errorf("rebuildReferencedNames(conflict) error = nil, want non-nil")
+		}
+	})
+
+	t.Run("section name override wins over name table", func(t *testing.T) {
+		f := &lvrsrc.File{
+			Names: []lvrsrc.NameEntry{
+				{Offset: 0, Value: "lookup", Consumed: 7},
+			},
+			Blocks: []lvrsrc.Block{
+				{
+					Type: "LIBN",
+					Sections: []lvrsrc.Section{
+						{Index: 0, NameOffset: 0, Name: "explicit", Payload: []byte("x")},
+					},
+				},
+			},
+		}
+		if err := rebuildReferencedNames(f); err != nil {
+			t.Fatalf("rebuildReferencedNames returned %v", err)
+		}
+		if got := f.Blocks[0].Sections[0].Name; got != "explicit" {
+			t.Errorf("Section.Name = %q, want %q", got, "explicit")
+		}
+		if got := f.Names[0].Value; got != "explicit" {
+			t.Errorf("rebuilt name table value = %q, want explicit", got)
+		}
+	})
+}
+
+func readCleanCorpusFile(t *testing.T, name string) *lvrsrc.File {
+	t.Helper()
+	data := readCorpusFixture(t, name)
+	f, err := lvrsrc.Parse(data, lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Parse(clean) error = %v", err)
+	}
+	return f
+}

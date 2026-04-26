@@ -264,3 +264,62 @@ func buildSyntheticRSRC(t *testing.T) ([]byte, syntheticLayout) {
 		dataOffset:          headerSize,
 	}
 }
+
+// TestFileInfersFileSizeWhenOptionAbsent forces the inferredFileSize
+// fallback (and the maxU32/maxInt helpers it uses) by leaving FileSize
+// unset on Options.
+func TestFileInfersFileSizeWhenOptionAbsent(t *testing.T) {
+	data, _ := buildSyntheticRSRC(t)
+
+	f, err := rsrcwire.ParseWithOptions(data, rsrcwire.ParseOptions{})
+	if err != nil {
+		t.Fatalf("ParseWithOptions() error = %v", err)
+	}
+
+	if issues := File(f, Options{}); len(issues) != 0 {
+		t.Fatalf("File(no-FileSize) issues = %+v, want none", issues)
+	}
+}
+
+// TestFileNilReturnsNoIssues covers the early-return guard.
+func TestFileNilReturnsNoIssues(t *testing.T) {
+	if got := File(nil, Options{}); got != nil {
+		t.Fatalf("File(nil) = %+v, want nil", got)
+	}
+}
+
+// TestFileReportsHeaderInfoAndDataBounds shrinks the reported file size
+// past the header offsets so the bounds checks fire.
+func TestFileReportsHeaderInfoAndDataBounds(t *testing.T) {
+	data, _ := buildSyntheticRSRC(t)
+	f, err := rsrcwire.ParseWithOptions(data, rsrcwire.ParseOptions{})
+	if err != nil {
+		t.Fatalf("ParseWithOptions() error = %v", err)
+	}
+	issues := File(f, Options{FileSize: 1})
+	assertHasIssueCode(t, issues, "header.info.bounds")
+	assertHasIssueCode(t, issues, "header.data.bounds")
+}
+
+// TestFileDeduplicatesIssues exercises the addIssue dedup branch by
+// triggering the same code from two angles (block.count_mismatch on a
+// single block surfaced once).
+func TestFileDeduplicatesIssues(t *testing.T) {
+	data, _ := buildSyntheticRSRC(t)
+	f, err := rsrcwire.ParseWithOptions(data, rsrcwire.ParseOptions{})
+	if err != nil {
+		t.Fatalf("ParseWithOptions() error = %v", err)
+	}
+	f.Blocks[0].SectionCountMinusOne = 0
+
+	issues := File(f, Options{FileSize: len(data)})
+	count := 0
+	for _, i := range issues {
+		if i.Code == "block.count_mismatch" {
+			count++
+		}
+	}
+	if count != 1 {
+		t.Fatalf("block.count_mismatch appeared %d times, want 1", count)
+	}
+}

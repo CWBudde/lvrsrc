@@ -278,3 +278,73 @@ func TestDecodeKnownResourcesDoesNotMutatePayloads(t *testing.T) {
 		}
 	}
 }
+
+// TestModelImportsAndDependencies exercises the LIfp/LIbd/LIvi
+// dependency surfaces along with TopTypes. Most VI fixtures have one or
+// more of these blocks; the test only asserts the helpers run without
+// panic and return matching ok flags relative to the underlying file.
+func TestModelImportsAndDependencies(t *testing.T) {
+	for _, name := range []string{"format-string.vi", "is-float.vi", "action.ctl"} {
+		t.Run(name, func(t *testing.T) {
+			f := mustOpen(t, name)
+			m, _ := DecodeKnownResources(f)
+
+			// Only assert ok flags here; LIfp/LIbd entries can be empty
+			// for fixtures that do not import any sub-VIs.
+			lifp := blockExists(f, "LIfp")
+			_, fpOK := m.FrontPanelImports()
+			if lifp != fpOK {
+				t.Errorf("FrontPanelImports ok=%v but LIfp present=%v", fpOK, lifp)
+			}
+
+			libd := blockExists(f, "LIbd")
+			_, bdOK := m.BlockDiagramImports()
+			if libd != bdOK {
+				t.Errorf("BlockDiagramImports ok=%v but LIbd present=%v", bdOK, libd)
+			}
+
+			if _, ok := m.VIDependencies(); ok {
+				t.Errorf("VIDependencies returned ok=true (Phase 7.2 only decoded envelope)")
+			}
+
+			tops, topsOK := m.TopTypes()
+			vctp := blockExists(f, "VCTP")
+			if vctp != topsOK {
+				t.Errorf("TopTypes ok=%v but VCTP present=%v", topsOK, vctp)
+			}
+			_ = tops
+		})
+	}
+}
+
+// TestModelMethodsHandleNilFile covers the m.file == nil branches in
+// TopTypes / FrontPanelImports / BlockDiagramImports.
+func TestModelMethodsHandleNilFile(t *testing.T) {
+	var m *Model
+	if _, ok := m.TopTypes(); ok {
+		t.Errorf("(*Model)(nil).TopTypes ok = true, want false")
+	}
+	if _, ok := m.FrontPanelImports(); ok {
+		t.Errorf("(*Model)(nil).FrontPanelImports ok = true, want false")
+	}
+	if _, ok := m.BlockDiagramImports(); ok {
+		t.Errorf("(*Model)(nil).BlockDiagramImports ok = true, want false")
+	}
+	if _, ok := m.ConnectorPane(); ok {
+		t.Errorf("(*Model)(nil).ConnectorPane ok = true, want false")
+	}
+
+	empty := &Model{}
+	if _, ok := empty.TopTypes(); ok {
+		t.Errorf("empty Model TopTypes ok = true, want false")
+	}
+}
+
+func blockExists(f *lvrsrc.File, fourCC string) bool {
+	for _, b := range f.Blocks {
+		if b.Type == fourCC {
+			return true
+		}
+	}
+	return false
+}
