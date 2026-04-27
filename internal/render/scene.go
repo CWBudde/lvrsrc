@@ -200,7 +200,7 @@ func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 	}
 
 	scene.ViewBox = computeViewBox(scene, heuristicY)
-	scene.Warnings = sceneWarnings(scene, items, lvvi.CountCompressedWireTables(tree))
+	scene.Warnings = sceneWarnings(scene, items, lvvi.CountWireMix(tree))
 
 	return scene
 }
@@ -570,7 +570,7 @@ func textWidth(s string) float64 {
 	return float64(runes) * sceneCharW
 }
 
-func sceneWarnings(scene Scene, roots []*layoutItem, wireTableChunks int) []string {
+func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix) []string {
 	var warnings []string
 	allRootsHaveBounds := len(roots) > 0
 	for _, item := range roots {
@@ -593,11 +593,11 @@ func sceneWarnings(scene Scene, roots []*layoutItem, wireTableChunks int) []stri
 		warnings = append(warnings, "Placeholder nodes are present for unresolved object classes or fields.")
 	}
 	if scene.View == ViewBlockDiagram {
-		warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, connectivity decoder pending).")
-		if wireTableChunks > 0 {
+		warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
+		if total := wireMix.Total(); total > 0 {
 			warnings = append(warnings, fmt.Sprintf(
-				"Block diagram has %d compressed wire-table chunks; topology not yet decoded (Phase 12.4b).",
-				wireTableChunks))
+				"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); auto-routed L-shapes and 2-branch trees are typed-decoded, multi-elbow / 3+ branch chunks remain raw (Phase 12.4b₃).",
+				total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other))
 		}
 	}
 	return warnings

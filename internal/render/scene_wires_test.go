@@ -8,9 +8,12 @@ import (
 	"github.com/CWBudde/lvrsrc/pkg/lvvi"
 )
 
-// A BD heap tree that contains compressed wire-table chunks should
-// surface a scene warning telling the demo how many were recorded.
-// This is the 12.4a presence signal — connectivity is still opaque.
+// A BD heap tree that contains wire-table chunks should surface a
+// scene warning enumerating the wire-network count and the per-mode
+// breakdown — Phase 12.4b₁ replaced the older "compressed
+// wire-table chunks" wording with the proper "wire networks"
+// terminology after the spike confirmed that one chunk encodes a
+// whole network (not an edge).
 func TestProjectHeapTreeAddsWireTableWarning(t *testing.T) {
 	tree := lvvi.HeapTree{
 		Nodes: []lvvi.HeapNode{
@@ -33,13 +36,14 @@ func TestProjectHeapTreeAddsWireTableWarning(t *testing.T) {
 	scene := ProjectHeapTree(tree, ViewBlockDiagram)
 	saw := false
 	for _, w := range scene.Warnings {
-		if strings.Contains(w, "compressed wire-table") && strings.Contains(w, "2") {
+		if strings.Contains(w, "wire networks") &&
+			strings.Contains(w, "2 auto-routed") {
 			saw = true
 			break
 		}
 	}
 	if !saw {
-		t.Errorf("expected compressed-wire-table warning with count 2, got %v", scene.Warnings)
+		t.Errorf("expected wire-networks warning with auto-routed count 2, got %v", scene.Warnings)
 	}
 }
 
@@ -55,7 +59,7 @@ func TestProjectHeapTreeFrontPanelSuppressesWireWarning(t *testing.T) {
 	}
 	scene := ProjectHeapTree(tree, ViewFrontPanel)
 	for _, w := range scene.Warnings {
-		if strings.Contains(w, "compressed wire-table") {
+		if strings.Contains(w, "wire networks") {
 			t.Errorf("front-panel scene emitted wire warning: %q", w)
 		}
 		if strings.Contains(w, "wire routing") || strings.Contains(w, "terminal positions") {
@@ -75,7 +79,7 @@ func TestProjectHeapTreeBlockDiagramWithoutWireTablesOmitsCountWarning(t *testin
 	}
 	scene := ProjectHeapTree(tree, ViewBlockDiagram)
 	for _, w := range scene.Warnings {
-		if strings.Contains(w, "compressed wire-table") {
+		if strings.Contains(w, "wire networks") {
 			t.Errorf("BD scene without wire-table chunks emitted count warning: %q", w)
 		}
 	}

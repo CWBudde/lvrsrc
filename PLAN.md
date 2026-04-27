@@ -645,24 +645,17 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 - [x] `internal/render` adds a scene warning of the form `"Block diagram has N compressed wire-table chunks; topology not yet decoded (Phase 12.4b)."` whenever the projected BD tree contains at least one such leaf, so the demo no longer silently drops the wire data.
 - [x] Render goldens regenerated; corpus coverage test asserts 80 / 80 leaves return non-empty bytes; WASM rebuilt; `docs/resources/bdhb.md` "What's still opaque" updated with the spec-discovery findings.
 
-#### 12.4b Connectivity decoding (reframed — byte-format spike pending)
+#### 12.4b Connectivity decoding (controlled-fixture spike concluded)
 
-A focused spike walked the parent chain and byte distribution of all 80
-`OF__compressedWireTable` leaves in the corpus, plus probed the 18
-reference VIs available under `references/pylavi/tests/` and
-`references/pylabview/examples/`. The original spike conclusion that
-these chunks were "primitive-internal metadata only" was **wrong**;
-the corrected framing follows.
-
-**Enum-collision discovery.** Tag 233 collides between two pylabview
-families: `ClassTag.SL__baseTableControl` (a UI table-control widget)
-and `FieldTag.OF__signalList` (an aggregate of BD signals). The heap
-walker resolves open-scope tags to ClassTag first, so our debugger
-output labels these containers as `SL__baseTableControl`. But context
-makes it certain they are `OF__signalList`: parented under
-`SL__eventDataNode` / `SL__sdfTun` / `SL__concatDCO` in BD heaps, a UI
-table widget would not appear, but a per-primitive signal list
-absolutely would. That recasts the structure as:
+The original "primitive-internal metadata only" conclusion was wrong;
+an enum collision had us mis-reading the parent chain. Tag 233
+collides between `ClassTag.SL__baseTableControl` (a UI widget) and
+`FieldTag.OF__signalList` (a BD signal aggregate); the heap resolver
+prefers ClassTag, so our debug output labelled the container as
+`SL__baseTableControl`. In BD context — parented under
+`SL__eventDataNode` / `SL__sdfTun` / `SL__concatDCO` — it is a
+signalList, and each `arrayElement` child holds one wire/signal entry
+with `OF__compressedWireTable` as its payload:
 
 ```text
 SL__rootObject
@@ -672,32 +665,143 @@ SL__rootObject
                  └── OF__compressedWireTable   (its wire payload)
 ```
 
-So the 80 chunks **are** the visible BD signal/wire data — just
-persisted in a per-primitive aggregated form rather than in a single
-top-level wire table. The uncompressed `OF__wireTable` / `OF__wireID`
-tags appear in zero corpus or reference fixtures because the
-compressed form supersedes them in modern LV save formats.
+A controlled-fixture spike then authored 12 deliberately-varied VIs
+(`blank.vi`, `Numeric42.vi`, `Numeric4Dot2.vi`, `BoolToLED.vi`,
+`Add17Plus25.vi`, `Numeric42Far.vi`, `Numeric42Bend.vi`,
+`Numeric42_8px_down.vi`, `Numeric42_16px_down.vi`,
+`Numeric42_8px_down_8px_further_right.vi`,
+`Numeric42TwoIndicatorsY.vi`, `Numeric42ThreeIndicatorsY.vi`) and
+diffed their byte payloads. Findings:
 
-**Adding more fixtures will not unblock decoding.** Probing the 18
-reference VIs (`pylavi/tests/*.vi`, `pylabview/examples/*.vi`) showed
-the same persistence model — even `add.vi` (a 2-input adder, 3 visible
-wires) emits exactly 3 `compressedWireTable` chunks of the smallest
-form (`0208`), all parented under the same `signalList` /
-`arrayElement` chain. So:
+1. **Chunks are wire-networks, not edges.** A Y-shaped fan-out
+   (1 source → 2 indicators) emits **one** chunk, not two. So chunk
+   count = wire-network count; an N-edge tree is one chunk that
+   describes the whole network.
+2. **`byte0` = waypoint count** (endpoints + every internal corner of
+   the auto-routed path). Adding one auto-bend (8 px y-offset) bumped
+   `byte0` from 2 to 4 because LabVIEW renders an offset wire as a
+   Z-shape elbow with two corners, not one.
+3. **`byte1` = mode flag.** Three values observed:
+   - `0x08` auto-routed chain (single edge, layout-derived)
+   - `0x04` manually-routed chain (user-placed waypoints)
+   - `0x00` tree (multi-endpoint network)
+4. **Chain-mode trailing payload is LEB128 varints encoding _just the
+   delta_ over what auto-routing can recover from terminal positions.**
+   Verified by predicting that `Numeric42_16px_down` would change
+   exactly one byte from `Numeric42_8px_down`'s payload — and it did
+   (`08` → `10`). The horizontal indicator shift produced no payload
+   change at all because the post-elbow horizontal segment is implicit
+   (auto-stretches to the sink's `OF__bounds.x`).
+5. **Tree-mode payload is fixed-width 2-byte records.** Total length
+   equals `byte0 × 2`, with the first record being `(byte0, byte1)`
+   and the remaining `byte0 - 1` records describing branches +
+   geometry tail. Adding one branch (2-Y → 3-Y) increments `byte0`,
+   inserts a record in the branch list, and appends a per-branch
+   trailing byte.
 
-- [ ] What the byte format actually encodes is now the only blocker.
-  Reverse-engineering it without an external reference (NI internals,
-  community RE) is still high-risk, but the per-fixture-wire
-  correspondence (e.g. add.vi has 3 wires → 3 chunks → all `0208`)
-  gives an empirical handle: a controlled set of fixtures with known
-  wire counts and topologies could let us correlate byte changes to
-  topology changes. `0208` looks suspiciously like a sentinel "no
-  encoded payload, defaults apply" marker, with longer chunks
-  encoding non-default routing.
-- [ ] If a controlled fixture set proves untenable (we can't author
-  new VIs without LabVIEW), the spike stays open until an external
-  reference surfaces. Stage 1's exit criterion for wire rendering is
-  consequently still blocked on this work.
+#### 12.4b₁ — typed accessor (shipped)
+
+- [x] `pkg/lvvi.WireMode` enum: `WireModeAutoChain` (`0x08`),
+  `WireModeManualChain` (`0x04`), `WireModeTree` (`0x00`),
+  `WireModeOther` (anything else). String() yields the symbolic name
+  for diagnostics.
+- [x] `pkg/lvvi.HeapWire(tree, idx)` returns a typed `Wire` projection:
+  `{Mode, Waypoints, ChainGeometry []uint64, TreeRecords [][2]byte,
+  Raw []byte}`. Chain-mode populates `ChainGeometry` from LEB128
+  varint decoding; tree-mode populates `TreeRecords` from fixed-width
+  splitting; both preserve `Raw` bytes for round-trip safety. Unknown
+  modes carry only `Raw` and `Waypoints`.
+- [x] `pkg/lvvi.CountWireMix(tree)` returns per-mode counts; the
+  scene-graph projection consumes it to surface a per-network
+  breakdown warning ("Block diagram has N wire networks (X
+  auto-routed, Y manually-routed, Z branched, W other); …") in
+  place of the older "compressed wire-table chunks" wording.
+- [x] Tests: 12 unit-level cases covering each mode (with payloads
+  drawn from the controlled-fixture spike — including ground-truth
+  cases like the 8 px / 16 px y-shifted I32 wires) plus a corpus
+  sweep that asserts every chunk decodes. Coverage on the 33-fixture
+  corpus is **93 / 93** (83 auto-chain, 3 manual-chain, 5 tree, 2
+  other).
+
+#### 12.4b₂ — per-record semantics (shipped, partial)
+
+The controlled-fixture spike grew to 16 deliberately-varied VIs —
+adding `Numeric42_8px_up.vi` (sign test), `Numeric42TwoNetworks.vi`
+(network-boundary test), `Numeric42TwoIndicatorsY_top7right_bottom11down.vi`
+(tree geometry-varied test) and `Numeric42FourIndicatorsY_single.vi`
+(higher-branch test) on top of the 12 from the prior batch.
+
+Findings:
+
+- **Sign is encoded separately, not zigzag.** `Numeric42_8px_up`
+  (indicator moved 8 px _above_ source, vs the
+  `Numeric42_8px_down` baseline) only changed payload[0]: `0x00 →
+  0x01`. The y-step magnitude byte stayed `0x08`. So payload[0] is
+  a direction flag (0 = down, 1 = up), payload[3] is unsigned
+  magnitude.
+- **Network-boundary rule confirmed both ways.** Two disconnected
+  const→indicator pairs emit exactly 2 chunks of `0208` each.
+  Combined with the earlier "Y-tree → 1 chunk" finding, chunks
+  reliably correspond to wire-networks (not edges, not terminals).
+- **2-Y tree endpoints ground-truthed.** Diffing the regular 2-Y
+  against `top7right_bottom11down` (top indicator nudged 7 px
+  right, bottom indicator nudged ~11 px down) showed exactly two
+  byte changes — record #4 H-byte +7, record #5 V-byte +10 (LV
+  drag-snap rounded the 11 to 10). So records #4 and #5 of a 2-Y
+  chunk are (V, H) endpoint coordinates per branch.
+- **3+ branch tree-mode is topology-dependent.** The 4-indicator
+  fixture (`Numeric42FourIndicatorsY_single.vi`, comb topology
+  with 4 distinct splice points along the trunk) emits 10 records,
+  not the linear-scaled 8 a "single Y with 4 fan-out branches"
+  would predict. Tree-mode header records grow with topology
+  complexity, not branch count alone, and need 12.4b₃ work to
+  fully decode.
+
+Shipped accessors:
+
+- [x] `Wire.ChainAutoPath()` returns a typed
+  `ChainAutoPath{Straight, YStep, SourceAnchorX}` for chain-auto
+  wires whose payload matches the `0208` sentinel or the 4-varint
+  L-shape (`payload = [direction, 0, source-anchor-x, y-step-mag]`).
+  YStep is signed pixels, SourceAnchorX is the elbow's horizontal
+  offset from the source-glyph anchor (= 65 for I32 numeric
+  constants in our corpus). Multi-elbow auto-chain payloads return
+  ok=false — the magnitude clamp catches `Numeric42Far`'s 9 456
+  varint as out-of-range. Renderer composition (12.5): source +
+  SourceAnchorX → YStep → continue to sink.x.
+- [x] `Wire.TreeEndpointPair()` returns the two `Point{V, H}`
+  endpoints of a 2-fan-out tree wire-network (byte0 == 6, six
+  2-byte records). Records #4 and #5 are the per-branch endpoint
+  coordinates; geometry change in the controlled fixture moved
+  exactly the bytes we predicted. Tree chunks of any other shape
+  (3-Y, 4-Y, comb, …) return ok=false until 12.4b₃ untangles
+  topology-dependent header records.
+- [x] Scene warning extended: `"… auto-routed L-shapes and
+  2-branch trees are typed-decoded, multi-elbow / 3+ branch chunks
+  remain raw (Phase 12.4b₃)."` Goldens regen'd; WASM rebuilt;
+  corpus coverage stays 100 % (98 / 98 chunks decode through
+  HeapWire).
+
+#### 12.4b₃ — remaining tree-mode and multi-elbow chain semantics (pending)
+
+- [ ] **Multi-elbow chain decoding.** `Numeric42Far.vi` produces a
+  4-varint payload `[0, 0, 255, 9 456]` whose byte 3 is implausibly
+  large for a pixel y-step. Likely encodes a routing index or
+  per-segment delta list rather than a single elbow. Needs a
+  controlled fixture with deliberate 2- or 3-elbow auto-routing
+  (e.g. an obstacle-forcing layout) to map the variable shape.
+- [ ] **Tree-mode topology header.** The 3-Y and 4-Y fixtures show
+  topology-dependent header records (the 4-Y has `(06,00) (03,03)
+  (05,00) (03,41)` between the global header and the endpoint
+  records, where the 2-Y has `(00, 03) (00, 41)`). Decoding these
+  needs a controlled set varying topology while holding branch
+  count fixed — at minimum a single-junction 4-fan-out (true Y)
+  to compare against the comb-topology 4-fan-out we already have.
+- [ ] **Manual-chain decoding.** The 3 manual-chain chunks (byte1
+  `0x04`) decode as long varint streams; per-position semantics
+  unmapped beyond "user-placed waypoints with explicit deltas."
+  Needs controlled manual-bend fixtures with known-position
+  waypoints.
 
 ### 12.5 Wire path drawing (Stage 1, batch 5)
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "fixtureCount": 21,
+    "fixtureCount": 37,
     "resourceTypeCount": 27
   },
   "summary": {
@@ -13,7 +13,7 @@
   "resources": [
     {
       "fourCC": "BDEx",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -32,7 +32,7 @@
     },
     {
       "fourCC": "BDHb",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -51,7 +51,7 @@
     },
     {
       "fourCC": "BDPW",
-      "corpusFixtures": 10,
+      "corpusFixtures": 26,
       "typed": {
         "decode": true,
         "encode": true,
@@ -70,7 +70,7 @@
     },
     {
       "fourCC": "BDSE",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -89,7 +89,7 @@
     },
     {
       "fourCC": "CONP",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -108,7 +108,7 @@
     },
     {
       "fourCC": "CPC2",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -127,7 +127,7 @@
     },
     {
       "fourCC": "DTHP",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -146,7 +146,7 @@
     },
     {
       "fourCC": "FPEx",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -165,7 +165,7 @@
     },
     {
       "fourCC": "FPHb",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -184,7 +184,7 @@
     },
     {
       "fourCC": "FPSE",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -203,7 +203,7 @@
     },
     {
       "fourCC": "FTAB",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -222,7 +222,7 @@
     },
     {
       "fourCC": "HIST",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -241,7 +241,7 @@
     },
     {
       "fourCC": "ICON",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -279,7 +279,7 @@
     },
     {
       "fourCC": "LIbd",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -298,7 +298,7 @@
     },
     {
       "fourCC": "LIfp",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -317,7 +317,7 @@
     },
     {
       "fourCC": "LIvi",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -336,7 +336,7 @@
     },
     {
       "fourCC": "LVSR",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -355,7 +355,7 @@
     },
     {
       "fourCC": "MUID",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -374,7 +374,7 @@
     },
     {
       "fourCC": "RTSG",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -412,7 +412,7 @@
     },
     {
       "fourCC": "VCTP",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -431,7 +431,7 @@
     },
     {
       "fourCC": "VITS",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -450,7 +450,7 @@
     },
     {
       "fourCC": "VPDP",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -488,7 +488,7 @@
     },
     {
       "fourCC": "icl8",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,
@@ -507,7 +507,7 @@
     },
     {
       "fourCC": "vers",
-      "corpusFixtures": 21,
+      "corpusFixtures": 37,
       "typed": {
         "decode": true,
         "encode": true,

@@ -95,21 +95,26 @@ the following typed leaf payloads:
 
 ## What's still opaque
 
-- Wire connectivity. Spec discovery for Phase 12.4 found that the
-  uncompressed wire tags (`OF__wireTable`, `OF__wireID`,
-  `OF__wireGlyphID`, `OF__signalList`, `OF__signalIndex`) all have
-  zero leaves in our 21-fixture corpus; the connectivity for these
-  fixtures travels on `OF__compressedWireTable` (FieldTag 456) —
-  80 leaves, children of `SL__arrayElement`, variable-length
-  payloads (2 / 4 / 6 / 8 / 10 / 12 / 14 / 20 bytes). Pylabview's
-  `LVheap.py` has the enum number only, no decoder. Phase 12.4a
-  shipped as a presence accessor (`lvvi.HeapCompressedWireTable`,
-  `lvvi.CountCompressedWireTables`) plus a scene warning of the
-  form _"Block diagram has N compressed wire-table chunks; topology
-  not yet decoded (Phase 12.4b)."_ The compression scheme itself is
-  the open spike. Until 12.4b lands, wires render as that warning
-  rather than as drawn paths; terminal anchors (Phase 12.3) are
-  positioned but unconnected.
+- Wire path drawing. Phase 12.4 shipped in two batches. **12.4a**
+  added a presence accessor for the persisted-wire data —
+  pylabview's `LVheap.py` has the enum number only, so the format
+  was reverse-engineered against a controlled-fixture spike (12
+  deliberately-varied VIs in the corpus). **12.4b₁** then shipped
+  the typed `lvvi.HeapWire` decoder that classifies each
+  `OF__compressedWireTable` chunk by mode (auto-chain `0x08`,
+  manual-chain `0x04`, tree `0x00`, or other) and projects the
+  payload into either an LEB128 varint stream (chain modes) or
+  2-byte records (tree mode). The scene-graph projection now
+  surfaces a per-mode breakdown — e.g. _"Block diagram has 4 wire
+  networks (4 auto-routed, 0 manually-routed, 0 branched, 0
+  other); per-network geometry decoded, full path drawing pending
+  (Phase 12.4b₂ / 12.5)."_ Corpus coverage of `HeapWire` is **93 /
+  93** (83 auto-chain, 3 manual-chain, 5 tree, 2 other). The wire
+  data the spike could not yet ground-truth — per-record semantics
+  inside the chain-mode varint stream and the tree-mode 2-byte
+  records — is tracked as Phase 12.4b₂. Until that lands wires
+  render as the warning rather than as drawn paths; terminal
+  anchors (Phase 12.3) are positioned but unconnected.
 - Terminal anchor decoding shipped as Phase 12.3 (`OF__termBounds` +
   `OF__termHotPoint`) — see the "What's decoded" section above; the
   literal `OF__terminal` (FieldTag 367) carries no payload in the
