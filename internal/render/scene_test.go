@@ -153,8 +153,8 @@ func TestProjectHeapTreeAddsFidelityWarnings(t *testing.T) {
 	}
 
 	bd := ProjectHeapTree(tree, ViewBlockDiagram)
-	if !containsString(bd.Warnings, "wire routing") {
-		t.Fatalf("block-diagram warnings = %v, want wire-routing warning", bd.Warnings)
+	if !containsString(bd.Warnings, "wires not yet rendered") {
+		t.Fatalf("block-diagram warnings = %v, want wires-not-rendered warning", bd.Warnings)
 	}
 }
 

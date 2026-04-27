@@ -95,15 +95,26 @@ the following typed leaf payloads:
 
 ## What's still opaque
 
-- Wire routing (`OF__wireTable`, `OF__wireID`, `OF__wireGlyphID`) —
-  recognised as tags but content bytes left raw. Tracked as Phase 12.4
-  / 12.5; the demo still emits a "wire routing not rendered yet"
-  warning until those land. Terminal anchor decoding shipped as Phase
-  12.3 (`OF__termBounds` + `OF__termHotPoint`) — see the "What's
-  decoded" section above; the literal `OF__terminal` (FieldTag 367)
-  carries no payload in the 21-fixture corpus and pylabview's
-  `LVheap.py` has no decoder for it, so it remains an opaque
-  fallback.
+- Wire connectivity. Spec discovery for Phase 12.4 found that the
+  uncompressed wire tags (`OF__wireTable`, `OF__wireID`,
+  `OF__wireGlyphID`, `OF__signalList`, `OF__signalIndex`) all have
+  zero leaves in our 21-fixture corpus; the connectivity for these
+  fixtures travels on `OF__compressedWireTable` (FieldTag 456) —
+  80 leaves, children of `SL__arrayElement`, variable-length
+  payloads (2 / 4 / 6 / 8 / 10 / 12 / 14 / 20 bytes). Pylabview's
+  `LVheap.py` has the enum number only, no decoder. Phase 12.4a
+  shipped as a presence accessor (`lvvi.HeapCompressedWireTable`,
+  `lvvi.CountCompressedWireTables`) plus a scene warning of the
+  form _"Block diagram has N compressed wire-table chunks; topology
+  not yet decoded (Phase 12.4b)."_ The compression scheme itself is
+  the open spike. Until 12.4b lands, wires render as that warning
+  rather than as drawn paths; terminal anchors (Phase 12.3) are
+  positioned but unconnected.
+- Terminal anchor decoding shipped as Phase 12.3 (`OF__termBounds` +
+  `OF__termHotPoint`) — see the "What's decoded" section above; the
+  literal `OF__terminal` (FieldTag 367) carries no payload in the
+  21-fixture corpus and pylabview's `LVheap.py` has no decoder for
+  it, so it remains an opaque fallback.
 - Per-primitive operand metadata (selector ranges, frame counts on Case
   structures, sequence-frame ordering, …). These are domain-specific
   and still being mapped from `pylabview`'s per-primitive decoders.

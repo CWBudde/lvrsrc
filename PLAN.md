@@ -623,9 +623,81 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 - [x] `internal/render.SVG` draws `NodeKindTerminal` as a thin outline rect at the bounds plus a filled `r=2` anchor circle at `Anchor`. Ships `.lvrsrc-widget-terminal` and `.lvrsrc-node-terminal-anchor` CSS rules. Wires (12.4 / 12.5) will consume `Anchor` as the connect-point.
 - [x] Render goldens regenerated (BD now contains a `terminal` node from `load-vi.vi`'s `SL__sdfTun`); WASM rebuilt; `docs/resources/bdhb.md` "What's decoded" updated.
 
-### 12.4 Decode `OF__wireTable` / `OF__wireID` (Stage 1, batch 4)
+### 12.4 Surface `OF__compressedWireTable` presence (Stage 1, batch 4)
 
-- [ ] Decode the wire table to extract connectivity (which terminal connects to which). Topology only — exact waypoints are deferred to Stage 2.
+> Spec discovery showed the literal `OF__wireTable` (296),
+> `OF__wireID` (295), `OF__wireGlyphID` (294), `OF__signalList`
+> (233), and `OF__signalIndex` (232) all have **0 leaves** across
+> the 21-fixture corpus; the wire connectivity for our fixtures
+> lives in `OF__compressedWireTable` (FieldTag 456) — 80 leaves,
+> children of `SL__arrayElement`, variable-length payloads (2 / 4 /
+> 6 / 8 / 10 / 12 / 14 / 20 bytes). Pylabview's `LVheap.py` carries
+> the enum number only — no decoder. Reverse-engineering the
+> compression scheme blind from 80 samples is high-risk work that
+> may produce wrong connectivity, so 12.4 ships as a **presence
+> accessor only**. Connectivity decoding is tracked as 12.4b and
+> waits on an external reference.
+
+#### 12.4a Presence accessor (shipped)
+
+- [x] `pkg/lvvi.HeapCompressedWireTable(tree, idx) ([]byte, bool)` returns the raw payload of an `OF__compressedWireTable` leaf, mirroring the `HeapBounds` / `HeapTermBounds` accessor pattern. The bytes stay opaque — callers get them verbatim and decide what to do with them.
+- [x] `pkg/lvvi.CountCompressedWireTables(tree HeapTree) int` walks a heap tree and reports how many compressed wire-table chunks it carries. The web demo / scene projection use this to surface a "wires present but topology not yet decoded" annotation.
+- [x] `internal/render` adds a scene warning of the form `"Block diagram has N compressed wire-table chunks; topology not yet decoded (Phase 12.4b)."` whenever the projected BD tree contains at least one such leaf, so the demo no longer silently drops the wire data.
+- [x] Render goldens regenerated; corpus coverage test asserts 80 / 80 leaves return non-empty bytes; WASM rebuilt; `docs/resources/bdhb.md` "What's still opaque" updated with the spec-discovery findings.
+
+#### 12.4b Connectivity decoding (reframed — byte-format spike pending)
+
+A focused spike walked the parent chain and byte distribution of all 80
+`OF__compressedWireTable` leaves in the corpus, plus probed the 18
+reference VIs available under `references/pylavi/tests/` and
+`references/pylabview/examples/`. The original spike conclusion that
+these chunks were "primitive-internal metadata only" was **wrong**;
+the corrected framing follows.
+
+**Enum-collision discovery.** Tag 233 collides between two pylabview
+families: `ClassTag.SL__baseTableControl` (a UI table-control widget)
+and `FieldTag.OF__signalList` (an aggregate of BD signals). The heap
+walker resolves open-scope tags to ClassTag first, so our debugger
+output labels these containers as `SL__baseTableControl`. But context
+makes it certain they are `OF__signalList`: parented under
+`SL__eventDataNode` / `SL__sdfTun` / `SL__concatDCO` in BD heaps, a UI
+table widget would not appear, but a per-primitive signal list
+absolutely would. That recasts the structure as:
+
+```text
+SL__rootObject
+  └── SL__eventDataNode (or other primitive)
+       └── OF__signalList                ← _not_ SL__baseTableControl
+            └── SL__arrayElement          (one entry per signal/wire)
+                 └── OF__compressedWireTable   (its wire payload)
+```
+
+So the 80 chunks **are** the visible BD signal/wire data — just
+persisted in a per-primitive aggregated form rather than in a single
+top-level wire table. The uncompressed `OF__wireTable` / `OF__wireID`
+tags appear in zero corpus or reference fixtures because the
+compressed form supersedes them in modern LV save formats.
+
+**Adding more fixtures will not unblock decoding.** Probing the 18
+reference VIs (`pylavi/tests/*.vi`, `pylabview/examples/*.vi`) showed
+the same persistence model — even `add.vi` (a 2-input adder, 3 visible
+wires) emits exactly 3 `compressedWireTable` chunks of the smallest
+form (`0208`), all parented under the same `signalList` /
+`arrayElement` chain. So:
+
+- [ ] What the byte format actually encodes is now the only blocker.
+  Reverse-engineering it without an external reference (NI internals,
+  community RE) is still high-risk, but the per-fixture-wire
+  correspondence (e.g. add.vi has 3 wires → 3 chunks → all `0208`)
+  gives an empirical handle: a controlled set of fixtures with known
+  wire counts and topologies could let us correlate byte changes to
+  topology changes. `0208` looks suspiciously like a sentinel "no
+  encoded payload, defaults apply" marker, with longer chunks
+  encoding non-default routing.
+- [ ] If a controlled fixture set proves untenable (we can't author
+  new VIs without LabVIEW), the spike stays open until an external
+  reference surfaces. Stage 1's exit criterion for wire rendering is
+  consequently still blocked on this work.
 
 ### 12.5 Wire path drawing (Stage 1, batch 5)
 

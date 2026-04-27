@@ -1,6 +1,7 @@
 package render
 
 import (
+	"fmt"
 	"math"
 	"strings"
 
@@ -199,7 +200,7 @@ func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 	}
 
 	scene.ViewBox = computeViewBox(scene, heuristicY)
-	scene.Warnings = sceneWarnings(scene, items)
+	scene.Warnings = sceneWarnings(scene, items, lvvi.CountCompressedWireTables(tree))
 
 	return scene
 }
@@ -569,7 +570,7 @@ func textWidth(s string) float64 {
 	return float64(runes) * sceneCharW
 }
 
-func sceneWarnings(scene Scene, roots []*layoutItem) []string {
+func sceneWarnings(scene Scene, roots []*layoutItem, wireTableChunks int) []string {
 	var warnings []string
 	allRootsHaveBounds := len(roots) > 0
 	for _, item := range roots {
@@ -592,7 +593,12 @@ func sceneWarnings(scene Scene, roots []*layoutItem) []string {
 		warnings = append(warnings, "Placeholder nodes are present for unresolved object classes or fields.")
 	}
 	if scene.View == ViewBlockDiagram {
-		warnings = append(warnings, "Block-diagram wire routing and terminal positions are not rendered yet.")
+		warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, connectivity decoder pending).")
+		if wireTableChunks > 0 {
+			warnings = append(warnings, fmt.Sprintf(
+				"Block diagram has %d compressed wire-table chunks; topology not yet decoded (Phase 12.4b).",
+				wireTableChunks))
+		}
 	}
 	return warnings
 }
