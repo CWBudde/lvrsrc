@@ -69,20 +69,27 @@ type renderGoldenSnapshot struct {
 }
 
 type renderNodeSnapshot struct {
-	Kind        NodeKind `json:"kind"`
-	Label       string   `json:"label,omitempty"`
-	Bounds      Rect     `json:"bounds"`
-	Parent      int      `json:"parent"`
-	Children    []int    `json:"children,omitempty"`
-	Z           int      `json:"z"`
-	Placeholder bool     `json:"placeholder,omitempty"`
-	HeapIndex   int      `json:"heap_index"`
-	Path        string   `json:"path,omitempty"`
+	Kind        NodeKind        `json:"kind"`
+	Label       string          `json:"label,omitempty"`
+	Bounds      Rect            `json:"bounds"`
+	Parent      int             `json:"parent"`
+	Children    []int           `json:"children,omitempty"`
+	Z           int             `json:"z"`
+	Placeholder bool            `json:"placeholder,omitempty"`
+	HeapIndex   int             `json:"heap_index"`
+	Path        string          `json:"path,omitempty"`
+	WidgetKind  lvvi.WidgetKind `json:"widget_kind,omitempty"`
+	Anchor      *Point          `json:"anchor,omitempty"`
 }
 
 func snapshotNodes(nodes []Node) []renderNodeSnapshot {
 	out := make([]renderNodeSnapshot, len(nodes))
 	for i, n := range nodes {
+		var anchor *Point
+		if n.Kind == NodeKindTerminal {
+			a := n.Anchor
+			anchor = &a
+		}
 		out[i] = renderNodeSnapshot{
 			Kind:        n.Kind,
 			Label:       n.Label,
@@ -93,6 +100,8 @@ func snapshotNodes(nodes []Node) []renderNodeSnapshot {
 			Placeholder: n.Placeholder,
 			HeapIndex:   n.HeapIndex,
 			Path:        n.Path,
+			WidgetKind:  n.WidgetKind,
+			Anchor:      anchor,
 		}
 	}
 	return out

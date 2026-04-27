@@ -570,6 +570,77 @@ Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap
 
 ---
 
+## Phase 12 — LabVIEW-faithful rendering
+
+> Target: incremental | Exit: web demo and CLI render front-panel and block-diagram surfaces that _read_ like LabVIEW (real positions, identifiable widget kinds, wires connecting nodes) so a viewer can recognise the VI at a glance | Tag: `v1.2.0` (Stage 1 complete) / `v1.3.0+` (fidelity)
+>
+> Replaces the heuristic depth-stacked layout from Phase 11 with decoded
+> LabVIEW geometry as it lands tag-by-tag. Two stages: **Stage 1
+> (functional clarity)** — controls in the right place, BD nodes wired
+> up, generic widget styling per kind; **Stage 2 (fidelity)** —
+> per-class control skins, fonts, exact wire waypoints, decorations.
+
+### 12.1 Decode `OF__bounds` and use real positions (Stage 1, batch 1)
+
+- [x] Spec confirmed against `pylabview` `HeapNodeRect` (LVheap.py:1725) and the corpus: 4 × big-endian `int16` Left/Top/Right/Bottom; FieldTag 14 — already supported by `internal/codecs/heap.Node.AsRect`. Coverage: 1 188 / 1 188 OF__bounds leaves across 42 FPHb + BDHb trees decode without error.
+- [x] `lvvi.HeapBounds(tree, idx)` and `lvvi.FindBoundsChild(tree, parentIdx)` ship as the typed accessors callers use to look up a control's outer rectangle. Mirrors the on-demand pattern of `lvvi.HeapDataFill`. Tests in `pkg/lvvi/bounds_test.go`.
+- [x] `internal/render.ProjectHeapTree` promotes a control's decoded bounds onto its scene group — position **and** size come from LabVIEW pixels — and drops the OF__bounds leaf from the rendered output (it's metadata, not visible content). Controls without a decoded bounds child fall back to the prior heuristic stack so partial coverage degrades gracefully. Scene viewBox auto-fits to the decoded coord range.
+- [x] Heuristic-layout warning relaxed: only emitted when at least one root falls back to the heuristic path. A fully bounds-driven scene no longer self-flags as approximate.
+- [x] Render goldens regenerated (`internal/render/testdata/golden/*.golden.json`) — control front-panel goldens shrink from heuristic-stretched layouts (e.g. 678×9024) to their true LabVIEW pixel extents (e.g. 856×3024). WASM `web/lvrsrc.wasm` rebuilt; `web/smoke_test.go` still passes.
+
+### 12.2 Map class → widget kind and stylize generically (Stage 1, batch 2)
+
+#### 12.2a Name-based mapping (shipped)
+
+- [x] `pkg/lvvi.WidgetKind` enum (boolean / numeric / string / cluster / array / graph / decoration / structure / primitive / other) plus `WidgetKindForClass(ClassTag)` and `WidgetKindForNode(HeapNode)`. The node-level resolver also folds `SystemTag(SL__array)` (-4) and `SystemTag(SL__arrayElement)` (-6) into Array because FP array containers and their repeated children are persisted as system tags rather than positive class tags. Tests in `pkg/lvvi/widget_test.go`.
+- [x] `internal/render.Node.WidgetKind` propagates through `buildLayoutItem` / `placeLayoutItem` onto every emitted group / box / title-label, so the SVG renderer can pick a per-kind skin without re-resolving from the tag. Test in `internal/render/scene_widget_test.go`.
+- [x] `internal/render.SVG` emits an additional `lvrsrc-widget-{kind}` CSS class on each node and ships generic per-kind skins (filled box vs. dashed-outline vs. tinted background) in the embedded stylesheet. Empty `WidgetKind` (helper / leaf nodes) suppresses the class. Test in `internal/render/svg_test.go`.
+- [x] Goldens regenerated for the three render fixtures; corpus baseline (`TestWidgetKindForNodeCorpusBaseline`) reports ≈ 50 % open-scope-node coverage today, dominated by Array (`SL__arrayElement`), Other, Primitive, Graph, and Decoration. WASM rebuilt.
+
+#### 12.2b pylabview cross-check (pending)
+
+- [ ] Read pylabview's `LVheap.py` per-class parser dispatch and adjust the `widgetKindByClass` table where the name-based heuristic disagrees with pylabview's actual classification. Goal: lift the corpus classified-rate beyond name guessing and catch silent miscategorizations (e.g. classes whose names look like primitives but pylabview treats as terminals or refnums).
+- [ ] Where pylabview groups classes into kinds we don't have (refnum / tunnel / variant / connector-pane), decide whether to add new `WidgetKind` values or fold them into `Other` with a per-kind doc note.
+
+#### Stage-1 exit for 12.2
+
+- [x] Phase 12.2 stops short of pixel-faithful skins (that's Stage 2); the deliverable is "you can tell the booleans from the numerics from the strings." Met by 12.2a — boolean / numeric / string / cluster / array / graph / decoration / structure / primitive each carry a distinct fill+stroke skin in the SVG renderer; pylabview-aligned tightening of the mapping (12.2b) does not block this exit criterion.
+
+### 12.3 Decode `OF__termBounds` / `OF__termHotPoint` (Stage 1, batch 3)
+
+> Spec discovery showed `OF__terminal` (FieldTag 367) has zero leaves
+> in the 21-fixture corpus and pylabview's `LVheap.py` carries no
+> decoder for it. The real terminal geometry travels on
+> `OF__termBounds` (266, 154 leaves at 8 B = same `{Left, Top, Right,
+> Bottom}` rect as `OF__bounds`) and `OF__termHotPoint` (267, 6 leaves
+> at 4 B = a single Mac-style `Point{V, H}`). The PLAN bullet for
+> 12.3 was renamed to match.
+
+- [x] `pkg/lvvi.HeapTermBounds(tree, idx)` decodes `OF__termBounds` (FieldTag 266) — same 8-byte BE int16 rect as `OF__bounds`, accessor mirrors `HeapBounds`. `FindTermBoundsChild` is the parent-side lookup. Tests in `pkg/lvvi/terminal_test.go`. Corpus coverage: **154 / 154** OF__termBounds leaves decode without error.
+- [x] `pkg/lvvi.HeapTermHotPoint(tree, idx)` decodes `OF__termHotPoint` (FieldTag 267) — 4 bytes BE int16 in Mac Point V/H order. `FindTermHotPointChild` is the parent-side lookup. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode.
+- [x] `WidgetKindTerminal` ships as the 11th member of the widget-kind enum; the BD tunnel/terminal classes (`SL__term`, `SL__fPTerm`, `SL__lpTun`, `SL__innerLpTun`, `SL__matedLpTun`, `SL__seqTun`, `SL__matedSeqTun`, `SL__flatSeqTun`, `SL__selTun`, `SL__simTun`, `SL__sdfTun`, `SL__regionTun`, `SL__commentTun`, `SL__externalTun`, `SL__xTunnel`, `SL__decomposeRecomposeTunnel`) are mapped onto it. Corpus baseline lifts from 49.7 % → **55.4 %** classified, with terminals (275 nodes) becoming the third-largest kind after Array and Other.
+- [x] `internal/render` adds `NodeKindTerminal` plus an `Anchor Point` field on `Node`. Tunnel / terminal heap nodes emit a flat `NodeKindTerminal` (not the group/box/title-label triple) sized via `OF__termBounds` (preferred) or `OF__bounds` (fallback), with `Anchor` set from `OF__termHotPoint` when present, else the bounds centre. Tests in `internal/render/scene_terminal_test.go`.
+- [x] `internal/render.SVG` draws `NodeKindTerminal` as a thin outline rect at the bounds plus a filled `r=2` anchor circle at `Anchor`. Ships `.lvrsrc-widget-terminal` and `.lvrsrc-node-terminal-anchor` CSS rules. Wires (12.4 / 12.5) will consume `Anchor` as the connect-point.
+- [x] Render goldens regenerated (BD now contains a `terminal` node from `load-vi.vi`'s `SL__sdfTun`); WASM rebuilt; `docs/resources/bdhb.md` "What's decoded" updated.
+
+### 12.4 Decode `OF__wireTable` / `OF__wireID` (Stage 1, batch 4)
+
+- [ ] Decode the wire table to extract connectivity (which terminal connects to which). Topology only — exact waypoints are deferred to Stage 2.
+
+### 12.5 Wire path drawing (Stage 1, batch 5)
+
+- [ ] Render block-diagram wires as orthogonal/Manhattan paths between known terminals. Drops the "wire routing not rendered yet" warning. Exit criterion for Stage 1: open a corpus VI in the demo and _recognise_ it.
+
+### 12.6+ Stage 2 — fidelity (post-`v1.2.0`)
+
+- [ ] Per-class control skins (real LabVIEW widget look).
+- [ ] Fonts, captions, tick labels, scale ranges.
+- [ ] Exact wire waypoints from `OF__wireTable` (replace orthogonal routing).
+- [ ] Decorations, colors, panel backgrounds.
+- [ ] Polish — selection bounds, label anchors, custom fonts.
+
+---
+
 ## Cross-Cutting Concerns
 
 ### Documentation

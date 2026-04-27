@@ -24,6 +24,10 @@ const (
 	NodeKindBox      NodeKind = "box"
 	NodeKindLabel    NodeKind = "label"
 	NodeKindPort     NodeKind = "port"
+	// NodeKindTerminal is a flat anchor marker for BD tunnels and
+	// front-panel terminals. It carries Bounds (the terminal's outer
+	// rectangle) and Anchor (the connect-point wires will eventually
+	// attach to). It does not have group / box / title-label children.
 	NodeKindTerminal NodeKind = "terminal"
 )
 
@@ -57,6 +61,17 @@ type Node struct {
 	Path        string
 	LeafCount   int
 	ContentSize int
+	// WidgetKind is the lvvi-resolved widget category for this scene
+	// node — boolean / numeric / string / array / structure / primitive
+	// / etc. Empty for label and helper nodes, "other" for unclassified
+	// open-scope nodes.
+	WidgetKind lvvi.WidgetKind
+	// Anchor is the connect-point wires will attach to, in scene
+	// coordinates. Only meaningful for NodeKindTerminal — for other
+	// node kinds it is the zero Point. Phase 12.3 sources Anchor from
+	// OF__termHotPoint when present, falling back to the terminal's
+	// bounds centre.
+	Anchor Point
 }
 
 // Wire is the future hook for explicit block-diagram routing. The
@@ -97,13 +112,18 @@ const (
 	sceneCharW          = 7.0
 	canvasNodeThreshold = 180
 	canvasAreaThreshold = 1200 * 1200
+	// sceneTerminalSize is the default extent for a terminal whose
+	// heap node carries neither OF__termBounds nor OF__bounds — small
+	// enough to read as an anchor marker rather than a full widget.
+	sceneTerminalSize = 8.0
 )
 
 type layoutKind string
 
 const (
-	layoutKindGroup layoutKind = "group"
-	layoutKindLabel layoutKind = "label"
+	layoutKindGroup    layoutKind = "group"
+	layoutKindLabel    layoutKind = "label"
+	layoutKindTerminal layoutKind = "terminal"
 )
 
 type layoutItem struct {
@@ -122,6 +142,18 @@ type layoutItem struct {
 	// present. nil means the heuristic layout pass owns position and
 	// size for this item.
 	bounds *lvvi.Bounds
+	// widgetKind is the lvvi-resolved widget category for this item.
+	// Stamped on the emitted scene Nodes so the SVG renderer can pick
+	// a generic per-kind skin without re-resolving from the tag.
+	widgetKind lvvi.WidgetKind
+	// anchor is the per-item connect-point in the item's local
+	// coordinate frame (relative to bounds.Left / bounds.Top). Only
+	// populated for layoutKindTerminal items.
+	anchor lvvi.Point
+	// hasAnchor distinguishes "no hot-point recorded" from a hot-point
+	// of {V:0, H:0}. When false, placeLayoutItem falls back to the
+	// bounds centre.
+	hasAnchor bool
 }
 
 // ProjectHeapTree converts a decoded heap tree into a renderer-neutral
@@ -240,6 +272,36 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 
 	switch n.Scope {
 	case "open":
+		widgetKind := lvvi.WidgetKindForNode(n)
+		// Terminal classes (tunnels, FP terminals) are rendered as a
+		// flat anchor marker rather than a group / box / title-label
+		// triple. Bounds come from OF__termBounds (preferred) or
+		// OF__bounds (fallback); the anchor offset comes from
+		// OF__termHotPoint when present.
+		if widgetKind == lvvi.WidgetKindTerminal {
+			item := &layoutItem{
+				kind:        layoutKindTerminal,
+				heapIndex:   idx,
+				tag:         n.Tag,
+				label:       label,
+				placeholder: placeholder,
+				path:        path,
+				contentSize: len(n.Content),
+				widgetKind:  widgetKind,
+			}
+			if b, ok := lvvi.FindTermBoundsChild(tree, idx); ok {
+				b := b
+				item.bounds = &b
+			} else if b, ok := lvvi.FindBoundsChild(tree, idx); ok {
+				b := b
+				item.bounds = &b
+			}
+			if p, ok := lvvi.FindTermHotPointChild(tree, idx); ok {
+				item.anchor = p
+				item.hasAnchor = true
+			}
+			return item
+		}
 		item := &layoutItem{
 			kind:        layoutKindGroup,
 			heapIndex:   idx,
@@ -248,6 +310,7 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 			placeholder: placeholder,
 			path:        path,
 			contentSize: len(n.Content),
+			widgetKind:  widgetKind,
 		}
 		if b, ok := lvvi.FindBoundsChild(tree, idx); ok {
 			b := b
@@ -302,6 +365,25 @@ func measureLayout(item *layoutItem) {
 	case layoutKindLabel:
 		item.width = math.Max(sceneMinLabelW, labelW+12)
 		item.height = sceneLabelH
+	case layoutKindTerminal:
+		// Terminals have no children; size comes from termBounds /
+		// bounds. Falls back to a small fixed marker if no rect
+		// payload was attached.
+		if item.bounds != nil {
+			w := float64(item.bounds.Width())
+			h := float64(item.bounds.Height())
+			if w < 1 {
+				w = 1
+			}
+			if h < 1 {
+				h = 1
+			}
+			item.width = w
+			item.height = h
+			return
+		}
+		item.width = sceneTerminalSize
+		item.height = sceneTerminalSize
 	case layoutKindGroup:
 		// Recurse into children regardless so they pick up their
 		// own decoded bounds before we measure the parent.
@@ -348,6 +430,35 @@ func measureLayout(item *layoutItem) {
 
 func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth int) int {
 	switch item.kind {
+	case layoutKindTerminal:
+		// Anchor offset is recorded in the item's local frame; convert
+		// to scene coordinates here. When no hot-point was decoded,
+		// fall back to the centre of the terminal's bounds so wires
+		// always have a connect-point to attach to.
+		var anchor Point
+		if item.hasAnchor {
+			anchor = Point{X: x + float64(item.anchor.H), Y: y + float64(item.anchor.V)}
+		} else {
+			anchor = Point{X: x + item.width/2, Y: y + item.height/2}
+		}
+		idx := appendNode(scene, Node{
+			Kind:        NodeKindTerminal,
+			Label:       item.label,
+			Bounds:      Rect{X: x, Y: y, Width: item.width, Height: item.height},
+			Parent:      parent,
+			Z:           depth*10 + 1,
+			Placeholder: item.placeholder,
+			HeapIndex:   item.heapIndex,
+			Tag:         item.tag,
+			Path:        item.path,
+			ContentSize: item.contentSize,
+			WidgetKind:  item.widgetKind,
+			Anchor:      anchor,
+		})
+		if parent >= 0 {
+			scene.Nodes[parent].Children = append(scene.Nodes[parent].Children, idx)
+		}
+		return idx
 	case layoutKindLabel:
 		idx := appendNode(scene, Node{
 			Kind:        NodeKindLabel,
@@ -379,6 +490,7 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 			Path:        item.path,
 			LeafCount:   item.leafCount,
 			ContentSize: item.contentSize,
+			WidgetKind:  item.widgetKind,
 		})
 		if parent >= 0 {
 			scene.Nodes[parent].Children = append(scene.Nodes[parent].Children, groupIdx)
@@ -396,6 +508,7 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 			Path:        item.path,
 			LeafCount:   item.leafCount,
 			ContentSize: item.contentSize,
+			WidgetKind:  item.widgetKind,
 		})
 		scene.Nodes[groupIdx].Children = append(scene.Nodes[groupIdx].Children, boxIdx)
 
@@ -415,6 +528,7 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 			Path:        item.path,
 			LeafCount:   item.leafCount,
 			ContentSize: item.contentSize,
+			WidgetKind:  item.widgetKind,
 		})
 		scene.Nodes[groupIdx].Children = append(scene.Nodes[groupIdx].Children, titleIdx)
 

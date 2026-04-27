@@ -65,35 +65,75 @@ modes use that shared projection.
 - Wired into `pkg/lvvi.newLvviRegistry`, `pkg/lvdiff.defaultDecodedDiffers`,
   `internal/coverage.shippedCodecs`, and the WASM `typedFourCCs` set.
 
-## What's still opaque
+## What's decoded
 
 The codec resolves the tag-stream **structure** — every node's enum class,
-every parent/child relation, every leaf's preserved payload bytes. It
-deliberately does not yet:
+every parent/child relation, every leaf's preserved payload bytes — and
+the following typed leaf payloads:
 
-- Decode per-class field payloads (control geometry, label fonts, scale
-  ticks, …). Those carry domain-specific binary formats that vary by
-  control type and are still being mapped from `pylabview`.
-- Resolve `Tag(N)` fallbacks to higher-level categories. Tags that don't
-  appear in any of the 40 enum tables in `tags_gen.go` are surfaced
-  with their raw numeric form so coverage gaps stay visible in the
-  demo.
+- `OF__bounds` (Phase 11.1): 4 × big-endian `int16` Left/Top/Right/Bottom
+  rectangles per `pylabview`'s `HeapNodeRect` (LVheap.py:1725). Decoded
+  by `lvvi.HeapBounds` and the `lvvi.FindBoundsChild` helper; consumed
+  by `internal/render` so the scene graph places groups at real
+  LabVIEW pixel positions whenever a control carries a bounds child.
+  Corpus coverage: **1188 / 1188** OF__bounds leaves across 42 FPHb +
+  BDHb trees.
 
-These are tracked as Phase 11+ work (post-`v1.0`) and do not block any of
-the read-only inspection / validation / safe-edit flows the codec
+## What's still opaque
+
+- Per-class field payloads other than `OF__bounds` (label fonts, scale
+  ticks, button geometry beyond the outer rect, custom controls, …).
+  Those carry domain-specific binary formats that vary by control type
+  and are still being mapped from `pylabview`.
+- Wire routing (`OF__wireTable`, `OF__wireID`, `OF__wireGlyphID`) and
+  terminal positions (`OF__terminal`) — recognised as tags but content
+  bytes left raw. Tracked as Phase 11.3–11.5.
+- Other rectangle-shaped tags (`OF__contRect`, `OF__dBounds`,
+  `OF__pBounds`, `OF__iconBounds`, …): the binary format is identical
+  to `OF__bounds` but they are not yet promoted onto scene-graph
+  geometry; only the outer `OF__bounds` rectangle is consumed today.
+- Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
+  40 enum tables in `tags_gen.go` are surfaced with their raw numeric
+  form so coverage gaps stay visible in the demo.
+
+These are tracked as Phase 11.2+ work (post-`v1.0`) and do not block any
+of the read-only inspection / validation / safe-edit flows the codec
 currently powers.
 
 ## Render/export semantics
 
-Current front-panel rendering is intentionally structural:
+Phase 11.1 turned scene rendering into a hybrid of decoded and heuristic
+layout:
 
-- SVG and canvas output come from inferred scene-graph bounds, not decoded
-  LabVIEW control coordinates.
+- Groups whose heap node has an `OF__bounds` child are positioned and
+  sized at the decoded LabVIEW pixel rectangle.
+- Groups without a decoded bounds child fall back to the prior
+  heuristic stack (vertical, indented by depth).
+- The OF__bounds leaf itself is dropped from scene output once it has
+  been promoted onto the parent — its content is metadata, not visible.
 - Unresolved classes remain visible as placeholder nodes with their
   `Tag(N)` label and parent path.
-- The web demo surfaces the same warnings the renderer emits
-  (heuristic layout, placeholders present) so consumers can tell the
-  difference between "decoded faithfully" and "best effort".
+- The web demo's "Layout is heuristic" warning now reads as "_some_
+  positions and sizes are heuristic" and only appears when at least one
+  root falls back, so a fully bounds-driven scene is no longer flagged
+  as approximate.
+
+Phase 12.2a layered a generic widget-kind classification on top of that
+hybrid layout. Each scene group / box carries an `lvvi.WidgetKind`
+(`boolean` / `numeric` / `string` / `cluster` / `array` / `graph` /
+`decoration` / `structure` / `primitive` / `other`) resolved from the
+heap node's class tag via `lvvi.WidgetKindForNode`. The shared SVG
+renderer (`internal/render.SVG`) emits an `lvrsrc-widget-{kind}` CSS
+class alongside the existing `lvrsrc-node-*` classes and ships
+distinct per-kind skins — booleans get a green-tinted fill, numerics
+blue, strings purple, structures a heavier orange-brown stroke, and so
+on. The mapping in `widgetKindByClass` covers the obvious-by-name
+classes (`SL__stdBool`, `SL__stdNum`, `SL__forLoop`, `SL__prim`,
+…); unmapped classes fall back to `other` so unknown widgets still
+render as plain placeholder boxes. A pylabview-aligned cross-check
+pass (Phase 12.2b) is pending and will tighten the table where the
+name heuristic disagrees with pylabview's actual per-class parser
+dispatch.
 
 ## Typed data fills (`OF__StdNumMin` / `Max` / `Inc`)
 

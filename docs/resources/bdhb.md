@@ -66,37 +66,87 @@ the CLI (`lvrsrc render --view block-diagram`) and the web demo consume.
 - Wired into `pkg/lvvi.newLvviRegistry`, `pkg/lvdiff.defaultDecodedDiffers`,
   `internal/coverage.shippedCodecs`, and the WASM `typedFourCCs` set.
 
-## What's still opaque
+## What's decoded
 
 The codec resolves the tag-stream **structure** — every node's enum class,
-every parent/child relation, every leaf's preserved payload bytes. It
-deliberately does not yet:
+every parent/child relation, every leaf's preserved payload bytes — and
+the following typed leaf payloads:
 
-- Decode wire routing (waypoint coordinates, hops, label anchors). The
-  v1 demo skips wire rendering altogether; only the diagram object tree
-  is shown.
-- Decode per-primitive operand metadata (selector ranges, frame counts
-  on Case structures, sequence-frame ordering, …). These are
-  domain-specific and still being mapped from `pylabview`'s
-  per-primitive decoders.
-- Resolve `Tag(N)` fallbacks. Tags that don't appear in any of the 40
-  enum tables in `tags_gen.go` surface with their raw numeric form so
-  coverage gaps stay visible in the demo.
+- `OF__bounds` (Phase 11.1): 4 × big-endian `int16` Left/Top/Right/Bottom
+  rectangles per `pylabview`'s `HeapNodeRect` (LVheap.py:1725). Decoded
+  by `lvvi.HeapBounds` and the `lvvi.FindBoundsChild` helper; consumed
+  by `internal/render` so block-diagram object boxes are positioned at
+  real LabVIEW pixel coordinates whenever a node carries a bounds
+  child. Corpus coverage shared with FPHb: **1188 / 1188** OF__bounds
+  leaves across 42 trees.
+- `OF__termBounds` (Phase 12.3): same 8-byte BE int16
+  Left/Top/Right/Bottom rect format as `OF__bounds`, decoded by
+  `lvvi.HeapTermBounds` / `lvvi.FindTermBoundsChild`. Carries the outer
+  rectangle of a tunnel / terminal class (`SL__simTun`, `SL__sdfTun`,
+  `SL__seqTun`, …) and is preferred over `OF__bounds` for sizing the
+  scene-graph terminal anchor. Corpus coverage: **154 / 154**
+  OF__termBounds leaves decode.
+- `OF__termHotPoint` (Phase 12.3): 4 bytes BE int16 in Mac Point V/H
+  order, decoded by `lvvi.HeapTermHotPoint` / `lvvi.FindTermHotPointChild`
+  into a `lvvi.Point{V, H}`. Becomes the connect-point on the
+  `NodeKindTerminal` scene node — wires (Phase 12.5) will attach
+  there. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode;
+  terminals without a hot-point fall back to the bounds centre.
 
-These are tracked as Phase 11+ work (post-`v1.0`) and do not block any of
-the read-only inspection / validation / safe-edit flows the codec
+## What's still opaque
+
+- Wire routing (`OF__wireTable`, `OF__wireID`, `OF__wireGlyphID`) —
+  recognised as tags but content bytes left raw. Tracked as Phase 12.4
+  / 12.5; the demo still emits a "wire routing not rendered yet"
+  warning until those land. Terminal anchor decoding shipped as Phase
+  12.3 (`OF__termBounds` + `OF__termHotPoint`) — see the "What's
+  decoded" section above; the literal `OF__terminal` (FieldTag 367)
+  carries no payload in the 21-fixture corpus and pylabview's
+  `LVheap.py` has no decoder for it, so it remains an opaque
+  fallback.
+- Per-primitive operand metadata (selector ranges, frame counts on Case
+  structures, sequence-frame ordering, …). These are domain-specific
+  and still being mapped from `pylabview`'s per-primitive decoders.
+- Other rectangle-shaped tags (`OF__termBounds`, `OF__pBounds`,
+  `OF__growAreaBounds`, …): same wire format as `OF__bounds` but not
+  yet promoted onto scene-graph geometry.
+- Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
+  40 enum tables in `tags_gen.go` surface with their raw numeric form
+  so coverage gaps stay visible in the demo.
+
+These are tracked as Phase 11.2+ work (post-`v1.0`) and do not block any
+of the read-only inspection / validation / safe-edit flows the codec
 currently powers.
 
 ## Render/export semantics
 
-Current block-diagram rendering is intentionally structural:
+Phase 11.1 turned scene rendering into a hybrid of decoded and heuristic
+layout:
 
-- SVG and canvas output come from inferred scene-graph bounds, not decoded
-  primitive coordinates or persisted wire geometry.
+- Groups whose heap node has an `OF__bounds` child are positioned and
+  sized at the decoded LabVIEW pixel rectangle.
+- Groups without a decoded bounds child fall back to the prior
+  heuristic stack (vertical, indented by depth).
+- The OF__bounds leaf itself is dropped from scene output once it has
+  been promoted onto the parent.
 - Unresolved classes remain visible as placeholder nodes with their
   `Tag(N)` label and parent path.
-- Wire routing and terminal positions are not rendered yet; the renderer
-  emits explicit warnings and the web demo surfaces them inline.
+- Wire routing and terminal positions are not rendered yet; the
+  renderer still emits the "wire routing not rendered" warning until
+  Phase 11.5 lands.
+
+Phase 12.2a added widget-kind classification on top of that hybrid
+layout. Block-diagram nodes resolve to `structure` (loops, sequences,
+case selectors, event structures, …) or `primitive` (`SL__prim`,
+`SL__node`, property / invoke / call-by-ref nodes, build-array /
+index / decompose primitives, formula nodes, …) via
+`lvvi.WidgetKindForNode`. The shared SVG renderer emits an
+`lvrsrc-widget-{kind}` CSS class alongside the existing
+`lvrsrc-node-*` classes — structures get a heavier orange-brown
+stroke, primitives a navy-tinted fill, decorations a dashed gray
+outline. Unmapped classes fall back to `other`. The pylabview-aligned
+cross-check (Phase 12.2b) is pending and will catch primitives
+mis-classified by name alone.
 
 ## References
 
