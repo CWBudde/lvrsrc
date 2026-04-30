@@ -5,8 +5,8 @@ import "github.com/CWBudde/lvrsrc/internal/codecs/heap"
 // WireMode classifies an OF__compressedWireTable chunk by its `byte1`
 // flag — the family of encoding used for the rest of the payload.
 //
-// Phase 12.4b's controlled-fixture spike observed three distinct
-// values across all 80 corpus chunks and 12 deliberately-varied
+// The controlled-fixture spike (phases 13.2–13.5) observed three distinct
+// values across all initial corpus chunks and deliberately-varied
 // fixtures. Anything else falls to WireModeOther so the decoder
 // degrades gracefully on unfamiliar shapes.
 type WireMode uint8
@@ -35,7 +35,7 @@ const (
 	// first of which is the (byte0, byte1) header itself, and the
 	// remaining `byte0 - 1` records describe branches plus a shared
 	// geometry tail. Per-record semantics are tracked as Phase
-	// 12.4b₂.
+	// Phase 13.3.
 	WireModeTree WireMode = 0x00
 
 	// WireModeOther covers any byte1 value we have not yet
@@ -62,7 +62,7 @@ func (m WireMode) String() string {
 //
 // Wire is shape-aware but content-agnostic — the per-varint and
 // per-record semantics inside ChainGeometry / TreeRecords are still
-// being mapped (Phase 12.4b₂). Callers that need round-trip-safe
+// being mapped (Phase 13.5). Callers that need round-trip-safe
 // access to the original bytes should use Raw; ChainGeometry and
 // TreeRecords are projections of those bytes for diagnostic and
 // renderer use.
@@ -170,19 +170,19 @@ func splitTreeRecords(payload []byte) [][2]byte {
 // CountWireNetworks reports how many wire-network chunks tree
 // carries. Equivalent to CountCompressedWireTables, kept under the
 // new name so the renderer can use accurate "network" terminology
-// post-12.4b spike.
+// post-Phase 13.1 spike.
 func CountWireNetworks(tree HeapTree) int {
 	return CountCompressedWireTables(tree)
 }
 
-// ChainAutoPath is the typed Phase 12.4b₂ projection of a
+// ChainAutoPath is the typed Phase 13 projection of a
 // WireModeAutoChain payload. It is populated by Wire.ChainAutoPath
 // when the payload matches a recognised shape (straight wire or
 // single-elbow L-shape); longer multi-elbow auto-routed payloads
 // currently return ok=false and callers fall back to the raw
 // ChainGeometry varint stream.
 //
-// Renderer composition (Phase 12.5): a wire is drawn from the
+// Renderer composition (Phase 14): a wire is drawn from the
 // source-glyph's output anchor → +SourceAnchorX horizontally →
 // ±YStep vertically (sign from YStep) → continue horizontally to
 // the sink-glyph's input anchor. The sink's x-position comes from
@@ -235,19 +235,17 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 		// A real BD elbow's y-step measures in tens or low
 		// hundreds of pixels. Reject implausibly large values as
 		// evidence we have not actually hit the L-shape pattern —
-		// e.g. multi-elbow wires whose payload[3] encodes a
-		// routing index rather than a pixel step (Numeric42Far
-		// emits a varint of 9456 there). 4096 is generous: BD
-		// canvases rarely exceed that overall, let alone a single
-		// elbow step.
+		// multi-elbow auto-chain wires can encode routing indices
+		// rather than pixel steps in the same payload positions.
+		// 4096 is generous: BD canvases rarely exceed that overall,
+		// let alone a single elbow step.
 		const maxReasonableYStep = 4096
 		if yMag > maxReasonableYStep {
 			return ChainAutoPath{}, false
 		}
 		// Source-glyph anchors are also bounded — the spike saw
-		// `65` for I32 numeric constants. Reject implausibly
-		// large anchors for the same reason; Numeric42Far emits
-		// `255` there, which is large enough to be suspicious.
+		// `65` for I32 numeric constants. Reject implausibly large
+		// anchors for the same reason.
 		if w.ChainGeometry[2] > 1024 {
 			return ChainAutoPath{}, false
 		}
@@ -259,33 +257,69 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 	return ChainAutoPath{}, false
 }
 
-// TreeEndpointPair returns the two endpoint coordinates of a
-// tree-mode wire-network when the chunk matches the recognised
-// 2-fan-out (Y) shape: byte0 == 6 with exactly six 2-byte records.
-// The endpoints come from records #4 and #5 of the record stream,
-// each encoded as a Mac-style Point in (V, H) byte order.
+// TreeEndpoints returns the (V, H) endpoint coordinates for a pure
+// Y-tree wire-network. Supports 2-branch (byte0=6) and 3-branch
+// (byte0=7) shapes where the last byte0−4 records hold one (V, H)
+// endpoint per branch, each encoded as two bytes in Mac-style Point
+// (V, H) order.
 //
-// Returns ok=false for non-tree modes, tree chunks of any other
-// record count (3-Y, 4-Y, comb topologies), or chunks whose
-// internal layout we have not yet ground-truthed. The 3-Y and 4-Y
-// tree shapes are tracked as Phase 12.4b₃ — they include
-// topology-dependent header records that need additional controlled
-// fixtures to fully decode.
-func (w Wire) TreeEndpointPair() (a, b Point, ok bool) {
+// The rule "last N = byte0−4 endpoint records" was ground-truthed for
+// 2-branch by the geometry-varied controlled fixture. For 3-branch it
+// is now confirmed by Numeric42ThreeIndicatorsY_bottom8pxdown.vi,
+// which moves exactly one endpoint record by 8 px; the independent
+// corpus reference-find-by-id.vi chunk also matches the same shape.
+//
+// Returns nil, false for:
+//   - non-tree modes
+//   - comb topologies (byte0 ≥ 8), which have additional junction
+//     records whose positions are topology-dependent and not yet
+//     ground-truthed (Phase 13.5)
+//   - truncated or malformed record slices
+func (w Wire) TreeEndpoints() ([]Point, bool) {
 	if w.Mode != WireModeTree {
+		return nil, false
+	}
+	var n int
+	switch w.Waypoints {
+	case 6:
+		n = 2
+	case 7:
+		n = 3
+	default:
+		return nil, false
+	}
+	// Pure Y-trees have exactly 3 header records before the N
+	// endpoint records: the (byte0, byte1) header is consumed into
+	// Waypoints/Mode, so TreeRecords[0..2] are the 3 structural
+	// records and TreeRecords[len-n..] are the N endpoints.
+	if len(w.TreeRecords) != n+3 {
+		return nil, false
+	}
+	base := len(w.TreeRecords) - n
+	out := make([]Point, n)
+	for i := range n {
+		r := w.TreeRecords[base+i]
+		out[i] = Point{V: int16(r[0]), H: int16(r[1])}
+	}
+	return out, true
+}
+
+// TreeEndpointPair returns the two endpoint coordinates of a
+// 2-branch Y-tree wire-network. It is a convenience wrapper over
+// TreeEndpoints for the byte0=6 case; callers that handle N-branch
+// trees should use TreeEndpoints directly.
+//
+// Returns ok=false for non-tree modes, 3-branch and comb topologies,
+// or truncated record slices.
+func (w Wire) TreeEndpointPair() (a, b Point, ok bool) {
+	if w.Waypoints != 6 {
 		return Point{}, Point{}, false
 	}
-	if w.Waypoints != 6 || len(w.TreeRecords) != 5 {
+	pts, ok := w.TreeEndpoints()
+	if !ok {
 		return Point{}, Point{}, false
 	}
-	// TreeRecords excludes the header record consumed before
-	// projection, so what we see at indices 3 and 4 is records
-	// #4 and #5 in the chunk's record numbering.
-	rA := w.TreeRecords[3]
-	rB := w.TreeRecords[4]
-	return Point{V: int16(rA[0]), H: int16(rA[1])},
-		Point{V: int16(rB[0]), H: int16(rB[1])},
-		true
+	return pts[0], pts[1], true
 }
 
 // WireMix counts wire networks broken down by mode. Useful for

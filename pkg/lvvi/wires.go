@@ -6,9 +6,9 @@ import "github.com/CWBudde/lvrsrc/internal/codecs/heap"
 // OF__compressedWireTable leaf at tree.Nodes[nodeIdx]. The byte layout
 // is undocumented — pylabview's `LVheap.py` carries the enum number
 // only, with no decoder — so callers receive the bytes verbatim and
-// decide how to interpret them. Phase 12.4a uses this as a presence
-// signal only ("there are wires here") and a stable round-trip
-// fixture for any future decoder work (Phase 12.4b).
+// decide how to interpret them. Phase 13 uses this as a presence
+// signal ("there are wires here") and a stable round-trip fixture for
+// current and future decoder work.
 //
 // Returns ok=false when:
 //   - nodeIdx is out of range,

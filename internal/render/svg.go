@@ -29,12 +29,21 @@ func SVG(scene Scene, opts SVGOptions) (string, error) {
 		int(scene.ViewBox.Width), int(scene.ViewBox.Height), int(scene.ViewBox.Width), int(scene.ViewBox.Height), esc(title))
 	fmt.Fprintf(&buf, "<title>%s</title>\n", esc(title))
 	buf.WriteString(svgStyle)
+	if len(scene.Wires) > 0 {
+		buf.WriteString(svgWireStyle)
+	}
 
 	if len(scene.Warnings) > 0 {
 		y := 18.0
 		for _, warning := range scene.Warnings {
 			fmt.Fprintf(&buf, `<text class="lvrsrc-warning" x="12" y="%.0f">%s</text>`+"\n", y, esc(warning))
 			y += 16
+		}
+	}
+
+	for _, wire := range scene.Wires {
+		if err := writeSVGWire(&buf, wire); err != nil {
+			return "", err
 		}
 	}
 
@@ -82,9 +91,34 @@ const svgStyle = `<style>
 .lvrsrc-widget-structure { fill: #f1d9c2; stroke: #8b4f1f; stroke-width: 2; }
 .lvrsrc-widget-primitive { fill: #d3dceb; stroke: #1f3a6b; }
 .lvrsrc-widget-terminal { fill: #ffffff; stroke: #2a2a2a; stroke-width: 1; }
+.lvrsrc-widget-refnum { fill: #dfe5ee; stroke: #41536b; }
+.lvrsrc-widget-variant { fill: #eee5d4; stroke: #736239; }
+.lvrsrc-widget-connector-pane { fill: #e7ece4; stroke: #4d6645; stroke-width: 1.5; }
 .lvrsrc-node-terminal-anchor { fill: #2a2a2a; stroke: none; }
 </style>
 `
+
+const svgWireStyle = `<style>
+.lvrsrc-wire { fill: none; stroke: #1f5f9f; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+</style>
+`
+
+func writeSVGWire(buf *bytes.Buffer, wire Wire) error {
+	if len(wire.Points) < 2 {
+		return nil
+	}
+	var pts strings.Builder
+	for i, p := range wire.Points {
+		if i > 0 {
+			pts.WriteByte(' ')
+		}
+		fmt.Fprintf(&pts, "%.0f,%.0f", p.X, p.Y)
+	}
+	_, err := fmt.Fprintf(buf,
+		`<polyline class="lvrsrc-wire" data-label="%s" data-from="%d" data-to="%d" points="%s"/>`+"\n",
+		esc(wire.Label), wire.From, wire.To, pts.String())
+	return err
+}
 
 func writeSVGNode(buf *bytes.Buffer, node Node) error {
 	classes := []string{"lvrsrc-node", "lvrsrc-node-" + string(node.Kind)}
@@ -110,7 +144,7 @@ func writeSVGNode(buf *bytes.Buffer, node Node) error {
 		return err
 	case NodeKindTerminal:
 		// Terminal anchors are drawn as a small outline rect at the
-		// bounds plus a filled dot at the anchor — wires (12.5) will
+		// bounds plus a filled dot at the anchor — wires (Phase 14) will
 		// attach at the dot.
 		if _, err := fmt.Fprintf(buf,
 			`<rect %s x="%.0f" y="%.0f" width="%.0f" height="%.0f"/>`+"\n",

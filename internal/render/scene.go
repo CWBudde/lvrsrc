@@ -21,10 +21,10 @@ const (
 type NodeKind string
 
 const (
-	NodeKindGroup    NodeKind = "group"
-	NodeKindBox      NodeKind = "box"
-	NodeKindLabel    NodeKind = "label"
-	NodeKindPort     NodeKind = "port"
+	NodeKindGroup NodeKind = "group"
+	NodeKindBox   NodeKind = "box"
+	NodeKindLabel NodeKind = "label"
+	NodeKindPort  NodeKind = "port"
 	// NodeKindTerminal is a flat anchor marker for BD tunnels and
 	// front-panel terminals. It carries Bounds (the terminal's outer
 	// rectangle) and Anchor (the connect-point wires will eventually
@@ -95,6 +95,11 @@ type Scene struct {
 	Wires    []Wire
 	Roots    []int
 	Warnings []string
+}
+
+type wireProjectionStats struct {
+	Total    int
+	Rendered int
 }
 
 const (
@@ -199,8 +204,14 @@ func ProjectHeapTree(tree lvvi.HeapTree, view View) Scene {
 		scene.Roots = append(scene.Roots, rootIdx)
 	}
 
+	wireMix := lvvi.CountWireMix(tree)
+	wireStats := wireProjectionStats{Total: wireMix.Total()}
+	if view == ViewBlockDiagram {
+		scene.Wires, wireStats = projectSceneWires(tree, scene, wireStats.Total)
+	}
+
 	scene.ViewBox = computeViewBox(scene, heuristicY)
-	scene.Warnings = sceneWarnings(scene, items, lvvi.CountWireMix(tree))
+	scene.Warnings = sceneWarnings(scene, items, wireMix, wireStats)
 
 	return scene
 }
@@ -221,6 +232,18 @@ func computeViewBox(scene Scene, heuristicEnd float64) Rect {
 		}
 		if bottom > maxY {
 			maxY = bottom
+		}
+	}
+	for _, w := range scene.Wires {
+		for _, p := range w.Points {
+			right := p.X + sceneMarginX
+			bottom := p.Y + sceneMarginY
+			if right > maxX {
+				maxX = right
+			}
+			if bottom > maxY {
+				maxY = bottom
+			}
 		}
 	}
 	return Rect{X: 0, Y: 0, Width: maxX, Height: maxY}
@@ -570,7 +593,7 @@ func textWidth(s string) float64 {
 	return float64(runes) * sceneCharW
 }
 
-func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix) []string {
+func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix, wireStats wireProjectionStats) []string {
 	var warnings []string
 	allRootsHaveBounds := len(roots) > 0
 	for _, item := range roots {
@@ -593,12 +616,219 @@ func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix) []str
 		warnings = append(warnings, "Placeholder nodes are present for unresolved object classes or fields.")
 	}
 	if scene.View == ViewBlockDiagram {
-		warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
 		if total := wireMix.Total(); total > 0 {
-			warnings = append(warnings, fmt.Sprintf(
-				"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); auto-routed L-shapes and 2-branch trees are typed-decoded, multi-elbow / 3+ branch chunks remain raw (Phase 12.4b₃).",
-				total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other))
+			if wireStats.Rendered == 0 {
+				warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
+				warnings = append(warnings, fmt.Sprintf(
+					"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw (Phase 12.4.4).",
+					total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other))
+			} else {
+				warnings = append(warnings, fmt.Sprintf(
+					"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); rendered %d recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw (Phase 14.2).",
+					total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other, wireStats.Rendered))
+			}
+		} else {
+			warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
 		}
 	}
 	return warnings
+}
+
+func projectSceneWires(tree lvvi.HeapTree, scene Scene, total int) ([]Wire, wireProjectionStats) {
+	stats := wireProjectionStats{Total: total}
+	terminalByHeap := make(map[int]int)
+	for i, n := range scene.Nodes {
+		if n.Kind == NodeKindTerminal {
+			terminalByHeap[n.HeapIndex] = i
+		}
+	}
+	if len(terminalByHeap) == 0 {
+		return nil, stats
+	}
+
+	var wires []Wire
+	for i, n := range tree.Nodes {
+		if n.Scope != "leaf" || n.Tag != int32(heap.FieldTagCompressedWireTable) || len(n.Content) == 0 {
+			continue
+		}
+		w, ok := lvvi.HeapWire(tree, i)
+		if !ok {
+			continue
+		}
+		terms := terminalSceneNodesForWire(tree, i, terminalByHeap)
+		switch w.Mode {
+		case lvvi.WireModeAutoChain:
+			if len(terms) < 2 {
+				continue
+			}
+			path, ok := w.ChainAutoPath()
+			if !ok {
+				continue
+			}
+			from, to := leftToRightTerminals(scene, terms[0], terms[1])
+			points := chainAutoScenePoints(scene.Nodes[from].Anchor, scene.Nodes[to].Anchor, path)
+			if len(points) < 2 {
+				continue
+			}
+			wires = append(wires, Wire{
+				From:   from,
+				To:     to,
+				Z:      1000 + i,
+				Points: points,
+				Label:  lvvi.WireModeAutoChain.String(),
+			})
+			stats.Rendered++
+		case lvvi.WireModeTree:
+			endpoints, ok := w.TreeEndpoints()
+			if !ok {
+				continue
+			}
+			points := treeEndpointScenePoints(scene, endpoints, terms)
+			if len(points) < 2 {
+				continue
+			}
+			junction := treeJunction(points)
+			for _, p := range points {
+				branch := manhattanBranch(junction, p)
+				if len(branch) < 2 {
+					continue
+				}
+				wires = append(wires, Wire{
+					From:   -1,
+					To:     -1,
+					Z:      1000 + i,
+					Points: branch,
+					Label:  lvvi.WireModeTree.String(),
+				})
+			}
+			stats.Rendered++
+		}
+	}
+	return wires, stats
+}
+
+func terminalSceneNodesForWire(tree lvvi.HeapTree, wireIdx int, terminalByHeap map[int]int) []int {
+	if wireIdx < 0 || wireIdx >= len(tree.Nodes) {
+		return nil
+	}
+	for p := tree.Nodes[wireIdx].Parent; p >= 0 && p < len(tree.Nodes); p = tree.Nodes[p].Parent {
+		var out []int
+		collectTerminalSceneNodes(tree, p, terminalByHeap, &out)
+		if len(out) >= 2 {
+			return out
+		}
+	}
+	out := make([]int, 0, len(terminalByHeap))
+	for heapIdx := range tree.Nodes {
+		if sceneIdx, ok := terminalByHeap[heapIdx]; ok {
+			out = append(out, sceneIdx)
+		}
+	}
+	return out
+}
+
+func collectTerminalSceneNodes(tree lvvi.HeapTree, heapIdx int, terminalByHeap map[int]int, out *[]int) {
+	if sceneIdx, ok := terminalByHeap[heapIdx]; ok {
+		*out = append(*out, sceneIdx)
+	}
+	if heapIdx < 0 || heapIdx >= len(tree.Nodes) {
+		return
+	}
+	for _, ci := range tree.Nodes[heapIdx].Children {
+		collectTerminalSceneNodes(tree, ci, terminalByHeap, out)
+	}
+}
+
+func leftToRightTerminals(scene Scene, a, b int) (int, int) {
+	if a < 0 || a >= len(scene.Nodes) || b < 0 || b >= len(scene.Nodes) {
+		return a, b
+	}
+	if scene.Nodes[a].Anchor.X <= scene.Nodes[b].Anchor.X {
+		return a, b
+	}
+	return b, a
+}
+
+func chainAutoScenePoints(start, end Point, path lvvi.ChainAutoPath) []Point {
+	points := []Point{start}
+	if path.Straight {
+		if start.X != end.X && start.Y != end.Y {
+			points = appendPoint(points, Point{X: end.X, Y: start.Y})
+		}
+		return appendPoint(points, end)
+	}
+
+	elbowX := start.X + float64(path.SourceAnchorX)
+	if end.X < start.X {
+		elbowX = start.X - float64(path.SourceAnchorX)
+	}
+	elbowY := start.Y + float64(path.YStep)
+	points = appendPoint(points, Point{X: elbowX, Y: start.Y})
+	points = appendPoint(points, Point{X: elbowX, Y: elbowY})
+	points = appendPoint(points, Point{X: end.X, Y: elbowY})
+	return appendPoint(points, end)
+}
+
+func treeEndpointScenePoints(scene Scene, endpoints []lvvi.Point, terms []int) []Point {
+	points := make([]Point, 0, len(endpoints))
+	for _, ep := range endpoints {
+		p := Point{X: float64(ep.H) + sceneMarginX, Y: float64(ep.V) + sceneMarginY}
+		if match, ok := nearestTerminalAnchor(scene, p, terms); ok {
+			p = match
+		}
+		points = append(points, p)
+	}
+	return points
+}
+
+func nearestTerminalAnchor(scene Scene, p Point, terms []int) (Point, bool) {
+	const maxDistance = 4.0
+	bestDistance := maxDistance + 1
+	var best Point
+	for _, idx := range terms {
+		if idx < 0 || idx >= len(scene.Nodes) {
+			continue
+		}
+		a := scene.Nodes[idx].Anchor
+		d := math.Abs(a.X-p.X) + math.Abs(a.Y-p.Y)
+		if d < bestDistance {
+			bestDistance = d
+			best = a
+		}
+	}
+	if bestDistance <= maxDistance {
+		return best, true
+	}
+	return Point{}, false
+}
+
+func treeJunction(points []Point) Point {
+	if len(points) == 0 {
+		return Point{}
+	}
+	minX := points[0].X
+	sumY := 0.0
+	for _, p := range points {
+		if p.X < minX {
+			minX = p.X
+		}
+		sumY += p.Y
+	}
+	return Point{X: minX, Y: sumY / float64(len(points))}
+}
+
+func manhattanBranch(from, to Point) []Point {
+	points := []Point{from}
+	points = appendPoint(points, Point{X: to.X, Y: from.Y})
+	return appendPoint(points, to)
+}
+
+func appendPoint(points []Point, p Point) []Point {
+	if len(points) > 0 {
+		last := points[len(points)-1]
+		if last.X == p.X && last.Y == p.Y {
+			return points
+		}
+	}
+	return append(points, p)
 }

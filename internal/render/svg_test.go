@@ -121,6 +121,11 @@ func TestSVGEmitsWidgetKindClass(t *testing.T) {
 	if !strings.Contains(got, ".lvrsrc-widget-other") {
 		t.Fatalf("SVG output missing default widget styling: %q", got)
 	}
+	if !strings.Contains(got, ".lvrsrc-widget-refnum") ||
+		!strings.Contains(got, ".lvrsrc-widget-variant") ||
+		!strings.Contains(got, ".lvrsrc-widget-connector-pane") {
+		t.Fatalf("SVG output missing pylabview cross-check widget styling: %q", got)
+	}
 }
 
 func TestSVGOmitsWidgetKindClassWhenAbsent(t *testing.T) {
@@ -150,7 +155,7 @@ func TestSVGOmitsWidgetKindClassWhenAbsent(t *testing.T) {
 
 // A NodeKindTerminal must emit both an outline rect at the bounds and
 // a small filled circle at the anchor — that's the visual contract
-// wires (12.5) will eventually attach to.
+// wires (Phase 14) will eventually attach to.
 func TestSVGEmitsTerminalAnchorAndOutline(t *testing.T) {
 	scene := Scene{
 		View:    ViewBlockDiagram,
@@ -184,6 +189,34 @@ func TestSVGEmitsTerminalAnchorAndOutline(t *testing.T) {
 	}
 	if !strings.Contains(got, `cx="44"`) || !strings.Contains(got, `cy="64"`) {
 		t.Fatalf("SVG terminal anchor circle not at (44,64): %q", got)
+	}
+}
+
+func TestSVGEmitsWirePolyline(t *testing.T) {
+	scene := Scene{
+		View:    ViewBlockDiagram,
+		ViewBox: Rect{Width: 200, Height: 120},
+		Wires: []Wire{
+			{
+				From:   1,
+				To:     2,
+				Label:  "auto-chain",
+				Points: []Point{{X: 10, Y: 20}, {X: 40, Y: 20}, {X: 40, Y: 60}},
+			},
+		},
+	}
+	got, err := SVG(scene, SVGOptions{})
+	if err != nil {
+		t.Fatalf("SVG() err = %v", err)
+	}
+	if !strings.Contains(got, `<polyline class="lvrsrc-wire"`) {
+		t.Fatalf("SVG output missing wire polyline: %q", got)
+	}
+	if !strings.Contains(got, `points="10,20 40,20 40,60"`) {
+		t.Fatalf("SVG wire polyline has wrong points: %q", got)
+	}
+	if !strings.Contains(got, `data-label="auto-chain"`) {
+		t.Fatalf("SVG wire polyline missing label: %q", got)
 	}
 }
 

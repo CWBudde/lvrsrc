@@ -47,6 +47,45 @@ func TestWidgetKindForClassString(t *testing.T) {
 	}
 }
 
+func TestWidgetKindForClassRefnum(t *testing.T) {
+	cases := []heap.ClassTag{
+		heap.ClassTagStdRefNum,
+		heap.ClassTagStdHandle,
+		heap.ClassTagGRef,
+		heap.ClassTagGRefDCO,
+		heap.ClassTagCtlRefConst,
+		heap.ClassTagCtlRefDCO,
+		heap.ClassTagOldStatVIRef,
+		heap.ClassTagStatVIRef,
+		heap.ClassTagDynLink,
+		heap.ClassTagBaseRefNum,
+	}
+	for _, c := range cases {
+		if got := WidgetKindForClass(c); got != WidgetKindRefnum {
+			t.Errorf("%s = %q, want %q", c, got, WidgetKindRefnum)
+		}
+	}
+}
+
+func TestWidgetKindForClassVariant(t *testing.T) {
+	cases := []heap.ClassTag{
+		heap.ClassTagStdVar,
+		heap.ClassTagOleVariant,
+		heap.ClassTagStdLvVariant,
+	}
+	for _, c := range cases {
+		if got := WidgetKindForClass(c); got != WidgetKindVariant {
+			t.Errorf("%s = %q, want %q", c, got, WidgetKindVariant)
+		}
+	}
+}
+
+func TestWidgetKindForClassConnectorPane(t *testing.T) {
+	if got := WidgetKindForClass(heap.ClassTagConPane); got != WidgetKindConPane {
+		t.Errorf("%s = %q, want %q", heap.ClassTagConPane, got, WidgetKindConPane)
+	}
+}
+
 func TestWidgetKindForClassCluster(t *testing.T) {
 	cases := []heap.ClassTag{
 		heap.ClassTagStdClust,

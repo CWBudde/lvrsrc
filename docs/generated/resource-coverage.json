@@ -1,8 +1,42 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "fixtureCount": 37,
-    "resourceTypeCount": 27
+    "fixtureCount": 40,
+    "resourceTypeCount": 27,
+    "breadth": {
+      "fileKinds": {
+        "ctl": 11,
+        "vi": 29
+      },
+      "fileExtensions": {
+        ".ctl": 11,
+        ".vi": 29
+      },
+      "formatVersions": {
+        "3": 40
+      },
+      "labviewVersions": {
+        "25.1.1": 3,
+        "25.1.2": 10,
+        "25.3.2": 27
+      },
+      "platforms": {
+        "unknown": 40
+      },
+      "textEncodings": {
+        "unknown": 40
+      },
+      "passwordProtection": {
+        "empty-password": 29,
+        "no-bdpw": 11
+      },
+      "lockedFlags": {
+        "false": 40
+      },
+      "separateCompiledCode": {
+        "true": 40
+      }
+    }
   },
   "summary": {
     "typedCodecCount": 27,
@@ -13,7 +47,9 @@
   "resources": [
     {
       "fourCC": "BDEx",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 188,
       "typed": {
         "decode": true,
         "encode": true,
@@ -28,11 +64,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "opaque-preserving",
+        "semantic": [
+          "small block-diagram auxiliary envelope size and round-trip invariants"
+        ],
+        "opaque": [
+          "entry meanings and correlation with BDHb remain unmapped"
+        ],
+        "next": [
+          "correlate non-zero samples with block-diagram heap changes"
+        ]
       }
     },
     {
       "fourCC": "BDHb",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 27075,
       "typed": {
         "decode": true,
         "encode": true,
@@ -47,11 +97,37 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "heap envelope header",
+          "tag-stream node structure",
+          "tag enum names",
+          "OF__bounds",
+          "OF__termBounds",
+          "OF__termHotPoint",
+          "selected compressed-wire projections"
+        ],
+        "compressed": [
+          "zlib-compressed heap stream preserved byte-for-byte when possible"
+        ],
+        "opaque": [
+          "per-class primitive fields",
+          "structure metadata",
+          "multi-elbow/manual/comb wire records",
+          "unknown tags surfaced as Tag(N)"
+        ],
+        "next": [
+          "decode per-class BD fields and finish compressed-wire topology"
+        ]
       }
     },
     {
       "fourCC": "BDPW",
-      "corpusFixtures": 26,
+      "corpusFixtures": 29,
+      "corpusSections": 29,
+      "corpusBytes": 1392,
       "typed": {
         "decode": true,
         "encode": true,
@@ -66,11 +142,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "structural",
+        "semantic": [
+          "fixed-size block-diagram password/protection payload shape"
+        ],
+        "opaque": [
+          "hash/salt and lockout field meanings are not mutation-safe"
+        ],
+        "next": [
+          "separate protection flags from hash material with controlled password fixtures"
+        ]
       }
     },
     {
       "fourCC": "BDSE",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 160,
       "typed": {
         "decode": true,
         "encode": true,
@@ -85,11 +175,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "opaque-preserving",
+        "semantic": [
+          "small block-diagram settings payload shape and round-trip invariants"
+        ],
+        "opaque": [
+          "bit and counter meanings remain unmapped"
+        ],
+        "next": [
+          "vary diagram settings one at a time"
+        ]
       }
     },
     {
       "fourCC": "CONP",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 80,
       "typed": {
         "decode": true,
         "encode": true,
@@ -104,11 +208,26 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "connector-pane pointer/selector",
+          "links to VCTP top types where present"
+        ],
+        "opaque": [
+          "version-specific selector semantics beyond observed CPC2 forms"
+        ],
+        "next": [
+          "expand connector-pane fixture variants and version gates"
+        ]
       }
     },
     {
       "fourCC": "CPC2",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 80,
       "typed": {
         "decode": true,
         "encode": true,
@@ -123,11 +242,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "connector-pane count/variant value"
+        ],
+        "opaque": [
+          "full pane-pattern catalog and version-specific meanings"
+        ],
+        "next": [
+          "map every LabVIEW connector pattern against terminal type refs"
+        ]
       }
     },
     {
       "fourCC": "DTHP",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 158,
       "typed": {
         "decode": true,
         "encode": true,
@@ -142,11 +275,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "default data heap index shift used to resolve heap TypeIDs into VCTP descriptors"
+        ],
+        "opaque": [
+          "broader version behavior when DTHP is absent or multi-section"
+        ],
+        "next": [
+          "cross-check older fixtures and every heap data-fill site"
+        ]
       }
     },
     {
       "fourCC": "FPEx",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 196,
       "typed": {
         "decode": true,
         "encode": true,
@@ -161,11 +308,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "opaque-preserving",
+        "semantic": [
+          "small front-panel auxiliary envelope size and round-trip invariants"
+        ],
+        "opaque": [
+          "entry meanings and correlation with FPHb remain unmapped"
+        ],
+        "next": [
+          "correlate non-zero samples with front-panel heap changes"
+        ]
       }
     },
     {
       "fourCC": "FPHb",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 43035,
       "typed": {
         "decode": true,
         "encode": true,
@@ -180,11 +341,36 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "heap envelope header",
+          "tag-stream node structure",
+          "tag enum names",
+          "OF__bounds",
+          "selected numeric data fills"
+        ],
+        "compressed": [
+          "zlib-compressed heap stream preserved byte-for-byte when possible"
+        ],
+        "opaque": [
+          "per-class visual fields",
+          "label/caption/font/color/style records",
+          "many rectangle-like fields",
+          "custom-control state",
+          "unknown tags surfaced as Tag(N)"
+        ],
+        "next": [
+          "decode per-class FP fields and promote additional geometry tags"
+        ]
       }
     },
     {
       "fourCC": "FPSE",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 160,
       "typed": {
         "decode": true,
         "encode": true,
@@ -199,11 +385,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "opaque-preserving",
+        "semantic": [
+          "small front-panel settings payload shape and round-trip invariants"
+        ],
+        "opaque": [
+          "bit and counter meanings remain unmapped"
+        ],
+        "next": [
+          "vary panel settings one at a time"
+        ]
       }
     },
     {
       "fourCC": "FTAB",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 4139,
       "typed": {
         "decode": true,
         "encode": true,
@@ -218,11 +418,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "font table entry envelope and names"
+        ],
+        "opaque": [
+          "platform-specific font attributes not fully classified"
+        ],
+        "next": [
+          "add font variation fixtures across platforms"
+        ]
       }
     },
     {
       "fourCC": "HIST",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 1600,
       "typed": {
         "decode": true,
         "encode": true,
@@ -237,11 +451,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "structural",
+        "semantic": [
+          "fixed array of edit-history counters"
+        ],
+        "opaque": [
+          "individual counter meanings are not confirmed"
+        ],
+        "next": [
+          "diff save/edit operations to name each slot"
+        ]
       }
     },
     {
       "fourCC": "ICON",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 5120,
       "typed": {
         "decode": true,
         "encode": true,
@@ -256,11 +484,22 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "full-observed",
+        "semantic": [
+          "32x32 1-bit icon pixels and palette mapping"
+        ],
+        "next": [
+          "keep older-version icon geometry as a version-gated check"
+        ]
       }
     },
     {
       "fourCC": "LIBN",
       "corpusFixtures": 13,
+      "corpusSections": 13,
+      "corpusBytes": 263,
       "typed": {
         "decode": true,
         "encode": true,
@@ -275,11 +514,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "library-name list envelope and Pascal-style names"
+        ],
+        "opaque": [
+          "multi-library membership behavior and text encoding edge cases"
+        ],
+        "next": [
+          "add multi-library and localized-name fixtures"
+        ]
       }
     },
     {
       "fourCC": "LIbd",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 1466,
       "typed": {
         "decode": true,
         "encode": true,
@@ -294,11 +547,31 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "link-info header",
+          "BDHP marker",
+          "entry count",
+          "qualifiers",
+          "primary/secondary PTH path refs",
+          "typed LinkObjRef targets where ported"
+        ],
+        "opaque": [
+          "Tail bytes between path refs",
+          "unported LinkObjRef subclasses"
+        ],
+        "next": [
+          "decode Tail subrecords and expand LinkObjRef target families"
+        ]
       }
     },
     {
       "fourCC": "LIfp",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 1631,
       "typed": {
         "decode": true,
         "encode": true,
@@ -313,11 +586,31 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "link-info header",
+          "FPHP marker",
+          "entry count",
+          "qualifiers",
+          "primary/secondary PTH path refs",
+          "typed LinkObjRef targets where ported"
+        ],
+        "opaque": [
+          "Tail bytes between path refs",
+          "unported LinkObjRef subclasses"
+        ],
+        "next": [
+          "decode Tail subrecords and expand LinkObjRef target families"
+        ]
       }
     },
     {
       "fourCC": "LIvi",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 1604,
       "typed": {
         "decode": true,
         "encode": true,
@@ -332,11 +625,32 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "VI link-info header",
+          "file-kind marker",
+          "entry count",
+          "qualifiers",
+          "primary/secondary PTH path refs",
+          "typed LinkObjRef targets where ported"
+        ],
+        "opaque": [
+          "Tail bytes between path refs",
+          "unported LinkObjRef subclasses",
+          "future file-kind markers"
+        ],
+        "next": [
+          "decode Tail subrecords and broaden dependency fixture shapes"
+        ]
       }
     },
     {
       "fourCC": "LVSR",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 6400,
       "typed": {
         "decode": true,
         "encode": true,
@@ -351,11 +665,26 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "version word",
+          "selected execution/debug/protection flag projections"
+        ],
+        "opaque": [
+          "unsurfaced flag words and version-specific tail fields"
+        ],
+        "next": [
+          "name every observed flag word and add version gates"
+        ]
       }
     },
     {
       "fourCC": "MUID",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 160,
       "typed": {
         "decode": true,
         "encode": true,
@@ -370,11 +699,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "maximum object UID value observed at save time"
+        ],
+        "opaque": [
+          "allocation scope and lifecycle semantics"
+        ],
+        "next": [
+          "diff object creation/deletion sequences"
+        ]
       }
     },
     {
       "fourCC": "RTSG",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 640,
       "typed": {
         "decode": true,
         "encode": true,
@@ -389,11 +732,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "structural",
+        "semantic": [
+          "fixed-size runtime signature payload"
+        ],
+        "opaque": [
+          "signature field roles and validation algorithm"
+        ],
+        "next": [
+          "vary runtime/signature-affecting settings"
+        ]
       }
     },
     {
       "fourCC": "STRG",
       "corpusFixtures": 4,
+      "corpusSections": 4,
+      "corpusBytes": 577,
       "typed": {
         "decode": true,
         "encode": true,
@@ -408,11 +765,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "full-observed",
+        "semantic": [
+          "modern LabVIEW \u003e= 4 string-list description payload"
+        ],
+        "opaque": [
+          "legacy LabVIEW \u003c 4 count-prefixed layout is documented but untested"
+        ],
+        "next": [
+          "add legacy fixtures before claiming all-version semantic coverage"
+        ]
       }
     },
     {
       "fourCC": "VCTP",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 7640,
       "typed": {
         "decode": true,
         "encode": true,
@@ -427,11 +798,34 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "outer size prefix",
+          "zlib descriptor pool",
+          "flat descriptor headers",
+          "flags",
+          "FullType codes",
+          "labels",
+          "top-type list"
+        ],
+        "compressed": [
+          "compressed descriptor-pool bytes preserved; semantic diffs compare inflated pool"
+        ],
+        "opaque": [
+          "type-specific Inner payloads for arrays, clusters, functions, refnums, variants, typedefs, and complex types"
+        ],
+        "next": [
+          "decode each type-specific grammar and report field-level diffs"
+        ]
       }
     },
     {
       "fourCC": "VITS",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 63362,
       "typed": {
         "decode": true,
         "encode": true,
@@ -446,11 +840,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "tag entry envelope and names"
+        ],
+        "opaque": [
+          "variant content bytes and per-tag meanings"
+        ],
+        "next": [
+          "decode known VITS tag payloads with setting-specific fixtures"
+        ]
       }
     },
     {
       "fourCC": "VPDP",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 160,
       "typed": {
         "decode": true,
         "encode": true,
@@ -465,11 +873,25 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "opaque-preserving",
+        "semantic": [
+          "observed all-zero 4-byte payload shape"
+        ],
+        "opaque": [
+          "VI primitive dependency flag meanings"
+        ],
+        "next": [
+          "create primitive-dependency fixtures that produce non-zero payloads"
+        ]
       }
     },
     {
       "fourCC": "icl4",
       "corpusFixtures": 5,
+      "corpusSections": 5,
+      "corpusBytes": 2560,
       "typed": {
         "decode": true,
         "encode": true,
@@ -484,11 +906,22 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "full-observed",
+        "semantic": [
+          "32x32 4-bit icon pixels and LabVIEW palette mapping"
+        ],
+        "next": [
+          "verify whether any version embeds alternate palettes"
+        ]
       }
     },
     {
       "fourCC": "icl8",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 40,
+      "corpusBytes": 40960,
       "typed": {
         "decode": true,
         "encode": true,
@@ -503,11 +936,22 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "full-observed",
+        "semantic": [
+          "32x32 8-bit icon pixels and LabVIEW palette mapping"
+        ],
+        "next": [
+          "verify palette index 188 and older-version palette behavior"
+        ]
       }
     },
     {
       "fourCC": "vers",
-      "corpusFixtures": 37,
+      "corpusFixtures": 40,
+      "corpusSections": 84,
+      "corpusBytes": 1132,
       "typed": {
         "decode": true,
         "encode": true,
@@ -522,6 +966,18 @@
       "writeVersions": {
         "min": 0,
         "max": 0
+      },
+      "disposition": {
+        "status": "partial",
+        "semantic": [
+          "LabVIEW major/minor/patch/stage version stamp and text"
+        ],
+        "opaque": [
+          "exact meaning of multiple version stamp roles in one file"
+        ],
+        "next": [
+          "map version resource IDs to producer/save/load roles"
+        ]
       }
     }
   ],

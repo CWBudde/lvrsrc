@@ -112,7 +112,7 @@ func TestProjectHeapTreeTerminalUsesHotPointForAnchor(t *testing.T) {
 }
 
 // Without an OF__termHotPoint child, the terminal anchor falls back
-// to the centre of its bounds, so wires (12.5) always have a connect
+// to the centre of its bounds, so wires (Phase 14) always have a connect
 // point even on terminals that didn't record a hot-point.
 func TestProjectHeapTreeTerminalAnchorDefaultsToBoundsCenter(t *testing.T) {
 	tree := lvvi.HeapTree{

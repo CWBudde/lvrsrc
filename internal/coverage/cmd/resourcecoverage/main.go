@@ -12,11 +12,21 @@ import (
 
 func main() {
 	check := flag.Bool("check", false, "verify checked-in coverage artifacts are current")
+	printJSON := flag.Bool("print-json", false, "print the generated JSON manifest to stdout")
+	printMarkdown := flag.Bool("print-md", false, "print the generated Markdown report to stdout")
 	flag.Parse()
 
 	manifest, err := coverage.BuildManifest()
 	if err != nil {
 		fail(err)
+	}
+	if *printJSON {
+		fmt.Print(coverage.RenderManifestJSON(manifest))
+		return
+	}
+	if *printMarkdown {
+		fmt.Print(coverage.RenderMarkdown(manifest))
+		return
 	}
 
 	files := coverage.ArtifactContents(manifest)

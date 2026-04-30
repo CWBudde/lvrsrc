@@ -89,17 +89,16 @@ the following typed leaf payloads:
 - `OF__termHotPoint` (Phase 12.3): 4 bytes BE int16 in Mac Point V/H
   order, decoded by `lvvi.HeapTermHotPoint` / `lvvi.FindTermHotPointChild`
   into a `lvvi.Point{V, H}`. Becomes the connect-point on the
-  `NodeKindTerminal` scene node — wires (Phase 12.5) will attach
+  `NodeKindTerminal` scene node — wires (Phase 14) will attach
   there. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode;
   terminals without a hot-point fall back to the bounds centre.
 
 ## What's still opaque
 
-- Wire path drawing. Phase 12.4 shipped in two batches. **12.4a**
-  added a presence accessor for the persisted-wire data —
+- Wire path drawing. Phase 13 is mapping the persisted-wire data. The
+  first pass added a presence accessor —
   pylabview's `LVheap.py` has the enum number only, so the format
-  was reverse-engineered against a controlled-fixture spike (12
-  deliberately-varied VIs in the corpus). **12.4b₁** then shipped
+  was reverse-engineered against controlled-fixture spikes. Phase 13.3 shipped
   the typed `lvvi.HeapWire` decoder that classifies each
   `OF__compressedWireTable` chunk by mode (auto-chain `0x08`,
   manual-chain `0x04`, tree `0x00`, or other) and projects the
@@ -107,14 +106,28 @@ the following typed leaf payloads:
   2-byte records (tree mode). The scene-graph projection now
   surfaces a per-mode breakdown — e.g. _"Block diagram has 4 wire
   networks (4 auto-routed, 0 manually-routed, 0 branched, 0
-  other); per-network geometry decoded, full path drawing pending
-  (Phase 12.4b₂ / 12.5)."_ Corpus coverage of `HeapWire` is **93 /
-  93** (83 auto-chain, 3 manual-chain, 5 tree, 2 other). The wire
-  data the spike could not yet ground-truth — per-record semantics
-  inside the chain-mode varint stream and the tree-mode 2-byte
-  records — is tracked as Phase 12.4b₂. Until that lands wires
-  render as the warning rather than as drawn paths; terminal
-  anchors (Phase 12.3) are positioned but unconnected.
+  other); auto-routed L-shapes and 2- and 3-branch pure Y-trees
+  are typed-decoded, multi-elbow / comb and 4+ branch chunks remain
+  raw (Phase 13.5)."_ Corpus coverage of `HeapWire` is **101 / 101**
+  across the 40-fixture corpus (86 auto-chain, 3 manual-chain, 10 tree,
+  2 other). Phase 13.4 then layered typed projections on top:
+  `Wire.ChainAutoPath()` exposes `{Straight, YStep, SourceAnchorX}`
+  for the most common wire shapes, and `Wire.TreeEndpoints()`
+  returns `[]Point{V, H}` endpoint coordinates for pure Y-trees
+  (2-branch confirmed by geometry-varied fixture; 3-branch confirmed by
+  `Numeric42ThreeIndicatorsY_bottom8pxdown.vi` and independently matched by
+  `reference-find-by-id.vi`). `Wire.TreeEndpointPair()` is a 2-branch
+  convenience wrapper. Both projections are ground-truthed against
+  controlled-fixture diffs (8/16 px y-shift, x-shift, sign flip,
+  geometry-varied 2-Y/3-Y). The renderer composes the chain-auto
+  projection with terminal `OF__bounds` at draw time: source +
+  `SourceAnchorX` horizontally → `YStep` vertically → continue
+  horizontally to sink. Multi-elbow auto-chains, manual-chains,
+  and comb / 4+ branch trees stay raw until Phase 13.5 is complete.
+  The current comb spike (`Numeric42ThreeIndicatorsYComb_middle8pxdown.vi`)
+  shows the moved middle branch changes two adjacent records in opposite
+  directions (`5b 01` → `63 01`, `57 42` → `4f 42`), so the comb payload
+  carries span/junction data rather than just endpoint records.
 - Terminal anchor decoding shipped as Phase 12.3 (`OF__termBounds` +
   `OF__termHotPoint`) — see the "What's decoded" section above; the
   literal `OF__terminal` (FieldTag 367) carries no payload in the
@@ -160,9 +173,16 @@ index / decompose primitives, formula nodes, …) via
 `lvrsrc-widget-{kind}` CSS class alongside the existing
 `lvrsrc-node-*` classes — structures get a heavier orange-brown
 stroke, primitives a navy-tinted fill, decorations a dashed gray
-outline. Unmapped classes fall back to `other`. The pylabview-aligned
-cross-check (Phase 12.2b) is pending and will catch primitives
-mis-classified by name alone.
+outline.
+
+Phase 14.1 cross-checked the table against pylabview's `LVheap.py`
+class enum and per-class child-tag dispatch. Reference-bearing classes
+(`SL__stdRefNum`, `SL__baseRefNum`, static/dynamic VI/control refs)
+now resolve to `refnum`; `SL__stdVar` / `SL__stdLvVariant` /
+`SL__oleVariant` resolve to `variant`; and `SL__conPane` resolves to
+`connector-pane`. Tunnel classes stay folded into `terminal`, matching
+the renderer's wire-anchor model. Unmapped classes fall back to
+`other`.
 
 ## References
 

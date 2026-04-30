@@ -8,11 +8,12 @@ import "github.com/CWBudde/lvrsrc/internal/codecs/heap"
 // so a viewer can tell booleans from numerics from strings without
 // matching every individual ClassTag.
 //
-// Phase 12.2a (this batch) populates the table from class-name
-// heuristics — `SL__std*` controls map by suffix, `SL__*Loop` /
-// `SL__*Sequence` map to Structure, etc. Phase 12.2b will cross-check
-// the result against pylabview's per-class parser dispatch and adjust
-// where the two disagree.
+// The table began as a name-based heuristic in Phase 12.2a and was
+// cross-checked against pylabview's LVheap.py class enum / per-class
+// child-tag dispatch in Phase 14.1. pylabview does not expose a visual
+// widget-kind enum; the explicit refnum / variant / connector-pane
+// classes below are carried as separate kinds because they are stable
+// heap classes rather than renderer guesses.
 type WidgetKind string
 
 // Members of WidgetKind. The set is intentionally small; classes that
@@ -29,6 +30,9 @@ const (
 	WidgetKindStructure  WidgetKind = "structure"
 	WidgetKindPrimitive  WidgetKind = "primitive"
 	WidgetKindTerminal   WidgetKind = "terminal"
+	WidgetKindRefnum     WidgetKind = "refnum"
+	WidgetKindVariant    WidgetKind = "variant"
+	WidgetKindConPane    WidgetKind = "connector-pane"
 	WidgetKindOther      WidgetKind = "other"
 )
 
@@ -79,6 +83,31 @@ var widgetKindByClass = map[heap.ClassTag]WidgetKind{
 	heap.ClassTagStdPath:     WidgetKindString,
 	heap.ClassTagStdComboBox: WidgetKindString,
 	heap.ClassTagStdTag:      WidgetKindString,
+
+	// Refnum controls / constants / data objects. pylabview's
+	// LVheap.py exposes these as explicit SL__*Ref* / SL__baseRefNum
+	// classes; keep them distinct from generic primitives so callers
+	// can style and audit reference-bearing nodes separately.
+	heap.ClassTagStdRefNum:    WidgetKindRefnum,
+	heap.ClassTagStdHandle:    WidgetKindRefnum,
+	heap.ClassTagGRef:         WidgetKindRefnum,
+	heap.ClassTagGRefDCO:      WidgetKindRefnum,
+	heap.ClassTagCtlRefConst:  WidgetKindRefnum,
+	heap.ClassTagCtlRefDCO:    WidgetKindRefnum,
+	heap.ClassTagOldStatVIRef: WidgetKindRefnum,
+	heap.ClassTagStatVIRef:    WidgetKindRefnum,
+	heap.ClassTagDynLink:      WidgetKindRefnum,
+	heap.ClassTagBaseRefNum:   WidgetKindRefnum,
+
+	// Variant controls / data objects.
+	heap.ClassTagStdVar:       WidgetKindVariant,
+	heap.ClassTagOleVariant:   WidgetKindVariant,
+	heap.ClassTagStdLvVariant: WidgetKindVariant,
+
+	// Connector pane object. It has its own pylabview class
+	// (SL__conPane) and a dedicated child-tag mapping in
+	// CLASS_EN_TO_TAG_LIST_MAPPING, so it is not just a generic box.
+	heap.ClassTagConPane: WidgetKindConPane,
 
 	// Cluster controls.
 	heap.ClassTagStdClust:   WidgetKindCluster,
@@ -216,20 +245,20 @@ var widgetKindByClass = map[heap.ClassTag]WidgetKind{
 	// node, including structure tunnels (inputs/outputs that pierce a
 	// loop or sequence boundary) and FP-side terminals that link a
 	// front-panel control to its block-diagram representation.
-	heap.ClassTagTerm:                        WidgetKindTerminal,
-	heap.ClassTagFPTerm:                      WidgetKindTerminal,
-	heap.ClassTagLpTun:                       WidgetKindTerminal,
-	heap.ClassTagInnerLpTun:                  WidgetKindTerminal,
-	heap.ClassTagMatedLpTun:                  WidgetKindTerminal,
-	heap.ClassTagSeqTun:                      WidgetKindTerminal,
-	heap.ClassTagMatedSeqTun:                 WidgetKindTerminal,
-	heap.ClassTagFlatSeqTun:                  WidgetKindTerminal,
-	heap.ClassTagSelTun:                      WidgetKindTerminal,
-	heap.ClassTagSimTun:                      WidgetKindTerminal,
-	heap.ClassTagSdfTun:                      WidgetKindTerminal,
-	heap.ClassTagRegionTun:                   WidgetKindTerminal,
-	heap.ClassTagCommentTun:                  WidgetKindTerminal,
-	heap.ClassTagExternalTun:                 WidgetKindTerminal,
-	heap.ClassTagXTunnel:                     WidgetKindTerminal,
-	heap.ClassTagDecomposeRecomposeTunnel:    WidgetKindTerminal,
+	heap.ClassTagTerm:                     WidgetKindTerminal,
+	heap.ClassTagFPTerm:                   WidgetKindTerminal,
+	heap.ClassTagLpTun:                    WidgetKindTerminal,
+	heap.ClassTagInnerLpTun:               WidgetKindTerminal,
+	heap.ClassTagMatedLpTun:               WidgetKindTerminal,
+	heap.ClassTagSeqTun:                   WidgetKindTerminal,
+	heap.ClassTagMatedSeqTun:              WidgetKindTerminal,
+	heap.ClassTagFlatSeqTun:               WidgetKindTerminal,
+	heap.ClassTagSelTun:                   WidgetKindTerminal,
+	heap.ClassTagSimTun:                   WidgetKindTerminal,
+	heap.ClassTagSdfTun:                   WidgetKindTerminal,
+	heap.ClassTagRegionTun:                WidgetKindTerminal,
+	heap.ClassTagCommentTun:               WidgetKindTerminal,
+	heap.ClassTagExternalTun:              WidgetKindTerminal,
+	heap.ClassTagXTunnel:                  WidgetKindTerminal,
+	heap.ClassTagDecomposeRecomposeTunnel: WidgetKindTerminal,
 }

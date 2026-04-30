@@ -120,20 +120,21 @@ layout:
 
 Phase 12.2a layered a generic widget-kind classification on top of that
 hybrid layout. Each scene group / box carries an `lvvi.WidgetKind`
-(`boolean` / `numeric` / `string` / `cluster` / `array` / `graph` /
-`decoration` / `structure` / `primitive` / `other`) resolved from the
-heap node's class tag via `lvvi.WidgetKindForNode`. The shared SVG
-renderer (`internal/render.SVG`) emits an `lvrsrc-widget-{kind}` CSS
-class alongside the existing `lvrsrc-node-*` classes and ships
-distinct per-kind skins — booleans get a green-tinted fill, numerics
-blue, strings purple, structures a heavier orange-brown stroke, and so
-on. The mapping in `widgetKindByClass` covers the obvious-by-name
-classes (`SL__stdBool`, `SL__stdNum`, `SL__forLoop`, `SL__prim`,
-…); unmapped classes fall back to `other` so unknown widgets still
-render as plain placeholder boxes. A pylabview-aligned cross-check
-pass (Phase 12.2b) is pending and will tighten the table where the
-name heuristic disagrees with pylabview's actual per-class parser
-dispatch.
+resolved from the heap node's class tag via `lvvi.WidgetKindForNode`.
+The shared SVG renderer (`internal/render.SVG`) emits an
+`lvrsrc-widget-{kind}` CSS class alongside the existing
+`lvrsrc-node-*` classes and ships distinct per-kind skins — booleans
+get a green-tinted fill, numerics blue, strings purple, structures a
+heavier orange-brown stroke, and so on.
+
+Phase 14.1 cross-checked the table against pylabview's `LVheap.py`
+class enum and per-class child-tag dispatch. The mapping now carries
+explicit `refnum`, `variant`, and `connector-pane` kinds for
+`SL__stdRefNum` / `SL__baseRefNum` / VI/control ref classes,
+`SL__stdVar` / `SL__stdLvVariant` / `SL__oleVariant`, and
+`SL__conPane`. Tunnels remain folded into `terminal` because the
+renderer treats them as wire anchors. Unmapped classes still fall back
+to `other` so unknown widgets render as plain placeholder boxes.
 
 ## Typed data fills (`OF__StdNumMin` / `Max` / `Inc`)
 

@@ -6,292 +6,51 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ## Phase 0 — Research & Corpus Setup
 
-> Target: 1–2 weeks | Exit: ≥20 diverse sample files, known resource type list, scope approved
-
-### 0.1 Repository Skeleton
-
-- [x] Initialize Go module (`go mod init`)
-- [x] Create directory tree: `cmd/lvrsrc/`, `internal/binaryx/`, `internal/rsrcwire/`, `internal/codecs/`, `internal/validate/`, `internal/golden/`, `pkg/lvrsrc/`, `pkg/lvvi/`, `pkg/lvmeta/`, `pkg/lvdiff/`, `testdata/`, `docs/`
-- [x] Add `.gitignore`, `LICENSE`, `README.md` stub
-- [x] Set up `go.mod` with Cobra and Viper dependencies _(dependency download blocked in current environment; versions pinned in `go.mod`)_
-
-### 0.2 CI Setup
-
-- [x] Configure GitHub Actions workflow (lint, build, test, fuzz)
-- [x] Add `golangci-lint` configuration
-- [x] Add `go vet` and `staticcheck` steps
-- [x] Set up Go fuzz target placeholder in CI
-
-### 0.3 Reference Study
-
-- [x] Read and annotate `pylabview` wiki and source code _(blocked by network; local clone path reserved and docs scaffolded)_
-- [x] Read and annotate `pylavi` docs and source code _(blocked by network; local clone path reserved and docs scaffolded)_
-- [x] Document RSRC wire layout from reference sources in `docs/wire-layout.md`
-- [x] Document known resource type list with FourCC codes in `docs/resource-registry.md`
-
-### 0.4 Sample Corpus
-
-- [x] Collect ≥20 diverse `.vi` files across different LabVIEW versions _(deferred: corpus to be supplied by user)_
-- [x] Include simple VIs, controls (`.ctl`), and templates (`.vit`) _(deferred pending user corpus)_
-- [x] Include files with unusual names or resource types _(deferred pending user corpus)_
-- [x] Run Python reference tools (`pylabview`, `pylavi`) against corpus to establish oracle baseline _(deferred pending user corpus and network access for tools)_
-- [x] Store baseline outputs for differential testing _(deferred pending user corpus)_
-
-### 0.5 Architecture Doc
-
-- [x] Write `docs/format-overview.md` (RSRC container concepts)
-- [x] Write `docs/safety-model.md` (editing tiers, preservation rules)
-- [x] Write `docs/contributing-reverse-engineering.md` (discovery method)
-- [x] Confirm final MVP scope _(Phase 1 focus started: `internal/binaryx` + fuzz scaffold)_
+> Target: 1-2 weeks | Exit: corpus baseline, resource inventory, and MVP scope approved
+- Go module, directory skeleton, README/LICENSE/gitignore, and dependency pins were established.
+- CI, lint, vet/staticcheck, build/test, and fuzz placeholders were wired.
+- Reference docs captured RSRC layout, resource registry, safety model, and reverse-engineering workflow.
+- Corpus/oracle setup was documented and later backed by committed fixtures and baselines.
 
 ---
 
 ## Phase 1 — Container Parser
 
-> Target: 2–4 weeks | Exit: `inspect`, `dump`, `list-resources` work on corpus; no panics; fuzz baseline in CI | Tag: `v0.1.0`
-
-### 1.1 Wire-Level Binary Reader (`internal/binaryx`)
-
-- [x] Define `Reader` struct with `io.ReaderAt` and `binary.ByteOrder`
-- [x] Implement `U8`, `U16`, `U32`, `U64` methods with offset parameter
-- [x] Implement `Bytes(off, n)` method
-- [x] Implement `PascalString(off)` method (returns string + consumed bytes)
-- [x] Implement `CString(off)` method
-- [x] Add boundary checks and error wrapping
-- [x] Write unit tests for all reader methods
-
-### 1.2 RSRC Container Codec — Reader (`internal/rsrcwire`)
-
-- [x] Define `File`, `Header`, `Block`, `Section` structs matching wire layout
-- [x] Parse primary header (magic, version, data offset, data size, rsrc offset, rsrc size)
-- [x] Parse duplicated/secondary header and validate consistency
-- [x] Parse block info list (type, count, offset)
-- [x] Parse block headers (FourCC, ID, name index)
-- [x] Parse section descriptors (index, offset, size)
-- [x] Parse section payloads (raw bytes)
-- [x] Parse name table / trailing Pascal strings
-- [x] Preserve `RawTail` bytes exactly
-- [x] Add `CompressionKind` detection stub
-- [x] Add `FileKind` detection (`.vi`, `.ctl`, `.vit`, `.llb`)
-- [x] Write parse tests against corpus files
-
-### 1.3 Public Container API (`pkg/lvrsrc`)
-
-- [x] Define `OpenOptions` struct (`Strict bool`)
-- [x] Implement `Open(path string, opts OpenOptions) (*File, error)`
-- [x] Implement `Parse(data []byte, opts OpenOptions) (*File, error)`
-- [x] Implement `(f *File) Resources() []ResourceRef`
-- [x] Implement `(f *File) Clone() *File`
-- [x] Write package-level tests
-
-### 1.4 JSON Dump
-
-- [x] Define JSON-serializable mirror of `File` struct
-- [x] Implement `(f *File) MarshalJSON()` or dedicated `DumpJSON` function
-- [x] Ensure unknown/opaque section bytes are represented as base64
-
-### 1.5 CLI Scaffold (`cmd/lvrsrc`)
-
-- [x] Initialize Cobra root command with Viper config binding
-- [x] Add Viper config file support (`--config`), env prefix, defaults
-- [x] Add persistent flags: `--format`, `--strict`, `--log-level`
-- [x] Implement `lvrsrc inspect <file>` command (kind, version, header info, block list, warnings)
-- [x] Implement `lvrsrc dump <file> [--json]` command
-- [x] Implement `lvrsrc list-resources <file>` command (compact table: type, id, name, size)
-- [x] Add `--out` flag for output redirection
-- [x] Write smoke tests for all Phase 1 CLI commands
-
-### 1.6 Fuzzing Baseline
-
-- [x] Add `FuzzParseFile` target in `internal/rsrcwire`
-- [x] Add `FuzzParseHeader` target
-- [x] Add `FuzzNameTable` target
-- [x] Verify fuzz targets run in CI (short seed corpus)
+> Tag: v0.1.0 | Exit: inspect, dump, and list-resources work on corpus without panics
+- Added bounded binary reader helpers for integers, byte ranges, Pascal strings, and C strings.
+- Parsed RSRC headers, block info, block headers, sections, payloads, names, raw tails, file kind, and compression stubs.
+- Published lvrsrc Open/Parse/Resources/Clone APIs plus JSON dump support with opaque bytes as base64.
+- Shipped Cobra/Viper inspect, dump, and list-resources commands with smoke tests and parser fuzz targets.
 
 ---
 
 ## Phase 2 — Preserving Writer
 
-> Target: 2–4 weeks | Exit: corpus round-trips successfully; opaque sections preserved; rewritten files pass validation | Tag: `v0.2.0`
-
-### 2.1 Wire-Level Binary Writer (`internal/binaryx`)
-
-- [x] Define `Writer` struct with `io.WriterAt` and byte order
-- [x] Implement `WriteU16`, `WriteU32`, `WriteU64` at offset
-- [x] Implement `WriteBytes(off, data)` method
-- [x] Implement `WritePascalString(off, s)` method
-- [x] Implement offset-patching helper (write placeholder, patch later)
-- [x] Write unit tests for all writer methods
-
-### 2.2 RSRC Serializer — Preserving Mode (`internal/rsrcwire`)
-
-- [x] Implement offset/padding recomputation for section payloads
-- [x] Implement block table serialization preserving original ordering
-- [x] Implement name table serialization
-- [x] Regenerate both headers consistently (primary and duplicate)
-- [x] Preserve exact bytes for unknown/opaque sections
-- [x] Preserve original padding/alignment where possible
-- [x] Write serializer tests (parse → serialize → parse, compare structure)
-
-### 2.3 Public Write API (`pkg/lvrsrc`)
-
-- [x] Implement `(f *File) WriteTo(w io.Writer) error`
-- [x] Implement `(f *File) WriteToFile(path string) error`
-- [x] Implement `(f *File) Validate() []Issue`
-- [x] Write API-level round-trip tests
-
-### 2.4 CLI `rewrite` Command
-
-- [x] Implement `lvrsrc rewrite <file> --out <output>` command
-- [x] Add `--canonical` flag (canonical writer mode, future)
-- [x] Add round-trip integration test using CLI
-
-### 2.5 Round-Trip Test Suite
-
-- [x] Create `internal/golden` harness for golden file tests
-- [x] Run round-trip on all corpus files; assert byte-for-byte equivalence or structural equivalence (see `TestCorpusGolden`; currently 1 byte/file diff is tracked in goldens — see `docs/writer-differences.md`)
-- [x] Add regression test against Python oracle for block/section counts _(wired 2026-04-24: `scripts/gen-oracle.py` walks `testdata/{corpus,llb}` using locally cloned `references/pylabview`, writes per-file JSON baselines under `testdata/oracle/`; `internal/oracle/oracle_test.go` reads those baselines and asserts `lvrsrc.Open` reports the same `(fourcc, section_count)` inventory. All 22 committed oracles pass. CI stays Go-only — Python is only needed to refresh baselines; see `scripts/README.md`.)_
-- [x] Document any known acceptable differences (regenerated fields) — `docs/writer-differences.md`
+> Tag: v0.2.0 | Exit: corpus round-trips while opaque data is preserved
+- Added offset-aware binary writer helpers and Pascal-string writing tests.
+- Implemented preserving RSRC serialization: offsets, padding, block/name tables, duplicate headers, raw tails, and opaque sections.
+- Published WriteTo, WriteToFile, and Validate APIs plus the lvrsrc rewrite command.
+- Added golden round-trip harness, CLI integration coverage, Python-oracle inventory regression tests, and writer-difference docs.
 
 ---
 
 ## Phase 3 — Validator & Diff
 
-> Target: 1–2 weeks | Exit: human + JSON diagnostics; corpus >90% coverage | Tag: `v0.3.0`
-
-### 3.1 Structural Validator (`internal/validate`)
-
-- [x] Define `Issue` struct (severity, code, message, location)
-- [x] Check: duplicate headers are consistent
-- [x] Check: all offsets are within file bounds
-- [x] Check: section sizes are non-zero and sane
-- [x] Check: block counts match block info table
-- [x] Check: name offsets are valid
-- [x] Check: no overlapping payload regions
-- [x] Check: FourCC values are printable ASCII
-- [x] Implement strict vs. lenient mode
-- [x] Write validator tests (valid files pass; injected-error files fail with expected codes)
-
-### 3.2 CLI `validate` Command
-
-- [x] Implement `lvrsrc validate <file>` command
-- [x] Human-readable output (colored if TTY)
-- [x] JSON output with `--json` flag and machine-readable exit codes
-- [x] Exit 0: valid; Exit 1: warnings; Exit 2: errors
-
-### 3.3 Diff Engine (`pkg/lvdiff`)
-
-- [x] Define `Diff` and `DiffItem` structs
-- [x] Implement header-level diff (field-by-field)
-- [x] Implement resource type additions/removals diff
-- [x] Implement section-level binary diff (size changes, content hash)
-- [x] Implement decoded-resource diff for known types (stub, expand in Phase 4+) _(pluggable `Options.DecodedDiffers` extension point; typed codecs wire in via Phase 4+)_
-
-### 3.4 CLI `diff` Command
-
-- [x] Implement `lvrsrc diff <a.vi> <b.vi>` command
-- [x] Human-readable unified-diff style output
-- [x] JSON diff output with `--json` flag
-
-### 3.5 JSON Schema
-
-- [x] Define JSON schema for `dump` output — `docs/schemas/dump.schema.json`
-- [x] Define JSON schema for `validate` output — `docs/schemas/validate.schema.json`
-- [x] Publish schemas under `docs/` _(additionally: `Issue`/`IssueLocation` gained `json:` tags so emitted keys are camelCase; CLI schema-conformance tests in `cmd/lvrsrc/schemas_test.go` guard against drift)_
+> Tag: v0.3.0 | Exit: human and JSON diagnostics plus resource diffs
+- Added structural validator issues for headers, bounds, sizes, counts, names, payload overlap, FourCCs, and strict/lenient mode.
+- Shipped lvrsrc validate with human/JSON output and machine-readable exit codes.
+- Implemented lvdiff header/resource/section diffs plus decoded-resource extension hooks.
+- Added lvrsrc diff and dump/validate JSON schemas with schema-conformance tests.
 
 ---
 
 ## Phase 4 — Safe Metadata Editing
 
-> Target: 2–4 weeks | Exit: targeted metadata edits survive rewrite and validation | Tag: `v0.4.0`
-
-### 4.1 Resource Registry (`internal/codecs`)
-
-- [x] Define `ResourceCodec` interface (`Decode`, `Encode`, `Validate`, `Capability`)
-- [x] Define `Registry` struct with `map[FourCC]ResourceCodec`
-- [x] Define `Context` struct (`FileVersion`, `Kind`)
-- [x] Define `Capability` struct (`FourCC`, `ReadVersions`, `WriteVersions`, `Safety`)
-- [x] Implement registry lookup and fallback to opaque codec
-- [x] Write registry tests
-
-### 4.2 Version Awareness
-
-- [x] Define `Version` type and `VersionRange` _(Version in `pkg/lvvi`; VersionRange in `internal/codecs` from 4.1)_
-- [x] Define `FileKind` enum _(existed from Phase 1.2 in `internal/rsrcwire` / `pkg/lvrsrc`; re-exported in `pkg/lvvi`)_
-- [x] Implement `(f *File) DetectVersion() (Version, bool)` in `pkg/lvvi` _(implemented as package function `lvvi.DetectVersion(*lvrsrc.File)` to avoid `pkg/lvrsrc` ↔ `pkg/lvvi` import cycle)_
-- [x] Wire version context into all codec calls _(wired 2026-04-24: `pkg/lvmeta` (`contextFromFile` in `pkg/lvmeta/lvmeta.go`), `pkg/lvvi/model.go`, and now `pkg/lvdiff/decoded.go` all derive `codecs.Context{FileVersion, Kind}` from `*lvrsrc.File`; `pkg/lvdiff`'s default decoded differs carry per-file contexts via closures, with `aCtx` used for the old payload and `bCtx` for the new — see `pkg/lvdiff/decoded.go`'s `contextFromFile` + `makeCodecDiffer`)_
-
-### 4.3 Initial Typed Codecs (low-risk resources)
-
-- [x] Research and document VI description resource layout (Markdown spec in `docs/resources/`) — `docs/resources/strg.md`, grounded in `pylabview`'s `StringListBlock`/`STRG` handling and 4 corpus files with non-empty descriptions
-- [x] Implement codec for VI description / documentation string resource — `internal/codecs/strg` (modern LV≥4.0 single-string layout; legacy layout documented as future work)
-- [x] Research and document VI name resource layout _(N/A — the VI filename is surfaced as `Section.Name` of the `LVSR` block during container parsing; confirmed via `pylabview` `LVSR` class which carries save-record fields but not the name)_
-- [x] Implement codec for VI name resource _(N/A — read path covered by `Section.Name`; write path is a container-level name-table edit handled in Phase 4.4 `pkg/lvmeta`)_
-- [x] Research and document version stamp resource layout — `docs/resources/vers.md`, grounded in 65 corpus samples
-- [x] Implement codec for version stamp resource — `internal/codecs/vers` (Decode + Encode + Validate, byte-for-byte round-trip verified on all corpus `vers` sections)
-- [x] Add resource-specific validator checks for each codec _(implemented for `vers` and `STRG`; see validation rule tables in `docs/resources/*.md`)_
-
-### 4.4 `pkg/lvmeta` Editing API
-
-#### 4.4.1 Package scaffold and dispatch wiring
-
-- [x] Create `pkg/lvmeta` package with package docs that define Tier 2 mutation guarantees and explicitly distinguish typed edits from Tier 1 preserving rewrites and future Tier 3 raw patching
-- [x] Implement `Mutator` struct with `Strict bool`
-- [x] Add default codec-registry wiring for all shipped Tier 2 codecs (`STRG`, `vers`) so `pkg/lvmeta` does not duplicate FourCC-specific registration logic in callers
-- [x] Add helper to derive `codecs.Context` from `*lvrsrc.File` (`Header.FormatVersion` + `Kind`) so Phase 4.2 version-awareness becomes active on actual codec calls
-- [x] Add deterministic block/section lookup helpers for “zero / one / many” matches so metadata setters can reject ambiguous targets rather than mutating the wrong resource
-
-#### 4.4.2 Generic typed mutation pipeline
-
-- [x] Add internal helper that performs the common Tier 2 edit flow: locate target section, look up codec by FourCC, enforce `Capability.Safety == Tier 2`, enforce `WriteVersions.Contains(ctx.FileVersion)`, decode payload, apply mutation, re-encode payload, run codec `Validate`, and replace the section payload only after the edited value passes checks
-- [x] Make the mutation helper preserve untouched blocks, sections, names, and `RawTail` exactly, with only the edited payload and serializer-regenerated offsets/name-table bytes allowed to change
-- [x] Define strict-mode failure policy: always fail on post-edit validation errors; in `Strict` mode also fail when the edit introduces new warnings for the touched resource
-- [x] Return offset-aware, FourCC-aware errors for all mutator failures (missing target, duplicate target, unsupported version, codec decode/encode failure, post-edit validation failure)
-
-#### 4.4.3 Description editing
-
-- [x] Implement `SetDescription(f *lvrsrc.File, desc string) error`
-- [x] Map description edits to the `STRG` resource using the generic typed mutation pipeline
-- [x] If exactly one `STRG` section exists, update it in place; if no `STRG` section exists, create a new `STRG` block/section with a deterministic section ID and empty name; if multiple `STRG` sections exist, reject in `Strict` mode until corpus evidence justifies an automatic selection rule
-- [x] Preserve the caller-provided description bytes as-is (no newline normalization, trimming, or charset transcoding) and allow empty descriptions to round-trip as a valid zero-length `STRG` payload
-
-#### 4.4.4 Name editing
-
-- [x] Implement `SetName(f *lvrsrc.File, name string) error`
-- [x] Treat VI renaming as a container/name-table mutation rather than a resource-codec edit: update the relevant `LVSR` section `Name`, keep `NameOffset` references valid, and update `File.Names` so serializer and validator stay in sync
-- [x] Reuse an existing name-table entry when another section already carries the requested name; otherwise append/update a `NameEntry` and let serializer compaction rewrite offsets if the old sparse layout no longer fits
-- [x] Reject names that cannot be represented safely in the current container model (for example Pascal-string length overflow) and leave path/extension normalization out of scope for Phase 4.4
-
-#### 4.4.5 Post-edit safety gate and tests
-
-- [x] Add shared post-edit validation helper for `pkg/lvmeta`: run `f.Validate()` after each successful mutation and fail the edit if structural validation reports any error _(implemented as serialize → re-parse → Validate; compares pre-edit vs post-edit error codes so only edit-induced structural breakage fails the gate)_
-- [x] Add focused unit tests for helper behavior: version-context wiring, ambiguous-target detection, missing-resource handling, and strict-vs-lenient warning policy
-- [x] Add corpus-backed mutation tests for description updates on files that already contain `STRG` — `TestSetDescriptionCorpusUpdatesExistingSTRGEndToEnd`
-- [x] Add mutation tests for inserting a new `STRG` section when a file has no description resource
-- [x] Add rename tests that exercise name-table reuse and name-table compaction paths — `TestSetNameReusesExistingEntryWhenAnotherCarriesIt`, `TestSetNameCompactionPath`
-- [x] Add regression tests for unchanged opaque resources surviving metadata edits byte-for-byte — `TestSetDescriptionCorpusUpdatesExistingSTRGEndToEnd`, `TestSetDescriptionCorpusCreatesNewSTRGEndToEnd`, `TestSetNameCorpusOpaquePreservation`
-- [x] Add end-to-end mutation tests (`edit -> write -> re-parse -> assert field value -> Validate()`) for both `SetDescription` and `SetName` — `TestSetDescriptionEndToEndRoundTrips`, `TestSetNameEndToEndRoundTrips`
-
-### 4.5 `pkg/lvvi` Higher-Level Model
-
-- [x] Define `Model` struct with decoded known resources — `pkg/lvvi/model.go` (caches decoded `vers` application version and `STRG` description)
-- [x] Implement `DecodeKnownResources(f *lvrsrc.File) (*Model, []Issue)` — walks sections, dispatches via a local registry mirroring `pkg/lvmeta`'s Tier 2 set, surfaces decode errors + multi-section warnings as `lvvi.Issue` values
-- [x] Implement `(m *Model) Version() (Version, bool)` — `Version` extended with `Major/Minor/Patch/Stage/Build/Text/HasApp` populated from the decoded `vers` resource
-- [x] Implement `(m *Model) ListResources() []ResourceSummary` — one summary per section with `Decoded` flagging sections with a registered non-opaque codec
-- [x] Write model tests — `pkg/lvvi/model_test.go` covers nil-file, app-version surfacing, description round-trip, no-STRG/no-vers fallbacks, ordered `ListResources` with known-codec marking, nil-receiver safety, multi-section warning path, decode-failure issue emission, underlying-pointer access, and payload-immutability guard
-
-### 4.6 CLI `set-meta` Command
-
-- [x] Implement `lvrsrc set-meta <file> --description "..." --out <output>` command — `cmd/lvrsrc/setmeta.go` routes through `lvmeta.Mutator.SetDescription` and propagates `--strict`
-- [x] Add `--name` flag — maps to `lvmeta.Mutator.SetName`; can be combined with `--description` in a single invocation
-- [x] Add `--unsafe` flag for Tier 3 raw patching (disabled by default) — flag is accepted but currently returns an error citing that Tier 3 is not yet implemented, per the safety model
-- [x] Add post-write validation step in command — `postWriteValidate` re-opens the written file and fails on any severity-error issue from `f.Validate()`
-- [x] Write CLI integration tests for metadata editing — `cmd/lvrsrc/setmeta_test.go` covers description-only, name-only, both-flags, STRG creation when absent, empty-description allowed, missing `--out`, missing edit flags (no output file created), rejected `--unsafe`, propagated `ErrNameTooLong`, and post-write re-validation on corpus
-
-### 4.7 Compatibility Table
-
-- [x] Define compatibility table format in `docs/resource-registry.md` — new _Compatibility table format_ section explains every column, maps `all` to `codecs.VersionRange{Min:0, Max:0}`, documents how future closed ranges render as `Min–Max`, and cross-links [generated/resource-coverage.md](docs/generated/resource-coverage.md) as the machine-readable sibling
-- [x] Populate entries for all implemented codecs (read/write version ranges, safety tier) — _Codec status_ table now carries `Read versions` + `Write versions` columns for all seven shipped typed codecs (`CONP`, `CPC2`, `ICON`, `icl4`, `icl8`, `vers`, `STRG`) plus the opaque-fallback row
+> Tag: v0.4.0 | Exit: targeted metadata edits survive rewrite and validation
+- Added codec registry, version/file-kind context, compatibility table, and Tier 2 STRG/vers codecs.
+- Implemented lvmeta mutation pipeline with safety checks, strict-mode warning policy, and offset/FourCC-aware errors.
+- Added SetDescription and SetName, including STRG insertion, name-table reuse/compaction, and post-edit validation.
+- Exposed lvvi decoded model data and shipped lvrsrc set-meta with integration and corpus preservation tests.
 
 ---
 
@@ -349,471 +108,287 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ## Phase 6 — Small-Block Completion & Colour Icons
 
-> Target: 2–3 weeks | Exit: every FourCC observed in the corpus that is straightforwardly shaped has a typed codec; the `icl4` / `icl8` codecs emit RGB; demo's Info tab can render a colour icon and surface VI flags | Tag: `v0.6.0`
-
-This phase clears the long tail of small, well-understood blocks where `pylabview` already has a complete decoder we can port in a few hundred lines each. It also ships the two colour-icon palettes so the demo icon hero can upgrade from 1-bit to 8-bit.
-
-### 6.1 Colour-icon palettes and renderers
-
-- [x] Port `LABVIEW_COLOR_PALETTE_16` and `LABVIEW_COLOR_PALETTE_256` (references/pylabview/pylabview/LVmisc.py:52–95) into an internal Go table — `internal/codecs/icon/palette.go` ships `Palette2`, `Palette16`, `Palette256` as `[N]uint32` packed ARGB with alpha pinned to `0xFF`; includes `Palette2` port from `LVmisc.py:93-95` so mono shares the same pipeline
-- [x] Extend `internal/codecs/icon` `Value` to expose a `Palette []uint32` (packed ARGB) alongside `Pixels` for `icl4` / `icl8` — `Value.Palette` is populated on Decode for every bit depth (Decode wires it via the new `paletteFor(bitsPerPixel)` helper); ignored on Encode since it's derivable from `BitsPerPixel`
-- [x] Add a pure-Go `(Value) RGBA() []uint8` helper that combines indices + palette — returns a fresh `Width*Height*4` slice in RGBA row-major order; out-of-range pixel indices fall back to opaque black (never panics)
-- [x] Unit-test palette indexing against at least one corpus `icl8` section using a handcrafted expected RGBA array — `internal/codecs/icon/palette_corpus_test.go` spot-checks the first and last pixel of `testdata/corpus/format-string.vi`'s `icl8` section against `Palette256[payload[i]]`; test skips cleanly when the fixture is absent
-- [x] Update `docs/resources/icon.md` to record the palette sources — new _Palette sources_ section cites the pylabview line ranges, documents the packed-ARGB layout, and flags the suspicious `LABVIEW_COLOR_PALETTE_256[188] = 0x3003FF` upstream value as an open question
-
-### 6.2 LVSR flag decoding
-
-- [x] Research LVSR save-record layout (references/pylavi/pylavi/resource_types.py:96–198 is the concise reference; references/pylabview/pylabview/LVblock.py has the longer one) — confirmed pylavi's `(word-index, mask)` flag map; cross-checked against pylabview's `VI_EXEC_FLAGS` enum (`LVinstrument.py:137-171`) where word 0 = `execFlags` and the bits align
-- [x] Write `docs/resources/lvsr.md` documenting the byte layout and flag bits — covers version header, variable-length Raw flags, the nine exposed bits with their word/mask coordinates, breakpoint count at word 28, validation rule, reference citations, and open questions
-- [x] Implement `internal/codecs/lvsr` (Tier 1 read) returning `Value{FormatVersion, Flags, ...}` with typed booleans for `Locked`, `PasswordProtected`, `Debuggable`, `RunOnOpen`, `SuspendOnRun`, `SeparateCode`, `AutoErrorHandling`, `Breakpoints`, `ClearIndicators` — shipped as `Value{Version, Raw}` with method accessors for each flag (`PasswordProtected` deferred: it requires combining LVSR's `Locked` bit with BDPW's actual hash state, which is a Phase 6.3 `BDPW` codec prerequisite); `BreakpointCount()` added as a bonus per pylavi's `BREAKPOINT_COUNT_INDEX = 28`
-- [x] Round-trip test on every corpus LVSR — `internal/codecs/lvsr/lvsr_corpus_test.go` exercises 21 LVSR sections (one per corpus fixture), every one decodes and re-encodes byte-for-byte
-- [x] Expose the decoded flags on `pkg/lvvi.Model` (e.g. `(m *Model) Flags() (LVSRFlags, bool)`) — `LVSRFlags` struct published; `Model.Flags()` and `Model.BreakpointCount()` return `(_, ok)`, cached during `DecodeKnownResources`
-
-### 6.3 Block-family codecs (references: pylabview/pylabview/LVblock.py)
-
-For each, ship a typed codec (`internal/codecs/<name>`), corpus round-trip tests, and per-resource docs in `docs/resources/`:
-
-- [x] `LIBN` — library-name list (LVblock.py:4683–4756) — `internal/codecs/libn`; 4-byte BE count + Pascal-string list (`padto=1`, no padding); 13 corpus sections round-trip; `docs/resources/libn.md`
-- [x] `BDPW` — block-diagram password (MD5, hash1, hash2, empty-password sentinel) (LVblock.py:4334–4680; cross-check references/pylavi/pylavi/resource_types.py:54–94) — `internal/codecs/bdpw`; three concatenated MD5 hashes; ships `(Value).HasPassword()` against the `d41d8cd98f00b204e9800998ecf8427e` empty sentinel and `(Value).PasswordMatches(string)` for safe verification; 10 corpus sections round-trip; `docs/resources/bdpw.md`
-- [x] `FTAB` — font table (LVblock.py:2892–3075) — `internal/codecs/ftab`; section header + variable-width entry table (12 or 16 bytes, gated by `Prop1 & 0x00010000`) + Pascal-string name pool; pylabview's no-shared-offsets append algorithm reproduced; 21 corpus sections round-trip byte-for-byte; `docs/resources/ftab.md`
-- [x] `DTHP` — data-type-heap pointer (LVblock.py:3177–3276) — `internal/codecs/dthp`; variable-size U2p2 fields (`tdCount` + optional `indexShift`); zero-count payloads correctly omit shift; 21 corpus sections round-trip; `docs/resources/dthp.md`
-- [x] `RTSG` — runtime signature GUID (LVblock.py:5383–5434) — `internal/codecs/rtsg`; 16-byte GUID preserved verbatim; 21 corpus sections round-trip; `docs/resources/rtsg.md`
-- [x] `MUID` — module unique ID (LVblock.py:1272–1286) — `internal/codecs/muid`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/muid.md`
-- [x] `FPSE` — front-panel size estimate (LVblock.py:1288–1298) — `internal/codecs/fpse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/fpse.md`
-- [x] `BDSE` — block-diagram size estimate (LVblock.py:1383–1393) — `internal/codecs/bdse`; 4-byte BE uint32; 21 corpus sections round-trip; `docs/resources/bdse.md`
-- [x] `HIST` — edit history counters (LVblock.py:3078–3085; pylabview is a stub — research further before deciding on final shape) — `internal/codecs/hist`; pylabview ships only a stub; corpus is uniformly 40 bytes so the codec preserves bytes verbatim and exposes a `Counters() [10]uint32` accessor for callers; 21 corpus sections round-trip; field semantics still unknown (documented in `docs/resources/hist.md`)
-- [x] `VITS` — VI settings (LVblock.py:7015–7120; LVVariant name/value pairs with endianness-aware decoding; scope to stable top-level keys first, leave variant-content interpretation opaque) — `internal/codecs/vits`; envelope-only decode (`[u32 count] + N × [u32 nameLen + name + u32 varLen + variant]`); variant content preserved as opaque bytes (LVdatafill decoding deferred to Phase 9); 21 corpus sections totalling 33 tag entries round-trip byte-for-byte; `docs/resources/vits.md`
-- [x] `FPEx` / `BDEx` — heap-aux blocks (not present in pylabview; corpus-only research — 4-byte zero / 8-byte / 16-byte outliers; start as Tier 1 shape-only and escalate if patterns emerge) — `internal/codecs/fpex` and `internal/codecs/bdex`; corpus probe revealed a clean `[u32 count] + count × u32` shape with all entries zero in current corpus; both codecs ship with strict size validation (`size == 4 + 4*count`); 21 corpus sections each round-trip byte-for-byte; `docs/resources/{fpex,bdex}.md`
-- [x] `VPDP` — VI probe-data pointer (LVblock.py:5055–5061; pylabview is a stub) — `internal/codecs/vpdp`; pylabview is a stub; corpus value is always `0x00000000`; codec exposes the 4-byte value verbatim with a sentinel-check helper; 21 corpus sections round-trip; `docs/resources/vpdp.md`
-
-### 6.4 Safety tier follow-through
-
-- [x] Classify each new codec Tier 1 (read-only) unless corpus evidence justifies Tier 2 — every codec shipped in Phase 6.3 (LVSR, MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST, BDPW, FPEx, BDEx, FTAB, VITS) declares `SafetyTier1` in its Capability; mutation paths intentionally absent
-- [x] Update `internal/coverage` manifest and verify the README badge reflects the new count (target: ≥ 20 typed FourCCs) — `internal/coverage/coverage.go` now registers all 14 new codecs in `shippedCodecs`; regenerated artifacts (`docs/generated/resource-coverage.{json,md,svg}`) report **24/27 typed (88.9%)** across the 21-fixture corpus, well above the ≥ 20 target. The README badge auto-updates from the regenerated SVG. Coverage tests adjusted (TypedCodecCount, OpaqueResourceTypes, BDPW row).
-- [x] Extend `pkg/lvdiff` decoded differs for every new codec — `pkg/lvdiff/decoded.go` `defaultDecodedDiffers` registers all 14 new typed codecs alongside the existing 10. `Diff` now produces structural decoded diffs for these resources instead of opaque hash deltas.
-
-### 6.5 Demo integration
-
-- [x] Info tab: icon hero picks the best available icon (`icl8` → `icl4` → `ICON`) and renders RGB — `internal/codecs/icon.PickBest` drives the server-side selection; WASM now sends base64 RGBA + the chosen FourCC; JS paints to a hidden canvas and embeds the PNG via `canvas.toDataURL()` with `image-rendering: pixelated` so the 32×32 source stays crisp at 128 px. A small `icl8` / `icl4` / `ICON` badge sits below the icon
-- [x] Info tab: new flag-row chip for each LVSR flag that is set (e.g. `locked`, `password`, `debuggable`) — `cmd/lvrsrcwasm/main.go` `decodeFlags` projects every set LVSR bit (plus a derived `PasswordProtected` that combines LVSR.Locked with `BDPW.HasPassword`) into a `WASMFlags` struct; `web/app.js` renders one chip per true flag with three colour variants (warn / info / debug) styled in `web/style.css`. Verified visually on `format-string.vi` which surfaces "separate code", "auto error handling", "debuggable"
-- [x] Structure tab: "decoded" badges light up for every FourCC newly covered — `cmd/lvrsrcwasm/main.go` `typedFourCCs` set extended to include all 14 new codecs (LVSR, MUID, FPSE, BDSE, VPDP, DTHP, RTSG, LIBN, HIST, BDPW, FPEx, BDEx, FTAB, VITS); `pkg/lvvi.newLvviRegistry` registers the same set so `Model.ListResources` reports `Decoded: true` for each
+> Tag: v0.6.0 | Exit: small observed FourCCs typed, colour icons rendered, LVSR flags surfaced
+- Ported LabVIEW icon palettes and RGBA rendering for ICON/icl4/icl8.
+- Added LVSR flag decoding and public lvvi flag/breakpoint accessors.
+- Added Tier 1 codecs/docs/tests for LIBN, BDPW, FTAB, DTHP, RTSG, MUID, FPSE, BDSE, HIST, VITS, FPEx, BDEx, and VPDP.
+- Updated coverage to 24/27 typed FourCCs, extended decoded diffs, and lit up icon/flag/decoded badges in the demo.
 
 ---
 
 ## Phase 7 — Rich Link Graph
 
-> Target: 2–4 weeks | Exit: `LIfp`, `LIbd`, and `LIvi` entries surface fully-typed link targets with resolved paths; dependency card in demo shows per-entry link kind plus a human-readable path | Tag: `v0.7.0`
-
-Today `LIfp` / `LIbd` decode only the entry envelope and opaque tail. `LIvi` is not decoded at all. `pylabview` has ready-to-port decoders for all three plus the PTH0/PTH1 path types and 50-odd `LinkObjRef` subclasses; this phase brings that into Go.
-
-### 7.1 PTH0 / PTH1 path decoder
-
-- [x] Research `LVPath0` / `LVPath1` layouts (references/pylabview/pylabview/LVclasses.py:94 and :159) — variant dispatch ported from `LVlinkinfo.py:66-78` (PTH0 uses 1-byte-length components + 2-byte tpval; PTH1/PTH2 share a 2-byte-length + 4-byte tpident layout)
-- [x] Write `docs/resources/pth0.md` documenting type idents (`"unc "`, `"!pth"`, `"abs "`, `"rel "`), count field, and the length-prefixed component strings — covers both variants, the zero-fill phony case, and open questions about PTH0.TPVal semantics
-- [x] Implement `internal/codecs/pthx` with `Value{Variant, Components []string, IsAbsolute, IsRelative, IsUNC, IsPhony}` covering both the 1-byte-length (PTH0) and 2-byte-length (PTH1) forms and the LabVIEW "zero-fill phony" case — `pthx.Decode/Encode` are package-level functions returning bytes consumed; helpers `IsPTH0/IsPTH1/IsAbsolute/IsRelative/IsUNC/IsNotAPath/IsPhony`
-- [x] Round-trip test across every PTH0 reference embedded in corpus `LIfp` / `LIbd` payloads — 32 PTH0 instances scanned and re-encoded byte-for-byte; 11 unit tests including edge cases (zero-fill, extended-form, all four PTH1 type idents)
-
-### 7.2 LIvi codec
-
-- [x] Research `LIvi` shape (references/pylabview/pylabview/LVblock.py:2426; base class `LinkObjRefs` at LVblock.py:2248; ident `LVIN`) — corpus probe revealed marker varies by file kind (`LVIN` for `.vi`, `LVCC` for `.ctl`); per-entry layout differs subtly from LIfp/LIbd in ways the libd-style heuristic cannot disambiguate without porting LinkObjRef subclasses
-- [x] Write `docs/resources/livi.md` — covers envelope, known markers, per-entry shape sketch, and the open questions that motivated the deferred per-entry decode
-- [x] Implement `internal/codecs/livi` with the same envelope shape as `LIfp` / `LIbd` (version, marker, entry count, entries, footer) — Phase 7.2 scope is **envelope only**: `Value{Version, Marker, EntryCount, Body, Footer}` with `Body` opaque for byte-for-byte round-trip; per-entry typed access is a Phase 7.3 / Phase 9 follow-up. Validates known markers (LVIN/LVCC/LVIT/LLBV) with a warning for unknown ones. 21 corpus sections round-trip (10 LVIN + 11 LVCC).
-
-### 7.3 Upgrade LIfp / LIbd decoders
-
-- [x] Replace the per-entry `Tail []byte` with a typed `Target LinkTarget` struct populated from the key `LinkObjRef` subclasses (references/pylabview/pylabview/LVlinkinfo.py:1428–2524) — landed via `internal/codecs/linkobj` with a `LinkTarget` interface and lazy `Entry.Target() (linkobj.LinkTarget, error)` accessors on `lifp.Entry`, `libd.Entry`, and `livi.Entry`. `Tail` stays as the byte-authoritative on-disk source (so re-encode is unaffected); `Target()` decodes it on demand. `LinkObjRefs.parseRSRCSectionData` (LVblock.py:2248) was the missing link — confirms what our codec calls `Version` / `Footer` / `Kind` are pylabview's `nextLinkInfo` 1/3/2 markers, and that LIfp/LIbd/LIvi entries share the same shape
-- [x] Cover at least: `VIToOwnerVI`, `VIToLib`, `VIToMSLink`, `VIToFileLink`, `TypeDefToCCLink`, `InstanceVIToOwnerVI`, `HeapToAssembly`, `VIToAssembly` — expose a stable `LinkKind` enum for the rest — `linkobj.LinkKind` ships with all ~115 idents from `newLinkObject` (LVlinkinfo.py:4235) registered as named constants. Two subclasses are fully decoded today: `LinkObjTypeDefToCCLink` (TDCC; corpus has 15 instances across LIfp + LIbd) and `LinkObjVIToLib` (VILB; 13 LIvi instances). The remaining 6 listed subclasses are not in the shipped corpus, so they round-trip via `OpaqueTarget` — typed parsers can be added incrementally as fixtures are introduced. Public surface: `pkg/lvvi.LookupLinkKind`, `LinkKindIdent`, `LinkKindDescription`, plus typed fields on `DependencyEntry` (`LinkKind`, `KindDescription`, `TypeID`, `HasTypeID`, `Offsets`)
-- [x] Keep unknown subclasses round-trip-safe via an opaque fallback so the codec remains Tier 1 — already the case: `lifp.Entry.Tail` and `libd.Entry.Tail` preserve the post-path bytes byte-for-byte
-- [x] Wire decoded `PrimaryPath` / `SecondaryPath` through `internal/codecs/pthx` instead of preserving raw bytes — `(PathRef).Decoded() (pthx.Value, error)` accessor added on both `lifp.PathRef` and `libd.PathRef`; `Raw` still drives encode for round-trip safety. Corpus tests (`pathref_decoded_test.go` in both packages) decode 31 paths cleanly
-- [x] Extend round-trip tests to cover corpus files with the 98/100/201/336-byte LIfp variants — already covered: existing corpus round-trip tests in `lifp` / `libd` iterate every fixture in `testdata/corpus/`, including the 201-byte LIfp variants (3 fixtures), the 100-byte (1), 98-byte (2), and the 336-byte one
-
-### 7.4 Public surface
-
-- [x] `pkg/lvvi.Model` gains `FrontPanelImports()`, `BlockDiagramImports()`, `VIDependencies()` returning typed entries with resolved paths — `DependencyEntry{LinkType, LinkKind, KindDescription, Qualifiers, PrimaryPath, HasPrimaryPath, SecondaryPath, HasSecondaryPath, TypeID, HasTypeID, Offsets}` and `DependencyPath{Ident, TPIdent, Components, IsAbsolute, ...}`. All three accessors decode through pthx and `linkobj`. As of Phase 7.3, `VIDependencies()` returns ok=true whenever an LIvi block is present and its entries decode — 21/21 corpus VIs cleanly
-- [x] `pkg/lvdiff` decoded differ for each link block — `livi.Codec{}` registered in `defaultDecodedDiffers`; `lifp` and `libd` were already wired in Phase 6.4
-- [x] Update `docs/resources/lifp.md` and `docs/resources/libd.md` to reflect the richer model; add `docs/resources/livi.md` — added `docs/resources/livi.md` (envelope, marker map, deferral notes) and `docs/resources/pth0.md` covering the path codec. The existing `lifp.md` / `libd.md` continue to describe their resources accurately; the per-entry rendering now lives in `pkg/lvvi.Model.FrontPanelImports/BlockDiagramImports` rather than as a per-resource doc claim
-
-### 7.5 Demo integration
-
-- [x] Dependency card on Info tab: three subsections (Front panel, Block diagram, VI dependencies) with per-entry link-kind chip + rendered path + qualifiers — all three subsections now render. The link-kind chip shows the human-readable `LinkKind` description (e.g. "TypeDef → CustCtl", "VI → Library") with the on-disk 4-byte ident as a tooltip. TDCC entries also surface a meta chip with `type #N · M offsets` (the resolved VCTP TypeID + LinkOffsetList count). Phase 7.3 lifted `VIDependencies()` from envelope-only to typed entries, so the subsection now populates from real data on every corpus VI/CTL
-- [x] When path is relative, show origin hint (e.g. `vi.lib/...`, `user.lib/...`) if it can be inferred from the qualifier list — handled at a coarser level: every rendered path is prefixed with its TPIdent classification (`abs `, `rel `, `unc `, `!pth`, `phony `) when one is set; the inferred hint will land naturally once Phase 9's `DTHP` / qualifier-resolution work surfaces a richer origin mapping. Visual verification: `reference-find-by-id.vi` renders 5 entries showing `TypeDefs / ReferenceType.ctl` etc.
+> Tag: v0.7.0 | Exit: LIfp, LIbd, and LIvi entries expose typed link targets and paths
+- Implemented PTH0/PTH1 path decoding and LIvi envelope parsing with round-trip preservation.
+- Upgraded LIfp/LIbd/LIvi entries with lazy typed LinkObjRef targets, LinkKind metadata, and opaque fallback.
+- Exposed FrontPanelImports, BlockDiagramImports, and VIDependencies through lvvi, with decoded diffs for link resources.
+- Documented path/link resources and added dependency-card rendering in the web demo.
 
 ---
 
 ## Phase 8 — Type-Descriptor Surface & Connector Pane
 
-> Target: 1–2 weeks | Exit: `VCTP` is navigable through `pkg/lvvi`; `CONP` resolves to a typed Function TypeDesc whose terminals are enumerated; demo shows a Types panel and a connector-pane diagram | Tag: `v0.8.0`
-
-`VCTP` is already decoded at the wire level by Phase 5.2 but the demo doesn't render it and `CONP` / `CPC2` remain unsurfaced. This phase wires the pieces together — no new codecs, just a richer public API and demo UI.
-
-### 8.1 `pkg/lvvi` type-descriptor model
-
-- [x] Define `TypeDescriptor` as a Go sum type (or interface hierarchy) covering the VCTP enum set (primitive numerics, strings, arrays, clusters, function, user-defined, …) — shipped as `internal/codecs/vctp.TypeDescriptor` (Index, FullType, Flags, HasLabel, Label, Inner, Length) plus the `FullType` enum with `String()` method covering 30+ TD_FULL_TYPE codes (primitives, strings, arrays, clusters, refnums, functions, typedefs). Per-type-specific decoding (cluster children, function parameters) is intentionally deferred to Phase 9 alongside the heap port; the `Inner []byte` slot lets callers re-parse later without breaking round-trip.
-- [x] Implement `(m *Model) Types() []TypeDescriptor` returning top-level types in VCTP order — `pkg/lvvi.TypeDescriptor` is the public projection (no internal codec exposed); `Model.Types()` returns the flat list, `Model.TopTypes()` exposes the trailing top-types list. 399 typedescs across the 21-fixture corpus parse cleanly (test `TestParseInnerCorpus`).
-- [x] Implement `(m *Model) TypeAt(id uint32) TypeDescriptor` for lookups from CONP and DTHP — 1-based indexing matching the on-disk numbering (flatID 0 reserved as "no type"). Tested with `TestModelTypeAtIs1Based`.
-- [x] Extensive unit tests using corpus fixtures already covered by `internal/codecs/vctp` — added `internal/codecs/vctp/typedesc_test.go` (4 tests including handcrafted, empty, truncation, and full corpus walk) plus `pkg/lvvi/types_test.go` (3 tests covering empty file, full corpus exercise, and 1-based indexing semantics)
-
-### 8.2 Connector-pane resolution
-
-- [x] Helper `(m *Model) ConnectorPane() (ConnectorPane, bool)` that reads `CONP` as a TypeID, resolves it through `VCTP`, and returns a struct with `TerminalCount`, `Terminals []Terminal{Name, Direction, TypeID}`, and the observed CPC2 variant — `ConnectorPane{CONP, CPC2, HasPaneType, PaneType TypeDescriptor}`. Per-terminal decoding (`Terminals []Terminal`) requires walking the Function TypeDesc's client list which depends on Phase 9's LVdatatype port; the resolver currently surfaces the pane type plus CPC2 variant for the demo's SVG layout. 21/21 corpus VIs resolved their CONP TypeID through VCTP.
-- [x] Tests against every corpus file with CPC2 in {1..4} — `TestModelTypesAndConnectorPaneOnCorpus` exercises every corpus VI (21/21 resolved). All four CPC2 variants are observed (`docs/resources/conpane.md` records 11 × CPC2=1, 6 × CPC2=2, 3 × CPC2=3, 1 × CPC2=4).
-
-### 8.3 Demo integration
-
-- [x] Info tab: collapsed "Types" sub-card listing the top N VCTP entries (expandable for the full tree) — `Types` card lists up to 12 named typedescs (e.g. `[6] Boolean "replace all?"`, `[11] NumInt32 "number of replacements"`) plus a histogram-pill row of all type kinds (`String 7`, `Boolean 5`, `NumInt32 4`, …). Verified visually on `format-string.vi` which surfaces the VI's actual parameter labels.
-- [x] Info tab: "Connector pane" sub-card rendering the pane as a small SVG using the classic LabVIEW 4-2-2-4 layout based on CPC2 (fall back to generic NxM grid for unfamiliar variants) — `connectorLayout(cpc2)` returns row-of-cells layouts for CPC2 ∈ {1..4} (`4-2-2-4`, `4-4`, `2-1-1-2`, `3-1-1-3`) plus an N-up grid fallback for unknown values. The SVG renders rounded-rect terminals on a card-coloured background; the meta line shows `8 terminals · CPC2 = 2 · CONP = 1 · resolved to <Type>`.
+> Tag: v0.8.0 | Exit: VCTP navigation and connector-pane rendering
+- Exposed public TypeDescriptor projections, top-type lists, and 1-based TypeAt lookups over VCTP.
+- Resolved CONP through VCTP and surfaced CPC2 connector-pane variants across the corpus.
+- Added codec/model tests for typedesc parsing, corpus lookup, and connector-pane resolution.
+- Rendered Types and Connector Pane cards in the Info tab.
 
 ---
 
-## Phase 9 — Front-Panel Heap Decoder (`FPHb`)
+## Phase 9 — Front-Panel Heap Decoder (FPHb)
 
-> Target: 6–10 weeks | Exit: `FPHb` is no longer opaque — its tag stream parses into a typed Go tree that round-trips byte-for-byte on the full corpus; `pkg/lvvi` exposes the decoded front-panel object graph | Tag: `v0.9.0`
-
-This is the structurally largest block still opaque. `pylabview`'s `LVheap.py` is the reference; it's ~2 800 lines of tag-stream and typed-node code. The goal is a Tier 1 (read-only) Go port that parses the envelope and the enumerated node types, preserves unknown payload bytes exactly, and gives the rest of the system a walkable tree.
-
-### 9.1 ZLIB wrapping and envelope
-
-- [x] Research `HeapVerb` wrapper (references/pylabview/pylabview/LVblock.py:5094) — Zlib decompression applied before heap parsing — confirmed against the corpus: payload is `[u32 BE declared_size][zlib bytes]`; after inflation, `[u32 BE content_len][content_len bytes of tag-stream]`. Two nested size headers, with `declared_size == 4 + content_len`. Same shape as VCTP plus one extra inner size word.
-- [x] Implement the wrapper in `internal/codecs/heap` shared between FPHb and BDHb — `internal/codecs/heap/envelope.go` ships `Envelope{DeclaredSize, ContentLen, Content, Compressed}` with `DecodeEnvelope` and `EncodeEnvelope`. Strict size validation at both nesting levels. The `Compressed` field caches the original on-disk byte run so re-encoding without touching `Content` reproduces the on-disk payload byte-for-byte; touching `Content` (or building a fresh Envelope) triggers a recompress through the standard library's zlib writer. Verified: 21 FPHb + 21 BDHb corpus envelopes decode and round-trip byte-for-byte through the Compressed cache.
-- [x] Add fuzz target for the envelope parser — `internal/codecs/heap/envelope_fuzz_test.go` defines `FuzzDecodeEnvelope` (random bytes → never panics) and `FuzzEncodeRoundTrip` (random Content → encode → decode → byte-equal). 10s smoke runs hit 393K and 44K execs respectively without any panic or assertion failure.
-
-### 9.2 Tag-enum system
-
-- [x] Port `SL_SYSTEM_TAGS`, `OBJ_FIELD_TAGS`, `SL_CLASS_TAGS` (references/pylabview/pylabview/LVheap.py) — all three core enums shipped as Go types `SystemTag`, `FieldTag`, `ClassTag` with full member lists (5 / 616 / 373 entries) and `String()` accessors. pylabview's two case-distinct duplicates (`OF__commentSelLabData` / `OF__CommentSelLabData`) and value-aliased pairs (`OF__tagDLLPath = OF__recursiveFunc = 430`) both round-trip cleanly.
-- [x] Port the ~30 specialised tag enums (plot data, tree nodes, tabs, cursors, digital buses, scales, …) — scope to those actually observed in corpus first — all 42 enum classes (HEAP*FORMAT, NODE_SCOPE, ENUM_TAGS, SL*_*TAGS, OBJ*_\_TAGS) ported in a single pass since the generator is mechanical. Per-enum `String()` methods + `*Names` lookup tables for callers that prefer the maps directly. Out-of-range values fall back to `Type(N)` style strings.
-- [x] Ship as generated Go code with a regenerator script under `scripts/` — `scripts/gen-heap-tags/main.go` parses `references/pylabview/pylabview/LVheap.py` via regex (class header + `Name = number` lines, ignoring docstrings and methods) and emits `internal/codecs/heap/tags_gen.go` (~3.2K lines covering all 42 types). Re-run with `go run ./scripts/gen-heap-tags > internal/codecs/heap/tags_gen.go`. Spot-check tests in `tags_test.go` lock the core SystemTag/SystemAttribTag/NodeScope/HeapFormat/FieldTag values to their pylabview source-of-truth so the generator can never drift silently.
-
-### 9.3 Node types
-
-Each listed node class from `LVheap.py` → a Go struct in `internal/codecs/heap/nodes`:
-
-- [x] `HeapNode` base type with attributes + children — `internal/codecs/heap/node.go` ships `Node{Tag, RawTagID, HasExplicitTag, Scope, SizeSpec, Attribs, Content, ByteSize, Children, parent}` and a top-level `Walk(content)` that returns `WalkResult{Flat, Roots}` mirroring pylabview's flat `section.objects` plus a parent/child tree projection. Variable-size foundation (`readU124`, `readS124`, `readS24`) ported in `varsize.go`. **Verified: 22 541 heap entries from 42 corpus FPHb/BDHb streams (84 top-level roots) decode cleanly**, no errors, full byte-accounting (no trailing or short reads). pylabview's TagClose-as-sibling tree shape is reproduced exactly.
-- [x] `HeapNodeStdInt` (U124 / S24 variable-length encoding) — `Node.AsStdInt(signed bool) (int64, error)` reads the node's `Content` as a big-endian integer of length `len(Content)`. Supports both signed and unsigned variants; rejects bool-shaped nodes and content > 8 bytes. Note: the U124/S24 variable-length encoding is used by the _attribute list_ and _content size header_, not the StdInt content body itself; pylabview's `HeapNodeStdInt` reads `len(content)` BE bytes — which is what `AsStdInt` does.
-- [x] `HeapNodeTypeId` — `Node.AsTypeID() (int64, error)`, alias for `AsStdInt(true)` matching pylabview's `HeapNodeTypeId(HeapNodeStdInt)` with `signed=True, btlen=-1`.
-- [x] `HeapNodeRect` — `Node.AsRect() (Rect, error)` returns `Rect{Left, Top, Right, Bottom}` (4 × BE int16, exactly 8 bytes).
-- [x] `HeapNodePoint` — `Node.AsPoint() (Point, error)` returns `Point{X, Y}` (2 × BE int16, exactly 4 bytes).
-- [x] `HeapNodeString` — `Node.AsString() (text string, isNull bool, error)`. SizeSpec 0/7 (bool-shaped) is treated as the pylabview `[NULL]` marker; SizeSpec 6 with empty content is a legitimate empty string. Returned bytes are not transcoded.
-- [x] `HeapNodeBool` — already covered by the base walker via `SizeSpec` 0/7 + `Node.IsBool()` / `Node.BoolValue()` helpers (no separate node type needed because pylabview encodes bools entirely in the SizeSpec field, with no content body).
-- [x] `HeapNodeTDDataFill` and `HeapNodeTDDataFillLeaf` — typed accessor `pkg/lvvi.Model.HeapDataFill(tree, nodeIdx)` decodes `OF__StdNumMin`/`Max`/`Inc` (513/514/515) leaves via the parent's `OF__typeDesc` child through DTHP+VCTP. Numeric primitives (NumInt8…UInt64, NumFloat32, NumFloat64) decode to typed `DataFillValue.{Int, Uint, Float}` with declared `Width`; non-numeric TDs (Boolean, Cluster, String, Function, refnum, complex, quad-float) fall back to `Kind=Raw` with the resolved `FullType` preserved. Backed by new heap-level accessors `Node.AsFloat32` / `AsFloat64`. `HeapNodeTDDataFillLeaf` (the complex-leg `OF__real`/`OF__imaginary` form) has no fixture coverage and is intentionally not classified as a DataFill tag yet. Verified across all 75 corpus DataFill nodes (21 typed numeric, 42 Raw, 12 Unknown) — `Raw` always preserves the original content bytes so the heap codec remains round-trip-safe; see `docs/resources/fphb.md` for the resolution algorithm.
-- [x] Opaque-bytes fallback for every node type `pylabview` itself leaves partially decoded — `Node.Content` IS the opaque-bytes fallback. Every node, regardless of tag, has its content preserved verbatim so unparsed nodes round-trip exactly.
-
-### 9.4 FPHb codec
-
-- [x] `internal/codecs/fphb` wires the envelope + tag-stream decoder + node types — `Codec{}` returns `Value{Envelope, Tree}` from `heap.DecodeEnvelope` + `heap.Walk`; registered in `pkg/lvvi`, `pkg/lvdiff`, `internal/coverage`, and the WASM `typedFourCCs` set.
-- [x] Tier 1; round-trip verified byte-for-byte on every corpus FPHb section — `TestEncodeRoundTripCorpus` walks all 21 corpus VIs and re-encodes 21 FPHb sections (15164 tag entries total) bit-for-bit; `Encode` reuses `Envelope.Compressed` cache and recompresses cleanly when cleared (covered by `TestEncodeRecompressesWhenEnvelopeCacheCleared`).
-- [x] Validate: detect truncation, unrecognised tags (warning in lenient, error in strict), node arity violations — `Validate` calls `Decode`; envelope/walker errors surface as `Tier 1` issues. Truncation, bad declared sizes, and walker-level structural violations propagate; unknown-tag classification stays a future hook on top of `tags_gen.go`.
-- [x] Extensive fuzz coverage — `FuzzDecode` (661K+ execs in 15s, no panics) and `FuzzValidate` (301K+ execs in 10s, no panics), seeded with synthetic envelopes plus up to 8 real corpus payloads.
-
-### 9.5 Public surface
-
-- [x] `pkg/lvvi.Model` gains `FrontPanel()` returning the decoded tree — `Model.FrontPanel() (HeapTree, bool)` projects the internal `heap.WalkResult` into a cycle-free public form (`HeapTree{Nodes, Roots}` with each `HeapNode` carrying a `Parent` index and `Children` index slice). Verified across 21 corpus VIs (15164 nodes / 42 roots projected with consistent parent/children indices and `Scope ∈ {open, leaf, close}`).
-- [x] `pkg/lvdiff` decoded differ for FPHb (structural, tolerates tag ordering noise) — `fphb.Codec` is registered in `defaultDecodedDiffers` (Phase 9.4); Phase 9.5 makes the diff structural by extending `ignoreDecodedField` to suppress `heap.Envelope.Compressed` (round-trip cache), `heap.WalkResult.Roots` (redundant with `Tree.Flat`), and `heap.Node.Children` (redundant with the per-position flat walk + `Parent` edge). Identical files now produce zero FPHb decoded items; cross-file diffs no longer surface noise from the duplicated tree projection or the recompressed-bytes cache.
+> Tag: v0.9.0 | Exit: FPHb parses to a typed tree and round-trips byte-for-byte
+- Implemented shared heap zlib envelope with cached-byte preservation, recompression fallback, and fuzz targets.
+- Generated/ported heap tag enums from pylabview and added typed node accessors for ints, type IDs, rects, points, strings, bools, and data fills.
+- Added FPHb Tier 1 codec, validation, corpus round-trip tests, and extensive fuzz coverage.
+- Exposed lvvi FrontPanel trees and structural decoded diffs for FPHb.
 
 ---
 
-## Phase 10 — Block-Diagram Heap (`BDHb`) & Approximate Render
+## Phase 10 — Block-Diagram Heap (BDHb) & Approximate Render
 
-> Target: 4–6 weeks | Exit: `BDHb` round-trips through the same heap framework; demo shows approximate Front-Panel and Block-Diagram previews; coverage dashboard reports typed support for every corpus FourCC; v1.0 gate cleared | Tag: `v1.0.0`
-
-### 10.1 BDHb codec
-
-- [x] Reuse the Phase 9 heap framework (tag enums are largely shared — cross-reference `BDHb`/`FPHb` in LVblock.py:5350–5362) — `internal/codecs/bdhb` is a sibling of `internal/codecs/fphb` over the same `internal/codecs/heap` envelope + walker; `Value` carries the same `Envelope` and `Tree` fields.
-- [x] Add BDHb-specific tag subsets (block-diagram primitives, wires, structures) from corpus evidence — block-diagram-specific tag identification rides on top of the shared `tags_gen.go` enums (the FPHb/BDHb subclasses in pylabview share parsing wholesale at this layer); per-tag block-diagram payload typing is the natural next step in 10.2's render path, not a 10.1 deliverable.
-- [x] Tier 1 round-trip verified — `TestEncodeRoundTripCorpus` re-emits all 21 corpus BDHb sections (7377 total tag entries) bit-for-bit; `TestEncodeRecompressesWhenEnvelopeCacheCleared` confirms the recompression fallback path; `FuzzDecode` (15s, no panics) and `FuzzValidate` (10s, no panics) exercise malformed inputs. Wired into `pkg/lvvi.newLvviRegistry`, `pkg/lvdiff.defaultDecodedDiffers`, `internal/coverage.shippedCodecs`, and the WASM `typedFourCCs` set; coverage dashboard now reports **27/27 typed (100.0%)** with zero opaque resource types.
-
-### 10.2 Front-panel and block-diagram render (demo-side)
-
-- [x] Render a best-effort front-panel preview from the decoded tree: controls, indicators, labels, visible groupings (ignore custom skins / images for v1) — new "Front Panel" tab in the web demo renders a tree-view of FPHb opening-scope nodes with class names resolved by `lvvi.HeapTagName` (SystemTag → ClassTag → FieldTag fallback). Each node shows its class label, child count, and folded leaf-field count; pure leafs are surfaced as field-count badges on the parent.
-- [x] Render a block-diagram overview: structures (while/for/case/sequence), primitives, SubVI references — deliberately skip wire routing in v1 — sibling "Block Diagram" tab rendering the BDHb tree with the same projection. `pkg/lvvi.Model.BlockDiagram()` mirrors `FrontPanel()`, returning a cycle-free `HeapTree` with parent/children indices.
-- [x] Gracefully degrade for object types the decoder can't reach yet; surface them as opaque placeholder boxes with their tag label — unresolved tags fall back to `Tag(N)` form, rendered with a muted/italic style (`heap-node-tag-fallback`, `heap-hist-pill-fallback`) so coverage gaps are visually obvious. Verified on the corpus: action.ctl resolves 50/50 open-scope FPHb tags; degenerate cases never produce blank labels.
-- [x] Add a "render fidelity" legend explaining what's approximate — each new tab leads with a `heap-fidelity-card` that calls out what's structural-only (no positioned UI skins, no wire routing), why (per-class field decoders are out of scope for v1), and how unresolved tags are flagged. Histogram card on each tab summarises object counts by class.
-
-### 10.3 v1.0 acceptance gate
-
-- [x] `internal/coverage` reports typed codec support for every FourCC observed in the corpus — `docs/generated/resource-coverage.{json,md,svg}` show **27/27 typed (100.0%)** with zero opaque resource types; `TestGeneratedArtifactsStayInSync` fails CI if the manifest drifts from the registered codec set.
-- [x] Per-phase `docs/resources/*.md` up to date; `docs/resource-registry.md` shows all observed types as typed — added [`docs/resources/fphb.md`](docs/resources/fphb.md) and [`docs/resources/bdhb.md`](docs/resources/bdhb.md) for the two heap codecs; `docs/resource-registry.md` now lists every shipped codec (was 10/27, now 27/27) and the opaque-fallback row was removed since no observed FourCC needs it.
-- [x] CLI / API surface frozen; any Tier 2 expansions beyond this phase go through a compat policy update — published [`docs/api-compat.md`](docs/api-compat.md) defining the supported `pkg/*` and CLI surface, the round-trip invariant, the rules for additive Tier 2 expansions, and the criteria that force a 2.0 bump.
-- [x] Demo published with the richer Info / Structure views active — `web/` is auto-deployed to GitHub Pages by `.github/workflows/pages.yml` on every push to `main`; the live build carries the Phase 10.2 _Front Panel_ and _Block Diagram_ tabs over the shared `lvvi.HeapTree` projection.
+> Tag: v1.0.0 | Exit: BDHb typed, approximate FP/BD render, 100% corpus FourCC coverage
+- Reused the heap framework for BDHb with Tier 1 round-trip validation and fuzz coverage.
+- Added FrontPanel and BlockDiagram tree projections plus approximate demo render tabs with fidelity notes.
+- Brought coverage to 27/27 typed observed FourCCs and updated generated coverage/resource-registry docs.
+- Published API compatibility policy and deployed the richer web demo flow.
 
 ---
 
 ## Phase 11 — SVG / Canvas Renderers & CLI Export
 
-> Target: 2–4 weeks | Exit: web demo can show geometry-based front-panel / block-diagram previews in addition to the current tree view; CLI can emit standalone SVG renderings; unresolved objects still render as labeled placeholders instead of disappearing | Tag: `v1.1.0`
-
-### 11.1 Renderer-neutral scene graph
-
-- [x] Define a shared scene model (`internal/render` or equivalent) for boxes, labels, groups, ports/terminals, wires, and z-order so the demo and CLI do not each invent their own approximation rules — `internal/render/scene.go` now defines `Scene`, `Node`, `Wire`, `Rect`, `View`, and deterministic heap-tree projection/layout helpers (`ProjectHeapTree`, `FrontPanelScene`, `BlockDiagramScene`). Tests in `internal/render/scene_test.go` lock the initial contract: explicit logical bounds, containment, placeholder labels/paths for unresolved tags, and corpus-backed front-panel scene generation.
-- [x] Project decoded `FPHb` / `BDHb` nodes into that scene graph with explicit bounds, text, and containment relationships wherever corpus evidence is strong enough — Phase 11.1's first pass is intentionally structural rather than geometry-faithful: every decoded open-scope heap object becomes a grouped scene node with a box, title label, logical bounds, z-order, and nested children; leaf entries remain visible as label nodes. Both `FrontPanelScene` and `BlockDiagramScene` now project real corpus files through that path.
-- [x] Keep partially decoded or unknown object classes visible as placeholder nodes carrying their resolved tag label and parent path, so exports remain complete even when fidelity is low — unresolved tags stay visible as `Placeholder` scene nodes, keep `Tag(N)` labels plus their full parent path, and carry through into both SVG output and the web-demo preview instead of disappearing.
-- [x] Keep coordinates vector-friendly (logical units + view box) so the same scene can drive SVG output and a browser canvas renderer — the scene graph stores logical `Rect` bounds plus a scene-level `ViewBox`, and `internal/render/svg.go` now proves the same coordinates can drive a standalone SVG renderer without any CLI- or web-specific layout fork.
-
-### 11.2 Web demo visual render mode
-
-- [x] Add a visual render mode to the existing "Front Panel" and "Block Diagram" tabs; keep the current tree view available as an inspection/debug fallback — both tabs now expose an explicit `Visual | Tree` mode switch in `web/index.html` / `web/app.js`, with visual mode selected by default and the existing tree renderer retained as the fallback/debug surface.
-- [x] Prefer SVG for the primary browser render so users can inspect DOM nodes, copy the output, and compare object bounds directly in devtools — the WASM payload now carries `front_panel_svg` / `block_diagram_svg` emitted by `internal/render.SVG`, and the web demo mounts that SVG directly as the primary visible render in each heap tab.
-- [x] Add an optional canvas path for larger diagrams where pan/zoom performance matters more than DOM inspectability — the web demo now exposes a third `Canvas` mode beside `Visual` and `Tree`. WASM passes the shared scene graph through as JSON plus a `PreferCanvas` hint derived from `internal/render.PreferCanvas`, and `web/app.js` draws the same boxes/labels onto `<canvas>` with a size-based recommendation note for larger scenes.
-- [x] Surface fidelity warnings inline when a render falls back to placeholders, omitted wire routing, or heuristic sizing — `internal/render.ProjectHeapTree` now emits shared scene warnings (heuristic layout, placeholder nodes, missing block-diagram wires), WASM passes them through, and the web demo shows them in a dedicated "Fidelity Warnings" card above the active render.
-
-### 11.3 CLI render/export
-
-- [x] Add `lvrsrc render <file>` with `--view=front-panel|block-diagram` and `--format=svg` so the same approximate render can be emitted outside the web demo — `cmd/lvrsrc/render.go` opens the file, decodes known resources through `pkg/lvvi`, projects the requested scene through `internal/render`, and emits SVG using the shared renderer. Tests in `cmd/lvrsrc/render_test.go` cover stdout SVG generation, `--out`, and unsupported-format rejection.
-- [x] Support `--out <path>` for writing a standalone SVG artifact and stdout output for shell pipelines — the new command reuses the root `--out` plumbing, so `lvrsrc render` works both as `lvrsrc render foo.vi > foo.svg` and `lvrsrc --out foo.svg render foo.vi`.
-- [x] Make the CLI output self-describing: title block / metadata, view box sized to the rendered scene, and visible placeholder styling for unresolved objects — `internal/render.SVG` emits a standalone `<svg>` with title / aria label, scene-sized `viewBox`, stable CSS classes, and dashed placeholder styling for unresolved nodes.
-- [x] Reuse the same scene-graph projection as the web demo rather than maintaining a separate CLI-only renderer — both the CLI `render` command and the WASM/web-demo previews now flow through the same `internal/render` scene graph and SVG renderer, so layout rules and placeholder handling are shared.
-
-### 11.4 Verification and docs
-
-- [x] Add golden tests for scene-graph projection and SVG output on representative corpus files (simple VI, control, structure-heavy block diagram) — `internal/render/golden_test.go` snapshots the shared scene graph plus full SVG output for `format-string.vi` (simple VI front panel), `action.ctl` (control front panel), and `load-vi.vi` (structure-heavier block diagram). Goldens live under `internal/render/testdata/golden/`.
-- [x] Add web-demo smoke coverage ensuring both tabs can switch between tree and visual modes without panics on files that have `FPHb` / `BDHb` — `web/app_smoke_test.mjs` drives the real `web/app.js` module against a stub DOM and exercises `Visual`, `Canvas`, and `Tree` mode switching for both heap tabs; `web/smoke_test.go` wraps that script so it runs under `go test ./web`.
-- [x] Document renderer limits and export semantics in `docs/cli.md` and the relevant `docs/resources/*.md` pages — new CLI documentation lives in `docs/cli.md`; `docs/resources/fphb.md` and `docs/resources/bdhb.md` now describe the shared scene graph, current SVG/canvas render semantics, and the main approximation limits.
+> Tag: v1.1.0 | Exit: shared scene graph, web visual modes, and CLI SVG export
+- Added renderer-neutral scene graph with bounds, labels, containment, placeholders, wires, view boxes, and z-order.
+- Projected FPHb/BDHb trees into shared SVG/canvas render paths used by both WASM and CLI.
+- Shipped lvrsrc render with front-panel/block-diagram SVG output and --out/stdout support.
+- Added scene/SVG goldens, web visual/canvas/tree smoke coverage, and renderer limit docs.
 
 ---
 
-## Phase 12 — LabVIEW-faithful rendering
+## Phase 12 — LabVIEW Geometry & Widget Foundations
 
-> Target: incremental | Exit: web demo and CLI render front-panel and block-diagram surfaces that _read_ like LabVIEW (real positions, identifiable widget kinds, wires connecting nodes) so a viewer can recognise the VI at a glance | Tag: `v1.2.0` (Stage 1 complete) / `v1.3.0+` (fidelity)
+> Target: Stage 1 foundation | Exit: controls have real bounds, generic widget kinds, and terminal anchors for later wire rendering | Tag: `v1.2.0-pre`
 >
-> Replaces the heuristic depth-stacked layout from Phase 11 with decoded
-> LabVIEW geometry as it lands tag-by-tag. Two stages: **Stage 1
-> (functional clarity)** — controls in the right place, BD nodes wired
-> up, generic widget styling per kind; **Stage 2 (fidelity)** —
-> per-class control skins, fonts, exact wire waypoints, decorations.
+> Replaces the Phase 11 heuristic depth-stacked layout with decoded
+> LabVIEW geometry wherever the heap exposes it. This phase is complete:
+> it does not attempt full LabVIEW skins or wire routing.
 
-### 12.1 Decode `OF__bounds` and use real positions (Stage 1, batch 1)
+### 12.1 `OF__bounds` real positions (completed)
 
-- [x] Spec confirmed against `pylabview` `HeapNodeRect` (LVheap.py:1725) and the corpus: 4 × big-endian `int16` Left/Top/Right/Bottom; FieldTag 14 — already supported by `internal/codecs/heap.Node.AsRect`. Coverage: 1 188 / 1 188 OF__bounds leaves across 42 FPHb + BDHb trees decode without error.
-- [x] `lvvi.HeapBounds(tree, idx)` and `lvvi.FindBoundsChild(tree, parentIdx)` ship as the typed accessors callers use to look up a control's outer rectangle. Mirrors the on-demand pattern of `lvvi.HeapDataFill`. Tests in `pkg/lvvi/bounds_test.go`.
-- [x] `internal/render.ProjectHeapTree` promotes a control's decoded bounds onto its scene group — position **and** size come from LabVIEW pixels — and drops the OF__bounds leaf from the rendered output (it's metadata, not visible content). Controls without a decoded bounds child fall back to the prior heuristic stack so partial coverage degrades gracefully. Scene viewBox auto-fits to the decoded coord range.
-- [x] Heuristic-layout warning relaxed: only emitted when at least one root falls back to the heuristic path. A fully bounds-driven scene no longer self-flags as approximate.
-- [x] Render goldens regenerated (`internal/render/testdata/golden/*.golden.json`) — control front-panel goldens shrink from heuristic-stretched layouts (e.g. 678×9024) to their true LabVIEW pixel extents (e.g. 856×3024). WASM `web/lvrsrc.wasm` rebuilt; `web/smoke_test.go` still passes.
+- Spec confirmed against `pylabview` `HeapNodeRect` (LVheap.py:1725): FieldTag 14 stores 4 big-endian `int16` values `{Left, Top, Right, Bottom}`. Corpus coverage: 1 188 / 1 188 OF__bounds leaves decode across 42 FPHb + BDHb trees.
+- `lvvi.HeapBounds(tree, idx)` and `lvvi.FindBoundsChild(tree, parentIdx)` expose bounds with tests in `pkg/lvvi/bounds_test.go`.
+- `internal/render.ProjectHeapTree` promotes decoded bounds to scene groups, drops the metadata leaf from visible output, keeps heuristic fallback for controls without bounds, and auto-fits the scene viewBox.
+- Heuristic-layout warnings now appear only when at least one root falls back to heuristic placement. Render goldens were regenerated; WASM rebuilt; `web/smoke_test.go` still passes.
 
-### 12.2 Map class → widget kind and stylize generically (Stage 1, batch 2)
+### 12.2 Generic widget-kind styling (completed)
 
-#### 12.2a Name-based mapping (shipped)
+- `pkg/lvvi.WidgetKind` covers boolean, numeric, string, cluster, array, graph, decoration, structure, primitive, terminal, and other; name-based class mapping also folds `SL__array` and `SL__arrayElement` into Array.
+- `internal/render.Node.WidgetKind` flows through layout and SVG output, emitting `lvrsrc-widget-{kind}` CSS classes with distinct generic fills/strokes. Empty helper/leaf kinds suppress the class.
+- Corpus baseline (`TestWidgetKindForNodeCorpusBaseline`) reports roughly 50% open-scope-node coverage before terminal classes, dominated by Array, Other, Primitive, Graph, and Decoration.
+- Stage 1 deliberately stops short of pixel-faithful skins; the shipped goal is that booleans, numerics, strings, clusters, arrays, graphs, decorations, structures, primitives, and terminals are visually distinguishable.
 
-- [x] `pkg/lvvi.WidgetKind` enum (boolean / numeric / string / cluster / array / graph / decoration / structure / primitive / other) plus `WidgetKindForClass(ClassTag)` and `WidgetKindForNode(HeapNode)`. The node-level resolver also folds `SystemTag(SL__array)` (-4) and `SystemTag(SL__arrayElement)` (-6) into Array because FP array containers and their repeated children are persisted as system tags rather than positive class tags. Tests in `pkg/lvvi/widget_test.go`.
-- [x] `internal/render.Node.WidgetKind` propagates through `buildLayoutItem` / `placeLayoutItem` onto every emitted group / box / title-label, so the SVG renderer can pick a per-kind skin without re-resolving from the tag. Test in `internal/render/scene_widget_test.go`.
-- [x] `internal/render.SVG` emits an additional `lvrsrc-widget-{kind}` CSS class on each node and ships generic per-kind skins (filled box vs. dashed-outline vs. tinted background) in the embedded stylesheet. Empty `WidgetKind` (helper / leaf nodes) suppresses the class. Test in `internal/render/svg_test.go`.
-- [x] Goldens regenerated for the three render fixtures; corpus baseline (`TestWidgetKindForNodeCorpusBaseline`) reports ≈ 50 % open-scope-node coverage today, dominated by Array (`SL__arrayElement`), Other, Primitive, Graph, and Decoration. WASM rebuilt.
-
-#### 12.2b pylabview cross-check (pending)
-
-- [ ] Read pylabview's `LVheap.py` per-class parser dispatch and adjust the `widgetKindByClass` table where the name-based heuristic disagrees with pylabview's actual classification. Goal: lift the corpus classified-rate beyond name guessing and catch silent miscategorizations (e.g. classes whose names look like primitives but pylabview treats as terminals or refnums).
-- [ ] Where pylabview groups classes into kinds we don't have (refnum / tunnel / variant / connector-pane), decide whether to add new `WidgetKind` values or fold them into `Other` with a per-kind doc note.
-
-#### Stage-1 exit for 12.2
-
-- [x] Phase 12.2 stops short of pixel-faithful skins (that's Stage 2); the deliverable is "you can tell the booleans from the numerics from the strings." Met by 12.2a — boolean / numeric / string / cluster / array / graph / decoration / structure / primitive each carry a distinct fill+stroke skin in the SVG renderer; pylabview-aligned tightening of the mapping (12.2b) does not block this exit criterion.
-
-### 12.3 Decode `OF__termBounds` / `OF__termHotPoint` (Stage 1, batch 3)
+### 12.3 Terminal geometry and anchors (completed)
 
 > Spec discovery showed `OF__terminal` (FieldTag 367) has zero leaves
-> in the 21-fixture corpus and pylabview's `LVheap.py` carries no
-> decoder for it. The real terminal geometry travels on
-> `OF__termBounds` (266, 154 leaves at 8 B = same `{Left, Top, Right,
-> Bottom}` rect as `OF__bounds`) and `OF__termHotPoint` (267, 6 leaves
-> at 4 B = a single Mac-style `Point{V, H}`). The PLAN bullet for
-> 12.3 was renamed to match.
+> in the 21-fixture corpus and pylabview has no decoder for it. Real
+> terminal geometry travels via `OF__termBounds` and `OF__termHotPoint`.
 
-- [x] `pkg/lvvi.HeapTermBounds(tree, idx)` decodes `OF__termBounds` (FieldTag 266) — same 8-byte BE int16 rect as `OF__bounds`, accessor mirrors `HeapBounds`. `FindTermBoundsChild` is the parent-side lookup. Tests in `pkg/lvvi/terminal_test.go`. Corpus coverage: **154 / 154** OF__termBounds leaves decode without error.
-- [x] `pkg/lvvi.HeapTermHotPoint(tree, idx)` decodes `OF__termHotPoint` (FieldTag 267) — 4 bytes BE int16 in Mac Point V/H order. `FindTermHotPointChild` is the parent-side lookup. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode.
-- [x] `WidgetKindTerminal` ships as the 11th member of the widget-kind enum; the BD tunnel/terminal classes (`SL__term`, `SL__fPTerm`, `SL__lpTun`, `SL__innerLpTun`, `SL__matedLpTun`, `SL__seqTun`, `SL__matedSeqTun`, `SL__flatSeqTun`, `SL__selTun`, `SL__simTun`, `SL__sdfTun`, `SL__regionTun`, `SL__commentTun`, `SL__externalTun`, `SL__xTunnel`, `SL__decomposeRecomposeTunnel`) are mapped onto it. Corpus baseline lifts from 49.7 % → **55.4 %** classified, with terminals (275 nodes) becoming the third-largest kind after Array and Other.
-- [x] `internal/render` adds `NodeKindTerminal` plus an `Anchor Point` field on `Node`. Tunnel / terminal heap nodes emit a flat `NodeKindTerminal` (not the group/box/title-label triple) sized via `OF__termBounds` (preferred) or `OF__bounds` (fallback), with `Anchor` set from `OF__termHotPoint` when present, else the bounds centre. Tests in `internal/render/scene_terminal_test.go`.
-- [x] `internal/render.SVG` draws `NodeKindTerminal` as a thin outline rect at the bounds plus a filled `r=2` anchor circle at `Anchor`. Ships `.lvrsrc-widget-terminal` and `.lvrsrc-node-terminal-anchor` CSS rules. Wires (12.4 / 12.5) will consume `Anchor` as the connect-point.
-- [x] Render goldens regenerated (BD now contains a `terminal` node from `load-vi.vi`'s `SL__sdfTun`); WASM rebuilt; `docs/resources/bdhb.md` "What's decoded" updated.
+- `pkg/lvvi.HeapTermBounds` decodes FieldTag 266 as the same 8-byte rect shape as `OF__bounds`; corpus coverage is 154 / 154 leaves. `FindTermBoundsChild` supports parent-side lookup.
+- `pkg/lvvi.HeapTermHotPoint` decodes FieldTag 267 as a 4-byte Mac-style `Point{V, H}`; corpus coverage is 6 / 6 leaves. `FindTermHotPointChild` mirrors the bounds lookup helper.
+- `WidgetKindTerminal` maps BD tunnel/terminal classes including `SL__term`, `SL__fPTerm`, loop/sequence/case tunnels, region/comment/external tunnels, `SL__xTunnel`, and `SL__decomposeRecomposeTunnel`. Corpus classified coverage rose from 49.7% to 55.4%.
+- `internal/render` emits tunnel/terminal heap nodes as flat `NodeKindTerminal` nodes with bounds from termBounds/bounds and `Anchor` from termHotPoint or the bounds centre.
+- SVG output draws terminal bounds as thin outlines plus a filled `r=2` anchor circle. Goldens were regenerated, WASM rebuilt, and `docs/resources/bdhb.md` documents the decoded terminal surface.
 
-### 12.4 Surface `OF__compressedWireTable` presence (Stage 1, batch 4)
+---
 
-> Spec discovery showed the literal `OF__wireTable` (296),
-> `OF__wireID` (295), `OF__wireGlyphID` (294), `OF__signalList`
-> (233), and `OF__signalIndex` (232) all have **0 leaves** across
-> the 21-fixture corpus; the wire connectivity for our fixtures
-> lives in `OF__compressedWireTable` (FieldTag 456) — 80 leaves,
-> children of `SL__arrayElement`, variable-length payloads (2 / 4 /
-> 6 / 8 / 10 / 12 / 14 / 20 bytes). Pylabview's `LVheap.py` carries
-> the enum number only — no decoder. Reverse-engineering the
-> compression scheme blind from 80 samples is high-risk work that
-> may produce wrong connectivity, so 12.4 ships as a **presence
-> accessor only**. Connectivity decoding is tracked as 12.4b and
-> waits on an external reference.
+## Phase 13 — Compressed Wire Table Decoding
 
-#### 12.4a Presence accessor (shipped)
+> Target: Stage 1 wire semantics | Exit: compressed wire-table chunks are typed enough for reliable block-diagram wire paths | Tag: `v1.2.0-pre`
+>
+> This phase covers `OF__compressedWireTable` reverse engineering. The
+> presence and basic accessor layers are shipped; comb topology,
+> multi-elbow chain geometry, and manual-chain semantics remain open.
 
-- [x] `pkg/lvvi.HeapCompressedWireTable(tree, idx) ([]byte, bool)` returns the raw payload of an `OF__compressedWireTable` leaf, mirroring the `HeapBounds` / `HeapTermBounds` accessor pattern. The bytes stay opaque — callers get them verbatim and decide what to do with them.
-- [x] `pkg/lvvi.CountCompressedWireTables(tree HeapTree) int` walks a heap tree and reports how many compressed wire-table chunks it carries. The web demo / scene projection use this to surface a "wires present but topology not yet decoded" annotation.
-- [x] `internal/render` adds a scene warning of the form `"Block diagram has N compressed wire-table chunks; topology not yet decoded (Phase 12.4b)."` whenever the projected BD tree contains at least one such leaf, so the demo no longer silently drops the wire data.
-- [x] Render goldens regenerated; corpus coverage test asserts 80 / 80 leaves return non-empty bytes; WASM rebuilt; `docs/resources/bdhb.md` "What's still opaque" updated with the spec-discovery findings.
+### 13.1 Wire-table source discovery (completed)
 
-#### 12.4b Connectivity decoding (controlled-fixture spike concluded)
+- The literal `OF__wireTable` (296), `OF__wireID` (295), `OF__wireGlyphID` (294), `OF__signalList` (232/233 naming context), and `OF__signalIndex` (232) have 0 relevant leaves across the original 21-fixture corpus.
+- Actual wire connectivity lives in `OF__compressedWireTable` (FieldTag 456): initially 80 leaves, children of `SL__arrayElement`, with variable payload sizes of 2, 4, 6, 8, 10, 12, 14, and 20 bytes.
+- Pylabview carries the enum number but no decoder, so connectivity decoding is corpus- and controlled-fixture-driven.
+- `pkg/lvvi.HeapCompressedWireTable` returns raw payload bytes; `CountCompressedWireTables` reports chunk counts; render warnings now surface compressed-wire presence instead of silently dropping wire data.
 
-The original "primitive-internal metadata only" conclusion was wrong;
-an enum collision had us mis-reading the parent chain. Tag 233
-collides between `ClassTag.SL__baseTableControl` (a UI widget) and
-`FieldTag.OF__signalList` (a BD signal aggregate); the heap resolver
-prefers ClassTag, so our debug output labelled the container as
-`SL__baseTableControl`. In BD context — parented under
-`SL__eventDataNode` / `SL__sdfTun` / `SL__concatDCO` — it is a
-signalList, and each `arrayElement` child holds one wire/signal entry
-with `OF__compressedWireTable` as its payload:
+### 13.2 Signal-list correction and first controlled-fixture spike
+
+The original "primitive-internal metadata only" conclusion was wrong.
+Tag 233 collides between `ClassTag.SL__baseTableControl` and
+`FieldTag.OF__signalList`; the heap resolver prefers ClassTag, so
+debug output mislabeled the container. In BD context, parented under
+`SL__eventDataNode`, `SL__sdfTun`, or `SL__concatDCO`, it is a signal
+list, and each `arrayElement` child holds one wire/signal entry:
 
 ```text
 SL__rootObject
   └── SL__eventDataNode (or other primitive)
-       └── OF__signalList                ← _not_ SL__baseTableControl
-            └── SL__arrayElement          (one entry per signal/wire)
-                 └── OF__compressedWireTable   (its wire payload)
+       └── OF__signalList
+            └── SL__arrayElement
+                 └── OF__compressedWireTable
 ```
 
-A controlled-fixture spike then authored 12 deliberately-varied VIs
-(`blank.vi`, `Numeric42.vi`, `Numeric4Dot2.vi`, `BoolToLED.vi`,
+The first spike authored 12 deliberately varied VIs:
+`blank.vi`, `Numeric42.vi`, `Numeric4Dot2.vi`, `BoolToLED.vi`,
 `Add17Plus25.vi`, `Numeric42Far.vi`, `Numeric42Bend.vi`,
 `Numeric42_8px_down.vi`, `Numeric42_16px_down.vi`,
 `Numeric42_8px_down_8px_further_right.vi`,
-`Numeric42TwoIndicatorsY.vi`, `Numeric42ThreeIndicatorsY.vi`) and
-diffed their byte payloads. Findings:
-
-1. **Chunks are wire-networks, not edges.** A Y-shaped fan-out
-   (1 source → 2 indicators) emits **one** chunk, not two. So chunk
-   count = wire-network count; an N-edge tree is one chunk that
-   describes the whole network.
-2. **`byte0` = waypoint count** (endpoints + every internal corner of
-   the auto-routed path). Adding one auto-bend (8 px y-offset) bumped
-   `byte0` from 2 to 4 because LabVIEW renders an offset wire as a
-   Z-shape elbow with two corners, not one.
-3. **`byte1` = mode flag.** Three values observed:
-   - `0x08` auto-routed chain (single edge, layout-derived)
-   - `0x04` manually-routed chain (user-placed waypoints)
-   - `0x00` tree (multi-endpoint network)
-4. **Chain-mode trailing payload is LEB128 varints encoding _just the
-   delta_ over what auto-routing can recover from terminal positions.**
-   Verified by predicting that `Numeric42_16px_down` would change
-   exactly one byte from `Numeric42_8px_down`'s payload — and it did
-   (`08` → `10`). The horizontal indicator shift produced no payload
-   change at all because the post-elbow horizontal segment is implicit
-   (auto-stretches to the sink's `OF__bounds.x`).
-5. **Tree-mode payload is fixed-width 2-byte records.** Total length
-   equals `byte0 × 2`, with the first record being `(byte0, byte1)`
-   and the remaining `byte0 - 1` records describing branches +
-   geometry tail. Adding one branch (2-Y → 3-Y) increments `byte0`,
-   inserts a record in the branch list, and appends a per-branch
-   trailing byte.
-
-#### 12.4b₁ — typed accessor (shipped)
-
-- [x] `pkg/lvvi.WireMode` enum: `WireModeAutoChain` (`0x08`),
-  `WireModeManualChain` (`0x04`), `WireModeTree` (`0x00`),
-  `WireModeOther` (anything else). String() yields the symbolic name
-  for diagnostics.
-- [x] `pkg/lvvi.HeapWire(tree, idx)` returns a typed `Wire` projection:
-  `{Mode, Waypoints, ChainGeometry []uint64, TreeRecords [][2]byte,
-  Raw []byte}`. Chain-mode populates `ChainGeometry` from LEB128
-  varint decoding; tree-mode populates `TreeRecords` from fixed-width
-  splitting; both preserve `Raw` bytes for round-trip safety. Unknown
-  modes carry only `Raw` and `Waypoints`.
-- [x] `pkg/lvvi.CountWireMix(tree)` returns per-mode counts; the
-  scene-graph projection consumes it to surface a per-network
-  breakdown warning ("Block diagram has N wire networks (X
-  auto-routed, Y manually-routed, Z branched, W other); …") in
-  place of the older "compressed wire-table chunks" wording.
-- [x] Tests: 12 unit-level cases covering each mode (with payloads
-  drawn from the controlled-fixture spike — including ground-truth
-  cases like the 8 px / 16 px y-shifted I32 wires) plus a corpus
-  sweep that asserts every chunk decodes. Coverage on the 33-fixture
-  corpus is **93 / 93** (83 auto-chain, 3 manual-chain, 5 tree, 2
-  other).
-
-#### 12.4b₂ — per-record semantics (shipped, partial)
-
-The controlled-fixture spike grew to 16 deliberately-varied VIs —
-adding `Numeric42_8px_up.vi` (sign test), `Numeric42TwoNetworks.vi`
-(network-boundary test), `Numeric42TwoIndicatorsY_top7right_bottom11down.vi`
-(tree geometry-varied test) and `Numeric42FourIndicatorsY_single.vi`
-(higher-branch test) on top of the 12 from the prior batch.
+`Numeric42TwoIndicatorsY.vi`, and `Numeric42ThreeIndicatorsY.vi`.
 
 Findings:
 
-- **Sign is encoded separately, not zigzag.** `Numeric42_8px_up`
-  (indicator moved 8 px _above_ source, vs the
-  `Numeric42_8px_down` baseline) only changed payload[0]: `0x00 →
-  0x01`. The y-step magnitude byte stayed `0x08`. So payload[0] is
-  a direction flag (0 = down, 1 = up), payload[3] is unsigned
-  magnitude.
-- **Network-boundary rule confirmed both ways.** Two disconnected
-  const→indicator pairs emit exactly 2 chunks of `0208` each.
-  Combined with the earlier "Y-tree → 1 chunk" finding, chunks
-  reliably correspond to wire-networks (not edges, not terminals).
-- **2-Y tree endpoints ground-truthed.** Diffing the regular 2-Y
-  against `top7right_bottom11down` (top indicator nudged 7 px
-  right, bottom indicator nudged ~11 px down) showed exactly two
-  byte changes — record #4 H-byte +7, record #5 V-byte +10 (LV
-  drag-snap rounded the 11 to 10). So records #4 and #5 of a 2-Y
-  chunk are (V, H) endpoint coordinates per branch.
-- **3+ branch tree-mode is topology-dependent.** The 4-indicator
-  fixture (`Numeric42FourIndicatorsY_single.vi`, comb topology
-  with 4 distinct splice points along the trunk) emits 10 records,
-  not the linear-scaled 8 a "single Y with 4 fan-out branches"
-  would predict. Tree-mode header records grow with topology
-  complexity, not branch count alone, and need 12.4b₃ work to
-  fully decode.
+1. Chunks are wire-networks, not edges: a Y-shaped fan-out emits one chunk.
+2. `byte0` is the waypoint count: endpoints plus internal corners. One auto-bend can add two corners because LabVIEW renders an offset path as a Z-shape.
+3. `byte1` is the mode flag: `0x08` auto-routed chain, `0x04` manual chain, `0x00` tree, other values unknown.
+4. Chain-mode trailing payload uses LEB128 varints for deltas over geometry recoverable from terminal positions.
+5. Tree-mode payload is fixed-width 2-byte records: `(byte0, byte1)` followed by `byte0 - 1` records for branch/topology geometry.
+
+### 13.3 Typed wire accessor (completed)
+
+- `pkg/lvvi.WireMode` ships `WireModeAutoChain`, `WireModeManualChain`, `WireModeTree`, and `WireModeOther`, with `String()` for diagnostics.
+- `pkg/lvvi.HeapWire(tree, idx)` returns `{Mode, Waypoints, ChainGeometry []uint64, TreeRecords [][2]byte, Raw []byte}`. Chain mode decodes LEB128 varints; tree mode splits fixed 2-byte records; all modes preserve `Raw`.
+- `pkg/lvvi.CountWireMix(tree)` returns per-mode counts and drives scene warnings such as "N wire networks (X auto-routed, Y manual, Z branched, W other)".
+- Tests cover all modes with controlled-fixture payloads plus a corpus sweep. Coverage on the 33-fixture corpus is 93 / 93 chunks: 83 auto-chain, 3 manual-chain, 5 tree, 2 other.
+
+### 13.4 Per-record semantics shipped so far
+
+The second spike added `Numeric42_8px_up.vi`,
+`Numeric42TwoNetworks.vi`,
+`Numeric42TwoIndicatorsY_top7right_bottom11down.vi`, and
+`Numeric42FourIndicatorsY_single.vi`.
+
+Findings:
+
+- Sign is stored separately, not zigzag. Moving the indicator 8 px above the source changed payload[0] from `0x00` to `0x01`; the y-step magnitude byte stayed `0x08`.
+- Network boundaries were confirmed: two disconnected const-to-indicator pairs emit exactly two `0208` chunks.
+- 2-Y tree endpoints were ground-truthed: geometry changes moved record #4 H by +7 and record #5 V by +10, so records #4/#5 are endpoint coordinates for the two branches.
+- 3+ branch tree mode is topology-dependent. The 4-indicator comb fixture emits 10 records, not the linear 8 that a single-junction fan-out model would predict.
 
 Shipped accessors:
 
-- [x] `Wire.ChainAutoPath()` returns a typed
-  `ChainAutoPath{Straight, YStep, SourceAnchorX}` for chain-auto
-  wires whose payload matches the `0208` sentinel or the 4-varint
-  L-shape (`payload = [direction, 0, source-anchor-x, y-step-mag]`).
-  YStep is signed pixels, SourceAnchorX is the elbow's horizontal
-  offset from the source-glyph anchor (= 65 for I32 numeric
-  constants in our corpus). Multi-elbow auto-chain payloads return
-  ok=false — the magnitude clamp catches `Numeric42Far`'s 9 456
-  varint as out-of-range. Renderer composition (12.5): source +
-  SourceAnchorX → YStep → continue to sink.x.
-- [x] `Wire.TreeEndpointPair()` returns the two `Point{V, H}`
-  endpoints of a 2-fan-out tree wire-network (byte0 == 6, six
-  2-byte records). Records #4 and #5 are the per-branch endpoint
-  coordinates; geometry change in the controlled fixture moved
-  exactly the bytes we predicted. Tree chunks of any other shape
-  (3-Y, 4-Y, comb, …) return ok=false until 12.4b₃ untangles
-  topology-dependent header records.
-- [x] Scene warning extended: `"… auto-routed L-shapes and
-  2-branch trees are typed-decoded, multi-elbow / 3+ branch chunks
-  remain raw (Phase 12.4b₃)."` Goldens regen'd; WASM rebuilt;
-  corpus coverage stays 100 % (98 / 98 chunks decode through
-  HeapWire).
+- `Wire.ChainAutoPath()` returns `ChainAutoPath{Straight, YStep, SourceAnchorX}` for the `0208` sentinel and 4-varint L-shape payload (`[direction, 0, source-anchor-x, y-step-mag]`). Multi-elbow payloads return `ok=false` when magnitudes become implausible (>4096).
+- `Wire.TreeEndpointPair()` returns two `Point{V, H}` endpoints for 2-fan-out tree networks (`byte0 == 6`).
+- Scene warnings now state that auto-routed L-shapes and 2-branch trees are typed-decoded while multi-elbow and larger tree chunks remain raw.
 
-#### 12.4b₃ — remaining tree-mode and multi-elbow chain semantics (pending)
+### 13.5 Remaining tree-mode and chain semantics (partial)
 
-- [ ] **Multi-elbow chain decoding.** `Numeric42Far.vi` produces a
-  4-varint payload `[0, 0, 255, 9 456]` whose byte 3 is implausibly
-  large for a pixel y-step. Likely encodes a routing index or
-  per-segment delta list rather than a single elbow. Needs a
-  controlled fixture with deliberate 2- or 3-elbow auto-routing
-  (e.g. an obstacle-forcing layout) to map the variable shape.
-- [ ] **Tree-mode topology header.** The 3-Y and 4-Y fixtures show
-  topology-dependent header records (the 4-Y has `(06,00) (03,03)
-  (05,00) (03,41)` between the global header and the endpoint
-  records, where the 2-Y has `(00, 03) (00, 41)`). Decoding these
-  needs a controlled set varying topology while holding branch
-  count fixed — at minimum a single-junction 4-fan-out (true Y)
-  to compare against the comb-topology 4-fan-out we already have.
-- [ ] **Manual-chain decoding.** The 3 manual-chain chunks (byte1
-  `0x04`) decode as long varint streams; per-position semantics
-  unmapped beyond "user-placed waypoints with explicit deltas."
-  Needs controlled manual-bend fixtures with known-position
-  waypoints.
+- 3-branch pure Y-tree endpoints are now ground-truthed: `Wire.TreeEndpoints()` generalizes `TreeEndpointPair()` for `byte0` in `{6, 7}`. `Numeric42ThreeIndicatorsY_bottom8pxdown.vi` changes exactly one endpoint record (`44 2d` → `44 35`, +8 in the second coordinate), confirming the "last N = byte0 - 4 endpoint records" rule for pure 3-Y chunks. The independent corpus `reference-find-by-id.vi` chunk still matches the same shape.
 
-### 12.5 Wire path drawing (Stage 1, batch 5)
+- [ ] **Comb and 4+ branch topology.** Comb chunks (`byte0=10`, `rec[2][0]=6`) have records with `H=1` that are clearly flags or topology markers, not pixel coordinates. `Numeric42ThreeIndicatorsYComb_middle8pxdown.vi` shows the middle-branch edit changes two adjacent records in opposite directions (`5b 01` → `63 01`, `57 42` → `4f 42`), so the comb payload carries span/junction data around the moved branch rather than a simple trailing endpoint list. Other `byte0=10` chunks (`ndjson-parser.vi`, `reference-find-by-id.vi`) make the "last 4" rule suspicious (`H=4/10/16`). All `byte0 >= 8` shapes return nil/false from `TreeEndpoints()` until further ground-truthed.
 
-- [ ] Render block-diagram wires as orthogonal/Manhattan paths between known terminals. Drops the "wire routing not rendered yet" warning. Exit criterion for Stage 1: open a corpus VI in the demo and _recognise_ it.
+- [ ] **Multi-elbow chain decoding.** Multi-elbow auto-chain payloads carry more than 4 varints. The synthetic test case in `TestChainAutoPathDoesNotMakeUpMultiElbowGeometry` (`[0, 0, 255, 9 456]`) shows byte 3 is implausibly large for a pixel y-step, indicating routing-index or per-segment delta encoding. Needs a controlled fixture with deliberate 2- or 3-elbow auto-routing.
 
-### 12.6+ Stage 2 — fidelity (post-`v1.2.0`)
+- [ ] **Manual-chain decoding.** The 3 manual-chain chunks (`byte1 == 0x04`) decode as long varint streams, but per-position semantics are unmapped beyond "user-placed waypoints with explicit deltas." Needs controlled manual-bend fixtures with known-position waypoints.
 
-- [ ] Per-class control skins (real LabVIEW widget look).
-- [ ] Fonts, captions, tick labels, scale ranges.
-- [ ] Exact wire waypoints from `OF__wireTable` (replace orthogonal routing).
-- [ ] Decorations, colors, panel backgrounds.
-- [ ] Polish — selection bounds, label anchors, custom fonts.
+Remaining fixtures needed:
+
+1. **One more comb-geometry variation** — move a different branch or change actual vertical placement in `Numeric42ThreeIndicatorsYComb.vi` to separate endpoint coordinates from junction/span records.
+2. **`Numeric42TwoElbows.vi`** — force a single wire to auto-route with 2 elbows, then compare with `Numeric42_8px_down.vi` to map per-elbow varint roles.
+
+---
+
+## Phase 14 — Wire Rendering & Stage 1 Exit
+
+> Target: Stage 1 complete | Exit: a corpus VI is recognizable in the demo from positioned controls plus rendered block-diagram wires | Tag: `v1.2.0`
+
+### 14.1 Pylabview class cross-check
+
+- [x] Read pylabview's `LVheap.py` per-class parser dispatch and adjust `widgetKindByClass` where the name-based heuristic disagrees with pylabview's classification. Done: cross-checked `SL_CLASS_TAGS` plus `CLASS_EN_TO_TAG_LIST_MAPPING`; added explicit `refnum`, `variant`, and `connector-pane` widget kinds for pylabview-modeled classes that were previously `other`.
+- [x] Where pylabview groups classes into kinds not currently modeled (refnum, tunnel, variant, connector-pane), decide whether to add new `WidgetKind` values or fold them into `Other` with a per-kind doc note. Done: refnum, variant, and connector-pane are first-class `WidgetKind` values; tunnels stay folded into `terminal` because they are rendered as wire anchors.
+
+### 14.2 Wire path drawing
+
+- [x] Render block-diagram wires as orthogonal/Manhattan paths between known terminals using terminal anchors plus typed wire-network data. Done: `internal/render.ProjectHeapTree` now populates `Scene.Wires` for recognized block-diagram wire chunks, and SVG output draws them as polylines.
+- [x] Use `Wire.ChainAutoPath`, `Wire.TreeEndpointPair`, and `Wire.TreeEndpoints` where semantics are known; retain explicit warnings/placeholders for comb, 4+ branch, multi-elbow, manual-chain, and other unknown chunks. Done: auto-chain paths use `Wire.ChainAutoPath`; pure 2/3-branch tree networks use `Wire.TreeEndpoints` (which subsumes `TreeEndpointPair` for 2-branch cases); unknown/manual/multi-elbow/comb chunks remain unrendered with the wire summary warning.
+- [x] Drop the broad "wire routing not rendered yet" warning once known single-edge and 2/3-branch networks render visibly. Done: scenes with at least one rendered recognized wire report the rendered-network count instead of the broad not-rendered warning.
+- [ ] Exit criterion: open a corpus VI in the demo and recognize it from real control positions, generic widget styling, and connected block-diagram wire paths.
+
+---
+
+## Phase 15 — LabVIEW Fidelity Stage 2
+
+> Target: incremental fidelity | Exit: renders look substantially closer to native LabVIEW beyond Stage 1 functional clarity | Tag: `v1.3.0+`
+
+- [ ] Per-class control skins approximating the real LabVIEW widget look.
+- [ ] Fonts, captions, tick labels, scale ranges, and label anchors.
+- [ ] Exact wire waypoints once `OF__wireTable` / compressed-wire semantics are fully decoded, replacing heuristic orthogonal routing.
+- [ ] Decorations, colors, panel backgrounds, and custom style attributes.
+- [ ] Polish for selection bounds, resize handles, and export-quality SVG/canvas output.
+
+---
+
+## Phase 16 — Format Closure & Semantic Completeness
+
+> Target: close the remaining reverse-engineering gap | Exit: every observed byte is either semantically named, explicitly reserved/padding, or documented opaque with corpus evidence and a path to decode | Tag: `v1.4.0+`
+>
+> "Fully understand the format" is treated as a practical, evidence-backed
+> goal: complete for the supported LabVIEW versions and corpus families, with
+> version gates where older/newer files diverge. Unknown data should never be
+> hidden behind a typed codec name without a byte-level disposition.
+
+### 16.1 Coverage Accounting
+
+- [x] Add a byte-disposition report per resource: semantic fields, reserved/padding, checksums/compressed bytes, and opaque spans. Started in `internal/coverage`: the manifest now records corpus sections/bytes plus semantic/reserved/compressed/opaque/next fields for every observed FourCC.
+- [x] Extend `docs/generated/resource-coverage.md` beyond FourCC-level typed coverage so it reports semantic byte coverage for `FPHb`, `BDHb`, `VCTP`, `LIfp`, `LIbd`, `LIvi`, and LVSR tails. The generated JSON/Markdown artifacts now include corpus breadth, corpus sections/bytes, and byte-disposition status/details for every observed FourCC.
+- [x] Add tests that fail when a codec silently introduces a new opaque span without documenting it in the resource note. `internal/coverage` now fails the manifest test if any observed resource has an `undocumented` byte disposition or no semantic entry.
+- [x] Track corpus breadth by LabVIEW major version, platform, file kind (`.vi`, `.ctl`, `.vit`, `.llb`), password/protection state, compiled-code setting, and localized text encoding. The manifest now reports file kinds/extensions, RSRC format versions, decoded LabVIEW `vers` labels, password/BDPW state, LVSR locked flag, LVSR separate-compiled-code flag, and explicit `unknown` buckets for platform/text encoding until those fields are decoded.
+
+### 16.2 Corpus & Oracle Expansion
+
+- [ ] Build a controlled VI matrix that changes one feature at a time: labels, captions, fonts, colors, scales, decorations, clusters, arrays, graphs, structures, refnums, variants, subVI calls, event structures, cases, loops, and disabled/conditional diagrams.
+- [ ] Add version-spanning fixtures from old and current LabVIEW releases, with expected version gates for fields that move or change encoding.
+- [ ] Keep an external-oracle comparison harness against `pylabview`, `pylavi`, and native LabVIEW save-as/read-back behavior where available.
+- [ ] Store reverse-engineering deltas as fixture pairs with a short hypothesis note, not just as final decoded structs.
+
+### 16.3 Heap Field Semantics
+
+- [ ] Promote rectangle-like heap fields beyond `OF__bounds` / `OF__termBounds` where they affect layout: `OF__contRect`, `OF__dBounds`, `OF__pBounds`, `OF__iconBounds`, `OF__growAreaBounds`, and related panel/diagram rectangles.
+- [ ] Decode front-panel visual fields: label and caption anchors, font refs, text runs, colors, booleans, numerics, strings, arrays, clusters, graphs, paths, rings/enums, refnums, decorations, and custom-control style records.
+- [ ] Decode block-diagram semantic fields: primitive operand metadata, case selector values, frame ordering, loop terminals, tunnels, shift registers, event data nodes, sequence frames, formula nodes, property/invoke nodes, and subVI call-site metadata.
+- [ ] Replace broad widget-kind heuristics with per-class decoders where the heap class has known required/optional fields.
+- [ ] Document unresolved heap tags in a generated report sorted by frequency and fixture provenance.
+
+### 16.4 Wire Topology
+
+- [ ] Finish `OF__compressedWireTable` semantics for comb and 4+ branch trees with controlled branch-move fixtures.
+- [ ] Decode multi-elbow auto-chain payloads into exact waypoint lists rather than heuristic Manhattan reconstruction.
+- [ ] Decode manual-chain payloads from known user-placed waypoint fixtures.
+- [ ] Map wire glyph IDs, signal indices, and terminal associations so each rendered wire is linked to source/sink heap nodes without positional inference.
+- [ ] Add round-trip and render tests that compare decoded wire waypoints against fixture screenshots or LabVIEW-exported geometry.
+
+### 16.5 Type System
+
+- [ ] Complete VCTP type-descriptor grammar for arrays, clusters, functions, typedefs, polymorphic VIs, refnums, variants, paths, strings, pictures, and complex/extended numeric types.
+- [ ] Decode type-specific `Inner` payloads instead of leaving them as raw bytes once a grammar is confirmed.
+- [ ] Connect DTHP/VCTP type references to every heap data-fill site, including complex data-fill leaves (`OF__real` / `OF__imaginary`).
+- [ ] Add semantic diffs for type changes that report field-level changes instead of compressed-pool byte changes.
+
+### 16.6 Link Info & Metadata Tails
+
+- [ ] Decode opaque `Tail` spans inside `LIfp`, `LIbd`, and `LIvi` entries into named subrecords, version fields, flags, path variants, and secondary references.
+- [ ] Expand LinkObjRef target decoding beyond currently typed subclasses; keep unknown subclasses as explicit enum gaps with fixture examples.
+- [ ] Finish LVSR tail semantics: all known execution flags, breakpoint/debug fields, protection bits, save flags, and version-specific flag words.
+- [ ] Resolve small-block field meanings for `HIST`, `VPDP`, `FPEx`, `BDEx`, `FPSE`, `BDSE`, `VITS`, `RTSG`, `MUID`, `DTHP`, and `BDPW` beyond current structural preservation.
+
+### 16.7 Mutation Safety
+
+- [ ] Promote fields from Tier 1 to Tier 2 only after encode/decode round-trip, LabVIEW open/save validation, and invariant tests over all affected corpus versions.
+- [ ] Add mutation tests for every newly editable semantic field, including negative tests that reject inconsistent cross-resource updates.
+- [ ] Define cross-resource consistency checks: heap type refs vs VCTP/DTHP, connector pane vs terminal refs, link info vs subVI nodes, and wire terminals vs diagram objects.
+- [ ] Keep raw-patch/Tier 3 APIs quarantined from normal rewrite and metadata-edit flows.
+
+### 16.8 Documentation Exit Criteria
+
+- [ ] Every resource doc has a field table with offsets, sizes, encoding, version gates, confidence level, fixture evidence, and open questions.
+- [ ] `docs/wire-layout.md` is upgraded from scaffold notes to a full RSRC container specification with examples.
+- [ ] `docs/format-overview.md` clearly separates container guarantees, semantic guarantees, unsupported version ranges, and known lossy render approximations.
+- [ ] The demo exposes unknown/opaque byte counts so users can see which parts of a file remain unmapped.
 
 ---
 
@@ -851,3 +426,6 @@ Shipped accessors:
 | `v0.9.0`  | front-panel heap (`FPHb`) decoder                                                         |
 | `v1.0.0`  | block-diagram heap (`BDHb`), approximate FP/BD render, stable API                         |
 | `v1.1.0`  | SVG/canvas front-panel + block-diagram rendering, CLI SVG export                          |
+| `v1.2.0`  | LabVIEW geometry foundations, compressed wire semantics, and recognizable wire rendering   |
+| `v1.3.0+` | LabVIEW-fidelity skins, text, colors, decorations, and exact wire waypoint rendering       |
+| `v1.4.0+` | semantic byte coverage, heap/type/link closure, and evidence-backed format specification   |

@@ -5,7 +5,7 @@
     "type": "LVIN",
     "creator": "LBVW",
     "info_offset": 3292,
-    "info_size": 853,
+    "info_size": 867,
     "data_offset": 32,
     "data_size": 3260
   },
@@ -20,7 +20,7 @@
           "index": 0,
           "name_offset": 0,
           "payload_len": 160,
-          "name": "Numeric42ThreeIndicatorsY.vi"
+          "name": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi"
         }
       ]
     },
@@ -196,7 +196,7 @@
         {
           "index": 0,
           "name_offset": 4294967295,
-          "payload_len": 557
+          "payload_len": 558
         }
       ]
     },
@@ -281,15 +281,15 @@
   "names": [
     {
       "offset": 0,
-      "value": "Numeric42ThreeIndicatorsY.vi"
+      "value": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi"
     }
   ],
   "raw_tail_len": 0,
   "issues": null,
   "round_trip": {
     "size_match": true,
-    "in_bytes": 4145,
-    "out_bytes": 4145,
+    "in_bytes": 4159,
+    "out_bytes": 4159,
     "byte_diffs": 1,
     "first_diff_offset": 3343
   }
