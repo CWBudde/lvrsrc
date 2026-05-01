@@ -8,8 +8,8 @@
     "reportedTagCount": 119,
     "statusNodes": {
       "class-semantic-open": 7478,
-      "named-only": 1166,
-      "partial": 14503,
+      "named-only": 611,
+      "partial": 15058,
       "rect-role-open": 225,
       "resolved": 8850
     }
@@ -3244,7 +3244,7 @@
       "tag": 615,
       "name": "OF__MouseWheelSupport",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 247,
       "leafCount": 247,
       "contentBytes": 247,
@@ -3420,7 +3420,7 @@
         "SL__arrayElement=89",
         "SL__eventDataNode=40"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 52,
@@ -5485,7 +5485,7 @@
       "tag": 177,
       "name": "OF__origin",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 94,
       "leafCount": 94,
       "contentBytes": 376,
@@ -5660,7 +5660,7 @@
         "SL__rootObject=69",
         "SL__aInsDCO=25"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
     {
       "tag": 85,
@@ -7834,366 +7834,6 @@
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
-      "tag": 152,
-      "name": "OF__minPaneSize",
-      "family": "field",
-      "status": "named-only",
-      "count": 62,
-      "leafCount": 62,
-      "contentBytes": 248,
-      "wireBytes": 372,
-      "resources": {
-        "BDHb": 2,
-        "FPHb": 60
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 5
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 3
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 1
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__aInsDCO=62"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 187,
-      "name": "OF__paneFlags",
-      "family": "field",
-      "status": "named-only",
-      "count": 62,
-      "leafCount": 62,
-      "contentBytes": 186,
-      "wireBytes": 310,
-      "resources": {
-        "BDHb": 2,
-        "FPHb": 60
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 5
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 3
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 1
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__aInsDCO=62"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 598,
       "name": "OF__savedSize",
       "family": "field",
@@ -8374,6 +8014,366 @@
         "SL__arrayElement=9"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+    },
+    {
+      "tag": 152,
+      "name": "OF__minPaneSize",
+      "family": "field",
+      "status": "partial",
+      "count": 62,
+      "leafCount": 62,
+      "contentBytes": 248,
+      "wireBytes": 372,
+      "resources": {
+        "BDHb": 2,
+        "FPHb": 60
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 5
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 3
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 1
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__aInsDCO=62"
+      ],
+      "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
+    },
+    {
+      "tag": 187,
+      "name": "OF__paneFlags",
+      "family": "field",
+      "status": "partial",
+      "count": 62,
+      "leafCount": 62,
+      "contentBytes": 186,
+      "wireBytes": 310,
+      "resources": {
+        "BDHb": 2,
+        "FPHb": 60
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 5
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 3
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 1
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__aInsDCO=62"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 64,
@@ -9710,7 +9710,7 @@
       "tag": 348,
       "name": "OF__annexDDOFlag",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 33,
       "leafCount": 33,
       "contentBytes": 33,
@@ -9772,7 +9772,7 @@
       "parentContexts": [
         "SL__arrayElement=33"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 203,
@@ -10078,10 +10078,58 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
+      "tag": 624,
+      "name": "OF__kSLHDefaultValueMatchesCtlVI",
+      "family": "field",
+      "status": "named-only",
+      "count": 17,
+      "leafCount": 17,
+      "wireBytes": 34,
+      "resources": {
+        "BDHb": 6,
+        "FPHb": 11
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 7
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__mux=13",
+        "SL__arrayElement=4"
+      ],
+      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+    },
+    {
       "tag": 575,
       "name": "OF__MinButSize",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 17,
       "leafCount": 17,
       "contentBytes": 68,
@@ -10136,55 +10184,7 @@
         "SL__mux=9",
         "SL__arrayElement=8"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 624,
-      "name": "OF__kSLHDefaultValueMatchesCtlVI",
-      "family": "field",
-      "status": "named-only",
-      "count": 17,
-      "leafCount": 17,
-      "wireBytes": 34,
-      "resources": {
-        "BDHb": 6,
-        "FPHb": 11
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 7
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__mux=13",
-        "SL__arrayElement=4"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
     {
       "tag": 120,
@@ -10401,7 +10401,7 @@
       "tag": 113,
       "name": "OF__index",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 9,
       "leafCount": 9,
       "contentBytes": 9,
@@ -10439,7 +10439,7 @@
       "parentContexts": [
         "SL__arrayElement=9"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 51,
@@ -10547,7 +10547,7 @@
       "tag": 609,
       "name": "OF__FpgaImplementation",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 7,
       "leafCount": 7,
       "contentBytes": 7,
@@ -10590,7 +10590,7 @@
         "SL__arrayElement=4",
         "SL__mux=3"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 63,
@@ -10881,35 +10881,6 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
-      "tag": 4,
-      "name": "OF__activeThumb",
-      "family": "field",
-      "status": "named-only",
-      "count": 3,
-      "leafCount": 3,
-      "contentBytes": 2,
-      "wireBytes": 8,
-      "resources": {
-        "BDHb": 2,
-        "FPHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=2",
-        "OF__browseOptions=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 49,
       "name": "OF__dcoAgg",
       "family": "field",
@@ -10993,6 +10964,35 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
+      "tag": 4,
+      "name": "OF__activeThumb",
+      "family": "field",
+      "status": "partial",
+      "count": 3,
+      "leafCount": 3,
+      "contentBytes": 2,
+      "wireBytes": 8,
+      "resources": {
+        "BDHb": 2,
+        "FPHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=2",
+        "OF__browseOptions=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
       "tag": 43,
       "name": "OF__contRect",
       "family": "field",
@@ -11066,29 +11066,6 @@
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
-      "tag": 608,
-      "name": "OF__DefaultTunnelType",
-      "family": "field",
-      "status": "named-only",
-      "count": 2,
-      "leafCount": 2,
-      "contentBytes": 2,
-      "wireBytes": 6,
-      "resources": {
-        "BDHb": 2
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__parm=2"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 567,
       "name": "OF__SelectRangeArray32",
       "family": "field",
@@ -11157,10 +11134,10 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
-      "tag": 417,
-      "name": "OF__maxWordLength",
+      "tag": 608,
+      "name": "OF__DefaultTunnelType",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 2,
       "leafCount": 2,
       "contentBytes": 2,
@@ -11170,99 +11147,14 @@
       },
       "fixtures": [
         {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 1
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
         }
       ],
       "parentContexts": [
         "SL__parm=2"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 419,
-      "name": "OF__overflow",
-      "family": "field",
-      "status": "named-only",
-      "count": 2,
-      "leafCount": 2,
-      "contentBytes": 2,
-      "wireBytes": 6,
-      "resources": {
-        "BDHb": 2
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__parm=2"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 418,
-      "name": "OF__override",
-      "family": "field",
-      "status": "named-only",
-      "count": 2,
-      "leafCount": 2,
-      "contentBytes": 2,
-      "wireBytes": 6,
-      "resources": {
-        "BDHb": 2
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__parm=2"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 420,
-      "name": "OF__quantize",
-      "family": "field",
-      "status": "named-only",
-      "count": 2,
-      "leafCount": 2,
-      "contentBytes": 2,
-      "wireBytes": 6,
-      "resources": {
-        "BDHb": 2
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__parm=2"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 465,
@@ -11288,163 +11180,112 @@
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
     },
     {
-      "tag": 594,
-      "name": "OF__DebuggingEnabled",
+      "tag": 417,
+      "name": "OF__maxWordLength",
       "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "wireBytes": 2,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 600,
-      "name": "OF__OutputInstanceNumberFromP",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "wireBytes": 2,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 573,
-      "name": "OF__ParForIndexDistribution",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 580,
-      "name": "OF__ParForNumStaticWorkers",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 566,
-      "name": "OF__SelectNRightType",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 583,
-      "name": "OF__SelectSelLabFlags",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
+      "status": "partial",
+      "count": 2,
+      "leafCount": 2,
       "contentBytes": 2,
-      "wireBytes": 4,
+      "wireBytes": 6,
       "resources": {
-        "BDHb": 1
+        "BDHb": 2
       },
       "fixtures": [
         {
-          "fixture": "reference-find-by-id.vi",
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ndjson-parser.vi",
           "count": 1
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1"
+        "SL__parm=2"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
-      "tag": 607,
-      "name": "OF__TunnelType",
+      "tag": 419,
+      "name": "OF__overflow",
       "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
+      "status": "partial",
+      "count": 2,
+      "leafCount": 2,
+      "contentBytes": 2,
+      "wireBytes": 6,
       "resources": {
-        "BDHb": 1
+        "BDHb": 2
       },
       "fixtures": [
         {
-          "fixture": "reference-find-by-id.vi",
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ndjson-parser.vi",
           "count": 1
         }
       ],
       "parentContexts": [
-        "SL__parm=1"
+        "SL__parm=2"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 418,
+      "name": "OF__override",
+      "family": "field",
+      "status": "partial",
+      "count": 2,
+      "leafCount": 2,
+      "contentBytes": 2,
+      "wireBytes": 6,
+      "resources": {
+        "BDHb": 2
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__parm=2"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 420,
+      "name": "OF__quantize",
+      "family": "field",
+      "status": "partial",
+      "count": 2,
+      "leafCount": 2,
+      "contentBytes": 2,
+      "wireBytes": 6,
+      "resources": {
+        "BDHb": 2
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__parm=2"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 619,
@@ -11514,52 +11355,6 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
-      "tag": 41,
-      "name": "OF__connectorTM",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "write-ini.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 46,
-      "name": "OF__dIdx",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 414,
       "name": "OF__loopLimitDCO",
       "family": "field",
@@ -11582,10 +11377,215 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
+      "tag": 594,
+      "name": "OF__DebuggingEnabled",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "wireBytes": 2,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 600,
+      "name": "OF__OutputInstanceNumberFromP",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "wireBytes": 2,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 573,
+      "name": "OF__ParForIndexDistribution",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 580,
+      "name": "OF__ParForNumStaticWorkers",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 566,
+      "name": "OF__SelectNRightType",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 583,
+      "name": "OF__SelectSelLabFlags",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 2,
+      "wireBytes": 4,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 607,
+      "name": "OF__TunnelType",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__parm=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 41,
+      "name": "OF__connectorTM",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "write-ini.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 46,
+      "name": "OF__dIdx",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
       "tag": 161,
       "name": "OF__nVisItems",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1,
       "leafCount": 1,
       "contentBytes": 1,
@@ -11602,30 +11602,7 @@
       "parentContexts": [
         "SL__externalNode=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 293,
-      "name": "OF__winFlags",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 1,
-      "wireBytes": 3,
-      "resources": {
-        "FPHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "request.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__rootObject=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 250,
@@ -11649,6 +11626,29 @@
         "SL__arrayElement=1"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
+    },
+    {
+      "tag": 293,
+      "name": "OF__winFlags",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 1,
+      "wireBytes": 3,
+      "resources": {
+        "FPHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "request.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__rootObject=1"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     }
   ],
   "generated": {

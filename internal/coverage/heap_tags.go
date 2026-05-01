@@ -330,6 +330,9 @@ func heapTagStatus(tag int32, family string) (status, next string, report bool) 
 	if lvvi.IsHeapRectTag(tag) {
 		return "rect-role-open", "confirm the rectangle role with controlled fixtures before scene/layout promotion", true
 	}
+	if lvvi.IsHeapPointTag(tag) {
+		return "partial", "confirm point/size role, coordinate origin, and UI effect with controlled fixtures", true
+	}
 	if lvvi.IsHeapContainerTag(tag) {
 		return "partial", "map child ordering and required/optional container members with per-class fixture evidence", true
 	}

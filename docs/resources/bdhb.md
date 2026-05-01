@@ -99,10 +99,19 @@ the following typed projections:
   `OF__iconBounds`, `OF__pBounds`, `OF__sizeRect`, and
   `OF__termBounds`. The accessors expose the bytes; scene-graph
   promotion remains role-specific.
+- Point/size-pair heap fields (Phase 16.3): `lvvi.HeapPoint`,
+  `HeapPointForTag`, and `FindPointChild` decode `HeapNodePoint`-style
+  4-byte X/Y pairs for fields such as `OF__origin`, `OF__minPaneSize`,
+  and `OF__MinButSize`. These are byte-shape projections only:
+  coordinate origin, size role, and visible UI effect semantics still
+  need controlled fixtures.
 - Common scalar and color fields (Phase 16.3): `lvvi.HeapScalar`,
   `HeapScalarForTag`, and `FindScalarChild` expose observed integer /
   flag / count / id leaves such as `OF__objFlags`, `OF__howGrow`,
-  `OF__partID`, `OF__masterPart`, and `OF__primIndex`; `lvvi.HeapColor`,
+  `OF__partID`, `OF__masterPart`, `OF__primIndex`,
+  `OF__paneFlags`, `OF__MouseWheelSupport`, `OF__annexDDOFlag`,
+  fixed-point override fields, FPGA fields, and tunnel enum fields;
+  `lvvi.HeapColor`,
   `HeapColorForTag`, and `FindColorChild` expose 4-byte color-like
   leaves such as `OF__bgColor`, `OF__fgColor`, `OF__borderColor`, and
   `OF__structColor`. These are byte-shape projections only: bit names,
@@ -162,6 +171,9 @@ the following typed projections:
   terminal rectangles: several known rectangle leaves now decode
   generically, but controlled fixtures still need to identify which
   tags affect rendered block-diagram geometry.
+- Point/size-pair role semantics: `OF__origin`, pane-size fields, and
+  button-size fields now decode generically, but their coordinate origin
+  and visible layout effects remain fixture-driven unknowns.
 - Container child semantics: structural list tags now expose their child
   indices, but the meaning of each position and which children are
   mandatory for each owner class still needs per-class fixture evidence.

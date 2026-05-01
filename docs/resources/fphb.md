@@ -85,10 +85,18 @@ the following typed projections:
   `OF__growAreaBounds`, `OF__iconBounds`, `OF__pBounds`, and
   `OF__sizeRect`. These accessors expose the bytes, but only
   `OF__bounds` is currently promoted into scene-graph layout.
+- Point/size-pair heap fields (Phase 16.3): `lvvi.HeapPoint`,
+  `HeapPointForTag`, and `FindPointChild` decode `HeapNodePoint`-style
+  4-byte X/Y pairs for fields such as `OF__origin`, `OF__minPaneSize`,
+  and `OF__MinButSize`. These are byte-shape projections only:
+  coordinate origin, size role, and visible UI effect semantics still
+  need controlled fixtures.
 - Common scalar and color fields (Phase 16.3): `lvvi.HeapScalar`,
   `HeapScalarForTag`, and `FindScalarChild` expose observed integer /
   flag / count / id leaves such as `OF__objFlags`, `OF__howGrow`,
-  `OF__partID`, and `OF__masterPart`; `lvvi.HeapColor`,
+  `OF__partID`, `OF__masterPart`, `OF__paneFlags`,
+  `OF__MouseWheelSupport`, `OF__annexDDOFlag`, and `OF__index`;
+  `lvvi.HeapColor`,
   `HeapColorForTag`, and `FindColorChild` expose 4-byte color-like
   leaves such as `OF__bgColor`, `OF__fgColor`, `OF__borderColor`, and
   `OF__selectionColor`. These are byte-shape projections only: bit
@@ -103,7 +111,7 @@ the following typed projections:
 
 ## What's still opaque
 
-- Per-class field payloads beyond the generic rectangle/scalar/color/container
+- Per-class field payloads beyond the generic rectangle/point/scalar/color/container
   projections (label fonts, scale ticks, button geometry beyond the
   outer rect, custom controls, …). Those carry domain-specific binary
   formats that vary by control type and are still being mapped from
@@ -115,6 +123,9 @@ the following typed projections:
   rectangle leaves now decode generically, but the exact panel /
   diagram role of each one still needs controlled-fixture evidence
   before it affects rendered geometry.
+- Point/size-pair role semantics: `OF__origin`, pane-size fields, and
+  button-size fields now decode generically, but their coordinate origin
+  and visible layout effects remain fixture-driven unknowns.
 - Container child semantics: structural list tags now expose their child
   indices, but the meaning of each position and which children are
   mandatory for each owner class still needs per-class fixture evidence.
