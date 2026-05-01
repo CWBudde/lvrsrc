@@ -99,6 +99,15 @@ the following typed leaf payloads:
   `OF__iconBounds`, `OF__pBounds`, `OF__sizeRect`, and
   `OF__termBounds`. The accessors expose the bytes; scene-graph
   promotion remains role-specific.
+- Common scalar and color fields (Phase 16.3): `lvvi.HeapScalar`,
+  `HeapScalarForTag`, and `FindScalarChild` expose observed integer /
+  flag / count / id leaves such as `OF__objFlags`, `OF__howGrow`,
+  `OF__partID`, `OF__masterPart`, and `OF__primIndex`; `lvvi.HeapColor`,
+  `HeapColorForTag`, and `FindColorChild` expose 4-byte color-like
+  leaves such as `OF__bgColor`, `OF__fgColor`, `OF__borderColor`, and
+  `OF__structColor`. These are byte-shape projections only: bit names,
+  enum meanings, color-space prefix semantics, and system-color
+  sentinels still need controlled fixtures.
 
 ## What's still opaque
 

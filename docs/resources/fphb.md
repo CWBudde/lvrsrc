@@ -85,13 +85,23 @@ the following typed leaf payloads:
   `OF__growAreaBounds`, `OF__iconBounds`, `OF__pBounds`, and
   `OF__sizeRect`. These accessors expose the bytes, but only
   `OF__bounds` is currently promoted into scene-graph layout.
+- Common scalar and color fields (Phase 16.3): `lvvi.HeapScalar`,
+  `HeapScalarForTag`, and `FindScalarChild` expose observed integer /
+  flag / count / id leaves such as `OF__objFlags`, `OF__howGrow`,
+  `OF__partID`, and `OF__masterPart`; `lvvi.HeapColor`,
+  `HeapColorForTag`, and `FindColorChild` expose 4-byte color-like
+  leaves such as `OF__bgColor`, `OF__fgColor`, `OF__borderColor`, and
+  `OF__selectionColor`. These are byte-shape projections only: bit
+  names, enum meanings, color-space prefix semantics, and system-color
+  sentinels still need controlled fixtures.
 
 ## What's still opaque
 
-- Per-class field payloads other than `OF__bounds` (label fonts, scale
-  ticks, button geometry beyond the outer rect, custom controls, …).
-  Those carry domain-specific binary formats that vary by control type
-  and are still being mapped from `pylabview`.
+- Per-class field payloads beyond the generic rectangle/scalar/color
+  projections (label fonts, scale ticks, button geometry beyond the
+  outer rect, custom controls, …). Those carry domain-specific binary
+  formats that vary by control type and are still being mapped from
+  `pylabview`.
 - Wire routing (`OF__wireTable`, `OF__wireID`, `OF__wireGlyphID`) and
   terminal positions (`OF__terminal`) — recognised as tags but content
   bytes left raw. Tracked as Phase 11.3–11.5.

@@ -8,8 +8,8 @@
     "reportedTagCount": 119,
     "statusNodes": {
       "class-semantic-open": 7478,
-      "named-only": 14923,
-      "partial": 746,
+      "named-only": 3290,
+      "partial": 12379,
       "rect-role-open": 225,
       "resolved": 8850
     }
@@ -385,7 +385,7 @@
       "tag": 172,
       "name": "OF__objFlags",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1975,
       "leafCount": 1975,
       "contentBytes": 4655,
@@ -566,13 +566,13 @@
         "OF__loopTestDCO=2",
         "OF__innerLpTunDCO=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 192,
       "name": "OF__partID",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1548,
       "leafCount": 1548,
       "contentBytes": 1573,
@@ -748,13 +748,13 @@
         "SL__conPane=60",
         "SL__externalNode=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 106,
       "name": "OF__howGrow",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1348,
       "leafCount": 1348,
       "contentBytes": 2430,
@@ -932,13 +932,13 @@
         "SL__mux=7",
         "SL__externalNode=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 9,
       "name": "OF__bgColor",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1295,
       "leafCount": 1295,
       "contentBytes": 5177,
@@ -1115,13 +1115,13 @@
         "SL__eventDataNode=40",
         "SL__externalNode=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
     {
       "tag": 80,
       "name": "OF__fgColor",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 1105,
       "leafCount": 1105,
       "contentBytes": 4420,
@@ -1296,13 +1296,13 @@
         "SL__arrayElement=1045",
         "SL__conPane=60"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
     {
       "tag": 144,
       "name": "OF__masterPart",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 950,
       "leafCount": 950,
       "contentBytes": 967,
@@ -1477,7 +1477,7 @@
         "SL__arrayElement=949",
         "SL__externalNode=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 3,
@@ -1849,7 +1849,7 @@
       "tag": 2,
       "name": "OF__activeMarker",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 808,
       "leafCount": 808,
       "contentBytes": 2622,
@@ -2025,7 +2025,7 @@
         "SL__arrayElement=345",
         "OF__browseOptions=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 256,
@@ -2389,7 +2389,7 @@
       "tag": 1,
       "name": "OF__activeDiag",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 490,
       "leafCount": 490,
       "contentBytes": 1721,
@@ -2561,7 +2561,7 @@
         "SL__baseRefNum=144",
         "OF__browseOptions=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 283,
@@ -2880,7 +2880,7 @@
       "tag": 5,
       "name": "OF__activeXScale",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 463,
       "leafCount": 463,
       "contentBytes": 1848,
@@ -3055,7 +3055,7 @@
         "SL__baseRefNum=462",
         "OF__browseOptions=1"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 268,
@@ -3786,7 +3786,7 @@
       "tag": 315,
       "name": "OF__hGrowNodeListLength",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 194,
       "leafCount": 194,
       "contentBytes": 194,
@@ -3948,13 +3948,13 @@
       "parentContexts": [
         "SL__arrayElement=194"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 314,
       "name": "OF__refListLength",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 194,
       "leafCount": 194,
       "contentBytes": 194,
@@ -4116,13 +4116,13 @@
       "parentContexts": [
         "SL__arrayElement=194"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 217,
       "name": "OF__rsrcID",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 183,
       "leafCount": 183,
       "contentBytes": 366,
@@ -4292,7 +4292,7 @@
       "parentContexts": [
         "SL__arrayElement=183"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 214,
@@ -4478,7 +4478,7 @@
       "tag": 202,
       "name": "OF__primIndex",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 157,
       "leafCount": 157,
       "contentBytes": 260,
@@ -4532,7 +4532,7 @@
         "SL__parm=128",
         "SL__arrayElement=29"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 188,
@@ -5030,268 +5030,6 @@
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
-      "tag": 128,
-      "name": "OF__lastSignalKind",
-      "family": "field",
-      "status": "named-only",
-      "count": 101,
-      "leafCount": 101,
-      "contentBytes": 202,
-      "wireBytes": 404,
-      "resources": {
-        "BDHb": 101
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=101"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
-      "tag": 246,
-      "name": "OF__state",
-      "family": "field",
-      "status": "named-only",
-      "count": 101,
-      "leafCount": 101,
-      "contentBytes": 102,
-      "wireBytes": 304,
-      "resources": {
-        "BDHb": 101
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=101"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 456,
       "name": "OF__compressedWireTable",
       "family": "field",
@@ -5423,10 +5161,272 @@
       "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
     },
     {
+      "tag": 128,
+      "name": "OF__lastSignalKind",
+      "family": "field",
+      "status": "partial",
+      "count": 101,
+      "leafCount": 101,
+      "contentBytes": 202,
+      "wireBytes": 404,
+      "resources": {
+        "BDHb": 101
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=101"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 246,
+      "name": "OF__state",
+      "family": "field",
+      "status": "partial",
+      "count": 101,
+      "leafCount": 101,
+      "contentBytes": 102,
+      "wireBytes": 304,
+      "resources": {
+        "BDHb": 101
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=101"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
       "tag": 191,
       "name": "OF__parmIndex",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 99,
       "leafCount": 99,
       "contentBytes": 99,
@@ -5479,7 +5479,7 @@
       "parentContexts": [
         "SL__parm=99"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 177,
@@ -5666,7 +5666,7 @@
       "tag": 85,
       "name": "OF__format",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 93,
       "leafCount": 93,
       "contentBytes": 364,
@@ -5816,7 +5816,7 @@
       "parentContexts": [
         "SL__arrayElement=93"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 233,
@@ -6182,7 +6182,7 @@
       "tag": 66,
       "name": "OF__dsw",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 86,
       "leafCount": 86,
       "contentBytes": 172,
@@ -6305,7 +6305,7 @@
         "SL__parm=56",
         "SL__arrayElement=30"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 38,
@@ -6848,7 +6848,7 @@
       "tag": 123,
       "name": "OF__instrStyle",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 80,
       "leafCount": 80,
       "contentBytes": 80,
@@ -7022,13 +7022,13 @@
       "parentContexts": [
         "SL__rootObject=80"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 231,
       "name": "OF__shortCount",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 80,
       "leafCount": 80,
       "contentBytes": 80,
@@ -7201,7 +7201,7 @@
       "parentContexts": [
         "SL__arrayElement=80"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 45,
@@ -7662,7 +7662,7 @@
       "tag": 37,
       "name": "OF__conNum",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 67,
       "leafCount": 67,
       "contentBytes": 67,
@@ -7831,7 +7831,7 @@
       "parentContexts": [
         "SL__arrayElement=67"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 152,
@@ -8559,7 +8559,7 @@
       "tag": 313,
       "name": "OF__termListLength",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 59,
       "leafCount": 59,
       "contentBytes": 59,
@@ -8684,7 +8684,7 @@
       "parentContexts": [
         "SL__arrayElement=59"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 11,
@@ -9269,7 +9269,7 @@
       "tag": 27,
       "name": "OF__clumpNum",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 46,
       "leafCount": 46,
       "contentBytes": 138,
@@ -9398,7 +9398,7 @@
       "parentContexts": [
         "SL__arrayElement=46"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 589,
@@ -9531,7 +9531,7 @@
       "tag": 36,
       "name": "OF__conId",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 40,
       "leafCount": 40,
       "contentBytes": 80,
@@ -9704,7 +9704,7 @@
       "parentContexts": [
         "SL__lMax=40"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 348,
@@ -9778,7 +9778,7 @@
       "tag": 203,
       "name": "OF__primResID",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 29,
       "leafCount": 29,
       "contentBytes": 58,
@@ -9831,7 +9831,7 @@
       "parentContexts": [
         "SL__arrayElement=29"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 460,
@@ -9894,7 +9894,7 @@
       "tag": 83,
       "name": "OF__firstNodeIdx",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 26,
       "leafCount": 26,
       "contentBytes": 26,
@@ -10011,7 +10011,7 @@
       "parentContexts": [
         "SL__eventDataNode=26"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 15,
@@ -10190,7 +10190,7 @@
       "tag": 120,
       "name": "OF__inplace",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 15,
       "leafCount": 15,
       "contentBytes": 15,
@@ -10219,7 +10219,7 @@
       "parentContexts": [
         "SL__parm=15"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 502,
@@ -11605,29 +11605,6 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
-      "tag": 250,
-      "name": "OF__structColor",
-      "family": "field",
-      "status": "named-only",
-      "count": 1,
-      "leafCount": 1,
-      "contentBytes": 4,
-      "wireBytes": 6,
-      "resources": {
-        "BDHb": 1
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=1"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 293,
       "name": "OF__winFlags",
       "family": "field",
@@ -11649,6 +11626,29 @@
         "SL__rootObject=1"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+    },
+    {
+      "tag": 250,
+      "name": "OF__structColor",
+      "family": "field",
+      "status": "partial",
+      "count": 1,
+      "leafCount": 1,
+      "contentBytes": 4,
+      "wireBytes": 6,
+      "resources": {
+        "BDHb": 1
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=1"
+      ],
+      "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     }
   ],
   "generated": {

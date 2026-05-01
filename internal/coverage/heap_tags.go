@@ -330,6 +330,12 @@ func heapTagStatus(tag int32, family string) (status, next string, report bool) 
 	if lvvi.IsHeapRectTag(tag) {
 		return "rect-role-open", "confirm the rectangle role with controlled fixtures before scene/layout promotion", true
 	}
+	if lvvi.IsHeapColorTag(tag) {
+		return "partial", "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures", true
+	}
+	if lvvi.IsHeapScalarTag(tag) {
+		return "partial", "name individual bits/enums and add role-specific validation with controlled fixtures", true
+	}
 	return "named-only", "decode the field payload or document it as reserved/padding with fixture evidence", true
 }
 
