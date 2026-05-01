@@ -70,7 +70,7 @@ the CLI (`lvrsrc render --view block-diagram`) and the web demo consume.
 
 The codec resolves the tag-stream **structure** — every node's enum class,
 every parent/child relation, every leaf's preserved payload bytes — and
-the following typed leaf payloads:
+the following typed projections:
 
 - `OF__bounds` (Phase 11.1): 4 × big-endian `int16` Left/Top/Right/Bottom
   rectangles per `pylabview`'s `HeapNodeRect` (LVheap.py:1725). Decoded
@@ -108,6 +108,12 @@ the following typed leaf payloads:
   `OF__structColor`. These are byte-shape projections only: bit names,
   enum meanings, color-space prefix semantics, and system-color
   sentinels still need controlled fixtures.
+- Structural container/list fields (Phase 16.3): `lvvi.HeapContainer`,
+  `HeapContainerForTag`, and `FindContainerChild` expose known
+  open-scope child-list containers such as `OF__image`, `OF__nodeList`,
+  `OF__signalList`, `OF__sequenceList`, and `OF__termList`. These
+  preserve child indices and byte-size metadata only; child ordering,
+  per-class member roles, and required/optional child sets remain open.
 
 ## What's still opaque
 
@@ -156,6 +162,9 @@ the following typed leaf payloads:
   terminal rectangles: several known rectangle leaves now decode
   generically, but controlled fixtures still need to identify which
   tags affect rendered block-diagram geometry.
+- Container child semantics: structural list tags now expose their child
+  indices, but the meaning of each position and which children are
+  mandatory for each owner class still needs per-class fixture evidence.
 - Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
   40 enum tables in `tags_gen.go` surface with their raw numeric form
   so coverage gaps stay visible in the demo.

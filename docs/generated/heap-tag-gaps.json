@@ -8,8 +8,8 @@
     "reportedTagCount": 119,
     "statusNodes": {
       "class-semantic-open": 7478,
-      "named-only": 3290,
-      "partial": 12379,
+      "named-only": 1166,
+      "partial": 14503,
       "rect-role-open": 225,
       "resolved": 8850
     }
@@ -202,7 +202,7 @@
       "tag": 110,
       "name": "OF__image",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 2034,
       "openCount": 1017,
       "closeCount": 1017,
@@ -379,7 +379,7 @@
         "SL__conPane=120",
         "SL__externalNode=2"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "map child ordering and required/optional container members with per-class fixture evidence"
     },
     {
       "tag": 172,
@@ -6002,7 +6002,7 @@
       "tag": 164,
       "name": "OF__nodeList",
       "family": "field",
-      "status": "named-only",
+      "status": "partial",
       "count": 88,
       "openCount": 44,
       "closeCount": 44,
@@ -6176,7 +6176,7 @@
         "SL__eventDataNode=80",
         "SL__arrayElement=8"
       ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+      "next": "map child ordering and required/optional container members with per-class fixture evidence"
     },
     {
       "tag": 66,
@@ -11135,29 +11135,6 @@
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
     {
-      "tag": 465,
-      "name": "OF__browseOptions",
-      "family": "field",
-      "status": "named-only",
-      "count": 2,
-      "openCount": 1,
-      "closeCount": 1,
-      "wireBytes": 8,
-      "resources": {
-        "FPHb": 2
-      },
-      "fixtures": [
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__mux=2"
-      ],
-      "next": "decode the field payload or document it as reserved/padding with fixture evidence"
-    },
-    {
       "tag": 139,
       "name": "OF__lpTunDCO",
       "family": "field",
@@ -11286,6 +11263,29 @@
         "SL__parm=2"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
+    },
+    {
+      "tag": 465,
+      "name": "OF__browseOptions",
+      "family": "field",
+      "status": "partial",
+      "count": 2,
+      "openCount": 1,
+      "closeCount": 1,
+      "wireBytes": 8,
+      "resources": {
+        "FPHb": 2
+      },
+      "fixtures": [
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__mux=2"
+      ],
+      "next": "map child ordering and required/optional container members with per-class fixture evidence"
     },
     {
       "tag": 594,

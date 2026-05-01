@@ -69,7 +69,7 @@ modes use that shared projection.
 
 The codec resolves the tag-stream **structure** — every node's enum class,
 every parent/child relation, every leaf's preserved payload bytes — and
-the following typed leaf payloads:
+the following typed projections:
 
 - `OF__bounds` (Phase 11.1): 4 × big-endian `int16` Left/Top/Right/Bottom
   rectangles per `pylabview`'s `HeapNodeRect` (LVheap.py:1725). Decoded
@@ -94,10 +94,16 @@ the following typed leaf payloads:
   `OF__selectionColor`. These are byte-shape projections only: bit
   names, enum meanings, color-space prefix semantics, and system-color
   sentinels still need controlled fixtures.
+- Structural container/list fields (Phase 16.3): `lvvi.HeapContainer`,
+  `HeapContainerForTag`, and `FindContainerChild` expose known
+  open-scope child-list containers such as `OF__image`, `OF__nodeList`,
+  `OF__pageList`, `OF__partsList`, and `OF__termList`. These preserve
+  child indices and byte-size metadata only; child ordering,
+  per-class member roles, and required/optional child sets remain open.
 
 ## What's still opaque
 
-- Per-class field payloads beyond the generic rectangle/scalar/color
+- Per-class field payloads beyond the generic rectangle/scalar/color/container
   projections (label fonts, scale ticks, button geometry beyond the
   outer rect, custom controls, …). Those carry domain-specific binary
   formats that vary by control type and are still being mapped from
@@ -109,6 +115,9 @@ the following typed leaf payloads:
   rectangle leaves now decode generically, but the exact panel /
   diagram role of each one still needs controlled-fixture evidence
   before it affects rendered geometry.
+- Container child semantics: structural list tags now expose their child
+  indices, but the meaning of each position and which children are
+  mandatory for each owner class still needs per-class fixture evidence.
 - Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
   40 enum tables in `tags_gen.go` are surfaced with their raw numeric
   form so coverage gaps stay visible in the demo.

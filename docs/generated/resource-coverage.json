@@ -110,7 +110,8 @@
           "selected compressed-wire projections",
           "rectangle-like heap fields",
           "common scalar heap fields",
-          "common color heap fields"
+          "common color heap fields",
+          "structural heap container fields"
         ],
         "compressed": [
           "zlib-compressed heap stream preserved byte-for-byte when possible"
@@ -119,6 +120,7 @@
           "per-class primitive fields",
           "structure metadata",
           "multi-elbow/manual/comb wire records",
+          "container child ordering/member role semantics",
           "scalar bit/enum roles",
           "color prefix/system-color semantics",
           "unknown tags surfaced as Tag(N)"
@@ -357,7 +359,8 @@
           "selected numeric data fills",
           "rectangle-like heap fields",
           "common scalar heap fields",
-          "common color heap fields"
+          "common color heap fields",
+          "structural heap container fields"
         ],
         "compressed": [
           "zlib-compressed heap stream preserved byte-for-byte when possible"
@@ -366,6 +369,7 @@
           "per-class visual fields",
           "label/caption/font/style records",
           "rectangle role semantics",
+          "container child ordering/member role semantics",
           "scalar bit/enum roles",
           "color prefix/system-color semantics",
           "custom-control state",

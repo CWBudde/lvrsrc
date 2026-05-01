@@ -680,9 +680,9 @@ var semanticDispositions = map[string]Disposition{
 	},
 	"BDHb": {
 		Status:     "partial",
-		Semantic:   []string{"heap envelope header", "tag-stream node structure", "tag enum names", "OF__bounds", "OF__termBounds", "OF__termHotPoint", "selected compressed-wire projections", "rectangle-like heap fields", "common scalar heap fields", "common color heap fields"},
+		Semantic:   []string{"heap envelope header", "tag-stream node structure", "tag enum names", "OF__bounds", "OF__termBounds", "OF__termHotPoint", "selected compressed-wire projections", "rectangle-like heap fields", "common scalar heap fields", "common color heap fields", "structural heap container fields"},
 		Compressed: []string{"zlib-compressed heap stream preserved byte-for-byte when possible"},
-		Opaque:     []string{"per-class primitive fields", "structure metadata", "multi-elbow/manual/comb wire records", "scalar bit/enum roles", "color prefix/system-color semantics", "unknown tags surfaced as Tag(N)"},
+		Opaque:     []string{"per-class primitive fields", "structure metadata", "multi-elbow/manual/comb wire records", "container child ordering/member role semantics", "scalar bit/enum roles", "color prefix/system-color semantics", "unknown tags surfaced as Tag(N)"},
 		Next:       []string{"decode per-class BD fields and finish compressed-wire topology"},
 	},
 	"BDPW": {
@@ -723,9 +723,9 @@ var semanticDispositions = map[string]Disposition{
 	},
 	"FPHb": {
 		Status:     "partial",
-		Semantic:   []string{"heap envelope header", "tag-stream node structure", "tag enum names", "OF__bounds", "selected numeric data fills", "rectangle-like heap fields", "common scalar heap fields", "common color heap fields"},
+		Semantic:   []string{"heap envelope header", "tag-stream node structure", "tag enum names", "OF__bounds", "selected numeric data fills", "rectangle-like heap fields", "common scalar heap fields", "common color heap fields", "structural heap container fields"},
 		Compressed: []string{"zlib-compressed heap stream preserved byte-for-byte when possible"},
-		Opaque:     []string{"per-class visual fields", "label/caption/font/style records", "rectangle role semantics", "scalar bit/enum roles", "color prefix/system-color semantics", "custom-control state", "unknown tags surfaced as Tag(N)"},
+		Opaque:     []string{"per-class visual fields", "label/caption/font/style records", "rectangle role semantics", "container child ordering/member role semantics", "scalar bit/enum roles", "color prefix/system-color semantics", "custom-control state", "unknown tags surfaced as Tag(N)"},
 		Next:       []string{"decode per-class FP fields and promote additional geometry tags"},
 	},
 	"FPSE": {
