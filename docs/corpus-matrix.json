@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "fixtures": [
+    {
+      "name": "blank.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["empty VI baseline", "no wire networks"],
+      "hypothesis": "Baseline for measuring heap/resource noise introduced by adding controls, constants, terminals, and wires."
+    },
+    {
+      "name": "Numeric42.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["numeric constant", "numeric indicator", "straight auto-routed wire"],
+      "hypothesis": "The trivial compressed-wire payload encodes a direct source-to-sink chain when terminal anchors are aligned."
+    },
+    {
+      "name": "Numeric4Dot2.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["floating numeric type", "straight auto-routed wire"],
+      "hypothesis": "Changing numeric type updates VCTP/type metadata without changing the simple wire topology."
+    },
+    {
+      "name": "BoolToLED.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["boolean control", "boolean indicator", "straight auto-routed wire"],
+      "hypothesis": "Boolean widgets and terminals use the same compressed-wire chain family as numeric terminals."
+    },
+    {
+      "name": "Add17Plus25.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["primitive node", "multiple numeric inputs", "numeric output"],
+      "hypothesis": "Adding a primitive introduces block-diagram primitive metadata while preserving independently decodable terminal anchors."
+    },
+    {
+      "name": "Numeric42Far.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["horizontal spacing", "auto-routed wire stretch"],
+      "hypothesis": "Horizontal sink movement stretches the inferred post-elbow segment rather than changing the source-side anchor."
+    },
+    {
+      "name": "Numeric42Bend.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["single auto-routed bend"],
+      "hypothesis": "A one-bend auto route uses a four-varint chain payload with direction, reserved zero, source anchor, and y-step magnitude."
+    },
+    {
+      "name": "Numeric42_8px_down.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["8 px vertical sink movement", "auto-chain y-step magnitude"],
+      "hypothesis": "Moving the sink 8 px down changes only the y-step magnitude in the chain payload."
+    },
+    {
+      "name": "Numeric42_16px_down.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["16 px vertical sink movement", "auto-chain y-step magnitude"],
+      "hypothesis": "Doubling the vertical movement doubles the y-step magnitude."
+    },
+    {
+      "name": "Numeric42_8px_up.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["negative vertical sink movement", "auto-chain direction flag"],
+      "hypothesis": "Moving the sink above the source flips a sign/direction field while preserving the y-step magnitude."
+    },
+    {
+      "name": "Numeric42_8px_down_8px_further_right.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["combined vertical and horizontal sink movement"],
+      "hypothesis": "The y-step changes with vertical movement while the horizontal sink delta remains recoverable from terminal geometry."
+    },
+    {
+      "name": "Numeric42TwoNetworks.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["two disconnected wire networks"],
+      "hypothesis": "Two disconnected const-to-indicator pairs emit two independent compressed-wire chunks."
+    },
+    {
+      "name": "Numeric42TwoIndicatorsY.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["2-branch Y tree", "tree endpoint records"],
+      "hypothesis": "A two-output fan-out uses tree mode with trailing endpoint records."
+    },
+    {
+      "name": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["2-branch Y tree geometry perturbation"],
+      "hypothesis": "Moving each branch endpoint perturbs the matching endpoint record and leaves structural records stable."
+    },
+    {
+      "name": "Numeric42ThreeIndicatorsY.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["3-branch pure Y tree"],
+      "hypothesis": "A pure three-output fan-out follows the same trailing endpoint-record rule as the two-branch shape."
+    },
+    {
+      "name": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["3-branch Y endpoint perturbation"],
+      "hypothesis": "Moving one branch endpoint by 8 px changes exactly one endpoint record in the pure Y-tree payload."
+    },
+    {
+      "name": "Numeric42ThreeIndicatorsYComb.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["comb fan-out topology", "4+ branch tree records"],
+      "hypothesis": "Comb topology adds junction/span records that cannot be decoded as a simple trailing endpoint list."
+    },
+    {
+      "name": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["comb geometry perturbation"],
+      "hypothesis": "Moving the middle branch changes adjacent span/junction records in opposite directions."
+    },
+    {
+      "name": "Numeric42FourIndicatorsY_single.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["4-output single network", "large tree payload"],
+      "hypothesis": "Four outputs can produce a larger topology-dependent tree payload that must remain raw until more comb cases are mapped."
+    },
+    {
+      "name": "action.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["control typedef", "enum/action data"],
+      "hypothesis": "Control fixtures broaden VCTP and connector-pane coverage outside simple VI diagrams."
+    },
+    {
+      "name": "config-data.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["configuration cluster", "control front panel"],
+      "hypothesis": "Cluster-heavy controls exercise front-panel heap grouping and type descriptor labels."
+    },
+    {
+      "name": "create-vi-params.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["parameter cluster", "string/path-like data"],
+      "hypothesis": "Parameter controls exercise nested type descriptors and front-panel string-like widgets."
+    },
+    {
+      "name": "datatypes.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["numeric ranges", "typed data fills"],
+      "hypothesis": "Numeric min/max/increment data fills can be resolved through DTHP and VCTP."
+    },
+    {
+      "name": "error-response.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["error cluster", "status/code/source fields"],
+      "hypothesis": "Common LabVIEW error clusters exercise nested cluster type descriptors."
+    },
+    {
+      "name": "mcp-creator-states.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["state enum/control", "typedef metadata"],
+      "hypothesis": "State controls help identify enum/ring type metadata in VCTP."
+    },
+    {
+      "name": "module-data--cluster.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["large cluster", "library membership"],
+      "hypothesis": "Large clusters stress VCTP descriptor order and front-panel heap containment."
+    },
+    {
+      "name": "reference-type.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["reference type", "refnum metadata"],
+      "hypothesis": "Reference controls provide seed coverage for refnum descriptor and widget classification."
+    },
+    {
+      "name": "request.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["request cluster", "string and variant-like payloads"],
+      "hypothesis": "Request payload controls broaden cluster/string descriptor coverage."
+    },
+    {
+      "name": "response.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["response cluster", "status/data fields"],
+      "hypothesis": "Response controls provide a sibling shape for request/error cluster comparisons."
+    },
+    {
+      "name": "show-panel-argument--cluster.ctl",
+      "kind": "ctl",
+      "family": "labview-mcp",
+      "focus": ["cluster control", "front-panel bounds"],
+      "hypothesis": "Cluster controls with visible fields exercise front-panel containment and bounds promotion."
+    },
+    {
+      "name": "format-string.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["string primitive", "VI description", "render front-panel golden"],
+      "hypothesis": "Description metadata and string-oriented diagrams exercise STRG, string widgets, and front-panel render output."
+    },
+    {
+      "name": "get-vi-description.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["STRG-bearing VI", "metadata editing baseline"],
+      "hypothesis": "A VI with a non-empty description verifies safe metadata reads and edits."
+    },
+    {
+      "name": "is-float.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["floating-point type test", "no STRG baseline"],
+      "hypothesis": "A no-description VI checks STRG absence handling and float type descriptors."
+    },
+    {
+      "name": "is-int.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["integer type test", "numeric primitive"],
+      "hypothesis": "Integer type tests exercise numeric descriptor and primitive metadata."
+    },
+    {
+      "name": "is-string.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["string type test", "string primitive"],
+      "hypothesis": "String type tests exercise string descriptor and primitive metadata."
+    },
+    {
+      "name": "load-vi.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["subVI/reference workflow", "structure-heavy block diagram golden"],
+      "hypothesis": "A larger operational VI stresses block-diagram heap structure and render grouping."
+    },
+    {
+      "name": "module-timeout--constant.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["constant value", "module cluster dependency"],
+      "hypothesis": "Module constants exercise data-fill and dependency metadata around library-backed types."
+    },
+    {
+      "name": "ndjson-parser.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["parser diagram", "larger wire graph"],
+      "hypothesis": "A larger real diagram supplies independent wire tree/comb payloads outside synthetic fixtures."
+    },
+    {
+      "name": "reference-find-by-id.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["reference lookup", "LinkObjRef targets", "independent wire-tree sample"],
+      "hypothesis": "Reference workflows exercise typed and opaque LinkObjRef targets plus non-synthetic wire data."
+    },
+    {
+      "name": "write-ini.vi",
+      "kind": "vi",
+      "family": "labview-mcp",
+      "focus": ["file/path workflow", "external dependency paths"],
+      "hypothesis": "File I/O diagrams exercise path refs and dependency metadata."
+    }
+  ],
+  "gaps": [
+    {
+      "feature": "labels",
+      "priority": "high",
+      "neededFixtures": ["SingleControl_LabelMoved.vi", "SingleControl_LabelTextChanged.vi"],
+      "notes": "Separate label text from label bounds/anchor records."
+    },
+    {
+      "feature": "captions",
+      "priority": "high",
+      "neededFixtures": ["SingleControl_CaptionVisible.vi", "SingleControl_CaptionMoved.vi"],
+      "notes": "Distinguish captions from labels and control-owned text fields."
+    },
+    {
+      "feature": "fonts",
+      "priority": "high",
+      "neededFixtures": ["SingleString_FontSizeChanged.vi", "SingleString_FontFaceChanged.vi"],
+      "notes": "Correlate FTAB entries with heap text/font references."
+    },
+    {
+      "feature": "colors",
+      "priority": "high",
+      "neededFixtures": ["Boolean_ColorChanged.vi", "Panel_BackgroundColorChanged.vi"],
+      "notes": "Map front-panel color fields and panel background storage."
+    },
+    {
+      "feature": "scales",
+      "priority": "medium",
+      "neededFixtures": ["Numeric_ScaleRangeChanged.vi", "Graph_ScaleRangeChanged.vi"],
+      "notes": "Identify tick/range/format fields for numerics and graphs."
+    },
+    {
+      "feature": "decorations",
+      "priority": "medium",
+      "neededFixtures": ["Decoration_Box.vi", "Decoration_LineMoved.vi"],
+      "notes": "Separate decorative shapes from controls and diagram primitives."
+    },
+    {
+      "feature": "arrays",
+      "priority": "high",
+      "neededFixtures": ["Array_Numeric1D.ctl", "Array_Numeric2D.ctl"],
+      "notes": "Map array element containers, index displays, and VCTP array descriptors."
+    },
+    {
+      "feature": "graphs",
+      "priority": "medium",
+      "neededFixtures": ["WaveformGraph_Basic.vi", "WaveformGraph_Styled.vi"],
+      "notes": "Decode graph plot/scale metadata beyond generic widget classification."
+    },
+    {
+      "feature": "structures",
+      "priority": "high",
+      "neededFixtures": ["WhileLoop_Basic.vi", "ForLoop_AutoIndex.vi", "CaseStructure_TwoCases.vi", "FlatSequence_TwoFrames.vi"],
+      "notes": "Map frame ordering, tunnels, shift registers, and selector metadata."
+    },
+    {
+      "feature": "refnums",
+      "priority": "medium",
+      "neededFixtures": ["VIRefnum_Control.ctl", "FileRefnum_Control.ctl"],
+      "notes": "Expand refnum type descriptors and widget-specific fields."
+    },
+    {
+      "feature": "variants",
+      "priority": "medium",
+      "neededFixtures": ["Variant_Control.ctl", "Variant_ToData.vi"],
+      "notes": "Ground variant controls and VITS/LVVariant payload interpretation."
+    },
+    {
+      "feature": "subVI calls",
+      "priority": "high",
+      "neededFixtures": ["Caller_SubVI_Basic.vi", "Callee_SubVI_Basic.vi"],
+      "notes": "Connect BDHb call-site nodes to LIbd/LIvi dependency entries."
+    },
+    {
+      "feature": "event structures",
+      "priority": "medium",
+      "neededFixtures": ["EventStructure_ValueChange.vi", "EventStructure_Timeout.vi"],
+      "notes": "Decode event data node, registration, and frame metadata."
+    },
+    {
+      "feature": "disabled diagrams",
+      "priority": "medium",
+      "neededFixtures": ["DiagramDisable_TwoFrames.vi", "ConditionalDisable_Symbol.vi"],
+      "notes": "Map disabled/conditional diagram structure classes and active-frame fields."
+    },
+    {
+      "feature": "manual wires",
+      "priority": "high",
+      "neededFixtures": ["Numeric42ManualBend.vi", "Numeric42TwoManualBends.vi"],
+      "notes": "Ground manual-chain compressed-wire varint streams with known waypoints."
+    },
+    {
+      "feature": "multi-elbow auto wires",
+      "priority": "high",
+      "neededFixtures": ["Numeric42TwoElbows.vi", "Numeric42ThreeElbows.vi"],
+      "notes": "Decode chain payloads with more than four varints into exact waypoint lists."
+    },
+    {
+      "feature": "version span",
+      "priority": "high",
+      "neededFixtures": ["Blank_LV2014.vi", "Blank_LV2020.vi", "Blank_Current.vi", "Description_LV7.vi"],
+      "notes": "Establish version gates for resource layouts and legacy string/type encodings."
+    }
+  ],
+  "oracleTargets": [
+    "pylabview structural dump",
+    "pylavi resource dump",
+    "native LabVIEW open/save round-trip",
+    "native LabVIEW screenshot or exported geometry where visual semantics are tested"
+  ]
+}

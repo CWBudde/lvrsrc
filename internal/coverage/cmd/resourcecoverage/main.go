@@ -14,6 +14,8 @@ func main() {
 	check := flag.Bool("check", false, "verify checked-in coverage artifacts are current")
 	printJSON := flag.Bool("print-json", false, "print the generated JSON manifest to stdout")
 	printMarkdown := flag.Bool("print-md", false, "print the generated Markdown report to stdout")
+	printHeapTagsJSON := flag.Bool("print-heap-tags-json", false, "print the generated heap tag gap JSON report to stdout")
+	printHeapTagsMarkdown := flag.Bool("print-heap-tags-md", false, "print the generated heap tag gap Markdown report to stdout")
 	flag.Parse()
 
 	manifest, err := coverage.BuildManifest()
@@ -28,8 +30,23 @@ func main() {
 		fmt.Print(coverage.RenderMarkdown(manifest))
 		return
 	}
+	heapTags, err := coverage.BuildHeapTagReport()
+	if err != nil {
+		fail(err)
+	}
+	if *printHeapTagsJSON {
+		fmt.Print(coverage.RenderHeapTagReportJSON(heapTags))
+		return
+	}
+	if *printHeapTagsMarkdown {
+		fmt.Print(coverage.RenderHeapTagReportMarkdown(heapTags))
+		return
+	}
 
 	files := coverage.ArtifactContents(manifest)
+	for path, content := range coverage.HeapTagArtifactContents(heapTags) {
+		files[path] = content
+	}
 	if *check {
 		if err := checkArtifacts(files); err != nil {
 			fail(err)

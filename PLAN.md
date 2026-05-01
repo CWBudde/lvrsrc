@@ -341,18 +341,20 @@ Remaining fixtures needed:
 
 ### 16.2 Corpus & Oracle Expansion
 
-- [ ] Build a controlled VI matrix that changes one feature at a time: labels, captions, fonts, colors, scales, decorations, clusters, arrays, graphs, structures, refnums, variants, subVI calls, event structures, cases, loops, and disabled/conditional diagrams.
+- [x] Build a controlled VI matrix that changes one feature at a time: labels, captions, fonts, colors, scales, decorations, clusters, arrays, graphs, structures, refnums, variants, subVI calls, event structures, cases, loops, and disabled/conditional diagrams. `docs/corpus-matrix.json` now records every current `.vi` / `.ctl` fixture, its focus, its working hypothesis, the missing one-feature fixture names, and the oracle targets. `internal/corpus` tests keep the matrix in sync with the scanned corpus.
+- [ ] Author the missing one-feature fixtures listed in `docs/corpus-matrix.json`, then move their gap entries into fixture entries with measured deltas.
 - [ ] Add version-spanning fixtures from old and current LabVIEW releases, with expected version gates for fields that move or change encoding.
-- [ ] Keep an external-oracle comparison harness against `pylabview`, `pylavi`, and native LabVIEW save-as/read-back behavior where available.
-- [ ] Store reverse-engineering deltas as fixture pairs with a short hypothesis note, not just as final decoded structs.
+- [x] Keep an external-oracle comparison harness against `pylabview`, `pylavi`, and native LabVIEW save-as/read-back behavior where available. `internal/oracle` already verifies checked-in pylabview baselines; `docs/oracle-targets.json` now tracks automated pylabview coverage plus planned pylavi and manual native-LabVIEW artifact targets, with tests enforcing the registry shape.
+- [x] Store reverse-engineering deltas as fixture pairs with a short hypothesis note, not just as final decoded structs. `docs/reverse-deltas.json` now records controlled fixture pairs, topics, hypotheses, evidence notes, and status; `internal/corpus` tests ensure the referenced fixtures exist and key topics remain covered.
 
 ### 16.3 Heap Field Semantics
 
-- [ ] Promote rectangle-like heap fields beyond `OF__bounds` / `OF__termBounds` where they affect layout: `OF__contRect`, `OF__dBounds`, `OF__pBounds`, `OF__iconBounds`, `OF__growAreaBounds`, and related panel/diagram rectangles.
+- [x] Add a generic typed accessor for rectangle-like heap fields beyond `OF__bounds` / `OF__termBounds`: `OF__contRect`, `OF__dBounds`, `OF__pBounds`, `OF__iconBounds`, `OF__growAreaBounds`, `OF__sizeRect`, and related panel/diagram rectangles. `pkg/lvvi.HeapRect`, `HeapRectForTag`, `FindRectChild`, and `IsHeapRectTag` now share the `HeapNodeRect` decoder, while the existing `HeapBounds` / `HeapTermBounds` APIs stay source-compatible.
+- [ ] Promote the newly decoded rectangle roles into scene-graph layout only where controlled fixtures show that they affect visible geometry.
 - [ ] Decode front-panel visual fields: label and caption anchors, font refs, text runs, colors, booleans, numerics, strings, arrays, clusters, graphs, paths, rings/enums, refnums, decorations, and custom-control style records.
 - [ ] Decode block-diagram semantic fields: primitive operand metadata, case selector values, frame ordering, loop terminals, tunnels, shift registers, event data nodes, sequence frames, formula nodes, property/invoke nodes, and subVI call-site metadata.
 - [ ] Replace broad widget-kind heuristics with per-class decoders where the heap class has known required/optional fields.
-- [ ] Document unresolved heap tags in a generated report sorted by frequency and fixture provenance.
+- [x] Document unresolved heap tags in a generated report sorted by frequency and fixture provenance. `docs/generated/heap-tag-gaps.json` and `.md` now list unresolved/partial heap tags by corpus frequency with status buckets, FPHb/BDHb counts, fixture provenance, parent contexts, and next decode action; `internal/coverage` tests keep the artifacts current.
 
 ### 16.4 Wire Topology
 

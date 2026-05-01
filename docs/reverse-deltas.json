@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "deltas": [
+    {
+      "id": "empty-to-straight-numeric-wire",
+      "left": "blank.vi",
+      "right": "Numeric42.vi",
+      "topic": "wire-topology",
+      "focus": ["numeric constant", "numeric indicator", "straight auto-chain"],
+      "hypothesis": "Adding one numeric constant, one numeric indicator, and one aligned wire introduces a single auto-chain compressed-wire chunk with no trailing geometry.",
+      "evidence": "Numeric42.vi is the baseline for the 0208 straight-wire sentinel used by ChainAutoPath.",
+      "status": "confirmed"
+    },
+    {
+      "id": "numeric-type-int-to-float",
+      "left": "Numeric42.vi",
+      "right": "Numeric4Dot2.vi",
+      "topic": "type-system",
+      "focus": ["numeric type descriptor", "wire topology stability"],
+      "hypothesis": "Changing an integer numeric constant to floating-point changes VCTP/type metadata while preserving the simple auto-chain topology.",
+      "evidence": "Both fixtures remain simple single-wire networks; descriptor-level interpretation still needs VCTP Inner decoding.",
+      "status": "partial"
+    },
+    {
+      "id": "boolean-terminal-chain-family",
+      "left": "Numeric42.vi",
+      "right": "BoolToLED.vi",
+      "topic": "widget-and-terminal-kind",
+      "focus": ["boolean widgets", "terminal classification", "straight auto-chain"],
+      "hypothesis": "Boolean terminals use the same straight auto-chain wire family as numeric terminals, while widget class mapping changes from numeric to boolean.",
+      "evidence": "BoolToLED.vi provides a non-numeric straight-wire control/indicator pair.",
+      "status": "confirmed"
+    },
+    {
+      "id": "horizontal-sink-stretch",
+      "left": "Numeric42.vi",
+      "right": "Numeric42Far.vi",
+      "topic": "wire-topology",
+      "focus": ["horizontal terminal movement", "auto-router inferred segment"],
+      "hypothesis": "Moving the sink horizontally changes terminal geometry but does not require a new source-side chain payload value; the renderer stretches the post-elbow segment from terminal bounds.",
+      "evidence": "Numeric42Far.vi is used as the far-spacing control for ChainAutoPath rendering.",
+      "status": "partial"
+    },
+    {
+      "id": "auto-chain-y-step-8px",
+      "left": "Numeric42.vi",
+      "right": "Numeric42_8px_down.vi",
+      "topic": "wire-topology",
+      "focus": ["vertical terminal movement", "auto-chain y-step"],
+      "hypothesis": "Moving the sink 8 px down changes the auto-chain y-step magnitude to 8 while preserving source anchor semantics.",
+      "evidence": "Wire tests compare the decoded ChainAutoPath y-step against the controlled 8 px fixture.",
+      "status": "confirmed"
+    },
+    {
+      "id": "auto-chain-y-step-16px",
+      "left": "Numeric42_8px_down.vi",
+      "right": "Numeric42_16px_down.vi",
+      "topic": "wire-topology",
+      "focus": ["vertical terminal movement", "auto-chain y-step magnitude"],
+      "hypothesis": "Increasing the vertical displacement from 8 px to 16 px doubles the y-step magnitude.",
+      "evidence": "The pair separates magnitude from sign and horizontal routing effects.",
+      "status": "confirmed"
+    },
+    {
+      "id": "auto-chain-sign-up",
+      "left": "Numeric42_8px_down.vi",
+      "right": "Numeric42_8px_up.vi",
+      "topic": "wire-topology",
+      "focus": ["vertical sign", "auto-chain direction flag"],
+      "hypothesis": "Moving the sink above the source changes the direction flag while preserving y-step magnitude.",
+      "evidence": "The up/down fixture pair ground-truths ChainAutoPath sign handling.",
+      "status": "confirmed"
+    },
+    {
+      "id": "two-independent-networks",
+      "left": "Numeric42.vi",
+      "right": "Numeric42TwoNetworks.vi",
+      "topic": "wire-topology",
+      "focus": ["wire network boundary", "compressed-wire chunk count"],
+      "hypothesis": "Two disconnected const-to-indicator pairs emit two independent compressed-wire chunks.",
+      "evidence": "CountWireMix observes two auto-chain networks in the two-network fixture.",
+      "status": "confirmed"
+    },
+    {
+      "id": "two-branch-y-endpoints",
+      "left": "Numeric42TwoIndicatorsY.vi",
+      "right": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+      "topic": "wire-topology",
+      "focus": ["2-branch tree records", "endpoint coordinates"],
+      "hypothesis": "Moving each branch endpoint perturbs the corresponding trailing endpoint record while earlier structural records remain topology data.",
+      "evidence": "TreeEndpointPair is grounded by this geometry-varied pair.",
+      "status": "confirmed"
+    },
+    {
+      "id": "three-branch-y-endpoint",
+      "left": "Numeric42ThreeIndicatorsY.vi",
+      "right": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+      "topic": "wire-topology",
+      "focus": ["3-branch pure Y tree", "endpoint coordinate rule"],
+      "hypothesis": "For pure 3-branch Y trees, the last waypoint-count-minus-4 records are endpoint coordinates.",
+      "evidence": "Moving the bottom branch 8 px changes one trailing endpoint record and matches the independent reference-find-by-id.vi shape.",
+      "status": "confirmed"
+    },
+    {
+      "id": "comb-middle-branch-span",
+      "left": "Numeric42ThreeIndicatorsYComb.vi",
+      "right": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+      "topic": "wire-topology",
+      "focus": ["comb topology", "junction/span records"],
+      "hypothesis": "Comb payloads carry junction/span records around the moved branch rather than a simple trailing endpoint list.",
+      "evidence": "The middle-branch move changes adjacent records in opposite directions, so byte0 >= 8 shapes stay raw until more comb variations are authored.",
+      "status": "partial"
+    },
+    {
+      "id": "four-output-tree-large-payload",
+      "left": "Numeric42ThreeIndicatorsY.vi",
+      "right": "Numeric42FourIndicatorsY_single.vi",
+      "topic": "wire-topology",
+      "focus": ["4-output network", "large tree payload"],
+      "hypothesis": "Four-output networks produce larger topology-dependent tree payloads that need additional fixture variation before endpoint extraction is safe.",
+      "evidence": "The larger tree fixture is intentionally not decoded by TreeEndpoints.",
+      "status": "open"
+    },
+    {
+      "id": "real-world-wire-tree-cross-check",
+      "left": "Numeric42ThreeIndicatorsY.vi",
+      "right": "reference-find-by-id.vi",
+      "topic": "wire-topology",
+      "focus": ["controlled vs real-world tree shape"],
+      "hypothesis": "The pure Y-tree endpoint rule observed in controlled fixtures also appears in at least one independent real corpus VI.",
+      "evidence": "reference-find-by-id.vi carries a matching shape used as an independent sanity check.",
+      "status": "partial"
+    }
+  ]
+}

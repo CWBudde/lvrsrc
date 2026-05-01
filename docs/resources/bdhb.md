@@ -92,6 +92,13 @@ the following typed leaf payloads:
   `NodeKindTerminal` scene node — wires (Phase 14) will attach
   there. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode;
   terminals without a hot-point fall back to the bounds centre.
+- Rectangle-shaped heap fields (Phase 16.3): `lvvi.HeapRect`,
+  `lvvi.HeapRectForTag`, and `lvvi.FindRectChild` decode the shared
+  8-byte rectangle payload for known `OF__*Bounds` / `OF__*Rect` leaves
+  including `OF__contRect`, `OF__dBounds`, `OF__growAreaBounds`,
+  `OF__iconBounds`, `OF__pBounds`, `OF__sizeRect`, and
+  `OF__termBounds`. The accessors expose the bytes; scene-graph
+  promotion remains role-specific.
 
 ## What's still opaque
 
@@ -136,9 +143,10 @@ the following typed leaf payloads:
 - Per-primitive operand metadata (selector ranges, frame counts on Case
   structures, sequence-frame ordering, …). These are domain-specific
   and still being mapped from `pylabview`'s per-primitive decoders.
-- Other rectangle-shaped tags (`OF__termBounds`, `OF__pBounds`,
-  `OF__growAreaBounds`, …): same wire format as `OF__bounds` but not
-  yet promoted onto scene-graph geometry.
+- Rectangle role semantics beyond the promoted outer object and
+  terminal rectangles: several known rectangle leaves now decode
+  generically, but controlled fixtures still need to identify which
+  tags affect rendered block-diagram geometry.
 - Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
   40 enum tables in `tags_gen.go` surface with their raw numeric form
   so coverage gaps stay visible in the demo.

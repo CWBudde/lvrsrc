@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "targets": [
+    {
+      "name": "pylabview",
+      "availability": "automated",
+      "artifactRoot": "testdata/oracle",
+      "generator": "scripts/gen-oracle.py",
+      "testPackage": "./internal/oracle",
+      "coverage": [
+        "RSRC block inventory",
+        "section counts",
+        "format version"
+      ],
+      "refresh": "python3 scripts/gen-oracle.py",
+      "notes": "CI consumes checked-in JSON baselines and does not require Python or pylabview at test time."
+    },
+    {
+      "name": "pylavi",
+      "availability": "planned",
+      "artifactRoot": "testdata/oracle-pylavi",
+      "generator": "",
+      "testPackage": "",
+      "coverage": [
+        "resource-level metadata cross-checks",
+        "LVSR/BDPW flag and password-hash interpretation",
+        "small-block scalar/resource semantics"
+      ],
+      "refresh": "",
+      "notes": "Add a generator once a stable local pylavi checkout and CLI/API entry point are available."
+    },
+    {
+      "name": "native-labview",
+      "availability": "manual",
+      "artifactRoot": "testdata/native-labview",
+      "generator": "",
+      "testPackage": "",
+      "coverage": [
+        "open/save round-trip acceptance",
+        "exported front-panel/block-diagram screenshots",
+        "exported geometry or inspection data where available"
+      ],
+      "refresh": "",
+      "notes": "Native LabVIEW is not expected in CI. Store manually exported artifacts and fixture provenance when available."
+    }
+  ]
+}

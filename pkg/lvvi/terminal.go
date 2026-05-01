@@ -29,23 +29,7 @@ type Point struct {
 // Returns ok=false on out-of-range index, wrong tag, or wrong byte
 // length — same contract as HeapBounds.
 func HeapTermBounds(tree HeapTree, nodeIdx int) (Bounds, bool) {
-	if nodeIdx < 0 || nodeIdx >= len(tree.Nodes) {
-		return Bounds{}, false
-	}
-	n := tree.Nodes[nodeIdx]
-	if n.Tag != int32(heap.FieldTagTermBounds) {
-		return Bounds{}, false
-	}
-	if len(n.Content) != 8 {
-		return Bounds{}, false
-	}
-	c := n.Content
-	return Bounds{
-		Left:   int16(binary.BigEndian.Uint16(c[0:2])),
-		Top:    int16(binary.BigEndian.Uint16(c[2:4])),
-		Right:  int16(binary.BigEndian.Uint16(c[4:6])),
-		Bottom: int16(binary.BigEndian.Uint16(c[6:8])),
-	}, true
+	return HeapRectForTag(tree, nodeIdx, int32(heap.FieldTagTermBounds))
 }
 
 // HeapTermHotPoint decodes an OF__termHotPoint heap leaf at
@@ -74,22 +58,7 @@ func HeapTermHotPoint(tree HeapTree, nodeIdx int) (Point, bool) {
 // FindBoundsChild for the terminal-rect case; tunnel / terminal class
 // nodes carry their geometry as a sibling field tag.
 func FindTermBoundsChild(tree HeapTree, parentIdx int) (Bounds, bool) {
-	if parentIdx < 0 || parentIdx >= len(tree.Nodes) {
-		return Bounds{}, false
-	}
-	parent := tree.Nodes[parentIdx]
-	for _, ci := range parent.Children {
-		if ci < 0 || ci >= len(tree.Nodes) {
-			continue
-		}
-		if tree.Nodes[ci].Tag != int32(heap.FieldTagTermBounds) {
-			continue
-		}
-		if b, ok := HeapTermBounds(tree, ci); ok {
-			return b, true
-		}
-	}
-	return Bounds{}, false
+	return FindRectChild(tree, parentIdx, int32(heap.FieldTagTermBounds))
 }
 
 // FindTermHotPointChild walks the children of tree.Nodes[parentIdx]

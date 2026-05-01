@@ -78,6 +78,13 @@ the following typed leaf payloads:
   LabVIEW pixel positions whenever a control carries a bounds child.
   Corpus coverage: **1188 / 1188** OF__bounds leaves across 42 FPHb +
   BDHb trees.
+- Rectangle-shaped heap fields (Phase 16.3): `lvvi.HeapRect`,
+  `lvvi.HeapRectForTag`, and `lvvi.FindRectChild` decode the shared
+  8-byte rectangle payload for known `OF__*Bounds` / `OF__*Rect` leaves
+  including `OF__contRect`, `OF__dBounds`, `OF__docBounds`,
+  `OF__growAreaBounds`, `OF__iconBounds`, `OF__pBounds`, and
+  `OF__sizeRect`. These accessors expose the bytes, but only
+  `OF__bounds` is currently promoted into scene-graph layout.
 
 ## What's still opaque
 
@@ -88,10 +95,10 @@ the following typed leaf payloads:
 - Wire routing (`OF__wireTable`, `OF__wireID`, `OF__wireGlyphID`) and
   terminal positions (`OF__terminal`) — recognised as tags but content
   bytes left raw. Tracked as Phase 11.3–11.5.
-- Other rectangle-shaped tags (`OF__contRect`, `OF__dBounds`,
-  `OF__pBounds`, `OF__iconBounds`, …): the binary format is identical
-  to `OF__bounds` but they are not yet promoted onto scene-graph
-  geometry; only the outer `OF__bounds` rectangle is consumed today.
+- Rectangle role semantics beyond `OF__bounds`: several known
+  rectangle leaves now decode generically, but the exact panel /
+  diagram role of each one still needs controlled-fixture evidence
+  before it affects rendered geometry.
 - Unresolved `Tag(N)` fallbacks: tags that don't appear in any of the
   40 enum tables in `tags_gen.go` are surfaced with their raw numeric
   form so coverage gaps stay visible in the demo.
