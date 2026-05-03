@@ -86,6 +86,41 @@
       "hypothesis": "Two disconnected const-to-indicator pairs emit two independent compressed-wire chunks."
     },
     {
+      "name": "Numeric42_indicator_left.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["right-to-left auto-route", "multi-elbow auto-chain payload"],
+      "hypothesis": "Placing the indicator left of the source forces LabVIEW to auto-route a multi-elbow path; observed payload `06 08 00 01 00 00 10 0f 89 30` is a 6-waypoint auto-chain that the current ChainAutoPath decoder rejects (>4 varints). Useful as ground truth for §13.5 multi-elbow decoding."
+    },
+    {
+      "name": "Numeric42_two_elbows.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["multi-elbow auto-chain", "Z-shape route"],
+      "hypothesis": "A deliberately Z-shaped auto-route emits a 6-waypoint chain payload; observed `06 08 00 00 00 00 10 0f 34 23` differs from `_indicator_left.vi` only in the trailing magnitude varints, isolating per-elbow geometry from direction sign."
+    },
+    {
+      "name": "Numeric42_manual_elbows.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["attempted manual edits", "auto-chain re-snap"],
+      "hypothesis": "Manual elbow edits made in the LabVIEW editor were re-snapped to a single-elbow auto-route by LabVIEW's wire cleanup; observed payload `04 08 00 00 fe 70` is a normal 4-waypoint auto-chain (byte1=0x08, not 0x04). Confirms that manual-mode (byte1=0x04) requires a non-orthogonal drag the editor cannot fold back; Numeric42Bend.vi remains the only manual-chain ground truth."
+    },
+    {
+      "name": "ConnectorPane_2Inputs_2Outputs.vi",
+      "kind": "vi",
+      "family": "controlled-render",
+      "focus": ["connector pane geometry", "per-endpoint anchors", "shared sdfTun anchor"],
+      "hypothesis": "A 2-2 connector pane with 4 distinct FP terminals (2 unwired inputs, 2 wired outputs from constants) produces a single root-level SL__sdfTun whose children declare 6 endpoint IDs. The two output wires terminate on distinct conPane endpoints that currently share the sdfTun anchor — needed for §16.4 follow-up: per-endpoint connector-pane geometry."
+    },
+    {
+      "name": "WhileLoop_Numeric42.vi",
+      "kind": "vi",
+      "family": "controlled-render",
+      "focus": ["nested structure", "loop terminal projection", "nested sdfTun"],
+      "hypothesis": "A while-loop containing a constant-to-indicator wire produces a nested SL__sdfTun [16] inside the loop's wrapper [14] (own ID 165), in addition to the outer root-level SL__sdfTun [3]. Confirms that loops/structures nest WidgetKindTerminal nodes inside other WidgetKindTerminal nodes — needed to validate the §16.4 follow-up: project nested terminals into the scene."
+    },
+    {
       "name": "Numeric42TwoIndicatorsY.vi",
       "kind": "vi",
       "family": "controlled-wire",

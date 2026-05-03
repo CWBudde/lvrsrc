@@ -153,8 +153,11 @@ func TestProjectHeapTreeAddsFidelityWarnings(t *testing.T) {
 	}
 
 	bd := ProjectHeapTree(tree, ViewBlockDiagram)
-	if !containsString(bd.Warnings, "wires not yet rendered") {
-		t.Fatalf("block-diagram warnings = %v, want wires-not-rendered warning", bd.Warnings)
+	// A BD scene without any wire chunks no longer emits a wire-status
+	// warning at all — the per-mode breakdown only appears once the
+	// scene actually contains compressed-wire-table leaves.
+	if containsString(bd.Warnings, "wire") {
+		t.Fatalf("BD scene without wire chunks should not emit wire warnings, got %v", bd.Warnings)
 	}
 }
 

@@ -130,6 +130,36 @@
       "hypothesis": "The pure Y-tree endpoint rule observed in controlled fixtures also appears in at least one independent real corpus VI.",
       "evidence": "reference-find-by-id.vi carries a matching shape used as an independent sanity check.",
       "status": "partial"
+    },
+    {
+      "id": "single-elbow-vs-multi-elbow-auto-chain",
+      "left": "Numeric42_8px_down.vi",
+      "right": "Numeric42_indicator_left.vi",
+      "topic": "wire-topology",
+      "focus": ["multi-elbow auto-chain payload", "right-to-left routing"],
+      "hypothesis": "Forcing LabVIEW's auto-router to take a Z-shape by placing the indicator left of the source produces a 6-waypoint chain payload (06 08 00 01 00 00 10 0f 89 30) instead of the 4-waypoint single-elbow form (04 08 00 00 41 08). Provides ground truth for the multi-elbow ChainAutoPath gap (>4 varints currently rejected by the decoder).",
+      "evidence": "Both fixtures share heap-object IDs (95, 51 in termList) and SDF/SimTun anchors; only the wire chunk payload differs.",
+      "status": "partial"
+    },
+    {
+      "id": "two-elbow-z-shape-isolated",
+      "left": "Numeric42_indicator_left.vi",
+      "right": "Numeric42_two_elbows.vi",
+      "topic": "wire-topology",
+      "focus": ["multi-elbow geometry", "direction sign vs magnitude"],
+      "hypothesis": "Two right-to-left auto-routes with different terminal offsets produce 6-waypoint chains that differ only in the trailing magnitude varints (06 08 00 01 00 00 10 0f 89 30 vs 06 08 00 00 00 00 10 0f 34 23). Isolates per-elbow geometry from direction sign in the multi-elbow encoding.",
+      "evidence": "Heap-object IDs identical to the baseline _indicator_left.vi fixture; wire chunk content is the only delta.",
+      "status": "partial"
+    },
+    {
+      "id": "manual-elbows-snap-back-to-auto",
+      "left": "Numeric42_8px_down.vi",
+      "right": "Numeric42_manual_elbows.vi",
+      "topic": "wire-topology",
+      "focus": ["manual-mode trigger", "auto-router cleanup"],
+      "hypothesis": "Manual elbow edits made through the LabVIEW editor's normal drag handles get cleaned up by the auto-router when the resulting path is still expressible as a single L-shape; the saved payload retains byte1=0x08 (auto) rather than promoting to byte1=0x04 (manual). Confirms Numeric42Bend.vi remains the only manual-chain ground truth in the corpus.",
+      "evidence": "Saved content is 04 08 00 00 fe 70 — same 4-waypoint single-elbow shape as Numeric42_8px_down.vi (04 08 00 00 41 08); only the y-step magnitude varint differs.",
+      "status": "confirmed"
     }
   ]
 }

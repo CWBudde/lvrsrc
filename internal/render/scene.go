@@ -100,6 +100,25 @@ type Scene struct {
 type wireProjectionStats struct {
 	Total    int
 	Rendered int
+	// UnresolvedAtHeap counts wires whose source/sink termList IDs
+	// could not be mapped to a WidgetKindTerminal heap node by
+	// lvvi.WireTerminalAnchor. With the current corpus this is always
+	// zero; the field exists so a future regression surfaces loudly.
+	UnresolvedAtHeap int
+	// MissingFromScene counts wires whose heap terminal anchor exists
+	// in the heap tree but the scene projection did not surface it as
+	// a NodeKindTerminal (the layout pipeline stops at the first
+	// WidgetKindTerminal ancestor and does not recurse further, so
+	// terminals nested inside another terminal are dropped). Phase
+	// 16.4 follow-up: extend the layout to project nested terminals.
+	MissingFromScene int
+	// SharedAnchorSkipped counts wires whose two endpoints resolved to
+	// the same scene-terminal anchor (typically two connector-pane
+	// endpoints nested inside the same sdfTun). The chain renderer
+	// produces a zero-length path for these and the wire is dropped.
+	// Distinct per-endpoint anchors require deeper connector-pane
+	// geometry decoding (Phase 16.4 follow-up).
+	SharedAnchorSkipped int
 }
 
 const (
@@ -142,6 +161,14 @@ type layoutItem struct {
 	leafCount   int
 	contentSize int
 	children    []*layoutItem
+	// nestedTerminals are WidgetKindTerminal layoutItems collected from
+	// the descendant subtree of a terminal-class node (e.g. simTun
+	// instances inside an sdfTun's connector-pane subtree). They are
+	// kept separate from `children` because they are projected as
+	// scene siblings of the outer terminal anchor rather than visual
+	// containment children. Phase 16.4 follow-up: A1 nested-terminal
+	// projection.
+	nestedTerminals []*layoutItem
 	width       float64
 	height      float64
 	// bounds is the decoded OF__bounds rectangle for this group, when
@@ -324,6 +351,15 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 				item.anchor = p
 				item.hasAnchor = true
 			}
+			// Phase 16.4 A1: collect any nested WidgetKindTerminal
+			// descendants so they get their own scene NodeKindTerminal
+			// rather than being silently dropped. Common case: the
+			// per-endpoint SL__simTun instances nested inside an
+			// SL__sdfTun connector-pane subtree, which were previously
+			// invisible because this branch returned without recursing.
+			for _, ci := range n.Children {
+				collectNestedTerminals(tree, ci, path, item)
+			}
 			return item
 		}
 		item := &layoutItem{
@@ -380,6 +416,126 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 	}
 }
 
+// collectNestedTerminals walks the subtree rooted at idx and appends
+// either:
+//   - a fully-built layoutItem for any WidgetKindTerminal open-scope
+//     descendant (Phase 16.4 A1), or
+//   - a synthetic per-endpoint anchor for any open-scope arrayElement
+//     declaration (carrying both -2 and -3 attributes) that lives
+//     inside an outer terminal's subtree without containing a nested
+//     WidgetKindTerminal of its own (Phase 16.4 A2).
+//
+// Both forms become entries on outer.nestedTerminals so the scene
+// projection registers each as a NodeKindTerminal with a unique
+// HeapIndex. Per-endpoint anchors let wires terminate at distinct
+// positions within the same sdfTun container instead of all collapsing
+// onto the sdfTun's shared anchor.
+//
+// Recursion stops at the first match in any branch so the result is a
+// flat list (no double-counting of a canonical that itself contains a
+// simTun — the simTun wins, since walk-down prefers it).
+func collectNestedTerminals(tree lvvi.HeapTree, idx int, parentPath string, outer *layoutItem) {
+	if idx < 0 || idx >= len(tree.Nodes) {
+		return
+	}
+	n := tree.Nodes[idx]
+	if n.Scope != "open" {
+		return
+	}
+	if lvvi.WidgetKindForNode(n) == lvvi.WidgetKindTerminal {
+		nested := buildLayoutItem(tree, idx, parentPath)
+		if nested != nil {
+			outer.nestedTerminals = append(outer.nestedTerminals, nested)
+		}
+		return
+	}
+	if isPerEndpointCanonical(n) && !subtreeHasWidgetTerminal(tree, idx) {
+		anchor := buildEndpointAnchorItem(tree, idx, parentPath)
+		if anchor != nil {
+			outer.nestedTerminals = append(outer.nestedTerminals, anchor)
+		}
+		// Don't stop here: a canonical may contain nested canonicals
+		// (the connector-pane wrapper holds multiple per-endpoint
+		// canonicals inside its udClassDDO container). Each nested
+		// canonical needs its own scene anchor so wires resolving to
+		// distinct IDs hit distinct anchors.
+	}
+	for _, c := range n.Children {
+		collectNestedTerminals(tree, c, parentPath, outer)
+	}
+}
+
+// isPerEndpointCanonical reports whether n looks like an
+// arrayElement-with-IDs declaration (carrying both HeapAttrIndex and
+// HeapAttrObjectID) — the shape used for per-endpoint references
+// inside a connector-pane sdfTun subtree.
+func isPerEndpointCanonical(n lvvi.HeapNode) bool {
+	if n.Tag != -6 || n.Scope != "open" {
+		return false
+	}
+	hasIndex, hasID := false, false
+	for _, a := range n.Attributes {
+		if a.ID == lvvi.HeapAttrIndex {
+			hasIndex = true
+		}
+		if a.ID == lvvi.HeapAttrObjectID {
+			hasID = true
+		}
+	}
+	return hasIndex && hasID
+}
+
+// subtreeHasWidgetTerminal reports whether any descendant of root is an
+// open-scope WidgetKindTerminal node. Used to decide whether to emit
+// a per-endpoint synthetic anchor (no nested terminal) or let walk-down
+// handle the case (nested terminal exists).
+func subtreeHasWidgetTerminal(tree lvvi.HeapTree, root int) bool {
+	if root < 0 || root >= len(tree.Nodes) {
+		return false
+	}
+	for _, c := range tree.Nodes[root].Children {
+		if c < 0 || c >= len(tree.Nodes) {
+			continue
+		}
+		cn := tree.Nodes[c]
+		if cn.Scope == "open" && lvvi.WidgetKindForNode(cn) == lvvi.WidgetKindTerminal {
+			return true
+		}
+		if subtreeHasWidgetTerminal(tree, c) {
+			return true
+		}
+	}
+	return false
+}
+
+// buildEndpointAnchorItem constructs a synthetic layoutItem of kind
+// layoutKindTerminal representing a per-endpoint anchor inside an
+// outer terminal subtree (Phase 16.4 A2). The item carries the
+// canonical's heap index so terminalByHeap registration matches the
+// id returned by WireTerminalAnchor; size is fixed and the anchor
+// position is computed by placeLayoutItem's nested-terminal spread.
+func buildEndpointAnchorItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem {
+	if idx < 0 || idx >= len(tree.Nodes) {
+		return nil
+	}
+	n := tree.Nodes[idx]
+	label := lvvi.HeapTagName(n)
+	path := label
+	if parentPath != "" {
+		path = parentPath + "/" + label
+	}
+	return &layoutItem{
+		kind:        layoutKindTerminal,
+		heapIndex:   idx,
+		tag:         n.Tag,
+		label:       label,
+		placeholder: false,
+		path:        path,
+		contentSize: len(n.Content),
+		widgetKind:  lvvi.WidgetKindTerminal,
+	}
+}
+
 func measureLayout(item *layoutItem) {
 	if item == nil {
 		return
@@ -390,9 +546,14 @@ func measureLayout(item *layoutItem) {
 		item.width = math.Max(sceneMinLabelW, labelW+12)
 		item.height = sceneLabelH
 	case layoutKindTerminal:
-		// Terminals have no children; size comes from termBounds /
-		// bounds. Falls back to a small fixed marker if no rect
-		// payload was attached.
+		// Terminals are leaves in the visible group hierarchy; size
+		// comes from termBounds / bounds. Falls back to a small fixed
+		// marker if no rect payload was attached. Nested terminals
+		// (Phase 16.4 A1) are sized recursively here so they pick up
+		// their own decoded geometry before placement.
+		for _, nt := range item.nestedTerminals {
+			measureLayout(nt)
+		}
 		if item.bounds != nil {
 			w := float64(item.bounds.Width())
 			h := float64(item.bounds.Height())
@@ -481,6 +642,28 @@ func placeLayoutItem(scene *Scene, item *layoutItem, x, y float64, parent, depth
 		})
 		if parent >= 0 {
 			scene.Nodes[parent].Children = append(scene.Nodes[parent].Children, idx)
+		}
+		// Phase 16.4 A1: place nested terminals as scene children of
+		// this outer terminal so each gets its own NodeKindTerminal
+		// with a unique Anchor. Layout: nested terminals with decoded
+		// bounds use them at their parent-relative origin (the heap
+		// preserves coordinates relative to the diagram top-left, not
+		// the parent — so we pass scene coords as-is); nested terminals
+		// without bounds spread vertically inside the outer terminal's
+		// rect so wires don't all collapse onto the same anchor.
+		spreadY := y
+		spreadStep := sceneTerminalSize + 2
+		for _, nt := range item.nestedTerminals {
+			var nx, ny float64
+			if nt.bounds != nil {
+				nx = float64(nt.bounds.Left) + sceneMarginX
+				ny = float64(nt.bounds.Top) + sceneMarginY
+			} else {
+				nx = x + item.width + 4
+				ny = spreadY
+				spreadY += spreadStep
+			}
+			placeLayoutItem(scene, nt, nx, ny, idx, depth+1)
 		}
 		return idx
 	case layoutKindLabel:
@@ -617,18 +800,25 @@ func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix, wireS
 	}
 	if scene.View == ViewBlockDiagram {
 		if total := wireMix.Total(); total > 0 {
-			if wireStats.Rendered == 0 {
-				warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
+			summary := fmt.Sprintf(
+				"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); rendered %d recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw.",
+				total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other, wireStats.Rendered)
+			warnings = append(warnings, summary)
+			if wireStats.UnresolvedAtHeap > 0 {
 				warnings = append(warnings, fmt.Sprintf(
-					"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw (Phase 12.4.4).",
-					total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other))
-			} else {
-				warnings = append(warnings, fmt.Sprintf(
-					"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); rendered %d recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw (Phase 14.2).",
-					total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other, wireStats.Rendered))
+					"%d wire network(s) skipped because their source/sink terminal IDs could not be resolved at the heap level.",
+					wireStats.UnresolvedAtHeap))
 			}
-		} else {
-			warnings = append(warnings, "Block-diagram wires not yet rendered (terminals positioned, path drawing pending Phase 12.5).")
+			if wireStats.MissingFromScene > 0 {
+				warnings = append(warnings, fmt.Sprintf(
+					"%d wire network(s) skipped because their heap-resolved terminal was not surfaced as a scene anchor (terminal nested inside another terminal — Phase 16.4 follow-up).",
+					wireStats.MissingFromScene))
+			}
+			if wireStats.SharedAnchorSkipped > 0 {
+				warnings = append(warnings, fmt.Sprintf(
+					"%d wire network(s) skipped because both endpoints resolved to the same connector-pane anchor; per-endpoint geometry within the connector pane is not yet decoded.",
+					wireStats.SharedAnchorSkipped))
+			}
 		}
 	}
 	return warnings
@@ -645,6 +835,7 @@ func projectSceneWires(tree lvvi.HeapTree, scene Scene, total int) ([]Wire, wire
 	if len(terminalByHeap) == 0 {
 		return nil, stats
 	}
+	objIdx, _ := lvvi.BuildHeapObjectIndex(tree)
 
 	var wires []Wire
 	for i, n := range tree.Nodes {
@@ -655,14 +846,23 @@ func projectSceneWires(tree lvvi.HeapTree, scene Scene, total int) ([]Wire, wire
 		if !ok {
 			continue
 		}
-		terms := terminalSceneNodesForWire(tree, i, terminalByHeap)
+		terms, termsOK := wireSceneTerminals(tree, objIdx, i, terminalByHeap)
 		switch w.Mode {
 		case lvvi.WireModeAutoChain:
-			if len(terms) < 2 {
-				continue
-			}
 			path, ok := w.ChainAutoPath()
 			if !ok {
+				continue
+			}
+			if !termsOK || len(terms) < 2 {
+				stats.UnresolvedAtHeap++
+				continue
+			}
+			if terms[0] < 0 || terms[1] < 0 {
+				stats.MissingFromScene++
+				continue
+			}
+			if terms[0] == terms[1] {
+				stats.SharedAnchorSkipped++
 				continue
 			}
 			from, to := leftToRightTerminals(scene, terms[0], terms[1])
@@ -681,6 +881,10 @@ func projectSceneWires(tree lvvi.HeapTree, scene Scene, total int) ([]Wire, wire
 		case lvvi.WireModeTree:
 			endpoints, ok := w.TreeEndpoints()
 			if !ok {
+				continue
+			}
+			if !termsOK {
+				stats.UnresolvedAtHeap++
 				continue
 			}
 			points := treeEndpointScenePoints(scene, endpoints, terms)
@@ -707,36 +911,34 @@ func projectSceneWires(tree lvvi.HeapTree, scene Scene, total int) ([]Wire, wire
 	return wires, stats
 }
 
-func terminalSceneNodesForWire(tree lvvi.HeapTree, wireIdx int, terminalByHeap map[int]int) []int {
-	if wireIdx < 0 || wireIdx >= len(tree.Nodes) {
-		return nil
+// wireSceneTerminals resolves each wire endpoint to a scene-terminal
+// node index using lvvi.WireTerminalAnchor for the heap-side resolution
+// and terminalByHeap for the heap→scene projection. A returned entry of
+// -1 means the endpoint resolved to a heap node that the scene
+// projection did not surface as a NodeKindTerminal (e.g. a terminal
+// class the layout pipeline filtered out).
+//
+// Returns ok=false only when the wire has no termList sibling — the
+// upstream pkg/lvvi.WireTerminalIDs precondition.
+func wireSceneTerminals(tree lvvi.HeapTree, objIdx lvvi.HeapObjectIndex, wireIdx int, terminalByHeap map[int]int) ([]int, bool) {
+	ids, ok := lvvi.WireTerminalIDs(tree, wireIdx)
+	if !ok {
+		return nil, false
 	}
-	for p := tree.Nodes[wireIdx].Parent; p >= 0 && p < len(tree.Nodes); p = tree.Nodes[p].Parent {
-		var out []int
-		collectTerminalSceneNodes(tree, p, terminalByHeap, &out)
-		if len(out) >= 2 {
-			return out
+	out := make([]int, len(ids))
+	for i, id := range ids {
+		anchor := lvvi.WireTerminalAnchor(tree, objIdx, id)
+		if anchor < 0 {
+			out[i] = -1
+			continue
+		}
+		if sceneIdx, ok := terminalByHeap[anchor]; ok {
+			out[i] = sceneIdx
+		} else {
+			out[i] = -1
 		}
 	}
-	out := make([]int, 0, len(terminalByHeap))
-	for heapIdx := range tree.Nodes {
-		if sceneIdx, ok := terminalByHeap[heapIdx]; ok {
-			out = append(out, sceneIdx)
-		}
-	}
-	return out
-}
-
-func collectTerminalSceneNodes(tree lvvi.HeapTree, heapIdx int, terminalByHeap map[int]int, out *[]int) {
-	if sceneIdx, ok := terminalByHeap[heapIdx]; ok {
-		*out = append(*out, sceneIdx)
-	}
-	if heapIdx < 0 || heapIdx >= len(tree.Nodes) {
-		return
-	}
-	for _, ci := range tree.Nodes[heapIdx].Children {
-		collectTerminalSceneNodes(tree, ci, terminalByHeap, out)
-	}
+	return out, true
 }
 
 func leftToRightTerminals(scene Scene, a, b int) (int, int) {

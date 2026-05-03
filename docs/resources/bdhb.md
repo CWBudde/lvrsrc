@@ -222,6 +222,136 @@ now resolve to `refnum`; `SL__stdVar` / `SL__stdLvVariant` /
 the renderer's wire-anchor model. Unmapped classes fall back to
 `other`.
 
+## Wire-identity model (Phase 16.4)
+
+`BDHb` wires don't store source/sink terminal heap-tree indices
+directly. Instead, each `OF__compressedWireTable` chunk lives under
+this canonical structure:
+
+```
+… → SL__eventDataNode (or nested SL__arrayElement)
+     └── SL__baseTableControl                         ← tag-233 in this context = OF__signalList
+          └── SL__arrayElement                         ← one wire/network entry
+               ├── tag-268 OF__termList container     ← carries arity in attr {-5 N}
+               │    ├── SL__arrayElement leaf {-3 ID0} ← endpoint 0 reference
+               │    ├── SL__arrayElement leaf {-3 ID1} ← endpoint 1 reference
+               │    └── … (one leaf per network endpoint)
+               ├── OF__externalDiagram leaf
+               ├── OF__loop leaf
+               └── OF__compressedWireTable leaf       ← geometry payload (Phase 13)
+```
+
+Two heap-tag namespaces collide on the integers used here. Resolution
+in BD wire context is positional:
+
+| Tag | ClassTag name        | FieldTag name     | Meaning here     |
+| --: | -------------------- | ----------------- | ---------------- |
+| 233 | `SL__baseTableControl` | `OF__signalList` | signal list      |
+| 268 | `SL__udClassDDO`     | `OF__termList`    | terminal-id list |
+
+`pkg/lvvi.HeapTagName` resolves both as ClassTags by default; the wire
+APIs (`WireTerminalIDs`, `WireTerminalAnchor`) match the integer
+directly and document the contextual override.
+
+### `-3` is a heap-object identifier
+
+Most heap nodes carry `Attribute{ID:-3, Value:N}` that uniquely
+identifies the node within the section (BDHb / FPHb). Other nodes
+reference it by storing the same integer. The encoder also writes
+forward-declaration LEAF stubs (`{-3 N}` only) before the canonical
+OPEN declaration (`{-2 K, -3 N}`); the canonical wins for resolution.
+Attribute `-5` carries the child count on container nodes such as
+`OF__termList` and `SL__sdfTun`.
+
+`pkg/lvvi.HeapObjectID`, `BuildHeapObjectIndex`, and `HeapNodeID`
+expose this identity layer. The same `-3` machinery is used by
+non-wire references (link info, type refs) so the index is shared.
+
+### Two terminal classes carry visual state
+
+The corpus surfaces only two `WidgetKindTerminal` classes inside
+`BDHb`:
+
+- **`SL__sdfTun`** ("signal data flow tunnel"). Acts as a hub for
+  controls inside an event-data-node / connector-pane group. Children
+  are a mix of LEAF arrayElement stubs (`{-3 ID}` references) and
+  OPEN arrayElement declarations (`{-2 N, -3 ID}`) wrapped around
+  per-endpoint controls. One sdfTun typically declares 5–20 endpoint
+  IDs corresponding to the connector-pane terminals.
+- **`SL__simTun`** ("sim tunnel"). One per visible terminal anchor on
+  the BD (constants, primitive inputs/outputs, etc.). Wrapped in an
+  `SL__arrayElement` carrying its own canonical ID. Children are
+  open/close `SL__arrayElement` pairs with `attr {-2 600}` only — no
+  endpoint cross-references.
+
+### Endpoint resolution algorithm
+
+`pkg/lvvi.WireTerminalAnchor` maps a wire-endpoint `HeapObjectID` to
+the heap-tree index of its visual anchor. Corpus coverage: 45
+fixtures / 106 wires / 230 endpoints, 100% resolved. Three paths,
+in priority order:
+
+1. **Walk down** the canonical declaration's subtree for any
+   `WidgetKindTerminal` node. Hits constants, primitives, and most
+   in-line controls — typically resolves to a `SL__simTun`.
+2. **Walk up** the canonical declaration's parent chain for the
+   nearest `WidgetKindTerminal` ancestor. When the ancestor exists,
+   the **canonical declaration itself is returned** (Phase 16.4 A2):
+   each connector-pane endpoint has its own canonical with a unique
+   `HeapObjectID`, so returning the canonical lets the scene project
+   distinct per-endpoint anchors instead of collapsing every wire
+   onto the shared sdfTun anchor.
+3. **sdfTun children scan**: for endpoint IDs that appear only as
+   stub LEAF arrayElement children of a sdfTun (no canonical OPEN
+   declaration), the sdfTun itself is the visual anchor.
+
+Note that case (2) returns a heap node that is not necessarily a
+`WidgetKindTerminal` class. The render layer's `collectNestedTerminals`
+projects every per-endpoint canonical (open arrayElement carrying both
+`-2` and `-3`) inside an outer terminal subtree as a `NodeKindTerminal`
+scene node so it is addressable via `terminalByHeap`.
+
+### Scene projection of nested terminals (Phase 16.4 A1 + A2)
+
+`internal/render.buildLayoutItem` once stopped recursing the moment it
+hit a `WidgetKindTerminal` open node. That dropped every terminal
+nested inside another terminal (the per-endpoint `SL__simTun` instances
+inside an `SL__sdfTun`'s connector-pane subtree) from the scene, which
+in turn made `terminalByHeap` lose those mappings and wires collapse to
+`MissingFromScene` skips.
+
+The current pipeline:
+
+- The outer `WidgetKindTerminal` still becomes one `NodeKindTerminal`
+  scene node with the heap node's bounds and anchor.
+- Its descendants are walked by `collectNestedTerminals`. Every nested
+  open `WidgetKindTerminal` (A1) and every per-endpoint canonical
+  arrayElement (A2) is appended to the outer item's `nestedTerminals`
+  slice. Each becomes its own `NodeKindTerminal` scene node carrying
+  its own `HeapIndex`.
+- Nested terminals with decoded bounds are placed at those bounds;
+  nested terminals without decoded bounds are spread vertically
+  beside the outer terminal so adjacent endpoints have distinct
+  anchors and wires terminating on them render as separate paths.
+
+### Known gaps
+
+- Per-endpoint geometry within a connector pane is not yet decoded —
+  nested-terminal anchors are spread heuristically. The actual visual
+  position of each conPane endpoint on the BD comes from LabVIEW's
+  layout algorithm (conPane pattern + slot index), which is not
+  serialised in the heap. The `bigMultiLabel` rect on each per-endpoint
+  canonical (`OF__bigMultiLabel`, 4×int16 BE = `Left,Top,Right,Bottom`)
+  carries the FRONT-PANEL position, not BD, so it can disambiguate
+  endpoints but doesn't ground-truth their BD layout.
+- Source vs sink ordering inside the `OF__termList` is not yet
+  decoded; the scene renderer falls back to left-to-right anchor
+  sorting for chain-mode L-shape direction.
+- 3-waypoint auto-chain payloads (`byte0 = 3`) and multi-elbow
+  payloads (`byte0 ≥ 6`) remain undecoded by `Wire.ChainAutoPath`
+  (Phase 13.5 follow-up). Wires using these payloads are skipped
+  even though their endpoints resolve.
+
 ## References
 
 - pylabview `LVblock.py:5350–5362` — `FPHb` / `BDHb` sibling subclasses
