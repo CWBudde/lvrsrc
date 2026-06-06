@@ -351,17 +351,32 @@ func (w Wire) LeftwardChainPath() (LeftwardChainPath, bool) {
 	}, true
 }
 
-// TreeEndpoints returns the (V, H) endpoint coordinates for a pure
-// Y-tree wire-network. Supports 2-branch (byte0=6) and 3-branch
-// (byte0=7) shapes where the last byte0−4 records hold one (V, H)
-// endpoint per branch, each encoded as two bytes in Mac-style Point
-// (V, H) order.
+// TreeEndpoints returns the trailing per-branch coordinate records of a
+// fan-out wire-network. Supports 2-branch (byte0=6) and 3-branch
+// (byte0=7) shapes where the last byte0−4 records hold two bytes per
+// branch, returned as a Mac-style Point (V, H).
 //
-// The rule "last N = byte0−4 endpoint records" was ground-truthed for
-// 2-branch by the geometry-varied controlled fixture. For 3-branch it
-// is now confirmed by Numeric42ThreeIndicatorsY_bottom8pxdown.vi,
-// which moves exactly one endpoint record by 8 px; the independent
-// corpus reference-find-by-id.vi chunk also matches the same shape.
+// CAVEAT — the (V, H) interpretation is only fully ground-truthed for
+// the straight-through main-line endpoint. Two fan-out topologies share
+// byte0=7 and cannot be told apart from the header alone:
+//
+//   - Pure vertical Y-stack (all indicators near the same X): every
+//     trailing record reads cleanly as a small (V, H) endpoint.
+//     reference-find-by-id.vi is an independent corpus example.
+//   - T-fork (one indicator far to the right, others tapping up/down):
+//     the straight-through leg IS a genuine (V, H) endpoint — e.g.
+//     Numeric42ThreeIndicatorsTfork.vi decodes Numeric 3 as {V:66,
+//     H:196}, correctly far-right and mid-height — but the two tap
+//     records are NOT plain endpoints: moving the bottom tap 8 px DOWN
+//     (Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi) changes the byte
+//     this function labels H, not V, so that second tap byte tracks a
+//     branch length/offset rather than a horizontal coordinate.
+//
+// The "last N = byte0−4 records" framing is ground-truthed (one record
+// moves by exactly the edited pixel delta); the per-axis meaning of a
+// tap record's two bytes is NOT, pending a controlled horizontal-move
+// fixture. Callers should treat tap V/H as raw record bytes, not
+// trusted screen coordinates.
 //
 // Returns nil, false for:
 //   - non-tree modes

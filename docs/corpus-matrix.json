@@ -163,18 +163,18 @@
       "hypothesis": "Moving each branch endpoint perturbs the matching endpoint record and leaves structural records stable."
     },
     {
-      "name": "Numeric42ThreeIndicatorsY.vi",
+      "name": "Numeric42ThreeIndicatorsTfork.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["3-branch pure Y tree"],
-      "hypothesis": "A pure three-output fan-out follows the same trailing endpoint-record rule as the two-branch shape."
+      "focus": ["3-branch T-fork", "straight-through endpoint vs taps"],
+      "hypothesis": "A three-output fan-out with one indicator far to the right (T-fork, not a pure vertical Y-stack) emits byte0=7: the straight-through leg is a genuine far-right (V, H) endpoint ({V:66, H:196}); the two tap records' second byte is a branch offset, not a horizontal coordinate."
     },
     {
-      "name": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+      "name": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["3-branch Y endpoint perturbation"],
-      "hypothesis": "Moving one branch endpoint by 8 px changes exactly one endpoint record in the pure Y-tree payload."
+      "focus": ["3-branch T-fork tap perturbation"],
+      "hypothesis": "Moving the bottom tap 8 px down changes exactly one trailing record by +8, in the byte TreeEndpoints labels H — confirming the byte tracks the edited branch while showing it is a branch offset, not a horizontal coordinate."
     },
     {
       "name": "Numeric42ThreeIndicatorsYComb.vi",

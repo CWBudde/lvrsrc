@@ -615,10 +615,13 @@ func TestTreeEndpointsMatches2YGroundTruth(t *testing.T) {
 	}
 }
 
-// 3-Y pure (byte0=7): last 3 of 6 TreeRecords = (V, H) endpoints.
-// Ground-truth payload from Numeric42ThreeIndicatorsY.vi.
+// 3-branch fan-out (byte0=7): last 3 of 6 TreeRecords are per-branch
+// coordinate records. This is a T-fork (see TreeEndpoints caveat): the
+// straight-through leg to Numeric 3 is a genuine far-right endpoint
+// ({V:66, H:196}); the two taps' second byte is a branch offset, not H.
+// Ground-truth payload from Numeric42ThreeIndicatorsTfork.vi.
 func TestTreeEndpoints3YGroundTruth(t *testing.T) {
-	// Numeric42ThreeIndicatorsY.vi: 07 00 08 04 00 03 00 03 41 31 44 2d 42 c4
+	// Numeric42ThreeIndicatorsTfork.vi: 07 00 08 04 00 03 00 03 41 31 44 2d 42 c4
 	tree := wireLeaf([]byte{
 		0x07, 0x00,
 		0x08, 0x04,
@@ -647,13 +650,16 @@ func TestTreeEndpoints3YGroundTruth(t *testing.T) {
 	}
 }
 
-// Numeric42ThreeIndicatorsY_bottom8pxdown.vi is the geometry-varied
-// 3-Y fixture added for Phase 13.5. Its compressed wire payload
-// changes exactly one endpoint record (`44 2d` → `44 35`), confirming
-// the "last N records are endpoints" rule for byte0=7 pure Y-trees.
+// Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi is the geometry-varied
+// T-fork fixture added for Phase 13.5. Moving the bottom tap 8 px DOWN
+// changes exactly one trailing record (`44 2d` → `44 35`), confirming
+// the "last N records track per-branch geometry" rule for byte0=7. Note
+// the changed byte is the one TreeEndpoints labels H, even though the
+// edit was vertical — so a tap record's second byte is a branch offset,
+// not a horizontal coordinate (see TreeEndpoints caveat).
 func TestTreeEndpoints3YTracksGeometryEdit(t *testing.T) {
-	baseRaw := singleBlockDiagramWirePayload(t, "Numeric42ThreeIndicatorsY.vi")
-	movedRaw := singleBlockDiagramWirePayload(t, "Numeric42ThreeIndicatorsY_bottom8pxdown.vi")
+	baseRaw := singleBlockDiagramWirePayload(t, "Numeric42ThreeIndicatorsTfork.vi")
+	movedRaw := singleBlockDiagramWirePayload(t, "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi")
 
 	wantBase := []byte{0x07, 0x00, 0x08, 0x04, 0x00, 0x03, 0x00, 0x03, 0x41, 0x31, 0x44, 0x2d, 0x42, 0xc4}
 	wantMoved := []byte{0x07, 0x00, 0x08, 0x04, 0x00, 0x03, 0x00, 0x03, 0x41, 0x31, 0x44, 0x35, 0x42, 0xc4}
@@ -682,14 +688,19 @@ func TestTreeEndpoints3YTracksGeometryEdit(t *testing.T) {
 	if !reflect.DeepEqual(movedPts, wantMovedPts) {
 		t.Fatalf("moved points = %+v, want %+v", movedPts, wantMovedPts)
 	}
+	// The vertical (8 px down) edit moves the tap record's second byte
+	// (labelled H here): confirms the byte tracks the edited branch by
+	// exactly the pixel delta, while exposing that it is not a true
+	// horizontal coordinate. See TreeEndpoints caveat.
 	if movedPts[1].H-basePts[1].H != 8 {
-		t.Errorf("changed endpoint H delta = %d, want +8", movedPts[1].H-basePts[1].H)
+		t.Errorf("changed tap record byte delta = %d, want +8", movedPts[1].H-basePts[1].H)
 	}
 }
 
-// Second independent 3-Y fixture from the corpus (reference-find-by-id.vi).
-// Confirms the "last 3 records = endpoints" rule for a fixture we did
-// not author — all coordinate values are in a plausible pixel range.
+// Second independent 3-branch fixture from the corpus (reference-find-by-id.vi).
+// This is the pure vertical Y-stack case (contrast the T-fork above): all
+// three trailing records read as small, plausible (V, H) endpoints with no
+// far-right outlier, so the (V, H) interpretation holds cleanly here.
 func TestTreeEndpoints3YCorpusIndependent(t *testing.T) {
 	// reference-find-by-id.vi 3-Y chunk: 07 00 08 05 00 00 00 03 14 39 3d 34 32 19
 	tree := wireLeaf([]byte{

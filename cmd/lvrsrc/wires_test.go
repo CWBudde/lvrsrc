@@ -60,7 +60,7 @@ func TestWiresCommandJSON(t *testing.T) {
 func TestWiresCommandTreeEndpoints(t *testing.T) {
 	stdout := new(bytes.Buffer)
 	cmd := newRootCmd(stdout, new(bytes.Buffer))
-	cmd.SetArgs([]string{"wires", fixturePath(t, "Numeric42ThreeIndicatorsY.vi")})
+	cmd.SetArgs([]string{"wires", fixturePath(t, "Numeric42ThreeIndicatorsTfork.vi")})
 
 	if err := cmd.Execute(); err != nil {
 		t.Fatalf("Execute() error = %v", err)

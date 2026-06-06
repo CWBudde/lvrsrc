@@ -144,13 +144,18 @@ the following typed projections:
   2 other). Phase 13.4 then layered typed projections on top:
   `Wire.ChainAutoPath()` exposes `{Straight, YStep, SourceAnchorX}`
   for the most common wire shapes, and `Wire.TreeEndpoints()`
-  returns `[]Point{V, H}` endpoint coordinates for pure Y-trees
-  (2-branch confirmed by geometry-varied fixture; 3-branch confirmed by
-  `Numeric42ThreeIndicatorsY_bottom8pxdown.vi` and independently matched by
-  `reference-find-by-id.vi`). `Wire.TreeEndpointPair()` is a 2-branch
-  convenience wrapper. Both projections are ground-truthed against
-  controlled-fixture diffs (8/16 px y-shift, x-shift, sign flip,
-  geometry-varied 2-Y/3-Y). The renderer composes the chain-auto
+  returns `[]Point{V, H}` per-branch records for fan-out trees
+  (2-branch confirmed by geometry-varied fixture). For 3-branch
+  (`byte0=7`) the same header covers two shapes: a pure vertical
+  Y-stack (`reference-find-by-id.vi`, every record a clean `(V, H)`
+  endpoint) and a **T-fork** (`Numeric42ThreeIndicatorsTfork.vi`, where
+  Numeric 3 is a genuine far-right endpoint `{V:66, H:196}` but the two
+  taps' second byte is a branch offset, not a horizontal coordinate —
+  the `_bottom8pxdown` edit moves that byte for a _vertical_ drag).
+  `Wire.TreeEndpointPair()` is a 2-branch convenience wrapper. The
+  chain-auto projections are ground-truthed against controlled-fixture
+  diffs (8/16 px y-shift, x-shift, sign flip); 3-branch tap-byte axes
+  await a horizontal-move fixture. The renderer composes the chain-auto
   projection with terminal `OF__bounds` at draw time: source +
   `SourceAnchorX` horizontally → `YStep` vertically → continue
   horizontally to sink. Multi-elbow auto-chains, manual-chains,

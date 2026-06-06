@@ -239,7 +239,7 @@ The first spike authored 12 deliberately varied VIs:
 `Add17Plus25.vi`, `Numeric42Far.vi`, `Numeric42Bend.vi`,
 `Numeric42_8px_down.vi`, `Numeric42_16px_down.vi`,
 `Numeric42_8px_down_8px_further_right.vi`,
-`Numeric42TwoIndicatorsY.vi`, and `Numeric42ThreeIndicatorsY.vi`.
+`Numeric42TwoIndicatorsY.vi`, and `Numeric42ThreeIndicatorsTfork.vi`.
 
 Findings:
 
@@ -278,7 +278,7 @@ Shipped accessors:
 
 ### 13.5 Remaining tree-mode and chain semantics (partial)
 
-- 3-branch pure Y-tree endpoints are now ground-truthed: `Wire.TreeEndpoints()` generalizes `TreeEndpointPair()` for `byte0` in `{6, 7}`. `Numeric42ThreeIndicatorsY_bottom8pxdown.vi` changes exactly one endpoint record (`44 2d` → `44 35`, +8 in the second coordinate), confirming the "last N = byte0 - 4 endpoint records" rule for pure 3-Y chunks. The independent corpus `reference-find-by-id.vi` chunk still matches the same shape.
+- 3-branch fan-out endpoints are partially ground-truthed: `Wire.TreeEndpoints()` generalizes `TreeEndpointPair()` for `byte0` in `{6, 7}`. The "last N = byte0 - 4 records" framing holds — `Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi` changes exactly one trailing record (`44 2d` → `44 35`, +8) — but the block-diagram image revealed `Numeric42ThreeIndicatorsTfork.vi` is a **T-fork**, not a pure vertical Y-stack: Numeric 3 sits far right and decodes as a genuine endpoint `{V:66, H:196}`, while the two taps are not plain `(V, H)` endpoints (the 8 px **down** edit moved the byte labelled `H`, so a tap's second byte is a branch offset). The independent corpus `reference-find-by-id.vi` chunk is the clean pure-Y-stack case where every record reads as a small `(V, H)` endpoint. Still missing: a controlled **horizontal-move** fixture (slide Numeric 3 right by a known px) to confirm `H` scales 1:1 and to fully separate tap-byte axes.
 
 - [ ] **Comb and 4+ branch topology.** Comb chunks (`byte0=10`, `rec[2][0]=6`) have records with `H=1` that are clearly flags or topology markers, not pixel coordinates. `Numeric42ThreeIndicatorsYComb_middle8pxdown.vi` shows the middle-branch edit changes two adjacent records in opposite directions (`5b 01` → `63 01`, `57 42` → `4f 42`), so the comb payload carries span/junction data around the moved branch rather than a simple trailing endpoint list. Other `byte0=10` chunks (`ndjson-parser.vi`, `reference-find-by-id.vi`) make the "last 4" rule suspicious (`H=4/10/16`). All `byte0 >= 8` shapes return nil/false from `TreeEndpoints()` until further ground-truthed.
 

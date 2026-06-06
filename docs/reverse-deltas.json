@@ -93,13 +93,13 @@
     },
     {
       "id": "three-branch-y-endpoint",
-      "left": "Numeric42ThreeIndicatorsY.vi",
-      "right": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+      "left": "Numeric42ThreeIndicatorsTfork.vi",
+      "right": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
       "topic": "wire-topology",
-      "focus": ["3-branch pure Y tree", "endpoint coordinate rule"],
-      "hypothesis": "For pure 3-branch Y trees, the last waypoint-count-minus-4 records are endpoint coordinates.",
-      "evidence": "Moving the bottom branch 8 px changes one trailing endpoint record and matches the independent reference-find-by-id.vi shape.",
-      "status": "confirmed"
+      "focus": ["3-branch T-fork", "straight-through endpoint vs tap records"],
+      "hypothesis": "byte0=7 covers two visually distinct fan-outs that share a header: a pure vertical Y-stack (reference-find-by-id.vi, all small (V, H) endpoints) and a T-fork. The block-diagram image of Numeric42ThreeIndicatorsTfork.vi shows the latter — Numeric 3 sits far right at mid-height and decodes as a genuine endpoint {V:66, H:196}, while Numeric 2 / Numeric tap up and down off the junction. The last waypoint-count-minus-4 records track per-branch geometry, but only the straight-through leg's two bytes are a true (V, H) coordinate.",
+      "evidence": "Moving the bottom tap 8 px DOWN changes exactly one trailing record (44 2d -> 44 35, +8), but in the byte TreeEndpoints labels H rather than V — so a tap record's second byte is a branch offset, not a horizontal coordinate. Full per-axis decoding of tap records needs a controlled horizontal-move fixture (move Numeric 3 right by a known px to confirm H=196 scales 1:1).",
+      "status": "partial"
     },
     {
       "id": "comb-middle-branch-span",
@@ -113,7 +113,7 @@
     },
     {
       "id": "four-output-tree-large-payload",
-      "left": "Numeric42ThreeIndicatorsY.vi",
+      "left": "Numeric42ThreeIndicatorsTfork.vi",
       "right": "Numeric42FourIndicatorsY_single.vi",
       "topic": "wire-topology",
       "focus": ["4-output network", "large tree payload"],
@@ -123,12 +123,12 @@
     },
     {
       "id": "real-world-wire-tree-cross-check",
-      "left": "Numeric42ThreeIndicatorsY.vi",
+      "left": "Numeric42ThreeIndicatorsTfork.vi",
       "right": "reference-find-by-id.vi",
       "topic": "wire-topology",
       "focus": ["controlled vs real-world tree shape"],
-      "hypothesis": "The pure Y-tree endpoint rule observed in controlled fixtures also appears in at least one independent real corpus VI.",
-      "evidence": "reference-find-by-id.vi carries a matching shape used as an independent sanity check.",
+      "hypothesis": "reference-find-by-id.vi is the clean pure-vertical-Y-stack case of byte0=7 (every trailing record a small (V, H) endpoint), distinct from the controlled T-fork; it is the independent real-corpus sanity check that the trailing-record rule appears outside authored fixtures.",
+      "evidence": "reference-find-by-id.vi carries a matching byte0=7 shape with no far-right outlier record, used as an independent sanity check.",
       "status": "partial"
     },
     {
