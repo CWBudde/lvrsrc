@@ -4,10 +4,10 @@
     "format_version": 3,
     "type": "LVIN",
     "creator": "LBVW",
-    "info_offset": 3076,
+    "info_offset": 3080,
     "info_size": 864,
     "data_offset": 32,
-    "data_size": 3044
+    "data_size": 3048
   },
   "kind": "vi",
   "block_count": 24,
@@ -141,7 +141,7 @@
         {
           "index": 0,
           "name_offset": 4294967295,
-          "payload_len": 716
+          "payload_len": 717
         }
       ]
     },
@@ -196,7 +196,7 @@
         {
           "index": 0,
           "name_offset": 4294967295,
-          "payload_len": 495
+          "payload_len": 496
         }
       ]
     },
@@ -288,9 +288,9 @@
   "issues": null,
   "round_trip": {
     "size_match": true,
-    "in_bytes": 3940,
-    "out_bytes": 3940,
+    "in_bytes": 3944,
+    "out_bytes": 3944,
     "byte_diffs": 1,
-    "first_diff_offset": 3127
+    "first_diff_offset": 3131
   }
 }

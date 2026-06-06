@@ -425,6 +425,96 @@ func TestChainAutoPathDoesNotMakeUpMultiElbowGeometry(t *testing.T) {
 	}
 }
 
+// Ground truth for the byte0=6 leftward auto-route family. These four
+// controlled fixtures pin the exact on-disk bytes and the decoded
+// LeftwardChainPath, and assert the single-axis deltas that calibrated
+// the encoding. If a fixture is ever re-saved with different geometry,
+// these byte assertions fail loudly instead of drifting silently.
+func TestLeftwardChainPathGroundTruthFixtures(t *testing.T) {
+	cases := []struct {
+		name    string
+		want    []byte
+		wantUp  bool
+		wantVer int
+		wantP6  byte
+	}{
+		{"Numeric42_left_auto_8px_up.vi", []byte{0x06, 0x08, 0x00, 0x01, 0x01, 0x00, 0x10, 0x10, 0x9c, 0x18}, true, 8, 0x9c},
+		{"Numeric42_left_auto_16px_up.vi", []byte{0x06, 0x08, 0x00, 0x01, 0x01, 0x00, 0x10, 0x10, 0x9c, 0x20}, true, 16, 0x9c},
+		{"Numeric42_left_auto_8px_down.vi", []byte{0x06, 0x08, 0x01, 0x01, 0x00, 0x00, 0x10, 0x10, 0x9c, 0x18}, false, 8, 0x9c},
+		{"Numeric42_left_auto_8px_down+8px_right.vi", []byte{0x06, 0x08, 0x01, 0x01, 0x00, 0x00, 0x10, 0x10, 0x94, 0x18}, false, 8, 0x94},
+	}
+	got := map[string]LeftwardChainPath{}
+	for _, tc := range cases {
+		raw := singleBlockDiagramWirePayload(t, tc.name)
+		if !reflect.DeepEqual(raw, tc.want) {
+			t.Fatalf("%s raw = % x, want % x", tc.name, raw, tc.want)
+		}
+		w, _ := HeapWire(wireLeaf(raw), 0)
+		lcp, ok := w.LeftwardChainPath()
+		if !ok {
+			t.Fatalf("%s LeftwardChainPath() ok = false", tc.name)
+		}
+		if lcp.Up != tc.wantUp || lcp.VerticalPixels != tc.wantVer || lcp.HorizontalSeed != tc.wantP6 {
+			t.Errorf("%s = %+v, want Up=%v VerticalPixels=%d HorizontalSeed=%#x",
+				tc.name, lcp, tc.wantUp, tc.wantVer, tc.wantP6)
+		}
+		got[tc.name] = lcp
+	}
+
+	// Vertical magnitude: 8px vs 16px up differ only in VerticalPixels.
+	up8, up16 := got["Numeric42_left_auto_8px_up.vi"], got["Numeric42_left_auto_16px_up.vi"]
+	if up16.VerticalPixels-up8.VerticalPixels != 8 {
+		t.Errorf("vertical delta = %d, want +8", up16.VerticalPixels-up8.VerticalPixels)
+	}
+	if up8.HorizontalSeed != up16.HorizontalSeed || up8.Up != up16.Up {
+		t.Errorf("8px/16px up should differ only in vertical: %+v vs %+v", up8, up16)
+	}
+
+	// Direction: 8px up vs 8px down differ only in Up (same X, same magnitude).
+	down8 := got["Numeric42_left_auto_8px_down.vi"]
+	if up8.Up == down8.Up {
+		t.Error("8px up vs down should differ in direction")
+	}
+	if up8.VerticalPixels != down8.VerticalPixels || up8.HorizontalSeed != down8.HorizontalSeed {
+		t.Errorf("8px up vs down should differ only in direction: %+v vs %+v", up8, down8)
+	}
+
+	// Horizontal: 8px down vs +8px right differ only in HorizontalSeed,
+	// by exactly −8 (sink moved right, toward the source).
+	right8 := got["Numeric42_left_auto_8px_down+8px_right.vi"]
+	if int(down8.HorizontalSeed)-int(right8.HorizontalSeed) != 8 {
+		t.Errorf("horizontal seed delta = %d, want +8 (9c→94)", int(down8.HorizontalSeed)-int(right8.HorizontalSeed))
+	}
+	if down8.Up != right8.Up || down8.VerticalPixels != right8.VerticalPixels {
+		t.Errorf("8px down vs +8px right should differ only in horizontal: %+v vs %+v", down8, right8)
+	}
+}
+
+// LeftwardChainPath must reject shapes outside the calibrated family:
+// single-elbow auto chains, tree wires, and the near-aligned
+// indicator_left sample (p1=0x00, anchor 10 0f) that is not part of
+// the family.
+func TestLeftwardChainPathRejectsOtherShapes(t *testing.T) {
+	cases := []struct {
+		name string
+		raw  []byte
+	}{
+		{"single-elbow auto (byte0=4)", []byte{0x04, 0x08, 0x00, 0x00, 0x41, 0x08}},
+		{"trivial straight auto", []byte{0x02, 0x08}},
+		{"tree mode byte0=6", []byte{0x06, 0x00, 0x08, 0x07, 0x00, 0x03, 0x00, 0x41, 0x31, 0x44, 0x2d, 0x42}},
+		{"indicator_left near-aligned (p1=00)", []byte{0x06, 0x08, 0x00, 0x00, 0x00, 0x00, 0x10, 0x0f, 0x34, 0x23}},
+		{"byte0=6 family but unknown direction", []byte{0x06, 0x08, 0x01, 0x01, 0x01, 0x00, 0x10, 0x10, 0x9c, 0x18}},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			w, _ := HeapWire(wireLeaf(tc.raw), 0)
+			if _, ok := w.LeftwardChainPath(); ok {
+				t.Errorf("LeftwardChainPath() ok = true on %s", tc.name)
+			}
+		})
+	}
+}
+
 // 2-Y tree (byte0=6) is the only tree shape we have ground-truth
 // endpoint data for. TreeEndpointPair must expose the two
 // endpoints exactly as the geometry-varied controlled fixture

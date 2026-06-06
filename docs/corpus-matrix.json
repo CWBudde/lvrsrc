@@ -75,8 +75,15 @@
       "name": "Numeric42_8px_down_8px_further_right.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["combined vertical and horizontal sink movement"],
-      "hypothesis": "The y-step changes with vertical movement while the horizontal sink delta remains recoverable from terminal geometry."
+      "focus": ["horizontal sink movement", "stretched wire (not reconnected)"],
+      "hypothesis": "Moving the sink right after the wire was drawn STRETCHES the post-elbow segment: the wire chunk is byte-identical to Numeric42_8px_down.vi (04 08 00 00 41 08, sourceAnchorX=65 frozen) — horizontal position lives in the terminal bounds, not the chunk, for a rightward route."
+    },
+    {
+      "name": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["fresh auto-route (reconnect)", "edit-history vs chunk"],
+      "hypothesis": "Same terminal positions as Numeric42_8px_down_8px_further_right.vi but the wire was deleted and reconnected, so the auto-router recomputes the elbow at the canonical short distance: 04 08 00 00 10 08 (sourceAnchorX=16). Proves sourceAnchorX is edit-history-dependent, not a glyph constant — the chunk depends on how the wire was last routed, not just final terminal positions."
     },
     {
       "name": "Numeric42TwoNetworks.vi",
@@ -90,14 +97,35 @@
       "kind": "vi",
       "family": "controlled-wire",
       "focus": ["right-to-left auto-route", "multi-elbow auto-chain payload"],
-      "hypothesis": "Placing the indicator left of the source forces LabVIEW to auto-route a multi-elbow path; observed payload `06 08 00 01 00 00 10 0f 89 30` is a 6-waypoint auto-chain that the current ChainAutoPath decoder rejects (>4 varints). Useful as ground truth for §13.5 multi-elbow decoding."
+      "hypothesis": "Placing the indicator left of the source forces LabVIEW to auto-route a 6-waypoint (byte0=6) path; observed payload `06 08 00 00 00 00 10 0f 34 23` that ChainAutoPath rejects (>4 varints). A near-aligned variant of the left_auto family (prefix `10 0f`, p1=00) — kept as an independent multi-elbow sample distinct from the calibrated left_auto_* set."
     },
     {
-      "name": "Numeric42_two_elbows.vi",
+      "name": "Numeric42_left_auto_8px_up.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["multi-elbow auto-chain", "Z-shape route"],
-      "hypothesis": "A deliberately Z-shaped auto-route emits a 6-waypoint chain payload; observed `06 08 00 00 00 00 10 0f 34 23` differs from `_indicator_left.vi` only in the trailing magnitude varints, isolating per-elbow geometry from direction sign."
+      "focus": ["leftward multi-elbow auto-route", "vertical magnitude"],
+      "hypothesis": "Indicator placed left of and 8px above the source produces a 6-waypoint doubling-back auto route `06 08 00 01 01 00 10 10 9c 18`. Baseline of the calibrated left_auto family: p0/p2 encode vertical direction (up=(00,01)), p6 the horizontal seed, p7=16+pixels the vertical magnitude (here 0x18=24 → 8px)."
+    },
+    {
+      "name": "Numeric42_left_auto_16px_up.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["leftward multi-elbow auto-route", "vertical magnitude calibration"],
+      "hypothesis": "Same layout as left_auto_8px_up but indicator 16px above source: `06 08 00 01 01 00 10 10 9c 20`. Only p7 changes (0x18→0x20, +8 for +8px), confirming p7 = 16 + vertical pixels at 1 unit/pixel."
+    },
+    {
+      "name": "Numeric42_left_auto_8px_down.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["leftward multi-elbow auto-route", "direction sign"],
+      "hypothesis": "Same X as the up fixtures but indicator 8px below source: `06 08 01 01 00 00 10 10 9c 18`. Versus left_auto_8px_up only p0/p2 flip (down=(01,00)) while p6/p7 are unchanged, isolating vertical direction from magnitude and from horizontal position."
+    },
+    {
+      "name": "Numeric42_left_auto_8px_down+8px_right.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["leftward multi-elbow auto-route", "horizontal calibration"],
+      "hypothesis": "left_auto_8px_down with the indicator moved 8px right (closer to the source): `06 08 01 01 00 00 10 10 94 18`. Only p6 changes (0x9c→0x94, −8 for +8px right), confirming p6 = horizontal seed at 1 unit/pixel, decreasing as the sink approaches the source."
     },
     {
       "name": "Numeric42_manual_elbows.vi",
@@ -410,9 +438,9 @@
     },
     {
       "feature": "multi-elbow auto wires",
-      "priority": "high",
-      "neededFixtures": ["Numeric42TwoElbows.vi", "Numeric42ThreeElbows.vi"],
-      "notes": "Decode chain payloads with more than four varints into exact waypoint lists."
+      "priority": "medium",
+      "neededFixtures": ["Numeric42_left_auto_8px_up_right8.vi", "Numeric42ThreeElbows.vi"],
+      "notes": "The byte0=6 leftward doubling-back route is now decoded and calibrated by the Numeric42_left_auto_* family (Wire.LeftwardChainPath): p0/p2=direction, p6=horizontal seed (1/px), p7=16+vertical pixels. Remaining: an up-direction X pair to confirm p6 behaves the same upward, the absolute p6/p7 zero offsets, and rightward/other multi-elbow shapes (e.g. true 3-elbow routes)."
     },
     {
       "feature": "version span",

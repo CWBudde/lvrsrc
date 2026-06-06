@@ -198,11 +198,19 @@ type ChainAutoPath struct {
 	// negative when above. Zero when Straight is true.
 	YStep int
 	// SourceAnchorX is the elbow's horizontal distance from the
-	// source-glyph's output anchor, in pixels. This is glyph-
-	// specific (= 65 for the I32 Numeric Constant in our corpus)
-	// and stays stable as the sink moves horizontally because the
-	// auto-router stretches the post-elbow segment, not the pre-
-	// elbow one. Zero when Straight is true.
+	// source-glyph's output anchor, in pixels. It is NOT a glyph
+	// constant — it is edit-history-dependent:
+	//   - A freshly auto-routed (delete + reconnect) wire places the
+	//     elbow at the canonical short distance for the current
+	//     layout (~16 px for the I32-constant→numeric pair).
+	//   - Moving a terminal afterwards freezes the existing elbow and
+	//     only stretches the post-elbow segment, so the value stays at
+	//     whatever it was when the wire was last routed (e.g. 65 in
+	//     several corpus fixtures that were drawn then nudged).
+	// Two VIs with identical terminal positions can therefore carry
+	// different SourceAnchorX values. YStep, by contrast, reflects the
+	// real vertical offset regardless of edit method. Zero when
+	// Straight is true.
 	SourceAnchorX uint64
 }
 
@@ -220,7 +228,8 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 	case 4:
 		// payload[0]: y-direction flag (0 = down, 1 = up)
 		// payload[1]: always 0 in our corpus (reserved / unknown)
-		// payload[2]: source-glyph elbow anchor (= 65 for I32 const)
+		// payload[2]: elbow horizontal offset (edit-history-dependent:
+		//             ~16 for a fresh reconnect, 65 when stretched)
 		// payload[3]: y-step magnitude (unsigned pixels)
 		var sign int
 		switch w.ChainGeometry[0] {
@@ -243,9 +252,9 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 		if yMag > maxReasonableYStep {
 			return ChainAutoPath{}, false
 		}
-		// Source-glyph anchors are also bounded — the spike saw
-		// `65` for I32 numeric constants. Reject implausibly large
-		// anchors for the same reason.
+		// Elbow horizontal offsets are also bounded (observed 16 and
+		// 65 across fresh/stretched fixtures). Reject implausibly
+		// large values as evidence we have not hit the L-shape.
 		if w.ChainGeometry[2] > 1024 {
 			return ChainAutoPath{}, false
 		}
@@ -255,6 +264,91 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 		}, true
 	}
 	return ChainAutoPath{}, false
+}
+
+// LeftwardChainPath is the typed projection of a byte0=6 leftward
+// auto-routed wire — the doubling-back route LabVIEW emits when the
+// sink terminal sits to the left of the source, forcing the wire to
+// exit right, loop around, and come back. ChainAutoPath rejects these
+// (>4 varints); this accessor decodes the family that four controlled
+// fixtures calibrated:
+//
+//	left_auto_8px_up            06 08 00 01 01 00 10 10 9c 18
+//	left_auto_16px_up           06 08 00 01 01 00 10 10 9c 20
+//	left_auto_8px_down          06 08 01 01 00 00 10 10 9c 18
+//	left_auto_8px_down+8px_right 06 08 01 01 00 00 10 10 94 18
+//
+// Payload byte map (payload = Raw[2:], indices p0..p7):
+//
+//	p0,p2 — vertical direction: up=(p0=0,p2=1), down=(p0=1,p2=0)
+//	p1    — always 0x01 in this family
+//	p3    — always 0x00
+//	p4,p5 — glyph anchor seed = 0x10 0x10 (I32-constant specific)
+//	p6    — horizontal seed: 1 unit per pixel, decreasing as the sink
+//	        moves right (toward the source). Absolute zero is not yet
+//	        calibrated, so it is exposed raw.
+//	p7    — vertical magnitude = 16 + pixels (1 unit per pixel),
+//	        direction-independent (8px→0x18, 16px→0x20).
+//
+// Both axes are confirmed linear at 1 unit/pixel by the controlled
+// pairs; the constant "+16" base on p7 and the absolute base of p6 are
+// fixed routing margins that terminal-bounds correlation can resolve
+// later. The anchor seed is glyph-specific, so the decoder only
+// recognises the exact prefix it has ground truth for.
+type LeftwardChainPath struct {
+	// Up reports the vertical direction: true when the sink is above
+	// the source, false when below.
+	Up bool
+	// VerticalPixels is the vertical offset magnitude in pixels
+	// (p7 − 16). Always non-negative.
+	VerticalPixels int
+	// HorizontalSeed is the raw p6 byte. It moves 1 unit per pixel and
+	// decreases as the sink approaches the source horizontally; its
+	// absolute pixel zero is not yet calibrated.
+	HorizontalSeed byte
+}
+
+// LeftwardChainPath returns the typed projection for a byte0=6
+// leftward auto-route when the payload matches the calibrated family
+// shape (auto mode, Waypoints==6, prefix `?? 01 ?? 00 10 10`, and a
+// recognised direction pair in p0/p2). Returns ok=false for every
+// other mode/shape — including single-elbow auto chains, tree wires,
+// and the near-aligned Numeric42_indicator_left.vi sample (which has
+// p1==0x00 and a different anchor seed).
+func (w Wire) LeftwardChainPath() (LeftwardChainPath, bool) {
+	if w.Mode != WireModeAutoChain || w.Waypoints != 6 {
+		return LeftwardChainPath{}, false
+	}
+	if len(w.Raw) < 2 {
+		return LeftwardChainPath{}, false
+	}
+	p := w.Raw[2:]
+	if len(p) != 8 {
+		return LeftwardChainPath{}, false
+	}
+	// Stable prefix shared by every ground-truth fixture in the family.
+	if p[1] != 0x01 || p[3] != 0x00 || p[4] != 0x10 || p[5] != 0x10 {
+		return LeftwardChainPath{}, false
+	}
+	var up bool
+	switch {
+	case p[0] == 0x00 && p[2] == 0x01:
+		up = true
+	case p[0] == 0x01 && p[2] == 0x00:
+		up = false
+	default:
+		return LeftwardChainPath{}, false
+	}
+	// p7 = 16 + vertical pixels; a value below the base is evidence we
+	// have not actually matched the family, so reject it.
+	if p[7] < 16 {
+		return LeftwardChainPath{}, false
+	}
+	return LeftwardChainPath{
+		Up:             up,
+		VerticalPixels: int(p[7]) - 16,
+		HorizontalSeed: p[6],
+	}, true
 }
 
 // TreeEndpoints returns the (V, H) endpoint coordinates for a pure

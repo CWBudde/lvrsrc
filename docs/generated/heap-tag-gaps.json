@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "fixtureCount": 45,
-    "heapTreeCount": 90,
-    "totalNodes": 34886,
-    "reportedNodes": 25312,
+    "fixtureCount": 49,
+    "heapTreeCount": 98,
+    "totalNodes": 36434,
+    "reportedNodes": 26452,
     "reportedTagCount": 119,
     "statusNodes": {
-      "class-semantic-open": 8144,
-      "named-only": 652,
-      "partial": 16265,
-      "rect-role-open": 251,
-      "resolved": 9574
+      "class-semantic-open": 8528,
+      "named-only": 672,
+      "partial": 16981,
+      "rect-role-open": 271,
+      "resolved": 9982
     }
   },
   "tags": [
@@ -20,13 +20,13 @@
       "name": "SL__fontRun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 2590,
-      "leafCount": 2590,
-      "contentBytes": 6756,
-      "wireBytes": 12431,
+      "count": 2710,
+      "leafCount": 2710,
+      "contentBytes": 7064,
+      "wireBytes": 12995,
       "resources": {
-        "BDHb": 493,
-        "FPHb": 2097
+        "BDHb": 525,
+        "FPHb": 2185
       },
       "fixtures": [
         {
@@ -166,6 +166,10 @@
           "count": 30
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 30
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 30
         },
@@ -174,11 +178,23 @@
           "count": 30
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 30
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 30
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 30
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 30
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 30
         },
         {
@@ -211,9 +227,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1123",
-        "OF__image=1091",
-        "SL__prNodeList=375",
+        "SL__arrayElement=1179",
+        "OF__image=1139",
+        "SL__prNodeList=391",
         "OF__browseOptions=1"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -223,13 +239,13 @@
       "name": "OF__image",
       "family": "field",
       "status": "partial",
-      "count": 2182,
-      "openCount": 1091,
-      "closeCount": 1091,
-      "wireBytes": 8728,
+      "count": 2278,
+      "openCount": 1139,
+      "closeCount": 1139,
+      "wireBytes": 9112,
       "resources": {
-        "BDHb": 520,
-        "FPHb": 1662
+        "BDHb": 544,
+        "FPHb": 1734
       },
       "fixtures": [
         {
@@ -365,6 +381,10 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 24
         },
@@ -373,11 +393,23 @@
           "count": 24
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 24
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 24
         },
         {
@@ -414,9 +446,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1910",
-        "SL__conPane=136",
-        "SL__aInsDCO=134",
+        "SL__arrayElement=1990",
+        "SL__conPane=144",
+        "SL__aInsDCO=142",
         "SL__externalNode=2"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -426,13 +458,13 @@
       "name": "OF__objFlags",
       "family": "field",
       "status": "partial",
-      "count": 2140,
-      "leafCount": 2140,
-      "contentBytes": 5066,
-      "wireBytes": 9346,
+      "count": 2236,
+      "leafCount": 2236,
+      "contentBytes": 5302,
+      "wireBytes": 9774,
       "resources": {
-        "BDHb": 808,
-        "FPHb": 1332
+        "BDHb": 844,
+        "FPHb": 1392
       },
       "fixtures": [
         {
@@ -572,6 +604,10 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 24
         },
@@ -580,11 +616,23 @@
           "count": 24
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 24
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 24
         },
         {
@@ -617,12 +665,12 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1724",
-        "SL__mux=128",
+        "SL__arrayElement=1796",
+        "SL__mux=136",
         "SL__parm=80",
-        "SL__conPane=68",
-        "SL__eventDataNode=68",
-        "SL__aInsDCO=67",
+        "SL__eventDataNode=76",
+        "SL__conPane=72",
+        "SL__aInsDCO=71",
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=1"
       ],
@@ -633,13 +681,13 @@
       "name": "OF__partID",
       "family": "field",
       "status": "partial",
-      "count": 1668,
-      "leafCount": 1668,
-      "contentBytes": 1693,
-      "wireBytes": 5029,
+      "count": 1740,
+      "leafCount": 1740,
+      "contentBytes": 1765,
+      "wireBytes": 5245,
       "resources": {
-        "BDHb": 393,
-        "FPHb": 1275
+        "BDHb": 413,
+        "FPHb": 1327
       },
       "fixtures": [
         {
@@ -779,6 +827,10 @@
           "count": 18
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 18
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 18
         },
@@ -787,11 +839,23 @@
           "count": 18
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 18
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 18
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 18
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 18
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 18
         },
         {
@@ -824,8 +888,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1599",
-        "SL__conPane=68",
+        "SL__arrayElement=1667",
+        "SL__conPane=72",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -835,13 +899,13 @@
       "name": "OF__howGrow",
       "family": "field",
       "status": "partial",
-      "count": 1454,
-      "leafCount": 1454,
-      "contentBytes": 2622,
-      "wireBytes": 5530,
+      "count": 1518,
+      "leafCount": 1518,
+      "contentBytes": 2734,
+      "wireBytes": 5770,
       "resources": {
-        "BDHb": 340,
-        "FPHb": 1114
+        "BDHb": 356,
+        "FPHb": 1162
       },
       "fixtures": [
         {
@@ -981,6 +1045,10 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 16
         },
@@ -989,11 +1057,23 @@
           "count": 16
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 16
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 16
         },
         {
@@ -1026,9 +1106,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1310",
-        "SL__conPane=68",
-        "SL__aInsDCO=67",
+        "SL__arrayElement=1366",
+        "SL__conPane=72",
+        "SL__aInsDCO=71",
         "SL__mux=8",
         "SL__externalNode=1"
       ],
@@ -1039,13 +1119,13 @@
       "name": "OF__bgColor",
       "family": "field",
       "status": "partial",
-      "count": 1401,
-      "leafCount": 1401,
-      "contentBytes": 5601,
-      "wireBytes": 8403,
+      "count": 1465,
+      "leafCount": 1465,
+      "contentBytes": 5857,
+      "wireBytes": 8787,
       "resources": {
-        "BDHb": 361,
-        "FPHb": 1040
+        "BDHb": 381,
+        "FPHb": 1084
       },
       "fixtures": [
         {
@@ -1185,6 +1265,10 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 16
         },
@@ -1193,11 +1277,23 @@
           "count": 16
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 16
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 16
         },
         {
@@ -1230,9 +1326,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1287",
-        "SL__conPane=68",
-        "SL__eventDataNode=45",
+        "SL__arrayElement=1343",
+        "SL__conPane=72",
+        "SL__eventDataNode=49",
         "SL__externalNode=1"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
@@ -1242,13 +1338,13 @@
       "name": "OF__fgColor",
       "family": "field",
       "status": "partial",
-      "count": 1195,
-      "leafCount": 1195,
-      "contentBytes": 4780,
-      "wireBytes": 7170,
+      "count": 1247,
+      "leafCount": 1247,
+      "contentBytes": 4988,
+      "wireBytes": 7482,
       "resources": {
-        "BDHb": 296,
-        "FPHb": 899
+        "BDHb": 312,
+        "FPHb": 935
       },
       "fixtures": [
         {
@@ -1388,6 +1484,10 @@
           "count": 13
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 13
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 13
         },
@@ -1396,11 +1496,23 @@
           "count": 13
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 13
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 13
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 13
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 13
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 13
         },
         {
@@ -1433,8 +1545,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1127",
-        "SL__conPane=68"
+        "SL__arrayElement=1175",
+        "SL__conPane=72"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
@@ -1443,13 +1555,13 @@
       "name": "OF__masterPart",
       "family": "field",
       "status": "partial",
-      "count": 1022,
-      "leafCount": 1022,
-      "contentBytes": 1039,
-      "wireBytes": 3083,
+      "count": 1066,
+      "leafCount": 1066,
+      "contentBytes": 1083,
+      "wireBytes": 3215,
       "resources": {
-        "BDHb": 185,
-        "FPHb": 837
+        "BDHb": 193,
+        "FPHb": 873
       },
       "fixtures": [
         {
@@ -1585,6 +1697,10 @@
           "count": 11
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 11
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 11
         },
@@ -1593,11 +1709,23 @@
           "count": 11
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 11
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 11
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 11
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 11
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 11
         },
         {
@@ -1634,7 +1762,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1021",
+        "SL__arrayElement=1065",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -1644,15 +1772,15 @@
       "name": "OF__activePlot",
       "family": "field",
       "status": "named-only",
-      "count": 1013,
-      "leafCount": 263,
-      "openCount": 375,
-      "closeCount": 375,
-      "contentBytes": 1735,
-      "wireBytes": 5398,
+      "count": 1053,
+      "leafCount": 271,
+      "openCount": 391,
+      "closeCount": 391,
+      "contentBytes": 1779,
+      "wireBytes": 5590,
       "resources": {
         "BDHb": 42,
-        "FPHb": 971
+        "FPHb": 1011
       },
       "fixtures": [
         {
@@ -1780,6 +1908,10 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 10
         },
@@ -1788,11 +1920,23 @@
           "count": 10
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 10
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 10
         },
         {
@@ -1837,8 +1981,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=752",
-        "SL__baseRefNum=260",
+        "SL__arrayElement=784",
+        "SL__baseRefNum=268",
         "OF__browseOptions=1"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
@@ -1848,13 +1992,13 @@
       "name": "SL__baseRefNum",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 994,
-      "openCount": 497,
-      "closeCount": 497,
-      "wireBytes": 3976,
+      "count": 1034,
+      "openCount": 517,
+      "closeCount": 517,
+      "wireBytes": 4136,
       "resources": {
-        "BDHb": 328,
-        "FPHb": 666
+        "BDHb": 344,
+        "FPHb": 690
       },
       "fixtures": [
         {
@@ -1986,6 +2130,10 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 10
         },
@@ -1994,11 +2142,23 @@
           "count": 10
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 10
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 10
         },
         {
@@ -2039,8 +2199,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=856",
-        "SL__conPane=136",
+        "SL__arrayElement=888",
+        "SL__conPane=144",
         "SL__externalNode=2"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -2050,13 +2210,13 @@
       "name": "OF__activeMarker",
       "family": "field",
       "status": "partial",
-      "count": 875,
-      "leafCount": 875,
-      "contentBytes": 2848,
-      "wireBytes": 4598,
+      "count": 911,
+      "leafCount": 911,
+      "contentBytes": 2968,
+      "wireBytes": 4790,
       "resources": {
-        "BDHb": 166,
-        "FPHb": 709
+        "BDHb": 174,
+        "FPHb": 737
       },
       "fixtures": [
         {
@@ -2188,6 +2348,10 @@
           "count": 9
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 9
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 9
         },
@@ -2196,11 +2360,23 @@
           "count": 9
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 9
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 9
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 9
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 9
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 9
         },
         {
@@ -2241,8 +2417,8 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=497",
-        "SL__arrayElement=377",
+        "SL__baseRefNum=517",
+        "SL__arrayElement=393",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -2252,13 +2428,13 @@
       "name": "SL__simTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 664,
-      "openCount": 332,
-      "closeCount": 332,
-      "wireBytes": 2656,
+      "count": 696,
+      "openCount": 348,
+      "closeCount": 348,
+      "wireBytes": 2784,
       "resources": {
-        "BDHb": 116,
-        "FPHb": 548
+        "BDHb": 124,
+        "FPHb": 572
       },
       "fixtures": [
         {
@@ -2382,6 +2558,10 @@
           "count": 8
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 8
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 8
         },
@@ -2390,11 +2570,23 @@
           "count": 8
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 8
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 8
         },
         {
@@ -2439,7 +2631,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=664"
+        "SL__arrayElement=696"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2448,13 +2640,13 @@
       "name": "SL__stdLvVariant",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 578,
-      "openCount": 289,
-      "closeCount": 289,
-      "wireBytes": 2312,
+      "count": 602,
+      "openCount": 301,
+      "closeCount": 301,
+      "wireBytes": 2408,
       "resources": {
-        "BDHb": 140,
-        "FPHb": 438
+        "BDHb": 148,
+        "FPHb": 454
       },
       "fixtures": [
         {
@@ -2594,6 +2786,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 6
         },
@@ -2602,11 +2798,23 @@
           "count": 6
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 6
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 6
         },
         {
@@ -2639,9 +2847,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=266",
+        "SL__mux=282",
         "SL__arrayElement=178",
-        "SL__aInsDCO=134"
+        "SL__aInsDCO=142"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2650,13 +2858,13 @@
       "name": "OF__activeDiag",
       "family": "field",
       "status": "partial",
-      "count": 539,
-      "leafCount": 539,
-      "contentBytes": 1891,
-      "wireBytes": 2969,
+      "count": 563,
+      "leafCount": 563,
+      "contentBytes": 1975,
+      "wireBytes": 3101,
       "resources": {
-        "BDHb": 96,
-        "FPHb": 443
+        "BDHb": 104,
+        "FPHb": 459
       },
       "fixtures": [
         {
@@ -2772,6 +2980,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 6
         },
@@ -2780,11 +2992,23 @@
           "count": 6
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 6
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 6
         },
         {
@@ -2837,8 +3061,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=377",
-        "SL__baseRefNum=161",
+        "SL__arrayElement=393",
+        "SL__baseRefNum=169",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -2848,13 +3072,13 @@
       "name": "OF__typeDesc",
       "family": "field",
       "status": "partial",
-      "count": 509,
-      "leafCount": 509,
-      "contentBytes": 509,
-      "wireBytes": 1527,
+      "count": 525,
+      "leafCount": 525,
+      "contentBytes": 525,
+      "wireBytes": 1575,
       "resources": {
-        "BDHb": 277,
-        "FPHb": 232
+        "BDHb": 285,
+        "FPHb": 240
       },
       "fixtures": [
         {
@@ -2990,6 +3214,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -2998,11 +3226,23 @@
           "count": 4
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 4
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 4
         },
         {
@@ -3035,9 +3275,9 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=201",
-        "SL__arrayElement=167",
-        "SL__mux=133",
+        "SL__parm=205",
+        "SL__arrayElement=171",
+        "SL__mux=141",
         "OF__loopTestDCO=3",
         "SL__recipeBkUp=3",
         "OF__innerLpTunDCO=2"
@@ -3049,13 +3289,13 @@
       "name": "OF__activeXScale",
       "family": "field",
       "status": "partial",
-      "count": 498,
-      "leafCount": 498,
-      "contentBytes": 1988,
-      "wireBytes": 2984,
+      "count": 518,
+      "leafCount": 518,
+      "contentBytes": 2068,
+      "wireBytes": 3104,
       "resources": {
-        "BDHb": 164,
-        "FPHb": 334
+        "BDHb": 172,
+        "FPHb": 346
       },
       "fixtures": [
         {
@@ -3187,6 +3427,10 @@
           "count": 5
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 5
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 5
         },
@@ -3195,11 +3439,23 @@
           "count": 5
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 5
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 5
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 5
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 5
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 5
         },
         {
@@ -3240,7 +3496,7 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=497",
+        "SL__baseRefNum=517",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3250,13 +3506,13 @@
       "name": "SL__parm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 496,
-      "leafCount": 94,
-      "openCount": 201,
-      "closeCount": 201,
-      "wireBytes": 2775,
+      "count": 508,
+      "leafCount": 98,
+      "openCount": 205,
+      "closeCount": 205,
+      "wireBytes": 2843,
       "resources": {
-        "BDHb": 496
+        "BDHb": 508
       },
       "fixtures": [
         {
@@ -3368,6 +3624,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 3
         },
@@ -3376,11 +3636,23 @@
           "count": 3
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 3
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 3
         },
         {
@@ -3393,7 +3665,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=496"
+        "SL__arrayElement=508"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -3402,12 +3674,12 @@
       "name": "SL__udClassDDO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 440,
-      "openCount": 220,
-      "closeCount": 220,
-      "wireBytes": 1760,
+      "count": 456,
+      "openCount": 228,
+      "closeCount": 228,
+      "wireBytes": 1824,
       "resources": {
-        "BDHb": 440
+        "BDHb": 456
       },
       "fixtures": [
         {
@@ -3519,6 +3791,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -3527,11 +3803,23 @@
           "count": 4
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 4
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 4
         },
         {
@@ -3592,7 +3880,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=390",
+        "SL__arrayElement=406",
         "SL__parm=34",
         "OF__loopTestDCO=6",
         "SL__recipeBkUp=6",
@@ -3601,17 +3889,231 @@
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
+      "tag": 52,
+      "name": "SL__mux",
+      "family": "class",
+      "status": "class-semantic-open",
+      "count": 282,
+      "openCount": 141,
+      "closeCount": 141,
+      "wireBytes": 1551,
+      "resources": {
+        "BDHb": 110,
+        "FPHb": 172
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 24
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 16
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 14
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 12
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 10
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 8
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 8
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 8
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 8
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 6
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 6
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 4
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 4
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 4
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 4
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=172",
+        "SL__parm=104",
+        "SL__mux=6"
+      ],
+      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
+    },
+    {
       "tag": 615,
       "name": "OF__MouseWheelSupport",
       "family": "field",
       "status": "partial",
-      "count": 267,
-      "leafCount": 267,
-      "contentBytes": 267,
-      "wireBytes": 801,
+      "count": 279,
+      "leafCount": 279,
+      "contentBytes": 279,
+      "wireBytes": 837,
       "resources": {
-        "BDHb": 68,
-        "FPHb": 199
+        "BDHb": 72,
+        "FPHb": 207
       },
       "fixtures": [
         {
@@ -3747,6 +4249,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 3
         },
@@ -3755,11 +4261,23 @@
           "count": 3
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 3
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 3
         },
         {
@@ -3796,222 +4314,24 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=133",
+        "SL__mux=141",
         "SL__arrayElement=89",
-        "SL__eventDataNode=45"
+        "SL__eventDataNode=49"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 52,
-      "name": "SL__mux",
-      "family": "class",
-      "status": "class-semantic-open",
-      "count": 266,
-      "openCount": 133,
-      "closeCount": 133,
-      "wireBytes": 1463,
-      "resources": {
-        "BDHb": 102,
-        "FPHb": 164
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 24
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 16
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 14
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 12
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 10
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 10
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 8
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 8
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 8
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 8
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 8
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 8
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 8
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 8
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 8
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 6
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 6
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 6
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 6
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42_two_elbows.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 4
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 4
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 4
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 4
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=164",
-        "SL__parm=96",
-        "SL__mux=6"
-      ],
-      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
       "tag": 303,
       "name": "SL__sdfTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 234,
-      "openCount": 117,
-      "closeCount": 117,
-      "wireBytes": 936,
+      "count": 250,
+      "openCount": 125,
+      "closeCount": 125,
+      "wireBytes": 1000,
       "resources": {
-        "BDHb": 104,
-        "FPHb": 130
+        "BDHb": 112,
+        "FPHb": 138
       },
       "fixtures": [
         {
@@ -4135,6 +4455,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -4143,11 +4467,23 @@
           "count": 4
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 4
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 4
         },
         {
@@ -4196,8 +4532,8 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=134",
-        "SL__eventDataNode=90",
+        "SL__aInsDCO=142",
+        "SL__eventDataNode=98",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -4207,13 +4543,13 @@
       "name": "OF__hGrowNodeListLength",
       "family": "field",
       "status": "partial",
-      "count": 209,
-      "leafCount": 209,
-      "contentBytes": 209,
-      "wireBytes": 627,
+      "count": 217,
+      "leafCount": 217,
+      "contentBytes": 217,
+      "wireBytes": 651,
       "resources": {
-        "BDHb": 55,
-        "FPHb": 154
+        "BDHb": 59,
+        "FPHb": 158
       },
       "fixtures": [
         {
@@ -4353,6 +4689,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -4361,11 +4701,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -4386,7 +4738,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=209"
+        "SL__arrayElement=217"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4395,13 +4747,13 @@
       "name": "OF__refListLength",
       "family": "field",
       "status": "partial",
-      "count": 209,
-      "leafCount": 209,
-      "contentBytes": 209,
-      "wireBytes": 627,
+      "count": 217,
+      "leafCount": 217,
+      "contentBytes": 217,
+      "wireBytes": 651,
       "resources": {
-        "BDHb": 55,
-        "FPHb": 154
+        "BDHb": 59,
+        "FPHb": 158
       },
       "fixtures": [
         {
@@ -4541,6 +4893,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -4549,11 +4905,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -4574,7 +4942,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=209"
+        "SL__arrayElement=217"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4583,13 +4951,13 @@
       "name": "OF__rsrcID",
       "family": "field",
       "status": "partial",
-      "count": 197,
-      "leafCount": 197,
-      "contentBytes": 394,
-      "wireBytes": 788,
+      "count": 205,
+      "leafCount": 205,
+      "contentBytes": 410,
+      "wireBytes": 820,
       "resources": {
-        "BDHb": 65,
-        "FPHb": 132
+        "BDHb": 69,
+        "FPHb": 136
       },
       "fixtures": [
         {
@@ -4717,6 +5085,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -4725,11 +5097,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -4770,7 +5154,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=197"
+        "SL__arrayElement=205"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4779,13 +5163,13 @@
       "name": "SL__eventDataNode",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 180,
-      "openCount": 90,
-      "closeCount": 90,
-      "wireBytes": 990,
+      "count": 196,
+      "openCount": 98,
+      "closeCount": 98,
+      "wireBytes": 1078,
       "resources": {
-        "BDHb": 90,
-        "FPHb": 90
+        "BDHb": 98,
+        "FPHb": 98
       },
       "fixtures": [
         {
@@ -4857,6 +5241,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -4865,11 +5253,23 @@
           "count": 4
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 4
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 4
         },
         {
@@ -4970,7 +5370,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=180"
+        "SL__rootObject=196"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5039,12 +5439,12 @@
       "name": "SL__conPane",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 136,
-      "openCount": 68,
-      "closeCount": 68,
-      "wireBytes": 748,
+      "count": 144,
+      "openCount": 72,
+      "closeCount": 72,
+      "wireBytes": 792,
       "resources": {
-        "BDHb": 136
+        "BDHb": 144
       },
       "fixtures": [
         {
@@ -5152,6 +5552,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5160,11 +5564,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -5181,7 +5597,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=136"
+        "SL__arrayElement=144"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5190,13 +5606,13 @@
       "name": "SL__aInsDCO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 134,
-      "openCount": 67,
-      "closeCount": 67,
-      "wireBytes": 737,
+      "count": 142,
+      "openCount": 71,
+      "closeCount": 71,
+      "wireBytes": 781,
       "resources": {
         "BDHb": 4,
-        "FPHb": 130
+        "FPHb": 138
       },
       "fixtures": [
         {
@@ -5316,6 +5732,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5324,11 +5744,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -5381,7 +5813,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90",
+        "SL__eventDataNode=98",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -5392,13 +5824,13 @@
       "name": "SL__demux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 134,
-      "openCount": 67,
-      "closeCount": 67,
-      "wireBytes": 536,
+      "count": 142,
+      "openCount": 71,
+      "closeCount": 71,
+      "wireBytes": 568,
       "resources": {
         "BDHb": 4,
-        "FPHb": 130
+        "FPHb": 138
       },
       "fixtures": [
         {
@@ -5518,6 +5950,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5526,11 +5962,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -5583,477 +6031,24 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90",
+        "SL__eventDataNode=98",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
-      "tag": 456,
-      "name": "OF__compressedWireTable",
-      "family": "field",
-      "status": "partial",
-      "count": 108,
-      "leafCount": 108,
-      "contentBytes": 678,
-      "wireBytes": 966,
-      "resources": {
-        "BDHb": 108
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_two_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=108"
-      ],
-      "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
-    },
-    {
-      "tag": 128,
-      "name": "OF__lastSignalKind",
-      "family": "field",
-      "status": "partial",
-      "count": 108,
-      "leafCount": 108,
-      "contentBytes": 216,
-      "wireBytes": 432,
-      "resources": {
-        "BDHb": 108
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_two_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=108"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 246,
-      "name": "OF__state",
-      "family": "field",
-      "status": "partial",
-      "count": 108,
-      "leafCount": 108,
-      "contentBytes": 109,
-      "wireBytes": 325,
-      "resources": {
-        "BDHb": 108
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_two_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=108"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
       "tag": 85,
       "name": "OF__format",
       "family": "field",
       "status": "partial",
-      "count": 107,
-      "leafCount": 107,
-      "contentBytes": 420,
-      "wireBytes": 636,
+      "count": 115,
+      "leafCount": 115,
+      "contentBytes": 452,
+      "wireBytes": 684,
       "resources": {
-        "BDHb": 39,
-        "FPHb": 68
+        "BDHb": 43,
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -6141,6 +6136,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6149,11 +6148,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -6214,7 +6225,341 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=107"
+        "SL__arrayElement=115"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 456,
+      "name": "OF__compressedWireTable",
+      "family": "field",
+      "status": "partial",
+      "count": 112,
+      "leafCount": 112,
+      "contentBytes": 714,
+      "wireBytes": 1014,
+      "resources": {
+        "BDHb": 112
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=112"
+      ],
+      "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
+    },
+    {
+      "tag": 128,
+      "name": "OF__lastSignalKind",
+      "family": "field",
+      "status": "partial",
+      "count": 112,
+      "leafCount": 112,
+      "contentBytes": 224,
+      "wireBytes": 448,
+      "resources": {
+        "BDHb": 112
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=112"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -6223,13 +6568,13 @@
       "name": "OF__origin",
       "family": "field",
       "status": "partial",
-      "count": 104,
-      "leafCount": 104,
-      "contentBytes": 416,
-      "wireBytes": 624,
+      "count": 112,
+      "leafCount": 112,
+      "contentBytes": 448,
+      "wireBytes": 672,
       "resources": {
-        "BDHb": 36,
-        "FPHb": 68
+        "BDHb": 40,
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -6333,6 +6678,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6341,11 +6690,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -6414,22 +6775,189 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=79",
+        "SL__rootObject=87",
         "SL__aInsDCO=25"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
+    },
+    {
+      "tag": 246,
+      "name": "OF__state",
+      "family": "field",
+      "status": "partial",
+      "count": 112,
+      "leafCount": 112,
+      "contentBytes": 113,
+      "wireBytes": 337,
+      "resources": {
+        "BDHb": 112
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsY_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=112"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
       "tag": 233,
       "name": "SL__baseTableControl",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 100,
-      "openCount": 50,
-      "closeCount": 50,
-      "wireBytes": 400,
+      "count": 108,
+      "openCount": 54,
+      "closeCount": 54,
+      "wireBytes": 432,
       "resources": {
-        "BDHb": 100
+        "BDHb": 108
       },
       "fixtures": [
         {
@@ -6513,6 +7041,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6521,11 +7053,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -6614,7 +7158,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90",
+        "SL__eventDataNode=98",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -6624,13 +7168,13 @@
       "name": "OF__dsw",
       "family": "field",
       "status": "partial",
-      "count": 100,
-      "leafCount": 100,
-      "contentBytes": 200,
-      "wireBytes": 400,
+      "count": 108,
+      "leafCount": 108,
+      "contentBytes": 216,
+      "wireBytes": 432,
       "resources": {
-        "BDHb": 64,
-        "FPHb": 36
+        "BDHb": 68,
+        "FPHb": 40
       },
       "fixtures": [
         {
@@ -6714,6 +7258,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6722,11 +7270,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -6763,8 +7323,8 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=63",
-        "SL__arrayElement=36",
+        "SL__parm=67",
+        "SL__arrayElement=40",
         "OF__loopTestDCO=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -6774,12 +7334,12 @@
       "name": "OF__nodeList",
       "family": "field",
       "status": "partial",
-      "count": 100,
-      "openCount": 50,
-      "closeCount": 50,
-      "wireBytes": 400,
+      "count": 108,
+      "openCount": 54,
+      "closeCount": 54,
+      "wireBytes": 432,
       "resources": {
-        "BDHb": 100
+        "BDHb": 108
       },
       "fixtures": [
         {
@@ -6863,6 +7423,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6871,11 +7435,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -6964,7 +7540,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90",
+        "SL__eventDataNode=98",
         "SL__arrayElement=10"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -7033,12 +7609,12 @@
       "name": "SL__lMax",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 90,
-      "openCount": 45,
-      "closeCount": 45,
-      "wireBytes": 495,
+      "count": 98,
+      "openCount": 49,
+      "closeCount": 49,
+      "wireBytes": 539,
       "resources": {
-        "FPHb": 90
+        "FPHb": 98
       },
       "fixtures": [
         {
@@ -7110,6 +7686,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7118,11 +7698,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -7223,7 +7815,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90"
+        "SL__eventDataNode=98"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -7232,12 +7824,12 @@
       "name": "SL__oHExt",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 90,
-      "openCount": 45,
-      "closeCount": 45,
-      "wireBytes": 495,
+      "count": 98,
+      "openCount": 49,
+      "closeCount": 49,
+      "wireBytes": 539,
       "resources": {
-        "FPHb": 90
+        "FPHb": 98
       },
       "fixtures": [
         {
@@ -7309,6 +7901,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7317,11 +7913,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -7422,7 +8030,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=90"
+        "SL__eventDataNode=98"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -7431,12 +8039,12 @@
       "name": "SL__seqTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 90,
-      "openCount": 45,
-      "closeCount": 45,
-      "wireBytes": 360,
+      "count": 98,
+      "openCount": 49,
+      "closeCount": 49,
+      "wireBytes": 392,
       "resources": {
-        "FPHb": 90
+        "FPHb": 98
       },
       "fixtures": [
         {
@@ -7508,6 +8116,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7516,11 +8128,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -7621,7 +8245,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=90"
+        "SL__lMax=98"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -7630,13 +8254,13 @@
       "name": "OF__instrStyle",
       "family": "field",
       "status": "partial",
-      "count": 90,
-      "leafCount": 90,
-      "contentBytes": 90,
-      "wireBytes": 270,
+      "count": 98,
+      "leafCount": 98,
+      "contentBytes": 98,
+      "wireBytes": 294,
       "resources": {
-        "BDHb": 45,
-        "FPHb": 45
+        "BDHb": 49,
+        "FPHb": 49
       },
       "fixtures": [
         {
@@ -7708,6 +8332,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7716,11 +8344,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -7821,7 +8461,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=90"
+        "SL__rootObject=98"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -7830,13 +8470,13 @@
       "name": "OF__dBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 90,
-      "leafCount": 90,
-      "contentBytes": 720,
-      "wireBytes": 990,
+      "count": 98,
+      "leafCount": 98,
+      "contentBytes": 784,
+      "wireBytes": 1078,
       "resources": {
-        "BDHb": 45,
-        "FPHb": 45
+        "BDHb": 49,
+        "FPHb": 49
       },
       "fixtures": [
         {
@@ -7908,6 +8548,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7916,11 +8560,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -8021,7 +8677,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=90"
+        "SL__rootObject=98"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -8030,13 +8686,13 @@
       "name": "OF__pBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 90,
-      "leafCount": 90,
-      "contentBytes": 720,
-      "wireBytes": 990,
+      "count": 98,
+      "leafCount": 98,
+      "contentBytes": 784,
+      "wireBytes": 1078,
       "resources": {
-        "BDHb": 45,
-        "FPHb": 45
+        "BDHb": 49,
+        "FPHb": 49
       },
       "fixtures": [
         {
@@ -8108,6 +8764,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -8116,11 +8776,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -8221,7 +8893,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=90"
+        "SL__rootObject=98"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -8230,12 +8902,12 @@
       "name": "OF__shortCount",
       "family": "field",
       "status": "partial",
-      "count": 87,
-      "leafCount": 87,
-      "contentBytes": 87,
-      "wireBytes": 261,
+      "count": 91,
+      "leafCount": 91,
+      "contentBytes": 91,
+      "wireBytes": 273,
       "resources": {
-        "BDHb": 87
+        "BDHb": 91
       },
       "fixtures": [
         {
@@ -8347,6 +9019,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -8355,11 +9031,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -8420,7 +9108,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=87"
+        "SL__arrayElement=91"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -8524,12 +9212,12 @@
       "name": "OF__conNum",
       "family": "field",
       "status": "partial",
-      "count": 74,
-      "leafCount": 74,
-      "contentBytes": 74,
-      "wireBytes": 222,
+      "count": 78,
+      "leafCount": 78,
+      "contentBytes": 78,
+      "wireBytes": 234,
       "resources": {
-        "FPHb": 74
+        "FPHb": 78
       },
       "fixtures": [
         {
@@ -8633,6 +9321,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -8641,11 +9333,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -8710,7 +9414,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=74"
+        "SL__arrayElement=78"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -8719,12 +9423,12 @@
       "name": "SL__multiCosm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 68,
-      "openCount": 34,
-      "closeCount": 34,
-      "wireBytes": 272,
+      "count": 76,
+      "openCount": 38,
+      "closeCount": 38,
+      "wireBytes": 304,
       "resources": {
-        "FPHb": 68
+        "FPHb": 76
       },
       "fixtures": [
         {
@@ -8796,6 +9500,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -8804,11 +9512,23 @@
           "count": 2
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 2
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 2
         },
         {
@@ -8865,7 +9585,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=68"
+        "SL__rootObject=76"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -8874,13 +9594,13 @@
       "name": "OF__savedSize",
       "family": "field",
       "status": "named-only",
-      "count": 67,
-      "leafCount": 67,
-      "contentBytes": 536,
-      "wireBytes": 737,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 568,
+      "wireBytes": 781,
       "resources": {
         "BDHb": 2,
-        "FPHb": 65
+        "FPHb": 69
       },
       "fixtures": [
         {
@@ -9000,6 +9720,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9008,11 +9732,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9065,7 +9801,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=45",
+        "SL__eventDataNode=49",
         "SL__mux=13",
         "SL__arrayElement=9"
       ],
@@ -9076,13 +9812,13 @@
       "name": "OF__minPaneSize",
       "family": "field",
       "status": "partial",
-      "count": 67,
-      "leafCount": 67,
-      "contentBytes": 268,
-      "wireBytes": 402,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 284,
+      "wireBytes": 426,
       "resources": {
         "BDHb": 2,
-        "FPHb": 65
+        "FPHb": 69
       },
       "fixtures": [
         {
@@ -9202,6 +9938,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9210,11 +9950,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9267,7 +10019,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=67"
+        "SL__aInsDCO=71"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
@@ -9276,13 +10028,13 @@
       "name": "OF__paneFlags",
       "family": "field",
       "status": "partial",
-      "count": 67,
-      "leafCount": 67,
-      "contentBytes": 201,
-      "wireBytes": 335,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 213,
+      "wireBytes": 355,
       "resources": {
         "BDHb": 2,
-        "FPHb": 65
+        "FPHb": 69
       },
       "fixtures": [
         {
@@ -9402,6 +10154,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9410,11 +10166,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9467,7 +10235,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=67"
+        "SL__aInsDCO=71"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -9476,12 +10244,12 @@
       "name": "OF__termListLength",
       "family": "field",
       "status": "partial",
-      "count": 67,
-      "leafCount": 67,
-      "contentBytes": 67,
-      "wireBytes": 201,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 71,
+      "wireBytes": 213,
       "resources": {
-        "FPHb": 67
+        "FPHb": 71
       },
       "fixtures": [
         {
@@ -9585,6 +10353,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9593,11 +10365,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9618,7 +10402,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=67"
+        "SL__arrayElement=71"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -9627,13 +10411,13 @@
       "name": "OF__docBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 67,
-      "leafCount": 67,
-      "contentBytes": 536,
-      "wireBytes": 737,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 568,
+      "wireBytes": 781,
       "resources": {
         "BDHb": 2,
-        "FPHb": 65
+        "FPHb": 69
       },
       "fixtures": [
         {
@@ -9753,6 +10537,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9761,11 +10549,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9818,7 +10618,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=67"
+        "SL__aInsDCO=71"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -9827,12 +10627,12 @@
       "name": "OF__StdNumInc",
       "family": "field",
       "status": "partial",
-      "count": 64,
-      "leafCount": 64,
-      "contentBytes": 337,
-      "wireBytes": 504,
+      "count": 68,
+      "leafCount": 68,
+      "contentBytes": 369,
+      "wireBytes": 548,
       "resources": {
-        "FPHb": 64
+        "FPHb": 68
       },
       "fixtures": [
         {
@@ -9916,6 +10716,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9924,11 +10728,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -9985,7 +10801,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=46",
+        "SL__mux=50",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -9995,12 +10811,12 @@
       "name": "OF__StdNumMax",
       "family": "field",
       "status": "partial",
-      "count": 64,
-      "leafCount": 64,
-      "contentBytes": 385,
-      "wireBytes": 552,
+      "count": 68,
+      "leafCount": 68,
+      "contentBytes": 417,
+      "wireBytes": 596,
       "resources": {
-        "FPHb": 64
+        "FPHb": 68
       },
       "fixtures": [
         {
@@ -10084,6 +10900,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10092,11 +10912,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -10153,7 +10985,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=46",
+        "SL__mux=50",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -10163,12 +10995,12 @@
       "name": "OF__StdNumMin",
       "family": "field",
       "status": "partial",
-      "count": 64,
-      "leafCount": 64,
-      "contentBytes": 385,
-      "wireBytes": 552,
+      "count": 68,
+      "leafCount": 68,
+      "contentBytes": 417,
+      "wireBytes": 596,
       "resources": {
-        "FPHb": 64
+        "FPHb": 68
       },
       "fixtures": [
         {
@@ -10252,6 +11084,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10260,11 +11096,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -10321,7 +11169,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=46",
+        "SL__mux=50",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -10331,12 +11179,12 @@
       "name": "OF__clumpNum",
       "family": "field",
       "status": "partial",
-      "count": 51,
-      "leafCount": 51,
-      "contentBytes": 153,
-      "wireBytes": 255,
+      "count": 55,
+      "leafCount": 55,
+      "contentBytes": 165,
+      "wireBytes": 275,
       "resources": {
-        "BDHb": 51
+        "BDHb": 55
       },
       "fixtures": [
         {
@@ -10436,6 +11284,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10444,11 +11296,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -10477,7 +11341,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=51"
+        "SL__arrayElement=55"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -10486,12 +11350,12 @@
       "name": "OF__ConstValue",
       "family": "field",
       "status": "named-only",
-      "count": 48,
-      "leafCount": 48,
-      "contentBytes": 322,
-      "wireBytes": 433,
+      "count": 52,
+      "leafCount": 52,
+      "contentBytes": 338,
+      "wireBytes": 457,
       "resources": {
-        "BDHb": 48
+        "BDHb": 52
       },
       "fixtures": [
         {
@@ -10579,6 +11443,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10587,11 +11455,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -10624,7 +11504,7 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=48"
+        "SL__parm=52"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
@@ -10633,12 +11513,12 @@
       "name": "OF__conId",
       "family": "field",
       "status": "partial",
-      "count": 45,
-      "leafCount": 45,
-      "contentBytes": 90,
-      "wireBytes": 180,
+      "count": 49,
+      "leafCount": 49,
+      "contentBytes": 98,
+      "wireBytes": 196,
       "resources": {
-        "FPHb": 45
+        "FPHb": 49
       },
       "fixtures": [
         {
@@ -10710,6 +11590,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10718,11 +11602,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -10823,75 +11719,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=45"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 348,
-      "name": "OF__annexDDOFlag",
-      "family": "field",
-      "status": "partial",
-      "count": 33,
-      "leafCount": 33,
-      "contentBytes": 33,
-      "wireBytes": 99,
-      "resources": {
-        "BDHb": 11,
-        "FPHb": 22
-      },
-      "fixtures": [
-        {
-          "fixture": "format-string.vi",
-          "count": 5
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 4
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=33"
+        "SL__lMax=49"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -10900,12 +11728,12 @@
       "name": "OF__firstNodeIdx",
       "family": "field",
       "status": "partial",
-      "count": 30,
-      "leafCount": 30,
-      "contentBytes": 30,
-      "wireBytes": 90,
+      "count": 34,
+      "leafCount": 34,
+      "contentBytes": 34,
+      "wireBytes": 102,
       "resources": {
-        "BDHb": 30
+        "BDHb": 34
       },
       "fixtures": [
         {
@@ -10977,6 +11805,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10985,11 +11817,23 @@
           "count": 1
         },
         {
-          "fixture": "Numeric42_manual_elbows.vi",
+          "fixture": "Numeric42_left_auto_16px_up.vi",
           "count": 1
         },
         {
-          "fixture": "Numeric42_two_elbows.vi",
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
           "count": 1
         },
         {
@@ -11030,7 +11874,75 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=30"
+        "SL__eventDataNode=34"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 348,
+      "name": "OF__annexDDOFlag",
+      "family": "field",
+      "status": "partial",
+      "count": 33,
+      "leafCount": 33,
+      "contentBytes": 33,
+      "wireBytes": 99,
+      "resources": {
+        "BDHb": 11,
+        "FPHb": 22
+      },
+      "fixtures": [
+        {
+          "fixture": "format-string.vi",
+          "count": 5
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 4
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=33"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },

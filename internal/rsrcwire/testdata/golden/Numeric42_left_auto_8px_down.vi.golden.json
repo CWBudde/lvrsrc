@@ -4,10 +4,10 @@
     "format_version": 3,
     "type": "LVIN",
     "creator": "LBVW",
-    "info_offset": 3084,
-    "info_size": 852,
+    "info_offset": 3080,
+    "info_size": 856,
     "data_offset": 32,
-    "data_size": 3052
+    "data_size": 3048
   },
   "kind": "vi",
   "block_count": 24,
@@ -20,7 +20,7 @@
           "index": 0,
           "name_offset": 0,
           "payload_len": 160,
-          "name": "Numeric42_indicator_left.vi"
+          "name": "Numeric42_left_auto_8px_down.vi"
         }
       ]
     },
@@ -141,7 +141,7 @@
         {
           "index": 0,
           "name_offset": 4294967295,
-          "payload_len": 717
+          "payload_len": 716
         }
       ]
     },
@@ -196,7 +196,7 @@
         {
           "index": 0,
           "name_offset": 4294967295,
-          "payload_len": 500
+          "payload_len": 497
         }
       ]
     },
@@ -281,7 +281,7 @@
   "names": [
     {
       "offset": 0,
-      "value": "Numeric42_indicator_left.vi"
+      "value": "Numeric42_left_auto_8px_down.vi"
     }
   ],
   "raw_tail_len": 0,
@@ -291,6 +291,6 @@
     "in_bytes": 3936,
     "out_bytes": 3936,
     "byte_diffs": 1,
-    "first_diff_offset": 3135
+    "first_diff_offset": 3131
   }
 }

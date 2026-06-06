@@ -81,6 +81,7 @@ func newRootCmd(stdout, stderr io.Writer) *cobra.Command {
 		app.newRepairCmd(),
 		app.newDiffCmd(),
 		app.newSetMetaCmd(),
+		app.newWiresCmd(),
 	)
 
 	return rootCmd

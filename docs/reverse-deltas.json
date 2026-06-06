@@ -137,19 +137,39 @@
       "right": "Numeric42_indicator_left.vi",
       "topic": "wire-topology",
       "focus": ["multi-elbow auto-chain payload", "right-to-left routing"],
-      "hypothesis": "Forcing LabVIEW's auto-router to take a Z-shape by placing the indicator left of the source produces a 6-waypoint chain payload (06 08 00 01 00 00 10 0f 89 30) instead of the 4-waypoint single-elbow form (04 08 00 00 41 08). Provides ground truth for the multi-elbow ChainAutoPath gap (>4 varints currently rejected by the decoder).",
-      "evidence": "Both fixtures share heap-object IDs (95, 51 in termList) and SDF/SimTun anchors; only the wire chunk payload differs.",
+      "hypothesis": "Placing the indicator left of the source produces a 6-waypoint chain payload (06 08 00 00 00 00 10 0f 34 23) instead of the 4-waypoint single-elbow form (04 08 00 00 41 08). Ground truth for the byte0=6 multi-elbow shape that ChainAutoPath rejects (>4 varints).",
+      "evidence": "Real on-disk bytes confirmed by pkg/lvvi decode. indicator_left is a near-aligned variant (prefix 10 0f, p1=00) distinct from the calibrated left_auto family below.",
       "status": "partial"
     },
     {
-      "id": "two-elbow-z-shape-isolated",
-      "left": "Numeric42_indicator_left.vi",
-      "right": "Numeric42_two_elbows.vi",
+      "id": "leftward-auto-vertical-magnitude",
+      "left": "Numeric42_left_auto_8px_up.vi",
+      "right": "Numeric42_left_auto_16px_up.vi",
       "topic": "wire-topology",
-      "focus": ["multi-elbow geometry", "direction sign vs magnitude"],
-      "hypothesis": "Two right-to-left auto-routes with different terminal offsets produce 6-waypoint chains that differ only in the trailing magnitude varints (06 08 00 01 00 00 10 0f 89 30 vs 06 08 00 00 00 00 10 0f 34 23). Isolates per-elbow geometry from direction sign in the multi-elbow encoding.",
-      "evidence": "Heap-object IDs identical to the baseline _indicator_left.vi fixture; wire chunk content is the only delta.",
-      "status": "partial"
+      "focus": ["multi-elbow vertical magnitude", "byte0=6 trailing byte"],
+      "hypothesis": "For the byte0=6 leftward auto route, moving the indicator from 8px to 16px above the source changes only the trailing byte p7 (06 08 00 01 01 00 10 10 9c 18 vs 9c 20), i.e. p7 = 16 + vertical pixels at 1 unit/pixel.",
+      "evidence": "Wire chunks identical except p7 (0x18 -> 0x20, +8 for +8px); decoded by Wire.LeftwardChainPath and pinned in pkg/lvvi ground-truth tests.",
+      "status": "confirmed"
+    },
+    {
+      "id": "leftward-auto-direction-sign",
+      "left": "Numeric42_left_auto_8px_up.vi",
+      "right": "Numeric42_left_auto_8px_down.vi",
+      "topic": "wire-topology",
+      "focus": ["multi-elbow vertical direction", "byte0=6 prefix"],
+      "hypothesis": "Flipping the indicator from 8px above to 8px below the source (same X) changes only p0/p2 (up=(00,01) -> down=(01,00)) while the magnitude p7 and horizontal p6 stay fixed, isolating vertical direction from magnitude and horizontal position.",
+      "evidence": "06 08 00 01 01 00 10 10 9c 18 vs 06 08 01 01 00 00 10 10 9c 18 — only p0/p2 differ.",
+      "status": "confirmed"
+    },
+    {
+      "id": "leftward-auto-horizontal-seed",
+      "left": "Numeric42_left_auto_8px_down.vi",
+      "right": "Numeric42_left_auto_8px_down+8px_right.vi",
+      "topic": "wire-topology",
+      "focus": ["multi-elbow horizontal seed", "byte0=6 p6 calibration"],
+      "hypothesis": "Moving the indicator 8px right (closer to the source) changes only p6 (06 08 01 01 00 00 10 10 9c 18 vs 94 18), i.e. p6 = horizontal seed at 1 unit/pixel, decreasing as the sink approaches the source. Horizontal IS stored in the byte0=6 chunk (unlike the byte0=4 single-step wires, where x comes from terminal bounds).",
+      "evidence": "Wire chunks identical except p6 (0x9c -> 0x94, -8 for +8px right); decoded by Wire.LeftwardChainPath.",
+      "status": "confirmed"
     },
     {
       "id": "manual-elbows-snap-back-to-auto",
@@ -159,6 +179,16 @@
       "focus": ["manual-mode trigger", "auto-router cleanup"],
       "hypothesis": "Manual elbow edits made through the LabVIEW editor's normal drag handles get cleaned up by the auto-router when the resulting path is still expressible as a single L-shape; the saved payload retains byte1=0x08 (auto) rather than promoting to byte1=0x04 (manual). Confirms Numeric42Bend.vi remains the only manual-chain ground truth in the corpus.",
       "evidence": "Saved content is 04 08 00 00 fe 70 — same 4-waypoint single-elbow shape as Numeric42_8px_down.vi (04 08 00 00 41 08); only the y-step magnitude varint differs.",
+      "status": "confirmed"
+    },
+    {
+      "id": "stretch-vs-reconnect-source-anchor",
+      "left": "Numeric42_8px_down_8px_further_right.vi",
+      "right": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+      "topic": "wire-topology",
+      "focus": ["edit history", "sourceAnchorX", "fresh route vs stretch"],
+      "hypothesis": "Two VIs with identical terminal positions but different edit history carry different wire chunks. Stretching a wire (moving the sink after drawing) freezes the elbow offset (04 08 00 00 41 08, sourceAnchorX=65); deleting and reconnecting it recomputes the elbow at the canonical short distance (04 08 00 00 10 08, sourceAnchorX=16). sourceAnchorX is therefore edit-history-dependent, not a glyph constant; only yStep reflects real geometry.",
+      "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath.",
       "status": "confirmed"
     }
   ]
