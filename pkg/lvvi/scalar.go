@@ -205,6 +205,121 @@ func (c ColorValue) HexRGB() string {
 	return fmt.Sprintf("#%02X%02X%02X", c.R, c.G, c.B)
 }
 
+// objFlags bit positions with authoritative meanings in the LabVIEW
+// format (pylabview LVparts.py OBJ_FLAGS). Only bit0 and bit3 are named
+// in the published format; every other bit is documented as "unknown"
+// there. See docs/heap-objflags-howgrow.md for the empirical per-bit
+// distribution mined from the corpus.
+const (
+	objFlagBitIndicator uint32 = 1 << 0 // OFFBit0: indicator, input disabled
+	objFlagBitHidden    uint32 = 1 << 3 // OFFBit3: part not visible on screen
+)
+
+// ObjFlagsValue is a typed projection of an OF__objFlags heap field.
+// Raw preserves the full 32-bit flag word for round-trip and access to
+// the unnamed bits; only the two bits with authoritative meanings are
+// surfaced as named booleans.
+type ObjFlagsValue struct {
+	Tag   int32
+	Width int
+	Raw   uint32
+	// IsIndicator mirrors OBJ_FLAGS bit0 ("indicator, input is
+	// disabled"). Corpus evidence: set on non-interactive structural
+	// sub-parts (FRAME, CONTENT_AREA, EXTRA_FRAME_PART at 100%) and
+	// clear on interactive parts such as scrollbars.
+	IsIndicator bool
+	// IsHidden mirrors OBJ_FLAGS bit3 ("part is not visible on screen").
+	// Corpus evidence: set on ~96% of RADIX parts and most
+	// increment/decrement sub-parts, matching LabVIEW visibility
+	// defaults.
+	IsHidden bool
+}
+
+// Bit reports whether bit n (0-31) of the raw flag word is set. Use this
+// for the bits LabVIEW does not publish names for.
+func (v ObjFlagsValue) Bit(n int) bool {
+	if n < 0 || n > 31 {
+		return false
+	}
+	return v.Raw&(uint32(1)<<uint(n)) != 0
+}
+
+// HowGrowValue is a typed projection of an OF__howGrow heap field. The
+// field is a resize/anchor bitfield: corpus values are deterministic per
+// structural part (e.g. X_SCROLLBAR=0x38, Y_SCROLLBAR=0xC2,
+// CONTENT_AREA=0x78), confirming the modRSRC anchors, but the individual
+// bit meanings are not published, so none are named. Raw is the source
+// of truth; Bit exposes individual flags. See
+// docs/heap-objflags-howgrow.md.
+type HowGrowValue struct {
+	Tag   int32
+	Width int
+	Raw   uint32
+}
+
+// Bit reports whether bit n (0-31) of the raw howGrow word is set.
+func (v HowGrowValue) Bit(n int) bool {
+	if n < 0 || n > 31 {
+		return false
+	}
+	return v.Raw&(uint32(1)<<uint(n)) != 0
+}
+
+func projectObjFlags(sv ScalarValue) ObjFlagsValue {
+	raw := uint32(sv.Unsigned)
+	return ObjFlagsValue{
+		Tag:         sv.Tag,
+		Width:       sv.Width,
+		Raw:         raw,
+		IsIndicator: raw&objFlagBitIndicator != 0,
+		IsHidden:    raw&objFlagBitHidden != 0,
+	}
+}
+
+// HeapObjFlags decodes an OF__objFlags leaf at tree.Nodes[nodeIdx].
+// Returns ok=false for indices that are not a decodable objFlags leaf or
+// whose value does not fit the 32-bit flag word.
+func HeapObjFlags(tree HeapTree, nodeIdx int) (ObjFlagsValue, bool) {
+	sv, ok := HeapScalarForTag(tree, nodeIdx, int32(heap.FieldTagObjFlags))
+	if !ok || sv.Unsigned > 0xFFFFFFFF {
+		return ObjFlagsValue{}, false
+	}
+	return projectObjFlags(sv), true
+}
+
+// FindObjFlagsChild returns the decoded OF__objFlags child of
+// tree.Nodes[parentIdx], when present.
+func FindObjFlagsChild(tree HeapTree, parentIdx int) (ObjFlagsValue, bool) {
+	if sv, ok := FindScalarChild(tree, parentIdx, int32(heap.FieldTagObjFlags)); ok && sv.Unsigned <= 0xFFFFFFFF {
+		return projectObjFlags(sv), true
+	}
+	return ObjFlagsValue{}, false
+}
+
+func projectHowGrow(sv ScalarValue) HowGrowValue {
+	return HowGrowValue{Tag: sv.Tag, Width: sv.Width, Raw: uint32(sv.Unsigned)}
+}
+
+// HeapHowGrow decodes an OF__howGrow leaf at tree.Nodes[nodeIdx].
+// Returns ok=false for indices that are not a decodable howGrow leaf or
+// whose value does not fit the 32-bit word.
+func HeapHowGrow(tree HeapTree, nodeIdx int) (HowGrowValue, bool) {
+	sv, ok := HeapScalarForTag(tree, nodeIdx, int32(heap.FieldTagHowGrow))
+	if !ok || sv.Unsigned > 0xFFFFFFFF {
+		return HowGrowValue{}, false
+	}
+	return projectHowGrow(sv), true
+}
+
+// FindHowGrowChild returns the decoded OF__howGrow child of
+// tree.Nodes[parentIdx], when present.
+func FindHowGrowChild(tree HeapTree, parentIdx int) (HowGrowValue, bool) {
+	if sv, ok := FindScalarChild(tree, parentIdx, int32(heap.FieldTagHowGrow)); ok && sv.Unsigned <= 0xFFFFFFFF {
+		return projectHowGrow(sv), true
+	}
+	return HowGrowValue{}, false
+}
+
 func decodeScalarContent(n HeapNode) (ScalarValue, bool) {
 	if n.SizeSpec == byte(heap.SizeSpecBoolFalse) {
 		return ScalarValue{Tag: n.Tag, Width: 0}, true

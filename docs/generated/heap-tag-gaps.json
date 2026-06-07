@@ -866,7 +866,7 @@
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=1"
       ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+      "next": "isIndicator(bit0)/isHidden(bit3) named and corpus-validated; name the remaining objFlags bits (see docs/heap-objflags-howgrow.md)"
     },
     {
       "tag": 192,
@@ -1432,7 +1432,7 @@
         "SL__mux=8",
         "SL__externalNode=1"
       ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+      "next": "resize/anchor bitfield decoded with per-part values corpus-validated; name individual grow/anchor bits (see docs/heap-objflags-howgrow.md)"
     },
     {
       "tag": 9,

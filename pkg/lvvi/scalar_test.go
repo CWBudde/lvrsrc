@@ -133,6 +133,175 @@ func TestFindScalarAndColorChild(t *testing.T) {
 	}
 }
 
+func TestHeapObjFlagsNamedBits(t *testing.T) {
+	// bit0 (isIndicator) + bit3 (isHidden) both set => 0x09, plus an
+	// unnamed high bit to confirm Raw round-trip and Bit access.
+	tree := HeapTree{
+		Nodes: []HeapNode{{
+			Tag:      int32(heap.FieldTagObjFlags),
+			Scope:    "leaf",
+			Parent:   -1,
+			SizeSpec: 4,
+			Content:  []byte{0x00, 0x17, 0x01, 0x49}, // 0x00170149
+		}},
+		Roots: []int{0},
+	}
+	v, ok := HeapObjFlags(tree, 0)
+	if !ok {
+		t.Fatal("HeapObjFlags() ok = false, want true")
+	}
+	if v.Raw != 0x00170149 || v.Width != 4 {
+		t.Fatalf("HeapObjFlags() = %+v, want raw 0x00170149 width 4", v)
+	}
+	if !v.IsIndicator { // bit0 set
+		t.Error("IsIndicator = false, want true (bit0 set)")
+	}
+	if !v.IsHidden { // bit3 set
+		t.Error("IsHidden = false, want true (bit3 set)")
+	}
+	if !v.Bit(16) || v.Bit(2) {
+		t.Errorf("Bit() mismatch: bit16=%v (want true), bit2=%v (want false)", v.Bit(16), v.Bit(2))
+	}
+
+	// Clear bit0/bit3 => named booleans false.
+	tree.Nodes[0].Content = []byte{0x00, 0x00, 0x00, 0xF0} // 0xF0: bits 4-7
+	v, ok = HeapObjFlags(tree, 0)
+	if !ok {
+		t.Fatal("HeapObjFlags() ok = false on second value")
+	}
+	if v.IsIndicator || v.IsHidden {
+		t.Errorf("0xF0 => IsIndicator=%v IsHidden=%v, want both false", v.IsIndicator, v.IsHidden)
+	}
+}
+
+func TestHeapHowGrowDecode(t *testing.T) {
+	// Y_SCROLLBAR anchor value 0xC2 (194).
+	tree := HeapTree{
+		Nodes: []HeapNode{{
+			Tag:      int32(heap.FieldTagHowGrow),
+			Scope:    "leaf",
+			Parent:   -1,
+			SizeSpec: 2,
+			Content:  []byte{0x00, 0xC2},
+		}},
+		Roots: []int{0},
+	}
+	v, ok := HeapHowGrow(tree, 0)
+	if !ok {
+		t.Fatal("HeapHowGrow() ok = false, want true")
+	}
+	if v.Raw != 0xC2 || v.Width != 2 {
+		t.Fatalf("HeapHowGrow() = %+v, want raw 0xC2 width 2", v)
+	}
+	if !v.Bit(1) || !v.Bit(6) || !v.Bit(7) || v.Bit(0) {
+		t.Errorf("0xC2 bits: bit1=%v bit6=%v bit7=%v bit0=%v", v.Bit(1), v.Bit(6), v.Bit(7), v.Bit(0))
+	}
+}
+
+func TestHeapObjFlagsHowGrowRejectWrongTag(t *testing.T) {
+	tree := HeapTree{
+		Nodes: []HeapNode{
+			{Tag: int32(heap.FieldTagHowGrow), Scope: "leaf", SizeSpec: 2, Content: []byte{0, 0xC2}},
+			{Tag: int32(heap.FieldTagObjFlags), Scope: "leaf", SizeSpec: 4, Content: []byte{0, 0, 0, 1}},
+		},
+	}
+	if _, ok := HeapObjFlags(tree, 0); ok {
+		t.Error("HeapObjFlags() on howGrow tag returned ok=true")
+	}
+	if _, ok := HeapHowGrow(tree, 1); ok {
+		t.Error("HeapHowGrow() on objFlags tag returned ok=true")
+	}
+}
+
+func TestFindObjFlagsAndHowGrowChild(t *testing.T) {
+	tree := HeapTree{
+		Nodes: []HeapNode{
+			{Tag: -6, Scope: "open", Parent: -1, Children: []int{1, 2}},
+			{Tag: int32(heap.FieldTagObjFlags), Scope: "leaf", Parent: 0, SizeSpec: 1, Content: []byte{0x09}},
+			{Tag: int32(heap.FieldTagHowGrow), Scope: "leaf", Parent: 0, SizeSpec: 1, Content: []byte{0x38}},
+		},
+	}
+	of, ok := FindObjFlagsChild(tree, 0)
+	if !ok || !of.IsIndicator || !of.IsHidden {
+		t.Fatalf("FindObjFlagsChild() = %+v ok=%v, want isIndicator+isHidden", of, ok)
+	}
+	hg, ok := FindHowGrowChild(tree, 0)
+	if !ok || hg.Raw != 0x38 {
+		t.Fatalf("FindHowGrowChild() = %+v ok=%v, want raw 0x38", hg, ok)
+	}
+}
+
+// TestHeapObjFlagsHowGrowCorpusCoverage asserts every OF__objFlags and
+// OF__howGrow leaf in the corpus decodes through the typed accessors with
+// no gaps, and that the typed projection agrees with the raw scalar
+// decode (round-trip). It intentionally avoids asserting corpus-specific
+// counts/values; those empirical findings live in
+// docs/heap-objflags-howgrow.md.
+func TestHeapObjFlagsHowGrowCorpusCoverage(t *testing.T) {
+	entries, err := os.ReadDir(corpus.Dir())
+	if err != nil {
+		t.Skipf("corpus directory not present: %v", err)
+	}
+	totalOF, decodedOF := 0, 0
+	totalHG, decodedHG := 0, 0
+	exercised := 0
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		ext := filepath.Ext(e.Name())
+		if ext != ".vi" && ext != ".ctl" && ext != ".vit" {
+			continue
+		}
+		f, err := lvrsrc.Open(filepath.Join(corpus.Dir(), e.Name()), lvrsrc.OpenOptions{})
+		if err != nil {
+			continue
+		}
+		m, _ := DecodeKnownResources(f)
+		for _, getter := range []func() (HeapTree, bool){m.FrontPanel, m.BlockDiagram} {
+			tree, ok := getter()
+			if !ok {
+				continue
+			}
+			exercised++
+			for i, n := range tree.Nodes {
+				if n.Scope != "leaf" {
+					continue
+				}
+				switch n.Tag {
+				case int32(heap.FieldTagObjFlags):
+					totalOF++
+					of, ok := HeapObjFlags(tree, i)
+					sv, svOK := HeapScalar(tree, i)
+					if ok && svOK && uint64(of.Raw) == sv.Unsigned {
+						decodedOF++
+					}
+				case int32(heap.FieldTagHowGrow):
+					totalHG++
+					hg, ok := HeapHowGrow(tree, i)
+					sv, svOK := HeapScalar(tree, i)
+					if ok && svOK && uint64(hg.Raw) == sv.Unsigned {
+						decodedHG++
+					}
+				}
+			}
+		}
+	}
+	if exercised == 0 {
+		t.Skip("no corpus VI yielded an FPHb or BDHb tree")
+	}
+	if totalOF == 0 || totalHG == 0 {
+		t.Fatalf("found objFlags=%d howGrow=%d leaves, want non-zero", totalOF, totalHG)
+	}
+	if decodedOF != totalOF {
+		t.Fatalf("HeapObjFlags decoded %d/%d leaves (round-trip mismatch)", decodedOF, totalOF)
+	}
+	if decodedHG != totalHG {
+		t.Fatalf("HeapHowGrow decoded %d/%d leaves (round-trip mismatch)", decodedHG, totalHG)
+	}
+	t.Logf("objFlags %d/%d, howGrow %d/%d decoded across %d trees", decodedOF, totalOF, decodedHG, totalHG, exercised)
+}
+
 func TestHeapScalarCorpusCoverage(t *testing.T) {
 	entries, err := os.ReadDir(corpus.Dir())
 	if err != nil {

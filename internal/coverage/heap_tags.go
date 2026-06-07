@@ -324,6 +324,10 @@ func heapTagStatus(tag int32, family string) (status, next string, report bool) 
 		return "partial", "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms", true
 	case int32(heap.FieldTagTypeDesc):
 		return "partial", "connect every heap-local type reference to VCTP/DTHP and validate version gates", true
+	case int32(heap.FieldTagObjFlags):
+		return "partial", "isIndicator(bit0)/isHidden(bit3) named and corpus-validated; name the remaining objFlags bits (see docs/heap-objflags-howgrow.md)", true
+	case int32(heap.FieldTagHowGrow):
+		return "partial", "resize/anchor bitfield decoded with per-part values corpus-validated; name individual grow/anchor bits (see docs/heap-objflags-howgrow.md)", true
 	}
 	if lvvi.IsHeapRectTag(tag) {
 		return "rect-role-open", "confirm the rectangle role with controlled fixtures before scene/layout promotion", true
