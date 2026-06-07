@@ -62,6 +62,16 @@
       "status": "confirmed"
     },
     {
+      "id": "auto-chain-raw-byte-magnitude",
+      "left": "Numeric42_16px_down.vi",
+      "right": "Numeric42_150px_down.vi",
+      "topic": "wire-topology",
+      "focus": ["auto-chain magnitude encoding", "raw byte vs LEB128", "127 boundary"],
+      "hypothesis": "The auto-chain geometry payload is a sequence of raw single bytes, not an LEB128 varint stream. A 150 px y-step is the single byte 0x96; LEB128 would emit two bytes (96 01) and lengthen the chunk. Crossing the 127 boundary is what distinguishes the two encodings — every prior controlled probe stayed under 128, so they were indistinguishable.",
+      "evidence": "Numeric42_16px_down.vi = 04 08 00 00 41 10 (yStep 0x10=16); Numeric42_150px_down.vi = 04 08 00 00 41 96 (yStep 0x96=150 as ONE byte). The old LEB128 parser mis-read 0x96 as a truncated continuation and dropped it (chain-geometry [0 0 65]); raw-byte parsing yields [0 0 65 150]. This also removed the over-fitted {16,65} anchor whitelist, unlocking ~8 real single-elbow chunks (write-ini.vi, ndjson-parser.vi, is-string.vi) whose anchors/y-steps exceed 127.",
+      "status": "confirmed"
+    },
+    {
       "id": "auto-chain-sign-up",
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_8px_up.vi",

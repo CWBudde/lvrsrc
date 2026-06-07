@@ -376,6 +376,71 @@ func TestChainAutoPathTracksYStepMagnitude(t *testing.T) {
 	}
 }
 
+// Ground truth from Numeric42_150px_down.vi (controlled probe with the
+// sink moved 150 px down — past the 127 boundary). The y-step byte is
+// 0x96 = 150 as a SINGLE raw byte; LEB128 would need two bytes (96 01)
+// and a longer chunk. This fixture proves the auto-chain geometry
+// payload is raw bytes, not an LEB128 varint stream, so values >= 128
+// (anchors and y-steps alike) must decode verbatim.
+func TestChainAutoPath150pxRawByteGroundTruth(t *testing.T) {
+	raw := singleBlockDiagramWirePayload(t, "Numeric42_150px_down.vi")
+	want := []byte{0x04, 0x08, 0x00, 0x00, 0x41, 0x96}
+	if !reflect.DeepEqual(raw, want) {
+		t.Fatalf("raw = %x, want %x", raw, want)
+	}
+	w, _ := HeapWire(wireLeaf(raw), 0)
+	// ChainGeometry must hold the raw byte 150, not an LEB128-mangled
+	// value (the old varint parser produced [0 0 65], dropping 0x96).
+	if !reflect.DeepEqual(w.ChainGeometry, []uint64{0, 0, 65, 150}) {
+		t.Fatalf("ChainGeometry = %v, want [0 0 65 150]", w.ChainGeometry)
+	}
+	got, ok := w.ChainAutoPath()
+	if !ok {
+		t.Fatal("ChainAutoPath() ok = false on 150px-down")
+	}
+	if got.YStep != 150 {
+		t.Errorf("YStep = %d, want 150", got.YStep)
+	}
+	if got.SourceAnchorX != 65 {
+		t.Errorf("SourceAnchorX = %d, want 65 (stretched)", got.SourceAnchorX)
+	}
+}
+
+// Real-corpus single-elbow chunks carry anchors/y-steps across the full
+// 0-255 byte range, not just the 16/65 the Numeric42 probes happened to
+// use. These previously fell out of ChainAutoPath — either because the
+// anchor was not in the {16,65} whitelist or because a byte >= 0x80 was
+// swallowed as an LEB128 continuation. With raw-byte parsing they decode
+// verbatim. Bytes lifted from write-ini.vi / ndjson-parser.vi.
+func TestChainAutoPathDecodesFullRangeRawBytes(t *testing.T) {
+	cases := []struct {
+		name   string
+		raw    []byte
+		yStep  int
+		anchor uint64
+	}{
+		{"anchor128 (write-ini 80 3d)", []byte{0x04, 0x08, 0x00, 0x00, 0x80, 0x3d}, 61, 128},
+		{"anchor210 up (ndjson d2 43)", []byte{0x04, 0x08, 0x01, 0x00, 0xd2, 0x43}, -67, 210},
+		{"ystep132 (ndjson 1a 84)", []byte{0x04, 0x08, 0x00, 0x00, 0x1a, 0x84}, 132, 26},
+		{"ystep196 (ndjson 8a c4)", []byte{0x04, 0x08, 0x00, 0x00, 0x8a, 0xc4}, 196, 138},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			w, _ := HeapWire(wireLeaf(c.raw), 0)
+			got, ok := w.ChainAutoPath()
+			if !ok {
+				t.Fatalf("ChainAutoPath() ok = false on %x", c.raw)
+			}
+			if got.YStep != c.yStep {
+				t.Errorf("YStep = %d, want %d", got.YStep, c.yStep)
+			}
+			if got.SourceAnchorX != c.anchor {
+				t.Errorf("SourceAnchorX = %d, want %d", got.SourceAnchorX, c.anchor)
+			}
+		})
+	}
+}
+
 // Horizontal indicator shift produces no payload change at all
 // (controlled-fixture spike confirmed). ChainAutoPath() must
 // therefore return identical results for the original 8px-down
@@ -406,11 +471,11 @@ func TestChainAutoPathRejectsNonAutoModes(t *testing.T) {
 // Multi-elbow auto-chain payloads (more than 4 varints) are not
 // yet decoded — must return ok=false until Phase 13.5.
 func TestChainAutoPathDoesNotMakeUpMultiElbowGeometry(t *testing.T) {
-	// Synthetic multi-elbow payload: 6 trailing bytes → 4 varints
-	// [0, 0, 255, 9456]. The 9456 is implausibly large for a pure
-	// y-step magnitude, indicating that longer auto-chain wires
-	// encode routing indices in the same payload positions. Don't
-	// claim more than we can defend.
+	// Synthetic multi-segment payload: 6 raw trailing bytes
+	// [0, 0, 255, 1, 240, 73]. A payload longer than the 4-byte
+	// single-elbow shape must not be force-fit into ChainAutoPath —
+	// longer auto-chain wires carry per-segment data we have not
+	// ground-truthed. Don't claim more than we can defend.
 	tree := wireLeaf([]byte{0x04, 0x08, 0x00, 0x00, 0xff, 0x01, 0xf0, 0x49})
 	w, _ := HeapWire(tree, 0)
 	got, ok := w.ChainAutoPath()

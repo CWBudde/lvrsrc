@@ -246,13 +246,13 @@ Findings:
 1. Chunks are wire-networks, not edges: a Y-shaped fan-out emits one chunk.
 2. `byte0` is the waypoint count: endpoints plus internal corners. One auto-bend can add two corners because LabVIEW renders an offset path as a Z-shape.
 3. `byte1` is the mode flag: `0x08` auto-routed chain, `0x04` manual chain, `0x00` tree, other values unknown.
-4. Chain-mode trailing payload uses LEB128 varints for deltas over geometry recoverable from terminal positions.
+4. Auto-chain (`byte1=0x08`) trailing payload is a sequence of **raw single bytes** (`[direction, 0, source-anchor-x, y-step-mag]` for the single-elbow case), NOT LEB128 — proved by `Numeric42_150px_down.vi` (y-step 150 = single byte `0x96`, where LEB128 would need `96 01`). Manual-chain (`byte1=0x04`) payload is still parsed as LEB128 pending a controlled fixture. Every value is therefore 0-255; magnitudes recoverable from terminal positions are simply omitted (e.g. the post-elbow run).
 5. Tree-mode payload is fixed-width 2-byte records: `(byte0, byte1)` followed by `byte0 - 1` records for branch/topology geometry.
 
 ### 13.3 Typed wire accessor (completed)
 
 - `pkg/lvvi.WireMode` ships `WireModeAutoChain`, `WireModeManualChain`, `WireModeTree`, and `WireModeOther`, with `String()` for diagnostics.
-- `pkg/lvvi.HeapWire(tree, idx)` returns `{Mode, Waypoints, ChainGeometry []uint64, TreeRecords [][2]byte, Raw []byte}`. Chain mode decodes LEB128 varints; tree mode splits fixed 2-byte records; all modes preserve `Raw`.
+- `pkg/lvvi.HeapWire(tree, idx)` returns `{Mode, Waypoints, ChainGeometry []uint64, TreeRecords [][2]byte, Raw []byte}`. Auto-chain stores the raw payload bytes (widened to uint64); manual-chain still decodes LEB128 varints (provisional); tree mode splits fixed 2-byte records; all modes preserve `Raw`.
 - `pkg/lvvi.CountWireMix(tree)` returns per-mode counts and drives scene warnings such as "N wire networks (X auto-routed, Y manual, Z branched, W other)".
 - Tests cover all modes with controlled-fixture payloads plus a corpus sweep. Coverage on the 33-fixture corpus is 93 / 93 chunks: 83 auto-chain, 3 manual-chain, 5 tree, 2 other.
 
@@ -272,7 +272,7 @@ Findings:
 
 Shipped accessors:
 
-- `Wire.ChainAutoPath()` returns `ChainAutoPath{Straight, YStep, SourceAnchorX}` for the `0208` sentinel and 4-varint L-shape payload (`[direction, 0, source-anchor-x, y-step-mag]`). Multi-elbow payloads return `ok=false` when magnitudes become implausible (>4096).
+- `Wire.ChainAutoPath()` returns `ChainAutoPath{Straight, YStep, SourceAnchorX}` for the `0208` sentinel and the 4-byte L-shape payload (`[direction, 0, source-anchor-x, y-step-mag]`, all raw bytes 0-255). The old `{16,65}` anchor whitelist was removed once `Numeric42_150px_down.vi` proved the payload is raw bytes; real single-elbow wires span the full byte range and now decode (~42 of 45 real `byte0=04` chunks). Payloads longer than 4 bytes (multi-segment) still return `ok=false`.
 - `Wire.TreeEndpointPair()` returns two `Point{V, H}` endpoints for 2-fan-out tree networks (`byte0 == 6`).
 - Scene warnings now state that auto-routed L-shapes and 2-branch trees are typed-decoded while multi-elbow and larger tree chunks remain raw.
 

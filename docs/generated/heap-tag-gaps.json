@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "fixtureCount": 49,
-    "heapTreeCount": 98,
-    "totalNodes": 36434,
-    "reportedNodes": 26452,
+    "fixtureCount": 51,
+    "heapTreeCount": 102,
+    "totalNodes": 37208,
+    "reportedNodes": 27022,
     "reportedTagCount": 119,
     "statusNodes": {
-      "class-semantic-open": 8528,
-      "named-only": 672,
-      "partial": 16981,
-      "rect-role-open": 271,
-      "resolved": 9982
+      "class-semantic-open": 8720,
+      "named-only": 682,
+      "partial": 17339,
+      "rect-role-open": 281,
+      "resolved": 10186
     }
   },
   "tags": [
@@ -20,13 +20,13 @@
       "name": "SL__fontRun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 2710,
-      "leafCount": 2710,
-      "contentBytes": 7064,
-      "wireBytes": 12995,
+      "count": 2770,
+      "leafCount": 2770,
+      "contentBytes": 7218,
+      "wireBytes": 13277,
       "resources": {
-        "BDHb": 525,
-        "FPHb": 2185
+        "BDHb": 541,
+        "FPHb": 2229
       },
       "fixtures": [
         {
@@ -154,6 +154,14 @@
           "count": 30
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 30
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 30
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 30
         },
@@ -227,9 +235,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1179",
-        "OF__image=1139",
-        "SL__prNodeList=391",
+        "SL__arrayElement=1207",
+        "OF__image=1163",
+        "SL__prNodeList=399",
         "OF__browseOptions=1"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -239,13 +247,13 @@
       "name": "OF__image",
       "family": "field",
       "status": "partial",
-      "count": 2278,
-      "openCount": 1139,
-      "closeCount": 1139,
-      "wireBytes": 9112,
+      "count": 2326,
+      "openCount": 1163,
+      "closeCount": 1163,
+      "wireBytes": 9304,
       "resources": {
-        "BDHb": 544,
-        "FPHb": 1734
+        "BDHb": 556,
+        "FPHb": 1770
       },
       "fixtures": [
         {
@@ -369,6 +377,14 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 24
         },
@@ -446,9 +462,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1990",
-        "SL__conPane=144",
-        "SL__aInsDCO=142",
+        "SL__arrayElement=2030",
+        "SL__conPane=148",
+        "SL__aInsDCO=146",
         "SL__externalNode=2"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -458,13 +474,13 @@
       "name": "OF__objFlags",
       "family": "field",
       "status": "partial",
-      "count": 2236,
-      "leafCount": 2236,
-      "contentBytes": 5302,
-      "wireBytes": 9774,
+      "count": 2284,
+      "leafCount": 2284,
+      "contentBytes": 5420,
+      "wireBytes": 9988,
       "resources": {
-        "BDHb": 844,
-        "FPHb": 1392
+        "BDHb": 862,
+        "FPHb": 1422
       },
       "fixtures": [
         {
@@ -592,6 +608,14 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 24
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 24
         },
@@ -665,12 +689,12 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1796",
-        "SL__mux=136",
+        "SL__arrayElement=1832",
+        "SL__mux=140",
+        "SL__eventDataNode=80",
         "SL__parm=80",
-        "SL__eventDataNode=76",
-        "SL__conPane=72",
-        "SL__aInsDCO=71",
+        "SL__conPane=74",
+        "SL__aInsDCO=73",
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=1"
       ],
@@ -681,13 +705,13 @@
       "name": "OF__partID",
       "family": "field",
       "status": "partial",
-      "count": 1740,
-      "leafCount": 1740,
-      "contentBytes": 1765,
-      "wireBytes": 5245,
+      "count": 1776,
+      "leafCount": 1776,
+      "contentBytes": 1801,
+      "wireBytes": 5353,
       "resources": {
-        "BDHb": 413,
-        "FPHb": 1327
+        "BDHb": 423,
+        "FPHb": 1353
       },
       "fixtures": [
         {
@@ -815,6 +839,14 @@
           "count": 18
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 18
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 18
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 18
         },
@@ -888,8 +920,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1667",
-        "SL__conPane=72",
+        "SL__arrayElement=1701",
+        "SL__conPane=74",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -899,13 +931,13 @@
       "name": "OF__howGrow",
       "family": "field",
       "status": "partial",
-      "count": 1518,
-      "leafCount": 1518,
-      "contentBytes": 2734,
-      "wireBytes": 5770,
+      "count": 1550,
+      "leafCount": 1550,
+      "contentBytes": 2790,
+      "wireBytes": 5890,
       "resources": {
-        "BDHb": 356,
-        "FPHb": 1162
+        "BDHb": 364,
+        "FPHb": 1186
       },
       "fixtures": [
         {
@@ -1033,6 +1065,14 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 16
         },
@@ -1106,9 +1146,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1366",
-        "SL__conPane=72",
-        "SL__aInsDCO=71",
+        "SL__arrayElement=1394",
+        "SL__conPane=74",
+        "SL__aInsDCO=73",
         "SL__mux=8",
         "SL__externalNode=1"
       ],
@@ -1119,13 +1159,13 @@
       "name": "OF__bgColor",
       "family": "field",
       "status": "partial",
-      "count": 1465,
-      "leafCount": 1465,
-      "contentBytes": 5857,
-      "wireBytes": 8787,
+      "count": 1497,
+      "leafCount": 1497,
+      "contentBytes": 5985,
+      "wireBytes": 8979,
       "resources": {
-        "BDHb": 381,
-        "FPHb": 1084
+        "BDHb": 391,
+        "FPHb": 1106
       },
       "fixtures": [
         {
@@ -1253,6 +1293,14 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 16
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 16
         },
@@ -1326,9 +1374,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1343",
-        "SL__conPane=72",
-        "SL__eventDataNode=49",
+        "SL__arrayElement=1371",
+        "SL__conPane=74",
+        "SL__eventDataNode=51",
         "SL__externalNode=1"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
@@ -1338,13 +1386,13 @@
       "name": "OF__fgColor",
       "family": "field",
       "status": "partial",
-      "count": 1247,
-      "leafCount": 1247,
-      "contentBytes": 4988,
-      "wireBytes": 7482,
+      "count": 1273,
+      "leafCount": 1273,
+      "contentBytes": 5092,
+      "wireBytes": 7638,
       "resources": {
-        "BDHb": 312,
-        "FPHb": 935
+        "BDHb": 320,
+        "FPHb": 953
       },
       "fixtures": [
         {
@@ -1472,6 +1520,14 @@
           "count": 13
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 13
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 13
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 13
         },
@@ -1545,8 +1601,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1175",
-        "SL__conPane=72"
+        "SL__arrayElement=1199",
+        "SL__conPane=74"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
@@ -1555,13 +1611,13 @@
       "name": "OF__masterPart",
       "family": "field",
       "status": "partial",
-      "count": 1066,
-      "leafCount": 1066,
-      "contentBytes": 1083,
-      "wireBytes": 3215,
+      "count": 1088,
+      "leafCount": 1088,
+      "contentBytes": 1105,
+      "wireBytes": 3281,
       "resources": {
-        "BDHb": 193,
-        "FPHb": 873
+        "BDHb": 197,
+        "FPHb": 891
       },
       "fixtures": [
         {
@@ -1685,6 +1741,14 @@
           "count": 11
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 11
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 11
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 11
         },
@@ -1762,7 +1826,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1065",
+        "SL__arrayElement=1087",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -1772,15 +1836,15 @@
       "name": "OF__activePlot",
       "family": "field",
       "status": "named-only",
-      "count": 1053,
-      "leafCount": 271,
-      "openCount": 391,
-      "closeCount": 391,
-      "contentBytes": 1779,
-      "wireBytes": 5590,
+      "count": 1073,
+      "leafCount": 275,
+      "openCount": 399,
+      "closeCount": 399,
+      "contentBytes": 1801,
+      "wireBytes": 5686,
       "resources": {
         "BDHb": 42,
-        "FPHb": 1011
+        "FPHb": 1031
       },
       "fixtures": [
         {
@@ -1896,6 +1960,14 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 10
         },
@@ -1981,8 +2053,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=784",
-        "SL__baseRefNum=268",
+        "SL__arrayElement=800",
+        "SL__baseRefNum=272",
         "OF__browseOptions=1"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
@@ -1992,13 +2064,13 @@
       "name": "SL__baseRefNum",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 1034,
-      "openCount": 517,
-      "closeCount": 517,
-      "wireBytes": 4136,
+      "count": 1054,
+      "openCount": 527,
+      "closeCount": 527,
+      "wireBytes": 4216,
       "resources": {
-        "BDHb": 344,
-        "FPHb": 690
+        "BDHb": 352,
+        "FPHb": 702
       },
       "fixtures": [
         {
@@ -2118,6 +2190,14 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 10
         },
@@ -2199,8 +2279,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=888",
-        "SL__conPane=144",
+        "SL__arrayElement=904",
+        "SL__conPane=148",
         "SL__externalNode=2"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -2210,13 +2290,13 @@
       "name": "OF__activeMarker",
       "family": "field",
       "status": "partial",
-      "count": 911,
-      "leafCount": 911,
-      "contentBytes": 2968,
-      "wireBytes": 4790,
+      "count": 929,
+      "leafCount": 929,
+      "contentBytes": 3028,
+      "wireBytes": 4886,
       "resources": {
-        "BDHb": 174,
-        "FPHb": 737
+        "BDHb": 178,
+        "FPHb": 751
       },
       "fixtures": [
         {
@@ -2336,6 +2416,14 @@
           "count": 9
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 9
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 9
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 9
         },
@@ -2417,8 +2505,8 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=517",
-        "SL__arrayElement=393",
+        "SL__baseRefNum=527",
+        "SL__arrayElement=401",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -2428,13 +2516,13 @@
       "name": "SL__simTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 696,
-      "openCount": 348,
-      "closeCount": 348,
-      "wireBytes": 2784,
+      "count": 712,
+      "openCount": 356,
+      "closeCount": 356,
+      "wireBytes": 2848,
       "resources": {
-        "BDHb": 124,
-        "FPHb": 572
+        "BDHb": 128,
+        "FPHb": 584
       },
       "fixtures": [
         {
@@ -2546,6 +2634,14 @@
           "count": 8
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 8
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 8
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 8
         },
@@ -2631,7 +2727,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=696"
+        "SL__arrayElement=712"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2640,13 +2736,13 @@
       "name": "SL__stdLvVariant",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 602,
-      "openCount": 301,
-      "closeCount": 301,
-      "wireBytes": 2408,
+      "count": 614,
+      "openCount": 307,
+      "closeCount": 307,
+      "wireBytes": 2456,
       "resources": {
-        "BDHb": 148,
-        "FPHb": 454
+        "BDHb": 152,
+        "FPHb": 462
       },
       "fixtures": [
         {
@@ -2774,6 +2870,14 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 6
         },
@@ -2847,9 +2951,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=282",
+        "SL__mux=290",
         "SL__arrayElement=178",
-        "SL__aInsDCO=142"
+        "SL__aInsDCO=146"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2858,13 +2962,13 @@
       "name": "OF__activeDiag",
       "family": "field",
       "status": "partial",
-      "count": 563,
-      "leafCount": 563,
-      "contentBytes": 1975,
-      "wireBytes": 3101,
+      "count": 575,
+      "leafCount": 575,
+      "contentBytes": 2017,
+      "wireBytes": 3167,
       "resources": {
-        "BDHb": 104,
-        "FPHb": 459
+        "BDHb": 108,
+        "FPHb": 467
       },
       "fixtures": [
         {
@@ -2968,6 +3072,14 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 6
         },
@@ -3061,8 +3173,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=393",
-        "SL__baseRefNum=169",
+        "SL__arrayElement=401",
+        "SL__baseRefNum=173",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3072,13 +3184,13 @@
       "name": "OF__typeDesc",
       "family": "field",
       "status": "partial",
-      "count": 525,
-      "leafCount": 525,
-      "contentBytes": 525,
-      "wireBytes": 1575,
+      "count": 533,
+      "leafCount": 533,
+      "contentBytes": 533,
+      "wireBytes": 1599,
       "resources": {
-        "BDHb": 285,
-        "FPHb": 240
+        "BDHb": 289,
+        "FPHb": 244
       },
       "fixtures": [
         {
@@ -3202,6 +3314,14 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 4
         },
@@ -3275,9 +3395,9 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=205",
-        "SL__arrayElement=171",
-        "SL__mux=141",
+        "SL__parm=207",
+        "SL__arrayElement=173",
+        "SL__mux=145",
         "OF__loopTestDCO=3",
         "SL__recipeBkUp=3",
         "OF__innerLpTunDCO=2"
@@ -3289,13 +3409,13 @@
       "name": "OF__activeXScale",
       "family": "field",
       "status": "partial",
-      "count": 518,
-      "leafCount": 518,
-      "contentBytes": 2068,
-      "wireBytes": 3104,
+      "count": 528,
+      "leafCount": 528,
+      "contentBytes": 2108,
+      "wireBytes": 3164,
       "resources": {
-        "BDHb": 172,
-        "FPHb": 346
+        "BDHb": 176,
+        "FPHb": 352
       },
       "fixtures": [
         {
@@ -3415,6 +3535,14 @@
           "count": 5
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 5
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 5
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 5
         },
@@ -3496,7 +3624,7 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=517",
+        "SL__baseRefNum=527",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3506,13 +3634,13 @@
       "name": "SL__parm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 508,
-      "leafCount": 98,
-      "openCount": 205,
-      "closeCount": 205,
-      "wireBytes": 2843,
+      "count": 514,
+      "leafCount": 100,
+      "openCount": 207,
+      "closeCount": 207,
+      "wireBytes": 2877,
       "resources": {
-        "BDHb": 508
+        "BDHb": 514
       },
       "fixtures": [
         {
@@ -3612,6 +3740,14 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 3
         },
@@ -3665,7 +3801,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=508"
+        "SL__arrayElement=514"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -3674,12 +3810,12 @@
       "name": "SL__udClassDDO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 456,
-      "openCount": 228,
-      "closeCount": 228,
-      "wireBytes": 1824,
+      "count": 464,
+      "openCount": 232,
+      "closeCount": 232,
+      "wireBytes": 1856,
       "resources": {
-        "BDHb": 456
+        "BDHb": 464
       },
       "fixtures": [
         {
@@ -3751,6 +3887,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 4
         },
@@ -3776,6 +3916,10 @@
         },
         {
           "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 4
         },
         {
@@ -3880,7 +4024,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=406",
+        "SL__arrayElement=414",
         "SL__parm=34",
         "OF__loopTestDCO=6",
         "SL__recipeBkUp=6",
@@ -3893,13 +4037,13 @@
       "name": "SL__mux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 282,
-      "openCount": 141,
-      "closeCount": 141,
-      "wireBytes": 1551,
+      "count": 290,
+      "openCount": 145,
+      "closeCount": 145,
+      "wireBytes": 1595,
       "resources": {
-        "BDHb": 110,
-        "FPHb": 172
+        "BDHb": 114,
+        "FPHb": 176
       },
       "fixtures": [
         {
@@ -3996,6 +4140,14 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 4
         },
         {
@@ -4096,8 +4248,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=172",
-        "SL__parm=104",
+        "SL__arrayElement=176",
+        "SL__parm=108",
         "SL__mux=6"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -4107,13 +4259,13 @@
       "name": "OF__MouseWheelSupport",
       "family": "field",
       "status": "partial",
-      "count": 279,
-      "leafCount": 279,
-      "contentBytes": 279,
-      "wireBytes": 837,
+      "count": 285,
+      "leafCount": 285,
+      "contentBytes": 285,
+      "wireBytes": 855,
       "resources": {
-        "BDHb": 72,
-        "FPHb": 207
+        "BDHb": 74,
+        "FPHb": 211
       },
       "fixtures": [
         {
@@ -4237,6 +4389,14 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 3
         },
@@ -4314,9 +4474,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=141",
+        "SL__mux=145",
         "SL__arrayElement=89",
-        "SL__eventDataNode=49"
+        "SL__eventDataNode=51"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4325,13 +4485,13 @@
       "name": "SL__sdfTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 250,
-      "openCount": 125,
-      "closeCount": 125,
-      "wireBytes": 1000,
+      "count": 258,
+      "openCount": 129,
+      "closeCount": 129,
+      "wireBytes": 1032,
       "resources": {
-        "BDHb": 112,
-        "FPHb": 138
+        "BDHb": 116,
+        "FPHb": 142
       },
       "fixtures": [
         {
@@ -4411,6 +4571,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 4
         },
@@ -4440,6 +4604,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 4
         },
         {
@@ -4532,8 +4700,8 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=142",
-        "SL__eventDataNode=98",
+        "SL__aInsDCO=146",
+        "SL__eventDataNode=102",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -4543,13 +4711,13 @@
       "name": "OF__hGrowNodeListLength",
       "family": "field",
       "status": "partial",
-      "count": 217,
-      "leafCount": 217,
-      "contentBytes": 217,
-      "wireBytes": 651,
+      "count": 221,
+      "leafCount": 221,
+      "contentBytes": 221,
+      "wireBytes": 663,
       "resources": {
-        "BDHb": 59,
-        "FPHb": 158
+        "BDHb": 61,
+        "FPHb": 160
       },
       "fixtures": [
         {
@@ -4677,6 +4845,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -4738,7 +4914,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=217"
+        "SL__arrayElement=221"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4747,13 +4923,13 @@
       "name": "OF__refListLength",
       "family": "field",
       "status": "partial",
-      "count": 217,
-      "leafCount": 217,
-      "contentBytes": 217,
-      "wireBytes": 651,
+      "count": 221,
+      "leafCount": 221,
+      "contentBytes": 221,
+      "wireBytes": 663,
       "resources": {
-        "BDHb": 59,
-        "FPHb": 158
+        "BDHb": 61,
+        "FPHb": 160
       },
       "fixtures": [
         {
@@ -4881,6 +5057,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -4942,7 +5126,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=217"
+        "SL__arrayElement=221"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4951,13 +5135,13 @@
       "name": "OF__rsrcID",
       "family": "field",
       "status": "partial",
-      "count": 205,
-      "leafCount": 205,
-      "contentBytes": 410,
-      "wireBytes": 820,
+      "count": 209,
+      "leafCount": 209,
+      "contentBytes": 418,
+      "wireBytes": 836,
       "resources": {
-        "BDHb": 69,
-        "FPHb": 136
+        "BDHb": 71,
+        "FPHb": 138
       },
       "fixtures": [
         {
@@ -5073,6 +5257,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -5154,7 +5346,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=205"
+        "SL__arrayElement=209"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -5163,13 +5355,13 @@
       "name": "SL__eventDataNode",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 196,
-      "openCount": 98,
-      "closeCount": 98,
-      "wireBytes": 1078,
+      "count": 204,
+      "openCount": 102,
+      "closeCount": 102,
+      "wireBytes": 1122,
       "resources": {
-        "BDHb": 98,
-        "FPHb": 98
+        "BDHb": 102,
+        "FPHb": 102
       },
       "fixtures": [
         {
@@ -5194,6 +5386,10 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
           "count": 4
         },
         {
@@ -5226,6 +5422,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 4
         },
         {
@@ -5370,7 +5570,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=196"
+        "SL__rootObject=204"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5439,12 +5639,12 @@
       "name": "SL__conPane",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 144,
-      "openCount": 72,
-      "closeCount": 72,
-      "wireBytes": 792,
+      "count": 148,
+      "openCount": 74,
+      "closeCount": 74,
+      "wireBytes": 814,
       "resources": {
-        "BDHb": 144
+        "BDHb": 148
       },
       "fixtures": [
         {
@@ -5540,6 +5740,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -5597,7 +5805,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=144"
+        "SL__arrayElement=148"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5606,13 +5814,13 @@
       "name": "SL__aInsDCO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 142,
-      "openCount": 71,
-      "closeCount": 71,
-      "wireBytes": 781,
+      "count": 146,
+      "openCount": 73,
+      "closeCount": 73,
+      "wireBytes": 803,
       "resources": {
         "BDHb": 4,
-        "FPHb": 138
+        "FPHb": 142
       },
       "fixtures": [
         {
@@ -5688,6 +5896,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 2
         },
@@ -5717,6 +5929,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 2
         },
         {
@@ -5813,7 +6029,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=98",
+        "SL__eventDataNode=102",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -5824,13 +6040,13 @@
       "name": "SL__demux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 142,
-      "openCount": 71,
-      "closeCount": 71,
-      "wireBytes": 568,
+      "count": 146,
+      "openCount": 73,
+      "closeCount": 73,
+      "wireBytes": 584,
       "resources": {
         "BDHb": 4,
-        "FPHb": 138
+        "FPHb": 142
       },
       "fixtures": [
         {
@@ -5906,6 +6122,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 2
         },
@@ -5935,6 +6155,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 2
         },
         {
@@ -6031,7 +6255,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=98",
+        "SL__eventDataNode=102",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -6042,13 +6266,13 @@
       "name": "OF__format",
       "family": "field",
       "status": "partial",
-      "count": 115,
-      "leafCount": 115,
-      "contentBytes": 452,
-      "wireBytes": 684,
+      "count": 119,
+      "leafCount": 119,
+      "contentBytes": 468,
+      "wireBytes": 708,
       "resources": {
-        "BDHb": 43,
-        "FPHb": 72
+        "BDHb": 45,
+        "FPHb": 74
       },
       "fixtures": [
         {
@@ -6124,6 +6348,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -6225,341 +6457,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=115"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 456,
-      "name": "OF__compressedWireTable",
-      "family": "field",
-      "status": "partial",
-      "count": 112,
-      "leafCount": 112,
-      "contentBytes": 714,
-      "wireBytes": 1014,
-      "resources": {
-        "BDHb": 112
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=112"
-      ],
-      "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
-    },
-    {
-      "tag": 128,
-      "name": "OF__lastSignalKind",
-      "family": "field",
-      "status": "partial",
-      "count": 112,
-      "leafCount": 112,
-      "contentBytes": 224,
-      "wireBytes": 448,
-      "resources": {
-        "BDHb": 112
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 28
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 15
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 10
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 6
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 4
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 3
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=112"
+        "SL__arrayElement=119"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -6568,13 +6466,13 @@
       "name": "OF__origin",
       "family": "field",
       "status": "partial",
-      "count": 112,
-      "leafCount": 112,
-      "contentBytes": 448,
-      "wireBytes": 672,
+      "count": 116,
+      "leafCount": 116,
+      "contentBytes": 464,
+      "wireBytes": 696,
       "resources": {
-        "BDHb": 40,
-        "FPHb": 72
+        "BDHb": 42,
+        "FPHb": 74
       },
       "fixtures": [
         {
@@ -6634,6 +6532,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 2
         },
@@ -6663,6 +6565,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 2
         },
         {
@@ -6775,22 +6681,22 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=87",
+        "SL__rootObject=91",
         "SL__aInsDCO=25"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
     {
-      "tag": 246,
-      "name": "OF__state",
+      "tag": 456,
+      "name": "OF__compressedWireTable",
       "family": "field",
       "status": "partial",
-      "count": 112,
-      "leafCount": 112,
-      "contentBytes": 113,
-      "wireBytes": 337,
+      "count": 114,
+      "leafCount": 114,
+      "contentBytes": 722,
+      "wireBytes": 1027,
       "resources": {
-        "BDHb": 112
+        "BDHb": 114
       },
       "fixtures": [
         {
@@ -6862,6 +6768,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -6887,6 +6797,10 @@
         },
         {
           "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -6943,7 +6857,357 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=112"
+        "SL__arrayElement=114"
+      ],
+      "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
+    },
+    {
+      "tag": 128,
+      "name": "OF__lastSignalKind",
+      "family": "field",
+      "status": "partial",
+      "count": 114,
+      "leafCount": 114,
+      "contentBytes": 228,
+      "wireBytes": 456,
+      "resources": {
+        "BDHb": 114
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=114"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 246,
+      "name": "OF__state",
+      "family": "field",
+      "status": "partial",
+      "count": 114,
+      "leafCount": 114,
+      "contentBytes": 115,
+      "wireBytes": 343,
+      "resources": {
+        "BDHb": 114
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 28
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 15
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 10
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 6
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 4
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 3
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=114"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -6952,12 +7216,12 @@
       "name": "SL__baseTableControl",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 108,
-      "openCount": 54,
-      "closeCount": 54,
-      "wireBytes": 432,
+      "count": 112,
+      "openCount": 56,
+      "closeCount": 56,
+      "wireBytes": 448,
       "resources": {
-        "BDHb": 108
+        "BDHb": 112
       },
       "fixtures": [
         {
@@ -6997,6 +7261,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 2
         },
@@ -7026,6 +7294,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 2
         },
         {
@@ -7158,7 +7430,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=98",
+        "SL__eventDataNode=102",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -7168,13 +7440,13 @@
       "name": "OF__dsw",
       "family": "field",
       "status": "partial",
-      "count": 108,
-      "leafCount": 108,
-      "contentBytes": 216,
-      "wireBytes": 432,
+      "count": 112,
+      "leafCount": 112,
+      "contentBytes": 224,
+      "wireBytes": 448,
       "resources": {
-        "BDHb": 68,
-        "FPHb": 40
+        "BDHb": 70,
+        "FPHb": 42
       },
       "fixtures": [
         {
@@ -7246,6 +7518,14 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 2
         },
@@ -7323,8 +7603,8 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=67",
-        "SL__arrayElement=40",
+        "SL__parm=69",
+        "SL__arrayElement=42",
         "OF__loopTestDCO=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -7334,12 +7614,12 @@
       "name": "OF__nodeList",
       "family": "field",
       "status": "partial",
-      "count": 108,
-      "openCount": 54,
-      "closeCount": 54,
-      "wireBytes": 432,
+      "count": 112,
+      "openCount": 56,
+      "closeCount": 56,
+      "wireBytes": 448,
       "resources": {
-        "BDHb": 108
+        "BDHb": 112
       },
       "fixtures": [
         {
@@ -7379,6 +7659,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 2
         },
@@ -7408,6 +7692,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 2
         },
         {
@@ -7540,10 +7828,1351 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=98",
+        "SL__eventDataNode=102",
         "SL__arrayElement=10"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
+    },
+    {
+      "tag": 38,
+      "name": "SL__lMax",
+      "family": "class",
+      "status": "class-semantic-open",
+      "count": 102,
+      "openCount": 51,
+      "closeCount": 51,
+      "wireBytes": 561,
+      "resources": {
+        "FPHb": 102
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__eventDataNode=102"
+      ],
+      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
+    },
+    {
+      "tag": 126,
+      "name": "SL__oHExt",
+      "family": "class",
+      "status": "class-semantic-open",
+      "count": 102,
+      "openCount": 51,
+      "closeCount": 51,
+      "wireBytes": 561,
+      "resources": {
+        "FPHb": 102
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__eventDataNode=102"
+      ],
+      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
+    },
+    {
+      "tag": 42,
+      "name": "SL__seqTun",
+      "family": "class",
+      "status": "class-semantic-open",
+      "count": 102,
+      "openCount": 51,
+      "closeCount": 51,
+      "wireBytes": 408,
+      "resources": {
+        "FPHb": 102
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__lMax=102"
+      ],
+      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
+    },
+    {
+      "tag": 123,
+      "name": "OF__instrStyle",
+      "family": "field",
+      "status": "partial",
+      "count": 102,
+      "leafCount": 102,
+      "contentBytes": 102,
+      "wireBytes": 306,
+      "resources": {
+        "BDHb": 51,
+        "FPHb": 51
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__rootObject=102"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 45,
+      "name": "OF__dBounds",
+      "family": "field",
+      "status": "rect-role-open",
+      "count": 102,
+      "leafCount": 102,
+      "contentBytes": 816,
+      "wireBytes": 1122,
+      "resources": {
+        "BDHb": 51,
+        "FPHb": 51
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__rootObject=102"
+      ],
+      "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
+    },
+    {
+      "tag": 183,
+      "name": "OF__pBounds",
+      "family": "field",
+      "status": "rect-role-open",
+      "count": 102,
+      "leafCount": 102,
+      "contentBytes": 816,
+      "wireBytes": 1122,
+      "resources": {
+        "BDHb": 51,
+        "FPHb": 51
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__rootObject=102"
+      ],
+      "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
     {
       "tag": 191,
@@ -7605,1309 +9234,16 @@
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
     {
-      "tag": 38,
-      "name": "SL__lMax",
-      "family": "class",
-      "status": "class-semantic-open",
-      "count": 98,
-      "openCount": 49,
-      "closeCount": 49,
-      "wireBytes": 539,
-      "resources": {
-        "FPHb": 98
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__eventDataNode=98"
-      ],
-      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
-    },
-    {
-      "tag": 126,
-      "name": "SL__oHExt",
-      "family": "class",
-      "status": "class-semantic-open",
-      "count": 98,
-      "openCount": 49,
-      "closeCount": 49,
-      "wireBytes": 539,
-      "resources": {
-        "FPHb": 98
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__eventDataNode=98"
-      ],
-      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
-    },
-    {
-      "tag": 42,
-      "name": "SL__seqTun",
-      "family": "class",
-      "status": "class-semantic-open",
-      "count": 98,
-      "openCount": 49,
-      "closeCount": 49,
-      "wireBytes": 392,
-      "resources": {
-        "FPHb": 98
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__lMax=98"
-      ],
-      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
-    },
-    {
-      "tag": 123,
-      "name": "OF__instrStyle",
-      "family": "field",
-      "status": "partial",
-      "count": 98,
-      "leafCount": 98,
-      "contentBytes": 98,
-      "wireBytes": 294,
-      "resources": {
-        "BDHb": 49,
-        "FPHb": 49
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__rootObject=98"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 45,
-      "name": "OF__dBounds",
-      "family": "field",
-      "status": "rect-role-open",
-      "count": 98,
-      "leafCount": 98,
-      "contentBytes": 784,
-      "wireBytes": 1078,
-      "resources": {
-        "BDHb": 49,
-        "FPHb": 49
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__rootObject=98"
-      ],
-      "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
-    },
-    {
-      "tag": 183,
-      "name": "OF__pBounds",
-      "family": "field",
-      "status": "rect-role-open",
-      "count": 98,
-      "leafCount": 98,
-      "contentBytes": 784,
-      "wireBytes": 1078,
-      "resources": {
-        "BDHb": 49,
-        "FPHb": 49
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__rootObject=98"
-      ],
-      "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
-    },
-    {
       "tag": 231,
       "name": "OF__shortCount",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 91,
-      "wireBytes": 273,
+      "count": 93,
+      "leafCount": 93,
+      "contentBytes": 93,
+      "wireBytes": 279,
       "resources": {
-        "BDHb": 91
+        "BDHb": 93
       },
       "fixtures": [
         {
@@ -8975,6 +9311,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -9004,6 +9344,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -9108,7 +9452,405 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=91"
+        "SL__arrayElement=93"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 11,
+      "name": "SL__multiCosm",
+      "family": "class",
+      "status": "class-semantic-open",
+      "count": 80,
+      "openCount": 40,
+      "closeCount": 40,
+      "wireBytes": 320,
+      "resources": {
+        "FPHb": 80
+      },
+      "fixtures": [
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 2
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 2
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 2
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 2
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 2
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 2
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        }
+      ],
+      "parentContexts": [
+        "SL__rootObject=80"
+      ],
+      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
+    },
+    {
+      "tag": 37,
+      "name": "OF__conNum",
+      "family": "field",
+      "status": "partial",
+      "count": 80,
+      "leafCount": 80,
+      "contentBytes": 80,
+      "wireBytes": 240,
+      "resources": {
+        "FPHb": 80
+      },
+      "fixtures": [
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 4
+        },
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 4
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 4
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=80"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -9208,399 +9950,17 @@
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
     {
-      "tag": 37,
-      "name": "OF__conNum",
-      "family": "field",
-      "status": "partial",
-      "count": 78,
-      "leafCount": 78,
-      "contentBytes": 78,
-      "wireBytes": 234,
-      "resources": {
-        "FPHb": 78
-      },
-      "fixtures": [
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 4
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 4
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 4
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=78"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 11,
-      "name": "SL__multiCosm",
-      "family": "class",
-      "status": "class-semantic-open",
-      "count": 76,
-      "openCount": 38,
-      "closeCount": 38,
-      "wireBytes": 304,
-      "resources": {
-        "FPHb": 76
-      },
-      "fixtures": [
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 2
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 2
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 2
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 2
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 2
-        },
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 2
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        }
-      ],
-      "parentContexts": [
-        "SL__rootObject=76"
-      ],
-      "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
-    },
-    {
       "tag": 598,
       "name": "OF__savedSize",
       "family": "field",
       "status": "named-only",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 568,
-      "wireBytes": 781,
+      "count": 73,
+      "leafCount": 73,
+      "contentBytes": 584,
+      "wireBytes": 803,
       "resources": {
         "BDHb": 2,
-        "FPHb": 69
+        "FPHb": 71
       },
       "fixtures": [
         {
@@ -9676,6 +10036,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -9705,6 +10069,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -9801,7 +10169,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=49",
+        "SL__eventDataNode=51",
         "SL__mux=13",
         "SL__arrayElement=9"
       ],
@@ -9812,443 +10180,12 @@
       "name": "OF__minPaneSize",
       "family": "field",
       "status": "partial",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 284,
-      "wireBytes": 426,
+      "count": 73,
+      "leafCount": 73,
+      "contentBytes": 292,
+      "wireBytes": 438,
       "resources": {
         "BDHb": 2,
-        "FPHb": 69
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 5
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 3
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 1
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__aInsDCO=71"
-      ],
-      "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
-    },
-    {
-      "tag": 187,
-      "name": "OF__paneFlags",
-      "family": "field",
-      "status": "partial",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 213,
-      "wireBytes": 355,
-      "resources": {
-        "BDHb": 2,
-        "FPHb": 69
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 5
-        },
-        {
-          "fixture": "error-response.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 3
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 3
-        },
-        {
-          "fixture": "module-data--cluster.ctl",
-          "count": 3
-        },
-        {
-          "fixture": "config-data.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "create-vi-params.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "request.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "response.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "show-panel-argument--cluster.ctl",
-          "count": 2
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "action.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "blank.vi",
-          "count": 1
-        },
-        {
-          "fixture": "datatypes.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 1
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 1
-        },
-        {
-          "fixture": "mcp-creator-states.ctl",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "reference-type.ctl",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__aInsDCO=71"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 313,
-      "name": "OF__termListLength",
-      "family": "field",
-      "status": "partial",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 71,
-      "wireBytes": 213,
-      "resources": {
         "FPHb": 71
       },
       "fixtures": [
@@ -10257,174 +10194,6 @@
           "count": 5
         },
         {
-          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42FourIndicatorsY_single.vi",
-          "count": 4
-        },
-        {
-          "fixture": "get-vi-description.vi",
-          "count": 4
-        },
-        {
-          "fixture": "load-vi.vi",
-          "count": 4
-        },
-        {
-          "fixture": "reference-find-by-id.vi",
-          "count": 4
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
-          "count": 3
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Numeric42TwoNetworks.vi",
-          "count": 2
-        },
-        {
-          "fixture": "format-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-float.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-int.vi",
-          "count": 2
-        },
-        {
-          "fixture": "is-string.vi",
-          "count": 2
-        },
-        {
-          "fixture": "Add17Plus25.vi",
-          "count": 1
-        },
-        {
-          "fixture": "BoolToLED.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Bend.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42Far.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_16px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_indicator_left.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_16px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_down.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_left_auto_8px_up.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric42_manual_elbows.vi",
-          "count": 1
-        },
-        {
-          "fixture": "Numeric4Dot2.vi",
-          "count": 1
-        },
-        {
-          "fixture": "WhileLoop_Numeric42.vi",
-          "count": 1
-        },
-        {
-          "fixture": "module-timeout--constant.vi",
-          "count": 1
-        },
-        {
-          "fixture": "write-ini.vi",
-          "count": 1
-        }
-      ],
-      "parentContexts": [
-        "SL__arrayElement=71"
-      ],
-      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
-    },
-    {
-      "tag": 64,
-      "name": "OF__docBounds",
-      "family": "field",
-      "status": "rect-role-open",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 568,
-      "wireBytes": 781,
-      "resources": {
-        "BDHb": 2,
-        "FPHb": 69
-      },
-      "fixtures": [
-        {
-          "fixture": "ndjson-parser.vi",
-          "count": 5
-        },
-        {
           "fixture": "reference-find-by-id.vi",
           "count": 5
         },
@@ -10493,6 +10262,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -10522,6 +10295,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -10618,7 +10395,630 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=71"
+        "SL__aInsDCO=73"
+      ],
+      "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
+    },
+    {
+      "tag": 187,
+      "name": "OF__paneFlags",
+      "family": "field",
+      "status": "partial",
+      "count": 73,
+      "leafCount": 73,
+      "contentBytes": 219,
+      "wireBytes": 365,
+      "resources": {
+        "BDHb": 2,
+        "FPHb": 71
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 5
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 3
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 1
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__aInsDCO=73"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 313,
+      "name": "OF__termListLength",
+      "family": "field",
+      "status": "partial",
+      "count": 73,
+      "leafCount": 73,
+      "contentBytes": 73,
+      "wireBytes": 219,
+      "resources": {
+        "FPHb": 73
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 4
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 4
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 4
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 3
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 2
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 2
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__arrayElement=73"
+      ],
+      "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
+    },
+    {
+      "tag": 64,
+      "name": "OF__docBounds",
+      "family": "field",
+      "status": "rect-role-open",
+      "count": 73,
+      "leafCount": 73,
+      "contentBytes": 584,
+      "wireBytes": 803,
+      "resources": {
+        "BDHb": 2,
+        "FPHb": 71
+      },
+      "fixtures": [
+        {
+          "fixture": "ndjson-parser.vi",
+          "count": 5
+        },
+        {
+          "fixture": "reference-find-by-id.vi",
+          "count": 5
+        },
+        {
+          "fixture": "error-response.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "get-vi-description.vi",
+          "count": 3
+        },
+        {
+          "fixture": "load-vi.vi",
+          "count": 3
+        },
+        {
+          "fixture": "module-data--cluster.ctl",
+          "count": 3
+        },
+        {
+          "fixture": "config-data.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "create-vi-params.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "request.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "response.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "show-panel-argument--cluster.ctl",
+          "count": 2
+        },
+        {
+          "fixture": "write-ini.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Add17Plus25.vi",
+          "count": 1
+        },
+        {
+          "fixture": "BoolToLED.vi",
+          "count": 1
+        },
+        {
+          "fixture": "ConnectorPane_2Inputs_2Outputs.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Bend.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FourIndicatorsY_single.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_16px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_indicator_left.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_16px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down+8px_right.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_left_auto_8px_up.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_manual_elbows.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric4Dot2.vi",
+          "count": 1
+        },
+        {
+          "fixture": "WhileLoop_Numeric42.vi",
+          "count": 1
+        },
+        {
+          "fixture": "action.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "blank.vi",
+          "count": 1
+        },
+        {
+          "fixture": "datatypes.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "format-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-float.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-int.vi",
+          "count": 1
+        },
+        {
+          "fixture": "is-string.vi",
+          "count": 1
+        },
+        {
+          "fixture": "mcp-creator-states.ctl",
+          "count": 1
+        },
+        {
+          "fixture": "module-timeout--constant.vi",
+          "count": 1
+        },
+        {
+          "fixture": "reference-type.ctl",
+          "count": 1
+        }
+      ],
+      "parentContexts": [
+        "SL__aInsDCO=73"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -10627,12 +11027,12 @@
       "name": "OF__StdNumInc",
       "family": "field",
       "status": "partial",
-      "count": 68,
-      "leafCount": 68,
-      "contentBytes": 369,
-      "wireBytes": 548,
+      "count": 70,
+      "leafCount": 70,
+      "contentBytes": 385,
+      "wireBytes": 570,
       "resources": {
-        "FPHb": 68
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -10704,6 +11104,14 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_16px_down.vi",
           "count": 1
         },
@@ -10801,7 +11209,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=50",
+        "SL__mux=52",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -10811,12 +11219,12 @@
       "name": "OF__StdNumMax",
       "family": "field",
       "status": "partial",
-      "count": 68,
-      "leafCount": 68,
-      "contentBytes": 417,
-      "wireBytes": 596,
+      "count": 70,
+      "leafCount": 70,
+      "contentBytes": 433,
+      "wireBytes": 618,
       "resources": {
-        "FPHb": 68
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -10885,6 +11293,14 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -10985,7 +11401,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=50",
+        "SL__mux=52",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -10995,12 +11411,12 @@
       "name": "OF__StdNumMin",
       "family": "field",
       "status": "partial",
-      "count": 68,
-      "leafCount": 68,
-      "contentBytes": 417,
-      "wireBytes": 596,
+      "count": 70,
+      "leafCount": 70,
+      "contentBytes": 433,
+      "wireBytes": 618,
       "resources": {
-        "FPHb": 68
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -11069,6 +11485,14 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -11169,7 +11593,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=50",
+        "SL__mux=52",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -11179,12 +11603,12 @@
       "name": "OF__clumpNum",
       "family": "field",
       "status": "partial",
-      "count": 55,
-      "leafCount": 55,
-      "contentBytes": 165,
-      "wireBytes": 275,
+      "count": 57,
+      "leafCount": 57,
+      "contentBytes": 171,
+      "wireBytes": 285,
       "resources": {
-        "BDHb": 55
+        "BDHb": 57
       },
       "fixtures": [
         {
@@ -11240,6 +11664,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -11269,6 +11697,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -11341,7 +11773,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=55"
+        "SL__arrayElement=57"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -11350,12 +11782,12 @@
       "name": "OF__ConstValue",
       "family": "field",
       "status": "named-only",
-      "count": 52,
-      "leafCount": 52,
-      "contentBytes": 338,
-      "wireBytes": 457,
+      "count": 54,
+      "leafCount": 54,
+      "contentBytes": 346,
+      "wireBytes": 469,
       "resources": {
-        "BDHb": 52
+        "BDHb": 54
       },
       "fixtures": [
         {
@@ -11403,6 +11835,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42FarFar.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42FourIndicatorsY_single.vi",
           "count": 1
         },
@@ -11428,6 +11864,10 @@
         },
         {
           "fixture": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -11504,7 +11944,7 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=52"
+        "SL__parm=54"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
@@ -11513,12 +11953,12 @@
       "name": "OF__conId",
       "family": "field",
       "status": "partial",
-      "count": 49,
-      "leafCount": 49,
-      "contentBytes": 98,
-      "wireBytes": 196,
+      "count": 51,
+      "leafCount": 51,
+      "contentBytes": 102,
+      "wireBytes": 204,
       "resources": {
-        "FPHb": 49
+        "FPHb": 51
       },
       "fixtures": [
         {
@@ -11543,6 +11983,10 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
           "count": 1
         },
         {
@@ -11575,6 +12019,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -11719,7 +12167,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=49"
+        "SL__lMax=51"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -11728,12 +12176,12 @@
       "name": "OF__firstNodeIdx",
       "family": "field",
       "status": "partial",
-      "count": 34,
-      "leafCount": 34,
-      "contentBytes": 34,
-      "wireBytes": 102,
+      "count": 36,
+      "leafCount": 36,
+      "contentBytes": 36,
+      "wireBytes": 108,
       "resources": {
-        "BDHb": 34
+        "BDHb": 36
       },
       "fixtures": [
         {
@@ -11758,6 +12206,10 @@
         },
         {
           "fixture": "Numeric42Far.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42FarFar.vi",
           "count": 1
         },
         {
@@ -11790,6 +12242,10 @@
         },
         {
           "fixture": "Numeric42TwoNetworks.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_150px_down.vi",
           "count": 1
         },
         {
@@ -11874,7 +12330,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=34"
+        "SL__eventDataNode=36"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },

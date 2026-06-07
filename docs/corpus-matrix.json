@@ -44,6 +44,13 @@
       "hypothesis": "Horizontal sink movement stretches the inferred post-elbow segment rather than changing the source-side anchor."
     },
     {
+      "name": "Numeric42FarFar.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["extreme horizontal spacing", "straight-wire chunk stability"],
+      "hypothesis": "A y-aligned source/sink emits the trivial straight chunk (02 08) regardless of horizontal distance — even further apart than Numeric42Far.vi, the chunk is unchanged because horizontal position lives entirely in the terminal bounds."
+    },
+    {
       "name": "Numeric42Bend.vi",
       "kind": "vi",
       "family": "controlled-wire",
@@ -63,6 +70,13 @@
       "family": "controlled-wire",
       "focus": ["16 px vertical sink movement", "auto-chain y-step magnitude"],
       "hypothesis": "Doubling the vertical movement doubles the y-step magnitude."
+    },
+    {
+      "name": "Numeric42_150px_down.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["auto-chain magnitude > 127", "raw-byte vs LEB128 encoding"],
+      "hypothesis": "Moving the sink 150 px down (past the 127 boundary) encodes the y-step as the single raw byte 0x96=150, not LEB128 (which would need 96 01). Proves auto-chain geometry magnitudes are raw bytes, so ChainAutoPath must drop the {16,65} anchor whitelist and decode values 0-255 verbatim."
     },
     {
       "name": "Numeric42_8px_up.vi",

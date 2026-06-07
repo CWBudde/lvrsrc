@@ -15,8 +15,8 @@ func TestBuildHeapTagReportFromCorpus(t *testing.T) {
 	if r.SchemaVersion != 1 {
 		t.Fatalf("SchemaVersion = %d, want 1", r.SchemaVersion)
 	}
-	if r.Summary.FixtureCount != 49 {
-		t.Fatalf("FixtureCount = %d, want 49", r.Summary.FixtureCount)
+	if r.Summary.FixtureCount != 51 {
+		t.Fatalf("FixtureCount = %d, want 51", r.Summary.FixtureCount)
 	}
 	if r.Summary.HeapTreeCount == 0 {
 		t.Fatal("HeapTreeCount = 0, want non-zero")

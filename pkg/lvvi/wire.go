@@ -74,9 +74,13 @@ type Wire struct {
 	// for tree mode, the total record count including the header.
 	Waypoints uint8
 	// ChainGeometry is populated for WireModeAutoChain and
-	// WireModeManualChain. It holds the LEB128-decoded varints from
-	// the payload after byte0 / byte1. Empty for chains with no
-	// trailing geometry (e.g. `0208`).
+	// WireModeManualChain from the payload after byte0 / byte1.
+	// For auto-chain it holds the raw payload bytes (each widened to
+	// uint64) — the geometry is NOT LEB128, see HeapWire and
+	// Numeric42_150px_down.vi. For manual-chain it is still the
+	// LEB128-decoded varint stream (unverified, pending a controlled
+	// fixture). Empty for chains with no trailing geometry (e.g.
+	// `0208`).
 	ChainGeometry []uint64
 	// TreeRecords is populated for WireModeTree. It splits the
 	// payload after byte0 / byte1 into 2-byte records.
@@ -111,12 +115,38 @@ func HeapWire(tree HeapTree, nodeIdx int) (Wire, bool) {
 	}
 	payload := n.Content[2:]
 	switch w.Mode {
-	case WireModeAutoChain, WireModeManualChain:
+	case WireModeAutoChain:
+		// Auto-chain geometry is a sequence of raw single bytes, NOT
+		// an LEB128 varint stream. Numeric42_150px_down.vi proves it:
+		// a 150 px y-step is the single byte 0x96, where LEB128 would
+		// require two bytes (96 01). Reading raw keeps values >= 128
+		// intact instead of swallowing them as varint continuations.
+		w.ChainGeometry = rawGeometryBytes(payload)
+	case WireModeManualChain:
+		// Manual-chain payloads are still parsed as LEB128 pending a
+		// controlled ground-truth fixture (the corpus has only the
+		// single Numeric42Bend.vi sample, whose ff-tokens are
+		// ambiguous between raw 0xff and an LEB128 255 sentinel).
 		w.ChainGeometry = decodeLEB128(payload)
 	case WireModeTree:
 		w.TreeRecords = splitTreeRecords(payload)
 	}
 	return w, true
+}
+
+// rawGeometryBytes widens each payload byte to a uint64 verbatim. For
+// values < 128 this is identical to decodeLEB128; for values >= 128 it
+// preserves the byte instead of treating the high bit as an LEB128
+// continuation (see HeapWire / Numeric42_150px_down.vi).
+func rawGeometryBytes(payload []byte) []uint64 {
+	if len(payload) == 0 {
+		return nil
+	}
+	out := make([]uint64, len(payload))
+	for i, b := range payload {
+		out[i] = uint64(b)
+	}
+	return out
 }
 
 func classifyWireMode(b byte) WireMode {
@@ -226,11 +256,20 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 	case 0:
 		return ChainAutoPath{Straight: true}, true
 	case 4:
+		// Raw-byte payload [signV, reserved, anchorX, yStep]:
 		// payload[0]: y-direction flag (0 = down, 1 = up)
 		// payload[1]: always 0 in our corpus (reserved / unknown)
-		// payload[2]: elbow horizontal offset (edit-history-dependent:
-		//             ~16 for a fresh reconnect, 65 when stretched)
-		// payload[3]: y-step magnitude (unsigned pixels)
+		// payload[2]: elbow horizontal offset, a raw byte 0-255
+		//             (edit-history-dependent: ~16 fresh, 65 stretched,
+		//             but real-world wires span the whole range)
+		// payload[3]: y-step magnitude, a raw byte 0-255
+		// Because each field is a single raw byte (see HeapWire and
+		// Numeric42_150px_down.vi), anchorX and yStep are inherently
+		// bounded to 0-255 — no separate magnitude whitelist is needed
+		// or wanted; the old {16,65} anchor bound was over-fitted to
+		// the Numeric42 probes and rejected most real single-elbow
+		// wires. Payloads longer than 4 bytes are multi-segment and
+		// fall through to ok=false.
 		var sign int
 		switch w.ChainGeometry[0] {
 		case 0:
@@ -240,26 +279,8 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 		default:
 			return ChainAutoPath{}, false
 		}
-		yMag := w.ChainGeometry[3]
-		// A real BD elbow's y-step measures in tens or low
-		// hundreds of pixels. Reject implausibly large values as
-		// evidence we have not actually hit the L-shape pattern —
-		// multi-elbow auto-chain wires can encode routing indices
-		// rather than pixel steps in the same payload positions.
-		// 4096 is generous: BD canvases rarely exceed that overall,
-		// let alone a single elbow step.
-		const maxReasonableYStep = 4096
-		if yMag > maxReasonableYStep {
-			return ChainAutoPath{}, false
-		}
-		// Elbow horizontal offsets are also bounded (observed 16 and
-		// 65 across fresh/stretched fixtures). Reject implausibly
-		// large values as evidence we have not hit the L-shape.
-		if w.ChainGeometry[2] > 1024 {
-			return ChainAutoPath{}, false
-		}
 		return ChainAutoPath{
-			YStep:         sign * int(yMag),
+			YStep:         sign * int(w.ChainGeometry[3]),
 			SourceAnchorX: w.ChainGeometry[2],
 		}, true
 	}
