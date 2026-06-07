@@ -112,6 +112,16 @@ type TypedConst struct {
 	FixedRadix    int
 	FixedValue    float64
 	FixedConfigOK bool
+	// Composite is the decoded flattened-data tree for a composite
+	// (cluster) default whose blob unflattened exactly against a resolved
+	// VCTP cluster type, or nil for scalar / unresolved constants.
+	// CompositeTypeIndex is that cluster's flat VCTP index and CompositeOK
+	// reports whether the composite decode succeeded. Populated only by
+	// FrontPanelDefaults (panel control defaults); see
+	// resolveCompositeDefault.
+	Composite          *FlatValue
+	CompositeTypeIndex int
+	CompositeOK        bool
 }
 
 // BlockDiagramConstants returns every block-diagram numeric constant in

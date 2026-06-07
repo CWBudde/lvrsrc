@@ -91,13 +91,13 @@ func (m *Model) FrontPanelTypes() ([]FrontPanelType, bool) {
 // default stores an 8-byte OF__DefaultData (`40 c3 4a 45 87 93 dd 98` =
 // 9876.5432) that resolves to NumFloat64 and decodes exactly.
 //
-// Composite (cluster) defaults are surfaced too, but not decoded to a
-// value: they resolve a type that is not a fixed-width numeric scalar (or
-// whose width does not match the blob), so they come back with
-// WidthMatch=false and Kind=unknown rather than a guessed value. Trust the
-// decoded value only when WidthMatch is true. Fully decoding a composite
-// default would require a recursive VCTP cluster flatten/unflatten walk
-// that this layer does not attempt.
+// Composite (cluster) defaults decode too, into Composite: their blob is a
+// flattened-data tree (members back-to-back, strings length-prefixed, nested
+// clusters recursive) which resolveCompositeDefault unflattens against the
+// governing VCTP cluster type. Those leaves still carry WidthMatch=false and
+// Kind=unknown (the blob is not a fixed-width scalar) — read the structured
+// value from Composite/CompositeOK instead. A scalar default with WidthMatch
+// true has no Composite; trust Composite only when CompositeOK is set.
 func (m *Model) FrontPanelDefaults() ([]TypedConst, bool) {
 	if m == nil || m.file == nil {
 		return nil, false
@@ -122,6 +122,20 @@ func (m *Model) FrontPanelDefaults() ([]TypedConst, bool) {
 		if flat, ok := resolveConstTypeIndex(tree, i, tops); ok && flat >= 0 && flat < len(descs) {
 			tc.TypeIndex = flat
 			fillTypedConst(&tc, descs[flat])
+		}
+		// A composite (cluster) default does not decode as a fixed-width
+		// scalar — the nearest-preceding typeDesc points at LabVIEW's
+		// internal transaction fields, not the user's data cluster. When the
+		// scalar decode did not produce a clean fit, recover the governing
+		// cluster structurally and unflatten the blob (see
+		// resolveCompositeDefault).
+		if !tc.WidthMatch {
+			if fv, flat, ok := resolveCompositeDefault(descs, tc.Raw); ok {
+				cp := fv
+				tc.Composite = &cp
+				tc.CompositeTypeIndex = flat
+				tc.CompositeOK = true
+			}
 		}
 		out = append(out, tc)
 	}
