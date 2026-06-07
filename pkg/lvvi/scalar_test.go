@@ -338,6 +338,15 @@ func TestHeapScalarCorpusCoverage(t *testing.T) {
 				if n.Scope != "leaf" || !IsHeapScalarTag(n.Tag) {
 					continue
 				}
+				// Heap tag ids are class-scoped: the same id can carry a
+				// wider class-specific payload than its usual scalar form
+				// (e.g. 16-byte OF__activeDiag leaves in the complex-
+				// extended constant Numeric42_CEXT.vi). HeapScalar projects
+				// only the <=8-byte integer/flag/color forms by contract, so
+				// wider leaves are out of scope for this coverage assertion.
+				if len(n.Content) > 8 {
+					continue
+				}
 				totalScalar++
 				countsByTag[n.Tag]++
 				if _, ok := HeapScalar(tree, i); ok {
