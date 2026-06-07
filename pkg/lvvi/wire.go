@@ -116,12 +116,12 @@ func HeapWire(tree HeapTree, nodeIdx int) (Wire, bool) {
 	payload := n.Content[2:]
 	switch w.Mode {
 	case WireModeAutoChain:
-		// Auto-chain geometry is a sequence of raw single bytes, NOT
-		// an LEB128 varint stream. Numeric42_150px_down.vi proves it:
-		// a 150 px y-step is the single byte 0x96, where LEB128 would
-		// require two bytes (96 01). Reading raw keeps values >= 128
-		// intact instead of swallowing them as varint continuations.
-		w.ChainGeometry = rawGeometryBytes(payload)
+		// Auto-chain geometry is a byte stream, NOT an LEB128 varint
+		// stream. Numeric42_150px_down.vi proves single bytes hold
+		// values up to 254 (y-step 150 = 0x96, where LEB128 would need
+		// 96 01); Numeric42FarFar.vi proves 0xff is an escape prefix
+		// for a 2-byte big-endian value (ff 01 d6 = 470).
+		w.ChainGeometry = decodeAutoChainGeometry(payload)
 	case WireModeManualChain:
 		// Manual-chain payloads are still parsed as LEB128 pending a
 		// controlled ground-truth fixture (the corpus has only the
@@ -134,17 +134,29 @@ func HeapWire(tree HeapTree, nodeIdx int) (Wire, bool) {
 	return w, true
 }
 
-// rawGeometryBytes widens each payload byte to a uint64 verbatim. For
-// values < 128 this is identical to decodeLEB128; for values >= 128 it
-// preserves the byte instead of treating the high bit as an LEB128
-// continuation (see HeapWire / Numeric42_150px_down.vi).
-func rawGeometryBytes(payload []byte) []uint64 {
+// decodeAutoChainGeometry reads the auto-chain geometry payload as a
+// byte stream with a 0xff escape. A byte 0x00-0xfe is that value
+// verbatim; a 0xff byte introduces the next two bytes as a big-endian
+// uint16 (magnitudes >= 255). This is NOT LEB128 — Numeric42_150px_down.vi
+// (single byte 0x96 = 150) and Numeric42FarFar.vi (ff 01 d6 = 470,
+// ff 02 59 = 601) ground-truth the two cases; big-endian is forced
+// because little-endian yields absurd values. A trailing 0xff without
+// its two follow-on bytes is dropped as a truncated escape.
+func decodeAutoChainGeometry(payload []byte) []uint64 {
 	if len(payload) == 0 {
 		return nil
 	}
-	out := make([]uint64, len(payload))
-	for i, b := range payload {
-		out[i] = uint64(b)
+	var out []uint64
+	for i := 0; i < len(payload); i++ {
+		if payload[i] != 0xff {
+			out = append(out, uint64(payload[i]))
+			continue
+		}
+		if i+2 >= len(payload) {
+			break // truncated escape
+		}
+		out = append(out, uint64(payload[i+1])<<8|uint64(payload[i+2]))
+		i += 2
 	}
 	return out
 }
@@ -256,20 +268,21 @@ func (w Wire) ChainAutoPath() (ChainAutoPath, bool) {
 	case 0:
 		return ChainAutoPath{Straight: true}, true
 	case 4:
-		// Raw-byte payload [signV, reserved, anchorX, yStep]:
+		// Decoded fields [signV, reserved, anchorX, yStep]:
 		// payload[0]: y-direction flag (0 = down, 1 = up)
 		// payload[1]: always 0 in our corpus (reserved / unknown)
-		// payload[2]: elbow horizontal offset, a raw byte 0-255
-		//             (edit-history-dependent: ~16 fresh, 65 stretched,
-		//             but real-world wires span the whole range)
-		// payload[3]: y-step magnitude, a raw byte 0-255
-		// Because each field is a single raw byte (see HeapWire and
-		// Numeric42_150px_down.vi), anchorX and yStep are inherently
-		// bounded to 0-255 — no separate magnitude whitelist is needed
-		// or wanted; the old {16,65} anchor bound was over-fitted to
+		// payload[2]: elbow horizontal offset (edit-history-dependent:
+		//             ~16 fresh, 65 stretched, but real-world wires
+		//             span the whole range; >= 255 via the 0xff escape,
+		//             e.g. 470 in Numeric42FarFar.vi)
+		// payload[3]: y-step magnitude (>= 255 via the 0xff escape,
+		//             e.g. 601 in Numeric42FarFar.vi)
+		// Values come from decodeAutoChainGeometry (raw bytes with a
+		// 0xff big-endian escape), so no magnitude whitelist is needed
+		// or wanted — the old {16,65} anchor bound was over-fitted to
 		// the Numeric42 probes and rejected most real single-elbow
-		// wires. Payloads longer than 4 bytes are multi-segment and
-		// fall through to ok=false.
+		// wires. Anything decoding to more than 4 values is multi-
+		// segment and falls through to ok=false.
 		var sign int
 		switch w.ChainGeometry[0] {
 		case 0:

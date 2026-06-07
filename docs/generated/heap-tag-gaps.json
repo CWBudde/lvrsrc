@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "fixtureCount": 51,
-    "heapTreeCount": 102,
-    "totalNodes": 37208,
-    "reportedNodes": 27022,
+    "fixtureCount": 52,
+    "heapTreeCount": 104,
+    "totalNodes": 37595,
+    "reportedNodes": 27307,
     "reportedTagCount": 119,
     "statusNodes": {
-      "class-semantic-open": 8720,
-      "named-only": 682,
-      "partial": 17339,
-      "rect-role-open": 281,
-      "resolved": 10186
+      "class-semantic-open": 8816,
+      "named-only": 687,
+      "partial": 17518,
+      "rect-role-open": 286,
+      "resolved": 10288
     }
   },
   "tags": [
@@ -20,13 +20,13 @@
       "name": "SL__fontRun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 2770,
-      "leafCount": 2770,
-      "contentBytes": 7218,
-      "wireBytes": 13277,
+      "count": 2800,
+      "leafCount": 2800,
+      "contentBytes": 7295,
+      "wireBytes": 13418,
       "resources": {
-        "BDHb": 541,
-        "FPHb": 2229
+        "BDHb": 549,
+        "FPHb": 2251
       },
       "fixtures": [
         {
@@ -178,6 +178,10 @@
           "count": 30
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 30
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 30
         },
@@ -235,9 +239,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1207",
-        "OF__image=1163",
-        "SL__prNodeList=399",
+        "SL__arrayElement=1221",
+        "OF__image=1175",
+        "SL__prNodeList=403",
         "OF__browseOptions=1"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -247,13 +251,13 @@
       "name": "OF__image",
       "family": "field",
       "status": "partial",
-      "count": 2326,
-      "openCount": 1163,
-      "closeCount": 1163,
-      "wireBytes": 9304,
+      "count": 2350,
+      "openCount": 1175,
+      "closeCount": 1175,
+      "wireBytes": 9400,
       "resources": {
-        "BDHb": 556,
-        "FPHb": 1770
+        "BDHb": 562,
+        "FPHb": 1788
       },
       "fixtures": [
         {
@@ -401,6 +405,10 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 24
         },
@@ -462,9 +470,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=2030",
-        "SL__conPane=148",
-        "SL__aInsDCO=146",
+        "SL__arrayElement=2050",
+        "SL__conPane=150",
+        "SL__aInsDCO=148",
         "SL__externalNode=2"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -474,13 +482,13 @@
       "name": "OF__objFlags",
       "family": "field",
       "status": "partial",
-      "count": 2284,
-      "leafCount": 2284,
-      "contentBytes": 5420,
-      "wireBytes": 9988,
+      "count": 2308,
+      "leafCount": 2308,
+      "contentBytes": 5479,
+      "wireBytes": 10095,
       "resources": {
-        "BDHb": 862,
-        "FPHb": 1422
+        "BDHb": 871,
+        "FPHb": 1437
       },
       "fixtures": [
         {
@@ -632,6 +640,10 @@
           "count": 24
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 24
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 24
         },
@@ -689,12 +701,12 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1832",
-        "SL__mux=140",
-        "SL__eventDataNode=80",
+        "SL__arrayElement=1850",
+        "SL__mux=142",
+        "SL__eventDataNode=82",
         "SL__parm=80",
-        "SL__conPane=74",
-        "SL__aInsDCO=73",
+        "SL__conPane=75",
+        "SL__aInsDCO=74",
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=1"
       ],
@@ -705,13 +717,13 @@
       "name": "OF__partID",
       "family": "field",
       "status": "partial",
-      "count": 1776,
-      "leafCount": 1776,
-      "contentBytes": 1801,
-      "wireBytes": 5353,
+      "count": 1794,
+      "leafCount": 1794,
+      "contentBytes": 1819,
+      "wireBytes": 5407,
       "resources": {
-        "BDHb": 423,
-        "FPHb": 1353
+        "BDHb": 428,
+        "FPHb": 1366
       },
       "fixtures": [
         {
@@ -863,6 +875,10 @@
           "count": 18
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 18
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 18
         },
@@ -920,8 +936,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1701",
-        "SL__conPane=74",
+        "SL__arrayElement=1718",
+        "SL__conPane=75",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -931,13 +947,13 @@
       "name": "OF__howGrow",
       "family": "field",
       "status": "partial",
-      "count": 1550,
-      "leafCount": 1550,
-      "contentBytes": 2790,
-      "wireBytes": 5890,
+      "count": 1566,
+      "leafCount": 1566,
+      "contentBytes": 2818,
+      "wireBytes": 5950,
       "resources": {
-        "BDHb": 364,
-        "FPHb": 1186
+        "BDHb": 368,
+        "FPHb": 1198
       },
       "fixtures": [
         {
@@ -1089,6 +1105,10 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 16
         },
@@ -1146,9 +1166,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1394",
-        "SL__conPane=74",
-        "SL__aInsDCO=73",
+        "SL__arrayElement=1408",
+        "SL__conPane=75",
+        "SL__aInsDCO=74",
         "SL__mux=8",
         "SL__externalNode=1"
       ],
@@ -1159,13 +1179,13 @@
       "name": "OF__bgColor",
       "family": "field",
       "status": "partial",
-      "count": 1497,
-      "leafCount": 1497,
-      "contentBytes": 5985,
-      "wireBytes": 8979,
+      "count": 1513,
+      "leafCount": 1513,
+      "contentBytes": 6049,
+      "wireBytes": 9075,
       "resources": {
-        "BDHb": 391,
-        "FPHb": 1106
+        "BDHb": 396,
+        "FPHb": 1117
       },
       "fixtures": [
         {
@@ -1317,6 +1337,10 @@
           "count": 16
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 16
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 16
         },
@@ -1374,9 +1398,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1371",
-        "SL__conPane=74",
-        "SL__eventDataNode=51",
+        "SL__arrayElement=1385",
+        "SL__conPane=75",
+        "SL__eventDataNode=52",
         "SL__externalNode=1"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
@@ -1386,13 +1410,13 @@
       "name": "OF__fgColor",
       "family": "field",
       "status": "partial",
-      "count": 1273,
-      "leafCount": 1273,
-      "contentBytes": 5092,
-      "wireBytes": 7638,
+      "count": 1286,
+      "leafCount": 1286,
+      "contentBytes": 5144,
+      "wireBytes": 7716,
       "resources": {
-        "BDHb": 320,
-        "FPHb": 953
+        "BDHb": 324,
+        "FPHb": 962
       },
       "fixtures": [
         {
@@ -1544,6 +1568,10 @@
           "count": 13
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 13
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 13
         },
@@ -1601,8 +1629,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1199",
-        "SL__conPane=74"
+        "SL__arrayElement=1211",
+        "SL__conPane=75"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
@@ -1611,13 +1639,13 @@
       "name": "OF__masterPart",
       "family": "field",
       "status": "partial",
-      "count": 1088,
-      "leafCount": 1088,
-      "contentBytes": 1105,
-      "wireBytes": 3281,
+      "count": 1099,
+      "leafCount": 1099,
+      "contentBytes": 1116,
+      "wireBytes": 3314,
       "resources": {
-        "BDHb": 197,
-        "FPHb": 891
+        "BDHb": 199,
+        "FPHb": 900
       },
       "fixtures": [
         {
@@ -1765,6 +1793,10 @@
           "count": 11
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 11
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 11
         },
@@ -1826,7 +1858,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1087",
+        "SL__arrayElement=1098",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -1836,15 +1868,15 @@
       "name": "OF__activePlot",
       "family": "field",
       "status": "named-only",
-      "count": 1073,
-      "leafCount": 275,
-      "openCount": 399,
-      "closeCount": 399,
-      "contentBytes": 1801,
-      "wireBytes": 5686,
+      "count": 1083,
+      "leafCount": 277,
+      "openCount": 403,
+      "closeCount": 403,
+      "contentBytes": 1812,
+      "wireBytes": 5734,
       "resources": {
         "BDHb": 42,
-        "FPHb": 1031
+        "FPHb": 1041
       },
       "fixtures": [
         {
@@ -1984,6 +2016,10 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 10
         },
@@ -2053,8 +2089,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=800",
-        "SL__baseRefNum=272",
+        "SL__arrayElement=808",
+        "SL__baseRefNum=274",
         "OF__browseOptions=1"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
@@ -2064,13 +2100,13 @@
       "name": "SL__baseRefNum",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 1054,
-      "openCount": 527,
-      "closeCount": 527,
-      "wireBytes": 4216,
+      "count": 1064,
+      "openCount": 532,
+      "closeCount": 532,
+      "wireBytes": 4256,
       "resources": {
-        "BDHb": 352,
-        "FPHb": 702
+        "BDHb": 356,
+        "FPHb": 708
       },
       "fixtures": [
         {
@@ -2214,6 +2250,10 @@
           "count": 10
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 10
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 10
         },
@@ -2279,8 +2319,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=904",
-        "SL__conPane=148",
+        "SL__arrayElement=912",
+        "SL__conPane=150",
         "SL__externalNode=2"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -2290,13 +2330,13 @@
       "name": "OF__activeMarker",
       "family": "field",
       "status": "partial",
-      "count": 929,
-      "leafCount": 929,
-      "contentBytes": 3028,
-      "wireBytes": 4886,
+      "count": 938,
+      "leafCount": 938,
+      "contentBytes": 3058,
+      "wireBytes": 4934,
       "resources": {
-        "BDHb": 178,
-        "FPHb": 751
+        "BDHb": 180,
+        "FPHb": 758
       },
       "fixtures": [
         {
@@ -2440,6 +2480,10 @@
           "count": 9
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 9
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 9
         },
@@ -2505,8 +2549,8 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=527",
-        "SL__arrayElement=401",
+        "SL__baseRefNum=532",
+        "SL__arrayElement=405",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -2516,13 +2560,13 @@
       "name": "SL__simTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 712,
-      "openCount": 356,
-      "closeCount": 356,
-      "wireBytes": 2848,
+      "count": 720,
+      "openCount": 360,
+      "closeCount": 360,
+      "wireBytes": 2880,
       "resources": {
-        "BDHb": 128,
-        "FPHb": 584
+        "BDHb": 130,
+        "FPHb": 590
       },
       "fixtures": [
         {
@@ -2658,6 +2702,10 @@
           "count": 8
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 8
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 8
         },
@@ -2727,7 +2775,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=712"
+        "SL__arrayElement=720"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2736,13 +2784,13 @@
       "name": "SL__stdLvVariant",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 614,
-      "openCount": 307,
-      "closeCount": 307,
-      "wireBytes": 2456,
+      "count": 620,
+      "openCount": 310,
+      "closeCount": 310,
+      "wireBytes": 2480,
       "resources": {
-        "BDHb": 152,
-        "FPHb": 462
+        "BDHb": 154,
+        "FPHb": 466
       },
       "fixtures": [
         {
@@ -2894,6 +2942,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 6
         },
@@ -2951,9 +3003,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=290",
+        "SL__mux=294",
         "SL__arrayElement=178",
-        "SL__aInsDCO=146"
+        "SL__aInsDCO=148"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -2962,13 +3014,13 @@
       "name": "OF__activeDiag",
       "family": "field",
       "status": "partial",
-      "count": 575,
-      "leafCount": 575,
-      "contentBytes": 2017,
-      "wireBytes": 3167,
+      "count": 581,
+      "leafCount": 581,
+      "contentBytes": 2038,
+      "wireBytes": 3200,
       "resources": {
-        "BDHb": 108,
-        "FPHb": 467
+        "BDHb": 110,
+        "FPHb": 471
       },
       "fixtures": [
         {
@@ -3096,6 +3148,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 6
         },
@@ -3173,8 +3229,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=401",
-        "SL__baseRefNum=173",
+        "SL__arrayElement=405",
+        "SL__baseRefNum=175",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3184,13 +3240,13 @@
       "name": "OF__typeDesc",
       "family": "field",
       "status": "partial",
-      "count": 533,
-      "leafCount": 533,
-      "contentBytes": 533,
-      "wireBytes": 1599,
+      "count": 537,
+      "leafCount": 537,
+      "contentBytes": 537,
+      "wireBytes": 1611,
       "resources": {
-        "BDHb": 289,
-        "FPHb": 244
+        "BDHb": 291,
+        "FPHb": 246
       },
       "fixtures": [
         {
@@ -3338,6 +3394,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -3395,9 +3455,9 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=207",
-        "SL__arrayElement=173",
-        "SL__mux=145",
+        "SL__parm=208",
+        "SL__arrayElement=174",
+        "SL__mux=147",
         "OF__loopTestDCO=3",
         "SL__recipeBkUp=3",
         "OF__innerLpTunDCO=2"
@@ -3409,13 +3469,13 @@
       "name": "OF__activeXScale",
       "family": "field",
       "status": "partial",
-      "count": 528,
-      "leafCount": 528,
-      "contentBytes": 2108,
-      "wireBytes": 3164,
+      "count": 533,
+      "leafCount": 533,
+      "contentBytes": 2128,
+      "wireBytes": 3194,
       "resources": {
-        "BDHb": 176,
-        "FPHb": 352
+        "BDHb": 178,
+        "FPHb": 355
       },
       "fixtures": [
         {
@@ -3559,6 +3619,10 @@
           "count": 5
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 5
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 5
         },
@@ -3624,7 +3688,7 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=527",
+        "SL__baseRefNum=532",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3634,13 +3698,13 @@
       "name": "SL__parm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 514,
-      "leafCount": 100,
-      "openCount": 207,
-      "closeCount": 207,
-      "wireBytes": 2877,
+      "count": 517,
+      "leafCount": 101,
+      "openCount": 208,
+      "closeCount": 208,
+      "wireBytes": 2894,
       "resources": {
-        "BDHb": 514
+        "BDHb": 517
       },
       "fixtures": [
         {
@@ -3764,6 +3828,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 3
         },
@@ -3801,7 +3869,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=514"
+        "SL__arrayElement=517"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -3810,12 +3878,12 @@
       "name": "SL__udClassDDO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 464,
-      "openCount": 232,
-      "closeCount": 232,
-      "wireBytes": 1856,
+      "count": 468,
+      "openCount": 234,
+      "closeCount": 234,
+      "wireBytes": 1872,
       "resources": {
-        "BDHb": 464
+        "BDHb": 468
       },
       "fixtures": [
         {
@@ -3939,6 +4007,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -4024,7 +4096,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=414",
+        "SL__arrayElement=418",
         "SL__parm=34",
         "OF__loopTestDCO=6",
         "SL__recipeBkUp=6",
@@ -4037,13 +4109,13 @@
       "name": "SL__mux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 290,
-      "openCount": 145,
-      "closeCount": 145,
-      "wireBytes": 1595,
+      "count": 294,
+      "openCount": 147,
+      "closeCount": 147,
+      "wireBytes": 1617,
       "resources": {
-        "BDHb": 114,
-        "FPHb": 176
+        "BDHb": 116,
+        "FPHb": 178
       },
       "fixtures": [
         {
@@ -4167,6 +4239,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -4248,8 +4324,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=176",
-        "SL__parm=108",
+        "SL__arrayElement=178",
+        "SL__parm=110",
         "SL__mux=6"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -4259,13 +4335,13 @@
       "name": "OF__MouseWheelSupport",
       "family": "field",
       "status": "partial",
-      "count": 285,
-      "leafCount": 285,
-      "contentBytes": 285,
-      "wireBytes": 855,
+      "count": 288,
+      "leafCount": 288,
+      "contentBytes": 288,
+      "wireBytes": 864,
       "resources": {
-        "BDHb": 74,
-        "FPHb": 211
+        "BDHb": 75,
+        "FPHb": 213
       },
       "fixtures": [
         {
@@ -4413,6 +4489,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 3
         },
@@ -4474,9 +4554,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=145",
+        "SL__mux=147",
         "SL__arrayElement=89",
-        "SL__eventDataNode=51"
+        "SL__eventDataNode=52"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4485,13 +4565,13 @@
       "name": "SL__sdfTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 258,
-      "openCount": 129,
-      "closeCount": 129,
-      "wireBytes": 1032,
+      "count": 262,
+      "openCount": 131,
+      "closeCount": 131,
+      "wireBytes": 1048,
       "resources": {
-        "BDHb": 116,
-        "FPHb": 142
+        "BDHb": 118,
+        "FPHb": 144
       },
       "fixtures": [
         {
@@ -4627,6 +4707,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 4
         },
@@ -4700,8 +4784,8 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=146",
-        "SL__eventDataNode=102",
+        "SL__aInsDCO=148",
+        "SL__eventDataNode=104",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -4711,13 +4795,13 @@
       "name": "OF__hGrowNodeListLength",
       "family": "field",
       "status": "partial",
-      "count": 221,
-      "leafCount": 221,
-      "contentBytes": 221,
-      "wireBytes": 663,
+      "count": 223,
+      "leafCount": 223,
+      "contentBytes": 223,
+      "wireBytes": 669,
       "resources": {
-        "BDHb": 61,
-        "FPHb": 160
+        "BDHb": 62,
+        "FPHb": 161
       },
       "fixtures": [
         {
@@ -4869,6 +4953,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -4914,7 +5002,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=221"
+        "SL__arrayElement=223"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -4923,13 +5011,13 @@
       "name": "OF__refListLength",
       "family": "field",
       "status": "partial",
-      "count": 221,
-      "leafCount": 221,
-      "contentBytes": 221,
-      "wireBytes": 663,
+      "count": 223,
+      "leafCount": 223,
+      "contentBytes": 223,
+      "wireBytes": 669,
       "resources": {
-        "BDHb": 61,
-        "FPHb": 160
+        "BDHb": 62,
+        "FPHb": 161
       },
       "fixtures": [
         {
@@ -5081,6 +5169,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5126,7 +5218,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=221"
+        "SL__arrayElement=223"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -5135,13 +5227,13 @@
       "name": "OF__rsrcID",
       "family": "field",
       "status": "partial",
-      "count": 209,
-      "leafCount": 209,
-      "contentBytes": 418,
-      "wireBytes": 836,
+      "count": 211,
+      "leafCount": 211,
+      "contentBytes": 422,
+      "wireBytes": 844,
       "resources": {
-        "BDHb": 71,
-        "FPHb": 138
+        "BDHb": 72,
+        "FPHb": 139
       },
       "fixtures": [
         {
@@ -5281,6 +5373,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5346,7 +5442,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=209"
+        "SL__arrayElement=211"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -5355,13 +5451,13 @@
       "name": "SL__eventDataNode",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 204,
-      "openCount": 102,
-      "closeCount": 102,
-      "wireBytes": 1122,
+      "count": 208,
+      "openCount": 104,
+      "closeCount": 104,
+      "wireBytes": 1144,
       "resources": {
-        "BDHb": 102,
-        "FPHb": 102
+        "BDHb": 104,
+        "FPHb": 104
       },
       "fixtures": [
         {
@@ -5442,6 +5538,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 4
         },
         {
@@ -5570,7 +5670,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=204"
+        "SL__rootObject=208"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5639,12 +5739,12 @@
       "name": "SL__conPane",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 148,
-      "openCount": 74,
-      "closeCount": 74,
-      "wireBytes": 814,
+      "count": 150,
+      "openCount": 75,
+      "closeCount": 75,
+      "wireBytes": 825,
       "resources": {
-        "BDHb": 148
+        "BDHb": 150
       },
       "fixtures": [
         {
@@ -5764,6 +5864,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -5805,7 +5909,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=148"
+        "SL__arrayElement=150"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5814,13 +5918,13 @@
       "name": "SL__aInsDCO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 146,
-      "openCount": 73,
-      "closeCount": 73,
-      "wireBytes": 803,
+      "count": 148,
+      "openCount": 74,
+      "closeCount": 74,
+      "wireBytes": 814,
       "resources": {
         "BDHb": 4,
-        "FPHb": 142
+        "FPHb": 144
       },
       "fixtures": [
         {
@@ -5952,6 +6056,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6029,7 +6137,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102",
+        "SL__eventDataNode=104",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -6040,13 +6148,13 @@
       "name": "SL__demux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 146,
-      "openCount": 73,
-      "closeCount": 73,
-      "wireBytes": 584,
+      "count": 148,
+      "openCount": 74,
+      "closeCount": 74,
+      "wireBytes": 592,
       "resources": {
         "BDHb": 4,
-        "FPHb": 142
+        "FPHb": 144
       },
       "fixtures": [
         {
@@ -6178,6 +6286,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6255,7 +6367,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102",
+        "SL__eventDataNode=104",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -6266,13 +6378,13 @@
       "name": "OF__format",
       "family": "field",
       "status": "partial",
-      "count": 119,
-      "leafCount": 119,
-      "contentBytes": 468,
-      "wireBytes": 708,
+      "count": 121,
+      "leafCount": 121,
+      "contentBytes": 476,
+      "wireBytes": 720,
       "resources": {
-        "BDHb": 45,
-        "FPHb": 74
+        "BDHb": 46,
+        "FPHb": 75
       },
       "fixtures": [
         {
@@ -6372,6 +6484,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6457,7 +6573,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=119"
+        "SL__arrayElement=121"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -6466,13 +6582,13 @@
       "name": "OF__origin",
       "family": "field",
       "status": "partial",
-      "count": 116,
-      "leafCount": 116,
-      "contentBytes": 464,
-      "wireBytes": 696,
+      "count": 118,
+      "leafCount": 118,
+      "contentBytes": 472,
+      "wireBytes": 708,
       "resources": {
-        "BDHb": 42,
-        "FPHb": 74
+        "BDHb": 43,
+        "FPHb": 75
       },
       "fixtures": [
         {
@@ -6588,6 +6704,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -6681,7 +6801,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=91",
+        "SL__rootObject=93",
         "SL__aInsDCO=25"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
@@ -6691,12 +6811,12 @@
       "name": "OF__compressedWireTable",
       "family": "field",
       "status": "partial",
-      "count": 114,
-      "leafCount": 114,
-      "contentBytes": 722,
-      "wireBytes": 1027,
+      "count": 115,
+      "leafCount": 115,
+      "contentBytes": 734,
+      "wireBytes": 1043,
       "resources": {
-        "BDHb": 114
+        "BDHb": 115
       },
       "fixtures": [
         {
@@ -6820,6 +6940,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -6857,7 +6981,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=114"
+        "SL__arrayElement=115"
       ],
       "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
     },
@@ -6866,12 +6990,12 @@
       "name": "OF__lastSignalKind",
       "family": "field",
       "status": "partial",
-      "count": 114,
-      "leafCount": 114,
-      "contentBytes": 228,
-      "wireBytes": 456,
+      "count": 115,
+      "leafCount": 115,
+      "contentBytes": 230,
+      "wireBytes": 460,
       "resources": {
-        "BDHb": 114
+        "BDHb": 115
       },
       "fixtures": [
         {
@@ -6995,6 +7119,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -7032,7 +7160,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=114"
+        "SL__arrayElement=115"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -7041,12 +7169,12 @@
       "name": "OF__state",
       "family": "field",
       "status": "partial",
-      "count": 114,
-      "leafCount": 114,
-      "contentBytes": 115,
-      "wireBytes": 343,
+      "count": 115,
+      "leafCount": 115,
+      "contentBytes": 116,
+      "wireBytes": 346,
       "resources": {
-        "BDHb": 114
+        "BDHb": 115
       },
       "fixtures": [
         {
@@ -7170,6 +7298,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -7207,7 +7339,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=114"
+        "SL__arrayElement=115"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -7216,12 +7348,12 @@
       "name": "SL__baseTableControl",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 112,
-      "openCount": 56,
-      "closeCount": 56,
-      "wireBytes": 448,
+      "count": 114,
+      "openCount": 57,
+      "closeCount": 57,
+      "wireBytes": 456,
       "resources": {
-        "BDHb": 112
+        "BDHb": 114
       },
       "fixtures": [
         {
@@ -7314,6 +7446,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -7430,7 +7566,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102",
+        "SL__eventDataNode=104",
         "SL__arrayElement=10"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -7440,13 +7576,13 @@
       "name": "OF__dsw",
       "family": "field",
       "status": "partial",
-      "count": 112,
-      "leafCount": 112,
-      "contentBytes": 224,
-      "wireBytes": 448,
+      "count": 114,
+      "leafCount": 114,
+      "contentBytes": 228,
+      "wireBytes": 456,
       "resources": {
-        "BDHb": 70,
-        "FPHb": 42
+        "BDHb": 71,
+        "FPHb": 43
       },
       "fixtures": [
         {
@@ -7542,6 +7678,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7603,8 +7743,8 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=69",
-        "SL__arrayElement=42",
+        "SL__parm=70",
+        "SL__arrayElement=43",
         "OF__loopTestDCO=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -7614,12 +7754,12 @@
       "name": "OF__nodeList",
       "family": "field",
       "status": "partial",
-      "count": 112,
-      "openCount": 56,
-      "closeCount": 56,
-      "wireBytes": 448,
+      "count": 114,
+      "openCount": 57,
+      "closeCount": 57,
+      "wireBytes": 456,
       "resources": {
-        "BDHb": 112
+        "BDHb": 114
       },
       "fixtures": [
         {
@@ -7715,6 +7855,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 2
         },
@@ -7828,7 +7972,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102",
+        "SL__eventDataNode=104",
         "SL__arrayElement=10"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -7838,12 +7982,12 @@
       "name": "SL__lMax",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 102,
-      "openCount": 51,
-      "closeCount": 51,
-      "wireBytes": 561,
+      "count": 104,
+      "openCount": 52,
+      "closeCount": 52,
+      "wireBytes": 572,
       "resources": {
-        "FPHb": 102
+        "FPHb": 104
       },
       "fixtures": [
         {
@@ -7924,6 +8068,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -8052,7 +8200,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102"
+        "SL__eventDataNode=104"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -8061,12 +8209,12 @@
       "name": "SL__oHExt",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 102,
-      "openCount": 51,
-      "closeCount": 51,
-      "wireBytes": 561,
+      "count": 104,
+      "openCount": 52,
+      "closeCount": 52,
+      "wireBytes": 572,
       "resources": {
-        "FPHb": 102
+        "FPHb": 104
       },
       "fixtures": [
         {
@@ -8147,6 +8295,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -8275,7 +8427,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=102"
+        "SL__eventDataNode=104"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -8284,12 +8436,12 @@
       "name": "SL__seqTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 102,
-      "openCount": 51,
-      "closeCount": 51,
-      "wireBytes": 408,
+      "count": 104,
+      "openCount": 52,
+      "closeCount": 52,
+      "wireBytes": 416,
       "resources": {
-        "FPHb": 102
+        "FPHb": 104
       },
       "fixtures": [
         {
@@ -8370,6 +8522,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -8498,7 +8654,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=102"
+        "SL__lMax=104"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -8507,13 +8663,13 @@
       "name": "OF__instrStyle",
       "family": "field",
       "status": "partial",
-      "count": 102,
-      "leafCount": 102,
-      "contentBytes": 102,
-      "wireBytes": 306,
+      "count": 104,
+      "leafCount": 104,
+      "contentBytes": 104,
+      "wireBytes": 312,
       "resources": {
-        "BDHb": 51,
-        "FPHb": 51
+        "BDHb": 52,
+        "FPHb": 52
       },
       "fixtures": [
         {
@@ -8594,6 +8750,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -8722,7 +8882,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=102"
+        "SL__rootObject=104"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -8731,13 +8891,13 @@
       "name": "OF__dBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 102,
-      "leafCount": 102,
-      "contentBytes": 816,
-      "wireBytes": 1122,
+      "count": 104,
+      "leafCount": 104,
+      "contentBytes": 832,
+      "wireBytes": 1144,
       "resources": {
-        "BDHb": 51,
-        "FPHb": 51
+        "BDHb": 52,
+        "FPHb": 52
       },
       "fixtures": [
         {
@@ -8818,6 +8978,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -8946,7 +9110,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=102"
+        "SL__rootObject=104"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -8955,13 +9119,13 @@
       "name": "OF__pBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 102,
-      "leafCount": 102,
-      "contentBytes": 816,
-      "wireBytes": 1122,
+      "count": 104,
+      "leafCount": 104,
+      "contentBytes": 832,
+      "wireBytes": 1144,
       "resources": {
-        "BDHb": 51,
-        "FPHb": 51
+        "BDHb": 52,
+        "FPHb": 52
       },
       "fixtures": [
         {
@@ -9042,6 +9206,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -9170,7 +9338,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=102"
+        "SL__rootObject=104"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -9238,12 +9406,12 @@
       "name": "OF__shortCount",
       "family": "field",
       "status": "partial",
-      "count": 93,
-      "leafCount": 93,
-      "contentBytes": 93,
-      "wireBytes": 279,
+      "count": 94,
+      "leafCount": 94,
+      "contentBytes": 94,
+      "wireBytes": 282,
       "resources": {
-        "BDHb": 93
+        "BDHb": 94
       },
       "fixtures": [
         {
@@ -9367,6 +9535,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -9452,7 +9624,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=93"
+        "SL__arrayElement=94"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -9461,12 +9633,12 @@
       "name": "SL__multiCosm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 80,
-      "openCount": 40,
-      "closeCount": 40,
-      "wireBytes": 320,
+      "count": 82,
+      "openCount": 41,
+      "closeCount": 41,
+      "wireBytes": 328,
       "resources": {
-        "FPHb": 80
+        "FPHb": 82
       },
       "fixtures": [
         {
@@ -9547,6 +9719,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 2
         },
         {
@@ -9631,7 +9807,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=80"
+        "SL__rootObject=82"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -9640,12 +9816,12 @@
       "name": "OF__conNum",
       "family": "field",
       "status": "partial",
-      "count": 80,
-      "leafCount": 80,
-      "contentBytes": 80,
-      "wireBytes": 240,
+      "count": 81,
+      "leafCount": 81,
+      "contentBytes": 81,
+      "wireBytes": 243,
       "resources": {
-        "FPHb": 80
+        "FPHb": 81
       },
       "fixtures": [
         {
@@ -9758,6 +9934,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 1
         },
         {
@@ -9850,7 +10030,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=80"
+        "SL__arrayElement=81"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -9954,13 +10134,13 @@
       "name": "OF__savedSize",
       "family": "field",
       "status": "named-only",
-      "count": 73,
-      "leafCount": 73,
-      "contentBytes": 584,
-      "wireBytes": 803,
+      "count": 74,
+      "leafCount": 74,
+      "contentBytes": 592,
+      "wireBytes": 814,
       "resources": {
         "BDHb": 2,
-        "FPHb": 71
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -10092,6 +10272,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10169,7 +10353,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=51",
+        "SL__eventDataNode=52",
         "SL__mux=13",
         "SL__arrayElement=9"
       ],
@@ -10180,13 +10364,13 @@
       "name": "OF__minPaneSize",
       "family": "field",
       "status": "partial",
-      "count": 73,
-      "leafCount": 73,
-      "contentBytes": 292,
-      "wireBytes": 438,
+      "count": 74,
+      "leafCount": 74,
+      "contentBytes": 296,
+      "wireBytes": 444,
       "resources": {
         "BDHb": 2,
-        "FPHb": 71
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -10318,6 +10502,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10395,7 +10583,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=73"
+        "SL__aInsDCO=74"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
@@ -10404,13 +10592,13 @@
       "name": "OF__paneFlags",
       "family": "field",
       "status": "partial",
-      "count": 73,
-      "leafCount": 73,
-      "contentBytes": 219,
-      "wireBytes": 365,
+      "count": 74,
+      "leafCount": 74,
+      "contentBytes": 222,
+      "wireBytes": 370,
       "resources": {
         "BDHb": 2,
-        "FPHb": 71
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -10542,6 +10730,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10619,7 +10811,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=73"
+        "SL__aInsDCO=74"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -10628,12 +10820,12 @@
       "name": "OF__termListLength",
       "family": "field",
       "status": "partial",
-      "count": 73,
-      "leafCount": 73,
-      "contentBytes": 73,
-      "wireBytes": 219,
+      "count": 74,
+      "leafCount": 74,
+      "contentBytes": 74,
+      "wireBytes": 222,
       "resources": {
-        "FPHb": 73
+        "FPHb": 74
       },
       "fixtures": [
         {
@@ -10749,6 +10941,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -10794,7 +10990,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=73"
+        "SL__arrayElement=74"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -10803,13 +10999,13 @@
       "name": "OF__docBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 73,
-      "leafCount": 73,
-      "contentBytes": 584,
-      "wireBytes": 803,
+      "count": 74,
+      "leafCount": 74,
+      "contentBytes": 592,
+      "wireBytes": 814,
       "resources": {
         "BDHb": 2,
-        "FPHb": 71
+        "FPHb": 72
       },
       "fixtures": [
         {
@@ -10941,6 +11137,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11018,7 +11218,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=73"
+        "SL__aInsDCO=74"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -11027,12 +11227,12 @@
       "name": "OF__StdNumInc",
       "family": "field",
       "status": "partial",
-      "count": 70,
-      "leafCount": 70,
-      "contentBytes": 385,
-      "wireBytes": 570,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 393,
+      "wireBytes": 581,
       "resources": {
-        "FPHb": 70
+        "FPHb": 71
       },
       "fixtures": [
         {
@@ -11128,6 +11328,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11209,7 +11413,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=52",
+        "SL__mux=53",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -11219,12 +11423,12 @@
       "name": "OF__StdNumMax",
       "family": "field",
       "status": "partial",
-      "count": 70,
-      "leafCount": 70,
-      "contentBytes": 433,
-      "wireBytes": 618,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 441,
+      "wireBytes": 629,
       "resources": {
-        "FPHb": 70
+        "FPHb": 71
       },
       "fixtures": [
         {
@@ -11320,6 +11524,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11401,7 +11609,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=52",
+        "SL__mux=53",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -11411,12 +11619,12 @@
       "name": "OF__StdNumMin",
       "family": "field",
       "status": "partial",
-      "count": 70,
-      "leafCount": 70,
-      "contentBytes": 433,
-      "wireBytes": 618,
+      "count": 71,
+      "leafCount": 71,
+      "contentBytes": 441,
+      "wireBytes": 629,
       "resources": {
-        "FPHb": 70
+        "FPHb": 71
       },
       "fixtures": [
         {
@@ -11512,6 +11720,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11593,7 +11805,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=52",
+        "SL__mux=53",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -11603,12 +11815,12 @@
       "name": "OF__clumpNum",
       "family": "field",
       "status": "partial",
-      "count": 57,
-      "leafCount": 57,
-      "contentBytes": 171,
-      "wireBytes": 285,
+      "count": 58,
+      "leafCount": 58,
+      "contentBytes": 174,
+      "wireBytes": 290,
       "resources": {
-        "BDHb": 57
+        "BDHb": 58
       },
       "fixtures": [
         {
@@ -11720,6 +11932,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11773,7 +11989,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=57"
+        "SL__arrayElement=58"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -11782,12 +11998,12 @@
       "name": "OF__ConstValue",
       "family": "field",
       "status": "named-only",
-      "count": 54,
-      "leafCount": 54,
-      "contentBytes": 346,
-      "wireBytes": 469,
+      "count": 55,
+      "leafCount": 55,
+      "contentBytes": 350,
+      "wireBytes": 475,
       "resources": {
-        "BDHb": 54
+        "BDHb": 55
       },
       "fixtures": [
         {
@@ -11887,6 +12103,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -11944,7 +12164,7 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=54"
+        "SL__parm=55"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
@@ -11953,12 +12173,12 @@
       "name": "OF__conId",
       "family": "field",
       "status": "partial",
-      "count": 51,
-      "leafCount": 51,
-      "contentBytes": 102,
-      "wireBytes": 204,
+      "count": 52,
+      "leafCount": 52,
+      "contentBytes": 104,
+      "wireBytes": 208,
       "resources": {
-        "FPHb": 51
+        "FPHb": 52
       },
       "fixtures": [
         {
@@ -12039,6 +12259,10 @@
         },
         {
           "fixture": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
           "count": 1
         },
         {
@@ -12167,7 +12391,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=51"
+        "SL__lMax=52"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -12176,12 +12400,12 @@
       "name": "OF__firstNodeIdx",
       "family": "field",
       "status": "partial",
-      "count": 36,
-      "leafCount": 36,
-      "contentBytes": 36,
-      "wireBytes": 108,
+      "count": 37,
+      "leafCount": 37,
+      "contentBytes": 37,
+      "wireBytes": 111,
       "resources": {
-        "BDHb": 36
+        "BDHb": 37
       },
       "fixtures": [
         {
@@ -12265,6 +12489,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric42_8px_down_auto-connect.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric42_8px_up.vi",
           "count": 1
         },
@@ -12330,7 +12558,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=36"
+        "SL__eventDataNode=37"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },

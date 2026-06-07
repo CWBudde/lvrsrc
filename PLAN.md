@@ -246,7 +246,7 @@ Findings:
 1. Chunks are wire-networks, not edges: a Y-shaped fan-out emits one chunk.
 2. `byte0` is the waypoint count: endpoints plus internal corners. One auto-bend can add two corners because LabVIEW renders an offset path as a Z-shape.
 3. `byte1` is the mode flag: `0x08` auto-routed chain, `0x04` manual chain, `0x00` tree, other values unknown.
-4. Auto-chain (`byte1=0x08`) trailing payload is a sequence of **raw single bytes** (`[direction, 0, source-anchor-x, y-step-mag]` for the single-elbow case), NOT LEB128 — proved by `Numeric42_150px_down.vi` (y-step 150 = single byte `0x96`, where LEB128 would need `96 01`). Manual-chain (`byte1=0x04`) payload is still parsed as LEB128 pending a controlled fixture. Every value is therefore 0-255; magnitudes recoverable from terminal positions are simply omitted (e.g. the post-elbow run).
+4. Auto-chain (`byte1=0x08`) trailing payload is a **byte stream with a `0xff` escape** (`[direction, 0, source-anchor-x, y-step-mag]` for the single-elbow case), NOT LEB128. Magnitudes 0-254 are single bytes — proved by `Numeric42_150px_down.vi` (y-step 150 = `0x96`, where LEB128 would need `96 01`); magnitudes >= 255 use `0xff` + a 2-byte big-endian value — proved by `Numeric42FarFar.vi` (`04 08 00 00 e2 ff 01 90`: yStep `ff 01 90`=400 for an exact 400 px move, confirming 1:1 scaling; anchorX=226 is the elbow offset, not the >400 px sink x). Manual-chain (`byte1=0x04`) payload is still parsed as LEB128 pending a controlled fixture.
 5. Tree-mode payload is fixed-width 2-byte records: `(byte0, byte1)` followed by `byte0 - 1` records for branch/topology geometry.
 
 ### 13.3 Typed wire accessor (completed)

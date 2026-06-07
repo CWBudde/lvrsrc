@@ -406,6 +406,59 @@ func TestChainAutoPath150pxRawByteGroundTruth(t *testing.T) {
 	}
 }
 
+// Numeric42_8px_down_auto-connect.vi was authored from Numeric42.vi by
+// deleting the wire, moving the indicator 8 px down, and reconnecting —
+// so LabVIEW auto-routes fresh and places the elbow at the canonical
+// ~16 px: 04 08 00 00 10 08 (anchorX=16, yStep=8). This is the clean
+// stretch-vs-reconnect counterpart to Numeric42_8px_down.vi (same 8px-
+// down geometry, stretched to anchorX=65).
+func TestChainAutoPathFreshRouteAnchorGroundTruth(t *testing.T) {
+	raw := singleBlockDiagramWirePayload(t, "Numeric42_8px_down_auto-connect.vi")
+	want := []byte{0x04, 0x08, 0x00, 0x00, 0x10, 0x08}
+	if !reflect.DeepEqual(raw, want) {
+		t.Fatalf("raw = %x, want %x", raw, want)
+	}
+	w, _ := HeapWire(wireLeaf(raw), 0)
+	got, ok := w.ChainAutoPath()
+	if !ok {
+		t.Fatal("ChainAutoPath() ok = false")
+	}
+	if got.YStep != 8 || got.SourceAnchorX != 16 {
+		t.Errorf("got %+v, want YStep=8 SourceAnchorX=16", got)
+	}
+}
+
+// Ground truth from Numeric42FarFar.vi (sink ~400 px down, > 400 px
+// right of the constant output). Payload 00 00 e2 ff 01 90:
+//   - anchorX = 0xe2 = 226 (single byte): the ELBOW offset, NOT the
+//     >400 px horizontal distance to the sink — the post-elbow run lives
+//     in the terminal bounds (anchorX is an edit-history artifact; an
+//     earlier save of this fixture had 470 at a SMALLER x offset).
+//   - yStep = 0xff 0x01 0x90 = 0x0190 = 400: the 0xff escape decodes to
+//     EXACTLY the 400 px vertical move, confirming 1:1 pixel scaling for
+//     escaped (>= 255) magnitudes. Big-endian is forced (LE = 0x9001).
+func TestChainAutoPathDecodesFFEscapeGroundTruth(t *testing.T) {
+	raw := singleBlockDiagramWirePayload(t, "Numeric42FarFar.vi")
+	want := []byte{0x04, 0x08, 0x00, 0x00, 0xe2, 0xff, 0x01, 0x90}
+	if !reflect.DeepEqual(raw, want) {
+		t.Fatalf("raw = %x, want %x", raw, want)
+	}
+	w, _ := HeapWire(wireLeaf(raw), 0)
+	if !reflect.DeepEqual(w.ChainGeometry, []uint64{0, 0, 226, 400}) {
+		t.Fatalf("ChainGeometry = %v, want [0 0 226 400]", w.ChainGeometry)
+	}
+	got, ok := w.ChainAutoPath()
+	if !ok {
+		t.Fatal("ChainAutoPath() ok = false on ff-escaped FarFar")
+	}
+	if got.YStep != 400 {
+		t.Errorf("YStep = %d, want 400", got.YStep)
+	}
+	if got.SourceAnchorX != 226 {
+		t.Errorf("SourceAnchorX = %d, want 226", got.SourceAnchorX)
+	}
+}
+
 // Real-corpus single-elbow chunks carry anchors/y-steps across the full
 // 0-255 byte range, not just the 16/65 the Numeric42 probes happened to
 // use. These previously fell out of ChainAutoPath — either because the
@@ -471,12 +524,13 @@ func TestChainAutoPathRejectsNonAutoModes(t *testing.T) {
 // Multi-elbow auto-chain payloads (more than 4 varints) are not
 // yet decoded — must return ok=false until Phase 13.5.
 func TestChainAutoPathDoesNotMakeUpMultiElbowGeometry(t *testing.T) {
-	// Synthetic multi-segment payload: 6 raw trailing bytes
-	// [0, 0, 255, 1, 240, 73]. A payload longer than the 4-byte
-	// single-elbow shape must not be force-fit into ChainAutoPath —
-	// longer auto-chain wires carry per-segment data we have not
-	// ground-truthed. Don't claim more than we can defend.
-	tree := wireLeaf([]byte{0x04, 0x08, 0x00, 0x00, 0xff, 0x01, 0xf0, 0x49})
+	// Synthetic multi-segment payload that decodes to MORE than the
+	// 4 values of a single-elbow shape: [0, 0, 65, 8, 65, 8] (six
+	// values, no 0xff escape). A payload longer than the single-elbow
+	// shape must not be force-fit into ChainAutoPath — longer auto-
+	// chain wires carry per-segment data we have not ground-truthed.
+	// Don't claim more than we can defend.
+	tree := wireLeaf([]byte{0x04, 0x08, 0x00, 0x00, 0x41, 0x08, 0x41, 0x08})
 	w, _ := HeapWire(tree, 0)
 	got, ok := w.ChainAutoPath()
 	if !ok {

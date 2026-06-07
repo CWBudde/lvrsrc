@@ -16,8 +16,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.SchemaVersion != 1 {
 		t.Fatalf("SchemaVersion = %d, want 1", m.SchemaVersion)
 	}
-	if m.Corpus.FixtureCount != 51 {
-		t.Fatalf("Corpus.FixtureCount = %d, want 51", m.Corpus.FixtureCount)
+	if m.Corpus.FixtureCount != 52 {
+		t.Fatalf("Corpus.FixtureCount = %d, want 52", m.Corpus.FixtureCount)
 	}
 	if m.Corpus.ResourceTypeCount != 27 {
 		t.Fatalf("Corpus.ResourceTypeCount = %d, want 27", m.Corpus.ResourceTypeCount)
@@ -31,34 +31,34 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if m.Summary.OpaqueResourceTypes != 0 {
 		t.Fatalf("Summary.OpaqueResourceTypes = %d, want 0", m.Summary.OpaqueResourceTypes)
 	}
-	if got, want := m.Corpus.Breadth.FileKinds["vi"], 40; got != want {
+	if got, want := m.Corpus.Breadth.FileKinds["vi"], 41; got != want {
 		t.Fatalf("Breadth.FileKinds[vi] = %d, want %d", got, want)
 	}
 	if got, want := m.Corpus.Breadth.FileKinds["ctl"], 11; got != want {
 		t.Fatalf("Breadth.FileKinds[ctl] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.FormatVersions["3"], 51; got != want {
+	if got, want := m.Corpus.Breadth.FormatVersions["3"], 52; got != want {
 		t.Fatalf("Breadth.FormatVersions[3] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.LabVIEWVersions["25.3.2"], 38; got != want {
+	if got, want := m.Corpus.Breadth.LabVIEWVersions["25.3.2"], 39; got != want {
 		t.Fatalf("Breadth.LabVIEWVersions[25.3.2] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.Platforms["unknown"], 51; got != want {
+	if got, want := m.Corpus.Breadth.Platforms["unknown"], 52; got != want {
 		t.Fatalf("Breadth.Platforms[unknown] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.TextEncodings["unknown"], 51; got != want {
+	if got, want := m.Corpus.Breadth.TextEncodings["unknown"], 52; got != want {
 		t.Fatalf("Breadth.TextEncodings[unknown] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.PasswordProtection["empty-password"], 40; got != want {
+	if got, want := m.Corpus.Breadth.PasswordProtection["empty-password"], 41; got != want {
 		t.Fatalf("Breadth.PasswordProtection[empty-password] = %d, want %d", got, want)
 	}
 	if got, want := m.Corpus.Breadth.PasswordProtection["no-bdpw"], 11; got != want {
 		t.Fatalf("Breadth.PasswordProtection[no-bdpw] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.LockedFlags["false"], 51; got != want {
+	if got, want := m.Corpus.Breadth.LockedFlags["false"], 52; got != want {
 		t.Fatalf("Breadth.LockedFlags[false] = %d, want %d", got, want)
 	}
-	if got, want := m.Corpus.Breadth.SeparateCompiledCode["true"], 51; got != want {
+	if got, want := m.Corpus.Breadth.SeparateCompiledCode["true"], 52; got != want {
 		t.Fatalf("Breadth.SeparateCompiledCode[true] = %d, want %d", got, want)
 	}
 
@@ -96,11 +96,11 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if mono.Package != "internal/codecs/icon" {
 		t.Fatalf("ICON Package = %q, want %q", mono.Package, "internal/codecs/icon")
 	}
-	if mono.CorpusFixtures != 51 {
-		t.Fatalf("ICON CorpusFixtures = %d, want 51",mono.CorpusFixtures)
+	if mono.CorpusFixtures != 52 {
+		t.Fatalf("ICON CorpusFixtures = %d, want 52",mono.CorpusFixtures)
 	}
-	if mono.CorpusSections != 51 || mono.CorpusBytes != 6528 {
-		t.Fatalf("ICON corpus totals = sections %d bytes %d, want sections 51 bytes 6528", mono.CorpusSections, mono.CorpusBytes)
+	if mono.CorpusSections != 52 || mono.CorpusBytes != 6656 {
+		t.Fatalf("ICON corpus totals = sections %d bytes %d, want sections 52 bytes 6656", mono.CorpusSections, mono.CorpusBytes)
 	}
 	if mono.Disposition.Status != "full-observed" {
 		t.Fatalf("ICON Disposition.Status = %q, want full-observed", mono.Disposition.Status)
@@ -116,8 +116,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if conp.Package != "internal/codecs/conpane" {
 		t.Fatalf("CONP Package = %q, want %q", conp.Package, "internal/codecs/conpane")
 	}
-	if conp.CorpusFixtures != 51 {
-		t.Fatalf("CONP CorpusFixtures = %d, want 51",conp.CorpusFixtures)
+	if conp.CorpusFixtures != 52 {
+		t.Fatalf("CONP CorpusFixtures = %d, want 52",conp.CorpusFixtures)
 	}
 
 	cpc2 := findResource(t, m, "CPC2")
@@ -130,8 +130,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if cpc2.Package != "internal/codecs/conpane" {
 		t.Fatalf("CPC2 Package = %q, want %q", cpc2.Package, "internal/codecs/conpane")
 	}
-	if cpc2.CorpusFixtures != 51 {
-		t.Fatalf("CPC2 CorpusFixtures = %d, want 51",cpc2.CorpusFixtures)
+	if cpc2.CorpusFixtures != 52 {
+		t.Fatalf("CPC2 CorpusFixtures = %d, want 52",cpc2.CorpusFixtures)
 	}
 
 	lifp := findResource(t, m, "LIfp")
@@ -144,8 +144,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if lifp.Package != "internal/codecs/lifp" {
 		t.Fatalf("LIfp Package = %q, want %q", lifp.Package, "internal/codecs/lifp")
 	}
-	if lifp.CorpusFixtures != 51 {
-		t.Fatalf("LIfp CorpusFixtures = %d, want 51",lifp.CorpusFixtures)
+	if lifp.CorpusFixtures != 52 {
+		t.Fatalf("LIfp CorpusFixtures = %d, want 52",lifp.CorpusFixtures)
 	}
 	if lifp.Disposition.Status != "partial" {
 		t.Fatalf("LIfp Disposition.Status = %q, want partial", lifp.Disposition.Status)
@@ -164,8 +164,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if libd.Package != "internal/codecs/libd" {
 		t.Fatalf("LIbd Package = %q, want %q", libd.Package, "internal/codecs/libd")
 	}
-	if libd.CorpusFixtures != 51 {
-		t.Fatalf("LIbd CorpusFixtures = %d, want 51",libd.CorpusFixtures)
+	if libd.CorpusFixtures != 52 {
+		t.Fatalf("LIbd CorpusFixtures = %d, want 52",libd.CorpusFixtures)
 	}
 
 	vers := findResource(t, m, "vers")
@@ -178,8 +178,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if vers.Package != "internal/codecs/vers" {
 		t.Fatalf("vers Package = %q, want %q", vers.Package, "internal/codecs/vers")
 	}
-	if vers.CorpusFixtures != 51 {
-		t.Fatalf("vers CorpusFixtures = %d, want 51",vers.CorpusFixtures)
+	if vers.CorpusFixtures != 52 {
+		t.Fatalf("vers CorpusFixtures = %d, want 52",vers.CorpusFixtures)
 	}
 
 	vctp := findResource(t, m, "VCTP")
@@ -192,8 +192,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if vctp.Package != "internal/codecs/vctp" {
 		t.Fatalf("VCTP Package = %q, want %q", vctp.Package, "internal/codecs/vctp")
 	}
-	if vctp.CorpusFixtures != 51 {
-		t.Fatalf("VCTP CorpusFixtures = %d, want 51",vctp.CorpusFixtures)
+	if vctp.CorpusFixtures != 52 {
+		t.Fatalf("VCTP CorpusFixtures = %d, want 52",vctp.CorpusFixtures)
 	}
 	if vctp.Disposition.Status != "partial" {
 		t.Fatalf("VCTP Disposition.Status = %q, want partial", vctp.Disposition.Status)
@@ -212,8 +212,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if bdpw.Package != "internal/codecs/bdpw" {
 		t.Fatalf("BDPW Package = %q, want %q", bdpw.Package, "internal/codecs/bdpw")
 	}
-	if bdpw.CorpusFixtures != 40 {
-		t.Fatalf("BDPW CorpusFixtures = %d, want 40", bdpw.CorpusFixtures)
+	if bdpw.CorpusFixtures != 41 {
+		t.Fatalf("BDPW CorpusFixtures = %d, want 41", bdpw.CorpusFixtures)
 	}
 
 	bdhb := findResource(t, m, "BDHb")
@@ -226,8 +226,8 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 	if bdhb.Package != "internal/codecs/bdhb" {
 		t.Fatalf("BDHb Package = %q, want %q", bdhb.Package, "internal/codecs/bdhb")
 	}
-	if bdhb.CorpusFixtures != 51 {
-		t.Fatalf("BDHb CorpusFixtures = %d, want 51",bdhb.CorpusFixtures)
+	if bdhb.CorpusFixtures != 52 {
+		t.Fatalf("BDHb CorpusFixtures = %d, want 52",bdhb.CorpusFixtures)
 	}
 	if bdhb.Disposition.Status != "partial" {
 		t.Fatalf("BDHb Disposition.Status = %q, want partial", bdhb.Disposition.Status)
@@ -307,9 +307,9 @@ func TestRenderMarkdownIncludesCoverageSummary(t *testing.T) {
 		"# Resource Coverage",
 		"Typed coverage: 27/27 resource types",
 		"## Corpus Breadth",
-		"File kinds: ctl=11, vi=40",
-		"LabVIEW versions: 25.1.1=3, 25.1.2=10, 25.3.2=38",
-		"Separate compiled code: true=51",
+		"File kinds: ctl=11, vi=41",
+		"LabVIEW versions: 25.1.1=3, 25.1.2=10, 25.3.2=39",
+		"Separate compiled code: true=52",
 		"Byte disposition",
 		"## Byte Disposition",
 		"Status: partial",

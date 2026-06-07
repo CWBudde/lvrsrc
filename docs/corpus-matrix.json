@@ -47,8 +47,15 @@
       "name": "Numeric42FarFar.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["extreme horizontal spacing", "straight-wire chunk stability"],
-      "hypothesis": "A y-aligned source/sink emits the trivial straight chunk (02 08) regardless of horizontal distance — even further apart than Numeric42Far.vi, the chunk is unchanged because horizontal position lives entirely in the terminal bounds."
+      "focus": ["magnitude > 255 escape", "anchorX is not the x distance"],
+      "hypothesis": "Sink ~400 px down and > 400 px right emits 04 08 00 00 e2 ff 01 90. yStep = 0xff 01 90 = 0x0190 = exactly 400, confirming the 0xff big-endian escape decodes 1:1 for magnitudes >= 255. anchorX = 0xe2 = 226 is the elbow offset, NOT the >400 px horizontal distance (which lives in the terminal bounds) — an earlier save had anchorX=470 at a SMALLER x offset, so anchorX is an edit-history artifact, not a distance."
+    },
+    {
+      "name": "Numeric42_8px_down_auto-connect.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["fresh-route source anchor", "8px-down geometry"],
+      "hypothesis": "Authored from Numeric42.vi by deleting the wire, moving the indicator 8 px down, and reconnecting — so LabVIEW auto-routes from scratch and places the elbow at the canonical ~16 px (04 08 00 00 10 08, anchorX=16, yStep=8 down). Clean stretch-vs-reconnect counterpart to Numeric42_8px_down.vi (same 8px-down geometry, but stretched to anchorX=65)."
     },
     {
       "name": "Numeric42Bend.vi",

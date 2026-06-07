@@ -72,6 +72,16 @@
       "status": "confirmed"
     },
     {
+      "id": "auto-chain-ff-escape-over-255",
+      "left": "Numeric42_150px_down.vi",
+      "right": "Numeric42FarFar.vi",
+      "topic": "wire-topology",
+      "focus": ["magnitude >= 255", "0xff big-endian escape"],
+      "hypothesis": "Auto-chain geometry magnitudes < 255 are single raw bytes (150 = 0x96); magnitudes >= 255 use a 0xff escape introducing a 2-byte big-endian value. Numeric42FarFar.vi (sink ~400 px down, > 400 px right) is 04 08 00 00 e2 ff 01 90 -> anchorX=0xe2=226, yStep=0xff 01 90=0x0190=400.",
+      "evidence": "yStep decodes to EXACTLY 400 for a 400 px move, confirming 1:1 pixel scaling for escaped (>= 255) magnitudes. Big-endian is forced: little-endian gives 0x9001. The same escape resolves the three previously-undecodable real chunks (is-float.vi 2d ff 01 28 -> [45,296]; is-int.vi ff 01 85 ff 03 3e -> [389,830]; is-float.vi ff 03 05 ff 02 35 -> [773,565]). Separately, anchorX=226 despite a >400 px horizontal offset (and 470 in an earlier save at a smaller x) confirms anchorX is the edit-history-dependent elbow offset, not the sink's x distance, which lives in the terminal bounds.",
+      "status": "confirmed"
+    },
+    {
       "id": "auto-chain-sign-up",
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_8px_up.vi",
@@ -198,7 +208,7 @@
       "topic": "wire-topology",
       "focus": ["edit history", "sourceAnchorX", "fresh route vs stretch"],
       "hypothesis": "Two VIs with identical terminal positions but different edit history carry different wire chunks. Stretching a wire (moving the sink after drawing) freezes the elbow offset (04 08 00 00 41 08, sourceAnchorX=65); deleting and reconnecting it recomputes the elbow at the canonical short distance (04 08 00 00 10 08, sourceAnchorX=16). sourceAnchorX is therefore edit-history-dependent, not a glyph constant; only yStep reflects real geometry.",
-      "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath.",
+      "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath. Second, cleaner witness with no horizontal confound: Numeric42_8px_down.vi (stretched, 04 08 00 00 41 08) vs Numeric42_8px_down_auto-connect.vi (deleted wire, moved indicator 8px down, reconnected -> fresh route 04 08 00 00 10 08) — identical 8px-down geometry, anchorX 65 vs 16.",
       "status": "confirmed"
     }
   ]
