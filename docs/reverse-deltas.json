@@ -418,6 +418,21 @@
       "hypothesis": "The block-diagram TopTypes type join carries to the front panel: each front-panel control/indicator/tunnel declares its data type with its own OF__typeDesc (tag 283) leaf in the FPHb heap whose content is a 0-based ordinal into the VCTP top-types list (TopTypes[content] = flat VCTP index). A control's DEFAULT value is an OF__DefaultData (tag 571) leaf governed by the same nearest-preceding-typeDesc rule as a block-diagram constant, so the constant decode machinery (resolveConstTypeIndex + fillTypedConst) decodes scalar defaults directly. A control left at its zero default stores no OF__DefaultData (and there is no DFDS block in the corpus); composite cluster defaults resolve a non-fixed-width type and are surfaced raw (WidthMatch=false) rather than decoded.",
       "evidence": "FP type join: Numeric42.vi panel indicator OF__typeDesc content 0x02 -> TopTypes[2]=3 -> VCTP[3]=NumFloat64 (a non-identity hop), independent of its wired I32 diagram constant; _I8/_SGL/_CDB panels -> NumInt8/NumFloat32/NumComplex128. Scalar default: NumericDblInput.vi, a DBL control with its current value committed as the default (Make Current Value Default), stores one 8-byte OF__DefaultData '40 c3 4a 45 87 93 dd 98' whose nearest-preceding typeDesc resolves to NumFloat64 and decodes to exactly 9876.5432 (WidthMatch=true); the same control before committing the default stored zero OF__DefaultData leaves. Corpus-wide: 278 FPHb typeDesc leaves, 0 OF__ConstValue, 0 DFDS blocks, and 6 OF__DefaultData leaves - the 5 in cluster .ctl/ndjson fixtures are composite (response.ctl: version + 'ok'; error-response.ctl: 'error') and resolve to Void/Type(0x64)/String placeholders, so they stay WidthMatch=false/Kind=unknown. pkg/lvvi.Model.FrontPanelTypes joins each object to its type; FrontPanelDefaults decodes scalar defaults and surfaces composites raw. Pinned by TestFrontPanelTypeJoin / TopTypesIndirection / DefaultScalar / DefaultComposite / NoPanel in pkg/lvvi.",
       "status": "confirmed"
+    },
+    {
+      "id": "bd-boolean-constant-dual-width",
+      "left": "BoolToLED.vi",
+      "right": "WhileLoop_Numeric42.vi",
+      "topic": "type-system",
+      "focus": [
+        "OF__ConstValue",
+        "Boolean",
+        "constant literal width",
+        "WidthMatch"
+      ],
+      "hypothesis": "A Boolean block-diagram constant literal (OF__ConstValue under a Boolean DDO) has no single fixed width: TRUE is stored as a 1-byte 0x01 and FALSE as a 2-byte 0x0000. The governing VCTP type is plain Boolean in both cases and its descriptor (FullType + Flags) is identical across the two widths, so the width cannot be predicted from the type; only the value correlates. The value decode is width-independent (any non-zero byte -> true), so both widths decode correctly; only the WidthMatch consistency flag had to be widened to accept 1 or 2 bytes. Why FALSE takes the extra byte is not yet explained - only the widths are corpus-confirmed.",
+      "evidence": "All 5 Boolean OF__ConstValue leaves in the corpus: BoolToLED.vi node48 raw 01 (Boolean Flags 0x00, TRUE), format-string.vi node333/node790 raw 01 (Boolean Flags 0x40, TRUE), WhileLoop_Numeric42.vi node169 raw 00 00 (Boolean Flags 0x00, FALSE), reference-find-by-id.vi node1180 raw 00 00 (Boolean Flags 0x00, FALSE). The enclosing DDO object shape (OF__partID 0x42 -> OF__typeDesc -> OF__ddo close -> OF__ConstValue leaf -> OF__dco close) is identical for the 1- and 2-byte cases, so the 2-byte FALSE is a genuine literal width, not a heap mis-decode or a type mis-resolution. constWidthMatches now accepts 1 or 2 bytes for Boolean; pinned by TestBlockDiagramConstantBoolean in pkg/lvvi.",
+      "status": "confirmed"
     }
   ]
 }

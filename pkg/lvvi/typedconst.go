@@ -220,9 +220,7 @@ func bigEndianUint(b []byte) (uint64, bool) {
 func fillTypedConst(tc *TypedConst, ft vctp.FullType) {
 	tc.FullType = ft.String()
 	tc.HasType = true
-	if w, ok := constLiteralWidth(ft); ok {
-		tc.WidthMatch = w == len(tc.Raw)
-	}
+	tc.WidthMatch = constWidthMatches(ft, len(tc.Raw))
 
 	raw := tc.Raw
 	switch ft {
@@ -300,17 +298,43 @@ func signExtend(u uint64, width int) int64 {
 	return int64(u)
 }
 
-// constLiteralWidth returns the OF__ConstValue byte width for a numeric
-// VCTP type, and ok=false for types whose constant literal has no fixed
-// numeric width (string, array, cluster, …). The widths track the
-// observed encoding: EXT is the 16-byte binary128 constant form (not the
-// 10/16-byte in-memory x87 extended), and the complex widths are twice
-// their component float.
+// constWidthMatches reports whether a raw OF__ConstValue / OF__DefaultData
+// length n is consistent with the resolved VCTP numeric type ft — a
+// consistency check on the heap↔VCTP join that callers expose as
+// TypedConst.WidthMatch.
+//
+// Most numeric types have a single fixed literal width (constLiteralWidth).
+// Boolean is the exception: across the corpus its constant literal is 1 byte
+// for TRUE (0x01) and 2 bytes for FALSE (0x0000) — BoolToLED/format-string
+// store the 1-byte TRUE, WhileLoop_Numeric42/reference-find-by-id the 2-byte
+// FALSE. The VCTP descriptor (including its Flags) is identical for both
+// widths, so the width cannot be predicted from the type alone; the value
+// decode (any non-zero byte → true) is width-independent, so both 1- and
+// 2-byte Boolean literals are accepted here. Why FALSE takes the extra byte
+// is not yet explained — only the widths are corpus-confirmed.
+//
+// Returns false for types whose literal has no fixed numeric width (string,
+// array, cluster, variant, …) so callers treat them as not-a-scalar.
+func constWidthMatches(ft vctp.FullType, n int) bool {
+	if ft == vctp.FullTypeBoolean || ft == vctp.FullTypeBooleanU16 {
+		return n == 1 || n == 2
+	}
+	w, ok := constLiteralWidth(ft)
+	return ok && w == n
+}
+
+// constLiteralWidth returns the fixed OF__ConstValue byte width for a numeric
+// VCTP type, and ok=false for types whose constant literal has no single
+// fixed numeric width (string, array, cluster, the dual-width Boolean, …).
+// The widths track the observed encoding: EXT is the 16-byte binary128
+// constant form (not the 10/16-byte in-memory x87 extended), and the complex
+// widths are twice their component float. Boolean is handled by
+// constWidthMatches, not here, because its literal width is not fixed.
 func constLiteralWidth(ft vctp.FullType) (int, bool) {
 	switch ft {
-	case vctp.FullTypeNumInt8, vctp.FullTypeNumUInt8, vctp.FullTypeBoolean:
+	case vctp.FullTypeNumInt8, vctp.FullTypeNumUInt8:
 		return 1, true
-	case vctp.FullTypeNumInt16, vctp.FullTypeNumUInt16, vctp.FullTypeBooleanU16:
+	case vctp.FullTypeNumInt16, vctp.FullTypeNumUInt16:
 		return 2, true
 	case vctp.FullTypeNumInt32, vctp.FullTypeNumUInt32, vctp.FullTypeNumFloat32:
 		return 4, true

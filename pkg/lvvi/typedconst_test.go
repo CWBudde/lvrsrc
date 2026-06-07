@@ -76,6 +76,65 @@ func TestBlockDiagramConstantTypeJoin(t *testing.T) {
 	}
 }
 
+// TestBlockDiagramConstantBoolean pins the dual-width Boolean literal. Across
+// the whole corpus a TRUE Boolean constant is stored as a 1-byte 0x01 and a
+// FALSE as a 2-byte 0x0000; both resolve to the same Boolean VCTP type (the
+// descriptor flags do not distinguish the widths), so both must come back as
+// Kind=boolean with WidthMatch=true and the value decoded from any non-zero
+// byte. BoolToLED carries the 1-byte TRUE; WhileLoop_Numeric42 and
+// reference-find-by-id carry the 2-byte FALSE — the WidthMatch=false outlier
+// this test closes.
+func TestBlockDiagramConstantBoolean(t *testing.T) {
+	cases := []struct {
+		fixture string
+		node    int
+		rawLen  int
+		value   uint64 // 0 = false, non-zero = true
+	}{
+		{"BoolToLED.vi", 48, 1, 1},
+		{"WhileLoop_Numeric42.vi", 169, 2, 0},
+		{"reference-find-by-id.vi", 1180, 2, 0},
+	}
+	for _, tc := range cases {
+		t.Run(tc.fixture, func(t *testing.T) {
+			f, err := lvrsrc.Open(filepath.Join(corpus.Dir(), tc.fixture), lvrsrc.OpenOptions{})
+			if err != nil {
+				t.Fatalf("Open: %v", err)
+			}
+			m, _ := DecodeKnownResources(f)
+			consts, ok := m.BlockDiagramConstants()
+			if !ok {
+				t.Fatal("no block-diagram heap")
+			}
+			var c *TypedConst
+			for i := range consts {
+				if consts[i].NodeIndex == tc.node {
+					c = &consts[i]
+					break
+				}
+			}
+			if c == nil {
+				t.Fatalf("no constant at node %d", tc.node)
+			}
+			if c.FullType != "Boolean" {
+				t.Errorf("FullType = %q, want Boolean", c.FullType)
+			}
+			if c.Kind != ConstKindBoolean {
+				t.Errorf("Kind = %v, want boolean", c.Kind)
+			}
+			if len(c.Raw) != tc.rawLen {
+				t.Errorf("rawLen = %d, want %d", len(c.Raw), tc.rawLen)
+			}
+			if !c.WidthMatch {
+				t.Errorf("WidthMatch = false; a %d-byte Boolean literal must be accepted", len(c.Raw))
+			}
+			if c.Uint != tc.value {
+				t.Errorf("Uint = %#x, want %#x", c.Uint, tc.value)
+			}
+		})
+	}
+}
+
 // TestBlockDiagramConstantTopTypesIndirection pins the TopTypes
 // indirection that the single-constant controlled fixtures cannot prove.
 // The OF__typeDesc content is a 0-based index into the VCTP top-types
