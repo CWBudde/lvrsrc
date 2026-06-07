@@ -1,50 +1,50 @@
 # Resource Coverage
 
-Typed coverage: 27/27 resource types (100.0%) across 68 corpus fixtures.
+Typed coverage: 27/27 resource types (100.0%) across 69 corpus fixtures.
 
 ## Corpus Breadth
 
-- File kinds: ctl=11, vi=57
-- File extensions: .ctl=11, .vi=57
-- RSRC format versions: 3=68
-- LabVIEW versions: 25.1.1=3, 25.1.2=10, 25.3.2=55
-- Platforms: unknown=68
-- Text encodings: unknown=68
-- Password protection: empty-password=57, no-bdpw=11
-- LVSR locked flag: false=68
-- Separate compiled code: true=68
+- File kinds: ctl=11, vi=58
+- File extensions: .ctl=11, .vi=58
+- RSRC format versions: 3=69
+- LabVIEW versions: 25.1.1=3, 25.1.2=10, 25.3.2=56
+- Platforms: unknown=69
+- Text encodings: unknown=69
+- Password protection: empty-password=58, no-bdpw=11
+- LVSR locked flag: false=69
+- Separate compiled code: true=69
 
 ## Resource Table
 
 | FourCC | Corpus fixtures | Sections | Bytes | Typed decode | Typed encode | Typed validate | Byte disposition  | Safety | Package                   | Read versions | Write versions |
 | ------ | --------------: | -------: | ----: | :----------: | :----------: | :------------: | ----------------- | ------ | ------------------------- | ------------- | -------------- |
-| `BDEx` |              68 |       68 |   300 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/bdex`    | all           | all            |
-| `BDHb` |              68 |       68 | 41740 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/bdhb`    | all           | all            |
-| `BDPW` |              57 |       57 |  2736 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/bdpw`    | all           | all            |
-| `BDSE` |              68 |       68 |   272 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/bdse`    | all           | all            |
-| `CONP` |              68 |       68 |   136 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/conpane` | all           | all            |
-| `CPC2` |              68 |       68 |   136 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/conpane` | all           | all            |
-| `DTHP` |              68 |       68 |   270 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/dthp`    | all           | all            |
-| `FPEx` |              68 |       68 |   308 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/fpex`    | all           | all            |
-| `FPHb` |              68 |       68 | 63391 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/fphb`    | all           | all            |
-| `FPSE` |              68 |       68 |   272 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/fpse`    | all           | all            |
-| `FTAB` |              68 |       68 |  7051 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/ftab`    | all           | all            |
-| `HIST` |              68 |       68 |  2720 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/hist`    | all           | all            |
-| `ICON` |              68 |       68 |  8704 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/icon`    | all           | all            |
+| `BDEx` |              69 |       69 |   304 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/bdex`    | all           | all            |
+| `BDHb` |              69 |       69 | 41982 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/bdhb`    | all           | all            |
+| `BDPW` |              58 |       58 |  2784 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/bdpw`    | all           | all            |
+| `BDSE` |              69 |       69 |   276 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/bdse`    | all           | all            |
+| `CONP` |              69 |       69 |   138 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/conpane` | all           | all            |
+| `CPC2` |              69 |       69 |   138 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/conpane` | all           | all            |
+| `DTHP` |              69 |       69 |   274 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/dthp`    | all           | all            |
+| `FPEx` |              69 |       69 |   312 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/fpex`    | all           | all            |
+| `FPHb` |              69 |       69 | 64122 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/fphb`    | all           | all            |
+| `FPSE` |              69 |       69 |   276 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/fpse`    | all           | all            |
+| `FTAB` |              69 |       69 |  7155 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/ftab`    | all           | all            |
+| `HIST` |              69 |       69 |  2760 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/hist`    | all           | all            |
+| `ICON` |              69 |       69 |  8832 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/icon`    | all           | all            |
 | `LIBN` |              13 |       13 |   263 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/libn`    | all           | all            |
-| `LIbd` |              68 |       68 |  1802 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/libd`    | all           | all            |
-| `LIfp` |              68 |       68 |  1967 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/lifp`    | all           | all            |
-| `LIvi` |              68 |       68 |  1940 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/livi`    | all           | all            |
-| `LVSR` |              68 |       68 | 10880 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/lvsr`    | all           | all            |
-| `MUID` |              68 |       68 |   272 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/muid`    | all           | all            |
-| `RTSG` |              68 |       68 |  1088 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/rtsg`    | all           | all            |
+| `LIbd` |              69 |       69 |  1814 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/libd`    | all           | all            |
+| `LIfp` |              69 |       69 |  1979 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/lifp`    | all           | all            |
+| `LIvi` |              69 |       69 |  1952 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/livi`    | all           | all            |
+| `LVSR` |              69 |       69 | 11040 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/lvsr`    | all           | all            |
+| `MUID` |              69 |       69 |   276 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/muid`    | all           | all            |
+| `RTSG` |              69 |       69 |  1104 |     yes      |     yes      |      yes       | structural        | Tier 1 | `internal/codecs/rtsg`    | all           | all            |
 | `STRG` |               4 |        4 |   577 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/strg`    | all           | all            |
-| `VCTP` |              68 |       68 |  9682 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/vctp`    | all           | all            |
-| `VITS` |              68 |       68 | 64916 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/vits`    | all           | all            |
-| `VPDP` |              68 |       68 |   272 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/vpdp`    | all           | all            |
+| `VCTP` |              69 |       69 |  9745 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/vctp`    | all           | all            |
+| `VITS` |              69 |       69 | 64969 |     yes      |     yes      |      yes       | partial           | Tier 1 | `internal/codecs/vits`    | all           | all            |
+| `VPDP` |              69 |       69 |   276 |     yes      |     yes      |      yes       | opaque-preserving | Tier 1 | `internal/codecs/vpdp`    | all           | all            |
 | `icl4` |               5 |        5 |  2560 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/icon`    | all           | all            |
-| `icl8` |              68 |       68 | 69632 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/icon`    | all           | all            |
-| `vers` |              68 |      112 |  1524 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/vers`    | all           | all            |
+| `icl8` |              69 |       69 | 70656 |     yes      |     yes      |      yes       | full-observed     | Tier 2 | `internal/codecs/icon`    | all           | all            |
+| `vers` |              69 |      113 |  1538 |     yes      |     yes      |      yes       | partial           | Tier 2 | `internal/codecs/vers`    | all           | all            |
 
 ## Byte Disposition
 

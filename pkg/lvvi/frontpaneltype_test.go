@@ -55,6 +55,7 @@ func TestFrontPanelTypeJoin(t *testing.T) {
 		{"Numeric9876Dot5432.vi", "NumFloat64"},
 		{"Numeric42_CSG.vi", "NumComplex64"},
 		{"Numeric42_i5_CDB.vi", "NumComplex128"},
+		{"NumericDblInput.vi", "NumFloat64"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.fixture, func(t *testing.T) {
@@ -121,18 +122,53 @@ func TestFrontPanelTypeTopTypesIndirection(t *testing.T) {
 	}
 }
 
-// TestFrontPanelDefaultsRaw pins the raw OF__DefaultData surface. The only
-// fixtures carrying a default are cluster typedefs, whose blobs are
-// composite (and intentionally not decoded to a typed value); the embedded
-// field literals are still verifiable in the raw bytes.
-func TestFrontPanelDefaultsRaw(t *testing.T) {
+// TestFrontPanelDefaultScalar pins the scalar control-default decode. A DBL
+// control whose current value was committed as the default (Make Current
+// Value Default) stores an 8-byte OF__DefaultData that resolves — through
+// the same nearest-preceding-typeDesc → TopTypes join as a block-diagram
+// constant — to NumFloat64 and decodes to the exact value 9876.5432.
+func TestFrontPanelDefaultScalar(t *testing.T) {
+	f, err := lvrsrc.Open(filepath.Join(corpus.Dir(), "NumericDblInput.vi"), lvrsrc.OpenOptions{})
+	if err != nil {
+		t.Fatalf("Open: %v", err)
+	}
+	m, _ := DecodeKnownResources(f)
+	defs, ok := m.FrontPanelDefaults()
+	if !ok {
+		t.Fatal("no front-panel heap")
+	}
+	if len(defs) != 1 {
+		t.Fatalf("got %d default leaves, want exactly 1", len(defs))
+	}
+	d := defs[0]
+	if !d.HasType {
+		t.Fatal("default did not resolve a VCTP type")
+	}
+	if d.FullType != "NumFloat64" {
+		t.Errorf("FullType = %q, want NumFloat64", d.FullType)
+	}
+	if d.Kind != ConstKindFloat {
+		t.Errorf("Kind = %v, want float", d.Kind)
+	}
+	if !d.WidthMatch {
+		t.Errorf("WidthMatch = false: %d raw bytes for NumFloat64", len(d.Raw))
+	}
+	if d.Float != 9876.5432 {
+		t.Errorf("Float = %v, want 9876.5432 (exact)", d.Float)
+	}
+}
+
+// TestFrontPanelDefaultComposite pins the honest treatment of composite
+// (cluster) defaults: they are surfaced with their raw bytes and the
+// embedded field literals are verifiable, but they are NOT decoded to a
+// scalar value — WidthMatch is false so callers know not to trust a value.
+func TestFrontPanelDefaultComposite(t *testing.T) {
 	cases := []struct {
-		fixture  string
-		wantSub  []byte
-		wantNonE bool
+		fixture string
+		wantSub []byte
 	}{
-		{"response.ctl", []byte("ok"), true},
-		{"error-response.ctl", []byte("error"), true},
+		{"response.ctl", []byte("ok")},
+		{"error-response.ctl", []byte("error")},
 	}
 	for _, tc := range cases {
 		t.Run(tc.fixture, func(t *testing.T) {
@@ -145,13 +181,16 @@ func TestFrontPanelDefaultsRaw(t *testing.T) {
 			if !ok {
 				t.Fatal("no front-panel heap")
 			}
-			if tc.wantNonE && len(defs) == 0 {
+			if len(defs) == 0 {
 				t.Fatal("expected at least one OF__DefaultData leaf")
 			}
 			found := false
 			for _, d := range defs {
 				if bytes.Contains(d.Raw, tc.wantSub) {
 					found = true
+					if d.WidthMatch {
+						t.Errorf("composite default WidthMatch=true; a cluster blob must not pass as a fixed-width scalar")
+					}
 				}
 			}
 			if !found {

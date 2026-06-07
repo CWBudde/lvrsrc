@@ -78,32 +78,27 @@ func (m *Model) FrontPanelTypes() ([]FrontPanelType, bool) {
 	return out, true
 }
 
-// FrontPanelDefault is a raw OF__DefaultData (tag 571) leaf from the FPHb
-// heap — the flattened default value of a front-panel data object.
+// FrontPanelDefaults returns every front-panel control default value
+// (OF__DefaultData, tag 571) in the wrapped file's panel heap, each joined
+// to its VCTP type and decoded — the panel mirror of BlockDiagramConstants.
+// Returns ok=false when there is no FPHb section.
 //
-// In the observed corpus every OF__DefaultData is a *composite* cluster
-// default (e.g. a request/response cluster carrying strings and a version
-// number), not a fixed-width numeric scalar. The object-level type does not
-// resolve cleanly through the TopTypes ordinal here — it points at a
-// Void/placeholder wrapper rather than the cluster type — so decoding the
-// value would require a recursive VCTP cluster flatten/unflatten walk that
-// this type-only layer deliberately does not attempt. The raw bytes are
-// surfaced verbatim for callers that want them, without an invented type.
-type FrontPanelDefault struct {
-	// NodeIndex is the FPHb heap node index of the OF__DefaultData leaf.
-	NodeIndex int
-	// Parent is the heap node index of the enclosing data object, or -1.
-	Parent int
-	// Raw is the verbatim OF__DefaultData payload (a flattened, typically
-	// composite, default value).
-	Raw []byte
-}
-
-// FrontPanelDefaults returns every raw OF__DefaultData (tag 571) leaf in
-// the wrapped file's front-panel heap, in panel order. Returns ok=false
-// when there is no FPHb section. The bytes are surfaced verbatim; see
-// FrontPanelDefault for why no typed value is decoded.
-func (m *Model) FrontPanelDefaults() ([]FrontPanelDefault, bool) {
+// A control's default is a value leaf governed by the same join as a
+// block-diagram constant: the nearest-preceding OF__typeDesc (tag 283) leaf
+// within its enclosing heap object, whose content is a top-types ordinal
+// (TopTypes[content] is the flat VCTP index). NumericDblInput.vi pins the
+// scalar case — a DBL control with its current value committed as the
+// default stores an 8-byte OF__DefaultData (`40 c3 4a 45 87 93 dd 98` =
+// 9876.5432) that resolves to NumFloat64 and decodes exactly.
+//
+// Composite (cluster) defaults are surfaced too, but not decoded to a
+// value: they resolve a type that is not a fixed-width numeric scalar (or
+// whose width does not match the blob), so they come back with
+// WidthMatch=false and Kind=unknown rather than a guessed value. Trust the
+// decoded value only when WidthMatch is true. Fully decoding a composite
+// default would require a recursive VCTP cluster flatten/unflatten walk
+// that this layer does not attempt.
+func (m *Model) FrontPanelDefaults() ([]TypedConst, bool) {
 	if m == nil || m.file == nil {
 		return nil, false
 	}
@@ -111,16 +106,24 @@ func (m *Model) FrontPanelDefaults() ([]FrontPanelDefault, bool) {
 	if !ok {
 		return nil, false
 	}
-	var out []FrontPanelDefault
+	descs, tops, _ := decodeVCTP(m.file)
+
+	var out []TypedConst
 	for i, n := range tree.Nodes {
 		if n.Tag != int32(heap.FieldTagDefaultData) || n.Scope != "leaf" {
 			continue
 		}
-		out = append(out, FrontPanelDefault{
+		tc := TypedConst{
 			NodeIndex: i,
-			Parent:    n.Parent,
 			Raw:       append([]byte(nil), n.Content...),
-		})
+			TypeIndex: -1,
+			Kind:      ConstKindUnknown,
+		}
+		if flat, ok := resolveConstTypeIndex(tree, i, tops); ok && flat >= 0 && flat < len(descs) {
+			tc.TypeIndex = flat
+			fillTypedConst(&tc, descs[flat].FullType)
+		}
+		out = append(out, tc)
 	}
 	return out, true
 }

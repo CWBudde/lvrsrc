@@ -406,16 +406,17 @@
     {
       "id": "fp-control-type-join-via-typedesc",
       "left": "Numeric42.vi",
-      "right": "response.ctl",
+      "right": "NumericDblInput.vi",
       "topic": "type-system",
       "focus": [
         "OF__typeDesc",
         "OF__DefaultData",
         "FPHb",
-        "VCTP TopTypes join"
+        "VCTP TopTypes join",
+        "control default value"
       ],
-      "hypothesis": "The block-diagram TopTypes type join carries to the front panel: each front-panel control/indicator/tunnel declares its data type with its own OF__typeDesc (tag 283) leaf in the FPHb heap whose content is a 0-based ordinal into the VCTP top-types list (TopTypes[content] = flat VCTP index). Unlike the block diagram (where a constant's type is the nearest-preceding typeDesc in its enclosing object), the panel declares each object's type directly with its leaf. Front-panel control DEFAULT values are a separate, unsolved concern: they are not stored as OF__ConstValue, there is no DFDS block in the corpus, and the only OF__DefaultData (tag 571) leaves are composite cluster blobs whose object-level type does not resolve cleanly through the ordinal.",
-      "evidence": "Numeric42.vi panel indicator: OF__typeDesc content 0x02 -> TopTypes[2]=3 -> VCTP[3]=NumFloat64 (a non-identity hop), independent of its wired I32 diagram constant; _I8/_SGL/_CDB panels resolve to NumInt8/NumFloat32/NumComplex128. Corpus-wide there are 278 FPHb typeDesc leaves, 0 OF__ConstValue, 0 DFDS blocks, and 5 OF__DefaultData leaves (request.ctl, response.ctl, error-response.ctl, show-panel-argument--cluster.ctl, ndjson-parser.vi) - all composite cluster defaults (response.ctl: version + string 'ok'; error-response.ctl: 'error'). For those, the nearest-in-enclosing and sibling typeDesc rules resolve to Void/Type(0x64) placeholders, not the cluster type, so no value is decoded. pkg/lvvi.Model.FrontPanelTypes joins each object to its type; FrontPanelDefaults surfaces raw blobs verbatim. Pinned by TestFrontPanelTypeJoin / TopTypesIndirection / DefaultsRaw / NoPanel in pkg/lvvi.",
+      "hypothesis": "The block-diagram TopTypes type join carries to the front panel: each front-panel control/indicator/tunnel declares its data type with its own OF__typeDesc (tag 283) leaf in the FPHb heap whose content is a 0-based ordinal into the VCTP top-types list (TopTypes[content] = flat VCTP index). A control's DEFAULT value is an OF__DefaultData (tag 571) leaf governed by the same nearest-preceding-typeDesc rule as a block-diagram constant, so the constant decode machinery (resolveConstTypeIndex + fillTypedConst) decodes scalar defaults directly. A control left at its zero default stores no OF__DefaultData (and there is no DFDS block in the corpus); composite cluster defaults resolve a non-fixed-width type and are surfaced raw (WidthMatch=false) rather than decoded.",
+      "evidence": "FP type join: Numeric42.vi panel indicator OF__typeDesc content 0x02 -> TopTypes[2]=3 -> VCTP[3]=NumFloat64 (a non-identity hop), independent of its wired I32 diagram constant; _I8/_SGL/_CDB panels -> NumInt8/NumFloat32/NumComplex128. Scalar default: NumericDblInput.vi, a DBL control with its current value committed as the default (Make Current Value Default), stores one 8-byte OF__DefaultData '40 c3 4a 45 87 93 dd 98' whose nearest-preceding typeDesc resolves to NumFloat64 and decodes to exactly 9876.5432 (WidthMatch=true); the same control before committing the default stored zero OF__DefaultData leaves. Corpus-wide: 278 FPHb typeDesc leaves, 0 OF__ConstValue, 0 DFDS blocks, and 6 OF__DefaultData leaves - the 5 in cluster .ctl/ndjson fixtures are composite (response.ctl: version + 'ok'; error-response.ctl: 'error') and resolve to Void/Type(0x64)/String placeholders, so they stay WidthMatch=false/Kind=unknown. pkg/lvvi.Model.FrontPanelTypes joins each object to its type; FrontPanelDefaults decodes scalar defaults and surfaces composites raw. Pinned by TestFrontPanelTypeJoin / TopTypesIndirection / DefaultScalar / DefaultComposite / NoPanel in pkg/lvvi.",
       "status": "confirmed"
     }
   ]

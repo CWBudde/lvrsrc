@@ -5,7 +5,10 @@
       "name": "blank.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["empty VI baseline", "no wire networks"],
+      "focus": [
+        "empty VI baseline",
+        "no wire networks"
+      ],
       "hypothesis": "Baseline for measuring heap/resource noise introduced by adding controls, constants, terminals, and wires."
     },
     {
@@ -23,7 +26,10 @@
       "name": "Numeric4Dot2.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["floating numeric type", "straight auto-routed wire"],
+      "focus": [
+        "floating numeric type",
+        "straight auto-routed wire"
+      ],
       "hypothesis": "Changing numeric type updates VCTP/type metadata without changing the simple wire topology."
     },
     {
@@ -41,98 +47,139 @@
       "name": "Add17Plus25.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["primitive node", "multiple numeric inputs", "numeric output"],
+      "focus": [
+        "primitive node",
+        "multiple numeric inputs",
+        "numeric output"
+      ],
       "hypothesis": "Adding a primitive introduces block-diagram primitive metadata while preserving independently decodable terminal anchors."
     },
     {
       "name": "Numeric42Far.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["horizontal spacing", "auto-routed wire stretch"],
+      "focus": [
+        "horizontal spacing",
+        "auto-routed wire stretch"
+      ],
       "hypothesis": "Horizontal sink movement stretches the inferred post-elbow segment rather than changing the source-side anchor."
     },
     {
       "name": "Numeric42FarFar.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["magnitude > 255 escape", "anchorX is not the x distance"],
+      "focus": [
+        "magnitude > 255 escape",
+        "anchorX is not the x distance"
+      ],
       "hypothesis": "Sink ~400 px down and > 400 px right emits 04 08 00 00 e2 ff 01 90. yStep = 0xff 01 90 = 0x0190 = exactly 400, confirming the 0xff big-endian escape decodes 1:1 for magnitudes >= 255. anchorX = 0xe2 = 226 is the elbow offset, NOT the >400 px horizontal distance (which lives in the terminal bounds) — an earlier save had anchorX=470 at a SMALLER x offset, so anchorX is an edit-history artifact, not a distance."
     },
     {
       "name": "Numeric42_8px_down_auto-connect.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["fresh-route source anchor", "8px-down geometry"],
+      "focus": [
+        "fresh-route source anchor",
+        "8px-down geometry"
+      ],
       "hypothesis": "Authored from Numeric42.vi by deleting the wire, moving the indicator 8 px down, and reconnecting — so LabVIEW auto-routes from scratch and places the elbow at the canonical ~16 px (04 08 00 00 10 08, anchorX=16, yStep=8 down). Clean stretch-vs-reconnect counterpart to Numeric42_8px_down.vi (same 8px-down geometry, but stretched to anchorX=65)."
     },
     {
       "name": "Numeric42Bend.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["single auto-routed bend"],
+      "focus": [
+        "single auto-routed bend"
+      ],
       "hypothesis": "A one-bend auto route uses a four-varint chain payload with direction, reserved zero, source anchor, and y-step magnitude."
     },
     {
       "name": "Numeric42_8px_down.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["8 px vertical sink movement", "auto-chain y-step magnitude"],
+      "focus": [
+        "8 px vertical sink movement",
+        "auto-chain y-step magnitude"
+      ],
       "hypothesis": "Moving the sink 8 px down changes only the y-step magnitude in the chain payload."
     },
     {
       "name": "Numeric42_16px_down.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["16 px vertical sink movement", "auto-chain y-step magnitude"],
+      "focus": [
+        "16 px vertical sink movement",
+        "auto-chain y-step magnitude"
+      ],
       "hypothesis": "Doubling the vertical movement doubles the y-step magnitude."
     },
     {
       "name": "Numeric42_150px_down.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["auto-chain magnitude > 127", "raw-byte vs LEB128 encoding"],
+      "focus": [
+        "auto-chain magnitude > 127",
+        "raw-byte vs LEB128 encoding"
+      ],
       "hypothesis": "Moving the sink 150 px down (past the 127 boundary) encodes the y-step as the single raw byte 0x96=150, not LEB128 (which would need 96 01). Proves auto-chain geometry magnitudes are raw bytes, so ChainAutoPath must drop the {16,65} anchor whitelist and decode values 0-255 verbatim."
     },
     {
       "name": "Numeric42_8px_up.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["negative vertical sink movement", "auto-chain direction flag"],
+      "focus": [
+        "negative vertical sink movement",
+        "auto-chain direction flag"
+      ],
       "hypothesis": "Moving the sink above the source flips a sign/direction field while preserving the y-step magnitude."
     },
     {
       "name": "Numeric42_8px_down_8px_further_right.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["horizontal sink movement", "stretched wire (not reconnected)"],
+      "focus": [
+        "horizontal sink movement",
+        "stretched wire (not reconnected)"
+      ],
       "hypothesis": "Moving the sink right after the wire was drawn STRETCHES the post-elbow segment: the wire chunk is byte-identical to Numeric42_8px_down.vi (04 08 00 00 41 08, sourceAnchorX=65 frozen) — horizontal position lives in the terminal bounds, not the chunk, for a rightward route."
     },
     {
       "name": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["fresh auto-route (reconnect)", "edit-history vs chunk"],
+      "focus": [
+        "fresh auto-route (reconnect)",
+        "edit-history vs chunk"
+      ],
       "hypothesis": "Same terminal positions as Numeric42_8px_down_8px_further_right.vi but the wire was deleted and reconnected, so the auto-router recomputes the elbow at the canonical short distance: 04 08 00 00 10 08 (sourceAnchorX=16). Proves sourceAnchorX is edit-history-dependent, not a glyph constant — the chunk depends on how the wire was last routed, not just final terminal positions."
     },
     {
       "name": "Numeric42TwoNetworks.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["two disconnected wire networks"],
+      "focus": [
+        "two disconnected wire networks"
+      ],
       "hypothesis": "Two disconnected const-to-indicator pairs emit two independent compressed-wire chunks."
     },
     {
       "name": "Numeric42_indicator_left.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["right-to-left auto-route", "multi-elbow auto-chain payload"],
+      "focus": [
+        "right-to-left auto-route",
+        "multi-elbow auto-chain payload"
+      ],
       "hypothesis": "Placing the indicator left of the source forces LabVIEW to auto-route a 6-waypoint (byte0=6) path; observed payload `06 08 00 00 00 00 10 0f 34 23` that ChainAutoPath rejects (>4 varints). A near-aligned variant of the left_auto family (prefix `10 0f`, p1=00) — kept as an independent multi-elbow sample distinct from the calibrated left_auto_* set."
     },
     {
       "name": "Numeric42_left_auto_8px_up.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["leftward multi-elbow auto-route", "vertical magnitude"],
+      "focus": [
+        "leftward multi-elbow auto-route",
+        "vertical magnitude"
+      ],
       "hypothesis": "Indicator placed left of and 8px above the source produces a 6-waypoint doubling-back auto route `06 08 00 01 01 00 10 10 9c 18`. Baseline of the calibrated left_auto family: p0/p2 encode vertical direction (up=(00,01)), p6 the horizontal seed, p7=16+pixels the vertical magnitude (here 0x18=24 → 8px)."
     },
     {
@@ -149,21 +196,30 @@
       "name": "Numeric42_left_auto_8px_down.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["leftward multi-elbow auto-route", "direction sign"],
+      "focus": [
+        "leftward multi-elbow auto-route",
+        "direction sign"
+      ],
       "hypothesis": "Same X as the up fixtures but indicator 8px below source: `06 08 01 01 00 00 10 10 9c 18`. Versus left_auto_8px_up only p0/p2 flip (down=(01,00)) while p6/p7 are unchanged, isolating vertical direction from magnitude and from horizontal position."
     },
     {
       "name": "Numeric42_left_auto_8px_down+8px_right.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["leftward multi-elbow auto-route", "horizontal calibration"],
+      "focus": [
+        "leftward multi-elbow auto-route",
+        "horizontal calibration"
+      ],
       "hypothesis": "left_auto_8px_down with the indicator moved 8px right (closer to the source): `06 08 01 01 00 00 10 10 94 18`. Only p6 changes (0x9c→0x94, −8 for +8px right), confirming p6 = horizontal seed at 1 unit/pixel, decreasing as the sink approaches the source."
     },
     {
       "name": "Numeric42_manual_elbows.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["attempted manual edits", "auto-chain re-snap"],
+      "focus": [
+        "attempted manual edits",
+        "auto-chain re-snap"
+      ],
       "hypothesis": "Manual elbow edits made in the LabVIEW editor were re-snapped to a single-elbow auto-route by LabVIEW's wire cleanup; observed payload `04 08 00 00 fe 70` is a normal 4-waypoint auto-chain (byte1=0x08, not 0x04). Confirms that manual-mode (byte1=0x04) requires a non-orthogonal drag the editor cannot fold back; Numeric42Bend.vi remains the only manual-chain ground truth."
     },
     {
@@ -192,126 +248,177 @@
       "name": "Numeric42TwoIndicatorsY.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["2-branch Y tree", "tree endpoint records"],
+      "focus": [
+        "2-branch Y tree",
+        "tree endpoint records"
+      ],
       "hypothesis": "A two-output fan-out uses tree mode with trailing endpoint records."
     },
     {
       "name": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["2-branch Y tree geometry perturbation"],
+      "focus": [
+        "2-branch Y tree geometry perturbation"
+      ],
       "hypothesis": "Moving each branch endpoint perturbs the matching endpoint record and leaves structural records stable."
     },
     {
       "name": "Numeric42ThreeIndicatorsTfork.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["3-branch T-fork", "straight-through endpoint vs taps"],
+      "focus": [
+        "3-branch T-fork",
+        "straight-through endpoint vs taps"
+      ],
       "hypothesis": "A three-output fan-out with one indicator far to the right (T-fork, not a pure vertical Y-stack) emits byte0=7: the straight-through leg is a genuine far-right (V, H) endpoint ({V:66, H:196}); the two tap records' second byte is a branch offset, not a horizontal coordinate."
     },
     {
       "name": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["3-branch T-fork tap perturbation"],
+      "focus": [
+        "3-branch T-fork tap perturbation"
+      ],
       "hypothesis": "Moving the bottom tap 8 px down changes exactly one trailing record by +8, in the byte TreeEndpoints labels H — confirming the byte tracks the edited branch while showing it is a branch offset, not a horizontal coordinate."
     },
     {
       "name": "Numeric42ThreeIndicatorsYComb.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["comb fan-out topology", "4+ branch tree records"],
+      "focus": [
+        "comb fan-out topology",
+        "4+ branch tree records"
+      ],
       "hypothesis": "Comb topology adds junction/span records that cannot be decoded as a simple trailing endpoint list."
     },
     {
       "name": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["comb geometry perturbation"],
+      "focus": [
+        "comb geometry perturbation"
+      ],
       "hypothesis": "Moving the middle branch changes adjacent span/junction records in opposite directions."
     },
     {
       "name": "Numeric42FourIndicatorsY_single.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["4-output single network", "large tree payload"],
+      "focus": [
+        "4-output single network",
+        "large tree payload"
+      ],
       "hypothesis": "Four outputs can produce a larger topology-dependent tree payload that must remain raw until more comb cases are mapped."
     },
     {
       "name": "action.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["control typedef", "enum/action data"],
+      "focus": [
+        "control typedef",
+        "enum/action data"
+      ],
       "hypothesis": "Control fixtures broaden VCTP and connector-pane coverage outside simple VI diagrams."
     },
     {
       "name": "config-data.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["configuration cluster", "control front panel"],
+      "focus": [
+        "configuration cluster",
+        "control front panel"
+      ],
       "hypothesis": "Cluster-heavy controls exercise front-panel heap grouping and type descriptor labels."
     },
     {
       "name": "create-vi-params.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["parameter cluster", "string/path-like data"],
+      "focus": [
+        "parameter cluster",
+        "string/path-like data"
+      ],
       "hypothesis": "Parameter controls exercise nested type descriptors and front-panel string-like widgets."
     },
     {
       "name": "datatypes.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["numeric ranges", "typed data fills"],
+      "focus": [
+        "numeric ranges",
+        "typed data fills"
+      ],
       "hypothesis": "Numeric min/max/increment data fills can be resolved through DTHP and VCTP."
     },
     {
       "name": "error-response.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["error cluster", "status/code/source fields"],
+      "focus": [
+        "error cluster",
+        "status/code/source fields"
+      ],
       "hypothesis": "Common LabVIEW error clusters exercise nested cluster type descriptors."
     },
     {
       "name": "mcp-creator-states.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["state enum/control", "typedef metadata"],
+      "focus": [
+        "state enum/control",
+        "typedef metadata"
+      ],
       "hypothesis": "State controls help identify enum/ring type metadata in VCTP."
     },
     {
       "name": "module-data--cluster.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["large cluster", "library membership"],
+      "focus": [
+        "large cluster",
+        "library membership"
+      ],
       "hypothesis": "Large clusters stress VCTP descriptor order and front-panel heap containment."
     },
     {
       "name": "reference-type.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["reference type", "refnum metadata"],
+      "focus": [
+        "reference type",
+        "refnum metadata"
+      ],
       "hypothesis": "Reference controls provide seed coverage for refnum descriptor and widget classification."
     },
     {
       "name": "request.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["request cluster", "string and variant-like payloads"],
+      "focus": [
+        "request cluster",
+        "string and variant-like payloads"
+      ],
       "hypothesis": "Request payload controls broaden cluster/string descriptor coverage."
     },
     {
       "name": "response.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["response cluster", "status/data fields"],
+      "focus": [
+        "response cluster",
+        "status/data fields"
+      ],
       "hypothesis": "Response controls provide a sibling shape for request/error cluster comparisons."
     },
     {
       "name": "show-panel-argument--cluster.ctl",
       "kind": "ctl",
       "family": "labview-mcp",
-      "focus": ["cluster control", "front-panel bounds"],
+      "focus": [
+        "cluster control",
+        "front-panel bounds"
+      ],
       "hypothesis": "Cluster controls with visible fields exercise front-panel containment and bounds promotion."
     },
     {
@@ -329,28 +436,40 @@
       "name": "get-vi-description.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["STRG-bearing VI", "metadata editing baseline"],
+      "focus": [
+        "STRG-bearing VI",
+        "metadata editing baseline"
+      ],
       "hypothesis": "A VI with a non-empty description verifies safe metadata reads and edits."
     },
     {
       "name": "is-float.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["floating-point type test", "no STRG baseline"],
+      "focus": [
+        "floating-point type test",
+        "no STRG baseline"
+      ],
       "hypothesis": "A no-description VI checks STRG absence handling and float type descriptors."
     },
     {
       "name": "is-int.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["integer type test", "numeric primitive"],
+      "focus": [
+        "integer type test",
+        "numeric primitive"
+      ],
       "hypothesis": "Integer type tests exercise numeric descriptor and primitive metadata."
     },
     {
       "name": "is-string.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["string type test", "string primitive"],
+      "focus": [
+        "string type test",
+        "string primitive"
+      ],
       "hypothesis": "String type tests exercise string descriptor and primitive metadata."
     },
     {
@@ -367,14 +486,20 @@
       "name": "module-timeout--constant.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["constant value", "module cluster dependency"],
+      "focus": [
+        "constant value",
+        "module cluster dependency"
+      ],
       "hypothesis": "Module constants exercise data-fill and dependency metadata around library-backed types."
     },
     {
       "name": "ndjson-parser.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["parser diagram", "larger wire graph"],
+      "focus": [
+        "parser diagram",
+        "larger wire graph"
+      ],
       "hypothesis": "A larger real diagram supplies independent wire tree/comb payloads outside synthetic fixtures."
     },
     {
@@ -392,7 +517,10 @@
       "name": "write-ini.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["file/path workflow", "external dependency paths"],
+      "focus": [
+        "file/path workflow",
+        "external dependency paths"
+      ],
       "hypothesis": "File I/O diagrams exercise path refs and dependency metadata."
     },
     {
@@ -570,6 +698,17 @@
         "CEXT representation"
       ],
       "hypothesis": "A CEXT (complex extended) constant's OF__ConstValue is 32 bytes = two big-endian IEEE-754 binary128 components, real-then-imaginary (42+0i; real half exponent 5, imaginary half all zero)."
+    },
+    {
+      "name": "NumericDblInput.vi",
+      "kind": "vi",
+      "family": "controlled-default",
+      "focus": [
+        "front-panel control default",
+        "OF__DefaultData",
+        "FPHb type join"
+      ],
+      "hypothesis": "A DBL front-panel control whose current value is committed as the default (Make Current Value Default) stores an 8-byte OF__DefaultData leaf (9876.5432 = 40 c3 4a 45 87 93 dd 98) that resolves through the same nearest-preceding OF__typeDesc -> TopTypes join as a block-diagram constant (-> NumFloat64) and decodes exactly; controls left at the zero default store no OF__DefaultData."
     }
   ],
   "gaps": [
@@ -621,19 +760,28 @@
     {
       "feature": "decorations",
       "priority": "medium",
-      "neededFixtures": ["Decoration_Box.vi", "Decoration_LineMoved.vi"],
+      "neededFixtures": [
+        "Decoration_Box.vi",
+        "Decoration_LineMoved.vi"
+      ],
       "notes": "Separate decorative shapes from controls and diagram primitives."
     },
     {
       "feature": "arrays",
       "priority": "high",
-      "neededFixtures": ["Array_Numeric1D.ctl", "Array_Numeric2D.ctl"],
+      "neededFixtures": [
+        "Array_Numeric1D.ctl",
+        "Array_Numeric2D.ctl"
+      ],
       "notes": "Map array element containers, index displays, and VCTP array descriptors."
     },
     {
       "feature": "graphs",
       "priority": "medium",
-      "neededFixtures": ["WaveformGraph_Basic.vi", "WaveformGraph_Styled.vi"],
+      "neededFixtures": [
+        "WaveformGraph_Basic.vi",
+        "WaveformGraph_Styled.vi"
+      ],
       "notes": "Decode graph plot/scale metadata beyond generic widget classification."
     },
     {
@@ -650,19 +798,28 @@
     {
       "feature": "refnums",
       "priority": "medium",
-      "neededFixtures": ["VIRefnum_Control.ctl", "FileRefnum_Control.ctl"],
+      "neededFixtures": [
+        "VIRefnum_Control.ctl",
+        "FileRefnum_Control.ctl"
+      ],
       "notes": "Expand refnum type descriptors and widget-specific fields."
     },
     {
       "feature": "variants",
       "priority": "medium",
-      "neededFixtures": ["Variant_Control.ctl", "Variant_ToData.vi"],
+      "neededFixtures": [
+        "Variant_Control.ctl",
+        "Variant_ToData.vi"
+      ],
       "notes": "Ground variant controls and VITS/LVVariant payload interpretation."
     },
     {
       "feature": "subVI calls",
       "priority": "high",
-      "neededFixtures": ["Caller_SubVI_Basic.vi", "Callee_SubVI_Basic.vi"],
+      "neededFixtures": [
+        "Caller_SubVI_Basic.vi",
+        "Callee_SubVI_Basic.vi"
+      ],
       "notes": "Connect BDHb call-site nodes to LIbd/LIvi dependency entries."
     },
     {

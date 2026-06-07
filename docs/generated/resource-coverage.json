@@ -1,40 +1,40 @@
 {
   "schemaVersion": 1,
   "corpus": {
-    "fixtureCount": 68,
+    "fixtureCount": 69,
     "resourceTypeCount": 27,
     "breadth": {
       "fileKinds": {
         "ctl": 11,
-        "vi": 57
+        "vi": 58
       },
       "fileExtensions": {
         ".ctl": 11,
-        ".vi": 57
+        ".vi": 58
       },
       "formatVersions": {
-        "3": 68
+        "3": 69
       },
       "labviewVersions": {
         "25.1.1": 3,
         "25.1.2": 10,
-        "25.3.2": 55
+        "25.3.2": 56
       },
       "platforms": {
-        "unknown": 68
+        "unknown": 69
       },
       "textEncodings": {
-        "unknown": 68
+        "unknown": 69
       },
       "passwordProtection": {
-        "empty-password": 57,
+        "empty-password": 58,
         "no-bdpw": 11
       },
       "lockedFlags": {
-        "false": 68
+        "false": 69
       },
       "separateCompiledCode": {
-        "true": 68
+        "true": 69
       }
     }
   },
@@ -47,9 +47,9 @@
   "resources": [
     {
       "fourCC": "BDEx",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 300,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 304,
       "typed": {
         "decode": true,
         "encode": true,
@@ -80,9 +80,9 @@
     },
     {
       "fourCC": "BDHb",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 41740,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 41982,
       "typed": {
         "decode": true,
         "encode": true,
@@ -134,9 +134,9 @@
     },
     {
       "fourCC": "BDPW",
-      "corpusFixtures": 57,
-      "corpusSections": 57,
-      "corpusBytes": 2736,
+      "corpusFixtures": 58,
+      "corpusSections": 58,
+      "corpusBytes": 2784,
       "typed": {
         "decode": true,
         "encode": true,
@@ -167,9 +167,9 @@
     },
     {
       "fourCC": "BDSE",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 272,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 276,
       "typed": {
         "decode": true,
         "encode": true,
@@ -200,9 +200,9 @@
     },
     {
       "fourCC": "CONP",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 136,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 138,
       "typed": {
         "decode": true,
         "encode": true,
@@ -234,9 +234,9 @@
     },
     {
       "fourCC": "CPC2",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 136,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 138,
       "typed": {
         "decode": true,
         "encode": true,
@@ -267,9 +267,9 @@
     },
     {
       "fourCC": "DTHP",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 270,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 274,
       "typed": {
         "decode": true,
         "encode": true,
@@ -300,9 +300,9 @@
     },
     {
       "fourCC": "FPEx",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 308,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 312,
       "typed": {
         "decode": true,
         "encode": true,
@@ -333,9 +333,9 @@
     },
     {
       "fourCC": "FPHb",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 63391,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 64122,
       "typed": {
         "decode": true,
         "encode": true,
@@ -386,9 +386,9 @@
     },
     {
       "fourCC": "FPSE",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 272,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 276,
       "typed": {
         "decode": true,
         "encode": true,
@@ -419,9 +419,9 @@
     },
     {
       "fourCC": "FTAB",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 7051,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 7155,
       "typed": {
         "decode": true,
         "encode": true,
@@ -452,9 +452,9 @@
     },
     {
       "fourCC": "HIST",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 2720,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 2760,
       "typed": {
         "decode": true,
         "encode": true,
@@ -485,9 +485,9 @@
     },
     {
       "fourCC": "ICON",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 8704,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 8832,
       "typed": {
         "decode": true,
         "encode": true,
@@ -548,9 +548,9 @@
     },
     {
       "fourCC": "LIbd",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 1802,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 1814,
       "typed": {
         "decode": true,
         "encode": true,
@@ -587,9 +587,9 @@
     },
     {
       "fourCC": "LIfp",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 1967,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 1979,
       "typed": {
         "decode": true,
         "encode": true,
@@ -626,9 +626,9 @@
     },
     {
       "fourCC": "LIvi",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 1940,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 1952,
       "typed": {
         "decode": true,
         "encode": true,
@@ -666,9 +666,9 @@
     },
     {
       "fourCC": "LVSR",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 10880,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 11040,
       "typed": {
         "decode": true,
         "encode": true,
@@ -700,9 +700,9 @@
     },
     {
       "fourCC": "MUID",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 272,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 276,
       "typed": {
         "decode": true,
         "encode": true,
@@ -733,9 +733,9 @@
     },
     {
       "fourCC": "RTSG",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 1088,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 1104,
       "typed": {
         "decode": true,
         "encode": true,
@@ -799,9 +799,9 @@
     },
     {
       "fourCC": "VCTP",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 9682,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 9745,
       "typed": {
         "decode": true,
         "encode": true,
@@ -841,9 +841,9 @@
     },
     {
       "fourCC": "VITS",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 64916,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 64969,
       "typed": {
         "decode": true,
         "encode": true,
@@ -874,9 +874,9 @@
     },
     {
       "fourCC": "VPDP",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 272,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 276,
       "typed": {
         "decode": true,
         "encode": true,
@@ -937,9 +937,9 @@
     },
     {
       "fourCC": "icl8",
-      "corpusFixtures": 68,
-      "corpusSections": 68,
-      "corpusBytes": 69632,
+      "corpusFixtures": 69,
+      "corpusSections": 69,
+      "corpusBytes": 70656,
       "typed": {
         "decode": true,
         "encode": true,
@@ -967,9 +967,9 @@
     },
     {
       "fourCC": "vers",
-      "corpusFixtures": 68,
-      "corpusSections": 112,
-      "corpusBytes": 1524,
+      "corpusFixtures": 69,
+      "corpusSections": 113,
+      "corpusBytes": 1538,
       "typed": {
         "decode": true,
         "encode": true,

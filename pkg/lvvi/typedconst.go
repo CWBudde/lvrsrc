@@ -66,7 +66,10 @@ func (k ConstKind) String() string {
 // produce the correct typed value, including the 16/32-byte EXT/CDB/CEXT
 // forms that HeapConstValue declines.
 type TypedConst struct {
-	// NodeIndex is the BD heap node index of the OF__ConstValue leaf.
+	// NodeIndex is the heap node index of the value leaf — the
+	// OF__ConstValue leaf for a block-diagram constant
+	// (BlockDiagramConstants) or the OF__DefaultData leaf for a
+	// front-panel control default (FrontPanelDefaults).
 	NodeIndex int
 	// Raw is the verbatim OF__ConstValue payload.
 	Raw []byte
