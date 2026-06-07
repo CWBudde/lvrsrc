@@ -455,6 +455,27 @@
       "family": "controlled-constant",
       "focus": ["fixed-point constant literal", "OF__ConstValue", "FXD representation"],
       "hypothesis": "A FXD constant's OF__ConstValue is an 8-byte big-endian fixed-point container; 9876.5432 is stored as magnitude 0x26948b = 2528395 = round(9876.5432 * 2^8), with the radix-point position set by the fixed-point word/integer-word-length config."
+    },
+    {
+      "name": "Numeric42_CSG.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["complex constant literal", "OF__ConstValue", "CSG representation"],
+      "hypothesis": "A CSG (complex single) constant's OF__ConstValue is 8 bytes = two big-endian IEEE-754 binary32 components, real-then-imaginary (42+0i = 42 28 00 00 | 00 00 00 00)."
+    },
+    {
+      "name": "Numeric42_i5_CDB.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["complex constant literal", "OF__ConstValue", "CDB representation"],
+      "hypothesis": "A CDB (complex double) constant's OF__ConstValue is 16 bytes = two big-endian IEEE-754 binary64 components, real-then-imaginary (42+5i = 40 45.. | 40 14..). The 16-byte width is EXT-vs-CDB ambiguous without the VCTP type."
+    },
+    {
+      "name": "Numeric42_CEXT.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["complex constant literal", "OF__ConstValue", "CEXT representation"],
+      "hypothesis": "A CEXT (complex extended) constant's OF__ConstValue is 32 bytes = two big-endian IEEE-754 binary128 components, real-then-imaginary (42+0i; real half exponent 5, imaginary half all zero)."
     }
   ],
   "gaps": [

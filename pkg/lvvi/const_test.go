@@ -217,3 +217,82 @@ func TestHeapConstValueExtendedAndFixedPoint(t *testing.T) {
 		}
 	})
 }
+
+// TestHeapConstValueComplex pins the complex-constant encodings. A
+// complex constant's OF__ConstValue is its two IEEE-754 components,
+// real-then-imaginary, each in the underlying float's big-endian width:
+// CSG = 2x binary32 (8 bytes), CDB = 2x binary64 (16 bytes), CEXT =
+// 2x binary128 (32 bytes). The 8-byte CSG payload is accepted by
+// HeapConstValue but its integer projection is not the complex value;
+// the 16/32-byte CDB/CEXT payloads exceed the numeric band and are
+// declined (16 bytes is also EXT-vs-CDB ambiguous without the type).
+func TestHeapConstValueComplex(t *testing.T) {
+	t.Run("CSG", func(t *testing.T) {
+		raw, accepted := rawConstLeaf(t, "Numeric42_CSG.vi")
+		wantRaw := []byte{0x42, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+		if len(raw) != 8 {
+			t.Fatalf("CSG length = %d, want 8 (% x)", len(raw), raw)
+		}
+		for i := range wantRaw {
+			if raw[i] != wantRaw[i] {
+				t.Fatalf("CSG raw = % x, want % x", raw, wantRaw)
+			}
+		}
+		re := math.Float32frombits(binary.BigEndian.Uint32(raw[0:4]))
+		im := math.Float32frombits(binary.BigEndian.Uint32(raw[4:8]))
+		if re != 42 || im != 0 {
+			t.Errorf("CSG re+im = %v+%vi, want 42+0i", re, im)
+		}
+		if !accepted { // 8-byte payload still fits the numeric band
+			t.Error("HeapConstValue should accept the 8-byte CSG leaf (raw bytes)")
+		}
+	})
+
+	t.Run("CDB", func(t *testing.T) {
+		raw, accepted := rawConstLeaf(t, "Numeric42_i5_CDB.vi")
+		wantRaw := []byte{
+			0x40, 0x45, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+			0x40, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+		}
+		if len(raw) != 16 {
+			t.Fatalf("CDB length = %d, want 16 (% x)", len(raw), raw)
+		}
+		for i := range wantRaw {
+			if raw[i] != wantRaw[i] {
+				t.Fatalf("CDB raw = % x, want % x", raw, wantRaw)
+			}
+		}
+		re := math.Float64frombits(binary.BigEndian.Uint64(raw[0:8]))
+		im := math.Float64frombits(binary.BigEndian.Uint64(raw[8:16]))
+		if re != 42 || im != 5 {
+			t.Errorf("CDB re+im = %v+%vi, want 42+5i", re, im)
+		}
+		if accepted {
+			t.Error("HeapConstValue should decline the 16-byte CDB leaf")
+		}
+	})
+
+	t.Run("CEXT", func(t *testing.T) {
+		raw, accepted := rawConstLeaf(t, "Numeric42_CEXT.vi")
+		if len(raw) != 32 {
+			t.Fatalf("CEXT length = %d, want 32 (% x)", len(raw), raw)
+		}
+		// real half: binary128 with unbiased exponent 5 (42 ∈ [2^5, 2^6)).
+		reHi := binary.BigEndian.Uint64(raw[0:8])
+		if exp := int((reHi>>48)&0x7fff) - 16383; exp != 5 {
+			t.Errorf("CEXT real binary128 unbiased exponent = %d, want 5", exp)
+		}
+		if raw[0] != 0x40 || raw[1] != 0x04 || raw[2] != 0x50 {
+			t.Errorf("CEXT real prefix = % x, want 40 04 50", raw[0:3])
+		}
+		// imaginary half (bytes 16..31) is all zero (im = 0).
+		for i := 16; i < 32; i++ {
+			if raw[i] != 0 {
+				t.Fatalf("CEXT imaginary half not zero: % x", raw[16:32])
+			}
+		}
+		if accepted {
+			t.Error("HeapConstValue should decline the 32-byte CEXT leaf")
+		}
+	})
+}

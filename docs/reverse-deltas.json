@@ -374,6 +374,20 @@
       "hypothesis": "Floating-point constants store big-endian IEEE-754 of the type's width: SGL = 4-byte binary32, DBL = 8-byte binary64, EXT = 16-byte binary128 (quad, not 80-bit x87). FXD is an 8-byte big-endian fixed-point container (value x 2^k).",
       "evidence": "SGL 46 1a 52 2c = float32(9876.5432)=9876.54297; DBL 40 c3 4a 45 87 93 dd 98 = 9876.5432; EXT 40 0c 34 a4 58 00... = binary128 with unbiased exponent 13 (9876.54297); FXD 00 00 26 94 8b 00 00 00 = 0x26948b=2528395=round(9876.5432*2^8). Pinned by TestHeapConstValueFloatGroundTruth and TestHeapConstValueExtendedAndFixedPoint.",
       "status": "confirmed"
+    },
+    {
+      "id": "const-value-complex-components",
+      "left": "Numeric42_CSG.vi",
+      "right": "Numeric42_i5_CDB.vi",
+      "topic": "type-system",
+      "focus": [
+        "OF__ConstValue",
+        "complex representation",
+        "CSG/CDB/CEXT"
+      ],
+      "hypothesis": "A complex constant's OF__ConstValue is its two IEEE-754 components written real-then-imaginary, each in the underlying float's big-endian width: CSG = 2x binary32 (8 bytes), CDB = 2x binary64 (16 bytes), CEXT = 2x binary128 (32 bytes). This makes width an ambiguous type key past 8 bytes (16 = EXT or CDB; 32 = CEXT or string), confirming the VCTP type is required to disambiguate.",
+      "evidence": "CSG 42+0i = 42 28 00 00 | 00 00 00 00 (2x binary32); CDB 42+5i = 40 45 00 00 00 00 00 00 | 40 14 00 00 00 00 00 00 (2x binary64); CEXT 42+0i = 32 bytes, real-half binary128 exponent 5, imaginary half all zero. Pinned by TestHeapConstValueComplex.",
+      "status": "confirmed"
     }
   ]
 }
