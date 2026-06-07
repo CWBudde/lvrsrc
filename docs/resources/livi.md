@@ -13,13 +13,13 @@ and project libraries. Sister to `LIfp` (front-panel imports) and `LIbd`
 
 ## Wire layout
 
-| Offset | Size | Field        | Notes                                                                         |
-| -----: | ---: | ------------ | ----------------------------------------------------------------------------- |
+| Offset | Size | Field        | Notes                                                                                                              |
+| -----: | ---: | ------------ | ------------------------------------------------------------------------------------------------------------------ |
 |      0 |    2 | `Version`    | Big-endian uint16. Corpus is uniformly `0x0001`. (Pylabview reads this as the `nextLinkInfo=1` list-start marker.) |
-|      2 |    4 | `Marker`     | File-kind FourCC (`LVIN` for `.vi`, `LVCC` for `.ctl`, etc.).                 |
-|      6 |    4 | `EntryCount` | Big-endian uint32 number of dependency entries.                               |
-|     10 |  ... | `Entries`    | `EntryCount` typed `Entry` records (layout below).                            |
-|    N-2 |    2 | `Footer`     | Big-endian uint16 trailing value. Corpus is uniformly `0x0003` — pylabview's `nextLinkInfo=3` list-end marker. |
+|      2 |    4 | `Marker`     | File-kind FourCC (`LVIN` for `.vi`, `LVCC` for `.ctl`, etc.).                                                      |
+|      6 |    4 | `EntryCount` | Big-endian uint32 number of dependency entries.                                                                    |
+|     10 |  ... | `Entries`    | `EntryCount` typed `Entry` records (layout below).                                                                 |
+|    N-2 |    2 | `Footer`     | Big-endian uint16 trailing value. Corpus is uniformly `0x0003` — pylabview's `nextLinkInfo=3` list-end marker.     |
 
 The `Marker` field mirrors the file's content type. `Validate` warns on
 an unknown marker but Decode accepts any 4-byte value so future kinds
@@ -29,17 +29,17 @@ round-trip cleanly.
 
 Each `Entry` follows the same shape as `LIfp` / `LIbd`:
 
-| Offset | Size | Field            | Notes                                                                                      |
-| -----: | ---: | ---------------- | ------------------------------------------------------------------------------------------ |
-|      0 |    2 | `Kind`           | Big-endian uint16. Always `0x0002` — pylabview's `nextLinkInfo=2` continuation marker.     |
-|      2 |    4 | `LinkType`       | 4-byte LinkObjRef wire ident (`VILB`, `VICC`, `TDCC`, …); see `internal/codecs/linkobj`.   |
+| Offset | Size | Field            | Notes                                                                                                                                                                                                             |
+| -----: | ---: | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|      0 |    2 | `Kind`           | Big-endian uint16. Always `0x0002` — pylabview's `nextLinkInfo=2` continuation marker.                                                                                                                            |
+|      2 |    4 | `LinkType`       | 4-byte LinkObjRef wire ident (`VILB`, `VICC`, `TDCC`, …); see `internal/codecs/linkobj`.                                                                                                                          |
 |      6 |  0–3 | `prefixPad`      | Zero-fill alignment bytes pylabview's `parseBasicLinkSaveInfo` inserts so the qualifier count starts on a 4-byte section boundary. Present whenever the previous entry's encoded size was not a multiple of four. |
-|    ... |    4 | `QualifierCount` | Big-endian uint32 number of Pascal-string qualifiers.                                      |
-|    ... |  ... | `Qualifiers`     | `QualifierCount` consecutive `[u8 length][bytes]` Pascal strings.                          |
-|    ... |  0–3 | `qualifierPad`   | Zero-fill alignment bytes before the primary path (pylabview's 2-byte align, plus slack).  |
-|    ... |  ... | `PrimaryPath`    | Embedded `PTH0` reference (see `docs/resources/pth0.md`). Decoded lazily through `internal/codecs/pthx`. |
-|    ... |  ... | `Tail`           | Post-path bytes — the `LinkObj`-specific payload. Decoded on demand through `Entry.Target() (linkobj.LinkTarget, error)`. |
-|    ... |  ... | `SecondaryPath`  | Optional `PTH0` reference (the `viLSPathRef` from `HeapToVILinkSaveInfo`). Present only for some `LinkType`s.            |
+|    ... |    4 | `QualifierCount` | Big-endian uint32 number of Pascal-string qualifiers.                                                                                                                                                             |
+|    ... |  ... | `Qualifiers`     | `QualifierCount` consecutive `[u8 length][bytes]` Pascal strings.                                                                                                                                                 |
+|    ... |  0–3 | `qualifierPad`   | Zero-fill alignment bytes before the primary path (pylabview's 2-byte align, plus slack).                                                                                                                         |
+|    ... |  ... | `PrimaryPath`    | Embedded `PTH0` reference (see `docs/resources/pth0.md`). Decoded lazily through `internal/codecs/pthx`.                                                                                                          |
+|    ... |  ... | `Tail`           | Post-path bytes — the `LinkObj`-specific payload. Decoded on demand through `Entry.Target() (linkobj.LinkTarget, error)`.                                                                                         |
+|    ... |  ... | `SecondaryPath`  | Optional `PTH0` reference (the `viLSPathRef` from `HeapToVILinkSaveInfo`). Present only for some `LinkType`s.                                                                                                     |
 
 `Entry.Target()` returns one of the typed `linkobj.LinkTarget`
 implementations (`TypeDefToCCLink`, `VIToLib`, …) or `OpaqueTarget` when

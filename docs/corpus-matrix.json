@@ -12,7 +12,11 @@
       "name": "Numeric42.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["numeric constant", "numeric indicator", "straight auto-routed wire"],
+      "focus": [
+        "numeric constant",
+        "numeric indicator",
+        "straight auto-routed wire"
+      ],
       "hypothesis": "The trivial compressed-wire payload encodes a direct source-to-sink chain when terminal anchors are aligned."
     },
     {
@@ -26,7 +30,11 @@
       "name": "BoolToLED.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["boolean control", "boolean indicator", "straight auto-routed wire"],
+      "focus": [
+        "boolean control",
+        "boolean indicator",
+        "straight auto-routed wire"
+      ],
       "hypothesis": "Boolean widgets and terminals use the same compressed-wire chain family as numeric terminals."
     },
     {
@@ -131,7 +139,10 @@
       "name": "Numeric42_left_auto_16px_up.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["leftward multi-elbow auto-route", "vertical magnitude calibration"],
+      "focus": [
+        "leftward multi-elbow auto-route",
+        "vertical magnitude calibration"
+      ],
       "hypothesis": "Same layout as left_auto_8px_up but indicator 16px above source: `06 08 00 01 01 00 10 10 9c 20`. Only p7 changes (0x18→0x20, +8 for +8px), confirming p7 = 16 + vertical pixels at 1 unit/pixel."
     },
     {
@@ -159,14 +170,22 @@
       "name": "ConnectorPane_2Inputs_2Outputs.vi",
       "kind": "vi",
       "family": "controlled-render",
-      "focus": ["connector pane geometry", "per-endpoint anchors", "shared sdfTun anchor"],
+      "focus": [
+        "connector pane geometry",
+        "per-endpoint anchors",
+        "shared sdfTun anchor"
+      ],
       "hypothesis": "A 2-2 connector pane with 4 distinct FP terminals (2 unwired inputs, 2 wired outputs from constants) produces a single root-level SL__sdfTun whose children declare 6 endpoint IDs. The two output wires terminate on distinct conPane endpoints that currently share the sdfTun anchor — needed for §16.4 follow-up: per-endpoint connector-pane geometry."
     },
     {
       "name": "WhileLoop_Numeric42.vi",
       "kind": "vi",
       "family": "controlled-render",
-      "focus": ["nested structure", "loop terminal projection", "nested sdfTun"],
+      "focus": [
+        "nested structure",
+        "loop terminal projection",
+        "nested sdfTun"
+      ],
       "hypothesis": "A while-loop containing a constant-to-indicator wire produces a nested SL__sdfTun [16] inside the loop's wrapper [14] (own ID 165), in addition to the outer root-level SL__sdfTun [3]. Confirms that loops/structures nest WidgetKindTerminal nodes inside other WidgetKindTerminal nodes — needed to validate the §16.4 follow-up: project nested terminals into the scene."
     },
     {
@@ -299,7 +318,11 @@
       "name": "format-string.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["string primitive", "VI description", "render front-panel golden"],
+      "focus": [
+        "string primitive",
+        "VI description",
+        "render front-panel golden"
+      ],
       "hypothesis": "Description metadata and string-oriented diagrams exercise STRG, string widgets, and front-panel render output."
     },
     {
@@ -334,7 +357,10 @@
       "name": "load-vi.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["subVI/reference workflow", "structure-heavy block diagram golden"],
+      "focus": [
+        "subVI/reference workflow",
+        "structure-heavy block diagram golden"
+      ],
       "hypothesis": "A larger operational VI stresses block-diagram heap structure and render grouping."
     },
     {
@@ -355,7 +381,11 @@
       "name": "reference-find-by-id.vi",
       "kind": "vi",
       "family": "labview-mcp",
-      "focus": ["reference lookup", "LinkObjRef targets", "independent wire-tree sample"],
+      "focus": [
+        "reference lookup",
+        "LinkObjRef targets",
+        "independent wire-tree sample"
+      ],
       "hypothesis": "Reference workflows exercise typed and opaque LinkObjRef targets plus non-synthetic wire data."
     },
     {
@@ -369,112 +399,176 @@
       "name": "Numeric255.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["numeric constant literal", "OF__ConstValue", "1-byte value boundary"],
+      "focus": [
+        "numeric constant literal",
+        "OF__ConstValue",
+        "1-byte value boundary"
+      ],
       "hypothesis": "The OF__ConstValue leaf stores an I32 constant as a fixed-width big-endian int32; 255 (0x000000ff) sits at the single-byte boundary without a varint/escape."
     },
     {
       "name": "Numeric256.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["numeric constant literal", "OF__ConstValue", "1-byte value boundary"],
+      "focus": [
+        "numeric constant literal",
+        "OF__ConstValue",
+        "1-byte value boundary"
+      ],
       "hypothesis": "256 (0x00000100) crossing the single-byte boundary keeps the same 4-byte big-endian OF__ConstValue width, proving the literal is positional BE, not a byte-stream-with-escape like the compressed wire geometry."
     },
     {
       "name": "Numeric65535.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["numeric constant literal", "OF__ConstValue", "2-byte value boundary"],
+      "focus": [
+        "numeric constant literal",
+        "OF__ConstValue",
+        "2-byte value boundary"
+      ],
       "hypothesis": "65535 (0x0000ffff) sits at the two-byte boundary; OF__ConstValue stays a fixed 4-byte big-endian int32."
     },
     {
       "name": "Numeric65536.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["numeric constant literal", "OF__ConstValue", "2-byte value boundary"],
+      "focus": [
+        "numeric constant literal",
+        "OF__ConstValue",
+        "2-byte value boundary"
+      ],
       "hypothesis": "65536 (0x00010000) crossing the two-byte boundary still occupies the same 4-byte big-endian OF__ConstValue field, confirming type-width fixed encoding with no escape."
     },
     {
       "name": "Numeric42_increment.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["function node", "horizontal-flow primitive", "single-elbow wires"],
+      "focus": [
+        "function node",
+        "horizontal-flow primitive",
+        "single-elbow wires"
+      ],
       "hypothesis": "A left-to-right primitive (Increment) keeps both terminals side-entered, so each wire stays a 2-corner byte0=04 elbow; an odd-corner byte0=03 route is not reachable from a horizontal-flow node."
     },
     {
       "name": "Numeric42_N_terminal.vi",
       "kind": "vi",
       "family": "controlled-wire",
-      "focus": ["For-Loop count terminal", "top-entered terminal", "single-elbow wires"],
+      "focus": [
+        "For-Loop count terminal",
+        "top-entered terminal",
+        "single-elbow wires"
+      ],
       "hypothesis": "Even a top-entered terminal (For-Loop N) keeps a short horizontal stub, so the route stays a 2-corner byte0=04 elbow; byte0=03 is an emergent multi-node artifact, not coercible from a single source-to-sink layout."
     },
     {
       "name": "Numeric9876Dot5432.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["floating-point constant literal", "OF__ConstValue", "DBL representation"],
+      "focus": [
+        "floating-point constant literal",
+        "OF__ConstValue",
+        "DBL representation"
+      ],
       "hypothesis": "OF__ConstValue stores a DBL constant as an 8-byte big-endian IEEE-754 double (9876.5432 = 40 c3 4a 45 87 93 dd 98), confirming the literal width tracks the data type (4 bytes I32, 8 bytes DBL) and is written verbatim with no escape."
     },
     {
       "name": "Numeric42_I8.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["integer constant literal", "OF__ConstValue", "I8 representation"],
+      "focus": [
+        "integer constant literal",
+        "OF__ConstValue",
+        "I8 representation"
+      ],
       "hypothesis": "An I8 constant's OF__ConstValue is a single raw byte (42 = 0x2a); signedness is carried by the type, not the literal bytes."
     },
     {
       "name": "Numeric42_U8.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["integer constant literal", "OF__ConstValue", "U8 representation"],
+      "focus": [
+        "integer constant literal",
+        "OF__ConstValue",
+        "U8 representation"
+      ],
       "hypothesis": "A U8 constant's OF__ConstValue is a single raw byte identical to the I8 case (42 = 0x2a), proving the literal stores magnitude bytes and leaves signedness to the type metadata."
     },
     {
       "name": "Numeric65536_I64.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["integer constant literal", "OF__ConstValue", "I64 representation"],
+      "focus": [
+        "integer constant literal",
+        "OF__ConstValue",
+        "I64 representation"
+      ],
       "hypothesis": "An I64 constant's OF__ConstValue is an 8-byte big-endian int64 (65536 = 00 00 00 00 00 01 00 00), confirming integer width tracks the data type."
     },
     {
       "name": "Numeric9876Dot5432_SGL.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["floating-point constant literal", "OF__ConstValue", "SGL representation"],
+      "focus": [
+        "floating-point constant literal",
+        "OF__ConstValue",
+        "SGL representation"
+      ],
       "hypothesis": "A SGL constant's OF__ConstValue is a 4-byte big-endian IEEE-754 binary32 (46 1a 52 2c = float32(9876.5432) = 9876.54297), storing the float32 rounding of the typed value."
     },
     {
       "name": "Numeric9876Dot5432_EXT.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["floating-point constant literal", "OF__ConstValue", "EXT representation"],
+      "focus": [
+        "floating-point constant literal",
+        "OF__ConstValue",
+        "EXT representation"
+      ],
       "hypothesis": "An EXT constant's OF__ConstValue is a 16-byte big-endian IEEE-754 binary128/quad (40 0c 34 a4 58 00..., unbiased exponent 13 = 9876.54297), not 80-bit x87; wider than the 8-byte numeric band, so the leaf alone cannot be distinguished from a string without the VCTP type."
     },
     {
       "name": "Numeric9876Dot5432_FXD.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["fixed-point constant literal", "OF__ConstValue", "FXD representation"],
+      "focus": [
+        "fixed-point constant literal",
+        "OF__ConstValue",
+        "FXD representation"
+      ],
       "hypothesis": "A FXD constant's OF__ConstValue is an 8-byte big-endian fixed-point container; 9876.5432 is stored as magnitude 0x26948b = 2528395 = round(9876.5432 * 2^8), with the radix-point position set by the fixed-point word/integer-word-length config."
     },
     {
       "name": "Numeric42_CSG.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["complex constant literal", "OF__ConstValue", "CSG representation"],
+      "focus": [
+        "complex constant literal",
+        "OF__ConstValue",
+        "CSG representation"
+      ],
       "hypothesis": "A CSG (complex single) constant's OF__ConstValue is 8 bytes = two big-endian IEEE-754 binary32 components, real-then-imaginary (42+0i = 42 28 00 00 | 00 00 00 00)."
     },
     {
       "name": "Numeric42_i5_CDB.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["complex constant literal", "OF__ConstValue", "CDB representation"],
+      "focus": [
+        "complex constant literal",
+        "OF__ConstValue",
+        "CDB representation"
+      ],
       "hypothesis": "A CDB (complex double) constant's OF__ConstValue is 16 bytes = two big-endian IEEE-754 binary64 components, real-then-imaginary (42+5i = 40 45.. | 40 14..). The 16-byte width is EXT-vs-CDB ambiguous without the VCTP type."
     },
     {
       "name": "Numeric42_CEXT.vi",
       "kind": "vi",
       "family": "controlled-constant",
-      "focus": ["complex constant literal", "OF__ConstValue", "CEXT representation"],
+      "focus": [
+        "complex constant literal",
+        "OF__ConstValue",
+        "CEXT representation"
+      ],
       "hypothesis": "A CEXT (complex extended) constant's OF__ConstValue is 32 bytes = two big-endian IEEE-754 binary128 components, real-then-imaginary (42+0i; real half exponent 5, imaginary half all zero)."
     }
   ],
@@ -482,31 +576,46 @@
     {
       "feature": "labels",
       "priority": "high",
-      "neededFixtures": ["SingleControl_LabelMoved.vi", "SingleControl_LabelTextChanged.vi"],
+      "neededFixtures": [
+        "SingleControl_LabelMoved.vi",
+        "SingleControl_LabelTextChanged.vi"
+      ],
       "notes": "Separate label text from label bounds/anchor records."
     },
     {
       "feature": "captions",
       "priority": "high",
-      "neededFixtures": ["SingleControl_CaptionVisible.vi", "SingleControl_CaptionMoved.vi"],
+      "neededFixtures": [
+        "SingleControl_CaptionVisible.vi",
+        "SingleControl_CaptionMoved.vi"
+      ],
       "notes": "Distinguish captions from labels and control-owned text fields."
     },
     {
       "feature": "fonts",
       "priority": "high",
-      "neededFixtures": ["SingleString_FontSizeChanged.vi", "SingleString_FontFaceChanged.vi"],
+      "neededFixtures": [
+        "SingleString_FontSizeChanged.vi",
+        "SingleString_FontFaceChanged.vi"
+      ],
       "notes": "Correlate FTAB entries with heap text/font references."
     },
     {
       "feature": "colors",
       "priority": "high",
-      "neededFixtures": ["Boolean_ColorChanged.vi", "Panel_BackgroundColorChanged.vi"],
+      "neededFixtures": [
+        "Boolean_ColorChanged.vi",
+        "Panel_BackgroundColorChanged.vi"
+      ],
       "notes": "Map front-panel color fields and panel background storage."
     },
     {
       "feature": "scales",
       "priority": "medium",
-      "neededFixtures": ["Numeric_ScaleRangeChanged.vi", "Graph_ScaleRangeChanged.vi"],
+      "neededFixtures": [
+        "Numeric_ScaleRangeChanged.vi",
+        "Graph_ScaleRangeChanged.vi"
+      ],
       "notes": "Identify tick/range/format fields for numerics and graphs."
     },
     {
@@ -530,7 +639,12 @@
     {
       "feature": "structures",
       "priority": "high",
-      "neededFixtures": ["WhileLoop_Basic.vi", "ForLoop_AutoIndex.vi", "CaseStructure_TwoCases.vi", "FlatSequence_TwoFrames.vi"],
+      "neededFixtures": [
+        "WhileLoop_Basic.vi",
+        "ForLoop_AutoIndex.vi",
+        "CaseStructure_TwoCases.vi",
+        "FlatSequence_TwoFrames.vi"
+      ],
       "notes": "Map frame ordering, tunnels, shift registers, and selector metadata."
     },
     {
@@ -554,31 +668,48 @@
     {
       "feature": "event structures",
       "priority": "medium",
-      "neededFixtures": ["EventStructure_ValueChange.vi", "EventStructure_Timeout.vi"],
+      "neededFixtures": [
+        "EventStructure_ValueChange.vi",
+        "EventStructure_Timeout.vi"
+      ],
       "notes": "Decode event data node, registration, and frame metadata."
     },
     {
       "feature": "disabled diagrams",
       "priority": "medium",
-      "neededFixtures": ["DiagramDisable_TwoFrames.vi", "ConditionalDisable_Symbol.vi"],
+      "neededFixtures": [
+        "DiagramDisable_TwoFrames.vi",
+        "ConditionalDisable_Symbol.vi"
+      ],
       "notes": "Map disabled/conditional diagram structure classes and active-frame fields."
     },
     {
       "feature": "manual wires",
       "priority": "high",
-      "neededFixtures": ["Numeric42ManualBend.vi", "Numeric42TwoManualBends.vi"],
+      "neededFixtures": [
+        "Numeric42ManualBend.vi",
+        "Numeric42TwoManualBends.vi"
+      ],
       "notes": "Ground manual-chain compressed-wire varint streams with known waypoints."
     },
     {
       "feature": "multi-elbow auto wires",
       "priority": "medium",
-      "neededFixtures": ["Numeric42_left_auto_8px_up_right8.vi", "Numeric42ThreeElbows.vi"],
+      "neededFixtures": [
+        "Numeric42_left_auto_8px_up_right8.vi",
+        "Numeric42ThreeElbows.vi"
+      ],
       "notes": "The byte0=6 leftward doubling-back route is now decoded and calibrated by the Numeric42_left_auto_* family (Wire.LeftwardChainPath): p0/p2=direction, p6=horizontal seed (1/px), p7=16+vertical pixels. Remaining: an up-direction X pair to confirm p6 behaves the same upward, the absolute p6/p7 zero offsets, and rightward/other multi-elbow shapes (e.g. true 3-elbow routes)."
     },
     {
       "feature": "version span",
       "priority": "high",
-      "neededFixtures": ["Blank_LV2014.vi", "Blank_LV2020.vi", "Blank_Current.vi", "Description_LV7.vi"],
+      "neededFixtures": [
+        "Blank_LV2014.vi",
+        "Blank_LV2020.vi",
+        "Blank_Current.vi",
+        "Description_LV7.vi"
+      ],
       "notes": "Establish version gates for resource layouts and legacy string/type encodings."
     }
   ],

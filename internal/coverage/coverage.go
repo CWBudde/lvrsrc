@@ -443,7 +443,8 @@ func RenderBadgeSVG(m Manifest) string {
 	totalWidth := leftWidth + rightWidth
 	color := badgeColor(m.Summary.TypedCoveragePct)
 
-	return fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="20" role="img" aria-label="%s: %s">
+	return fmt.Sprintf(
+		`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="20" role="img" aria-label="%s: %s">
 <linearGradient id="s" x2="0" y2="100%%">
 <stop offset="0" stop-color="#fff" stop-opacity=".7"/>
 <stop offset=".1" stop-color="#aaa" stop-opacity=".1"/>

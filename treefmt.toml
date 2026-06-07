@@ -70,4 +70,10 @@ includes = [
 excludes = [
     # Exclude potentially sensitive or auto-generated files
     "**/*.sops.*",
+    # Generated coverage artifacts: byte-compared by the StayInSync tests
+    # in internal/coverage; must stay in generator format, not prettier's.
+    "docs/generated/**",
+    # Golden test fixtures: byte-compared via internal/golden; a formatter
+    # must never rewrite them.
+    "**/*.golden.json",
 ]

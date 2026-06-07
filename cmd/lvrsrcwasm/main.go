@@ -225,14 +225,14 @@ type WASMDeps struct {
 // WASMDepEntry is one decoded link-info reference. Path fields are
 // populated when the embedded PTH0/PTH1 reference decoded cleanly.
 type WASMDepEntry struct {
-	LinkType        string    `json:"link_type"`
-	LinkKind        string    `json:"link_kind,omitempty"` // human-readable description, e.g. "TypeDef → CustCtl"
-	Qualifiers      []string  `json:"qualifiers"`
-	PrimaryPath     *WASMPath `json:"primary_path,omitempty"`
-	SecondaryPath   *WASMPath `json:"secondary_path,omitempty"`
-	TypeID          uint32    `json:"type_id,omitempty"`
-	HasTypeID       bool      `json:"has_type_id,omitempty"`
-	OffsetCount     int       `json:"offset_count,omitempty"`
+	LinkType      string    `json:"link_type"`
+	LinkKind      string    `json:"link_kind,omitempty"` // human-readable description, e.g. "TypeDef → CustCtl"
+	Qualifiers    []string  `json:"qualifiers"`
+	PrimaryPath   *WASMPath `json:"primary_path,omitempty"`
+	SecondaryPath *WASMPath `json:"secondary_path,omitempty"`
+	TypeID        uint32    `json:"type_id,omitempty"`
+	HasTypeID     bool      `json:"has_type_id,omitempty"`
+	OffsetCount   int       `json:"offset_count,omitempty"`
 }
 
 // WASMPath is the JSON-friendly projection of a typed path reference.
@@ -699,7 +699,8 @@ func decodeLIfp(ctx codecs.Context, payload []byte) []WASMDepEntry {
 		if entry.SecondaryPath != nil {
 			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
 		}
-		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		target, terr := entry.Target()
+		applyLinkTarget(&w, target, terr)
 		out = append(out, w)
 	}
 	return out
@@ -725,7 +726,8 @@ func decodeLIbd(ctx codecs.Context, payload []byte) []WASMDepEntry {
 		if entry.SecondaryPath != nil {
 			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
 		}
-		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		target, terr := entry.Target()
+		applyLinkTarget(&w, target, terr)
 		out = append(out, w)
 	}
 	return out
@@ -751,7 +753,8 @@ func decodeLIvi(ctx codecs.Context, payload []byte) []WASMDepEntry {
 		if entry.SecondaryPath != nil {
 			w.SecondaryPath = pathRefToWASM(entry.SecondaryPath.Raw)
 		}
-		target, terr := entry.Target(); applyLinkTarget(&w, target, terr)
+		target, terr := entry.Target()
+		applyLinkTarget(&w, target, terr)
 		out = append(out, w)
 	}
 	return out

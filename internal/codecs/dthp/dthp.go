@@ -141,7 +141,8 @@ func writeU2p2(dst []byte, v uint32) []byte {
 	if v <= 0x7FFF {
 		return append(dst, byte(v>>8), byte(v))
 	}
-	return append(dst,
+	return append(
+		dst,
 		byte((v>>24)|0x80), byte(v>>16),
 		byte(v>>8), byte(v),
 	)

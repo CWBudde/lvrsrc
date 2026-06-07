@@ -97,6 +97,7 @@ func (Color8Codec) Decode(_ codecs.Context, payload []byte) (any, error) {
 }
 
 func (MonoCodec) Encode(_ codecs.Context, value any) ([]byte, error) { return encode(monoSpec, value) }
+
 func (Color4Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 	return encode(color4Spec, value)
 }

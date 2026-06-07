@@ -76,7 +76,7 @@ the following typed projections:
   by `lvvi.HeapBounds` and the `lvvi.FindBoundsChild` helper; consumed
   by `internal/render` so the scene graph places groups at real
   LabVIEW pixel positions whenever a control carries a bounds child.
-  Corpus coverage: **1188 / 1188** OF__bounds leaves across 42 FPHb +
+  Corpus coverage: **1188 / 1188** OF\_\_bounds leaves across 42 FPHb +
   BDHb trees.
 - Rectangle-shaped heap fields (Phase 16.3): `lvvi.HeapRect`,
   `lvvi.HeapRectForTag`, and `lvvi.FindRectChild` decode the shared
@@ -146,7 +146,7 @@ layout:
   sized at the decoded LabVIEW pixel rectangle.
 - Groups without a decoded bounds child fall back to the prior
   heuristic stack (vertical, indented by depth).
-- The OF__bounds leaf itself is dropped from scene output once it has
+- The OF\_\_bounds leaf itself is dropped from scene output once it has
   been promoted onto the parent — its content is metadata, not visible.
 - Unresolved classes remain visible as placeholder nodes with their
   `Tag(N)` label and parent path.

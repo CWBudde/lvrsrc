@@ -105,7 +105,8 @@ func (Codec) Encode(_ codecs.Context, value any) ([]byte, error) {
 	}
 
 	out := make([]byte, 0, minPayloadSize+len(v.Text))
-	out = append(out,
+	out = append(
+		out,
 		v.Major,
 		(v.Minor<<4)|(v.Patch&0x0F),
 		v.Stage,

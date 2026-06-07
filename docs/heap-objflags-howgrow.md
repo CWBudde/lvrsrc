@@ -44,9 +44,9 @@ bit8  61.0%   bit11 48.4%   bit16 19.3%   bit17 32.4%   bit18 31.7%
 bit20 17.0%   (bit7,9,10,12-15,19,21-26,28 are sparse <12%)
 ```
 
-The **high byte (bits 16–23) correlates with the part family**: NAME_LABEL
+The **high byte (bits 16–23) correlates with the part family**: NAME*LABEL
 parts cluster on values `0x0017xxxx` (e.g. `0x0017014a`), matching the
-modRSRC.py anchor `NAME_LABEL objFlags = 0x17114a`. These bits are _not_
+modRSRC.py anchor `NAME_LABEL objFlags = 0x17114a`. These bits are \_not*
 named because pylabview does not document them and corpus correlation
 alone is insufficient to assign individual meanings.
 

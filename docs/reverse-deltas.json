@@ -6,11 +6,7 @@
       "left": "blank.vi",
       "right": "Numeric42.vi",
       "topic": "wire-topology",
-      "focus": [
-        "numeric constant",
-        "numeric indicator",
-        "straight auto-chain"
-      ],
+      "focus": ["numeric constant", "numeric indicator", "straight auto-chain"],
       "hypothesis": "Adding one numeric constant, one numeric indicator, and one aligned wire introduces a single auto-chain compressed-wire chunk with no trailing geometry.",
       "evidence": "Numeric42.vi is the baseline for the 0208 straight-wire sentinel used by ChainAutoPath.",
       "status": "confirmed"
@@ -20,10 +16,7 @@
       "left": "Numeric42.vi",
       "right": "Numeric4Dot2.vi",
       "topic": "type-system",
-      "focus": [
-        "numeric type descriptor",
-        "wire topology stability"
-      ],
+      "focus": ["numeric type descriptor", "wire topology stability"],
       "hypothesis": "Changing an integer numeric constant to floating-point changes VCTP/type metadata while preserving the simple auto-chain topology.",
       "evidence": "Both fixtures remain simple single-wire networks; descriptor-level interpretation still needs VCTP Inner decoding.",
       "status": "partial"
@@ -47,10 +40,7 @@
       "left": "Numeric42.vi",
       "right": "Numeric42Far.vi",
       "topic": "wire-topology",
-      "focus": [
-        "horizontal terminal movement",
-        "auto-router inferred segment"
-      ],
+      "focus": ["horizontal terminal movement", "auto-router inferred segment"],
       "hypothesis": "Moving the sink horizontally changes terminal geometry but does not require a new source-side chain payload value; the renderer stretches the post-elbow segment from terminal bounds.",
       "evidence": "Numeric42Far.vi is used as the far-spacing control for ChainAutoPath rendering.",
       "status": "partial"
@@ -60,10 +50,7 @@
       "left": "Numeric42.vi",
       "right": "Numeric42_8px_down.vi",
       "topic": "wire-topology",
-      "focus": [
-        "vertical terminal movement",
-        "auto-chain y-step"
-      ],
+      "focus": ["vertical terminal movement", "auto-chain y-step"],
       "hypothesis": "Moving the sink 8 px down changes the auto-chain y-step magnitude to 8 while preserving source anchor semantics.",
       "evidence": "Wire tests compare the decoded ChainAutoPath y-step against the controlled 8 px fixture.",
       "status": "confirmed"
@@ -73,10 +60,7 @@
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_16px_down.vi",
       "topic": "wire-topology",
-      "focus": [
-        "vertical terminal movement",
-        "auto-chain y-step magnitude"
-      ],
+      "focus": ["vertical terminal movement", "auto-chain y-step magnitude"],
       "hypothesis": "Increasing the vertical displacement from 8 px to 16 px doubles the y-step magnitude.",
       "evidence": "The pair separates magnitude from sign and horizontal routing effects.",
       "status": "confirmed"
@@ -100,10 +84,7 @@
       "left": "Numeric42_150px_down.vi",
       "right": "Numeric42FarFar.vi",
       "topic": "wire-topology",
-      "focus": [
-        "magnitude >= 255",
-        "0xff big-endian escape"
-      ],
+      "focus": ["magnitude >= 255", "0xff big-endian escape"],
       "hypothesis": "Auto-chain geometry magnitudes < 255 are single raw bytes (150 = 0x96); magnitudes >= 255 use a 0xff escape introducing a 2-byte big-endian value. Numeric42FarFar.vi (sink ~400 px down, > 400 px right) is 04 08 00 00 e2 ff 01 90 -> anchorX=0xe2=226, yStep=0xff 01 90=0x0190=400.",
       "evidence": "yStep decodes to EXACTLY 400 for a 400 px move, confirming 1:1 pixel scaling for escaped (>= 255) magnitudes. Big-endian is forced: little-endian gives 0x9001. The same escape resolves the three previously-undecodable real chunks (is-float.vi 2d ff 01 28 -> [45,296]; is-int.vi ff 01 85 ff 03 3e -> [389,830]; is-float.vi ff 03 05 ff 02 35 -> [773,565]). Separately, anchorX=226 despite a >400 px horizontal offset (and 470 in an earlier save at a smaller x) confirms anchorX is the edit-history-dependent elbow offset, not the sink's x distance, which lives in the terminal bounds.",
       "status": "confirmed"
@@ -113,10 +94,7 @@
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_8px_up.vi",
       "topic": "wire-topology",
-      "focus": [
-        "vertical sign",
-        "auto-chain direction flag"
-      ],
+      "focus": ["vertical sign", "auto-chain direction flag"],
       "hypothesis": "Moving the sink above the source changes the direction flag while preserving y-step magnitude.",
       "evidence": "The up/down fixture pair ground-truths ChainAutoPath sign handling.",
       "status": "confirmed"
@@ -126,10 +104,7 @@
       "left": "Numeric42.vi",
       "right": "Numeric42TwoNetworks.vi",
       "topic": "wire-topology",
-      "focus": [
-        "wire network boundary",
-        "compressed-wire chunk count"
-      ],
+      "focus": ["wire network boundary", "compressed-wire chunk count"],
       "hypothesis": "Two disconnected const-to-indicator pairs emit two independent compressed-wire chunks.",
       "evidence": "CountWireMix observes two auto-chain networks in the two-network fixture.",
       "status": "confirmed"
@@ -139,10 +114,7 @@
       "left": "Numeric42TwoIndicatorsY.vi",
       "right": "Numeric42TwoIndicatorsY_top7right_bottom11down.vi",
       "topic": "wire-topology",
-      "focus": [
-        "2-branch tree records",
-        "endpoint coordinates"
-      ],
+      "focus": ["2-branch tree records", "endpoint coordinates"],
       "hypothesis": "Moving each branch endpoint perturbs the corresponding trailing endpoint record while earlier structural records remain topology data.",
       "evidence": "TreeEndpointPair is grounded by this geometry-varied pair.",
       "status": "confirmed"
@@ -152,10 +124,7 @@
       "left": "Numeric42ThreeIndicatorsTfork.vi",
       "right": "Numeric42ThreeIndicatorsTfork_bottom8pxdown.vi",
       "topic": "wire-topology",
-      "focus": [
-        "3-branch T-fork",
-        "straight-through endpoint vs tap records"
-      ],
+      "focus": ["3-branch T-fork", "straight-through endpoint vs tap records"],
       "hypothesis": "byte0=7 covers two visually distinct fan-outs that share a header: a pure vertical Y-stack (reference-find-by-id.vi, all small (V, H) endpoints) and a T-fork. The block-diagram image of Numeric42ThreeIndicatorsTfork.vi shows the latter — Numeric 3 sits far right at mid-height and decodes as a genuine endpoint {V:66, H:196}, while Numeric 2 / Numeric tap up and down off the junction. The last waypoint-count-minus-4 records track per-branch geometry, but only the straight-through leg's two bytes are a true (V, H) coordinate.",
       "evidence": "Moving the bottom tap 8 px DOWN changes exactly one trailing record (44 2d -> 44 35, +8), but in the byte TreeEndpoints labels H rather than V — so a tap record's second byte is a branch offset, not a horizontal coordinate. Full per-axis decoding of tap records needs a controlled horizontal-move fixture (move Numeric 3 right by a known px to confirm H=196 scales 1:1).",
       "status": "partial"
@@ -165,10 +134,7 @@
       "left": "Numeric42ThreeIndicatorsYComb.vi",
       "right": "Numeric42ThreeIndicatorsYComb_middle8pxdown.vi",
       "topic": "wire-topology",
-      "focus": [
-        "comb topology",
-        "junction/span records"
-      ],
+      "focus": ["comb topology", "junction/span records"],
       "hypothesis": "Comb payloads carry junction/span records around the moved branch rather than a simple trailing endpoint list.",
       "evidence": "The middle-branch move changes adjacent records in opposite directions, so byte0 >= 8 shapes stay raw until more comb variations are authored.",
       "status": "partial"
@@ -178,10 +144,7 @@
       "left": "Numeric42ThreeIndicatorsTfork.vi",
       "right": "Numeric42FourIndicatorsY_single.vi",
       "topic": "wire-topology",
-      "focus": [
-        "4-output network",
-        "large tree payload"
-      ],
+      "focus": ["4-output network", "large tree payload"],
       "hypothesis": "Four-output networks produce larger topology-dependent tree payloads that need additional fixture variation before endpoint extraction is safe.",
       "evidence": "The larger tree fixture is intentionally not decoded by TreeEndpoints.",
       "status": "open"
@@ -191,9 +154,7 @@
       "left": "Numeric42ThreeIndicatorsTfork.vi",
       "right": "reference-find-by-id.vi",
       "topic": "wire-topology",
-      "focus": [
-        "controlled vs real-world tree shape"
-      ],
+      "focus": ["controlled vs real-world tree shape"],
       "hypothesis": "reference-find-by-id.vi is the clean pure-vertical-Y-stack case of byte0=7 (every trailing record a small (V, H) endpoint), distinct from the controlled T-fork; it is the independent real-corpus sanity check that the trailing-record rule appears outside authored fixtures.",
       "evidence": "reference-find-by-id.vi carries a matching byte0=7 shape with no far-right outlier record, used as an independent sanity check.",
       "status": "partial"
@@ -203,10 +164,7 @@
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_indicator_left.vi",
       "topic": "wire-topology",
-      "focus": [
-        "multi-elbow auto-chain payload",
-        "right-to-left routing"
-      ],
+      "focus": ["multi-elbow auto-chain payload", "right-to-left routing"],
       "hypothesis": "Placing the indicator left of the source produces a 6-waypoint chain payload (06 08 00 00 00 00 10 0f 34 23) instead of the 4-waypoint single-elbow form (04 08 00 00 41 08). Ground truth for the byte0=6 multi-elbow shape that ChainAutoPath rejects (>4 varints).",
       "evidence": "Real on-disk bytes confirmed by pkg/lvvi decode. indicator_left is a near-aligned variant (prefix 10 0f, p1=00) distinct from the calibrated left_auto family below.",
       "status": "partial"
@@ -216,10 +174,7 @@
       "left": "Numeric42_left_auto_8px_up.vi",
       "right": "Numeric42_left_auto_16px_up.vi",
       "topic": "wire-topology",
-      "focus": [
-        "multi-elbow vertical magnitude",
-        "byte0=6 trailing byte"
-      ],
+      "focus": ["multi-elbow vertical magnitude", "byte0=6 trailing byte"],
       "hypothesis": "For the byte0=6 leftward auto route, moving the indicator from 8px to 16px above the source changes only the trailing byte p7 (06 08 00 01 01 00 10 10 9c 18 vs 9c 20), i.e. p7 = 16 + vertical pixels at 1 unit/pixel.",
       "evidence": "Wire chunks identical except p7 (0x18 -> 0x20, +8 for +8px); decoded by Wire.LeftwardChainPath and pinned in pkg/lvvi ground-truth tests.",
       "status": "confirmed"
@@ -229,10 +184,7 @@
       "left": "Numeric42_left_auto_8px_up.vi",
       "right": "Numeric42_left_auto_8px_down.vi",
       "topic": "wire-topology",
-      "focus": [
-        "multi-elbow vertical direction",
-        "byte0=6 prefix"
-      ],
+      "focus": ["multi-elbow vertical direction", "byte0=6 prefix"],
       "hypothesis": "Flipping the indicator from 8px above to 8px below the source (same X) changes only p0/p2 (up=(00,01) -> down=(01,00)) while the magnitude p7 and horizontal p6 stay fixed, isolating vertical direction from magnitude and horizontal position.",
       "evidence": "06 08 00 01 01 00 10 10 9c 18 vs 06 08 01 01 00 00 10 10 9c 18 — only p0/p2 differ.",
       "status": "confirmed"
@@ -242,10 +194,7 @@
       "left": "Numeric42_left_auto_8px_down.vi",
       "right": "Numeric42_left_auto_8px_down+8px_right.vi",
       "topic": "wire-topology",
-      "focus": [
-        "multi-elbow horizontal seed",
-        "byte0=6 p6 calibration"
-      ],
+      "focus": ["multi-elbow horizontal seed", "byte0=6 p6 calibration"],
       "hypothesis": "Moving the indicator 8px right (closer to the source) changes only p6 (06 08 01 01 00 00 10 10 9c 18 vs 94 18), i.e. p6 = horizontal seed at 1 unit/pixel, decreasing as the sink approaches the source. Horizontal IS stored in the byte0=6 chunk (unlike the byte0=4 single-step wires, where x comes from terminal bounds).",
       "evidence": "Wire chunks identical except p6 (0x9c -> 0x94, -8 for +8px right); decoded by Wire.LeftwardChainPath.",
       "status": "confirmed"
@@ -255,10 +204,7 @@
       "left": "Numeric42_8px_down.vi",
       "right": "Numeric42_manual_elbows.vi",
       "topic": "wire-topology",
-      "focus": [
-        "manual-mode trigger",
-        "auto-router cleanup"
-      ],
+      "focus": ["manual-mode trigger", "auto-router cleanup"],
       "hypothesis": "Manual elbow edits made through the LabVIEW editor's normal drag handles get cleaned up by the auto-router when the resulting path is still expressible as a single L-shape; the saved payload retains byte1=0x08 (auto) rather than promoting to byte1=0x04 (manual). Confirms Numeric42Bend.vi remains the only manual-chain ground truth in the corpus.",
       "evidence": "Saved content is 04 08 00 00 fe 70 — same 4-waypoint single-elbow shape as Numeric42_8px_down.vi (04 08 00 00 41 08); only the y-step magnitude varint differs.",
       "status": "confirmed"
@@ -268,11 +214,7 @@
       "left": "Numeric42_8px_down_8px_further_right.vi",
       "right": "Numeric42_8px_down_8px_further_right_auto_connect.vi",
       "topic": "wire-topology",
-      "focus": [
-        "edit history",
-        "sourceAnchorX",
-        "fresh route vs stretch"
-      ],
+      "focus": ["edit history", "sourceAnchorX", "fresh route vs stretch"],
       "hypothesis": "Two VIs with identical terminal positions but different edit history carry different wire chunks. Stretching a wire (moving the sink after drawing) freezes the elbow offset (04 08 00 00 41 08, sourceAnchorX=65); deleting and reconnecting it recomputes the elbow at the canonical short distance (04 08 00 00 10 08, sourceAnchorX=16). sourceAnchorX is therefore edit-history-dependent, not a glyph constant; only yStep reflects real geometry.",
       "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath. Second, cleaner witness with no horizontal confound: Numeric42_8px_down.vi (stretched, 04 08 00 00 41 08) vs Numeric42_8px_down_auto-connect.vi (deleted wire, moved indicator 8px down, reconnected -> fresh route 04 08 00 00 10 08) — identical 8px-down geometry, anchorX 65 vs 16.",
       "status": "confirmed"
@@ -338,11 +280,7 @@
       "left": "Numeric42.vi",
       "right": "Numeric9876Dot5432.vi",
       "topic": "type-system",
-      "focus": [
-        "OF__ConstValue",
-        "DBL representation",
-        "literal width"
-      ],
+      "focus": ["OF__ConstValue", "DBL representation", "literal width"],
       "hypothesis": "The OF__ConstValue literal width tracks the constant data type: an I32 constant is a 4-byte big-endian int32, a DBL constant is an 8-byte big-endian IEEE-754 double, both written verbatim with no escape.",
       "evidence": "Numeric42.vi OF__ConstValue = 00 00 00 2a (4 bytes, I32 42); Numeric9876Dot5432.vi OF__ConstValue = 40 c3 4a 45 87 93 dd 98 (8 bytes, DBL 9876.5432 via big-endian IEEE-754). Pinned by TestHeapConstValueGroundTruth and TestHeapConstValueDBLGroundTruth.",
       "status": "confirmed"
@@ -352,11 +290,7 @@
       "left": "Numeric42_I8.vi",
       "right": "Numeric65536_I64.vi",
       "topic": "type-system",
-      "focus": [
-        "OF__ConstValue",
-        "integer representation",
-        "literal width"
-      ],
+      "focus": ["OF__ConstValue", "integer representation", "literal width"],
       "hypothesis": "Integer constant width tracks the data type: I8/U8 = 1 raw byte, I32 = 4-byte big-endian, I64 = 8-byte big-endian. Signedness is carried by the type, not the literal bytes (I8 and U8 of 42 both store 0x2a).",
       "evidence": "Numeric42_I8.vi and Numeric42_U8.vi OF__ConstValue = 2a (1 byte, =42); Numeric65536_I64.vi = 00 00 00 00 00 01 00 00 (8 bytes, =65536). Pinned by TestHeapConstValueGroundTruth.",
       "status": "confirmed"
@@ -366,11 +300,7 @@
       "left": "Numeric9876Dot5432_SGL.vi",
       "right": "Numeric9876Dot5432_EXT.vi",
       "topic": "type-system",
-      "focus": [
-        "OF__ConstValue",
-        "SGL/DBL/EXT",
-        "IEEE-754"
-      ],
+      "focus": ["OF__ConstValue", "SGL/DBL/EXT", "IEEE-754"],
       "hypothesis": "Floating-point constants store big-endian IEEE-754 of the type's width: SGL = 4-byte binary32, DBL = 8-byte binary64, EXT = 16-byte binary128 (quad, not 80-bit x87). FXD is an 8-byte big-endian fixed-point container (value x 2^k).",
       "evidence": "SGL 46 1a 52 2c = float32(9876.5432)=9876.54297; DBL 40 c3 4a 45 87 93 dd 98 = 9876.5432; EXT 40 0c 34 a4 58 00... = binary128 with unbiased exponent 13 (9876.54297); FXD 00 00 26 94 8b 00 00 00 = 0x26948b=2528395=round(9876.5432*2^8). Pinned by TestHeapConstValueFloatGroundTruth and TestHeapConstValueExtendedAndFixedPoint.",
       "status": "confirmed"
@@ -380,11 +310,7 @@
       "left": "Numeric42_CSG.vi",
       "right": "Numeric42_i5_CDB.vi",
       "topic": "type-system",
-      "focus": [
-        "OF__ConstValue",
-        "complex representation",
-        "CSG/CDB/CEXT"
-      ],
+      "focus": ["OF__ConstValue", "complex representation", "CSG/CDB/CEXT"],
       "hypothesis": "A complex constant's OF__ConstValue is its two IEEE-754 components written real-then-imaginary, each in the underlying float's big-endian width: CSG = 2x binary32 (8 bytes), CDB = 2x binary64 (16 bytes), CEXT = 2x binary128 (32 bytes). This makes width an ambiguous type key past 8 bytes (16 = EXT or CDB; 32 = CEXT or string), confirming the VCTP type is required to disambiguate.",
       "evidence": "CSG 42+0i = 42 28 00 00 | 00 00 00 00 (2x binary32); CDB 42+5i = 40 45 00 00 00 00 00 00 | 40 14 00 00 00 00 00 00 (2x binary64); CEXT 42+0i = 32 bytes, real-half binary128 exponent 5, imaginary half all zero. Pinned by TestHeapConstValueComplex.",
       "status": "confirmed"

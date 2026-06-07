@@ -802,22 +802,26 @@ func sceneWarnings(scene Scene, roots []*layoutItem, wireMix lvvi.WireMix, wireS
 		if total := wireMix.Total(); total > 0 {
 			summary := fmt.Sprintf(
 				"Block diagram has %d wire networks (%d auto-routed, %d manually-routed, %d branched, %d other); rendered %d recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw.",
-				total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other, wireStats.Rendered)
+				total, wireMix.AutoChain, wireMix.ManualChain, wireMix.Tree, wireMix.Other, wireStats.Rendered,
+			)
 			warnings = append(warnings, summary)
 			if wireStats.UnresolvedAtHeap > 0 {
 				warnings = append(warnings, fmt.Sprintf(
 					"%d wire network(s) skipped because their source/sink terminal IDs could not be resolved at the heap level.",
-					wireStats.UnresolvedAtHeap))
+					wireStats.UnresolvedAtHeap,
+				))
 			}
 			if wireStats.MissingFromScene > 0 {
 				warnings = append(warnings, fmt.Sprintf(
 					"%d wire network(s) skipped because their heap-resolved terminal was not surfaced as a scene anchor (terminal nested inside another terminal — Phase 16.4 follow-up).",
-					wireStats.MissingFromScene))
+					wireStats.MissingFromScene,
+				))
 			}
 			if wireStats.SharedAnchorSkipped > 0 {
 				warnings = append(warnings, fmt.Sprintf(
 					"%d wire network(s) skipped because both endpoints resolved to the same connector-pane anchor; per-endpoint geometry within the connector pane is not yet decoded.",
-					wireStats.SharedAnchorSkipped))
+					wireStats.SharedAnchorSkipped,
+				))
 			}
 		}
 	}

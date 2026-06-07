@@ -7,6 +7,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 0 — Research & Corpus Setup
 
 > Target: 1-2 weeks | Exit: corpus baseline, resource inventory, and MVP scope approved
+
 - Go module, directory skeleton, README/LICENSE/gitignore, and dependency pins were established.
 - CI, lint, vet/staticcheck, build/test, and fuzz placeholders were wired.
 - Reference docs captured RSRC layout, resource registry, safety model, and reverse-engineering workflow.
@@ -17,6 +18,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 1 — Container Parser
 
 > Tag: v0.1.0 | Exit: inspect, dump, and list-resources work on corpus without panics
+
 - Added bounded binary reader helpers for integers, byte ranges, Pascal strings, and C strings.
 - Parsed RSRC headers, block info, block headers, sections, payloads, names, raw tails, file kind, and compression stubs.
 - Published lvrsrc Open/Parse/Resources/Clone APIs plus JSON dump support with opaque bytes as base64.
@@ -27,6 +29,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 2 — Preserving Writer
 
 > Tag: v0.2.0 | Exit: corpus round-trips while opaque data is preserved
+
 - Added offset-aware binary writer helpers and Pascal-string writing tests.
 - Implemented preserving RSRC serialization: offsets, padding, block/name tables, duplicate headers, raw tails, and opaque sections.
 - Published WriteTo, WriteToFile, and Validate APIs plus the lvrsrc rewrite command.
@@ -37,6 +40,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 3 — Validator & Diff
 
 > Tag: v0.3.0 | Exit: human and JSON diagnostics plus resource diffs
+
 - Added structural validator issues for headers, bounds, sizes, counts, names, payload overlap, FourCCs, and strict/lenient mode.
 - Shipped lvrsrc validate with human/JSON output and machine-readable exit codes.
 - Implemented lvdiff header/resource/section diffs plus decoded-resource extension hooks.
@@ -47,6 +51,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 4 — Safe Metadata Editing
 
 > Tag: v0.4.0 | Exit: targeted metadata edits survive rewrite and validation
+
 - Added codec registry, version/file-kind context, compatibility table, and Tier 2 STRG/vers codecs.
 - Implemented lvmeta mutation pipeline with safety checks, strict-mode warning policy, and offset/FourCC-aware errors.
 - Added SetDescription and SetName, including STRG insertion, name-table reuse/compaction, and post-edit validation.
@@ -109,6 +114,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 6 — Small-Block Completion & Colour Icons
 
 > Tag: v0.6.0 | Exit: small observed FourCCs typed, colour icons rendered, LVSR flags surfaced
+
 - Ported LabVIEW icon palettes and RGBA rendering for ICON/icl4/icl8.
 - Added LVSR flag decoding and public lvvi flag/breakpoint accessors.
 - Added Tier 1 codecs/docs/tests for LIBN, BDPW, FTAB, DTHP, RTSG, MUID, FPSE, BDSE, HIST, VITS, FPEx, BDEx, and VPDP.
@@ -119,6 +125,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 7 — Rich Link Graph
 
 > Tag: v0.7.0 | Exit: LIfp, LIbd, and LIvi entries expose typed link targets and paths
+
 - Implemented PTH0/PTH1 path decoding and LIvi envelope parsing with round-trip preservation.
 - Upgraded LIfp/LIbd/LIvi entries with lazy typed LinkObjRef targets, LinkKind metadata, and opaque fallback.
 - Exposed FrontPanelImports, BlockDiagramImports, and VIDependencies through lvvi, with decoded diffs for link resources.
@@ -129,6 +136,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 8 — Type-Descriptor Surface & Connector Pane
 
 > Tag: v0.8.0 | Exit: VCTP navigation and connector-pane rendering
+
 - Exposed public TypeDescriptor projections, top-type lists, and 1-based TypeAt lookups over VCTP.
 - Resolved CONP through VCTP and surfaced CPC2 connector-pane variants across the corpus.
 - Added codec/model tests for typedesc parsing, corpus lookup, and connector-pane resolution.
@@ -139,6 +147,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 9 — Front-Panel Heap Decoder (FPHb)
 
 > Tag: v0.9.0 | Exit: FPHb parses to a typed tree and round-trips byte-for-byte
+
 - Implemented shared heap zlib envelope with cached-byte preservation, recompression fallback, and fuzz targets.
 - Generated/ported heap tag enums from pylabview and added typed node accessors for ints, type IDs, rects, points, strings, bools, and data fills.
 - Added FPHb Tier 1 codec, validation, corpus round-trip tests, and extensive fuzz coverage.
@@ -149,6 +158,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 10 — Block-Diagram Heap (BDHb) & Approximate Render
 
 > Tag: v1.0.0 | Exit: BDHb typed, approximate FP/BD render, 100% corpus FourCC coverage
+
 - Reused the heap framework for BDHb with Tier 1 round-trip validation and fuzz coverage.
 - Added FrontPanel and BlockDiagram tree projections plus approximate demo render tabs with fidelity notes.
 - Brought coverage to 27/27 typed observed FourCCs and updated generated coverage/resource-registry docs.
@@ -159,6 +169,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 ## Phase 11 — SVG / Canvas Renderers & CLI Export
 
 > Tag: v1.1.0 | Exit: shared scene graph, web visual modes, and CLI SVG export
+
 - Added renderer-neutral scene graph with bounds, labels, containment, placeholders, wires, view boxes, and z-order.
 - Projected FPHb/BDHb trees into shared SVG/canvas render paths used by both WASM and CLI.
 - Shipped lvrsrc render with front-panel/block-diagram SVG output and --out/stdout support.
@@ -176,7 +187,7 @@ Pure-Go RSRC/VI toolkit with strong round-trip guarantees, partial semantic deco
 
 ### 12.1 `OF__bounds` real positions (completed)
 
-- Spec confirmed against `pylabview` `HeapNodeRect` (LVheap.py:1725): FieldTag 14 stores 4 big-endian `int16` values `{Left, Top, Right, Bottom}`. Corpus coverage: 1 188 / 1 188 OF__bounds leaves decode across 42 FPHb + BDHb trees.
+- Spec confirmed against `pylabview` `HeapNodeRect` (LVheap.py:1725): FieldTag 14 stores 4 big-endian `int16` values `{Left, Top, Right, Bottom}`. Corpus coverage: 1 188 / 1 188 OF\_\_bounds leaves decode across 42 FPHb + BDHb trees.
 - `lvvi.HeapBounds(tree, idx)` and `lvvi.FindBoundsChild(tree, parentIdx)` expose bounds with tests in `pkg/lvvi/bounds_test.go`.
 - `internal/render.ProjectHeapTree` promotes decoded bounds to scene groups, drops the metadata leaf from visible output, keeps heuristic fallback for controls without bounds, and auto-fits the scene viewBox.
 - Heuristic-layout warnings now appear only when at least one root falls back to heuristic placement. Render goldens were regenerated; WASM rebuilt; `web/smoke_test.go` still passes.
@@ -293,7 +304,7 @@ Remaining fixtures needed:
 
 ### 13.6 Constant-literal encoding (completed)
 
-- **`OF__ConstValue` (tag 589) is a fixed-width big-endian literal whose width tracks the constant's data type.** Unlike the compressed-wire byte-stream, a numeric constant is written verbatim in its native type, with no varint and no `0xff` escape. Confirmed across the full representation span by the `controlled-constant` fixtures: I8/U8 = 1 raw byte (`Numeric42_{I8,U8}.vi`, both `2a` — signedness is in the type, not the bytes); I32 = 4-byte BE int (`Numeric{42,255,256,65535,65536}.vi`, straddling the 1- and 2-byte boundaries with no width change); I64 = 8-byte BE int (`Numeric65536_I64.vi`); SGL = 4-byte BE IEEE-754 binary32 (`…_SGL.vi`); DBL = 8-byte BE binary64 (`Numeric9876Dot5432.vi`); EXT = 16-byte BE binary128/quad (`…_EXT.vi`, unbiased exponent 13, *not* 80-bit x87); FXD = 8-byte BE fixed-point container (`…_FXD.vi`, magnitude `0x26948b` = round(9876.5432·2⁸)); complex = two IEEE-754 components real-then-imaginary, each the underlying float's BE width — CSG = 2×binary32 (8 B, `…_CSG.vi`), CDB = 2×binary64 (16 B, `…_i5_CDB.vi`, 42+5i), CEXT = 2×binary128 (32 B, `…_CEXT.vi`). Width stops being a unique type key past 8 bytes (8 = I64/DBL/CSG/FXD, 16 = EXT/CDB, 32 = CEXT/string), which is why the accessor declines >8-byte leaves and the VCTP type is required. Exposed by the dedicated `pkg/lvvi.HeapConstValue` / `FindConstValueChild` accessors, which decode integer/float widths up to 8 bytes (kept out of the generic scalar set because string/array constants — and 16-byte EXT — exceed 8 bytes and need the VCTP type to disambiguate). Pinned by `TestHeapConstValueGroundTruth`, `TestHeapConstValueFloatGroundTruth`, and `TestHeapConstValueExtendedAndFixedPoint`. Next: a type-aware layer that joins `OF__ConstValue` to its VCTP type to decode EXT/FXD to exact values and surface a typed float view.
+- **`OF__ConstValue` (tag 589) is a fixed-width big-endian literal whose width tracks the constant's data type.** Unlike the compressed-wire byte-stream, a numeric constant is written verbatim in its native type, with no varint and no `0xff` escape. Confirmed across the full representation span by the `controlled-constant` fixtures: I8/U8 = 1 raw byte (`Numeric42_{I8,U8}.vi`, both `2a` — signedness is in the type, not the bytes); I32 = 4-byte BE int (`Numeric{42,255,256,65535,65536}.vi`, straddling the 1- and 2-byte boundaries with no width change); I64 = 8-byte BE int (`Numeric65536_I64.vi`); SGL = 4-byte BE IEEE-754 binary32 (`…_SGL.vi`); DBL = 8-byte BE binary64 (`Numeric9876Dot5432.vi`); EXT = 16-byte BE binary128/quad (`…_EXT.vi`, unbiased exponent 13, _not_ 80-bit x87); FXD = 8-byte BE fixed-point container (`…_FXD.vi`, magnitude `0x26948b` = round(9876.5432·2⁸)); complex = two IEEE-754 components real-then-imaginary, each the underlying float's BE width — CSG = 2×binary32 (8 B, `…_CSG.vi`), CDB = 2×binary64 (16 B, `…_i5_CDB.vi`, 42+5i), CEXT = 2×binary128 (32 B, `…_CEXT.vi`). Width stops being a unique type key past 8 bytes (8 = I64/DBL/CSG/FXD, 16 = EXT/CDB, 32 = CEXT/string), which is why the accessor declines >8-byte leaves and the VCTP type is required. Exposed by the dedicated `pkg/lvvi.HeapConstValue` / `FindConstValueChild` accessors, which decode integer/float widths up to 8 bytes (kept out of the generic scalar set because string/array constants — and 16-byte EXT — exceed 8 bytes and need the VCTP type to disambiguate). Pinned by `TestHeapConstValueGroundTruth`, `TestHeapConstValueFloatGroundTruth`, and `TestHeapConstValueExtendedAndFixedPoint`. Next: a type-aware layer that joins `OF__ConstValue` to its VCTP type to decode EXT/FXD to exact values and surface a typed float view.
 
 - **`byte0=03` single-corner wires are an emergent multi-node artifact.** The waypoint count is `corners + 2` (`02`=straight, `04`=Z-elbow, `06`=leftward backtrack). The odd-corner `03` (1 corner) needs a vertically-attached terminal, which the constant→indicator pair cannot produce (both stubs horizontal ⇒ even corner count). Negative probes `Numeric42_increment.vi` (horizontal-flow primitive) and `Numeric42_N_terminal.vi` (top-entered For-Loop N) both still emit only `04`. All 10 real-world `03` chunks come from multi-node function VIs, so `03` is not reproducible from a single source-to-sink layout — parked until decoded from the real-world samples.
 
@@ -437,6 +448,6 @@ Remaining fixtures needed:
 | `v0.9.0`  | front-panel heap (`FPHb`) decoder                                                         |
 | `v1.0.0`  | block-diagram heap (`BDHb`), approximate FP/BD render, stable API                         |
 | `v1.1.0`  | SVG/canvas front-panel + block-diagram rendering, CLI SVG export                          |
-| `v1.2.0`  | LabVIEW geometry foundations, compressed wire semantics, and recognizable wire rendering   |
-| `v1.3.0+` | LabVIEW-fidelity skins, text, colors, decorations, and exact wire waypoint rendering       |
-| `v1.4.0+` | semantic byte coverage, heap/type/link closure, and evidence-backed format specification   |
+| `v1.2.0`  | LabVIEW geometry foundations, compressed wire semantics, and recognizable wire rendering  |
+| `v1.3.0+` | LabVIEW-fidelity skins, text, colors, decorations, and exact wire waypoint rendering      |
+| `v1.4.0+` | semantic byte coverage, heap/type/link closure, and evidence-backed format specification  |

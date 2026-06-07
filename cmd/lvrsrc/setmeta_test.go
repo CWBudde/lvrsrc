@@ -68,7 +68,8 @@ func TestSetMetaCommandSetsDescription(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "edited.vi")
 
-	_, stderr, err := runSetMeta(t,
+	_, stderr, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "Edited via set-meta.",
 		"--out", outPath,
@@ -90,7 +91,8 @@ func TestSetMetaCommandSetsName(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "renamed.vi")
 
-	_, stderr, err := runSetMeta(t,
+	_, stderr, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--name", "via-set-meta.vi",
 		"--out", outPath,
@@ -112,7 +114,8 @@ func TestSetMetaCommandSetsBothFlagsInOneCall(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "both.vi")
 
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "double edit",
 		"--name", "both.vi",
@@ -138,7 +141,8 @@ func TestSetMetaCommandCreatesNewSTRGWhenAbsent(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "added-strg.vi")
 
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "is-float.vi"),
 		"--description", "freshly inserted",
 		"--out", outPath,
@@ -162,7 +166,8 @@ func TestSetMetaCommandEmptyDescriptionAllowed(t *testing.T) {
 
 	// Passing an explicit empty description must be respected (not
 	// confused with "flag not provided"), producing a zero-length STRG.
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "",
 		"--out", outPath,
@@ -181,7 +186,8 @@ func TestSetMetaCommandEmptyDescriptionAllowed(t *testing.T) {
 }
 
 func TestSetMetaCommandRequiresOutFlag(t *testing.T) {
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "x",
 	)
@@ -197,7 +203,8 @@ func TestSetMetaCommandRequiresAtLeastOneEditFlag(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "never-written.vi")
 
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--out", outPath,
 	)
@@ -218,7 +225,8 @@ func TestSetMetaCommandUnsafeFlagRejected(t *testing.T) {
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "never.vi")
 
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "whatever",
 		"--unsafe",
@@ -237,7 +245,8 @@ func TestSetMetaCommandPropagatesLvmetaErrorForNameOverflow(t *testing.T) {
 	outPath := filepath.Join(tempDir, "overflow.vi")
 
 	overflow := strings.Repeat("a", 256) // > 255 → ErrNameTooLong
-	_, _, err := runSetMeta(t,
+	_, _, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--name", overflow,
 		"--out", outPath,
@@ -257,7 +266,8 @@ func TestSetMetaCommandPostWriteValidationPassesOnCorpus(t *testing.T) {
 	// downstream tooling.
 	tempDir := t.TempDir()
 	outPath := filepath.Join(tempDir, "passes.vi")
-	_, stderr, err := runSetMeta(t,
+	_, stderr, err := runSetMeta(
+		t,
 		fixturePath(t, "format-string.vi"),
 		"--description", "post-write check",
 		"--out", outPath,

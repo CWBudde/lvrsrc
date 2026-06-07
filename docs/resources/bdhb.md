@@ -77,7 +77,7 @@ the following typed projections:
   by `lvvi.HeapBounds` and the `lvvi.FindBoundsChild` helper; consumed
   by `internal/render` so block-diagram object boxes are positioned at
   real LabVIEW pixel coordinates whenever a node carries a bounds
-  child. Corpus coverage shared with FPHb: **1188 / 1188** OF__bounds
+  child. Corpus coverage shared with FPHb: **1188 / 1188** OF\_\_bounds
   leaves across 42 trees.
 - `OF__termBounds` (Phase 12.3): same 8-byte BE int16
   Left/Top/Right/Bottom rect format as `OF__bounds`, decoded by
@@ -85,12 +85,12 @@ the following typed projections:
   rectangle of a tunnel / terminal class (`SL__simTun`, `SL__sdfTun`,
   `SL__seqTun`, …) and is preferred over `OF__bounds` for sizing the
   scene-graph terminal anchor. Corpus coverage: **154 / 154**
-  OF__termBounds leaves decode.
+  OF\_\_termBounds leaves decode.
 - `OF__termHotPoint` (Phase 12.3): 4 bytes BE int16 in Mac Point V/H
   order, decoded by `lvvi.HeapTermHotPoint` / `lvvi.FindTermHotPointChild`
   into a `lvvi.Point{V, H}`. Becomes the connect-point on the
   `NodeKindTerminal` scene node — wires (Phase 14) will attach
-  there. Corpus coverage: **6 / 6** OF__termHotPoint leaves decode;
+  there. Corpus coverage: **6 / 6** OF\_\_termHotPoint leaves decode;
   terminals without a hot-point fall back to the bounds centre.
 - Rectangle-shaped heap fields (Phase 16.3): `lvvi.HeapRect`,
   `lvvi.HeapRectForTag`, and `lvvi.FindRectChild` decode the shared
@@ -199,7 +199,7 @@ layout:
   sized at the decoded LabVIEW pixel rectangle.
 - Groups without a decoded bounds child fall back to the prior
   heuristic stack (vertical, indented by depth).
-- The OF__bounds leaf itself is dropped from scene output once it has
+- The OF\_\_bounds leaf itself is dropped from scene output once it has
   been promoted onto the parent.
 - Unresolved classes remain visible as placeholder nodes with their
   `Tag(N)` label and parent path.
@@ -249,10 +249,10 @@ this canonical structure:
 Two heap-tag namespaces collide on the integers used here. Resolution
 in BD wire context is positional:
 
-| Tag | ClassTag name        | FieldTag name     | Meaning here     |
-| --: | -------------------- | ----------------- | ---------------- |
+| Tag | ClassTag name          | FieldTag name    | Meaning here     |
+| --: | ---------------------- | ---------------- | ---------------- |
 | 233 | `SL__baseTableControl` | `OF__signalList` | signal list      |
-| 268 | `SL__udClassDDO`     | `OF__termList`    | terminal-id list |
+| 268 | `SL__udClassDDO`       | `OF__termList`   | terminal-id list |
 
 `pkg/lvvi.HeapTagName` resolves both as ClassTags by default; the wire
 APIs (`WireTerminalIDs`, `WireTerminalAnchor`) match the integer
