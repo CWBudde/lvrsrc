@@ -171,41 +171,93 @@ func (m *Model) BlockDiagram() (HeapTree, bool) {
 	return projectHeapTree(v.Tree), true
 }
 
-// HeapTagName resolves a HeapNode's Tag to its best-known symbolic name.
-//
-// LabVIEW heaps reuse the same int-tag namespace for several different
-// enum families (system tags, class tags, field tags, …); pylabview
-// disambiguates by tracking a context-stack as it walks the stream. We
-// don't yet replicate that full state machine, so the resolver tries
-// the families in priority order and returns the first hit:
-//
-//  1. Negative tags map onto pylabview's SL_SYSTEM_TAGS.
-//  2. Positive tags are tried against ClassTag (object classes), then
-//     FieldTag (per-field tags). ClassTag wins ties because in practice
-//     the demo cares about object boundaries first.
-//
-// Unresolved tags fall back to a numeric label like "Tag(1234)" so the
-// UI never has to deal with an empty string. Callers that want to
-// distinguish "resolved" from "fallback" can check for a parenthesis in
-// the result.
-func HeapTagName(n HeapNode) string {
-	tag := n.Tag
-	if tag < 0 {
-		st := heap.SystemTag(tag)
-		if name := st.String(); !strings.Contains(name, "(") {
-			return name
-		}
-	} else {
-		ct := heap.ClassTag(tag)
-		if name := ct.String(); !strings.Contains(name, "(") {
-			return name
-		}
-		ft := heap.FieldTag(tag)
-		if name := ft.String(); !strings.Contains(name, "(") {
-			return name
+// HeapNodeClass returns the object class of a heap node, taken from its
+// SL__class attribute. Object (open) nodes carry this attribute; field
+// leaves do not. ok is false when the node carries no class attribute.
+func HeapNodeClass(n HeapNode) (heap.ClassTag, bool) {
+	for _, a := range n.Attributes {
+		if a.ID == int32(heap.SystemAttribTagClass) {
+			return heap.ClassTag(a.Value), true
 		}
 	}
-	return fmt.Sprintf("Tag(%d)", tag)
+	return 0, false
+}
+
+// ParentTopClass returns the class of the nearest enclosing object at or
+// above tree.Nodes[idx], found by walking the parent chain for the first
+// SL__class attribute. It mirrors pylabview's parentTopClassEn and is the
+// context used to resolve a child node's field tags. When no ancestor
+// carries a class, it returns heap.ClassDefault (SL__oHExt), matching
+// pylabview's fallback. Callers naming a node N pass N.Parent here.
+func ParentTopClass(tree HeapTree, idx int) heap.ClassTag {
+	for i := 0; i < 128 && idx >= 0 && idx < len(tree.Nodes); i++ {
+		if cls, ok := HeapNodeClass(tree.Nodes[idx]); ok {
+			return cls
+		}
+		idx = tree.Nodes[idx].Parent
+	}
+	return heap.ClassDefault
+}
+
+// HeapTagNameAt resolves the best display name for tree.Nodes[idx],
+// honouring LabVIEW's context-dependent tag namespace.
+//
+// LabVIEW heaps reuse the same integer tag namespace across unrelated
+// enum families, and a positive tag's meaning depends on the enclosing
+// object's class (pylabview's tagIdToEnum). This resolver replicates that:
+//
+//  1. Negative (system) tags name the node's structural role directly —
+//     SL__rootObject, SL__arrayElement — which is more descriptive than
+//     the object's class, so these win even when a class is present.
+//  2. Positive-tag object nodes (those carrying an SL__class attribute)
+//     are named by their class, e.g. SL__Image or SL__pane — the node's
+//     true identity (the older resolver wrongly used the tag here, naming
+//     a pane "SL__aInsDCO").
+//  3. Remaining nodes (field leaves) are named by their tag resolved in
+//     the parent object's class context: positive tags resolve in the
+//     parent class's per-class field list, then the generic OBJ_FIELD_TAGS
+//     family (e.g. tag 0 inside an SL__Image is OF__ImageResID, and tag
+//     172 anywhere is OF__objFlags, never the colliding SL__grouper).
+//
+// Unresolved tags fall back to "Tag(N)" so the UI never sees an empty
+// string; callers can detect a fallback by the parenthesis.
+func HeapTagNameAt(tree HeapTree, idx int) string {
+	if idx < 0 || idx >= len(tree.Nodes) {
+		return "Tag(?)"
+	}
+	n := tree.Nodes[idx]
+	if n.Tag >= 0 {
+		if cls, ok := HeapNodeClass(n); ok {
+			if name := heap.ClassTag(cls).String(); !strings.Contains(name, "(") {
+				return name
+			}
+		}
+	}
+	if name, _, ok := heap.ResolveTagName(n.Tag, ParentTopClass(tree, n.Parent)); ok {
+		return name
+	}
+	return fmt.Sprintf("Tag(%d)", n.Tag)
+}
+
+// HeapTagName resolves a single HeapNode's tag to its best-known name
+// without parent context. Prefer HeapTagNameAt, which knows the enclosing
+// object's class and so resolves context-dependent field tags correctly;
+// this context-free form is kept for callers that only hold a node. It
+// applies the same naming policy as HeapTagNameAt (system role, then
+// class, then field) but resolves field tags in the default (SL__oHExt)
+// class context since it has no parent chain to walk.
+func HeapTagName(n HeapNode) string {
+	if n.Tag >= 0 {
+		if cls, ok := HeapNodeClass(n); ok {
+			if name := heap.ClassTag(cls).String(); !strings.Contains(name, "(") {
+				return name
+			}
+		}
+	}
+	if name, _, ok := heap.ResolveTagName(n.Tag, heap.ClassDefault); ok {
+		return name
+	}
+	return fmt.Sprintf("Tag(%d)", n.Tag)
 }
 
 func scopeString(s heap.NodeScope) string {

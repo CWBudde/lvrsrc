@@ -314,7 +314,7 @@ func buildLayoutItem(tree lvvi.HeapTree, idx int, parentPath string) *layoutItem
 		return nil
 	}
 	n := tree.Nodes[idx]
-	label := lvvi.HeapTagName(n)
+	label := lvvi.HeapTagNameAt(tree, idx)
 	path := label
 	if parentPath != "" {
 		path = parentPath + "/" + label
@@ -519,7 +519,7 @@ func buildEndpointAnchorItem(tree lvvi.HeapTree, idx int, parentPath string) *la
 		return nil
 	}
 	n := tree.Nodes[idx]
-	label := lvvi.HeapTagName(n)
+	label := lvvi.HeapTagNameAt(tree, idx)
 	path := label
 	if parentPath != "" {
 		path = parentPath + "/" + label

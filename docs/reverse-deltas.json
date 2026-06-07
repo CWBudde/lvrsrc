@@ -91,7 +91,7 @@
         "raw byte vs LEB128",
         "127 boundary"
       ],
-      "hypothesis": "The auto-chain geometry payload is a sequence of raw single bytes, not an LEB128 varint stream. A 150 px y-step is the single byte 0x96; LEB128 would emit two bytes (96 01) and lengthen the chunk. Crossing the 127 boundary is what distinguishes the two encodings \u2014 every prior controlled probe stayed under 128, so they were indistinguishable.",
+      "hypothesis": "The auto-chain geometry payload is a sequence of raw single bytes, not an LEB128 varint stream. A 150 px y-step is the single byte 0x96; LEB128 would emit two bytes (96 01) and lengthen the chunk. Crossing the 127 boundary is what distinguishes the two encodings — every prior controlled probe stayed under 128, so they were indistinguishable.",
       "evidence": "Numeric42_16px_down.vi = 04 08 00 00 41 10 (yStep 0x10=16); Numeric42_150px_down.vi = 04 08 00 00 41 96 (yStep 0x96=150 as ONE byte). The old LEB128 parser mis-read 0x96 as a truncated continuation and dropped it (chain-geometry [0 0 65]); raw-byte parsing yields [0 0 65 150]. This also removed the over-fitted {16,65} anchor whitelist, unlocking ~8 real single-elbow chunks (write-ini.vi, ndjson-parser.vi, is-string.vi) whose anchors/y-steps exceed 127.",
       "status": "confirmed"
     },
@@ -156,8 +156,8 @@
         "3-branch T-fork",
         "straight-through endpoint vs tap records"
       ],
-      "hypothesis": "byte0=7 covers two visually distinct fan-outs that share a header: a pure vertical Y-stack (reference-find-by-id.vi, all small (V, H) endpoints) and a T-fork. The block-diagram image of Numeric42ThreeIndicatorsTfork.vi shows the latter \u2014 Numeric 3 sits far right at mid-height and decodes as a genuine endpoint {V:66, H:196}, while Numeric 2 / Numeric tap up and down off the junction. The last waypoint-count-minus-4 records track per-branch geometry, but only the straight-through leg's two bytes are a true (V, H) coordinate.",
-      "evidence": "Moving the bottom tap 8 px DOWN changes exactly one trailing record (44 2d -> 44 35, +8), but in the byte TreeEndpoints labels H rather than V \u2014 so a tap record's second byte is a branch offset, not a horizontal coordinate. Full per-axis decoding of tap records needs a controlled horizontal-move fixture (move Numeric 3 right by a known px to confirm H=196 scales 1:1).",
+      "hypothesis": "byte0=7 covers two visually distinct fan-outs that share a header: a pure vertical Y-stack (reference-find-by-id.vi, all small (V, H) endpoints) and a T-fork. The block-diagram image of Numeric42ThreeIndicatorsTfork.vi shows the latter — Numeric 3 sits far right at mid-height and decodes as a genuine endpoint {V:66, H:196}, while Numeric 2 / Numeric tap up and down off the junction. The last waypoint-count-minus-4 records track per-branch geometry, but only the straight-through leg's two bytes are a true (V, H) coordinate.",
+      "evidence": "Moving the bottom tap 8 px DOWN changes exactly one trailing record (44 2d -> 44 35, +8), but in the byte TreeEndpoints labels H rather than V — so a tap record's second byte is a branch offset, not a horizontal coordinate. Full per-axis decoding of tap records needs a controlled horizontal-move fixture (move Numeric 3 right by a known px to confirm H=196 scales 1:1).",
       "status": "partial"
     },
     {
@@ -234,7 +234,7 @@
         "byte0=6 prefix"
       ],
       "hypothesis": "Flipping the indicator from 8px above to 8px below the source (same X) changes only p0/p2 (up=(00,01) -> down=(01,00)) while the magnitude p7 and horizontal p6 stay fixed, isolating vertical direction from magnitude and horizontal position.",
-      "evidence": "06 08 00 01 01 00 10 10 9c 18 vs 06 08 01 01 00 00 10 10 9c 18 \u2014 only p0/p2 differ.",
+      "evidence": "06 08 00 01 01 00 10 10 9c 18 vs 06 08 01 01 00 00 10 10 9c 18 — only p0/p2 differ.",
       "status": "confirmed"
     },
     {
@@ -260,7 +260,7 @@
         "auto-router cleanup"
       ],
       "hypothesis": "Manual elbow edits made through the LabVIEW editor's normal drag handles get cleaned up by the auto-router when the resulting path is still expressible as a single L-shape; the saved payload retains byte1=0x08 (auto) rather than promoting to byte1=0x04 (manual). Confirms Numeric42Bend.vi remains the only manual-chain ground truth in the corpus.",
-      "evidence": "Saved content is 04 08 00 00 fe 70 \u2014 same 4-waypoint single-elbow shape as Numeric42_8px_down.vi (04 08 00 00 41 08); only the y-step magnitude varint differs.",
+      "evidence": "Saved content is 04 08 00 00 fe 70 — same 4-waypoint single-elbow shape as Numeric42_8px_down.vi (04 08 00 00 41 08); only the y-step magnitude varint differs.",
       "status": "confirmed"
     },
     {
@@ -274,7 +274,7 @@
         "fresh route vs stretch"
       ],
       "hypothesis": "Two VIs with identical terminal positions but different edit history carry different wire chunks. Stretching a wire (moving the sink after drawing) freezes the elbow offset (04 08 00 00 41 08, sourceAnchorX=65); deleting and reconnecting it recomputes the elbow at the canonical short distance (04 08 00 00 10 08, sourceAnchorX=16). sourceAnchorX is therefore edit-history-dependent, not a glyph constant; only yStep reflects real geometry.",
-      "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath. Second, cleaner witness with no horizontal confound: Numeric42_8px_down.vi (stretched, 04 08 00 00 41 08) vs Numeric42_8px_down_auto-connect.vi (deleted wire, moved indicator 8px down, reconnected -> fresh route 04 08 00 00 10 08) \u2014 identical 8px-down geometry, anchorX 65 vs 16.",
+      "evidence": "Same indicator position in both; wire chunk differs only at payload[2] (0x41=65 stretched vs 0x10=16 reconnected). Confirmed via lvrsrc wires and Wire.ChainAutoPath. Second, cleaner witness with no horizontal confound: Numeric42_8px_down.vi (stretched, 04 08 00 00 41 08) vs Numeric42_8px_down_auto-connect.vi (deleted wire, moved indicator 8px down, reconnected -> fresh route 04 08 00 00 10 08) — identical 8px-down geometry, anchorX 65 vs 16.",
       "status": "confirmed"
     },
     {
@@ -401,6 +401,21 @@
       ],
       "hypothesis": "A block-diagram constant's data type is resolved by joining its OF__ConstValue leaf to a VCTP type descriptor: the governing type is the nearest preceding OF__typeDesc (tag 283) leaf within the same enclosing heap object, whose content is a 0-based index into the VCTP top-types list (NOT a flat VCTP index). TopTypes[content] is the flat VCTP index. A diagram constant carries two typeDesc references (the wired indicator's type and the constant's own); the constant's is the inner, closer one. This join disambiguates the width collisions past 8 bytes (16 = EXT vs CDB, 32 = CEXT vs string) and decodes EXT/CDB/CEXT to exact typed values.",
       "evidence": "Numeric42.vi (I32 const wired to a DBL indicator): OF__typeDesc=0x03 -> TopTypes[3]=3 -> VCTP[3]=NumFloat64 (indicator) and 0x04 -> TopTypes[4]=4 -> VCTP[4]=NumInt32 (constant); nearest-preceding selects 0x04, matching the 4-byte literal. The single-constant fixtures only use content 0x03/0x04 where TopTypes is the identity, hiding the indirection. Add17Plus25.vi (two I32 constants, only 5 VCTP descriptors) is the disambiguator: its constants carry OF__typeDesc=0x07/0x09 indexing an 11-entry TopTypes (TopTypes[7]=TopTypes[9]=4 -> VCTP[4]=NumInt32); flat[7]/flat[9] would be out of range. module-timeout--constant.vi confirms a non-identity map (TopTypes[4]=1 -> VCTP[1]). All 71 corpus block-diagram constants resolve via this scheme. Pinned by TestBlockDiagramConstantTypeJoin / TopTypesIndirection / Integers / Floats / Complex / FixedPoint in pkg/lvvi.",
+      "status": "confirmed"
+    },
+    {
+      "id": "fp-control-type-join-via-typedesc",
+      "left": "Numeric42.vi",
+      "right": "response.ctl",
+      "topic": "type-system",
+      "focus": [
+        "OF__typeDesc",
+        "OF__DefaultData",
+        "FPHb",
+        "VCTP TopTypes join"
+      ],
+      "hypothesis": "The block-diagram TopTypes type join carries to the front panel: each front-panel control/indicator/tunnel declares its data type with its own OF__typeDesc (tag 283) leaf in the FPHb heap whose content is a 0-based ordinal into the VCTP top-types list (TopTypes[content] = flat VCTP index). Unlike the block diagram (where a constant's type is the nearest-preceding typeDesc in its enclosing object), the panel declares each object's type directly with its leaf. Front-panel control DEFAULT values are a separate, unsolved concern: they are not stored as OF__ConstValue, there is no DFDS block in the corpus, and the only OF__DefaultData (tag 571) leaves are composite cluster blobs whose object-level type does not resolve cleanly through the ordinal.",
+      "evidence": "Numeric42.vi panel indicator: OF__typeDesc content 0x02 -> TopTypes[2]=3 -> VCTP[3]=NumFloat64 (a non-identity hop), independent of its wired I32 diagram constant; _I8/_SGL/_CDB panels resolve to NumInt8/NumFloat32/NumComplex128. Corpus-wide there are 278 FPHb typeDesc leaves, 0 OF__ConstValue, 0 DFDS blocks, and 5 OF__DefaultData leaves (request.ctl, response.ctl, error-response.ctl, show-panel-argument--cluster.ctl, ndjson-parser.vi) - all composite cluster defaults (response.ctl: version + string 'ok'; error-response.ctl: 'error'). For those, the nearest-in-enclosing and sibling typeDesc rules resolve to Void/Type(0x64) placeholders, not the cluster type, so no value is decoded. pkg/lvvi.Model.FrontPanelTypes joins each object to its type; FrontPanelDefaults surfaces raw blobs verbatim. Pinned by TestFrontPanelTypeJoin / TopTypesIndirection / DefaultsRaw / NoPanel in pkg/lvvi.",
       "status": "confirmed"
     }
   ]

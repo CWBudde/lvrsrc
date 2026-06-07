@@ -106,7 +106,8 @@ type WASMInfo struct {
 // WASMHeapTree is the JS-friendly projection of a decoded FPHb / BDHb
 // heap. It carries a flat node list (one entry per tag) plus the
 // indices of the top-level entries. Class-name resolution happens
-// server-side via lvvi.HeapTagName.
+// server-side via lvvi.HeapTagNameAt (context-dependent on the
+// enclosing object's class).
 type WASMHeapTree struct {
 	Nodes []WASMHeapNode `json:"nodes"`
 	Roots []int          `json:"roots"`
@@ -497,7 +498,7 @@ func projectHeapTreeForWASM(t lvvi.HeapTree) *WASMHeapTree {
 		Histogram: make(map[string]int),
 	}
 	for i, n := range t.Nodes {
-		name := lvvi.HeapTagName(n)
+		name := lvvi.HeapTagNameAt(t, i)
 		out.Nodes[i] = WASMHeapNode{
 			Tag:         n.Tag,
 			TagName:     name,

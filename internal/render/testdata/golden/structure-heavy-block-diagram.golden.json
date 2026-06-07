@@ -72,7 +72,7 @@
     },
     {
       "kind": "group",
-      "label": "SL__eventDataNode",
+      "label": "SL__diag",
       "bounds": {
         "X": 58,
         "Y": 66,
@@ -91,12 +91,12 @@
       ],
       "z": 10,
       "heap_index": 1,
-      "path": "SL__rootObject/SL__eventDataNode",
+      "path": "SL__rootObject/SL__diag",
       "widget_kind": "primitive"
     },
     {
       "kind": "box",
-      "label": "SL__eventDataNode",
+      "label": "SL__diag",
       "bounds": {
         "X": 58,
         "Y": 66,
@@ -106,12 +106,12 @@
       "parent": 3,
       "z": 11,
       "heap_index": 1,
-      "path": "SL__rootObject/SL__eventDataNode",
+      "path": "SL__rootObject/SL__diag",
       "widget_kind": "primitive"
     },
     {
       "kind": "label",
-      "label": "SL__eventDataNode",
+      "label": "SL__diag",
       "bounds": {
         "X": 74,
         "Y": 78,
@@ -121,12 +121,12 @@
       "parent": 3,
       "z": 12,
       "heap_index": 1,
-      "path": "SL__rootObject/SL__eventDataNode",
+      "path": "SL__rootObject/SL__diag",
       "widget_kind": "primitive"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 92,
         "Y": 108,
@@ -136,11 +136,11 @@
       "parent": 3,
       "z": 22,
       "heap_index": 2,
-      "path": "SL__rootObject/SL__eventDataNode/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__objFlags"
     },
     {
       "kind": "terminal",
-      "label": "SL__sdfTun",
+      "label": "OF__zPlaneList",
       "bounds": {
         "X": 92,
         "Y": 136,
@@ -161,7 +161,7 @@
       ],
       "z": 21,
       "heap_index": 3,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList",
       "widget_kind": "terminal",
       "anchor": {
         "X": 96,
@@ -180,7 +180,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 8,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -199,7 +199,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 11,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -218,7 +218,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 20,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -237,7 +237,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 29,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -256,7 +256,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 37,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -275,7 +275,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 45,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -294,7 +294,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 55,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -313,7 +313,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 63,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -332,7 +332,7 @@
       "parent": 7,
       "z": 31,
       "heap_index": 72,
-      "path": "SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement",
       "widget_kind": "terminal",
       "anchor": {
         "X": 108,
@@ -357,7 +357,7 @@
       ],
       "z": 20,
       "heap_index": 88,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList",
+      "path": "SL__rootObject/SL__diag/OF__nodeList",
       "widget_kind": "other"
     },
     {
@@ -372,7 +372,7 @@
       "parent": 17,
       "z": 21,
       "heap_index": 88,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList",
+      "path": "SL__rootObject/SL__diag/OF__nodeList",
       "widget_kind": "other"
     },
     {
@@ -387,7 +387,7 @@
       "parent": 17,
       "z": 22,
       "heap_index": 88,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList",
+      "path": "SL__rootObject/SL__diag/OF__nodeList",
       "widget_kind": "other"
     },
     {
@@ -410,7 +410,7 @@
       ],
       "z": 30,
       "heap_index": 89,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -425,7 +425,7 @@
       "parent": 20,
       "z": 31,
       "heap_index": 89,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -440,12 +440,12 @@
       "parent": 20,
       "z": 32,
       "heap_index": 89,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 58,
         "Y": 66,
@@ -455,11 +455,11 @@
       "parent": 20,
       "z": 42,
       "heap_index": 90,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "group",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 58,
         "Y": 94,
@@ -477,12 +477,12 @@
       ],
       "z": 40,
       "heap_index": 91,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 58,
         "Y": 94,
@@ -492,12 +492,12 @@
       "parent": 24,
       "z": 41,
       "heap_index": 91,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 74,
         "Y": 106,
@@ -507,7 +507,7 @@
       "parent": 24,
       "z": 42,
       "heap_index": 91,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
@@ -529,7 +529,7 @@
       ],
       "z": 50,
       "heap_index": 92,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -544,7 +544,7 @@
       "parent": 27,
       "z": 51,
       "heap_index": 92,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -559,12 +559,12 @@
       "parent": 27,
       "z": 52,
       "heap_index": 92,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 141,
         "Y": 371,
@@ -574,11 +574,11 @@
       "parent": 27,
       "z": 62,
       "heap_index": 93,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__parm",
+      "label": "OF__dco",
       "bounds": {
         "X": 141,
         "Y": 399,
@@ -588,11 +588,11 @@
       "parent": 27,
       "z": 62,
       "heap_index": 94,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco"
     },
     {
       "kind": "group",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -613,12 +613,12 @@
       ],
       "z": 60,
       "heap_index": 96,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "box",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -628,12 +628,12 @@
       "parent": 32,
       "z": 61,
       "heap_index": 96,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 23,
         "Y": 36,
@@ -643,12 +643,12 @@
       "parent": 32,
       "z": 62,
       "heap_index": 96,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 41,
         "Y": 66,
@@ -658,11 +658,11 @@
       "parent": 32,
       "z": 72,
       "heap_index": 97,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__exprNode",
+      "label": "OF__partID",
       "bounds": {
         "X": 41,
         "Y": 94,
@@ -672,11 +672,11 @@
       "parent": 32,
       "z": 72,
       "heap_index": 98,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID"
     },
     {
       "kind": "label",
-      "label": "SL__extFunc",
+      "label": "OF__howGrow",
       "bounds": {
         "X": 41,
         "Y": 122,
@@ -686,11 +686,11 @@
       "parent": 32,
       "z": 72,
       "heap_index": 99,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow"
     },
     {
       "kind": "group",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -705,12 +705,12 @@
       ],
       "z": 70,
       "heap_index": 101,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -720,12 +720,12 @@
       "parent": 38,
       "z": 71,
       "heap_index": 101,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 57,
         "Y": 162,
@@ -735,26 +735,26 @@
       "parent": 38,
       "z": 72,
       "heap_index": 101,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__fontRun",
+      "label": "OF__ImageResID",
       "bounds": {
         "X": 75,
         "Y": 192,
-        "Width": 96,
+        "Width": 110,
         "Height": 18
       },
       "parent": 38,
       "z": 82,
       "heap_index": 102,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID"
     },
     {
       "kind": "label",
-      "label": "SL__stdNum",
+      "label": "OF__fgColor",
       "bounds": {
         "X": 41,
         "Y": 232,
@@ -764,11 +764,11 @@
       "parent": 32,
       "z": 72,
       "heap_index": 104,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor"
     },
     {
       "kind": "label",
-      "label": "SL__cosm",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 41,
         "Y": 260,
@@ -778,11 +778,11 @@
       "parent": 32,
       "z": 72,
       "heap_index": 105,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor"
     },
     {
       "kind": "group",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -799,12 +799,12 @@
       ],
       "z": 70,
       "heap_index": 106,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "box",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -814,12 +814,12 @@
       "parent": 44,
       "z": 71,
       "heap_index": 106,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 57,
         "Y": 300,
@@ -829,12 +829,12 @@
       "parent": 44,
       "z": 72,
       "heap_index": 106,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__textHair",
+      "label": "OF__flags",
       "bounds": {
         "X": 75,
         "Y": 330,
@@ -844,35 +844,35 @@
       "parent": 44,
       "z": 82,
       "heap_index": 107,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags"
     },
     {
       "kind": "label",
-      "label": "OF__activeMarker",
+      "label": "OF__mode",
       "bounds": {
         "X": 75,
         "Y": 358,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 44,
       "z": 82,
       "heap_index": 108,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode"
     },
     {
       "kind": "label",
-      "label": "SL__prVIPartList",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 75,
         "Y": 386,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 44,
       "z": 82,
       "heap_index": 109,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor"
     },
     {
       "kind": "group",
@@ -893,7 +893,7 @@
       ],
       "z": 50,
       "heap_index": 113,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -908,7 +908,7 @@
       "parent": 50,
       "z": 51,
       "heap_index": 113,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -923,12 +923,12 @@
       "parent": 50,
       "z": 52,
       "heap_index": 113,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 189,
         "Y": 371,
@@ -938,11 +938,11 @@
       "parent": 50,
       "z": 62,
       "heap_index": 114,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__parm",
+      "label": "OF__dco",
       "bounds": {
         "X": 189,
         "Y": 399,
@@ -952,11 +952,11 @@
       "parent": 50,
       "z": 62,
       "heap_index": 115,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco"
     },
     {
       "kind": "group",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -977,12 +977,12 @@
       ],
       "z": 60,
       "heap_index": 117,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "box",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -992,12 +992,12 @@
       "parent": 55,
       "z": 61,
       "heap_index": 117,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 23,
         "Y": 36,
@@ -1007,12 +1007,12 @@
       "parent": 55,
       "z": 62,
       "heap_index": 117,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 41,
         "Y": 66,
@@ -1022,11 +1022,11 @@
       "parent": 55,
       "z": 72,
       "heap_index": 118,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__exprNode",
+      "label": "OF__partID",
       "bounds": {
         "X": 41,
         "Y": 94,
@@ -1036,11 +1036,11 @@
       "parent": 55,
       "z": 72,
       "heap_index": 119,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID"
     },
     {
       "kind": "label",
-      "label": "SL__extFunc",
+      "label": "OF__howGrow",
       "bounds": {
         "X": 41,
         "Y": 122,
@@ -1050,11 +1050,11 @@
       "parent": 55,
       "z": 72,
       "heap_index": 120,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow"
     },
     {
       "kind": "group",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1069,12 +1069,12 @@
       ],
       "z": 70,
       "heap_index": 122,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1084,12 +1084,12 @@
       "parent": 61,
       "z": 71,
       "heap_index": 122,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 57,
         "Y": 162,
@@ -1099,26 +1099,26 @@
       "parent": 61,
       "z": 72,
       "heap_index": 122,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__fontRun",
+      "label": "OF__ImageResID",
       "bounds": {
         "X": 75,
         "Y": 192,
-        "Width": 96,
+        "Width": 110,
         "Height": 18
       },
       "parent": 61,
       "z": 82,
       "heap_index": 123,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID"
     },
     {
       "kind": "label",
-      "label": "SL__stdNum",
+      "label": "OF__fgColor",
       "bounds": {
         "X": 41,
         "Y": 232,
@@ -1128,11 +1128,11 @@
       "parent": 55,
       "z": 72,
       "heap_index": 125,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor"
     },
     {
       "kind": "label",
-      "label": "SL__cosm",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 41,
         "Y": 260,
@@ -1142,11 +1142,11 @@
       "parent": 55,
       "z": 72,
       "heap_index": 126,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor"
     },
     {
       "kind": "group",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1163,12 +1163,12 @@
       ],
       "z": 70,
       "heap_index": 127,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "box",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1178,12 +1178,12 @@
       "parent": 67,
       "z": 71,
       "heap_index": 127,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 57,
         "Y": 300,
@@ -1193,12 +1193,12 @@
       "parent": 67,
       "z": 72,
       "heap_index": 127,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__textHair",
+      "label": "OF__flags",
       "bounds": {
         "X": 75,
         "Y": 330,
@@ -1208,35 +1208,35 @@
       "parent": 67,
       "z": 82,
       "heap_index": 128,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags"
     },
     {
       "kind": "label",
-      "label": "OF__activeMarker",
+      "label": "OF__mode",
       "bounds": {
         "X": 75,
         "Y": 358,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 67,
       "z": 82,
       "heap_index": 129,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode"
     },
     {
       "kind": "label",
-      "label": "SL__prVIPartList",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 75,
         "Y": 386,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 67,
       "z": 82,
       "heap_index": 130,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor"
     },
     {
       "kind": "group",
@@ -1257,7 +1257,7 @@
       ],
       "z": 50,
       "heap_index": 134,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -1272,7 +1272,7 @@
       "parent": 73,
       "z": 51,
       "heap_index": 134,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -1287,12 +1287,12 @@
       "parent": 73,
       "z": 52,
       "heap_index": 134,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 189,
         "Y": 223,
@@ -1302,11 +1302,11 @@
       "parent": 73,
       "z": 62,
       "heap_index": 135,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__parm",
+      "label": "OF__dco",
       "bounds": {
         "X": 189,
         "Y": 251,
@@ -1316,11 +1316,11 @@
       "parent": 73,
       "z": 62,
       "heap_index": 136,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco"
     },
     {
       "kind": "group",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -1341,12 +1341,12 @@
       ],
       "z": 60,
       "heap_index": 138,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "box",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -1356,12 +1356,12 @@
       "parent": 78,
       "z": 61,
       "heap_index": 138,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 23,
         "Y": 36,
@@ -1371,12 +1371,12 @@
       "parent": 78,
       "z": 62,
       "heap_index": 138,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 41,
         "Y": 66,
@@ -1386,11 +1386,11 @@
       "parent": 78,
       "z": 72,
       "heap_index": 139,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__exprNode",
+      "label": "OF__partID",
       "bounds": {
         "X": 41,
         "Y": 94,
@@ -1400,11 +1400,11 @@
       "parent": 78,
       "z": 72,
       "heap_index": 140,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID"
     },
     {
       "kind": "label",
-      "label": "SL__extFunc",
+      "label": "OF__howGrow",
       "bounds": {
         "X": 41,
         "Y": 122,
@@ -1414,11 +1414,11 @@
       "parent": 78,
       "z": 72,
       "heap_index": 141,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow"
     },
     {
       "kind": "group",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1433,12 +1433,12 @@
       ],
       "z": 70,
       "heap_index": 143,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1448,12 +1448,12 @@
       "parent": 84,
       "z": 71,
       "heap_index": 143,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 57,
         "Y": 162,
@@ -1463,26 +1463,26 @@
       "parent": 84,
       "z": 72,
       "heap_index": 143,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__fontRun",
+      "label": "OF__ImageResID",
       "bounds": {
         "X": 75,
         "Y": 192,
-        "Width": 96,
+        "Width": 110,
         "Height": 18
       },
       "parent": 84,
       "z": 82,
       "heap_index": 144,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID"
     },
     {
       "kind": "label",
-      "label": "SL__stdNum",
+      "label": "OF__fgColor",
       "bounds": {
         "X": 41,
         "Y": 232,
@@ -1492,11 +1492,11 @@
       "parent": 78,
       "z": 72,
       "heap_index": 146,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor"
     },
     {
       "kind": "label",
-      "label": "SL__cosm",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 41,
         "Y": 260,
@@ -1506,11 +1506,11 @@
       "parent": 78,
       "z": 72,
       "heap_index": 147,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor"
     },
     {
       "kind": "group",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1527,12 +1527,12 @@
       ],
       "z": 70,
       "heap_index": 148,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "box",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1542,12 +1542,12 @@
       "parent": 90,
       "z": 71,
       "heap_index": 148,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 57,
         "Y": 300,
@@ -1557,12 +1557,12 @@
       "parent": 90,
       "z": 72,
       "heap_index": 148,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__textHair",
+      "label": "OF__flags",
       "bounds": {
         "X": 75,
         "Y": 330,
@@ -1572,35 +1572,35 @@
       "parent": 90,
       "z": 82,
       "heap_index": 149,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags"
     },
     {
       "kind": "label",
-      "label": "OF__activeMarker",
+      "label": "OF__mode",
       "bounds": {
         "X": 75,
         "Y": 358,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 90,
       "z": 82,
       "heap_index": 150,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode"
     },
     {
       "kind": "label",
-      "label": "SL__prVIPartList",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 75,
         "Y": 386,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 90,
       "z": 82,
       "heap_index": 151,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor"
     },
     {
       "kind": "group",
@@ -1621,7 +1621,7 @@
       ],
       "z": 50,
       "heap_index": 155,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -1636,7 +1636,7 @@
       "parent": 96,
       "z": 51,
       "heap_index": 155,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -1651,12 +1651,12 @@
       "parent": 96,
       "z": 52,
       "heap_index": 155,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 156,
         "Y": 288,
@@ -1666,11 +1666,11 @@
       "parent": 96,
       "z": 62,
       "heap_index": 156,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__parm",
+      "label": "OF__dco",
       "bounds": {
         "X": 156,
         "Y": 316,
@@ -1680,11 +1680,11 @@
       "parent": 96,
       "z": 62,
       "heap_index": 157,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco"
     },
     {
       "kind": "group",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -1705,12 +1705,12 @@
       ],
       "z": 60,
       "heap_index": 159,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "box",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 7,
         "Y": 24,
@@ -1720,12 +1720,12 @@
       "parent": 101,
       "z": 61,
       "heap_index": 159,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__conPane",
+      "label": "SL__label",
       "bounds": {
         "X": 23,
         "Y": 36,
@@ -1735,12 +1735,12 @@
       "parent": 101,
       "z": 62,
       "heap_index": 159,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label",
       "widget_kind": "connector-pane"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 41,
         "Y": 66,
@@ -1750,11 +1750,11 @@
       "parent": 101,
       "z": 72,
       "heap_index": 160,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags"
     },
     {
       "kind": "label",
-      "label": "SL__exprNode",
+      "label": "OF__partID",
       "bounds": {
         "X": 41,
         "Y": 94,
@@ -1764,11 +1764,11 @@
       "parent": 101,
       "z": 72,
       "heap_index": 161,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID"
     },
     {
       "kind": "label",
-      "label": "SL__extFunc",
+      "label": "OF__howGrow",
       "bounds": {
         "X": 41,
         "Y": 122,
@@ -1778,11 +1778,11 @@
       "parent": 101,
       "z": 72,
       "heap_index": 162,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow"
     },
     {
       "kind": "group",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1797,12 +1797,12 @@
       ],
       "z": 70,
       "heap_index": 164,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 41,
         "Y": 150,
@@ -1812,12 +1812,12 @@
       "parent": 107,
       "z": 71,
       "heap_index": 164,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "OF__image",
+      "label": "SL__Image",
       "bounds": {
         "X": 57,
         "Y": 162,
@@ -1827,26 +1827,26 @@
       "parent": 107,
       "z": 72,
       "heap_index": 164,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__fontRun",
+      "label": "OF__ImageResID",
       "bounds": {
         "X": 75,
         "Y": 192,
-        "Width": 96,
+        "Width": 110,
         "Height": 18
       },
       "parent": 107,
       "z": 82,
       "heap_index": 165,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID"
     },
     {
       "kind": "label",
-      "label": "SL__stdNum",
+      "label": "OF__fgColor",
       "bounds": {
         "X": 41,
         "Y": 232,
@@ -1856,11 +1856,11 @@
       "parent": 101,
       "z": 72,
       "heap_index": 167,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor"
     },
     {
       "kind": "label",
-      "label": "SL__cosm",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 41,
         "Y": 260,
@@ -1870,11 +1870,11 @@
       "parent": 101,
       "z": 72,
       "heap_index": 168,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor"
     },
     {
       "kind": "group",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1891,12 +1891,12 @@
       ],
       "z": 70,
       "heap_index": 169,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "box",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 41,
         "Y": 288,
@@ -1906,12 +1906,12 @@
       "parent": 113,
       "z": 71,
       "heap_index": 169,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__baseRefNum",
+      "label": "SL__textHair",
       "bounds": {
         "X": 57,
         "Y": 300,
@@ -1921,12 +1921,12 @@
       "parent": 113,
       "z": 72,
       "heap_index": 169,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum",
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair",
       "widget_kind": "refnum"
     },
     {
       "kind": "label",
-      "label": "SL__textHair",
+      "label": "OF__flags",
       "bounds": {
         "X": 75,
         "Y": 330,
@@ -1936,53 +1936,53 @@
       "parent": 113,
       "z": 82,
       "heap_index": 170,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags"
     },
     {
       "kind": "label",
-      "label": "OF__activeMarker",
+      "label": "OF__mode",
       "bounds": {
         "X": 75,
         "Y": 358,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 113,
       "z": 82,
       "heap_index": 171,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode"
     },
     {
       "kind": "label",
-      "label": "SL__prVIPartList",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 75,
         "Y": 386,
-        "Width": 124,
+        "Width": 96,
         "Height": 18
       },
       "parent": 113,
       "z": 82,
       "heap_index": 172,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor"
     },
     {
       "kind": "label",
-      "label": "SL__treeControl",
+      "label": "OF__shortCount",
       "bounds": {
         "X": 58,
         "Y": 316,
-        "Width": 117,
+        "Width": 110,
         "Height": 18
       },
       "parent": 20,
       "z": 42,
       "heap_index": 178,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__treeControl"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__shortCount"
     },
     {
       "kind": "label",
-      "label": "SL__diag",
+      "label": "OF__clumpNum",
       "bounds": {
         "X": 58,
         "Y": 344,
@@ -1992,7 +1992,7 @@
       "parent": 20,
       "z": 42,
       "heap_index": 179,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__diag"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__clumpNum"
     },
     {
       "kind": "label",
@@ -2006,11 +2006,11 @@
       "parent": 17,
       "z": 32,
       "heap_index": 181,
-      "path": "SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement"
     },
     {
       "kind": "group",
-      "label": "SL__baseTableControl",
+      "label": "OF__signalList",
       "bounds": {
         "X": 92,
         "Y": 247,
@@ -2028,12 +2028,12 @@
       ],
       "z": 20,
       "heap_index": 183,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl",
+      "path": "SL__rootObject/SL__diag/OF__signalList",
       "widget_kind": "graph"
     },
     {
       "kind": "box",
-      "label": "SL__baseTableControl",
+      "label": "OF__signalList",
       "bounds": {
         "X": 92,
         "Y": 247,
@@ -2043,12 +2043,12 @@
       "parent": 122,
       "z": 21,
       "heap_index": 183,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl",
+      "path": "SL__rootObject/SL__diag/OF__signalList",
       "widget_kind": "graph"
     },
     {
       "kind": "label",
-      "label": "SL__baseTableControl",
+      "label": "OF__signalList",
       "bounds": {
         "X": 108,
         "Y": 259,
@@ -2058,7 +2058,7 @@
       "parent": 122,
       "z": 22,
       "heap_index": 183,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl",
+      "path": "SL__rootObject/SL__diag/OF__signalList",
       "widget_kind": "graph"
     },
     {
@@ -2081,7 +2081,7 @@
       ],
       "z": 30,
       "heap_index": 184,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2096,7 +2096,7 @@
       "parent": 125,
       "z": 31,
       "heap_index": 184,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2111,12 +2111,12 @@
       "parent": 125,
       "z": 32,
       "heap_index": 184,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "group",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 331,
@@ -2132,12 +2132,12 @@
       ],
       "z": 40,
       "heap_index": 185,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 331,
@@ -2147,12 +2147,12 @@
       "parent": 128,
       "z": 41,
       "heap_index": 185,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 176,
         "Y": 343,
@@ -2162,7 +2162,7 @@
       "parent": 128,
       "z": 42,
       "heap_index": 185,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
@@ -2177,7 +2177,7 @@
       "parent": 128,
       "z": 52,
       "heap_index": 186,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
@@ -2191,21 +2191,21 @@
       "parent": 128,
       "z": 52,
       "heap_index": 187,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
-      "label": "SL__externalDiagram",
+      "label": "OF__state",
       "bounds": {
         "X": 160,
         "Y": 441,
-        "Width": 145,
+        "Width": 96,
         "Height": 18
       },
       "parent": 125,
       "z": 42,
       "heap_index": 189,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state"
     },
     {
       "kind": "label",
@@ -2219,21 +2219,21 @@
       "parent": 125,
       "z": 42,
       "heap_index": 190,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable"
     },
     {
       "kind": "label",
-      "label": "SL__loop",
+      "label": "OF__lastSignalKind",
       "bounds": {
         "X": 160,
         "Y": 497,
-        "Width": 96,
+        "Width": 138,
         "Height": 18
       },
       "parent": 125,
       "z": 42,
       "heap_index": 191,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind"
     },
     {
       "kind": "group",
@@ -2256,7 +2256,7 @@
       ],
       "z": 30,
       "heap_index": 193,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2271,7 +2271,7 @@
       "parent": 136,
       "z": 31,
       "heap_index": 193,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2286,12 +2286,12 @@
       "parent": 136,
       "z": 32,
       "heap_index": 193,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 160,
         "Y": 579,
@@ -2301,11 +2301,11 @@
       "parent": 136,
       "z": 42,
       "heap_index": 194,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "group",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 607,
@@ -2321,12 +2321,12 @@
       ],
       "z": 40,
       "heap_index": 195,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 607,
@@ -2336,12 +2336,12 @@
       "parent": 140,
       "z": 41,
       "heap_index": 195,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 176,
         "Y": 619,
@@ -2351,7 +2351,7 @@
       "parent": 140,
       "z": 42,
       "heap_index": 195,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
@@ -2366,7 +2366,7 @@
       "parent": 140,
       "z": 52,
       "heap_index": 196,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
@@ -2380,21 +2380,21 @@
       "parent": 140,
       "z": 52,
       "heap_index": 197,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
-      "label": "SL__externalDiagram",
+      "label": "OF__state",
       "bounds": {
         "X": 160,
         "Y": 717,
-        "Width": 145,
+        "Width": 96,
         "Height": 18
       },
       "parent": 136,
       "z": 42,
       "heap_index": 199,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state"
     },
     {
       "kind": "label",
@@ -2408,21 +2408,21 @@
       "parent": 136,
       "z": 42,
       "heap_index": 200,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable"
     },
     {
       "kind": "label",
-      "label": "SL__loop",
+      "label": "OF__lastSignalKind",
       "bounds": {
         "X": 160,
         "Y": 773,
-        "Width": 96,
+        "Width": 138,
         "Height": 18
       },
       "parent": 136,
       "z": 42,
       "heap_index": 201,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind"
     },
     {
       "kind": "group",
@@ -2445,7 +2445,7 @@
       ],
       "z": 30,
       "heap_index": 203,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2460,7 +2460,7 @@
       "parent": 148,
       "z": 31,
       "heap_index": 203,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2475,12 +2475,12 @@
       "parent": 148,
       "z": 32,
       "heap_index": 203,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "label",
-      "label": "SL__grouper",
+      "label": "OF__objFlags",
       "bounds": {
         "X": 160,
         "Y": 855,
@@ -2490,11 +2490,11 @@
       "parent": 148,
       "z": 42,
       "heap_index": 204,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__grouper"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__objFlags"
     },
     {
       "kind": "group",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 883,
@@ -2510,12 +2510,12 @@
       ],
       "z": 40,
       "heap_index": 205,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 883,
@@ -2525,12 +2525,12 @@
       "parent": 152,
       "z": 41,
       "heap_index": 205,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 176,
         "Y": 895,
@@ -2540,7 +2540,7 @@
       "parent": 152,
       "z": 42,
       "heap_index": 205,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
@@ -2555,7 +2555,7 @@
       "parent": 152,
       "z": 52,
       "heap_index": 206,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
@@ -2569,21 +2569,21 @@
       "parent": 152,
       "z": 52,
       "heap_index": 207,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
-      "label": "SL__externalDiagram",
+      "label": "OF__state",
       "bounds": {
         "X": 160,
         "Y": 993,
-        "Width": 145,
+        "Width": 96,
         "Height": 18
       },
       "parent": 148,
       "z": 42,
       "heap_index": 209,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state"
     },
     {
       "kind": "label",
@@ -2597,21 +2597,21 @@
       "parent": 148,
       "z": 42,
       "heap_index": 210,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable"
     },
     {
       "kind": "label",
-      "label": "SL__loop",
+      "label": "OF__lastSignalKind",
       "bounds": {
         "X": 160,
         "Y": 1049,
-        "Width": 96,
+        "Width": 138,
         "Height": 18
       },
       "parent": 148,
       "z": 42,
       "heap_index": 211,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind"
     },
     {
       "kind": "group",
@@ -2633,7 +2633,7 @@
       ],
       "z": 30,
       "heap_index": 213,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2648,7 +2648,7 @@
       "parent": 160,
       "z": 31,
       "heap_index": 213,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
@@ -2663,12 +2663,12 @@
       "parent": 160,
       "z": 32,
       "heap_index": 213,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement",
       "widget_kind": "array"
     },
     {
       "kind": "group",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 1131,
@@ -2684,12 +2684,12 @@
       ],
       "z": 40,
       "heap_index": 214,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "box",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 160,
         "Y": 1131,
@@ -2699,12 +2699,12 @@
       "parent": 163,
       "z": 41,
       "heap_index": 214,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
       "kind": "label",
-      "label": "SL__udClassDDO",
+      "label": "OF__termList",
       "bounds": {
         "X": 176,
         "Y": 1143,
@@ -2714,7 +2714,7 @@
       "parent": 163,
       "z": 42,
       "heap_index": 214,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO",
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList",
       "widget_kind": "other"
     },
     {
@@ -2729,7 +2729,7 @@
       "parent": 163,
       "z": 52,
       "heap_index": 215,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
@@ -2743,21 +2743,21 @@
       "parent": 163,
       "z": 52,
       "heap_index": 216,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement"
     },
     {
       "kind": "label",
-      "label": "SL__externalDiagram",
+      "label": "OF__state",
       "bounds": {
         "X": 160,
         "Y": 1241,
-        "Width": 145,
+        "Width": 96,
         "Height": 18
       },
       "parent": 160,
       "z": 42,
       "heap_index": 218,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state"
     },
     {
       "kind": "label",
@@ -2771,25 +2771,25 @@
       "parent": 160,
       "z": 42,
       "heap_index": 219,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable"
     },
     {
       "kind": "label",
-      "label": "SL__loop",
+      "label": "OF__lastSignalKind",
       "bounds": {
         "X": 160,
         "Y": 1297,
-        "Width": 96,
+        "Width": 138,
         "Height": 18
       },
       "parent": 160,
       "z": 42,
       "heap_index": 220,
-      "path": "SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop"
+      "path": "SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind"
     },
     {
       "kind": "label",
-      "label": "SL__cosm",
+      "label": "OF__bgColor",
       "bounds": {
         "X": 92,
         "Y": 1349,
@@ -2799,25 +2799,25 @@
       "parent": 3,
       "z": 22,
       "heap_index": 223,
-      "path": "SL__rootObject/SL__eventDataNode/SL__cosm"
+      "path": "SL__rootObject/SL__diag/OF__bgColor"
     },
     {
       "kind": "label",
-      "label": "SL__ctlRefDCO",
+      "label": "OF__pBounds",
       "bounds": {
         "X": 58,
         "Y": 1389,
-        "Width": 103,
+        "Width": 96,
         "Height": 18
       },
       "parent": 0,
       "z": 12,
       "heap_index": 225,
-      "path": "SL__rootObject/SL__ctlRefDCO"
+      "path": "SL__rootObject/OF__pBounds"
     },
     {
       "kind": "label",
-      "label": "SL__selTun",
+      "label": "OF__dBounds",
       "bounds": {
         "X": 58,
         "Y": 1417,
@@ -2827,21 +2827,21 @@
       "parent": 0,
       "z": 12,
       "heap_index": 226,
-      "path": "SL__rootObject/SL__selTun"
+      "path": "SL__rootObject/OF__dBounds"
     },
     {
       "kind": "label",
-      "label": "SL__subVIFromSelBkUp",
+      "label": "OF__origin",
       "bounds": {
         "X": 58,
         "Y": 1445,
-        "Width": 152,
+        "Width": 96,
         "Height": 18
       },
       "parent": 0,
       "z": 12,
       "heap_index": 227,
-      "path": "SL__rootObject/SL__subVIFromSelBkUp"
+      "path": "SL__rootObject/OF__origin"
     },
     {
       "kind": "label",
@@ -2858,5 +2858,5 @@
       "path": "SL__rootObject/OF__instrStyle"
     }
   ],
-  "svg": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"428\" height=\"1547\" viewBox=\"0 0 428 1547\" role=\"img\" aria-label=\"golden render\"\u003e\n\u003ctitle\u003egolden render\u003c/title\u003e\n\u003cstyle\u003e\n.lvrsrc-node-box { fill: #f4f0e8; stroke: #5f4b32; stroke-width: 1.5; rx: 8; ry: 8; }\n.lvrsrc-node-label { fill: #16324f; font: 13px \"Helvetica Neue\", Helvetica, Arial, sans-serif; }\n.lvrsrc-node-placeholder { fill: #7d4f50; stroke: #7d4f50; stroke-dasharray: 5 3; }\n.lvrsrc-warning { fill: #7d4f50; font: 12px \"Helvetica Neue\", Helvetica, Arial, sans-serif; }\n.lvrsrc-widget-other { fill: #f4f0e8; stroke: #5f4b32; }\n.lvrsrc-widget-boolean { fill: #d8eed3; stroke: #3a7a3a; }\n.lvrsrc-widget-numeric { fill: #d6e6f2; stroke: #1f6f8b; }\n.lvrsrc-widget-string { fill: #ecdcef; stroke: #5f3a7a; }\n.lvrsrc-widget-cluster { fill: #ecdfcd; stroke: #7a5a3a; }\n.lvrsrc-widget-array { fill: #e1e8c8; stroke: #5a6f1f; }\n.lvrsrc-widget-graph { fill: #d2e6e6; stroke: #1f6b6b; }\n.lvrsrc-widget-decoration { fill: #f0f0f0; stroke: #9a9a9a; stroke-dasharray: 3 2; }\n.lvrsrc-widget-structure { fill: #f1d9c2; stroke: #8b4f1f; stroke-width: 2; }\n.lvrsrc-widget-primitive { fill: #d3dceb; stroke: #1f3a6b; }\n.lvrsrc-widget-terminal { fill: #ffffff; stroke: #2a2a2a; stroke-width: 1; }\n.lvrsrc-widget-refnum { fill: #dfe5ee; stroke: #41536b; }\n.lvrsrc-widget-variant { fill: #eee5d4; stroke: #736239; }\n.lvrsrc-widget-connector-pane { fill: #e7ece4; stroke: #4d6645; stroke-width: 1.5; }\n.lvrsrc-node-terminal-anchor { fill: #2a2a2a; stroke: none; }\n\u003c/style\u003e\n\u003cstyle\u003e\n.lvrsrc-wire { fill: none; stroke: #1f5f9f; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }\n\u003c/style\u003e\n\u003ctext class=\"lvrsrc-warning\" x=\"12\" y=\"18\"\u003eLayout is heuristic: some positions and sizes are derived from heap structure rather than decoded LabVIEW geometry.\u003c/text\u003e\n\u003ctext class=\"lvrsrc-warning\" x=\"12\" y=\"34\"\u003eBlock diagram has 4 wire networks (4 auto-routed, 0 manually-routed, 0 branched, 0 other); rendered 3 recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw.\u003c/text\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"13\" points=\"96,140 108,140 108,190\"/\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"9\" points=\"96,140 108,140 108,150\"/\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"10\" points=\"96,140 106,140 106,116 108,116 108,160\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject\" data-heap-index=\"0\" x=\"24\" y=\"24\" width=\"380\" height=\"1479\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject\" data-heap-index=\"0\" x=\"40\" y=\"54\"\u003eSL__rootObject\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-primitive\" data-path=\"SL__rootObject/SL__eventDataNode\" data-heap-index=\"1\" x=\"58\" y=\"66\" width=\"330\" height=\"1313\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/OF__instrStyle\" data-heap-index=\"228\" x=\"58\" y=\"1487\"\u003eOF__instrStyle\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__ctlRefDCO\" data-heap-index=\"225\" x=\"58\" y=\"1403\"\u003eSL__ctlRefDCO\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__selTun\" data-heap-index=\"226\" x=\"58\" y=\"1431\"\u003eSL__selTun\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__subVIFromSelBkUp\" data-heap-index=\"227\" x=\"58\" y=\"1459\"\u003eSL__subVIFromSelBkUp\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-primitive\" data-path=\"SL__rootObject/SL__eventDataNode\" data-heap-index=\"1\" x=\"74\" y=\"96\"\u003eSL__eventDataNode\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun\" data-heap-index=\"3\" x=\"92\" y=\"136\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun\" data-heap-index=\"3\" cx=\"96\" cy=\"140\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList\" data-heap-index=\"88\" x=\"92\" y=\"154\" width=\"180\" height=\"83\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-graph\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl\" data-heap-index=\"183\" x=\"92\" y=\"247\" width=\"280\" height=\"1092\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__cosm\" data-heap-index=\"223\" x=\"92\" y=\"1363\"\u003eSL__cosm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__grouper\" data-heap-index=\"2\" x=\"92\" y=\"122\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList\" data-heap-index=\"88\" x=\"108\" y=\"184\"\u003eOF__nodeList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-graph\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl\" data-heap-index=\"183\" x=\"108\" y=\"277\"\u003eSL__baseTableControl\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"8\" x=\"104\" y=\"136\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"8\" cx=\"108\" cy=\"140\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"11\" x=\"104\" y=\"146\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"11\" cx=\"108\" cy=\"150\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"20\" x=\"104\" y=\"156\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"20\" cx=\"108\" cy=\"160\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"29\" x=\"104\" y=\"166\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"29\" cx=\"108\" cy=\"170\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"37\" x=\"104\" y=\"176\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"37\" cx=\"108\" cy=\"180\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"45\" x=\"104\" y=\"186\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"45\" cx=\"108\" cy=\"190\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"55\" x=\"104\" y=\"196\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"55\" cx=\"108\" cy=\"200\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"63\" x=\"104\" y=\"206\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"63\" cx=\"108\" cy=\"210\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"72\" x=\"104\" y=\"216\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__eventDataNode/SL__sdfTun/SL__arrayElement\" data-heap-index=\"72\" cx=\"108\" cy=\"220\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement\" data-heap-index=\"89\" x=\"24\" y=\"24\" width=\"1\" height=\"1\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"184\" x=\"126\" y=\"289\" width=\"230\" height=\"238\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"193\" x=\"126\" y=\"537\" width=\"230\" height=\"266\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"203\" x=\"126\" y=\"813\" width=\"230\" height=\"266\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"213\" x=\"126\" y=\"1089\" width=\"230\" height=\"238\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement\" data-heap-index=\"181\" x=\"126\" y=\"210\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement\" data-heap-index=\"89\" x=\"40\" y=\"54\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"184\" x=\"142\" y=\"319\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"193\" x=\"142\" y=\"567\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"203\" x=\"142\" y=\"843\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement\" data-heap-index=\"213\" x=\"142\" y=\"1119\"\u003eSL__arrayElement\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"91\" x=\"58\" y=\"94\" width=\"180\" height=\"212\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"185\" x=\"160\" y=\"331\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"195\" x=\"160\" y=\"607\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"205\" x=\"160\" y=\"883\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"214\" x=\"160\" y=\"1131\" width=\"180\" height=\"100\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__diag\" data-heap-index=\"179\" x=\"58\" y=\"358\"\u003eSL__diag\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__grouper\" data-heap-index=\"90\" x=\"58\" y=\"80\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__treeControl\" data-heap-index=\"178\" x=\"58\" y=\"330\"\u003eSL__treeControl\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"91\" x=\"74\" y=\"124\"\u003eSL__udClassDDO\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"190\" x=\"160\" y=\"483\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram\" data-heap-index=\"189\" x=\"160\" y=\"455\"\u003eSL__externalDiagram\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop\" data-heap-index=\"191\" x=\"160\" y=\"511\"\u003eSL__loop\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"185\" x=\"176\" y=\"361\"\u003eSL__udClassDDO\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"200\" x=\"160\" y=\"759\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram\" data-heap-index=\"199\" x=\"160\" y=\"731\"\u003eSL__externalDiagram\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__grouper\" data-heap-index=\"194\" x=\"160\" y=\"593\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop\" data-heap-index=\"201\" x=\"160\" y=\"787\"\u003eSL__loop\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"195\" x=\"176\" y=\"637\"\u003eSL__udClassDDO\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"210\" x=\"160\" y=\"1035\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram\" data-heap-index=\"209\" x=\"160\" y=\"1007\"\u003eSL__externalDiagram\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__grouper\" data-heap-index=\"204\" x=\"160\" y=\"869\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop\" data-heap-index=\"211\" x=\"160\" y=\"1063\"\u003eSL__loop\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"205\" x=\"176\" y=\"913\"\u003eSL__udClassDDO\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"219\" x=\"160\" y=\"1283\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__externalDiagram\" data-heap-index=\"218\" x=\"160\" y=\"1255\"\u003eSL__externalDiagram\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__loop\" data-heap-index=\"220\" x=\"160\" y=\"1311\"\u003eSL__loop\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO\" data-heap-index=\"214\" x=\"176\" y=\"1161\"\u003eSL__udClassDDO\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"92\" x=\"107\" y=\"329\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"113\" x=\"155\" y=\"329\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"134\" x=\"155\" y=\"181\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"155\" x=\"122\" y=\"246\" width=\"16\" height=\"32\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"92\" x=\"123\" y=\"359\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"113\" x=\"171\" y=\"359\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"134\" x=\"171\" y=\"211\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"155\" x=\"138\" y=\"276\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"186\" x=\"194\" y=\"387\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"187\" x=\"194\" y=\"415\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"196\" x=\"194\" y=\"663\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"197\" x=\"194\" y=\"691\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"206\" x=\"194\" y=\"939\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"207\" x=\"194\" y=\"967\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"215\" x=\"194\" y=\"1187\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/SL__baseTableControl/SL__arrayElement/SL__udClassDDO/SL__arrayElement\" data-heap-index=\"216\" x=\"194\" y=\"1215\"\u003eSL__arrayElement\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"96\" x=\"7\" y=\"24\" width=\"17\" height=\"34\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"117\" x=\"7\" y=\"24\" width=\"17\" height=\"49\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"138\" x=\"7\" y=\"24\" width=\"17\" height=\"94\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"159\" x=\"7\" y=\"24\" width=\"17\" height=\"39\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper\" data-heap-index=\"93\" x=\"141\" y=\"385\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm\" data-heap-index=\"94\" x=\"141\" y=\"413\"\u003eSL__parm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"96\" x=\"23\" y=\"54\"\u003eSL__conPane\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper\" data-heap-index=\"114\" x=\"189\" y=\"385\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm\" data-heap-index=\"115\" x=\"189\" y=\"413\"\u003eSL__parm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"117\" x=\"23\" y=\"54\"\u003eSL__conPane\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper\" data-heap-index=\"135\" x=\"189\" y=\"237\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm\" data-heap-index=\"136\" x=\"189\" y=\"265\"\u003eSL__parm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"138\" x=\"23\" y=\"54\"\u003eSL__conPane\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__grouper\" data-heap-index=\"156\" x=\"156\" y=\"302\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__parm\" data-heap-index=\"157\" x=\"156\" y=\"330\"\u003eSL__parm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane\" data-heap-index=\"159\" x=\"23\" y=\"54\"\u003eSL__conPane\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"101\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"106\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"122\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"127\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"143\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"148\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"164\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"169\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm\" data-heap-index=\"105\" x=\"41\" y=\"274\"\u003eSL__cosm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode\" data-heap-index=\"98\" x=\"41\" y=\"108\"\u003eSL__exprNode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc\" data-heap-index=\"99\" x=\"41\" y=\"136\"\u003eSL__extFunc\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper\" data-heap-index=\"97\" x=\"41\" y=\"80\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum\" data-heap-index=\"104\" x=\"41\" y=\"246\"\u003eSL__stdNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"101\" x=\"57\" y=\"180\"\u003eOF__image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"106\" x=\"57\" y=\"318\"\u003eSL__baseRefNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm\" data-heap-index=\"126\" x=\"41\" y=\"274\"\u003eSL__cosm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode\" data-heap-index=\"119\" x=\"41\" y=\"108\"\u003eSL__exprNode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc\" data-heap-index=\"120\" x=\"41\" y=\"136\"\u003eSL__extFunc\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper\" data-heap-index=\"118\" x=\"41\" y=\"80\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum\" data-heap-index=\"125\" x=\"41\" y=\"246\"\u003eSL__stdNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"122\" x=\"57\" y=\"180\"\u003eOF__image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"127\" x=\"57\" y=\"318\"\u003eSL__baseRefNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm\" data-heap-index=\"147\" x=\"41\" y=\"274\"\u003eSL__cosm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode\" data-heap-index=\"140\" x=\"41\" y=\"108\"\u003eSL__exprNode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc\" data-heap-index=\"141\" x=\"41\" y=\"136\"\u003eSL__extFunc\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper\" data-heap-index=\"139\" x=\"41\" y=\"80\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum\" data-heap-index=\"146\" x=\"41\" y=\"246\"\u003eSL__stdNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"143\" x=\"57\" y=\"180\"\u003eOF__image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"148\" x=\"57\" y=\"318\"\u003eSL__baseRefNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__cosm\" data-heap-index=\"168\" x=\"41\" y=\"274\"\u003eSL__cosm\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__exprNode\" data-heap-index=\"161\" x=\"41\" y=\"108\"\u003eSL__exprNode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__extFunc\" data-heap-index=\"162\" x=\"41\" y=\"136\"\u003eSL__extFunc\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__grouper\" data-heap-index=\"160\" x=\"41\" y=\"80\"\u003eSL__grouper\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__stdNum\" data-heap-index=\"167\" x=\"41\" y=\"246\"\u003eSL__stdNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image\" data-heap-index=\"164\" x=\"57\" y=\"180\"\u003eOF__image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum\" data-heap-index=\"169\" x=\"57\" y=\"318\"\u003eSL__baseRefNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun\" data-heap-index=\"102\" x=\"75\" y=\"206\"\u003eSL__fontRun\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker\" data-heap-index=\"108\" x=\"75\" y=\"372\"\u003eOF__activeMarker\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList\" data-heap-index=\"109\" x=\"75\" y=\"400\"\u003eSL__prVIPartList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair\" data-heap-index=\"107\" x=\"75\" y=\"344\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun\" data-heap-index=\"123\" x=\"75\" y=\"206\"\u003eSL__fontRun\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker\" data-heap-index=\"129\" x=\"75\" y=\"372\"\u003eOF__activeMarker\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList\" data-heap-index=\"130\" x=\"75\" y=\"400\"\u003eSL__prVIPartList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair\" data-heap-index=\"128\" x=\"75\" y=\"344\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun\" data-heap-index=\"144\" x=\"75\" y=\"206\"\u003eSL__fontRun\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker\" data-heap-index=\"150\" x=\"75\" y=\"372\"\u003eOF__activeMarker\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList\" data-heap-index=\"151\" x=\"75\" y=\"400\"\u003eSL__prVIPartList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair\" data-heap-index=\"149\" x=\"75\" y=\"344\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/OF__image/SL__fontRun\" data-heap-index=\"165\" x=\"75\" y=\"206\"\u003eSL__fontRun\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/OF__activeMarker\" data-heap-index=\"171\" x=\"75\" y=\"372\"\u003eOF__activeMarker\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__prVIPartList\" data-heap-index=\"172\" x=\"75\" y=\"400\"\u003eSL__prVIPartList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__eventDataNode/OF__nodeList/SL__arrayElement/SL__udClassDDO/SL__arrayElement/SL__conPane/SL__baseRefNum/SL__textHair\" data-heap-index=\"170\" x=\"75\" y=\"344\"\u003eSL__textHair\u003c/text\u003e\n\u003c/svg\u003e\n"
+  "svg": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"428\" height=\"1547\" viewBox=\"0 0 428 1547\" role=\"img\" aria-label=\"golden render\"\u003e\n\u003ctitle\u003egolden render\u003c/title\u003e\n\u003cstyle\u003e\n.lvrsrc-node-box { fill: #f4f0e8; stroke: #5f4b32; stroke-width: 1.5; rx: 8; ry: 8; }\n.lvrsrc-node-label { fill: #16324f; font: 13px \"Helvetica Neue\", Helvetica, Arial, sans-serif; }\n.lvrsrc-node-placeholder { fill: #7d4f50; stroke: #7d4f50; stroke-dasharray: 5 3; }\n.lvrsrc-warning { fill: #7d4f50; font: 12px \"Helvetica Neue\", Helvetica, Arial, sans-serif; }\n.lvrsrc-widget-other { fill: #f4f0e8; stroke: #5f4b32; }\n.lvrsrc-widget-boolean { fill: #d8eed3; stroke: #3a7a3a; }\n.lvrsrc-widget-numeric { fill: #d6e6f2; stroke: #1f6f8b; }\n.lvrsrc-widget-string { fill: #ecdcef; stroke: #5f3a7a; }\n.lvrsrc-widget-cluster { fill: #ecdfcd; stroke: #7a5a3a; }\n.lvrsrc-widget-array { fill: #e1e8c8; stroke: #5a6f1f; }\n.lvrsrc-widget-graph { fill: #d2e6e6; stroke: #1f6b6b; }\n.lvrsrc-widget-decoration { fill: #f0f0f0; stroke: #9a9a9a; stroke-dasharray: 3 2; }\n.lvrsrc-widget-structure { fill: #f1d9c2; stroke: #8b4f1f; stroke-width: 2; }\n.lvrsrc-widget-primitive { fill: #d3dceb; stroke: #1f3a6b; }\n.lvrsrc-widget-terminal { fill: #ffffff; stroke: #2a2a2a; stroke-width: 1; }\n.lvrsrc-widget-refnum { fill: #dfe5ee; stroke: #41536b; }\n.lvrsrc-widget-variant { fill: #eee5d4; stroke: #736239; }\n.lvrsrc-widget-connector-pane { fill: #e7ece4; stroke: #4d6645; stroke-width: 1.5; }\n.lvrsrc-node-terminal-anchor { fill: #2a2a2a; stroke: none; }\n\u003c/style\u003e\n\u003cstyle\u003e\n.lvrsrc-wire { fill: none; stroke: #1f5f9f; stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }\n\u003c/style\u003e\n\u003ctext class=\"lvrsrc-warning\" x=\"12\" y=\"18\"\u003eLayout is heuristic: some positions and sizes are derived from heap structure rather than decoded LabVIEW geometry.\u003c/text\u003e\n\u003ctext class=\"lvrsrc-warning\" x=\"12\" y=\"34\"\u003eBlock diagram has 4 wire networks (4 auto-routed, 0 manually-routed, 0 branched, 0 other); rendered 3 recognized network(s); auto-routed L-shapes and 2- and 3-branch pure Y-trees are typed-decoded, multi-elbow / comb and 4+ branch chunks remain raw.\u003c/text\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"13\" points=\"96,140 108,140 108,190\"/\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"9\" points=\"96,140 108,140 108,150\"/\u003e\n\u003cpolyline class=\"lvrsrc-wire\" data-label=\"auto-chain\" data-from=\"7\" data-to=\"10\" points=\"96,140 106,140 106,116 108,116 108,160\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject\" data-heap-index=\"0\" x=\"24\" y=\"24\" width=\"380\" height=\"1479\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject\" data-heap-index=\"0\" x=\"40\" y=\"54\"\u003eSL__rootObject\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-primitive\" data-path=\"SL__rootObject/SL__diag\" data-heap-index=\"1\" x=\"58\" y=\"66\" width=\"330\" height=\"1313\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/OF__dBounds\" data-heap-index=\"226\" x=\"58\" y=\"1431\"\u003eOF__dBounds\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/OF__instrStyle\" data-heap-index=\"228\" x=\"58\" y=\"1487\"\u003eOF__instrStyle\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/OF__origin\" data-heap-index=\"227\" x=\"58\" y=\"1459\"\u003eOF__origin\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/OF__pBounds\" data-heap-index=\"225\" x=\"58\" y=\"1403\"\u003eOF__pBounds\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-primitive\" data-path=\"SL__rootObject/SL__diag\" data-heap-index=\"1\" x=\"74\" y=\"96\"\u003eSL__diag\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList\" data-heap-index=\"3\" x=\"92\" y=\"136\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList\" data-heap-index=\"3\" cx=\"96\" cy=\"140\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList\" data-heap-index=\"88\" x=\"92\" y=\"154\" width=\"180\" height=\"83\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-graph\" data-path=\"SL__rootObject/SL__diag/OF__signalList\" data-heap-index=\"183\" x=\"92\" y=\"247\" width=\"280\" height=\"1092\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__bgColor\" data-heap-index=\"223\" x=\"92\" y=\"1363\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__objFlags\" data-heap-index=\"2\" x=\"92\" y=\"122\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList\" data-heap-index=\"88\" x=\"108\" y=\"184\"\u003eOF__nodeList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-graph\" data-path=\"SL__rootObject/SL__diag/OF__signalList\" data-heap-index=\"183\" x=\"108\" y=\"277\"\u003eOF__signalList\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"8\" x=\"104\" y=\"136\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"8\" cx=\"108\" cy=\"140\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"11\" x=\"104\" y=\"146\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"11\" cx=\"108\" cy=\"150\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"20\" x=\"104\" y=\"156\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"20\" cx=\"108\" cy=\"160\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"29\" x=\"104\" y=\"166\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"29\" cx=\"108\" cy=\"170\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"37\" x=\"104\" y=\"176\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"37\" cx=\"108\" cy=\"180\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"45\" x=\"104\" y=\"186\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"45\" cx=\"108\" cy=\"190\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"55\" x=\"104\" y=\"196\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"55\" cx=\"108\" cy=\"200\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"63\" x=\"104\" y=\"206\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"63\" cx=\"108\" cy=\"210\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-terminal lvrsrc-widget-terminal\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"72\" x=\"104\" y=\"216\" width=\"8\" height=\"8\"/\u003e\n\u003ccircle class=\"lvrsrc-node-terminal-anchor\" data-path=\"SL__rootObject/SL__diag/OF__zPlaneList/SL__arrayElement\" data-heap-index=\"72\" cx=\"108\" cy=\"220\" r=\"2\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement\" data-heap-index=\"89\" x=\"24\" y=\"24\" width=\"1\" height=\"1\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"184\" x=\"126\" y=\"289\" width=\"230\" height=\"238\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"193\" x=\"126\" y=\"537\" width=\"230\" height=\"266\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"203\" x=\"126\" y=\"813\" width=\"230\" height=\"266\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"213\" x=\"126\" y=\"1089\" width=\"230\" height=\"238\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement\" data-heap-index=\"181\" x=\"126\" y=\"210\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement\" data-heap-index=\"89\" x=\"40\" y=\"54\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"184\" x=\"142\" y=\"319\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"193\" x=\"142\" y=\"567\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"203\" x=\"142\" y=\"843\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement\" data-heap-index=\"213\" x=\"142\" y=\"1119\"\u003eSL__arrayElement\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList\" data-heap-index=\"91\" x=\"58\" y=\"94\" width=\"180\" height=\"212\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"185\" x=\"160\" y=\"331\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"195\" x=\"160\" y=\"607\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"205\" x=\"160\" y=\"883\" width=\"180\" height=\"100\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"214\" x=\"160\" y=\"1131\" width=\"180\" height=\"100\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__clumpNum\" data-heap-index=\"179\" x=\"58\" y=\"358\"\u003eOF__clumpNum\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__objFlags\" data-heap-index=\"90\" x=\"58\" y=\"80\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__shortCount\" data-heap-index=\"178\" x=\"58\" y=\"330\"\u003eOF__shortCount\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList\" data-heap-index=\"91\" x=\"74\" y=\"124\"\u003eOF__termList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"190\" x=\"160\" y=\"483\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind\" data-heap-index=\"191\" x=\"160\" y=\"511\"\u003eOF__lastSignalKind\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state\" data-heap-index=\"189\" x=\"160\" y=\"455\"\u003eOF__state\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"185\" x=\"176\" y=\"361\"\u003eOF__termList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"200\" x=\"160\" y=\"759\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind\" data-heap-index=\"201\" x=\"160\" y=\"787\"\u003eOF__lastSignalKind\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__objFlags\" data-heap-index=\"194\" x=\"160\" y=\"593\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state\" data-heap-index=\"199\" x=\"160\" y=\"731\"\u003eOF__state\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"195\" x=\"176\" y=\"637\"\u003eOF__termList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"210\" x=\"160\" y=\"1035\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind\" data-heap-index=\"211\" x=\"160\" y=\"1063\"\u003eOF__lastSignalKind\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__objFlags\" data-heap-index=\"204\" x=\"160\" y=\"869\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state\" data-heap-index=\"209\" x=\"160\" y=\"1007\"\u003eOF__state\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"205\" x=\"176\" y=\"913\"\u003eOF__termList\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__compressedWireTable\" data-heap-index=\"219\" x=\"160\" y=\"1283\"\u003eOF__compressedWireTable\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__lastSignalKind\" data-heap-index=\"220\" x=\"160\" y=\"1311\"\u003eOF__lastSignalKind\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__state\" data-heap-index=\"218\" x=\"160\" y=\"1255\"\u003eOF__state\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList\" data-heap-index=\"214\" x=\"176\" y=\"1161\"\u003eOF__termList\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"92\" x=\"107\" y=\"329\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"113\" x=\"155\" y=\"329\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"134\" x=\"155\" y=\"181\" width=\"16\" height=\"32\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"155\" x=\"122\" y=\"246\" width=\"16\" height=\"32\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"92\" x=\"123\" y=\"359\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"113\" x=\"171\" y=\"359\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"134\" x=\"171\" y=\"211\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-array\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"155\" x=\"138\" y=\"276\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"186\" x=\"194\" y=\"387\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"187\" x=\"194\" y=\"415\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"196\" x=\"194\" y=\"663\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"197\" x=\"194\" y=\"691\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"206\" x=\"194\" y=\"939\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"207\" x=\"194\" y=\"967\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"215\" x=\"194\" y=\"1187\"\u003eSL__arrayElement\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__signalList/SL__arrayElement/OF__termList/SL__arrayElement\" data-heap-index=\"216\" x=\"194\" y=\"1215\"\u003eSL__arrayElement\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"96\" x=\"7\" y=\"24\" width=\"17\" height=\"34\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"117\" x=\"7\" y=\"24\" width=\"17\" height=\"49\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"138\" x=\"7\" y=\"24\" width=\"17\" height=\"94\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"159\" x=\"7\" y=\"24\" width=\"17\" height=\"39\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco\" data-heap-index=\"94\" x=\"141\" y=\"413\"\u003eOF__dco\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags\" data-heap-index=\"93\" x=\"141\" y=\"385\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"96\" x=\"23\" y=\"54\"\u003eSL__label\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco\" data-heap-index=\"115\" x=\"189\" y=\"413\"\u003eOF__dco\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags\" data-heap-index=\"114\" x=\"189\" y=\"385\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"117\" x=\"23\" y=\"54\"\u003eSL__label\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco\" data-heap-index=\"136\" x=\"189\" y=\"265\"\u003eOF__dco\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags\" data-heap-index=\"135\" x=\"189\" y=\"237\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"138\" x=\"23\" y=\"54\"\u003eSL__label\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__dco\" data-heap-index=\"157\" x=\"156\" y=\"330\"\u003eOF__dco\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/OF__objFlags\" data-heap-index=\"156\" x=\"156\" y=\"302\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-connector-pane\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label\" data-heap-index=\"159\" x=\"23\" y=\"54\"\u003eSL__label\u003c/text\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"101\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"106\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"122\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"127\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"143\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"148\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"164\" x=\"41\" y=\"150\" width=\"180\" height=\"72\"/\u003e\n\u003crect class=\"lvrsrc-node lvrsrc-node-box lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"169\" x=\"41\" y=\"288\" width=\"180\" height=\"128\"/\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor\" data-heap-index=\"105\" x=\"41\" y=\"274\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor\" data-heap-index=\"104\" x=\"41\" y=\"246\"\u003eOF__fgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow\" data-heap-index=\"99\" x=\"41\" y=\"136\"\u003eOF__howGrow\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags\" data-heap-index=\"97\" x=\"41\" y=\"80\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID\" data-heap-index=\"98\" x=\"41\" y=\"108\"\u003eOF__partID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"101\" x=\"57\" y=\"180\"\u003eSL__Image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"106\" x=\"57\" y=\"318\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor\" data-heap-index=\"126\" x=\"41\" y=\"274\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor\" data-heap-index=\"125\" x=\"41\" y=\"246\"\u003eOF__fgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow\" data-heap-index=\"120\" x=\"41\" y=\"136\"\u003eOF__howGrow\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags\" data-heap-index=\"118\" x=\"41\" y=\"80\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID\" data-heap-index=\"119\" x=\"41\" y=\"108\"\u003eOF__partID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"122\" x=\"57\" y=\"180\"\u003eSL__Image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"127\" x=\"57\" y=\"318\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor\" data-heap-index=\"147\" x=\"41\" y=\"274\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor\" data-heap-index=\"146\" x=\"41\" y=\"246\"\u003eOF__fgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow\" data-heap-index=\"141\" x=\"41\" y=\"136\"\u003eOF__howGrow\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags\" data-heap-index=\"139\" x=\"41\" y=\"80\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID\" data-heap-index=\"140\" x=\"41\" y=\"108\"\u003eOF__partID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"143\" x=\"57\" y=\"180\"\u003eSL__Image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"148\" x=\"57\" y=\"318\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__bgColor\" data-heap-index=\"168\" x=\"41\" y=\"274\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__fgColor\" data-heap-index=\"167\" x=\"41\" y=\"246\"\u003eOF__fgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__howGrow\" data-heap-index=\"162\" x=\"41\" y=\"136\"\u003eOF__howGrow\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__objFlags\" data-heap-index=\"160\" x=\"41\" y=\"80\"\u003eOF__objFlags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/OF__partID\" data-heap-index=\"161\" x=\"41\" y=\"108\"\u003eOF__partID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-other\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image\" data-heap-index=\"164\" x=\"57\" y=\"180\"\u003eSL__Image\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label lvrsrc-widget-refnum\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair\" data-heap-index=\"169\" x=\"57\" y=\"318\"\u003eSL__textHair\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID\" data-heap-index=\"102\" x=\"75\" y=\"206\"\u003eOF__ImageResID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor\" data-heap-index=\"109\" x=\"75\" y=\"400\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags\" data-heap-index=\"107\" x=\"75\" y=\"344\"\u003eOF__flags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode\" data-heap-index=\"108\" x=\"75\" y=\"372\"\u003eOF__mode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID\" data-heap-index=\"123\" x=\"75\" y=\"206\"\u003eOF__ImageResID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor\" data-heap-index=\"130\" x=\"75\" y=\"400\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags\" data-heap-index=\"128\" x=\"75\" y=\"344\"\u003eOF__flags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode\" data-heap-index=\"129\" x=\"75\" y=\"372\"\u003eOF__mode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID\" data-heap-index=\"144\" x=\"75\" y=\"206\"\u003eOF__ImageResID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor\" data-heap-index=\"151\" x=\"75\" y=\"400\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags\" data-heap-index=\"149\" x=\"75\" y=\"344\"\u003eOF__flags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode\" data-heap-index=\"150\" x=\"75\" y=\"372\"\u003eOF__mode\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__Image/OF__ImageResID\" data-heap-index=\"165\" x=\"75\" y=\"206\"\u003eOF__ImageResID\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__bgColor\" data-heap-index=\"172\" x=\"75\" y=\"400\"\u003eOF__bgColor\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__flags\" data-heap-index=\"170\" x=\"75\" y=\"344\"\u003eOF__flags\u003c/text\u003e\n\u003ctext class=\"lvrsrc-node lvrsrc-node-label\" data-path=\"SL__rootObject/SL__diag/OF__nodeList/SL__arrayElement/OF__termList/SL__arrayElement/SL__label/SL__textHair/OF__mode\" data-heap-index=\"171\" x=\"75\" y=\"372\"\u003eOF__mode\u003c/text\u003e\n\u003c/svg\u003e\n"
 }
