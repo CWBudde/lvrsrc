@@ -158,10 +158,11 @@ func TestFrontPanelDefaultScalar(t *testing.T) {
 	}
 }
 
-// TestFrontPanelDefaultComposite pins the honest treatment of composite
-// (cluster) defaults: they are surfaced with their raw bytes and the
-// embedded field literals are verifiable, but they are NOT decoded to a
-// scalar value — WidthMatch is false so callers know not to trust a value.
+// TestFrontPanelDefaultComposite pins that composite (cluster) defaults never
+// masquerade as fixed-width scalars: their raw blob carries the embedded field
+// literals and WidthMatch stays false. The structured decode of those blobs
+// lives in TestFrontPanelDefaultCompositeDecode (the value is read from
+// Composite, not from the scalar fields).
 func TestFrontPanelDefaultComposite(t *testing.T) {
 	cases := []struct {
 		fixture string
