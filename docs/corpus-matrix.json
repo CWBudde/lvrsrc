@@ -413,6 +413,48 @@
       "family": "controlled-constant",
       "focus": ["floating-point constant literal", "OF__ConstValue", "DBL representation"],
       "hypothesis": "OF__ConstValue stores a DBL constant as an 8-byte big-endian IEEE-754 double (9876.5432 = 40 c3 4a 45 87 93 dd 98), confirming the literal width tracks the data type (4 bytes I32, 8 bytes DBL) and is written verbatim with no escape."
+    },
+    {
+      "name": "Numeric42_I8.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["integer constant literal", "OF__ConstValue", "I8 representation"],
+      "hypothesis": "An I8 constant's OF__ConstValue is a single raw byte (42 = 0x2a); signedness is carried by the type, not the literal bytes."
+    },
+    {
+      "name": "Numeric42_U8.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["integer constant literal", "OF__ConstValue", "U8 representation"],
+      "hypothesis": "A U8 constant's OF__ConstValue is a single raw byte identical to the I8 case (42 = 0x2a), proving the literal stores magnitude bytes and leaves signedness to the type metadata."
+    },
+    {
+      "name": "Numeric65536_I64.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["integer constant literal", "OF__ConstValue", "I64 representation"],
+      "hypothesis": "An I64 constant's OF__ConstValue is an 8-byte big-endian int64 (65536 = 00 00 00 00 00 01 00 00), confirming integer width tracks the data type."
+    },
+    {
+      "name": "Numeric9876Dot5432_SGL.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["floating-point constant literal", "OF__ConstValue", "SGL representation"],
+      "hypothesis": "A SGL constant's OF__ConstValue is a 4-byte big-endian IEEE-754 binary32 (46 1a 52 2c = float32(9876.5432) = 9876.54297), storing the float32 rounding of the typed value."
+    },
+    {
+      "name": "Numeric9876Dot5432_EXT.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["floating-point constant literal", "OF__ConstValue", "EXT representation"],
+      "hypothesis": "An EXT constant's OF__ConstValue is a 16-byte big-endian IEEE-754 binary128/quad (40 0c 34 a4 58 00..., unbiased exponent 13 = 9876.54297), not 80-bit x87; wider than the 8-byte numeric band, so the leaf alone cannot be distinguished from a string without the VCTP type."
+    },
+    {
+      "name": "Numeric9876Dot5432_FXD.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["fixed-point constant literal", "OF__ConstValue", "FXD representation"],
+      "hypothesis": "A FXD constant's OF__ConstValue is an 8-byte big-endian fixed-point container; 9876.5432 is stored as magnitude 0x26948b = 2528395 = round(9876.5432 * 2^8), with the radix-point position set by the fixed-point word/integer-word-length config."
     }
   ],
   "gaps": [

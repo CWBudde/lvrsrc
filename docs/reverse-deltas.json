@@ -288,7 +288,7 @@
         "1-byte boundary"
       ],
       "hypothesis": "A block-diagram numeric-constant literal lives in OF__ConstValue (tag 589) as a fixed-width big-endian int32 written verbatim, NOT the byte-stream-with-0xff-escape used by the compressed-wire geometry. Crossing the single-byte boundary (255->256) does not change the field width or insert an escape byte.",
-      "evidence": "OF__ConstValue leaf: 255 = 00 00 00 ff, 256 = 00 00 01 00 (HeapScalarForTag Signed=255/256). Pure positional big-endian, no 0xff prefix, width stays 4. Decoded via pkg/lvvi HeapScalar after adding FieldTagConstValue; pinned by TestHeapConstValueGroundTruth.",
+      "evidence": "OF__ConstValue leaf: 255 = 00 00 00 ff, 256 = 00 00 01 00 (HeapScalarForTag Signed=255/256). Pure positional big-endian, no 0xff prefix, width stays 4. Decoded via pkg/lvvi.HeapConstValue; pinned by TestHeapConstValueGroundTruth.",
       "status": "confirmed"
     },
     {
@@ -345,6 +345,34 @@
       ],
       "hypothesis": "The OF__ConstValue literal width tracks the constant data type: an I32 constant is a 4-byte big-endian int32, a DBL constant is an 8-byte big-endian IEEE-754 double, both written verbatim with no escape.",
       "evidence": "Numeric42.vi OF__ConstValue = 00 00 00 2a (4 bytes, I32 42); Numeric9876Dot5432.vi OF__ConstValue = 40 c3 4a 45 87 93 dd 98 (8 bytes, DBL 9876.5432 via big-endian IEEE-754). Pinned by TestHeapConstValueGroundTruth and TestHeapConstValueDBLGroundTruth.",
+      "status": "confirmed"
+    },
+    {
+      "id": "const-value-integer-widths-by-type",
+      "left": "Numeric42_I8.vi",
+      "right": "Numeric65536_I64.vi",
+      "topic": "type-system",
+      "focus": [
+        "OF__ConstValue",
+        "integer representation",
+        "literal width"
+      ],
+      "hypothesis": "Integer constant width tracks the data type: I8/U8 = 1 raw byte, I32 = 4-byte big-endian, I64 = 8-byte big-endian. Signedness is carried by the type, not the literal bytes (I8 and U8 of 42 both store 0x2a).",
+      "evidence": "Numeric42_I8.vi and Numeric42_U8.vi OF__ConstValue = 2a (1 byte, =42); Numeric65536_I64.vi = 00 00 00 00 00 01 00 00 (8 bytes, =65536). Pinned by TestHeapConstValueGroundTruth.",
+      "status": "confirmed"
+    },
+    {
+      "id": "const-value-float-representations",
+      "left": "Numeric9876Dot5432_SGL.vi",
+      "right": "Numeric9876Dot5432_EXT.vi",
+      "topic": "type-system",
+      "focus": [
+        "OF__ConstValue",
+        "SGL/DBL/EXT",
+        "IEEE-754"
+      ],
+      "hypothesis": "Floating-point constants store big-endian IEEE-754 of the type's width: SGL = 4-byte binary32, DBL = 8-byte binary64, EXT = 16-byte binary128 (quad, not 80-bit x87). FXD is an 8-byte big-endian fixed-point container (value x 2^k).",
+      "evidence": "SGL 46 1a 52 2c = float32(9876.5432)=9876.54297; DBL 40 c3 4a 45 87 93 dd 98 = 9876.5432; EXT 40 0c 34 a4 58 00... = binary128 with unbiased exponent 13 (9876.54297); FXD 00 00 26 94 8b 00 00 00 = 0x26948b=2528395=round(9876.5432*2^8). Pinned by TestHeapConstValueFloatGroundTruth and TestHeapConstValueExtendedAndFixedPoint.",
       "status": "confirmed"
     }
   ]
