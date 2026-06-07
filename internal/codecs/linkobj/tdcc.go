@@ -12,13 +12,13 @@ import (
 // which the surrounding LIfp/LIbd/LIvi codec has already extracted into
 // the entry's PrimaryPath — the wire layout is:
 //
-//	  linkSaveFlag (u32 BE)            // BasicLinkSaveInfo, v8.6+
-//	  typedLinkTD.index (varU2p2)      // TypedLinkSaveInfo, v8.0+
-//	  vilinkref (1B or 25B)            // VILinkRefInfo, v14+
-//	  typedLinkFlags (u32 BE)          // TypedLinkSaveInfo, v12+
-//	  linkOffsetCount (u32 BE)         // LinkOffsetList, v8.2+
-//	  offsets[count] (each u32 BE)
-//	  viLSPathRef (PTH0)               // HeapToVILinkSaveInfo, v8.2+
+//	linkSaveFlag (u32 BE)            // BasicLinkSaveInfo, v8.6+
+//	typedLinkTD.index (varU2p2)      // TypedLinkSaveInfo, v8.0+
+//	vilinkref (1B or 25B)            // VILinkRefInfo, v14+
+//	typedLinkFlags (u32 BE)          // TypedLinkSaveInfo, v12+
+//	linkOffsetCount (u32 BE)         // LinkOffsetList, v8.2+
+//	offsets[count] (each u32 BE)
+//	viLSPathRef (PTH0)               // HeapToVILinkSaveInfo, v8.2+
 //
 // The viLSPathRef is *not* part of body; it is the SecondaryPath the
 // surrounding codec extracted via splitTailAndSecondary.

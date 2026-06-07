@@ -165,11 +165,11 @@ func buildSyntheticWireTree(t *testing.T, ids []HeapObjectID) HeapTree {
 	}
 	// Wire-bearing arrayElement parent.
 	wireParentIdx := add(HeapNode{
-		Scope:    "open",
-		Tag:      -6,
+		Scope:      "open",
+		Tag:        -6,
 		Attributes: []HeapAttribute{{ID: HeapAttrIndex, Value: 23}, {ID: HeapAttrObjectID, Value: 999}},
-		Parent:   -1,
-		Children: nil,
+		Parent:     -1,
+		Children:   nil,
 	})
 	// termList container.
 	termListIdx := add(HeapNode{

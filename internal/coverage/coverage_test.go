@@ -97,7 +97,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("ICON Package = %q, want %q", mono.Package, "internal/codecs/icon")
 	}
 	if mono.CorpusFixtures != 65 {
-		t.Fatalf("ICON CorpusFixtures = %d, want 65",mono.CorpusFixtures)
+		t.Fatalf("ICON CorpusFixtures = %d, want 65", mono.CorpusFixtures)
 	}
 	if mono.CorpusSections != 65 || mono.CorpusBytes != 8320 {
 		t.Fatalf("ICON corpus totals = sections %d bytes %d, want sections 65 bytes 8320", mono.CorpusSections, mono.CorpusBytes)
@@ -117,7 +117,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("CONP Package = %q, want %q", conp.Package, "internal/codecs/conpane")
 	}
 	if conp.CorpusFixtures != 65 {
-		t.Fatalf("CONP CorpusFixtures = %d, want 65",conp.CorpusFixtures)
+		t.Fatalf("CONP CorpusFixtures = %d, want 65", conp.CorpusFixtures)
 	}
 
 	cpc2 := findResource(t, m, "CPC2")
@@ -131,7 +131,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("CPC2 Package = %q, want %q", cpc2.Package, "internal/codecs/conpane")
 	}
 	if cpc2.CorpusFixtures != 65 {
-		t.Fatalf("CPC2 CorpusFixtures = %d, want 65",cpc2.CorpusFixtures)
+		t.Fatalf("CPC2 CorpusFixtures = %d, want 65", cpc2.CorpusFixtures)
 	}
 
 	lifp := findResource(t, m, "LIfp")
@@ -145,7 +145,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("LIfp Package = %q, want %q", lifp.Package, "internal/codecs/lifp")
 	}
 	if lifp.CorpusFixtures != 65 {
-		t.Fatalf("LIfp CorpusFixtures = %d, want 65",lifp.CorpusFixtures)
+		t.Fatalf("LIfp CorpusFixtures = %d, want 65", lifp.CorpusFixtures)
 	}
 	if lifp.Disposition.Status != "partial" {
 		t.Fatalf("LIfp Disposition.Status = %q, want partial", lifp.Disposition.Status)
@@ -165,7 +165,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("LIbd Package = %q, want %q", libd.Package, "internal/codecs/libd")
 	}
 	if libd.CorpusFixtures != 65 {
-		t.Fatalf("LIbd CorpusFixtures = %d, want 65",libd.CorpusFixtures)
+		t.Fatalf("LIbd CorpusFixtures = %d, want 65", libd.CorpusFixtures)
 	}
 
 	vers := findResource(t, m, "vers")
@@ -179,7 +179,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("vers Package = %q, want %q", vers.Package, "internal/codecs/vers")
 	}
 	if vers.CorpusFixtures != 65 {
-		t.Fatalf("vers CorpusFixtures = %d, want 65",vers.CorpusFixtures)
+		t.Fatalf("vers CorpusFixtures = %d, want 65", vers.CorpusFixtures)
 	}
 
 	vctp := findResource(t, m, "VCTP")
@@ -193,7 +193,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("VCTP Package = %q, want %q", vctp.Package, "internal/codecs/vctp")
 	}
 	if vctp.CorpusFixtures != 65 {
-		t.Fatalf("VCTP CorpusFixtures = %d, want 65",vctp.CorpusFixtures)
+		t.Fatalf("VCTP CorpusFixtures = %d, want 65", vctp.CorpusFixtures)
 	}
 	if vctp.Disposition.Status != "partial" {
 		t.Fatalf("VCTP Disposition.Status = %q, want partial", vctp.Disposition.Status)
@@ -227,7 +227,7 @@ func TestBuildManifestFromCorpus(t *testing.T) {
 		t.Fatalf("BDHb Package = %q, want %q", bdhb.Package, "internal/codecs/bdhb")
 	}
 	if bdhb.CorpusFixtures != 65 {
-		t.Fatalf("BDHb CorpusFixtures = %d, want 65",bdhb.CorpusFixtures)
+		t.Fatalf("BDHb CorpusFixtures = %d, want 65", bdhb.CorpusFixtures)
 	}
 	if bdhb.Disposition.Status != "partial" {
 		t.Fatalf("BDHb Disposition.Status = %q, want partial", bdhb.Disposition.Status)

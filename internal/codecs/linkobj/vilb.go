@@ -10,7 +10,7 @@ import (
 // parseBasicLinkSaveInfo. After the primary path that the surrounding
 // codec extracts, the on-disk wire layout is exactly:
 //
-//	  linkSaveFlag (u32 BE)            // BasicLinkSaveInfo, v8.6+
+//	linkSaveFlag (u32 BE)            // BasicLinkSaveInfo, v8.6+
 //
 // VILB carries no secondary path.
 type VIToLib struct {

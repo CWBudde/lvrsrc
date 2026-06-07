@@ -196,14 +196,12 @@ func RenderHeapTagReportJSON(r HeapTagReport) string {
 func RenderHeapTagReportMarkdown(r HeapTagReport) string {
 	var b strings.Builder
 	b.WriteString("# Heap Tag Semantic Gaps\n\n")
-	b.WriteString(fmt.Sprintf(
-		"Reported %d unresolved or partial heap tags (%d nodes) across %d heap trees in %d corpus fixtures. Total heap nodes scanned: %d.\n\n",
+	fmt.Fprintf(&b, "Reported %d unresolved or partial heap tags (%d nodes) across %d heap trees in %d corpus fixtures. Total heap nodes scanned: %d.\n\n",
 		r.Summary.ReportedTagCount,
 		r.Summary.ReportedNodes,
 		r.Summary.HeapTreeCount,
 		r.Summary.FixtureCount,
-		r.Summary.TotalNodes,
-	))
+		r.Summary.TotalNodes)
 	b.WriteString("Status counts are node counts: ")
 	b.WriteString(formatCounts(r.Summary.StatusNodes))
 	b.WriteString(".\n\n")

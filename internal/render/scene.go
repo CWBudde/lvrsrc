@@ -169,8 +169,8 @@ type layoutItem struct {
 	// containment children. Phase 16.4 follow-up: A1 nested-terminal
 	// projection.
 	nestedTerminals []*layoutItem
-	width       float64
-	height      float64
+	width           float64
+	height          float64
 	// bounds is the decoded OF__bounds rectangle for this group, when
 	// present. nil means the heuristic layout pass owns position and
 	// size for this item.

@@ -142,8 +142,8 @@ const (
 // kindInfo is the static metadata for one LinkKind.
 type kindInfo struct {
 	kind        LinkKind
-	ident       string // primary 4-byte ident (the canonical wire token)
-	description string // short human label
+	ident       string   // primary 4-byte ident (the canonical wire token)
+	description string   // short human label
 	aliases     []string // list-context-dispatched aliases (e.g. "LVCC" for TDCC)
 }
 
@@ -266,8 +266,8 @@ var kindTable = []kindInfo{
 }
 
 var (
-	kindByIdent       map[string]LinkKind
-	kindByValue       map[LinkKind]kindInfo
+	kindByIdent map[string]LinkKind
+	kindByValue map[LinkKind]kindInfo
 )
 
 func init() {

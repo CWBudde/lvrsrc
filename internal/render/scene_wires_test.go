@@ -191,8 +191,10 @@ func TestProjectHeapTreeSkipsWireWithUnresolvedTerminals(t *testing.T) {
 	}
 }
 
-type rectBounds struct{ left, top, right, bottom int16 }
-type hotPoint struct{ h, v int16 }
+type (
+	rectBounds struct{ left, top, right, bottom int16 }
+	hotPoint   struct{ h, v int16 }
+)
 
 type terminalSpec struct {
 	id       lvvi.HeapObjectID

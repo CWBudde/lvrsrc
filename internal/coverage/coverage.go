@@ -219,13 +219,11 @@ func RenderManifestJSON(m Manifest) string {
 func RenderMarkdown(m Manifest) string {
 	var b strings.Builder
 	b.WriteString("# Resource Coverage\n\n")
-	b.WriteString(fmt.Sprintf(
-		"Typed coverage: %d/%d resource types (%.1f%%) across %d corpus fixtures.\n\n",
+	fmt.Fprintf(&b, "Typed coverage: %d/%d resource types (%.1f%%) across %d corpus fixtures.\n\n",
 		m.Summary.TypedResourceTypes,
 		m.Corpus.ResourceTypeCount,
 		m.Summary.TypedCoveragePct,
-		m.Corpus.FixtureCount,
-	))
+		m.Corpus.FixtureCount)
 	b.WriteString("## Corpus Breadth\n\n")
 	writeCountSummary(&b, "File kinds", m.Corpus.Breadth.FileKinds)
 	writeCountSummary(&b, "File extensions", m.Corpus.Breadth.FileExtensions)
@@ -296,8 +294,8 @@ func RenderMarkdown(m Manifest) string {
 	b.WriteString("\n## Byte Disposition\n\n")
 	b.WriteString("Status values are semantic byte-coverage claims, not codec availability. `structural` means the stable envelope is decoded but important inner bytes remain raw; `partial` means selected fields have semantic projections; `opaque-preserving` means payload bytes are intentionally retained without field meanings; `undocumented` is a failing coverage gap.\n\n")
 	for _, r := range m.Resources {
-		b.WriteString(fmt.Sprintf("### `%s`\n\n", r.FourCC))
-		b.WriteString(fmt.Sprintf("- Status: %s\n", r.Disposition.Status))
+		fmt.Fprintf(&b, "### `%s`\n\n", r.FourCC)
+		fmt.Fprintf(&b, "- Status: %s\n", r.Disposition.Status)
 		writeDispositionList(&b, "Semantic", r.Disposition.Semantic)
 		writeDispositionList(&b, "Reserved/padding", r.Disposition.Reserved)
 		writeDispositionList(&b, "Compressed/checksum", r.Disposition.Compressed)
@@ -309,7 +307,7 @@ func RenderMarkdown(m Manifest) string {
 }
 
 func writeCountSummary(b *strings.Builder, label string, counts map[string]int) {
-	b.WriteString(fmt.Sprintf("- %s: %s\n", label, formatCounts(counts)))
+	fmt.Fprintf(b, "- %s: %s\n", label, formatCounts(counts))
 }
 
 func formatCounts(counts map[string]int) string {
@@ -332,7 +330,7 @@ func writeDispositionList(b *strings.Builder, label string, values []string) {
 	if len(values) == 0 {
 		return
 	}
-	b.WriteString(fmt.Sprintf("- %s: %s\n", label, strings.Join(values, "; ")))
+	fmt.Fprintf(b, "- %s: %s\n", label, strings.Join(values, "; "))
 }
 
 type markdownTableAlignment int
