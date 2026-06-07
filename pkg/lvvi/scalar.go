@@ -32,6 +32,14 @@ type ColorValue struct {
 
 // IsHeapScalarTag reports whether tag is a common heap field currently
 // treated as a scalar integer/flag/count/id payload.
+//
+// OF__ConstValue is included here: a block-diagram numeric-constant
+// literal is stored as a fixed-width big-endian integer (4 bytes for an
+// I32 constant), so the scalar projection's Signed/Unsigned/Raw capture
+// it exactly. The width tracks the constant's data type; non-integer
+// representations (e.g. DBL) preserve their bytes in Raw but their
+// Signed/Unsigned projections are the raw big-endian word, pending
+// representation-probe fixtures.
 func IsHeapScalarTag(tag int32) bool {
 	switch tag {
 	case int32(heap.FieldTagActiveDiag),
@@ -44,6 +52,7 @@ func IsHeapScalarTag(tag int32) bool {
 		int32(heap.FieldTagConId),
 		int32(heap.FieldTagConNum),
 		int32(heap.FieldTagConnectorTM),
+		int32(heap.FieldTagConstValue),
 		int32(heap.FieldTagDebuggingEnabled),
 		int32(heap.FieldTagDefaultTunnelType),
 		int32(heap.FieldTagDIdx),

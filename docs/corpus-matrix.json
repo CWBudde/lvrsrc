@@ -364,6 +364,55 @@
       "family": "labview-mcp",
       "focus": ["file/path workflow", "external dependency paths"],
       "hypothesis": "File I/O diagrams exercise path refs and dependency metadata."
+    },
+    {
+      "name": "Numeric255.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["numeric constant literal", "OF__ConstValue", "1-byte value boundary"],
+      "hypothesis": "The OF__ConstValue leaf stores an I32 constant as a fixed-width big-endian int32; 255 (0x000000ff) sits at the single-byte boundary without a varint/escape."
+    },
+    {
+      "name": "Numeric256.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["numeric constant literal", "OF__ConstValue", "1-byte value boundary"],
+      "hypothesis": "256 (0x00000100) crossing the single-byte boundary keeps the same 4-byte big-endian OF__ConstValue width, proving the literal is positional BE, not a byte-stream-with-escape like the compressed wire geometry."
+    },
+    {
+      "name": "Numeric65535.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["numeric constant literal", "OF__ConstValue", "2-byte value boundary"],
+      "hypothesis": "65535 (0x0000ffff) sits at the two-byte boundary; OF__ConstValue stays a fixed 4-byte big-endian int32."
+    },
+    {
+      "name": "Numeric65536.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["numeric constant literal", "OF__ConstValue", "2-byte value boundary"],
+      "hypothesis": "65536 (0x00010000) crossing the two-byte boundary still occupies the same 4-byte big-endian OF__ConstValue field, confirming type-width fixed encoding with no escape."
+    },
+    {
+      "name": "Numeric42_increment.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["function node", "horizontal-flow primitive", "single-elbow wires"],
+      "hypothesis": "A left-to-right primitive (Increment) keeps both terminals side-entered, so each wire stays a 2-corner byte0=04 elbow; an odd-corner byte0=03 route is not reachable from a horizontal-flow node."
+    },
+    {
+      "name": "Numeric42_N_terminal.vi",
+      "kind": "vi",
+      "family": "controlled-wire",
+      "focus": ["For-Loop count terminal", "top-entered terminal", "single-elbow wires"],
+      "hypothesis": "Even a top-entered terminal (For-Loop N) keeps a short horizontal stub, so the route stays a 2-corner byte0=04 elbow; byte0=03 is an emergent multi-node artifact, not coercible from a single source-to-sink layout."
+    },
+    {
+      "name": "Numeric9876Dot5432.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": ["floating-point constant literal", "OF__ConstValue", "DBL representation"],
+      "hypothesis": "OF__ConstValue stores a DBL constant as an 8-byte big-endian IEEE-754 double (9876.5432 = 40 c3 4a 45 87 93 dd 98), confirming the literal width tracks the data type (4 bytes I32, 8 bytes DBL) and is written verbatim with no escape."
     }
   ],
   "gaps": [
