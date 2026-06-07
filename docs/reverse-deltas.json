@@ -433,6 +433,22 @@
       "hypothesis": "A Boolean block-diagram constant literal (OF__ConstValue under a Boolean DDO) has no single fixed width: TRUE is stored as a 1-byte 0x01 and FALSE as a 2-byte 0x0000. The governing VCTP type is plain Boolean in both cases and its descriptor (FullType + Flags) is identical across the two widths, so the width cannot be predicted from the type; only the value correlates. The value decode is width-independent (any non-zero byte -> true), so both widths decode correctly; only the WidthMatch consistency flag had to be widened to accept 1 or 2 bytes. Why FALSE takes the extra byte is not yet explained - only the widths are corpus-confirmed.",
       "evidence": "All 5 Boolean OF__ConstValue leaves in the corpus: BoolToLED.vi node48 raw 01 (Boolean Flags 0x00, TRUE), format-string.vi node333/node790 raw 01 (Boolean Flags 0x40, TRUE), WhileLoop_Numeric42.vi node169 raw 00 00 (Boolean Flags 0x00, FALSE), reference-find-by-id.vi node1180 raw 00 00 (Boolean Flags 0x00, FALSE). The enclosing DDO object shape (OF__partID 0x42 -> OF__typeDesc -> OF__ddo close -> OF__ConstValue leaf -> OF__dco close) is identical for the 1- and 2-byte cases, so the 2-byte FALSE is a genuine literal width, not a heap mis-decode or a type mis-resolution. constWidthMatches now accepts 1 or 2 bytes for Boolean; pinned by TestBlockDiagramConstantBoolean in pkg/lvvi.",
       "status": "confirmed"
+    },
+    {
+      "id": "fxp-radix-from-type-config",
+      "left": "Numeric9876Dot5432_FXD.vi",
+      "right": "Numeric9876Dot5432_FXD_w32i8.vi",
+      "topic": "type-system",
+      "focus": [
+        "FixedPoint",
+        "FXP word length",
+        "radix",
+        "binary point",
+        "VCTP inner config"
+      ],
+      "hypothesis": "A FixedPoint (FXP, TD code 0x5F) constant's scale is read from the resolved VCTP type's inner config, not assumed: the word length (total bits) is a U16 at inner offset 2 and the integer word length (bits left of the binary point, sign included) is a U32 at inner offset 4; the radix (fractional bit count) is wordLength - integerWordLength and the value is the WL-bit signed mantissa / 2^radix. The off-2/off-4 positions are pinned by cross-check fields (U32 wordLength-1 at offset 24, U32 integerWordLength-1 at offset 28) and by off-2 equalling the constant's significant width.",
+      "evidence": "Numeric9876Dot5432_FXD.vi carries two FixedPoint descriptors (flat[3] WL=32/IWL=16, flat[4] WL=64/IWL=32); its 8-byte constant binds to flat[4], mantissa 0x000026948b000000 / 2^32 = 9876.54296875, the FXP quantisation of the intended 9876.5432. But both types there have wordLength = 2 x integerWordLength, so radix = WL-IWL and radix = IWL coincide (both 32) and that fixture alone cannot disambiguate the formula. The ASYMMETRIC fixture Numeric9876Dot5432_FXD_w32i8.vi settles it: its constant binds to an FXP type with WL=32, IWL=8 (cross-checks off24=31=WL-1, off28=7=IWL-1), mantissa 0x2a1f9724 = 706713380 in the low 32 bits of the 8-byte leaf. radix = WL-IWL = 24 -> 706713380 / 2^24 = 42.12339997 = the entered 42.1234; radix = IWL = 8 would give 2760599.14, decisively refuted. So radix = wordLength - integerWordLength is confirmed. pkg/lvvi.fixedPointConfig parses WL/IWL; TypedConst exposes FixedWordLength/FixedIntWordLength/FixedRadix/FixedValue/FixedConfigOK; mantissa sign-extended from WL bits (signExtendBits). Pinned by TestBlockDiagramConstantFixedPoint over both fixtures. (Negative-mantissa FXP is not yet corpus-verified - both constants are positive.)",
+      "status": "confirmed"
     }
   ]
 }

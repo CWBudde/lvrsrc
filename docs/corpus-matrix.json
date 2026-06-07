@@ -709,6 +709,17 @@
         "FPHb type join"
       ],
       "hypothesis": "A DBL front-panel control whose current value is committed as the default (Make Current Value Default) stores an 8-byte OF__DefaultData leaf (9876.5432 = 40 c3 4a 45 87 93 dd 98) that resolves through the same nearest-preceding OF__typeDesc -> TopTypes join as a block-diagram constant (-> NumFloat64) and decodes exactly; controls left at the zero default store no OF__DefaultData."
+    },
+    {
+      "name": "Numeric9876Dot5432_FXD_w32i8.vi",
+      "kind": "vi",
+      "family": "controlled-constant",
+      "focus": [
+        "fixed-point constant literal",
+        "FXP word length / integer word length",
+        "radix disambiguation"
+      ],
+      "hypothesis": "An asymmetric FXP constant (word length 32, integer word length 8, so wordLength != 2 x integerWordLength) breaks the symmetry of Numeric9876Dot5432_FXD.vi: it pins radix = wordLength - integerWordLength = 24 (not radix = integerWordLength = 8). The entered 42.1234 is stored as mantissa 0x2a1f9724 = 706713380 in the low 32 bits of the 8-byte container; 706713380 / 2^24 = 42.12339997, the FXP quantisation of 42.1234."
     }
   ],
   "gaps": [

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "summary": {
-    "fixtureCount": 69,
-    "heapTreeCount": 138,
-    "totalNodes": 44224,
-    "reportedNodes": 32192,
+    "fixtureCount": 70,
+    "heapTreeCount": 140,
+    "totalNodes": 44629,
+    "reportedNodes": 32492,
     "reportedTagCount": 119,
     "statusNodes": {
-      "class-semantic-open": 10470,
-      "named-only": 780,
-      "partial": 20570,
-      "rect-role-open": 372,
-      "resolved": 12032
+      "class-semantic-open": 10569,
+      "named-only": 786,
+      "partial": 20760,
+      "rect-role-open": 377,
+      "resolved": 12137
     }
   },
   "tags": [
@@ -20,13 +20,13 @@
       "name": "SL__fontRun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 3312,
-      "leafCount": 3312,
-      "contentBytes": 8676,
-      "wireBytes": 15897,
+      "count": 3343,
+      "leafCount": 3343,
+      "contentBytes": 8755,
+      "wireBytes": 16042,
       "resources": {
-        "BDHb": 678,
-        "FPHb": 2634
+        "BDHb": 687,
+        "FPHb": 2656
       },
       "fixtures": [
         {
@@ -152,6 +152,10 @@
         {
           "fixture": "WhileLoop_Numeric42.vi",
           "count": 32
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 31
         },
         {
           "fixture": "Numeric255.vi",
@@ -307,9 +311,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1454",
-        "OF__image=1377",
-        "SL__prNodeList=471",
+        "SL__arrayElement=1468",
+        "OF__image=1390",
+        "SL__prNodeList=475",
         "OF__StdNumInc=3",
         "OF__StdNumMax=3",
         "OF__StdNumMin=3",
@@ -322,13 +326,13 @@
       "name": "OF__image",
       "family": "field",
       "status": "partial",
-      "count": 2754,
-      "openCount": 1377,
-      "closeCount": 1377,
-      "wireBytes": 11016,
+      "count": 2780,
+      "openCount": 1390,
+      "closeCount": 1390,
+      "wireBytes": 11120,
       "resources": {
-        "BDHb": 660,
-        "FPHb": 2094
+        "BDHb": 668,
+        "FPHb": 2112
       },
       "fixtures": [
         {
@@ -438,6 +442,10 @@
         {
           "fixture": "Add17Plus25.vi",
           "count": 28
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 26
         },
         {
           "fixture": "Numeric255.vi",
@@ -609,9 +617,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=2386",
-        "SL__conPane=184",
-        "SL__aInsDCO=182",
+        "SL__arrayElement=2408",
+        "SL__conPane=186",
+        "SL__aInsDCO=184",
         "SL__externalNode=2"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -621,13 +629,13 @@
       "name": "OF__objFlags",
       "family": "field",
       "status": "partial",
-      "count": 2722,
-      "leafCount": 2722,
-      "contentBytes": 6491,
-      "wireBytes": 11935,
+      "count": 2748,
+      "leafCount": 2748,
+      "contentBytes": 6554,
+      "wireBytes": 12050,
       "resources": {
-        "BDHb": 1031,
-        "FPHb": 1691
+        "BDHb": 1042,
+        "FPHb": 1706
       },
       "fixtures": [
         {
@@ -740,6 +748,10 @@
         },
         {
           "fixture": "Numeric42_increment.vi",
+          "count": 26
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 26
         },
         {
@@ -908,11 +920,11 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=2162",
-        "SL__mux=175",
-        "SL__eventDataNode=116",
-        "SL__conPane=92",
-        "SL__aInsDCO=91",
+        "SL__arrayElement=2182",
+        "SL__mux=177",
+        "SL__eventDataNode=118",
+        "SL__conPane=93",
+        "SL__aInsDCO=92",
         "SL__parm=81",
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=1"
@@ -924,13 +936,13 @@
       "name": "OF__partID",
       "family": "field",
       "status": "partial",
-      "count": 2096,
-      "leafCount": 2096,
-      "contentBytes": 2121,
-      "wireBytes": 6313,
+      "count": 2115,
+      "leafCount": 2115,
+      "contentBytes": 2140,
+      "wireBytes": 6370,
       "resources": {
-        "BDHb": 509,
-        "FPHb": 1587
+        "BDHb": 515,
+        "FPHb": 1600
       },
       "fixtures": [
         {
@@ -1040,6 +1052,10 @@
         {
           "fixture": "WhileLoop_Numeric42.vi",
           "count": 20
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 19
         },
         {
           "fixture": "module-timeout--constant.vi",
@@ -1211,8 +1227,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=2003",
-        "SL__conPane=92",
+        "SL__arrayElement=2021",
+        "SL__conPane=93",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -1222,13 +1238,13 @@
       "name": "OF__howGrow",
       "family": "field",
       "status": "partial",
-      "count": 1835,
-      "leafCount": 1835,
-      "contentBytes": 3288,
-      "wireBytes": 6958,
+      "count": 1852,
+      "leafCount": 1852,
+      "contentBytes": 3318,
+      "wireBytes": 7022,
       "resources": {
-        "BDHb": 433,
-        "FPHb": 1402
+        "BDHb": 438,
+        "FPHb": 1414
       },
       "fixtures": [
         {
@@ -1342,6 +1358,10 @@
         {
           "fixture": "WhileLoop_Numeric42.vi",
           "count": 18
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 17
         },
         {
           "fixture": "Numeric255.vi",
@@ -1509,9 +1529,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1643",
-        "SL__conPane=92",
-        "SL__aInsDCO=91",
+        "SL__arrayElement=1658",
+        "SL__conPane=93",
+        "SL__aInsDCO=92",
         "SL__mux=8",
         "SL__externalNode=1"
       ],
@@ -1522,13 +1542,13 @@
       "name": "OF__bgColor",
       "family": "field",
       "status": "partial",
-      "count": 1783,
-      "leafCount": 1783,
-      "contentBytes": 7129,
-      "wireBytes": 10695,
+      "count": 1800,
+      "leafCount": 1800,
+      "contentBytes": 7197,
+      "wireBytes": 10797,
       "resources": {
-        "BDHb": 479,
-        "FPHb": 1304
+        "BDHb": 485,
+        "FPHb": 1315
       },
       "fixtures": [
         {
@@ -1645,6 +1665,10 @@
         },
         {
           "fixture": "Numeric42_N_terminal.vi",
+          "count": 17
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 17
         },
         {
@@ -1809,9 +1833,9 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1621",
-        "SL__conPane=92",
-        "SL__eventDataNode=69",
+        "SL__arrayElement=1636",
+        "SL__conPane=93",
+        "SL__eventDataNode=70",
         "SL__externalNode=1"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
@@ -1821,13 +1845,13 @@
       "name": "OF__fgColor",
       "family": "field",
       "status": "partial",
-      "count": 1504,
-      "leafCount": 1504,
-      "contentBytes": 6016,
-      "wireBytes": 9024,
+      "count": 1518,
+      "leafCount": 1518,
+      "contentBytes": 6072,
+      "wireBytes": 9108,
       "resources": {
-        "BDHb": 389,
-        "FPHb": 1115
+        "BDHb": 394,
+        "FPHb": 1124
       },
       "fixtures": [
         {
@@ -1929,6 +1953,10 @@
         {
           "fixture": "Add17Plus25.vi",
           "count": 16
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 14
         },
         {
           "fixture": "WhileLoop_Numeric42.vi",
@@ -2108,8 +2136,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1412",
-        "SL__conPane=92"
+        "SL__arrayElement=1425",
+        "SL__conPane=93"
       ],
       "next": "confirm color-space, prefix-byte, and system-color sentinel semantics with controlled fixtures"
     },
@@ -2118,13 +2146,13 @@
       "name": "OF__masterPart",
       "family": "field",
       "status": "partial",
-      "count": 1284,
-      "leafCount": 1284,
-      "contentBytes": 1301,
-      "wireBytes": 3869,
+      "count": 1296,
+      "leafCount": 1296,
+      "contentBytes": 1313,
+      "wireBytes": 3905,
       "resources": {
-        "BDHb": 231,
-        "FPHb": 1053
+        "BDHb": 234,
+        "FPHb": 1062
       },
       "fixtures": [
         {
@@ -2230,6 +2258,10 @@
         {
           "fixture": "Add17Plus25.vi",
           "count": 13
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 12
         },
         {
           "fixture": "module-timeout--constant.vi",
@@ -2405,7 +2437,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1283",
+        "SL__arrayElement=1295",
         "SL__externalNode=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -2415,15 +2447,15 @@
       "name": "OF__activePlot",
       "family": "field",
       "status": "named-only",
-      "count": 1253,
-      "leafCount": 311,
-      "openCount": 471,
-      "closeCount": 471,
-      "contentBytes": 2001,
-      "wireBytes": 6552,
+      "count": 1264,
+      "leafCount": 314,
+      "openCount": 475,
+      "closeCount": 475,
+      "contentBytes": 2013,
+      "wireBytes": 6603,
       "resources": {
-        "BDHb": 42,
-        "FPHb": 1211
+        "BDHb": 43,
+        "FPHb": 1221
       },
       "fixtures": [
         {
@@ -2521,6 +2553,10 @@
         {
           "fixture": "module-timeout--constant.vi",
           "count": 12
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 11
         },
         {
           "fixture": "Add17Plus25.vi",
@@ -2704,8 +2740,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=944",
-        "SL__baseRefNum=308",
+        "SL__arrayElement=952",
+        "SL__baseRefNum=311",
         "OF__browseOptions=1"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
@@ -2715,13 +2751,13 @@
       "name": "SL__baseRefNum",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 1232,
-      "openCount": 616,
-      "closeCount": 616,
-      "wireBytes": 4928,
+      "count": 1244,
+      "openCount": 622,
+      "closeCount": 622,
+      "wireBytes": 4976,
       "resources": {
-        "BDHb": 422,
-        "FPHb": 810
+        "BDHb": 428,
+        "FPHb": 816
       },
       "fixtures": [
         {
@@ -2826,6 +2862,10 @@
         },
         {
           "fixture": "Add17Plus25.vi",
+          "count": 12
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 12
         },
         {
@@ -3002,8 +3042,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=1046",
-        "SL__conPane=184",
+        "SL__arrayElement=1056",
+        "SL__conPane=186",
         "SL__externalNode=2"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -3013,13 +3053,13 @@
       "name": "OF__activeMarker",
       "family": "field",
       "status": "partial",
-      "count": 1090,
-      "leafCount": 1090,
-      "contentBytes": 3564,
-      "wireBytes": 5744,
+      "count": 1100,
+      "leafCount": 1100,
+      "contentBytes": 3597,
+      "wireBytes": 5797,
       "resources": {
-        "BDHb": 213,
-        "FPHb": 877
+        "BDHb": 216,
+        "FPHb": 884
       },
       "fixtures": [
         {
@@ -3124,6 +3164,10 @@
         },
         {
           "fixture": "Add17Plus25.vi",
+          "count": 10
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 10
         },
         {
@@ -3300,8 +3344,8 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=616",
-        "SL__arrayElement=473",
+        "SL__baseRefNum=622",
+        "SL__arrayElement=477",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -3311,13 +3355,13 @@
       "name": "SL__simTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 854,
-      "openCount": 427,
-      "closeCount": 427,
-      "wireBytes": 3416,
+      "count": 862,
+      "openCount": 431,
+      "closeCount": 431,
+      "wireBytes": 3448,
       "resources": {
-        "BDHb": 162,
-        "FPHb": 692
+        "BDHb": 164,
+        "FPHb": 698
       },
       "fixtures": [
         {
@@ -3549,6 +3593,10 @@
           "count": 8
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 8
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 8
         },
@@ -3594,7 +3642,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=854"
+        "SL__arrayElement=862"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -3603,13 +3651,13 @@
       "name": "SL__stdLvVariant",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 720,
-      "openCount": 360,
-      "closeCount": 360,
-      "wireBytes": 2880,
+      "count": 726,
+      "openCount": 363,
+      "closeCount": 363,
+      "wireBytes": 2904,
       "resources": {
-        "BDHb": 186,
-        "FPHb": 534
+        "BDHb": 188,
+        "FPHb": 538
       },
       "fixtures": [
         {
@@ -3857,6 +3905,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 6
         },
@@ -3890,8 +3942,8 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=360",
-        "SL__aInsDCO=182",
+        "SL__mux=364",
+        "SL__aInsDCO=184",
         "SL__arrayElement=178"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -3901,13 +3953,13 @@
       "name": "OF__activeDiag",
       "family": "field",
       "status": "partial",
-      "count": 692,
-      "leafCount": 692,
-      "contentBytes": 2479,
-      "wireBytes": 3869,
+      "count": 698,
+      "leafCount": 698,
+      "contentBytes": 2500,
+      "wireBytes": 3902,
       "resources": {
-        "BDHb": 143,
-        "FPHb": 549
+        "BDHb": 145,
+        "FPHb": 553
       },
       "fixtures": [
         {
@@ -4131,6 +4183,10 @@
           "count": 6
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 6
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 6
         },
@@ -4184,8 +4240,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=473",
-        "SL__baseRefNum=209",
+        "SL__arrayElement=477",
+        "SL__baseRefNum=211",
         "OF__StdNumInc=3",
         "OF__StdNumMax=3",
         "OF__StdNumMin=3",
@@ -4198,13 +4254,13 @@
       "name": "OF__activeXScale",
       "family": "field",
       "status": "partial",
-      "count": 617,
-      "leafCount": 617,
-      "contentBytes": 2464,
-      "wireBytes": 3698,
+      "count": 623,
+      "leafCount": 623,
+      "contentBytes": 2488,
+      "wireBytes": 3734,
       "resources": {
-        "BDHb": 211,
-        "FPHb": 406
+        "BDHb": 214,
+        "FPHb": 409
       },
       "fixtures": [
         {
@@ -4309,6 +4365,10 @@
         },
         {
           "fixture": "Add17Plus25.vi",
+          "count": 6
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 6
         },
         {
@@ -4485,7 +4545,7 @@
         }
       ],
       "parentContexts": [
-        "SL__baseRefNum=616",
+        "SL__baseRefNum=622",
         "OF__browseOptions=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -4495,13 +4555,13 @@
       "name": "OF__typeDesc",
       "family": "field",
       "status": "partial",
-      "count": 607,
-      "leafCount": 607,
-      "contentBytes": 607,
-      "wireBytes": 1821,
+      "count": 611,
+      "leafCount": 611,
+      "contentBytes": 611,
+      "wireBytes": 1833,
       "resources": {
-        "BDHb": 327,
-        "FPHb": 280
+        "BDHb": 329,
+        "FPHb": 282
       },
       "fixtures": [
         {
@@ -4745,6 +4805,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 4
         },
@@ -4778,9 +4842,9 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=227",
-        "SL__arrayElement=191",
-        "SL__mux=180",
+        "SL__parm=228",
+        "SL__arrayElement=192",
+        "SL__mux=182",
         "SL__recipeBkUp=4",
         "OF__loopTestDCO=3",
         "OF__innerLpTunDCO=2"
@@ -4792,13 +4856,13 @@
       "name": "SL__parm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 574,
-      "leafCount": 120,
-      "openCount": 227,
-      "closeCount": 227,
-      "wireBytes": 3217,
+      "count": 577,
+      "leafCount": 121,
+      "openCount": 228,
+      "closeCount": 228,
+      "wireBytes": 3234,
       "resources": {
-        "BDHb": 574
+        "BDHb": 577
       },
       "fixtures": [
         {
@@ -5018,6 +5082,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 3
         },
@@ -5031,7 +5099,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=574"
+        "SL__arrayElement=577"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -5040,12 +5108,12 @@
       "name": "SL__udClassDDO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 548,
-      "openCount": 274,
-      "closeCount": 274,
-      "wireBytes": 2192,
+      "count": 552,
+      "openCount": 276,
+      "closeCount": 276,
+      "wireBytes": 2208,
       "resources": {
-        "BDHb": 548
+        "BDHb": 552
       },
       "fixtures": [
         {
@@ -5265,6 +5333,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 4
         },
@@ -5326,7 +5398,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=494",
+        "SL__arrayElement=498",
         "SL__parm=36",
         "SL__recipeBkUp=8",
         "OF__loopTestDCO=6",
@@ -5339,13 +5411,13 @@
       "name": "SL__mux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 360,
-      "openCount": 180,
-      "closeCount": 180,
-      "wireBytes": 1980,
+      "count": 364,
+      "openCount": 182,
+      "closeCount": 182,
+      "wireBytes": 2002,
       "resources": {
-        "BDHb": 148,
-        "FPHb": 212
+        "BDHb": 150,
+        "FPHb": 214
       },
       "fixtures": [
         {
@@ -5565,6 +5637,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 4
         },
@@ -5622,8 +5698,8 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=212",
-        "SL__parm=142",
+        "SL__arrayElement=214",
+        "SL__parm=144",
         "SL__mux=6"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -5633,13 +5709,13 @@
       "name": "OF__MouseWheelSupport",
       "family": "field",
       "status": "partial",
-      "count": 338,
-      "leafCount": 338,
-      "contentBytes": 338,
-      "wireBytes": 1014,
+      "count": 341,
+      "leafCount": 341,
+      "contentBytes": 341,
+      "wireBytes": 1023,
       "resources": {
-        "BDHb": 91,
-        "FPHb": 247
+        "BDHb": 92,
+        "FPHb": 249
       },
       "fixtures": [
         {
@@ -5883,6 +5959,10 @@
           "count": 3
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 3
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 3
         },
@@ -5920,9 +6000,9 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=180",
+        "SL__mux=182",
         "SL__arrayElement=89",
-        "SL__eventDataNode=69"
+        "SL__eventDataNode=70"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -5931,13 +6011,13 @@
       "name": "SL__sdfTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 332,
-      "openCount": 166,
-      "closeCount": 166,
-      "wireBytes": 1328,
+      "count": 336,
+      "openCount": 168,
+      "closeCount": 168,
+      "wireBytes": 1344,
       "resources": {
-        "BDHb": 154,
-        "FPHb": 178
+        "BDHb": 156,
+        "FPHb": 180
       },
       "fixtures": [
         {
@@ -6169,6 +6249,10 @@
           "count": 4
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 4
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 4
         },
@@ -6218,8 +6302,8 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=182",
-        "SL__eventDataNode=138",
+        "SL__aInsDCO=184",
+        "SL__eventDataNode=140",
         "SL__arrayElement=12"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -6229,13 +6313,13 @@
       "name": "SL__eventDataNode",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 276,
-      "openCount": 138,
-      "closeCount": 138,
-      "wireBytes": 1518,
+      "count": 280,
+      "openCount": 140,
+      "closeCount": 140,
+      "wireBytes": 1540,
       "resources": {
-        "BDHb": 138,
-        "FPHb": 138
+        "BDHb": 140,
+        "FPHb": 140
       },
       "fixtures": [
         {
@@ -6412,6 +6496,10 @@
         },
         {
           "fixture": "Numeric9876Dot5432_FXD.vi",
+          "count": 4
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 4
         },
         {
@@ -6516,7 +6604,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=276"
+        "SL__rootObject=280"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -6525,13 +6613,13 @@
       "name": "OF__hGrowNodeListLength",
       "family": "field",
       "status": "partial",
-      "count": 256,
-      "leafCount": 256,
-      "contentBytes": 256,
-      "wireBytes": 768,
+      "count": 258,
+      "leafCount": 258,
+      "contentBytes": 258,
+      "wireBytes": 774,
       "resources": {
-        "BDHb": 78,
-        "FPHb": 178
+        "BDHb": 79,
+        "FPHb": 179
       },
       "fixtures": [
         {
@@ -6779,6 +6867,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -6800,7 +6892,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=256"
+        "SL__arrayElement=258"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -6809,13 +6901,13 @@
       "name": "OF__refListLength",
       "family": "field",
       "status": "partial",
-      "count": 256,
-      "leafCount": 256,
-      "contentBytes": 256,
-      "wireBytes": 768,
+      "count": 258,
+      "leafCount": 258,
+      "contentBytes": 258,
+      "wireBytes": 774,
       "resources": {
-        "BDHb": 78,
-        "FPHb": 178
+        "BDHb": 79,
+        "FPHb": 179
       },
       "fixtures": [
         {
@@ -7063,6 +7155,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -7084,7 +7180,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=256"
+        "SL__arrayElement=258"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -7093,13 +7189,13 @@
       "name": "OF__rsrcID",
       "family": "field",
       "status": "partial",
-      "count": 244,
-      "leafCount": 244,
-      "contentBytes": 488,
-      "wireBytes": 976,
+      "count": 246,
+      "leafCount": 246,
+      "contentBytes": 492,
+      "wireBytes": 984,
       "resources": {
-        "BDHb": 88,
-        "FPHb": 156
+        "BDHb": 89,
+        "FPHb": 157
       },
       "fixtures": [
         {
@@ -7335,6 +7431,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -7376,7 +7476,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=244"
+        "SL__arrayElement=246"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -7385,12 +7485,12 @@
       "name": "SL__conPane",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 184,
-      "openCount": 92,
-      "closeCount": 92,
-      "wireBytes": 1012,
+      "count": 186,
+      "openCount": 93,
+      "closeCount": 93,
+      "wireBytes": 1023,
       "resources": {
-        "BDHb": 184
+        "BDHb": 186
       },
       "fixtures": [
         {
@@ -7606,6 +7706,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -7623,7 +7727,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=184"
+        "SL__arrayElement=186"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -7632,13 +7736,13 @@
       "name": "SL__aInsDCO",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 182,
-      "openCount": 91,
-      "closeCount": 91,
-      "wireBytes": 1001,
+      "count": 184,
+      "openCount": 92,
+      "closeCount": 92,
+      "wireBytes": 1012,
       "resources": {
         "BDHb": 4,
-        "FPHb": 178
+        "FPHb": 180
       },
       "fixtures": [
         {
@@ -7866,6 +7970,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -7919,7 +8027,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138",
+        "SL__eventDataNode=140",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -7930,13 +8038,13 @@
       "name": "SL__demux",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 182,
-      "openCount": 91,
-      "closeCount": 91,
-      "wireBytes": 728,
+      "count": 184,
+      "openCount": 92,
+      "closeCount": 92,
+      "wireBytes": 736,
       "resources": {
         "BDHb": 4,
-        "FPHb": 178
+        "FPHb": 180
       },
       "fixtures": [
         {
@@ -8164,6 +8272,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -8217,7 +8329,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138",
+        "SL__eventDataNode=140",
         "SL__mux=26",
         "SL__arrayElement=18"
       ],
@@ -8292,13 +8404,13 @@
       "name": "OF__format",
       "family": "field",
       "status": "partial",
-      "count": 154,
-      "leafCount": 154,
-      "contentBytes": 619,
-      "wireBytes": 936,
+      "count": 156,
+      "leafCount": 156,
+      "contentBytes": 629,
+      "wireBytes": 951,
       "resources": {
-        "BDHb": 62,
-        "FPHb": 92
+        "BDHb": 63,
+        "FPHb": 93
       },
       "fixtures": [
         {
@@ -8494,6 +8606,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -8555,7 +8671,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=154"
+        "SL__arrayElement=156"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -8564,13 +8680,13 @@
       "name": "OF__origin",
       "family": "field",
       "status": "partial",
-      "count": 152,
-      "leafCount": 152,
-      "contentBytes": 608,
-      "wireBytes": 912,
+      "count": 154,
+      "leafCount": 154,
+      "contentBytes": 616,
+      "wireBytes": 924,
       "resources": {
-        "BDHb": 60,
-        "FPHb": 92
+        "BDHb": 61,
+        "FPHb": 93
       },
       "fixtures": [
         {
@@ -8782,6 +8898,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -8851,7 +8971,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=127",
+        "SL__rootObject=129",
         "SL__aInsDCO=25"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
@@ -8861,12 +8981,12 @@
       "name": "SL__baseTableControl",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 150,
-      "openCount": 75,
-      "closeCount": 75,
-      "wireBytes": 600,
+      "count": 152,
+      "openCount": 76,
+      "closeCount": 76,
+      "wireBytes": 608,
       "resources": {
-        "BDHb": 150
+        "BDHb": 152
       },
       "fixtures": [
         {
@@ -9058,6 +9178,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -9147,7 +9271,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138",
+        "SL__eventDataNode=140",
         "SL__arrayElement=12"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
@@ -9157,12 +9281,12 @@
       "name": "OF__nodeList",
       "family": "field",
       "status": "partial",
-      "count": 150,
-      "openCount": 75,
-      "closeCount": 75,
-      "wireBytes": 600,
+      "count": 152,
+      "openCount": 76,
+      "closeCount": 76,
+      "wireBytes": 608,
       "resources": {
-        "BDHb": 150
+        "BDHb": 152
       },
       "fixtures": [
         {
@@ -9354,6 +9478,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -9443,7 +9571,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138",
+        "SL__eventDataNode=140",
         "SL__arrayElement=12"
       ],
       "next": "map child ordering and required/optional container members with per-class fixture evidence"
@@ -9453,13 +9581,13 @@
       "name": "OF__dsw",
       "family": "field",
       "status": "partial",
-      "count": 139,
-      "leafCount": 139,
-      "contentBytes": 278,
-      "wireBytes": 556,
+      "count": 141,
+      "leafCount": 141,
+      "contentBytes": 282,
+      "wireBytes": 564,
       "resources": {
-        "BDHb": 89,
-        "FPHb": 50
+        "BDHb": 90,
+        "FPHb": 51
       },
       "fixtures": [
         {
@@ -9615,6 +9743,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "get-vi-description.vi",
           "count": 2
         },
@@ -9684,8 +9816,8 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=88",
-        "SL__arrayElement=50",
+        "SL__parm=89",
+        "SL__arrayElement=51",
         "OF__loopTestDCO=1"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
@@ -9695,12 +9827,12 @@
       "name": "SL__lMax",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 138,
-      "openCount": 69,
-      "closeCount": 69,
-      "wireBytes": 759,
+      "count": 140,
+      "openCount": 70,
+      "closeCount": 70,
+      "wireBytes": 770,
       "resources": {
-        "FPHb": 138
+        "FPHb": 140
       },
       "fixtures": [
         {
@@ -9880,6 +10012,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -9981,7 +10117,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138"
+        "SL__eventDataNode=140"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -9990,12 +10126,12 @@
       "name": "SL__oHExt",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 138,
-      "openCount": 69,
-      "closeCount": 69,
-      "wireBytes": 759,
+      "count": 140,
+      "openCount": 70,
+      "closeCount": 70,
+      "wireBytes": 770,
       "resources": {
-        "FPHb": 138
+        "FPHb": 140
       },
       "fixtures": [
         {
@@ -10175,6 +10311,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -10276,7 +10416,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=138"
+        "SL__eventDataNode=140"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -10285,12 +10425,12 @@
       "name": "SL__seqTun",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 138,
-      "openCount": 69,
-      "closeCount": 69,
-      "wireBytes": 552,
+      "count": 140,
+      "openCount": 70,
+      "closeCount": 70,
+      "wireBytes": 560,
       "resources": {
-        "FPHb": 138
+        "FPHb": 140
       },
       "fixtures": [
         {
@@ -10470,6 +10610,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -10571,7 +10715,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=138"
+        "SL__lMax=140"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -10580,13 +10724,13 @@
       "name": "OF__instrStyle",
       "family": "field",
       "status": "partial",
-      "count": 138,
-      "leafCount": 138,
-      "contentBytes": 138,
-      "wireBytes": 414,
+      "count": 140,
+      "leafCount": 140,
+      "contentBytes": 140,
+      "wireBytes": 420,
       "resources": {
-        "BDHb": 69,
-        "FPHb": 69
+        "BDHb": 70,
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -10766,6 +10910,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -10867,7 +11015,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=138"
+        "SL__rootObject=140"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -10876,13 +11024,13 @@
       "name": "OF__dBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 138,
-      "leafCount": 138,
-      "contentBytes": 1104,
-      "wireBytes": 1518,
+      "count": 140,
+      "leafCount": 140,
+      "contentBytes": 1120,
+      "wireBytes": 1540,
       "resources": {
-        "BDHb": 69,
-        "FPHb": 69
+        "BDHb": 70,
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -11062,6 +11210,10 @@
           "count": 2
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 2
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 2
         },
@@ -11163,7 +11315,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=138"
+        "SL__rootObject=140"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -11172,13 +11324,13 @@
       "name": "OF__pBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 138,
-      "leafCount": 138,
-      "contentBytes": 1104,
-      "wireBytes": 1518,
+      "count": 140,
+      "leafCount": 140,
+      "contentBytes": 1120,
+      "wireBytes": 1540,
       "resources": {
-        "BDHb": 69,
-        "FPHb": 69
+        "BDHb": 70,
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -11355,6 +11507,10 @@
         },
         {
           "fixture": "Numeric9876Dot5432_FXD.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 2
         },
         {
@@ -11459,7 +11615,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=138"
+        "SL__rootObject=140"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -11468,12 +11624,12 @@
       "name": "OF__compressedWireTable",
       "family": "field",
       "status": "partial",
-      "count": 133,
-      "leafCount": 133,
-      "contentBytes": 826,
-      "wireBytes": 1185,
+      "count": 134,
+      "leafCount": 134,
+      "contentBytes": 832,
+      "wireBytes": 1194,
       "resources": {
-        "BDHb": 133
+        "BDHb": 134
       },
       "fixtures": [
         {
@@ -11693,6 +11849,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -11702,7 +11862,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=133"
+        "SL__arrayElement=134"
       ],
       "next": "finish multi-elbow, manual-chain, comb, and 4+ branch wire semantics"
     },
@@ -11711,12 +11871,12 @@
       "name": "OF__lastSignalKind",
       "family": "field",
       "status": "partial",
-      "count": 133,
-      "leafCount": 133,
-      "contentBytes": 266,
-      "wireBytes": 532,
+      "count": 134,
+      "leafCount": 134,
+      "contentBytes": 268,
+      "wireBytes": 536,
       "resources": {
-        "BDHb": 133
+        "BDHb": 134
       },
       "fixtures": [
         {
@@ -11936,6 +12096,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -11945,7 +12109,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=133"
+        "SL__arrayElement=134"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -11954,12 +12118,12 @@
       "name": "OF__state",
       "family": "field",
       "status": "partial",
-      "count": 133,
-      "leafCount": 133,
-      "contentBytes": 134,
-      "wireBytes": 400,
+      "count": 134,
+      "leafCount": 134,
+      "contentBytes": 135,
+      "wireBytes": 403,
       "resources": {
-        "BDHb": 133
+        "BDHb": 134
       },
       "fixtures": [
         {
@@ -12179,6 +12343,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -12188,7 +12356,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=133"
+        "SL__arrayElement=134"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -12197,12 +12365,12 @@
       "name": "SL__multiCosm",
       "family": "class",
       "status": "class-semantic-open",
-      "count": 116,
-      "openCount": 58,
-      "closeCount": 58,
-      "wireBytes": 464,
+      "count": 118,
+      "openCount": 59,
+      "closeCount": 59,
+      "wireBytes": 472,
       "resources": {
-        "FPHb": 116
+        "FPHb": 118
       },
       "fixtures": [
         {
@@ -12379,6 +12547,10 @@
         },
         {
           "fixture": "Numeric9876Dot5432_FXD.vi",
+          "count": 2
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 2
         },
         {
@@ -12439,7 +12611,7 @@
         }
       ],
       "parentContexts": [
-        "SL__rootObject=116"
+        "SL__rootObject=118"
       ],
       "next": "map required/optional child fields and add a per-class semantic decoder or explicit fallback"
     },
@@ -12448,12 +12620,12 @@
       "name": "OF__shortCount",
       "family": "field",
       "status": "partial",
-      "count": 114,
-      "leafCount": 114,
-      "contentBytes": 114,
-      "wireBytes": 342,
+      "count": 115,
+      "leafCount": 115,
+      "contentBytes": 115,
+      "wireBytes": 345,
       "resources": {
-        "BDHb": 114
+        "BDHb": 115
       },
       "fixtures": [
         {
@@ -12673,6 +12845,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -12734,7 +12910,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=114"
+        "SL__arrayElement=115"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -12806,12 +12982,12 @@
       "name": "OF__conNum",
       "family": "field",
       "status": "partial",
-      "count": 98,
-      "leafCount": 98,
-      "contentBytes": 98,
-      "wireBytes": 294,
+      "count": 99,
+      "leafCount": 99,
+      "contentBytes": 99,
+      "wireBytes": 297,
       "resources": {
-        "FPHb": 98
+        "FPHb": 99
       },
       "fixtures": [
         {
@@ -13023,6 +13199,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -13088,7 +13268,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=98"
+        "SL__arrayElement=99"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -13097,13 +13277,13 @@
       "name": "OF__savedSize",
       "family": "field",
       "status": "named-only",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 728,
-      "wireBytes": 1001,
+      "count": 92,
+      "leafCount": 92,
+      "contentBytes": 736,
+      "wireBytes": 1012,
       "resources": {
         "BDHb": 2,
-        "FPHb": 89
+        "FPHb": 90
       },
       "fixtures": [
         {
@@ -13328,6 +13508,10 @@
         },
         {
           "fixture": "Numeric9876Dot5432_FXD.vi",
+          "count": 1
+        },
+        {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
           "count": 1
         },
         {
@@ -13384,7 +13568,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=69",
+        "SL__eventDataNode=70",
         "SL__mux=13",
         "SL__arrayElement=9"
       ],
@@ -13395,14 +13579,14 @@
       "name": "OF__StdNumInc",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 85,
+      "count": 92,
+      "leafCount": 86,
       "openCount": 3,
       "closeCount": 3,
-      "contentBytes": 481,
-      "wireBytes": 730,
+      "contentBytes": 482,
+      "wireBytes": 733,
       "resources": {
-        "FPHb": 91
+        "FPHb": 92
       },
       "fixtures": [
         {
@@ -13594,6 +13778,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -13651,7 +13839,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=73",
+        "SL__mux=74",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -13661,14 +13849,14 @@
       "name": "OF__StdNumMax",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 85,
+      "count": 92,
+      "leafCount": 86,
       "openCount": 3,
       "closeCount": 3,
-      "contentBytes": 539,
-      "wireBytes": 789,
+      "contentBytes": 543,
+      "wireBytes": 795,
       "resources": {
-        "FPHb": 91
+        "FPHb": 92
       },
       "fixtures": [
         {
@@ -13860,6 +14048,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -13917,7 +14109,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=73",
+        "SL__mux=74",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -13927,14 +14119,14 @@
       "name": "OF__StdNumMin",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 85,
+      "count": 92,
+      "leafCount": 86,
       "openCount": 3,
       "closeCount": 3,
-      "contentBytes": 539,
-      "wireBytes": 789,
+      "contentBytes": 543,
+      "wireBytes": 795,
       "resources": {
-        "FPHb": 91
+        "FPHb": 92
       },
       "fixtures": [
         {
@@ -14126,6 +14318,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -14183,7 +14379,7 @@
         }
       ],
       "parentContexts": [
-        "SL__mux=73",
+        "SL__mux=74",
         "SL__arrayElement=18"
       ],
       "next": "extend HeapNodeTDDataFill beyond currently resolved primitive numeric forms"
@@ -14193,13 +14389,13 @@
       "name": "OF__minPaneSize",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 364,
-      "wireBytes": 546,
+      "count": 92,
+      "leafCount": 92,
+      "contentBytes": 368,
+      "wireBytes": 552,
       "resources": {
         "BDHb": 2,
-        "FPHb": 89
+        "FPHb": 90
       },
       "fixtures": [
         {
@@ -14427,6 +14623,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -14480,7 +14680,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=91"
+        "SL__aInsDCO=92"
       ],
       "next": "confirm point/size role, coordinate origin, and UI effect with controlled fixtures"
     },
@@ -14489,13 +14689,13 @@
       "name": "OF__paneFlags",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 273,
-      "wireBytes": 455,
+      "count": 92,
+      "leafCount": 92,
+      "contentBytes": 276,
+      "wireBytes": 460,
       "resources": {
         "BDHb": 2,
-        "FPHb": 89
+        "FPHb": 90
       },
       "fixtures": [
         {
@@ -14723,6 +14923,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -14776,7 +14980,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=91"
+        "SL__aInsDCO=92"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -14785,12 +14989,12 @@
       "name": "OF__termListLength",
       "family": "field",
       "status": "partial",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 91,
-      "wireBytes": 273,
+      "count": 92,
+      "leafCount": 92,
+      "contentBytes": 92,
+      "wireBytes": 276,
       "resources": {
-        "FPHb": 91
+        "FPHb": 92
       },
       "fixtures": [
         {
@@ -15002,6 +15206,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -15023,7 +15231,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=91"
+        "SL__arrayElement=92"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -15032,13 +15240,13 @@
       "name": "OF__docBounds",
       "family": "field",
       "status": "rect-role-open",
-      "count": 91,
-      "leafCount": 91,
-      "contentBytes": 728,
-      "wireBytes": 1001,
+      "count": 92,
+      "leafCount": 92,
+      "contentBytes": 736,
+      "wireBytes": 1012,
       "resources": {
         "BDHb": 2,
-        "FPHb": 89
+        "FPHb": 90
       },
       "fixtures": [
         {
@@ -15266,6 +15474,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -15319,7 +15531,7 @@
         }
       ],
       "parentContexts": [
-        "SL__aInsDCO=91"
+        "SL__aInsDCO=92"
       ],
       "next": "confirm the rectangle role with controlled fixtures before scene/layout promotion"
     },
@@ -15423,12 +15635,12 @@
       "name": "OF__clumpNum",
       "family": "field",
       "status": "partial",
-      "count": 74,
-      "leafCount": 74,
-      "contentBytes": 222,
-      "wireBytes": 370,
+      "count": 75,
+      "leafCount": 75,
+      "contentBytes": 225,
+      "wireBytes": 375,
       "resources": {
-        "BDHb": 74
+        "BDHb": 75
       },
       "fixtures": [
         {
@@ -15636,6 +15848,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "NumericDblInput.vi",
           "count": 1
         },
@@ -15661,7 +15877,7 @@
         }
       ],
       "parentContexts": [
-        "SL__arrayElement=74"
+        "SL__arrayElement=75"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -15670,12 +15886,12 @@
       "name": "OF__ConstValue",
       "family": "field",
       "status": "named-only",
-      "count": 71,
-      "leafCount": 71,
-      "contentBytes": 476,
-      "wireBytes": 640,
+      "count": 72,
+      "leafCount": 72,
+      "contentBytes": 484,
+      "wireBytes": 651,
       "resources": {
-        "BDHb": 71
+        "BDHb": 72
       },
       "fixtures": [
         {
@@ -15871,6 +16087,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -15900,7 +16120,7 @@
         }
       ],
       "parentContexts": [
-        "SL__parm=71"
+        "SL__parm=72"
       ],
       "next": "decode the field payload or document it as reserved/padding with fixture evidence"
     },
@@ -15909,12 +16129,12 @@
       "name": "OF__conId",
       "family": "field",
       "status": "partial",
-      "count": 69,
-      "leafCount": 69,
-      "contentBytes": 138,
-      "wireBytes": 276,
+      "count": 70,
+      "leafCount": 70,
+      "contentBytes": 140,
+      "wireBytes": 280,
       "resources": {
-        "FPHb": 69
+        "FPHb": 70
       },
       "fixtures": [
         {
@@ -16094,6 +16314,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "Numeric9876Dot5432_SGL.vi",
           "count": 1
         },
@@ -16195,7 +16419,7 @@
         }
       ],
       "parentContexts": [
-        "SL__lMax=69"
+        "SL__lMax=70"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },
@@ -16204,12 +16428,12 @@
       "name": "OF__firstNodeIdx",
       "family": "field",
       "status": "partial",
-      "count": 51,
-      "leafCount": 51,
-      "contentBytes": 51,
-      "wireBytes": 153,
+      "count": 52,
+      "leafCount": 52,
+      "contentBytes": 52,
+      "wireBytes": 156,
       "resources": {
-        "BDHb": 51
+        "BDHb": 52
       },
       "fixtures": [
         {
@@ -16381,6 +16605,10 @@
           "count": 1
         },
         {
+          "fixture": "Numeric9876Dot5432_FXD_w32i8.vi",
+          "count": 1
+        },
+        {
           "fixture": "NumericDblInput.vi",
           "count": 1
         },
@@ -16418,7 +16646,7 @@
         }
       ],
       "parentContexts": [
-        "SL__eventDataNode=51"
+        "SL__eventDataNode=52"
       ],
       "next": "name individual bits/enums and add role-specific validation with controlled fixtures"
     },

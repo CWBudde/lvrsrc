@@ -275,19 +275,57 @@ func TestBlockDiagramConstantComplex(t *testing.T) {
 	}
 }
 
-// TestBlockDiagramConstantFixedPoint pins the fixed-point magnitude. The
-// FXD constant stores the scaled magnitude in an 8-byte container; here
-// 9876.5432 is 0x26948b = round(9876.5432 * 2^8) lodged at bits 24..47.
+// TestBlockDiagramConstantFixedPoint pins the fixed-point decode driven by
+// the FXP type config: the radix (fractional bit count) is read as
+// wordLength - integerWordLength from the resolved FixedPoint VCTP type, and
+// the value is the WL-bit signed mantissa / 2^radix.
+//
+// The two fixtures together prove the formula. Both FXP types in the 64/32
+// fixture have wordLength = 2 x integerWordLength, so radix = WL-IWL and
+// radix = IWL coincide there (both 32). The w32i8 fixture breaks that
+// symmetry — WL=32, IWL=8 — so the two formulas diverge sharply: WL-IWL=24
+// gives the entered 42.1234, whereas radix=IWL=8 would give 2760599.14. The
+// decoded value matching 42.1234 confirms radix = wordLength -
+// integerWordLength, not integerWordLength.
 func TestBlockDiagramConstantFixedPoint(t *testing.T) {
-	c := typedConst(t, "Numeric9876Dot5432_FXD.vi")
-	if c.Kind != ConstKindFixedPoint {
-		t.Fatalf("Kind = %v, want fixed-point", c.Kind)
+	cases := []struct {
+		fixture  string
+		wordLen  int
+		intLen   int
+		radix    int
+		fixedRaw uint64
+		value    float64 // exact stored (FXP-quantised) value
+		intended float64 // the value entered in LabVIEW
+		quantTol float64 // FXP quantisation tolerance vs intended
+	}{
+		{"Numeric9876Dot5432_FXD.vi", 64, 32, 32, 0x000026948b000000, 9876.54296875, 9876.5432, 0.01},
+		{"Numeric9876Dot5432_FXD_w32i8.vi", 32, 8, 24, 0x000000002a1f9724, 42.1233999729156, 42.1234, 1e-6},
 	}
-	const mag = 0x26948b
-	if got := (c.FixedRaw >> 24) & 0xffffff; got != mag {
-		t.Errorf("FXD magnitude = %#x, want %#x", got, mag)
-	}
-	if want := 9876.5432; math.Abs(float64(mag)/256.0-want) > 0.01 {
-		t.Errorf("FXD magnitude/2^8 = %v, want ~%v", float64(mag)/256.0, want)
+	for _, tc := range cases {
+		t.Run(tc.fixture, func(t *testing.T) {
+			c := typedConst(t, tc.fixture)
+			if c.Kind != ConstKindFixedPoint {
+				t.Fatalf("Kind = %v, want fixed-point", c.Kind)
+			}
+			if !c.FixedConfigOK {
+				t.Fatal("FixedConfigOK = false; FXP config did not parse")
+			}
+			if c.FixedWordLength != tc.wordLen || c.FixedIntWordLength != tc.intLen {
+				t.Errorf("word/int word length = %d/%d, want %d/%d",
+					c.FixedWordLength, c.FixedIntWordLength, tc.wordLen, tc.intLen)
+			}
+			if c.FixedRadix != tc.radix {
+				t.Errorf("FixedRadix = %d, want %d (wordLength - integerWordLength)", c.FixedRadix, tc.radix)
+			}
+			if c.FixedRaw != tc.fixedRaw {
+				t.Errorf("FixedRaw = %#016x, want %#016x", c.FixedRaw, tc.fixedRaw)
+			}
+			if math.Abs(c.FixedValue-tc.value) > 1e-9 {
+				t.Errorf("FixedValue = %v, want %v (exact FXP quantisation)", c.FixedValue, tc.value)
+			}
+			if math.Abs(c.FixedValue-tc.intended) > tc.quantTol {
+				t.Errorf("FixedValue = %v, want ~%v (entered value)", c.FixedValue, tc.intended)
+			}
+		})
 	}
 }

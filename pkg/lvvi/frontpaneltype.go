@@ -121,7 +121,7 @@ func (m *Model) FrontPanelDefaults() ([]TypedConst, bool) {
 		}
 		if flat, ok := resolveConstTypeIndex(tree, i, tops); ok && flat >= 0 && flat < len(descs) {
 			tc.TypeIndex = flat
-			fillTypedConst(&tc, descs[flat].FullType)
+			fillTypedConst(&tc, descs[flat])
 		}
 		out = append(out, tc)
 	}

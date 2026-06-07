@@ -97,9 +97,21 @@ type TypedConst struct {
 	// from the underlying float width (binary32/64/128).
 	Real float64
 	Imag float64
-	// FixedRaw holds the raw fixed-point magnitude for ConstKindFixedPoint
-	// (radix governed by the FXD config, not yet parsed).
+	// FixedRaw holds the raw fixed-point mantissa for ConstKindFixedPoint —
+	// the verbatim big-endian word, before applying the binary-point scale.
 	FixedRaw uint64
+	// FixedWordLength / FixedIntWordLength are the FXP word length and
+	// integer word length in bits, read from the resolved FixedPoint VCTP
+	// type config. Valid only when FixedConfigOK.
+	FixedWordLength    int
+	FixedIntWordLength int
+	// FixedRadix is the fractional bit count (FixedWordLength -
+	// FixedIntWordLength); FixedValue is the scaled value
+	// (signExtend(FixedRaw) / 2^FixedRadix). Both valid only when
+	// FixedConfigOK, which reports whether the FXP config parsed.
+	FixedRadix    int
+	FixedValue    float64
+	FixedConfigOK bool
 }
 
 // BlockDiagramConstants returns every block-diagram numeric constant in
@@ -137,7 +149,7 @@ func (m *Model) BlockDiagramConstants() ([]TypedConst, bool) {
 		}
 		if flat, ok := resolveConstTypeIndex(tree, i, tops); ok && flat >= 0 && flat < len(descs) {
 			tc.TypeIndex = flat
-			fillTypedConst(&tc, descs[flat].FullType)
+			fillTypedConst(&tc, descs[flat])
 		}
 		out = append(out, tc)
 	}
@@ -215,9 +227,12 @@ func bigEndianUint(b []byte) (uint64, bool) {
 	return u, true
 }
 
-// fillTypedConst sets the typed fields of tc from the resolved VCTP
-// FullType ft and tc.Raw.
-func fillTypedConst(tc *TypedConst, ft vctp.FullType) {
+// fillTypedConst sets the typed fields of tc from the resolved VCTP type
+// descriptor and tc.Raw. The whole descriptor (not just its FullType) is
+// needed so the FixedPoint case can read the binary-point scale from the
+// type's inner config bytes.
+func fillTypedConst(tc *TypedConst, desc vctp.TypeDescriptor) {
+	ft := desc.FullType
 	tc.FullType = ft.String()
 	tc.HasType = true
 	tc.WidthMatch = constWidthMatches(ft, len(tc.Raw))
@@ -276,6 +291,19 @@ func fillTypedConst(tc *TypedConst, ft vctp.FullType) {
 		if u, ok := bigEndianUint(raw); ok {
 			tc.FixedRaw = u
 		}
+		if wl, iwl, ok := fixedPointConfig(desc.Inner); ok {
+			tc.FixedWordLength = wl
+			tc.FixedIntWordLength = iwl
+			tc.FixedRadix = wl - iwl
+			tc.FixedConfigOK = true
+			// The mantissa is the low wl bits of the container (which is
+			// wider than wl when wl < 64 — w32i8 holds a 32-bit value in an
+			// 8-byte leaf), sign-extended from bit wl-1. Both corpus FXP
+			// constants are positive, so negative-mantissa handling is not
+			// yet corpus-verified.
+			mantissa := signExtendBits(tc.FixedRaw, wl)
+			tc.FixedValue = float64(mantissa) * math.Ldexp(1, -tc.FixedRadix)
+		}
 	case vctp.FullTypeBoolean, vctp.FullTypeBooleanU16:
 		tc.Kind = ConstKindBoolean
 		if u, ok := bigEndianUint(raw); ok {
@@ -284,6 +312,55 @@ func fillTypedConst(tc *TypedConst, ft vctp.FullType) {
 	default:
 		tc.Kind = ConstKindUnknown
 	}
+}
+
+// fixedPointConfig reads the FXP word length and integer word length (both
+// in bits) from a FixedPoint VCTP descriptor's inner config bytes. The radix
+// (fractional bit count) is wordLength - intWordLength — the standard
+// LabVIEW FXP definition, where the integer word length counts the bits to
+// the left of the binary point (sign included).
+//
+// Inner layout (big-endian), read off Numeric9876Dot5432_FXD.vi's two
+// FixedPoint descriptors:
+//
+//	off 0:  0x03                     sub-record marker (constant across the corpus)
+//	off 1:  representation byte       0x51 for the signed FXP observed
+//	off 2:  U16 word length (bits)    32 / 64  — also the constant's byte width × 8
+//	off 4:  U32 integer word length   16 / 32
+//	off 24: U32 word length - 1       31 / 63  (cross-check)
+//	off 28: U32 integer word length-1 15 / 31  (cross-check)
+//
+// The off-2 / off-4 positions are pinned by the cross-check fields at off-24
+// / off-28 and by off-2 matching the constant's container width. Both corpus
+// FXP types happen to have wordLength = 2 × intWordLength, so this fixture
+// alone cannot tell radix = wordLength - intWordLength apart from radix =
+// intWordLength (they coincide); the former is the documented FXP semantics
+// and produces the correct value (9876.54296875) for the 64/32 constant.
+func fixedPointConfig(inner []byte) (wordLen, intWordLen int, ok bool) {
+	if len(inner) < 8 {
+		return 0, 0, false
+	}
+	wordLen = int(binary.BigEndian.Uint16(inner[2:4]))
+	intWordLen = int(binary.BigEndian.Uint32(inner[4:8]))
+	if wordLen <= 0 {
+		return 0, 0, false
+	}
+	return wordLen, intWordLen, true
+}
+
+// signExtendBits sign-extends the low `bits` bits of u to a signed int64,
+// masking off anything above bit bits-1. bits >= 64 (or <= 0) returns u
+// reinterpreted as int64 unchanged.
+func signExtendBits(u uint64, bits int) int64 {
+	if bits <= 0 || bits >= 64 {
+		return int64(u)
+	}
+	mask := (uint64(1) << uint(bits)) - 1
+	u &= mask
+	if u&(uint64(1)<<uint(bits-1)) != 0 {
+		u |= ^mask
+	}
+	return int64(u)
 }
 
 // signExtend sign-extends the low width*8 bits of u to a signed int64.
