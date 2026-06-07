@@ -28,6 +28,7 @@ const (
 	FullTypeNumFloatExt   FullType = 0x0B
 	FullTypeNumComplex64  FullType = 0x0C
 	FullTypeNumComplex128 FullType = 0x0D
+	FullTypeNumComplexExt FullType = 0x0E
 	FullTypeBooleanU16    FullType = 0x20
 	FullTypeBoolean       FullType = 0x21
 	FullTypeString        FullType = 0x30
@@ -39,6 +40,7 @@ const (
 	FullTypeArray         FullType = 0x40
 	FullTypeCluster       FullType = 0x50
 	FullTypeLVVariant     FullType = 0x53
+	FullTypeFixedPoint    FullType = 0x5F
 	FullTypeMeasureData   FullType = 0x54
 	FullTypeRefnum        FullType = 0x70
 	FullTypeFunction      FullType = 0xF0
@@ -62,6 +64,7 @@ var fullTypeNames = map[FullType]string{
 	FullTypeNumFloatExt:   "NumFloatExt",
 	FullTypeNumComplex64:  "NumComplex64",
 	FullTypeNumComplex128: "NumComplex128",
+	FullTypeNumComplexExt: "NumComplexExt",
 	FullTypeBooleanU16:    "BooleanU16",
 	FullTypeBoolean:       "Boolean",
 	FullTypeString:        "String",
@@ -73,6 +76,7 @@ var fullTypeNames = map[FullType]string{
 	FullTypeArray:         "Array",
 	FullTypeCluster:       "Cluster",
 	FullTypeLVVariant:     "LVVariant",
+	FullTypeFixedPoint:    "FixedPoint",
 	FullTypeMeasureData:   "MeasureData",
 	FullTypeRefnum:        "Refnum",
 	FullTypeFunction:      "Function",
